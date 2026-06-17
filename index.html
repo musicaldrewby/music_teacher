@@ -64,11 +64,25 @@
             box-sizing: border-box;
         }
 
+        /* Updated Grid Setup */
         .app-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 350px));
+            grid-template-columns: repeat(3, 1fr); /* Forces exactly 3 per row on large screens */
             gap: 2rem;
-            justify-content: center; 
+        }
+
+        /* Tablet Layout: Drop to 2 per row if screen is smaller than 992px */
+        @media (max-width: 992px) {
+            .app-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Mobile Layout: Drop to 1 per row if screen is smaller than 650px */
+        @media (max-width: 650px) {
+            .app-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
         .app-link {
