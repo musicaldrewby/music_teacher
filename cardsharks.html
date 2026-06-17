@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Card Sharks - Classroom Edition</title>
     <style>
-        /* Smartboard Optimized Base Styles */
         :root {
             --bg-color: #f0f8ff;
             --primary-blue: #0066cc;
@@ -41,7 +40,6 @@
             letter-spacing: 2px;
         }
 
-        /* --- NEW: RHYTHM HEADER --- */
         .rhythm-header {
             display: flex;
             align-items: center;
@@ -55,7 +53,6 @@
             right: 5vw;
         }
 
-        /* --- SCREEN 0: TITLE SCREEN --- */
         #screen-title {
             display: flex;
             flex-direction: column;
@@ -86,6 +83,27 @@
             margin-bottom: 5vh;
             text-shadow: 0 5px 10px rgba(0,0,0,0.8);
             letter-spacing: 0.5vw;
+        }
+
+        .credits-text {
+            position: absolute;
+            bottom: 10vh;
+            font-size: min(2vw, 2.5vh);
+            color: rgba(255, 255, 255, 0.7);
+            text-align: center;
+            z-index: 10;
+            line-height: 1.4;
+        }
+
+        .credits-text a {
+            color: #ffcc00;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .credits-text a:hover {
+            color: white;
+            text-decoration: underline;
         }
 
         @keyframes floatLogo {
@@ -159,9 +177,8 @@
         }
         @keyframes slowSwim { 0% { left: -60vw; } 100% { left: 100vw; } }
 
-        /* --- SCREEN 1: RHYTHM SCREEN --- */
         #screen-rhythm {
-            display: none; /* Changed from flex so title shows first */
+            display: none;
             flex-direction: column;
             align-items: center;
             justify-content: flex-start;
@@ -227,7 +244,6 @@
             transform: scale(1.15);
         }
 
-        /* --- NEW: XYLOPHONE --- */
         .xylo-container { 
             display: flex; gap: 4vw; margin-top: 2vh; justify-content: center; align-items: flex-end; height: 18vh; 
             position: relative; z-index: 10000; /* Puts bars in front of the water */
@@ -252,7 +268,6 @@
             border-radius: 50%; box-shadow: inset 1px 1px 3px rgba(0,0,0,0.6), 0 1px 2px rgba(0,0,0,0.8); 
         }
 
-        /* --- WATER FILL OVERLAY TRANSITION --- */
         #water-overlay {
             position: fixed;
             bottom: 0;
@@ -284,7 +299,6 @@
             background: #0066cc;
         }
 
-        /* --- SCREEN 2: GAME BOARD --- */
         #screen-game {
             display: none;
             flex-direction: column;
@@ -323,16 +337,14 @@
         .card-back { background: repeating-linear-gradient(45deg, var(--primary-blue), var(--primary-blue) 10px, #004c99 10px, #004c99 20px); transform: rotateY(180deg); border: 5px solid white; color: white; font-size: min(5vw, 7vh); display: flex; justify-content: center; align-items: center; }
         .is-flipped { transform: rotateY(180deg); }
 
-        /* --- OCEAN BACKGROUND FOR GAME --- */
         #ocean-container { position: absolute; bottom: 0; left: 0; width: 100vw; height: 25vh; overflow: hidden; z-index: 1; pointer-events: none; }
-        #shark-fin { position: absolute; bottom: 3vh; left: -10vw; width: 6vw; height: 6vw; z-index: 2; animation: sharkSwim 16s infinite linear; }
+        #shark-fin { position: absolute; bottom: 3vh; left: -10vw; width: 9vw; height: 9vw; z-index: 2; animation: sharkSwim 16s infinite linear; }
         @keyframes sharkSwim { 0% { left: -10vw; transform: translateY(10vh); } 10% { transform: translateY(2vh); } 25% { transform: translateY(6vh); } 40% { transform: translateY(2vh); } 50% { left: 110vw; transform: translateY(10vh); } 51% { left: 110vw; transform: translateY(10vh) scaleX(-1); } 60% { transform: translateY(2vh) scaleX(-1); } 75% { transform: translateY(6vh) scaleX(-1); } 90% { transform: translateY(2vh) scaleX(-1); } 100% { left: -10vw; transform: translateY(10vh) scaleX(-1); } }
         .wave { position: absolute; bottom: 0; width: 200vw; height: 15vh; background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1200 120" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0,40 C300,80 300,0 600,40 C900,80 900,0 1200,40 L1200,120 L0,120 Z" fill="%230066cc" fill-opacity="0.5"/></svg>') repeat-x; background-size: 50vw 100%; animation: waveMove 10s infinite linear; z-index: 3; }
         .wave2 { bottom: -2vh; animation: waveMove 14s infinite linear reverse; opacity: 0.8; z-index: 1; }
         .wave3 { bottom: -4vh; background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1200 120" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0,40 C300,80 300,0 600,40 C900,80 900,0 1200,40 L1200,120 L0,120 Z" fill="%23004c99" fill-opacity="0.8"/></svg>') repeat-x; background-size: 50vw 100%; animation: waveMove 8s infinite linear; z-index: 4; }
         @keyframes waveMove { 0% { background-position-x: 0; } 100% { background-position-x: 100vw; } }
 
-        /* Higher / Lower Controls */
         #game-controls { display: flex; gap: 5vw; opacity: 0; transition: opacity 0.5s; position: relative; z-index: 10; }
         .btn-container { display: flex; flex-direction: column; align-items: center; justify-content: flex-start; }
         .hl-btn { padding: 2vh 4vw; font-size: min(3.5vw, 4.5vh); font-weight: bold; border: none; border-radius: 30px; color: white; cursor: pointer; box-shadow: 0 10px 0 rgba(0,0,0,0.3); transition: all 0.1s; }
@@ -341,22 +353,6 @@
         .btn-lower { background-color: var(--btn-lower); box-shadow: 0 10px 0 var(--btn-lower-hover); }
         .prob-text { margin-top: 1vh; font-size: min(2vw, 2.5vh); color: white; text-shadow: 1px 1px 3px rgba(0,0,0,0.8); font-weight: bold; background: rgba(0,0,0,0.4); padding: 0.8vh 2vw; border-radius: 15px; border: 2px solid rgba(255,255,255,0.2); }
 
-        /* --- SHARK ATTACK ANIMATIONS --- */
-        #shark-attack-container { position: absolute; bottom: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 100; display: none; justify-content: center; overflow: hidden; }
-        #giant-shark { position: absolute; bottom: -60vh; width: 45vw; height: 90vh; transform: translateY(0); }
-        .shark-breach { animation: sharkBreachAnim 4.5s cubic-bezier(0.2, 0.8, 0.4, 1) forwards; }
-        @keyframes sharkBreachAnim { 
-            0% { transform: translateY(0) scale(1); } 
-            30% { transform: translateY(-140vh) scale(1.3); } /* Apex hang-time / slow-mo */
-            50% { transform: translateY(-140vh) scale(1.3); } 
-            100% { transform: translateY(30vh) scale(1); } 
-        }
-        .giant-splash { position: absolute; bottom: -5vh; width: 200vw; left: -50vw; height: 80vh; background: radial-gradient(ellipse at center, rgba(255,255,255,1) 0%, rgba(0, 102, 204, 0.9) 40%, rgba(255,255,255,0) 70%); opacity: 0; transform: scaleY(0); transform-origin: bottom; border-radius: 50%; filter: blur(10px); }
-        .secondary-splash { width: 250vw; left: -75vw; height: 100vh; background: radial-gradient(ellipse at center, rgba(255,255,255,1) 0%, rgba(135, 206, 250, 0.9) 30%, rgba(255,255,255,0) 70%); filter: blur(15px); animation-delay: 0.2s; }
-        .splashing { animation: giantSplashAnim 2.5s ease-out forwards; }
-        @keyframes giantSplashAnim { 0% { opacity: 0; transform: scaleY(0) scaleX(0.5); } 20% { opacity: 1; transform: scaleY(1.8) scaleX(1.2); } 100% { opacity: 0; transform: scaleY(0.8) scaleX(2.5); } }
-
-        /* --- SCREEN 3: LOSER SCREEN --- */
         #screen-loser { display: none; flex-direction: column; justify-content: center; align-items: center; height: 100%; width: 100%; background: radial-gradient(circle at 50% 60%, #001f3f 0%, #000000 80%); position: relative; cursor: default;}
         
         .cartoon-shark-container { display: flex; position: absolute; top: 15vh; z-index: 1; animation: float 6s infinite ease-in-out; }
@@ -365,14 +361,15 @@
         .bubbles-container { position: absolute; width: 100%; height: 100%; z-index: 0; overflow: hidden; top: 0; left: 0; pointer-events: none; }
         .bubble { position: absolute; bottom: -10vh; background-color: rgba(255, 255, 255, 0.1); border: 2px solid rgba(255, 255, 255, 0.3); border-radius: 50%; animation: rise infinite ease-in; }
         @keyframes rise { 0% { transform: translateY(0) scale(1) translateX(0); opacity: 0; } 10% { opacity: 1; } 50% { transform: translateY(-50vh) scale(1.2) translateX(2vw); } 90% { opacity: 1; } 100% { transform: translateY(-110vh) scale(1.5) translateX(-2vw); opacity: 0; } }
+        
         .underwater-text { font-size: min(5vw, 7vh); font-family: 'Arial Rounded MT Bold', 'Comic Sans MS', sans-serif; color: white; text-shadow: 0 5px 15px #000, 0 0 30px #004c99; z-index: 2; display: flex; flex-wrap: wrap; justify-content: center; text-align: center; gap: min(1.5vw, 2vh); margin-top: 15vh; padding: 0 5vw; }
         .word-container { display: flex; }
         .wave-letter { display: inline-block; animation: waveLetter 2.5s infinite ease-in-out; }
         @keyframes waveLetter { 0%, 100% { transform: translateY(0) skewX(-3deg); } 50% { transform: translateY(-3vh) skewX(3deg); } }
+        
         .btn-play-again { margin-top: 10vh; padding: 3vh 4vw; font-size: 3vw; font-weight: bold; border: none; border-radius: 20px; cursor: pointer; text-transform: uppercase; background-color: var(--card-red); color: white; z-index: 2; box-shadow: 0 8px 0 #8e0000; }
         .btn-play-again:active { transform: translateY(8px); box-shadow: 0 0 0 #8e0000; }
 
-        /* --- HIDDEN BUTTONS --- */
         #hidden-home {
             position: fixed;
             top: 2vh;
@@ -422,6 +419,12 @@
         <h1 class="title-logo">Card Sharks</h1>
         <h2 class="title-sub">HIGHER OR LOWER</h2>
         <button class="btn-start-title" onclick="startGameFromTitle()">START GAME</button>
+        
+        <!-- Creator Credits -->
+        <div class="credits-text">
+            Original Song and Game Idea by Tim Wiegand.<br>
+            Visit <a href="https://www.viegansong.com/" target="_blank" rel="noopener noreferrer">Viegansong</a>
+        </div>
     </div>
 
     <!-- SCREEN 1: RHYTHM & LYRICS -->
@@ -501,7 +504,6 @@
         </div>
         
         <audio id="theme-audio" src="CARDSHARKS.mp3" preload="auto"></audio>
-        <!-- NEW: Game Sound Effects -->
         <audio id="ocean-audio" src="OCEAN.mp3" loop preload="auto"></audio>
         <audio id="little-win-audio" src="LITTLEWIN.mp3" preload="auto"></audio>
         <audio id="big-win-audio" src="BIGWIN.mp3" preload="auto"></audio>
@@ -530,30 +532,12 @@
 
         <!-- Ocean and Shark -->
         <div id="ocean-container">
-            <svg id="shark-fin" viewBox="0 0 100 100" style="position: absolute; bottom: 3vh; left: -10vw; width: 9vw; height: 9vw; z-index: 2; animation: sharkSwim 16s infinite linear;">
+            <svg id="shark-fin" viewBox="0 0 100 100">
                 <path d="M 0 100 Q 40 10 50 0 Q 60 50 90 100 Z" fill="#2c3e50"/>
             </svg>
             <div class="wave wave2"></div>
             <div class="wave wave1"></div>
             <div class="wave wave3"></div>
-        </div>
-
-        <!-- Shark Attack Sequence -->
-        <div id="shark-attack-container">
-            <div class="giant-splash" id="giant-splash"></div>
-            <div class="giant-splash secondary-splash" id="secondary-splash"></div>
-            <svg id="giant-shark" viewBox="0 0 200 400" preserveAspectRatio="xMidYMid meet">
-                <path d="M 100 20 C 140 80 180 200 100 380 C 20 200 60 80 100 20 Z" fill="#2c3e50" />
-                <path d="M 100 60 C 120 100 140 220 100 340 C 60 220 80 100 100 60 Z" fill="#bdc3c7" />
-                <path d="M 40 200 L -20 280 L 50 240 Z" fill="#1a252f" />
-                <path d="M 160 200 L 220 280 L 150 240 Z" fill="#1a252f" />
-                <circle cx="75" cy="80" r="8" fill="#e74c3c" />
-                <circle cx="125" cy="80" r="8" fill="#e74c3c" />
-                <circle cx="75" cy="80" r="3" fill="#000" />
-                <circle cx="125" cy="80" r="3" fill="#000" />
-                <path d="M 70 30 Q 100 60 130 30 Q 100 10 70 30 Z" fill="#000" />
-                <path d="M 75 35 L 80 45 L 85 35 L 90 45 L 95 35 L 100 45 L 105 35 L 110 45 L 115 35 L 120 45 L 125 35" stroke="#fff" stroke-width="2" fill="none" />
-            </svg>
         </div>
     </div>
 
@@ -601,7 +585,6 @@
     </div>
 
     <script>
-        // --- Game Setup & Variables ---
         const suits = ['♥', '♦', '♣', '♠'];
         const values = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
         
@@ -610,46 +593,29 @@
         let currentIndex = 0;
         let isGameActive = false; 
 
-        // Sequential Note Variables
         let currentNoteIndex = -1;
         let notesList = [];
-        let isTransitioning = false; // Prevents multiple taps during water fill
-        let endGameTimeout = null; // Tracks the 10-second auto-reset to main menu
+        let isTransitioning = false;
+        let endGameTimeout = null;
 
-        // --- NEW: HARDCODED TIMINGS ARRAY ---
-        // Paste the generated code from the app into this array (leave empty brackets [] to use manual recording)
         const HARDCODED_TIMINGS = [14.403, 15.243, 16.075, 16.873, 17.765, 18.639, 19.438, 20.359, 21.256, 21.684, 22.091, 22.524, 22.954, 23.373, 23.804, 24.189, 24.651, 25.085, 25.51, 25.953, 26.375, 26.773, 27.206, 27.616, 28.086]; 
-
-        // Sync & Automation Variables
         let recordedTimings = HARDCODED_TIMINGS.length > 0 ? HARDCODED_TIMINGS : (JSON.parse(localStorage.getItem('cardSharksTimings')) || []);
-        let isRecording = false;
+        
         let isAutoPlaying = false;
         let playbackRAF = null;
-        let autoPlayStartTime = 0; // NEW: Fallback timer
-        
-        // Xylophone Animation Variables
+        let autoPlayStartTime = 0; // Fallback timer
         let xyloTimeouts = [];
 
-        // --- NEW: Audio Helpers ---
         function playSfx(id) {
             const audio = document.getElementById(id);
             if (audio) {
-                if (audio.fadeInterval) clearInterval(audio.fadeInterval); // Clear any lingering fades
+                if (audio.fadeInterval) clearInterval(audio.fadeInterval); 
                 try {
-                    audio.volume = 1; // Ensure volume is 100%
-                    
-                    // Only set currentTime if readyState allows, to prevent errors on missing sources
-                    if (audio.readyState > 0) {
-                        audio.currentTime = 0;
-                    }
-                    
+                    audio.volume = 1; 
+                    if (audio.readyState > 0) audio.currentTime = 0;
                     let playPromise = audio.play();
-                    if (playPromise !== undefined) {
-                        playPromise.catch(e => console.warn("Audio prevented:", e));
-                    }
-                } catch (e) {
-                    console.warn("Audio operation failed:", e);
-                }
+                    if (playPromise !== undefined) playPromise.catch(e => console.warn("Audio prevented:", e));
+                } catch (e) { console.warn("Audio operation failed:", e); }
             }
         }
 
@@ -659,9 +625,7 @@
                 if (audio.fadeInterval) clearInterval(audio.fadeInterval);
                 try {
                     audio.pause();
-                    if (audio.readyState > 0) {
-                        audio.currentTime = 0;
-                    }
+                    if (audio.readyState > 0) audio.currentTime = 0;
                 } catch(e) {}
             }
         }
@@ -675,7 +639,6 @@
                 const audio = document.getElementById(id);
                 if (!audio || audio.paused) return;
                 
-                // Clear any existing fade interval to prevent overlapping fades
                 if (audio.fadeInterval) clearInterval(audio.fadeInterval);
 
                 const steps = 30;
@@ -689,10 +652,8 @@
                         } else {
                             clearInterval(audio.fadeInterval);
                             audio.pause();
-                            if (audio.readyState > 0) {
-                                audio.currentTime = 0;
-                            }
-                            audio.volume = 1; // Reset volume for next play
+                            if (audio.readyState > 0) audio.currentTime = 0;
+                            audio.volume = 1; 
                         }
                     } catch(e) {
                         clearInterval(audio.fadeInterval);
@@ -701,17 +662,11 @@
             });
         }
 
-        // --- Core Game Logic ---
         function generateDeck() {
             deck = [];
             for (let suit of suits) {
                 for (let i = 0; i < values.length; i++) {
-                    deck.push({
-                        valueStr: values[i],
-                        suit: suit,
-                        numericValue: i,
-                        color: (suit === '♥' || suit === '♦') ? 'red-card' : 'black-card'
-                    });
+                    deck.push({ valueStr: values[i], suit: suit, numericValue: i, color: (suit === '♥' || suit === '♦') ? 'red-card' : 'black-card' });
                 }
             }
         }
@@ -726,7 +681,6 @@
             }
         }
 
-        // --- NEW: Probability Calculator ---
         function updateProbabilities() {
             if (currentIndex >= 4) return;
 
@@ -734,7 +688,6 @@
             let higherCount = 0;
             let lowerCount = 0;
             
-            // Unseen cards are the remaining deck PLUS any unrevealed cards on the board
             let unseenCards = [...deck, ...boardCards.slice(currentIndex + 1)];
             
             unseenCards.forEach(card => {
@@ -762,34 +715,30 @@
         function startNewRound() {
             document.getElementById('status-message').innerText = "Welcome to the Show!";
             document.getElementById('status-message').style.color = "var(--primary-blue)";
-            document.getElementById('game-controls').style.display = "flex"; // Fix: Ensure buttons become visible again
+            document.getElementById('game-controls').style.display = "flex"; 
             document.getElementById('game-controls').style.opacity = "0";
             document.getElementById('game-controls').style.pointerEvents = "auto";
             
             generateDeck();
             shuffleDeck();
             
-            // Deal cards one by one, ensuring no adjacent ties
             boardCards = [];
             
-            // --- NEW: Ensure the first card is NEVER a 2 (0) or an Ace (12) ---
+            // Ensure first card is NEVER a 2 (0) or an Ace (12)
             let validFirstCardFound = false;
             while (!validFirstCardFound) {
                 let candidateFirst = deck.shift();
                 if (candidateFirst.numericValue === 0 || candidateFirst.numericValue === 12) {
-                    // It's an Ace or a 2. Throw it to the bottom of the deck!
                     deck.push(candidateFirst);
                 } else {
-                    // Safe starting card
                     boardCards.push(candidateFirst);
                     validFirstCardFound = true;
                 }
             }
             
+            // Deal remaining 4, preventing adjacent ties
             while (boardCards.length < 5) {
                 let candidateCard = deck.shift();
-                
-                // If the candidate matches the previous card's value, throw it to the bottom of the deck
                 if (candidateCard.numericValue === boardCards[boardCards.length - 1].numericValue) {
                     deck.push(candidateCard);
                 } else {
@@ -798,7 +747,6 @@
             }
             
             currentIndex = 0;
-            
             renderBoard();
         }
 
@@ -824,7 +772,7 @@
 
             setTimeout(() => {
                 revealCard(0);
-                updateProbabilities(); // Calculate initial odds
+                updateProbabilities(); 
                 document.getElementById('game-controls').style.opacity = "1";
             }, 1500);
         }
@@ -869,29 +817,21 @@
                     statusBox.innerText = "🎉 YOU CLEARED THE BOARD! 🎉";
                     document.getElementById('game-controls').style.display = "none";
                     
-                    // Stop ocean, play big win!
                     stopSfx('ocean-audio');
                     playSfx('big-win-audio');
                     
-                    // Won whole board, show for 10 seconds then return to main menu
-                    endGameTimeout = setTimeout(() => {
-                        returnToMainMenu();
-                    }, 10000);
+                    endGameTimeout = setTimeout(() => { returnToMainMenu(); }, 10000);
                 } else {
                     document.getElementById('game-controls').style.display = "none";
-                    
-                    // Play little win!
                     playSfx('little-win-audio');
                     
-                    // Correct! Go back to sing for the next card
                     setTimeout(() => {
-                        stopSfx('ocean-audio'); // Silence the ocean before leaving
+                        stopSfx('ocean-audio'); 
                         fillWaterAndExecute(() => {
                             document.getElementById('screen-game').style.display = 'none';
                             document.getElementById('screen-rhythm').style.display = 'flex';
                             resetNotes(); 
                             
-                            // Pop the xylophone bars in after water drains
                             setTimeout(() => {
                                 const xylo = document.querySelector('.xylo-container');
                                 if (xylo) xylo.style.opacity = '1';
@@ -913,7 +853,6 @@
         }
 
         function triggerSharkAttack() {
-            // Abruptly cut the ocean loop and play the losing sound
             stopSfx('ocean-audio');
             playSfx('lose-audio');
 
@@ -922,15 +861,12 @@
                 document.getElementById('screen-game').style.display = 'none';
                 document.getElementById('screen-loser').style.display = 'flex';
 
-                // Auto-return to main menu after 10 seconds
-                endGameTimeout = setTimeout(() => {
-                    returnToMainMenu();
-                }, 10000);
+                endGameTimeout = setTimeout(() => { returnToMainMenu(); }, 10000);
             });
         }
 
         function returnToMainMenu() {
-            fadeOutAllGameSfx(3000); // 3-second fade out
+            fadeOutAllGameSfx(3000); 
             fillWaterAndExecute(() => {
                 document.getElementById('screen-game').style.display = 'none';
                 document.getElementById('screen-loser').style.display = 'none';
@@ -941,15 +877,14 @@
         }
 
         function backToStartScreen() {
-            if (endGameTimeout) clearTimeout(endGameTimeout); // Cancel auto-return if they manually click
-            fadeOutAllGameSfx(3000); // 3-second fade out
+            if (endGameTimeout) clearTimeout(endGameTimeout); 
+            fadeOutAllGameSfx(3000); 
             fillWaterAndExecute(() => {
                 document.getElementById('screen-loser').style.display = 'none';
                 document.getElementById('screen-rhythm').style.display = 'flex';
                 isGameActive = false;
                 resetNotes();
                 
-                // Pop the xylophone bars in after water drains
                 setTimeout(() => {
                     const xylo = document.querySelector('.xylo-container');
                     if (xylo) xylo.style.opacity = '1';
@@ -961,7 +896,6 @@
             currentNoteIndex = -1;
             notesList.forEach(n => n.classList.remove('lit'));
             
-            // Reset xylophone bars
             xyloTimeouts.forEach(clearTimeout);
             xyloTimeouts = [];
             const eBar = document.getElementById('xylo-e');
@@ -970,53 +904,41 @@
             if(fBar) fBar.classList.remove('lit');
         }
 
-        // --- The Generalized Water Fill Transition ---
         function fillWaterAndExecute(callback) {
             if (isTransitioning) return;
             isTransitioning = true;
             
             const overlay = document.getElementById('water-overlay');
-            // Overfill slightly to completely obscure screen
             overlay.style.height = '110vh'; 
 
             setTimeout(() => {
-                // We are completely underwater! Execute the screen swap logic.
                 callback();
-
-                // Drain the water
                 overlay.style.height = '0';
-                
-                setTimeout(() => {
-                    isTransitioning = false; // Unblock interactions
-                }, 2000); // Wait for water to drop
-
-            }, 2000); // 2 second delay to match CSS fill time
+                setTimeout(() => { isTransitioning = false; }, 2000); 
+            }, 2000); 
         }
 
         function startGameFromTitle() {
             const xylo = document.querySelector('.xylo-container');
-            if (xylo) xylo.style.opacity = '0'; // Ensure it is hidden during the fill
+            if (xylo) xylo.style.opacity = '0'; 
 
             fillWaterAndExecute(() => {
                 document.getElementById('screen-title').style.display = 'none';
                 document.getElementById('screen-rhythm').style.display = 'flex';
-                document.getElementById('play-song-btn').style.display = 'block'; // Ensure play button is visible
+                document.getElementById('play-song-btn').style.display = 'block'; 
                 
-                // Pop the xylophone bars in after water drains
                 setTimeout(() => {
                     if (xylo) xylo.style.opacity = '1';
                 }, 2000);
             });
         }
 
-        // --- Hidden Reset Function ---
         function resetToHome() {
             if (endGameTimeout) clearTimeout(endGameTimeout);
 
             const xylo = document.querySelector('.xylo-container');
-            if (xylo) xylo.style.opacity = '0'; // Hide xylophone bars
+            if (xylo) xylo.style.opacity = '0'; 
 
-            // Reset game states
             isGameActive = false;
             isTransitioning = false;
             isAutoPlaying = false;
@@ -1026,27 +948,15 @@
             if(themeAudio) {
                 try {
                     themeAudio.pause();
-                    if (themeAudio.readyState > 0) {
-                        themeAudio.currentTime = 0;
-                    }
+                    if (themeAudio.readyState > 0) themeAudio.currentTime = 0;
                 } catch(e) {}
             }
             
-            stopAllGameSfx(); // Silence everything instantly
-
+            stopAllGameSfx(); 
             resetNotes();
             document.getElementById('play-song-btn').style.display = 'block';
-
-            // Clear water if filling
             document.getElementById('water-overlay').style.height = '0';
             
-            // Clear shark attack states if active
-            document.getElementById('shark-attack-container').style.display = 'none';
-            document.getElementById('giant-shark').classList.remove('shark-breach');
-            document.getElementById('giant-splash').classList.remove('splashing');
-            if (document.getElementById('secondary-splash')) document.getElementById('secondary-splash').classList.remove('splashing');
-
-            // Switch to Title Screen immediately
             document.getElementById('screen-rhythm').style.display = 'none';
             document.getElementById('screen-game').style.display = 'none';
             document.getElementById('screen-loser').style.display = 'none';
@@ -1058,15 +968,13 @@
             
             resetNotes();
             isAutoPlaying = true;
-            autoPlayStartTime = performance.now(); // Start internal clock
+            autoPlayStartTime = performance.now(); 
             document.getElementById('play-song-btn').style.display = 'none'; 
             
             const audio = document.getElementById('theme-audio');
             
             try {
-                if (audio.readyState > 0) {
-                    audio.currentTime = 0;
-                }
+                if (audio.readyState > 0) audio.currentTime = 0;
                 let playPromise = audio.play();
                 if (playPromise !== undefined) {
                     playPromise.catch(e => console.warn("Audio playback failed, using internal clock:", e));
@@ -1084,13 +992,10 @@
             const audio = document.getElementById('theme-audio');
             let nextIndex = currentNoteIndex + 1;
             
-            // --- NEW: ROBUST CLOCK ---
-            // If the audio file is missing or blocked, audio.currentTime gets stuck at 0.
-            // We use the internal browser clock as a perfect fallback so the visual animation still plays!
+            // Robust fallback clock logic
             let elapsed = (performance.now() - autoPlayStartTime) / 1000;
             let currentTime = (audio.readyState > 0 && !audio.paused) ? audio.currentTime : elapsed;
             
-            // Check if it's time to light up the next note
             if (nextIndex < recordedTimings.length && currentTime >= recordedTimings[nextIndex]) {
                 if (currentNoteIndex >= 0 && currentNoteIndex < notesList.length) {
                     notesList[currentNoteIndex].classList.remove('lit');
@@ -1098,16 +1003,12 @@
                 currentNoteIndex = nextIndex;
                 if (currentNoteIndex < notesList.length) {
                     notesList[currentNoteIndex].classList.add('lit');
-                    triggerXyloForNote(currentNoteIndex); // Trigger xylophone sync
+                    triggerXyloForNote(currentNoteIndex); 
                 }
                 
-                // If it's the last visual note, end automation and trigger transition
-                // (Using notesList.length - 1 prevents getting stuck if there were extra accidental taps recorded)
                 if (currentNoteIndex >= notesList.length - 1) {
                     isAutoPlaying = false;
-                    setTimeout(() => {
-                        triggerPostSongTransition();
-                    }, 1500); // Wait 1.5s after last note before transitioning
+                    setTimeout(() => { triggerPostSongTransition(); }, 1500); 
                 }
             }
             
@@ -1116,7 +1017,6 @@
             }
         }
 
-        // --- XYLOPHONE SYNC LOGIC ---
         function triggerXyloForNote(index) {
             xyloTimeouts.forEach(clearTimeout);
             xyloTimeouts = [];
@@ -1135,33 +1035,29 @@
                 
                 xyloTimeouts.push(setTimeout(() => {
                     if (bar) bar.classList.remove('lit');
-                }, 300)); // 300ms visual hit
+                }, 300)); 
             } else if (index >= 16 && index <= 23) {
                 // Eighth Note Pairs (Indices 16-23): E then F split over the duration
-                let duration = 400; // Default fallback duration
+                let duration = 400; 
                 if (recordedTimings.length > index + 1) {
                     duration = (recordedTimings[index + 1] - recordedTimings[index]) * 1000;
                 } else if (index > 0 && recordedTimings.length > index) {
                     duration = (recordedTimings[index] - recordedTimings[index - 1]) * 1000;
                 }
                 
-                // Safety clamp just in case timings are wonky
                 if (duration > 1000 || duration < 100) duration = 400;
 
                 const halfDuration = duration / 2;
 
-                // Light E bar first
                 if (eBar) eBar.classList.add('lit');
 
                 xyloTimeouts.push(setTimeout(() => {
-                    // Turn off E, light up F
                     if (eBar) eBar.classList.remove('lit');
                     if (fBar) fBar.classList.add('lit');
                     
                     xyloTimeouts.push(setTimeout(() => {
-                        // Turn off F
                         if (fBar) fBar.classList.remove('lit');
-                    }, halfDuration * 0.8)); // 0.8 keeps a slight visual gap between notes
+                    }, halfDuration * 0.8)); 
                 }, halfDuration));
             }
         }
@@ -1169,9 +1065,8 @@
         function triggerPostSongTransition() {
             const audio = document.getElementById('theme-audio');
             const xylo = document.querySelector('.xylo-container');
-            if (xylo) xylo.style.opacity = '0'; // Hide xylophone bars as water fills
+            if (xylo) xylo.style.opacity = '0'; 
             
-            // Fade out audio gracefully just in case it's still trailing off
             let fadeOut = setInterval(() => {
                 try {
                     if (audio.volume > 0.05) {
@@ -1179,9 +1074,7 @@
                     } else {
                         clearInterval(fadeOut);
                         audio.pause();
-                        if (audio.readyState > 0) {
-                            audio.currentTime = 0;
-                        }
+                        if (audio.readyState > 0) audio.currentTime = 0;
                         audio.volume = 1;
                     }
                 } catch(e) {
@@ -1199,16 +1092,15 @@
                 } else {
                     document.getElementById('status-message').innerText = "Higher or lower?";
                     document.getElementById('status-message').style.color = "var(--primary-blue)";
-                    updateProbabilities(); // Update odds for the new card
+                    updateProbabilities(); 
                     document.getElementById('game-controls').style.display = "flex";
                     document.getElementById('game-controls').style.opacity = "1";
                     document.getElementById('game-controls').style.pointerEvents = "auto";
                 }
 
                 resetNotes(); 
-                document.getElementById('play-song-btn').style.display = 'block'; // Show the Play button again
+                document.getElementById('play-song-btn').style.display = 'block'; 
 
-                // Start ocean loop AS SOON AS water drains (2 seconds after this callback)
                 setTimeout(() => {
                     if (isGameActive && document.getElementById('screen-game').style.display !== 'none') {
                         playSfx('ocean-audio');
@@ -1217,7 +1109,6 @@
             });
         }
 
-        // Initialize On Load
         document.addEventListener("DOMContentLoaded", () => {
             // Wavy Text setup
             const loserText = "SORRY, YOU'RE SHARK FOOD!";
@@ -1235,21 +1126,14 @@
                 textContainer.appendChild(wordDiv);
             });
 
-            // Global Click Logic for Rhythm Screen Notes
             notesList = document.querySelectorAll('.note');
             const rhythmScreen = document.getElementById('screen-rhythm');
             
             rhythmScreen.addEventListener('click', (e) => {
-                if (isTransitioning) return; // Prevent extra clicks during the water effect
-
-                // Do not trigger background click if clicking a button or the xylophone
+                if (isTransitioning) return; 
                 if (e.target.closest('button') || e.target.closest('.xylo-container')) return;
-
-                // Ignore background clicks if song is automated via hardcoded timings
                 if (isAutoPlaying || HARDCODED_TIMINGS.length > 0) return;
 
-                // --- MANUAL FALLBACK MODE ---
-                // If you haven't recorded anything, it falls back to manual tapping
                 if (currentNoteIndex >= 0 && currentNoteIndex < notesList.length) {
                     notesList[currentNoteIndex].classList.remove('lit');
                 }
@@ -1258,9 +1142,8 @@
                 
                 if (currentNoteIndex < notesList.length) {
                     notesList[currentNoteIndex].classList.add('lit');
-                    triggerXyloForNote(currentNoteIndex); // Trigger xylophone on manual taps too
+                    triggerXyloForNote(currentNoteIndex); 
                 } else {
-                    // All notes tapped manually! Trigger transition
                     triggerPostSongTransition();
                 }
             });
