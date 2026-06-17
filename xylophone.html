@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Xylophone</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+    }
+    /* Prevent default touch actions like scrolling when sliding over the keys */
+    .touch-none {
+      touch-action: none;
+    }
+    /* Hot Pink Solid Glow Animation */
+    @keyframes bar-glow-solid {
+      0% { box-shadow: 0 0 0px #ff00ff, 0 0 0px #ff00ff; }
+      20% { box-shadow: 0 0 15px #ff00ff, 0 0 30px #ff00ff; }
+      100% { box-shadow: 0 0 0px #ff00ff, 0 0 0px #ff00ff; }
+    }
+    .bar-glow-effect {
+      animation: bar-glow-solid 0.3s ease-out forwards;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="main-wrapper" class="bg-gray-100 flex flex-col items-center justify-center font-sans transition-all duration-300 min-h-screen p-4 sm:p-8">
+    
+    <!-- Fullscreen Toggle Button -->
+    <button
+      id="fs-btn"
+      class="absolute top-4 right-4 z-[60] p-2 sm:p-3 rounded-full bg-black/10 hover:bg-black/20 text-gray-800 transition-colors flex items-center gap-2"
+      title="Enter Fullscreen"
+    >
+      <span id="fs-btn-icon"></span>
+      <span id="fs-btn-text" class="hidden sm:inline font-semibold pr-1">Fullscreen</span>
+    </button>
+
+    <!-- Title & Controls Panel -->
+    <div id="controls-panel" class="mb-8 mt-12 sm:mt-0 w-full max-w-6xl bg-white p-6 rounded-xl shadow-md border border-gray-200 flex flex-col gap-6">
+      <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
+        <div>
+          <h1 class="text-2xl font-bold text-gray-800">Interactive Xylophone</h1>
+          <p class="text-sm text-gray-500 mt-1">Tap top ⅛ to highlight, bottom ⅛ to blackout. Slide middle to play.</p>
+        </div>
+        
+        <div class="flex flex-wrap items-center gap-4 sm:gap-6">
+          <label class="flex items-center gap-2 cursor-pointer group">
+            <div class="relative">
+              <input type="checkbox" id="bb-checkbox" class="sr-only" />
+              <div id="bb-toggle-bg" class="block w-14 h-8 rounded-full transition-colors bg-gray-300"></div>
+              <div id="bb-toggle-dot" class="absolute left-1 top-1 bg-white w-6 h-6 rounded-full transition-transform"></div>
+            </div>
+            <span class="text-lg font-semibold text-gray-700 group-hover:text-black transition-colors">Bb</span>
+          </label>
+
+          <label class="flex items-center gap-2 cursor-pointer group">
+            <div class="relative">
+              <input type="checkbox" id="fs-checkbox" class="sr-only" />
+              <div id="fs-toggle-bg" class="block w-14 h-8 rounded-full transition-colors bg-gray-300"></div>
+              <div id="fs-toggle-dot" class="absolute left-1 top-1 bg-white w-6 h-6 rounded-full transition-transform"></div>
+            </div>
+            <span class="text-lg font-semibold text-gray-700 group-hover:text-black transition-colors">F#</span>
+          </label>
+
+          <!-- Octave Switcher -->
+          <div class="flex items-center bg-gray-100 rounded-lg p-1 border border-gray-200">
+            <button id="octave-down" class="w-8 h-8 flex items-center justify-center bg-white rounded shadow-sm text-lg font-bold text-gray-700 hover:bg-gray-50 active:bg-gray-200 transition-colors" title="Octave Down">-</button>
+            <span class="font-semibold text-gray-700 w-24 text-center text-sm">Octave: <span id="octave-display">0</span></span>
+            <button id="octave-up" class="w-8 h-8 flex items-center justify-center bg-white rounded shadow-sm text-lg font-bold text-gray-700 hover:bg-gray-50 active:bg-gray-200 transition-colors" title="Octave Up">+</button>
+          </div>
+
+          <!-- Reset Button -->
+          <button id="reset-btn" class="px-4 py-2 bg-red-500 text-white text-sm font-bold rounded-lg shadow-sm hover:bg-red-600 active:bg-red-700 transition-colors">
+            RESET ALL
+          </button>
+        </div>
+      </div>
+      
+      <!-- Sequencer / Transport Row -->
+      <div class="flex flex-wrap items-center gap-3 pt-4 border-t border-gray-200 w-full">
+        <button id="btn-rec" class="px-4 py-2 bg-gray-200 text-gray-700 hover:bg-gray-300 text-sm font-bold rounded-lg transition-colors">🔴 REC</button>
+        <button id="btn-play" disabled class="px-4 py-2 bg-gray-100 text-gray-400 cursor-not-allowed text-sm font-bold rounded-lg transition-colors">▶ PLAY</button>
+        <button id="btn-stop" class="px-4 py-2 bg-gray-200 text-gray-700 hover:bg-gray-300 text-sm font-bold rounded-lg transition-colors">⏹ STOP</button>
+        <button id="btn-loop" class="px-4 py-2 bg-gray-200 text-gray-700 hover:bg-gray-300 text-sm font-bold rounded-lg transition-colors">🔁 LOOP</button>
+        <button id="btn-overdub" disabled class="px-4 py-2 bg-gray-100 text-gray-400 cursor-not-allowed text-sm font-bold rounded-lg transition-colors">➕ OVERDUB</button>
+        <span id="seq-status" class="ml-auto text-sm font-mono text-gray-500 font-semibold tracking-wider">IDLE</span>
+      </div>
+    </div>
+
+    <!-- Xylophone Container -->
+    <div id="xylo-wrapper" class="w-full bg-white rounded-xl flex items-center justify-center overflow-x-auto transition-all duration-300 max-w-6xl h-[50vh] min-h-[400px] shadow-lg border border-gray-200 p-4 sm:p-8">
+      <div id="bars-container" class="flex items-center justify-center gap-1 sm:gap-2 h-full w-full min-w-[700px]">
+        <!-- Bars injected by JS Once -->
+      </div>
+    </div>
+    
+  </div>
+
+  <script>
+    // --- Icons ---
+    const maximizeIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>`;
+    const minimizeIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3v3a2 2 0 0 1-2 2H3m18 0h-3a2 2 0 0 1-2-2V3m0 18v-3a2 2 0 0 1 2-2h3M3 16h3a2 2 0 0 1 2 2v3"/></svg>`;
+
+    // --- State & Constants ---
+    const notesData = ['C', 'D', 'E', 'F', 'G', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'A'];
+    const highlightColors = ['', 'bg-yellow-300/60', 'bg-green-400/60', 'bg-red-400/60'];
+    const maxH = 85;
+    const minH = 45;
+    const step = (maxH - minH) / (notesData.length - 1);
+
+    let state = {
+      useBb: false,
+      useFSharp: false,
+      isFullscreen: false,
+      octaveOffset: 0,
+      bars: notesData.map((note, index) => ({
+        note: note,
+        heightPercent: maxH - (step * index),
+        highlight: 0,
+        blackout: false
+      }))
+    };
+
+    let seq = {
+      armed: false,
+      recording: false,
+      overdubbing: false,
+      playing: false,
+      loop: false,
+      startTime: 0,
+      playbackStartTime: 0,
+      duration: 0,
+      track: [], // Stores { relativeTime, barIndex, freq, octave }
+      timeouts: [], 
+      loopTimeoutId: null, 
+      scheduledOscillators: [] 
+    };
+
+    // --- DOM Elements ---
+    const mainWrapper = document.getElementById('main-wrapper');
+    const controlsPanel = document.getElementById('controls-panel');
+    const xyloWrapper = document.getElementById('xylo-wrapper');
+    const barsContainer = document.getElementById('bars-container');
+    const fsBtn = document.getElementById('fs-btn');
+    const fsBtnIcon = document.getElementById('fs-btn-icon');
+    const fsBtnText = document.getElementById('fs-btn-text');
+
+    // --- Audio & Visual FX Setup ---
+    let audioCtx = null;
+    let masterCompressor = null;
+    
+    function initAudio() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        
+        // Prevent clipping when many notes play simultaneously
+        masterCompressor = audioCtx.createDynamicsCompressor();
+        masterCompressor.threshold.setValueAtTime(-12, audioCtx.currentTime);
+        masterCompressor.knee.setValueAtTime(30, audioCtx.currentTime);
+        masterCompressor.ratio.setValueAtTime(12, audioCtx.currentTime);
+        masterCompressor.attack.setValueAtTime(0.003, audioCtx.currentTime);
+        masterCompressor.release.setValueAtTime(0.25, audioCtx.currentTime);
+        masterCompressor.connect(audioCtx.destination);
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+    }
+
+    function getFrequency(index) {
+      // Base Octave (C4 to A5) with F#/Bb support
+      const baseFreqs = [
+        261.63, 293.66, 329.63, state.useFSharp ? 370.00 : 349.23,
+        392.00, 440.00, state.useBb ? 466.16 : 493.88, 523.25,
+        587.33, 659.25, state.useFSharp ? 739.99 : 698.46, 783.99, 880.00
+      ];
+      const baseFreq = parseInt(index) >= 0 ? baseFreqs[index] : 0;
+      return baseFreq * Math.pow(2, state.octaveOffset);
+    }
+
+    function playTone(freq, startTime = 0, isScheduled = false) {
+      initAudio();
+      const time = startTime || audioCtx.currentTime;
+
+      const osc = audioCtx.createOscillator();
+      const gainNode = audioCtx.createGain();
+      
+      osc.type = 'sine';
+      osc.frequency.value = freq;
+      
+      osc.connect(gainNode);
+      gainNode.connect(masterCompressor);
+      
+      gainNode.gain.setValueAtTime(0, time);
+      gainNode.gain.linearRampToValueAtTime(0.4, time + 0.01);
+      gainNode.gain.exponentialRampToValueAtTime(0.001, time + 0.6);
+      
+      osc.start(time);
+      osc.stop(time + 0.6);
+
+      // Clean up nodes strictly after playback ends
+      osc.onended = () => {
+        osc.disconnect();
+        gainNode.disconnect();
+        if (isScheduled) {
+          const idx = seq.scheduledOscillators.indexOf(osc);
+          if (idx > -1) seq.scheduledOscillators.splice(idx, 1);
+        }
+      };
+
+      if (isScheduled) {
+        seq.scheduledOscillators.push(osc);
+      }
+    }
+
+    function flashBar(index) {
+      const bar = document.getElementById(`bar-${index}`);
+      if (!bar) return;
+      
+      // Reset animation to allow rapid re-triggering
+      bar.classList.remove('bar-glow-effect');
+      void bar.offsetWidth; // Trigger DOM reflow
+      bar.classList.add('bar-glow-effect');
+    }
+
+    // --- Sequencer Implementation ---
+    function clearTimeouts() {
+      seq.timeouts.forEach(clearTimeout);
+      seq.timeouts = [];
+    }
+
+    function updateTransportUI() {
+      const recBtn = document.getElementById('btn-rec');
+      const playBtn = document.getElementById('btn-play');
+      const overdubBtn = document.getElementById('btn-overdub');
+      const loopBtn = document.getElementById('btn-loop');
+      const statusText = document.getElementById('seq-status');
+
+      if (seq.recording) {
+        recBtn.className = 'px-4 py-2 bg-red-600 text-white text-sm font-bold rounded-lg shadow-sm transition-colors';
+        recBtn.innerHTML = '🔴 REC';
+      } else if (seq.armed) {
+        recBtn.className = 'px-4 py-2 bg-red-200 text-red-800 text-sm font-bold rounded-lg shadow-sm animate-pulse transition-colors';
+        recBtn.innerHTML = '🔴 ARMED';
+      } else {
+        recBtn.className = 'px-4 py-2 bg-gray-200 text-gray-700 hover:bg-gray-300 text-sm font-bold rounded-lg transition-colors';
+        recBtn.innerHTML = '🔴 REC';
+      }
+
+      playBtn.disabled = seq.track.length === 0;
+      if (seq.playing && !seq.recording) {
+        playBtn.className = 'px-4 py-2 bg-green-500 text-white text-sm font-bold rounded-lg shadow-sm transition-colors';
+      } else {
+        playBtn.className = `px-4 py-2 text-sm font-bold rounded-lg transition-colors ${seq.track.length === 0 ? 'bg-gray-100 text-gray-400 cursor-not-allowed' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}`;
+      }
+
+      overdubBtn.disabled = seq.duration === 0;
+      if (seq.overdubbing) {
+         overdubBtn.className = 'px-4 py-2 bg-yellow-500 text-white text-sm font-bold rounded-lg shadow-sm transition-colors';
+      } else {
+         overdubBtn.className = `px-4 py-2 text-sm font-bold rounded-lg transition-colors ${seq.duration === 0 ? 'bg-gray-100 text-gray-400 cursor-not-allowed' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}`;
+      }
+
+      loopBtn.className = seq.loop 
+        ? 'px-4 py-2 bg-blue-500 text-white text-sm font-bold rounded-lg shadow-sm transition-colors' 
+        : 'px-4 py-2 bg-gray-200 text-gray-700 hover:bg-gray-300 text-sm font-bold rounded-lg transition-colors';
+
+      if (seq.recording) statusText.innerText = 'RECORDING...';
+      else if (seq.armed) statusText.innerText = 'PLAY NOTE TO START';
+      else if (seq.overdubbing) statusText.innerText = 'OVERDUBBING...';
+      else if (seq.playing) statusText.innerText = 'PLAYING';
+      else if (seq.track.length > 0) statusText.innerText = 'TRACK READY';
+      else statusText.innerText = 'IDLE';
+    }
+
+    function toggleRecord() {
+      if (seq.recording || seq.armed) {
+        stopTransport();
+      } else {
+        stopTransport();
+        seq.track = [];
+        seq.duration = 0;
+        seq.armed = true;
+        updateTransportUI();
+      }
+    }
+
+    function toggleOverdub() {
+      if (seq.duration === 0) return;
+      if (seq.overdubbing) {
+        seq.overdubbing = false;
+      } else {
+        seq.overdubbing = true;
+        if (!seq.playing) playTransport();
+      }
+      updateTransportUI();
+    }
+
+    function stopTransport() {
+      initAudio();
+      if (seq.recording) {
+        seq.duration = audioCtx.currentTime - seq.startTime;
+      }
+      
+      seq.armed = false;
+      seq.recording = false;
+      seq.overdubbing = false;
+      seq.playing = false;
+      
+      clearTimeouts();
+      clearTimeout(seq.loopTimeoutId);
+      
+      // Stop currently scheduled sounds instantly
+      seq.scheduledOscillators.forEach(osc => {
+          try { osc.stop(); } catch(e) {}
+      });
+      seq.scheduledOscillators = [];
+      
+      updateTransportUI();
+    }
+
+    // Precise lookahead scheduler to prevent drift
+    function scheduleLoopIteration(loopStartAudioTime) {
+      seq.track.forEach(note => {
+        const noteTime = loopStartAudioTime + note.relativeTime;
+        
+        // 50ms grace window for immediate playback buffer
+        if (noteTime >= audioCtx.currentTime - 0.05) {
+          playTone(note.freq, noteTime, true);
+          
+          // Flash visuals sync with the audio context (Only if octave matches)
+          if (note.octave === state.octaveOffset) {
+             const delayMs = Math.max(0, (noteTime - audioCtx.currentTime) * 1000);
+             const tid = setTimeout(() => flashBar(note.barIndex), delayMs);
+             seq.timeouts.push(tid);
+          }
+        }
+      });
+
+      if (seq.loop) {
+        const nextLoopStart = loopStartAudioTime + seq.duration;
+        const delayMs = (nextLoopStart - audioCtx.currentTime) * 1000;
+        // Schedule next iteration just before it happens
+        seq.loopTimeoutId = setTimeout(() => {
+          scheduleLoopIteration(nextLoopStart);
+        }, delayMs - 50);
+      } else {
+        seq.loopTimeoutId = setTimeout(() => {
+          stopTransport();
+        }, seq.duration * 1000);
+      }
+    }
+
+    function playTransport() {
+      if (seq.track.length === 0 || seq.duration === 0) return;
+      initAudio();
+      clearTimeouts();
+      seq.playing = true;
+      seq.playbackStartTime = audioCtx.currentTime;
+      scheduleLoopIteration(seq.playbackStartTime);
+      updateTransportUI();
+    }
+
+    function handleNotePlay(index, freq) {
+      initAudio(); 
+      const now = audioCtx.currentTime;
+      
+      playTone(freq, now);
+      
+      // Immediate flash if the note belongs to the currently viewed octave
+      flashBar(index);
+
+      if (seq.armed) {
+        seq.armed = false;
+        seq.recording = true;
+        seq.startTime = now;
+        seq.track.push({ relativeTime: 0, barIndex: index, freq, octave: state.octaveOffset });
+        updateTransportUI();
+      } else if (seq.recording) {
+        seq.track.push({ relativeTime: now - seq.startTime, barIndex: index, freq, octave: state.octaveOffset });
+      } else if (seq.overdubbing) {
+        if (!seq.playing) playTransport(); // Restarts play engine
+        let relTime = (now - seq.playbackStartTime) % seq.duration;
+        if (relTime < 0) relTime += seq.duration;
+        seq.track.push({ relativeTime: relTime, barIndex: index, freq, octave: state.octaveOffset });
+      }
+    }
+
+    // --- DOM View & Updates ---
+    function getLabel(note) {
+      if (note === 'B' && state.useBb) return 'Bb';
+      if (note === 'F' && state.useFSharp) return 'F#';
+      return note;
+    }
+
+    function initBars() {
+      barsContainer.innerHTML = state.bars.map((bar, index) => {
+        const label = getLabel(bar.note);
+        const isAltered = label.length > 1;
+        const textClass = `note-label font-sans font-bold transition-opacity duration-200 ${
+          isAltered ? 'text-2xl sm:text-3xl md:text-5xl lg:text-6xl' : 'text-3xl sm:text-4xl md:text-6xl lg:text-7xl'
+        } text-black opacity-100 pointer-events-none`;
+        
+        return `
+          <div id="bar-${index}" style="height: ${bar.heightPercent}%" class="xylo-bar relative flex-1 min-w-[30px] max-w-[8%] border-[3px] border-black rounded-sm flex flex-col justify-between items-center transition-colors duration-200 select-none bg-white">
+            <div class="highlight-overlay absolute inset-0 pointer-events-none z-10 hidden"></div>
+            
+            <div class="top-zone w-full h-[12.5%] min-h-[40px] flex justify-center items-center cursor-pointer z-20 hover:bg-black/10 transition-colors" data-index="${index}" title="Tap to highlight">
+              <div class="w-2.5 h-2.5 sm:w-3 sm:h-3 md:w-4 md:h-4 rounded-full border-[1.5px] border-black bg-white shadow-sm pointer-events-none"></div>
+            </div>
+            
+            <div class="middle-zone w-full flex-1 flex justify-center items-center cursor-pointer z-10 touch-none" data-index="${index}" title="Tap or slide to play">
+              <span class="${textClass}">${label}</span>
+            </div>
+            
+            <div class="bottom-zone w-full h-[12.5%] min-h-[40px] flex justify-center items-center cursor-pointer z-20 hover:bg-black/10 transition-colors" data-index="${index}" title="Tap to blackout">
+              <div class="w-2.5 h-2.5 sm:w-3 sm:h-3 md:w-4 md:h-4 rounded-full border-[1.5px] border-black bg-white shadow-sm pointer-events-none"></div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function updateBarVisuals(index) {
+      const barState = state.bars[index];
+      const barEl = document.getElementById(`bar-${index}`);
+      if (!barEl) return;
+
+      const overlay = barEl.querySelector('.highlight-overlay');
+      const label = barEl.querySelector('.note-label');
+      const isActiveBlackout = barState.blackout;
+
+      // Background Toggle
+      if (isActiveBlackout) {
+        barEl.classList.replace('bg-white', 'bg-gray-900');
+        label.classList.replace('text-black', 'text-white');
+        label.classList.replace('opacity-100', 'opacity-20');
+      } else {
+        barEl.classList.replace('bg-gray-900', 'bg-white');
+        label.classList.replace('text-white', 'text-black');
+        label.classList.replace('opacity-20', 'opacity-100');
+      }
+
+      // Highlight logic respects blackout state
+      if (barState.highlight > 0 && !isActiveBlackout) {
+        overlay.className = `highlight-overlay absolute inset-0 pointer-events-none z-10 ${highlightColors[barState.highlight]}`;
+      } else {
+        overlay.className = `highlight-overlay absolute inset-0 pointer-events-none z-10 hidden`;
+      }
+    }
+
+    function updateLabels() {
+      state.bars.forEach((bar, index) => {
+        const labelStr = getLabel(bar.note);
+        const isAltered = labelStr.length > 1;
+        const barEl = document.getElementById(`bar-${index}`);
+        const labelEl = barEl.querySelector('.note-label');
+
+        labelEl.innerText = labelStr;
+
+        if (isAltered) {
+          labelEl.classList.remove('text-3xl', 'sm:text-4xl', 'md:text-6xl', 'lg:text-7xl');
+          labelEl.classList.add('text-2xl', 'sm:text-3xl', 'md:text-5xl', 'lg:text-6xl');
+        } else {
+          labelEl.classList.remove('text-2xl', 'sm:text-3xl', 'md:text-5xl', 'lg:text-6xl');
+          labelEl.classList.add('text-3xl', 'sm:text-4xl', 'md:text-6xl', 'lg:text-7xl');
+        }
+      });
+    }
+
+    function updateToggles() {
+      const bbBg = document.getElementById('bb-toggle-bg');
+      const bbDot = document.getElementById('bb-toggle-dot');
+      bbBg.className = `block w-14 h-8 rounded-full transition-colors ${state.useBb ? 'bg-blue-500' : 'bg-gray-300'}`;
+      bbDot.className = `absolute left-1 top-1 bg-white w-6 h-6 rounded-full transition-transform ${state.useBb ? 'translate-x-6' : ''}`;
+
+      const fsBg = document.getElementById('fs-toggle-bg');
+      const fsDot = document.getElementById('fs-toggle-dot');
+      fsBg.className = `block w-14 h-8 rounded-full transition-colors ${state.useFSharp ? 'bg-blue-500' : 'bg-gray-300'}`;
+      fsDot.className = `absolute left-1 top-1 bg-white w-6 h-6 rounded-full transition-transform ${state.useFSharp ? 'translate-x-6' : ''}`;
+    }
+
+    function toggleFullscreen() {
+      state.isFullscreen = !state.isFullscreen;
+      if (state.isFullscreen) {
+        mainWrapper.className = 'bg-gray-100 flex flex-col items-center justify-center font-sans transition-all duration-300 fixed inset-0 z-50 p-2 sm:p-4 overflow-hidden';
+        controlsPanel.classList.add('hidden');
+        xyloWrapper.className = 'w-full bg-white rounded-xl flex items-center justify-center overflow-x-auto transition-all duration-300 h-full max-h-[85vh] aspect-[21/9] p-4 sm:p-8 shadow-2xl';
+        fsBtnText.innerText = 'Exit Fullscreen';
+        fsBtn.title = 'Exit Fullscreen';
+        fsBtnIcon.innerHTML = minimizeIcon;
+      } else {
+        mainWrapper.className = 'bg-gray-100 flex flex-col items-center justify-center font-sans transition-all duration-300 min-h-screen p-4 sm:p-8';
+        controlsPanel.classList.remove('hidden');
+        xyloWrapper.className = 'w-full bg-white rounded-xl flex items-center justify-center overflow-x-auto transition-all duration-300 max-w-6xl h-[50vh] min-h-[400px] shadow-lg border border-gray-200 p-4 sm:p-8';
+        fsBtnText.innerText = 'Fullscreen';
+        fsBtn.title = 'Enter Fullscreen';
+        fsBtnIcon.innerHTML = maximizeIcon;
+      }
+    }
+
+    // --- Input & Event Listeners ---
+    
+    // Replace click with pointerdown for zero-lag mobile reaction
+    barsContainer.addEventListener('pointerdown', (e) => {
+      const topZone = e.target.closest('.top-zone');
+      const bottomZone = e.target.closest('.bottom-zone');
+      const middleZone = e.target.closest('.middle-zone');
+
+      if (topZone) {
+        const index = parseInt(topZone.getAttribute('data-index'), 10);
+        state.bars[index].highlight = (state.bars[index].highlight + 1) % 4;
+        updateBarVisuals(index);
+      } else if (bottomZone) {
+        const index = parseInt(bottomZone.getAttribute('data-index'), 10);
+        state.bars[index].blackout = !state.bars[index].blackout;
+        updateBarVisuals(index);
+      } else if (middleZone) {
+        // Start fluid glissando mechanics
+        isGlissando = true;
+        lastPlayedZone = middleZone;
+        const index = parseInt(middleZone.getAttribute('data-index'), 10);
+        handleNotePlay(index, getFrequency(index));
+      }
+    });
+
+    // Handle seamless sliding (glissando) across keys
+    let isGlissando = false;
+    let lastPlayedZone = null;
+
+    window.addEventListener('pointermove', (e) => {
+      if (!isGlissando) return;
+      
+      const elem = document.elementFromPoint(e.clientX, e.clientY);
+      if (!elem) return;
+      
+      const middleZone = elem.closest('.middle-zone');
+      if (middleZone && middleZone !== lastPlayedZone) {
+        lastPlayedZone = middleZone;
+        const index = parseInt(middleZone.getAttribute('data-index'), 10);
+        handleNotePlay(index, getFrequency(index));
+      }
+    });
+
+    // Reset sliding state
+    window.addEventListener('pointerup', () => { isGlissando = false; lastPlayedZone = null; });
+    window.addEventListener('pointercancel', () => { isGlissando = false; lastPlayedZone = null; });
+
+    document.getElementById('bb-checkbox').addEventListener('change', (e) => {
+      state.useBb = e.target.checked;
+      updateToggles();
+      updateLabels();
+    });
+
+    document.getElementById('fs-checkbox').addEventListener('change', (e) => {
+      state.useFSharp = e.target.checked;
+      updateToggles();
+      updateLabels();
+    });
+
+    document.getElementById('octave-up').addEventListener('click', () => {
+      if (state.octaveOffset < 2) {
+        state.octaveOffset++;
+        document.getElementById('octave-display').innerText = state.octaveOffset > 0 ? `+${state.octaveOffset}` : state.octaveOffset;
+      }
+    });
+
+    document.getElementById('octave-down').addEventListener('click', () => {
+      if (state.octaveOffset > -2) {
+        state.octaveOffset--;
+        document.getElementById('octave-display').innerText = state.octaveOffset > 0 ? `+${state.octaveOffset}` : state.octaveOffset;
+      }
+    });
+
+    document.getElementById('reset-btn').addEventListener('click', () => {
+      // Reset variables
+      state.useBb = false;
+      state.useFSharp = false;
+      state.octaveOffset = 0;
+      state.bars.forEach(bar => { bar.highlight = 0; bar.blackout = false; });
+      
+      // Stop and reset Sequence Engine
+      stopTransport();
+      seq.track = [];
+      seq.duration = 0;
+      updateTransportUI();
+      
+      // Sync DOM
+      document.getElementById('bb-checkbox').checked = false;
+      document.getElementById('fs-checkbox').checked = false;
+      document.getElementById('octave-display').innerText = '0';
+      updateToggles();
+      updateLabels();
+      state.bars.forEach((_, i) => updateBarVisuals(i));
+    });
+
+    // Sequencer Transport Controls
+    document.getElementById('btn-rec').addEventListener('click', toggleRecord);
+    document.getElementById('btn-play').addEventListener('click', playTransport);
+    document.getElementById('btn-stop').addEventListener('click', stopTransport);
+    document.getElementById('btn-overdub').addEventListener('click', toggleOverdub);
+    document.getElementById('btn-loop').addEventListener('click', () => {
+        seq.loop = !seq.loop;
+        updateTransportUI();
+    });
+
+    fsBtn.addEventListener('click', toggleFullscreen);
+
+    // --- Init ---
+    fsBtnIcon.innerHTML = maximizeIcon;
+    initBars();
+    updateTransportUI();
+
+  </script>
+</body>
+</html>
