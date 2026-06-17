@@ -1,0 +1,1252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Mr. Drew's Name That Note Challenge</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700;900&display=block" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Music&display=block" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=block" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Fredoka', 'sans-serif'],
+                        serif: ['Times New Roman', 'serif'],
+                        display: ['Luckiest Guy', 'cursive'],
+                    },
+                    boxShadow: {
+                        'neo': '4px 4px 0px 0px rgba(0,0,0,1)',
+                        'neo-sm': '2px 2px 0px 0px rgba(0,0,0,1)',
+                        'neo-lg': '6px 6px 0px 0px rgba(0,0,0,1)',
+                        'neo-xl': '8px 8px 0px 0px rgba(0,0,0,1)',
+                        'neo-inner': 'inset 4px 4px 0px 0px rgba(0,0,0,0.1)',
+                    },
+                    colors: {
+                        'gum-pink': '#FF90E8',
+                        'gum-yellow': '#FFC900',
+                        'gum-blue': '#23A094',
+                        'gum-bg': '#FFFBF0',
+                        'gum-dark': '#000000',
+                    },
+                    borderWidth: {
+                        '3': '3px',
+                    },
+                    animation: {
+                        'fuse': 'fuse burn linear forwards',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #FFFBF0;
+            background-image: radial-gradient(#FFC900 1px, transparent 1px);
+            background-size: 20px 20px;
+            overflow: hidden;
+            touch-action: manipulation;
+        }
+
+        .neo-box {
+            border: 3px solid black;
+            box-shadow: 4px 4px 0px 0px black;
+            background-color: white;
+            transition: all 0.1s ease-in-out;
+        }
+
+        .neo-btn {
+            border: 3px solid black;
+            box-shadow: 4px 4px 0px 0px black;
+            transition: all 0.1s;
+            cursor: pointer;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        .neo-btn:hover {
+            transform: translate(-1px, -1px);
+            box-shadow: 6px 6px 0px 0px black;
+        }
+
+        .neo-btn:active {
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0px 0px black;
+        }
+
+        .note-head {
+            fill: none; 
+            stroke: black;
+            stroke-width: 4px;
+            transition: all 0.2s ease;
+        }
+
+        .note-head.solved {
+            fill: #23A094;
+            stroke: #23A094;
+        }
+        
+        .staff-line, .ledger-line {
+            stroke: black;
+            stroke-width: 3px; 
+            stroke-linecap: round; 
+        }
+
+        .clef-text {
+            font-family: 'Noto Music', 'Times New Roman', serif;
+            fill: black;
+            user-select: none;
+        }
+
+        @keyframes shake {
+            0% { transform: translate(1px, 1px) rotate(0deg); }
+            10% { transform: translate(-1px, -2px) rotate(-1deg); }
+            20% { transform: translate(-3px, 0px) rotate(1deg); }
+            30% { transform: translate(3px, 2px) rotate(0deg); }
+            40% { transform: translate(1px, -1px) rotate(1deg); }
+            50% { transform: translate(-1px, 2px) rotate(-1deg); }
+            60% { transform: translate(-3px, 1px) rotate(0deg); }
+            70% { transform: translate(3px, 1px) rotate(-1deg); }
+            80% { transform: translate(-1px, -1px) rotate(1deg); }
+            90% { transform: translate(1px, 2px) rotate(0deg); }
+            100% { transform: translate(1px, -2px) rotate(-1deg); }
+        }
+        .shake-anim { animation: shake 0.5s; }
+
+        /* Squash & Stretch (Idle) */
+        @keyframes squash-bounce {
+            0%, 100% { transform: translateY(0) scale(1.02, 0.98); } /* Landed/Squashed */
+            50% { transform: translateY(-10px) scale(0.98, 1.02); } /* Peak/Stretched */
+        }
+
+        .animate-squash {
+            animation: squash-bounce 2s ease-in-out infinite;
+        }
+
+        .screen { display: none; width: 100%; height: 100%; }
+        .screen.active { display: flex; }
+        
+        .blur-bg {
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+
+        /* Timer Bar Animation */
+        #timer-bar {
+            width: 100%;
+            height: 100%;
+            background-color: #FF90E8;
+            transform-origin: left;
+        }
+        
+        .text-solid-shadow {
+            text-shadow: 3px 3px 0px black;
+        }
+
+        /* GOLD SHIMMER ANIMATION */
+        @keyframes sheen-pass {
+            0% { transform: translateX(-150%) skewX(-20deg); }
+            10% { transform: translateX(200%) skewX(-20deg); } /* Fast pass */
+            100% { transform: translateX(200%) skewX(-20deg); } /* Wait for rest of cycle */
+        }
+
+        .shimmer-gold {
+            position: relative;
+            overflow: hidden;
+            background: #FFC900; /* Fallback */
+            background: linear-gradient(to bottom, #FFD700, #FFC900);
+        }
+
+        .shimmer-gold::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0) 100%);
+            transform: translateX(-150%) skewX(-20deg);
+            animation: sheen-pass 6s infinite ease-in-out;
+            pointer-events: none;
+        }
+        
+        /* Toggle Styles */
+        .mode-btn {
+            opacity: 0.5;
+            border-color: transparent;
+            background: transparent;
+            box-shadow: none;
+        }
+        .mode-btn.active {
+            opacity: 1;
+            border-color: black;
+            box-shadow: 2px 2px 0px 0px black;
+        }
+    </style>
+</head>
+<body class="h-screen w-full font-sans text-gum-dark flex flex-col opacity-0 transition-opacity duration-700">
+
+    <!-- HEADER -->
+    <header class="w-full p-2 md:p-4 flex justify-end items-center z-10 relative shrink-0">
+        <button id="setupBtn" class="neo-btn bg-white rounded-full w-10 h-10 md:w-12 md:h-12 flex items-center justify-center text-xl">
+            ⚙️
+        </button>
+    </header>
+
+    <!-- CONTENT WRAPPER -->
+    <div class="flex-1 w-full relative overflow-hidden flex flex-col">
+        
+        <!-- MAIN MENU -->
+        <main id="screen-menu" class="screen active flex-col items-center justify-center p-4">
+            
+            <!-- TITLE SECTION (Squash Container Only) -->
+            <div class="mb-4 md:mb-8 text-center animate-squash z-10">
+                <h1 class="text-5xl md:text-7xl font-display text-gum-blue mb-0 leading-none tracking-wider text-solid-shadow">MR. DREW'S</h1>
+                <h1 class="text-4xl md:text-6xl font-display text-gum-pink leading-none tracking-wider text-solid-shadow my-2">NAME THAT NOTE</h1>
+                <h1 class="text-5xl md:text-7xl font-display text-gum-yellow leading-none tracking-wider text-solid-shadow">CHALLENGE</h1>
+            </div>
+
+            <!-- MENU BOX -->
+            <div class="neo-box bg-white p-6 md:p-8 rounded-xl max-w-md w-full text-center transform rotate-1">
+                
+                <!-- MASTER TOGGLE -->
+                <div class="flex justify-center mb-6">
+                    <div class="bg-gray-100 p-1 rounded-full border-3 border-black shadow-neo-sm flex relative w-full">
+                        <button id="mode-classic" onclick="setMenuMode('classic')" class="mode-btn flex-1 py-2 rounded-full font-black text-sm md:text-lg transition-all active bg-gum-yellow">SINGLE NOTE</button>
+                        <button id="mode-spelling" onclick="setMenuMode('spelling')" class="mode-btn flex-1 py-2 rounded-full font-black text-sm md:text-lg transition-all bg-gum-pink">SPELLING BEE</button>
+                    </div>
+                </div>
+                
+                <button onclick="startGame('arcade')" class="neo-btn bg-gum-pink w-full py-4 rounded-xl text-xl mb-4 hover:bg-pink-300 relative overflow-hidden group">
+                    <span class="relative z-10 flex flex-col items-center justify-center leading-tight">
+                        <span class="text-2xl font-black">🏆 ARCADE RUN</span>
+                        <span id="btn-label-arcade" class="text-sm font-bold opacity-70">10 Rounds • Time Attack</span>
+                    </span>
+                </button>
+
+                <button onclick="startGame('practice')" class="neo-btn bg-gum-blue w-full py-4 rounded-xl text-xl mb-4 hover:bg-teal-300 text-white relative overflow-hidden">
+                     <span class="flex flex-col items-center justify-center leading-tight">
+                        <span class="text-2xl font-black">🧘 PRACTICE</span>
+                        <span id="btn-label-practice" class="text-sm font-bold opacity-80">Endless • Custom Settings</span>
+                    </span>
+                </button>
+                
+                <!-- NEW: High Score Button with Gold Shimmer -->
+                <button onclick="showLeaderboardOverlay()" class="mt-4 w-full neo-btn shimmer-gold py-3 rounded-xl text-sm font-black text-gray-900 tracking-wider hover:brightness-110">
+                    SEE HIGH SCORES
+                </button>
+            </div>
+        </main>
+
+        <!-- SETUP SCREEN -->
+        <main id="screen-setup" class="screen flex-col items-center justify-start p-4 overflow-y-auto">
+            <div class="w-full max-w-2xl pb-8">
+                <div class="flex items-center gap-4 mb-4">
+                    <button onclick="showScreen('screen-menu')" class="neo-btn bg-white px-4 py-2 rounded-lg">← Back</button>
+                    <h2 class="text-2xl font-black bg-gum-yellow px-3 py-1 border-2 border-black shadow-neo-sm rounded">TEACHER SETUP</h2>
+                </div>
+
+                <!-- TREBLE SETTINGS -->
+                <div class="neo-box bg-white p-4 md:p-6 rounded-xl mb-6 relative overflow-hidden">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-xl font-bold flex items-center gap-2">
+                            <span class="w-4 h-4 rounded-full bg-gum-blue border-2 border-black"></span>
+                            Treble Clef
+                        </h3>
+                        <label class="flex items-center gap-2 cursor-pointer select-none">
+                            <span class="font-bold text-sm">ENABLED</span>
+                            <div class="relative inline-block w-12 h-6 align-middle select-none transition duration-200 ease-in">
+                                <input type="checkbox" id="toggle-treble" checked class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 border-black appearance-none cursor-pointer translate-x-6" onchange="updateSettingsUI()"/>
+                                <label for="toggle-treble" class="toggle-label block overflow-hidden h-6 rounded-full bg-gum-blue border-2 border-black cursor-pointer"></label>
+                            </div>
+                        </label>
+                    </div>
+
+                    <div id="treble-controls" class="space-y-4">
+                        <div class="flex items-center justify-between bg-gum-bg p-3 rounded border-2 border-black">
+                            <span class="font-bold">Lowest Note</span>
+                            <div class="flex items-center gap-2">
+                                <button onclick="adjustRange('treble', 'min', -1)" class="neo-btn bg-white w-8 h-8 rounded flex items-center justify-center">-</button>
+                                <span id="treble-min-display" class="font-mono w-16 text-center font-bold">C4</span>
+                                <button onclick="adjustRange('treble', 'min', 1)" class="neo-btn bg-white w-8 h-8 rounded flex items-center justify-center">+</button>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between bg-gum-bg p-3 rounded border-2 border-black">
+                            <span class="font-bold">Highest Note</span>
+                            <div class="flex items-center gap-2">
+                                <button onclick="adjustRange('treble', 'max', -1)" class="neo-btn bg-white w-8 h-8 rounded flex items-center justify-center">-</button>
+                                <span id="treble-max-display" class="font-mono w-16 text-center font-bold">A5</span>
+                                <button onclick="adjustRange('treble', 'max', 1)" class="neo-btn bg-white w-8 h-8 rounded flex items-center justify-center">+</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- BASS SETTINGS -->
+                <div class="neo-box bg-white p-4 md:p-6 rounded-xl mb-6 relative overflow-hidden">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-xl font-bold flex items-center gap-2">
+                            <span class="w-4 h-4 rounded-full bg-gum-pink border-2 border-black"></span>
+                            Bass Clef
+                        </h3>
+                        <label class="flex items-center gap-2 cursor-pointer select-none">
+                            <span class="font-bold text-sm">ENABLED</span>
+                            <div class="relative inline-block w-12 h-6 align-middle select-none transition duration-200 ease-in">
+                                <input type="checkbox" id="toggle-bass" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 border-black appearance-none cursor-pointer" onchange="updateSettingsUI()"/>
+                                <label for="toggle-bass" class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 border-2 border-black cursor-pointer"></label>
+                            </div>
+                        </label>
+                    </div>
+
+                    <div id="bass-controls" class="space-y-4 opacity-50 pointer-events-none">
+                        <div class="flex items-center justify-between bg-gum-bg p-3 rounded border-2 border-black">
+                            <span class="font-bold">Lowest Note</span>
+                            <div class="flex items-center gap-2">
+                                <button onclick="adjustRange('bass', 'min', -1)" class="neo-btn bg-white w-8 h-8 rounded flex items-center justify-center">-</button>
+                                <span id="bass-min-display" class="font-mono w-16 text-center font-bold">C2</span>
+                                <button onclick="adjustRange('bass', 'min', 1)" class="neo-btn bg-white w-8 h-8 rounded flex items-center justify-center">+</button>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between bg-gum-bg p-3 rounded border-2 border-black">
+                            <span class="font-bold">Highest Note</span>
+                            <div class="flex items-center gap-2">
+                                <button onclick="adjustRange('bass', 'max', -1)" class="neo-btn bg-white w-8 h-8 rounded flex items-center justify-center">-</button>
+                                <span id="bass-max-display" class="font-mono w-16 text-center font-bold">E4</span>
+                                <button onclick="adjustRange('bass', 'max', 1)" class="neo-btn bg-white w-8 h-8 rounded flex items-center justify-center">+</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- GAME SCREEN -->
+        <main id="screen-game" class="screen flex-col relative w-full h-full max-w-7xl mx-auto p-2 md:p-4">
+            
+            <!-- TIMER BAR (Only for Arcade) -->
+            <div id="timer-container" class="w-full h-3 bg-gray-200 rounded-full mb-2 overflow-hidden border-2 border-black hidden shrink-0">
+                <div id="timer-bar" class="w-full h-full bg-gum-pink"></div>
+            </div>
+
+            <!-- Score Bar -->
+            <div class="flex justify-between items-center mb-2 shrink-0">
+                <div class="neo-box bg-white px-3 py-1 rounded-lg flex items-center gap-2">
+                    <span id="score-label" class="text-sm font-bold text-gray-500">STREAK</span>
+                    <span id="score-display" class="text-xl font-black text-gum-blue">0</span>
+                </div>
+                <!-- Round Counter for Arcade -->
+                <div id="round-display" class="neo-box bg-gum-yellow px-3 py-1 rounded-lg hidden">
+                    <span class="text-sm font-black">Q: <span id="current-round">1</span>/10</span>
+                </div>
+                <button onclick="quitGame()" class="neo-btn bg-white w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm text-red-500">X</button>
+            </div>
+
+            <!-- The Stage (Canvas/SVG Container) -->
+            <div class="flex-1 min-h-0 flex flex-col items-center justify-center relative mb-2" id="game-stage">
+                
+                <!-- SVG Renderer -->
+                <div class="neo-box bg-white w-full h-full rounded-2xl relative flex items-center justify-center overflow-hidden">
+                    <svg id="music-svg" width="100%" height="100%" viewBox="0 0 1000 600" preserveAspectRatio="xMidYMid meet">
+                        <!-- Staff lines will be drawn here by JS -->
+                    </svg>
+                </div>
+
+                <!-- Feedback Overlay -->
+                <div id="feedback-overlay" class="absolute inset-0 flex items-start justify-center pt-12 md:pt-16 opacity-0 transition-opacity duration-300 pointer-events-none z-20">
+                    <div id="feedback-text" class="text-6xl font-black bg-gradient-to-r from-gum-yellow via-gum-pink to-gum-blue bg-clip-text text-transparent" style="filter: drop-shadow(4px 4px 0px black);">
+                        CORRECT!
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Controls -->
+            <div class="grid grid-cols-7 gap-1 md:gap-4 w-full shrink-0 h-[18vh] max-h-32">
+                <button onclick="submitAnswer('A')" class="note-btn neo-btn bg-gum-yellow rounded-xl text-2xl md:text-4xl font-black hover:bg-yellow-300 flex items-center justify-center h-full w-full">A</button>
+                <button onclick="submitAnswer('B')" class="note-btn neo-btn bg-gum-pink rounded-xl text-2xl md:text-4xl font-black hover:bg-pink-300 flex items-center justify-center h-full w-full">B</button>
+                <button onclick="submitAnswer('C')" class="note-btn neo-btn bg-gum-blue rounded-xl text-2xl md:text-4xl font-black hover:bg-teal-300 text-white flex items-center justify-center h-full w-full">C</button>
+                <button onclick="submitAnswer('D')" class="note-btn neo-btn bg-white rounded-xl text-2xl md:text-4xl font-black hover:bg-gray-100 flex items-center justify-center h-full w-full">D</button>
+                <button onclick="submitAnswer('E')" class="note-btn neo-btn bg-gum-yellow rounded-xl text-2xl md:text-4xl font-black hover:bg-yellow-300 flex items-center justify-center h-full w-full">E</button>
+                <button onclick="submitAnswer('F')" class="note-btn neo-btn bg-gum-pink rounded-xl text-2xl md:text-4xl font-black hover:bg-pink-300 flex items-center justify-center h-full w-full">F</button>
+                <button onclick="submitAnswer('G')" class="note-btn neo-btn bg-gum-blue rounded-xl text-2xl md:text-4xl font-black hover:bg-teal-300 text-white flex items-center justify-center h-full w-full">G</button>
+            </div>
+            
+            <!-- GAME OVER OVERLAY -->
+            <div id="game-over-overlay" class="absolute inset-0 z-50 flex items-center justify-center bg-black/30 blur-bg hidden transition-opacity duration-300">
+                <div class="neo-box bg-white p-6 md:p-8 rounded-2xl max-w-sm w-full mx-4 text-center shadow-neo-xl transform scale-100 animate-in fade-in zoom-in duration-200">
+                    <h2 class="text-4xl font-black mb-2 italic transform -rotate-2">GAME OVER</h2>
+                    
+                    <div class="mb-4">
+                        <!-- Score Display Section -->
+                         <div id="arcade-result-box" class="hidden">
+                             <div class="flex justify-between text-sm text-gray-500 font-bold border-b border-gray-200 pb-1 mb-1">
+                                 <span>Base</span>
+                                 <span id="res-base">0</span>
+                             </div>
+                             <div class="flex justify-between text-sm text-gray-500 font-bold border-b-2 border-black pb-1 mb-1">
+                                 <span>Time Bonus</span>
+                                 <span id="res-bonus" class="text-gum-pink">+0</span>
+                             </div>
+                             <div class="text-6xl font-black text-gum-blue mt-2" id="res-total">0</div>
+                             <div class="text-xs font-bold tracking-widest text-gray-400 mt-1">TOTAL SCORE</div>
+                         </div>
+
+                         <div id="practice-result-box" class="hidden">
+                             <div class="text-gray-500 font-bold text-sm">LONGEST STREAK</div>
+                             <div id="res-streak" class="text-6xl font-black text-gum-blue">0</div>
+                         </div>
+                    </div>
+
+                    <!-- Input Section (Only shown if high score in arcade mode) -->
+                    <div id="highscore-input-section" class="hidden mb-6">
+                        <div class="text-gum-pink font-bold animate-pulse mb-2">★ NEW HIGH SCORE! ★</div>
+                        <input type="text" id="player-initials" maxlength="3" placeholder="AAA" class="w-full text-center text-3xl font-black border-4 border-black rounded-lg py-2 uppercase tracking-widest bg-gum-bg mb-2 focus:outline-none focus:ring-4 focus:ring-gum-yellow">
+                        <button onclick="saveScore()" class="neo-btn bg-gum-yellow w-full py-2 rounded-lg font-bold">SAVE RECORD</button>
+                    </div>
+
+                    <div class="flex gap-2">
+                        <button onclick="endGame()" class="neo-btn bg-white flex-1 py-3 rounded-xl font-bold">MENU</button>
+                        <button onclick="playAgain()" class="neo-btn bg-gum-blue text-white flex-1 py-3 rounded-xl font-bold">PLAY AGAIN</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- LEADERBOARD OVERLAY -->
+        <div id="leaderboard-overlay" onclick="closeLeaderboardOverlay()" class="absolute inset-0 z-50 flex items-center justify-center bg-black/30 blur-bg hidden transition-opacity duration-300">
+            <div class="neo-box bg-white p-6 rounded-2xl max-w-4xl w-full mx-4 text-center shadow-neo-xl relative" onclick="event.stopPropagation()">
+                <button onclick="closeLeaderboardOverlay()" class="absolute top-4 right-4 z-10 neo-btn bg-white w-10 h-10 rounded-full flex items-center justify-center font-bold text-lg text-red-500">X</button>
+                
+                <h2 class="text-4xl font-display text-gum-blue mb-6 text-solid-shadow transform -rotate-1">HIGH SCORES</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    
+                    <!-- COLUMN 1: Single Note Challenge (Arcade) -->
+                    <div class="bg-gum-bg border-2 border-black rounded-xl p-4">
+                        <div class="bg-gum-yellow border-2 border-black rounded-lg py-2 px-4 mb-4 transform -rotate-1 shadow-neo-sm">
+                            <h3 class="text-xl font-black leading-tight">SINGLE NOTE<br>CHALLENGE</h3>
+                        </div>
+                        <ul id="lb-col-arcade" class="space-y-2 text-left font-bold font-mono text-lg">
+                            <!-- Filled by JS -->
+                        </ul>
+                    </div>
+
+                    <!-- COLUMN 2: Spelling Bee Challenge (Spelling Arcade) -->
+                    <div class="bg-gum-bg border-2 border-black rounded-xl p-4">
+                        <div class="bg-gum-pink border-2 border-black rounded-lg py-2 px-4 mb-4 transform rotate-1 shadow-neo-sm">
+                            <h3 class="text-xl font-black leading-tight">SPELLING BEE<br>CHALLENGE</h3>
+                        </div>
+                        <ul id="lb-col-spelling" class="space-y-2 text-left font-bold font-mono text-lg">
+                            <!-- Filled by JS -->
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // --- DATA & STATE ---
+        const NOTE_NAMES = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
+        const SPELLING_WORDS = [
+            "ACE", "ADD", "AGE", "BAD", "BAG", "BED", "BEE", "BEG", "CAB", "DAD", "DAB", "EGG", "FAD", "FED", "GAB", "GAG",
+            "ACED", "AGED", "BABE", "BEAD", "BEEF", "CAGE", "CAFE", "DEAD", "DEAF", "DEED", "EDGE", "FACE", "FADE", "FEED",
+            "BADGE", "CAGED", "DECAF", "FACED", "FADED", "BAGGED", "DEFACE", "CABBAGE", "BAGGAGE"
+        ];
+
+        // GLOBAL SELECTED MODE (Controlled by Main Menu Toggle)
+        let selectedGameMode = 'classic'; // 'classic' or 'spelling'
+
+        // "Practice" settings (editable by user)
+        let practiceSettings = {
+            treble: { enabled: true, min: 60, max: 77 }, // C4 to F5
+            bass: { enabled: false, min: 41, max: 60 }   // F2 to C4
+        };
+
+        // Current Active Settings
+        let activeSettings = {}; 
+
+        let gameState = {
+            type: 'practice', // 'arcade' or 'practice'
+            currentNotes: [], 
+            currentIndex: 0,
+            streak: 0,
+            maxStreak: 0,
+            isPlaying: false,
+            
+            // Arcade specifics
+            scoreBase: 0,
+            scoreBonus: 0,
+            round: 0,
+            maxRounds: 10,
+            startTime: 0,
+            timerInterval: null,
+            lastMidi: null, // Added to track history
+            
+            // Timer Duration
+            timerDuration: 5000 
+        };
+        
+        let questionTimeout; // Track delays to prevent overlaps
+
+        // --- DOM ELEMENTS ---
+        const svgCanvas = document.getElementById('music-svg');
+        const scoreDisplay = document.getElementById('score-display');
+        const scoreLabel = document.getElementById('score-label');
+        const gameOverOverlay = document.getElementById('game-over-overlay');
+        const highscoreSection = document.getElementById('highscore-input-section');
+        const playerInitialsInput = document.getElementById('player-initials');
+        const timerContainer = document.getElementById('timer-container');
+        const timerBar = document.getElementById('timer-bar');
+        const roundDisplay = document.getElementById('round-display');
+        const currentRoundSpan = document.getElementById('current-round');
+        
+        const leaderboardOverlay = document.getElementById('leaderboard-overlay');
+        const lbColArcade = document.getElementById('lb-col-arcade');
+        const lbColSpelling = document.getElementById('lb-col-spelling');
+
+        // --- INIT & NAVIGATION ---
+        document.addEventListener('DOMContentLoaded', () => {
+            showScreen('screen-menu');
+            document.getElementById('setupBtn').addEventListener('click', () => showScreen('screen-setup'));
+            updateSettingsUI();
+        });
+
+        function showScreen(id) {
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+        }
+
+        // --- MENU TOGGLE LOGIC ---
+        function setMenuMode(mode) {
+            selectedGameMode = mode;
+            
+            // Update Buttons Visuals
+            const btnClassic = document.getElementById('mode-classic');
+            const btnSpelling = document.getElementById('mode-spelling');
+            
+            if (mode === 'classic') {
+                btnClassic.classList.add('active', 'bg-gum-yellow');
+                btnClassic.classList.remove('opacity-50');
+                
+                btnSpelling.classList.remove('active', 'bg-gum-pink');
+                btnSpelling.classList.add('opacity-50');
+                
+                document.getElementById('btn-label-arcade').textContent = "10 Rounds • Time Attack";
+                document.getElementById('btn-label-practice').textContent = "Endless • Custom Settings";
+            } else {
+                btnSpelling.classList.add('active', 'bg-gum-pink');
+                btnSpelling.classList.remove('opacity-50');
+                
+                btnClassic.classList.remove('active', 'bg-gum-yellow');
+                btnClassic.classList.add('opacity-50');
+                
+                document.getElementById('btn-label-arcade').textContent = "10 Rounds • 15s Per Word";
+                document.getElementById('btn-label-practice').textContent = "Endless Spelling Practice";
+            }
+        }
+
+        // --- SETUP LOGIC (For Practice Mode) ---
+        function updateSettingsUI() {
+            // Update Clefs
+            const tTreble = document.getElementById('toggle-treble');
+            const tBass = document.getElementById('toggle-bass');
+            
+            if(!tTreble.checked && !tBass.checked) {
+                if(practiceSettings.treble.enabled) tBass.checked = true; 
+                else tTreble.checked = true;
+            }
+
+            practiceSettings.treble.enabled = tTreble.checked;
+            practiceSettings.bass.enabled = tBass.checked;
+
+            const bassControls = document.getElementById('bass-controls');
+            if(practiceSettings.bass.enabled) {
+                bassControls.classList.remove('opacity-50', 'pointer-events-none');
+                tBass.classList.add('translate-x-6');
+                tBass.nextElementSibling.classList.remove('bg-gray-300');
+                tBass.nextElementSibling.classList.add('bg-gum-pink');
+            } else {
+                bassControls.classList.add('opacity-50', 'pointer-events-none');
+                tBass.classList.remove('translate-x-6');
+                tBass.nextElementSibling.classList.add('bg-gray-300');
+                tBass.nextElementSibling.classList.remove('bg-gum-pink');
+            }
+
+            const trebleControls = document.getElementById('treble-controls');
+            if(practiceSettings.treble.enabled) {
+                trebleControls.classList.remove('opacity-50', 'pointer-events-none');
+                tTreble.classList.add('translate-x-6');
+                tTreble.nextElementSibling.classList.remove('bg-gray-300');
+                tTreble.nextElementSibling.classList.add('bg-gum-blue');
+            } else {
+                trebleControls.classList.add('opacity-50', 'pointer-events-none');
+                tTreble.classList.remove('translate-x-6');
+                tTreble.nextElementSibling.classList.add('bg-gray-300');
+                tTreble.nextElementSibling.classList.remove('bg-gum-blue');
+            }
+
+            document.getElementById('treble-min-display').textContent = getNoteName(practiceSettings.treble.min, true);
+            document.getElementById('treble-max-display').textContent = getNoteName(practiceSettings.treble.max, true);
+            document.getElementById('bass-min-display').textContent = getNoteName(practiceSettings.bass.min, true);
+            document.getElementById('bass-max-display').textContent = getNoteName(practiceSettings.bass.max, true);
+        }
+
+        function adjustRange(clef, type, delta) {
+            let current = practiceSettings[clef][type];
+            let next = current + delta;
+            while(isAccidental(next)) {
+                next += delta;
+            }
+
+            if (type === 'min') {
+                if (next >= practiceSettings[clef].max) return;
+                if (next < 21) return;
+            } else {
+                if (next <= practiceSettings[clef].min) return;
+                if (next > 108) return;
+            }
+
+            practiceSettings[clef][type] = next;
+            updateSettingsUI();
+        }
+
+        function isAccidental(midi) {
+            const note = midi % 12;
+            return [1, 3, 6, 8, 10].includes(note);
+        }
+
+        function getNoteName(midi, withOctave = false) {
+            const noteIndex = midi % 12;
+            const octave = Math.floor(midi / 12) - 1;
+            let name = NOTE_NAMES[noteIndex];
+            if(withOctave) return name + octave;
+            return name;
+        }
+
+        // --- GAME LOGIC ---
+
+        function startGame(type) {
+            gameState.type = type;
+            const currentMode = selectedGameMode; 
+
+            if (type === 'arcade') {
+                // Lock settings for Arcade: Treble, Standard Range
+                activeSettings = {
+                    mode: currentMode,
+                    treble: { enabled: true, min: 60, max: 77 }, // C4-F5
+                    bass: { enabled: false, min: 41, max: 60 }
+                };
+                timerContainer.classList.remove('hidden');
+                roundDisplay.classList.remove('hidden');
+                scoreLabel.textContent = "SCORE";
+            } else {
+                // Use User Practice Settings
+                activeSettings = JSON.parse(JSON.stringify(practiceSettings));
+                activeSettings.mode = currentMode; 
+                
+                timerContainer.classList.add('hidden');
+                roundDisplay.classList.add('hidden');
+                scoreLabel.textContent = "STREAK";
+            }
+
+            showScreen('screen-game');
+            resetGame();
+            nextQuestion();
+        }
+
+        function playAgain() {
+            resetGame();
+            nextQuestion();
+        }
+
+        function quitGame() {
+            gameState.isPlaying = false;
+            clearInterval(gameState.timerInterval);
+            clearTimeout(questionTimeout);
+            showGameOver();
+        }
+
+        function endGame() {
+            clearInterval(gameState.timerInterval);
+            clearTimeout(questionTimeout);
+            gameOverOverlay.classList.add('hidden');
+            showScreen('screen-menu');
+        }
+
+        function resetGame() {
+            gameState.streak = 0;
+            gameState.maxStreak = 0;
+            gameState.scoreBase = 0;
+            gameState.scoreBonus = 0;
+            gameState.round = 0;
+            gameState.isPlaying = true;
+            gameState.lastMidi = null;
+            scoreDisplay.textContent = "0";
+            gameOverOverlay.classList.add('hidden');
+        }
+
+        function startTimer() {
+            if (gameState.type !== 'arcade') return;
+            
+            clearInterval(gameState.timerInterval);
+            gameState.startTime = Date.now();
+            
+            timerBar.style.width = '100%';
+            timerBar.style.transition = 'none';
+            void timerBar.offsetWidth; // trigger reflow
+            
+            timerBar.style.transition = `width ${gameState.timerDuration}ms linear`;
+            timerBar.style.width = '0%';
+        }
+
+        function nextQuestion() {
+            gameState.isPlaying = true; // Ensure active gameplay
+            
+            if (gameState.type === 'arcade') {
+                gameState.round++;
+                if (gameState.round > gameState.maxRounds) {
+                    showGameOver();
+                    return;
+                }
+                currentRoundSpan.textContent = gameState.round;
+            }
+
+            let clef = 'treble';
+            if (activeSettings.treble.enabled && activeSettings.bass.enabled) {
+                clef = Math.random() > 0.5 ? 'treble' : 'bass';
+            } else if (activeSettings.bass.enabled) {
+                clef = 'bass';
+            }
+
+            gameState.currentNotes = [];
+            gameState.currentIndex = 0;
+
+            if (activeSettings.mode === 'classic') {
+                const range = activeSettings[clef];
+                let validNotes = [];
+                for(let i = range.min; i <= range.max; i++) {
+                    if(!isAccidental(i)) validNotes.push(i);
+                }
+                
+                let noteMidi;
+                // Prevent consecutive identical notes
+                if (validNotes.length > 1) {
+                    do {
+                        noteMidi = validNotes[Math.floor(Math.random() * validNotes.length)];
+                    } while (noteMidi === gameState.lastMidi);
+                } else {
+                    noteMidi = validNotes.length > 0 ? validNotes[0] : 60;
+                }
+                
+                gameState.lastMidi = noteMidi;
+                gameState.currentNotes = [{ midi: noteMidi, clef: clef, char: getNoteName(noteMidi).replace('#', '') }];
+            } else {
+                const word = SPELLING_WORDS[Math.floor(Math.random() * SPELLING_WORDS.length)];
+                for (let i = 0; i < word.length; i++) {
+                    const char = word[i];
+                    const midi = getMidiForLetter(char, clef);
+                    if (midi) {
+                         gameState.currentNotes.push({ midi: midi, clef: clef, char: char });
+                    }
+                }
+            }
+
+            drawStaff(clef, gameState.currentNotes, gameState.currentIndex);
+            enableButtons(true);
+            
+            // Dynamic timer: 3 seconds per letter for spelling bee, 5 seconds flat for single notes
+            if (activeSettings.mode === 'spelling') {
+                gameState.timerDuration = gameState.currentNotes.length * 3000;
+            } else {
+                gameState.timerDuration = 5000;
+            }
+            
+            startTimer();
+        }
+
+        function getMidiForLetter(letter, clef) {
+            const range = activeSettings[clef];
+            let candidates = [];
+            for(let i = range.min; i <= range.max; i++) {
+                if(!isAccidental(i)) {
+                    if (getNoteName(i).replace('#','') === letter) {
+                        candidates.push(i);
+                    }
+                }
+            }
+            if (candidates.length === 0) return null;
+            return candidates[Math.floor(Math.random() * candidates.length)];
+        }
+
+        function submitAnswer(noteChar) {
+            if(!gameState.isPlaying) return;
+
+            const target = gameState.currentNotes[gameState.currentIndex];
+            
+            if (noteChar === target.char) {
+                gameState.currentIndex++;
+                playSound(true, target.midi);
+                drawStaff(target.clef, gameState.currentNotes, gameState.currentIndex);
+
+                if (gameState.currentIndex >= gameState.currentNotes.length) {
+                    handleCorrect();
+                }
+            } else {
+                handleIncorrect();
+            }
+        }
+
+        function handleCorrect() {
+            let points = 0;
+            let timeBonus = 0;
+
+            if (gameState.type === 'arcade') {
+                const base = 1000;
+                const elapsed = Date.now() - gameState.startTime;
+                const remaining = Math.max(0, gameState.timerDuration - elapsed);
+                timeBonus = Math.floor((remaining / gameState.timerDuration) * 500); 
+                
+                let multiplier = 1;
+                if (gameState.streak >= 3) multiplier = 2;
+                if (gameState.streak >= 6) multiplier = 3;
+
+                points = (base * multiplier);
+                
+                gameState.scoreBase += points;
+                gameState.scoreBonus += timeBonus;
+                
+                scoreDisplay.textContent = (gameState.scoreBase + gameState.scoreBonus).toLocaleString();
+                showFeedbackText(`+${points + timeBonus}`, true);
+            } else {
+                showFeedbackText("CORRECT!", true);
+            }
+
+            gameState.streak++;
+            if (gameState.streak > gameState.maxStreak) {
+                gameState.maxStreak = gameState.streak;
+            }
+
+            if (gameState.type === 'practice') {
+                scoreDisplay.textContent = gameState.streak;
+            }
+
+            const delay = activeSettings.mode === 'spelling' ? 3000 : 800;
+            enableButtons(false);
+            clearInterval(gameState.timerInterval);
+            
+            questionTimeout = setTimeout(() => {
+                nextQuestion();
+            }, delay);
+        }
+
+        function handleIncorrect() {
+            gameState.streak = 0;
+            gameState.isPlaying = false;
+            clearInterval(gameState.timerInterval); // Pause timer visually on a miss
+            
+            if (gameState.type === 'practice') {
+                scoreDisplay.textContent = 0;
+                showFeedbackText("OOPS!", false);
+                playFeedbackAnimation(false);
+                shakeStaff();
+                playSound(false);
+                enableButtons(false);
+                questionTimeout = setTimeout(() => {
+                    nextQuestion();
+                }, 1000);
+            } else {
+                showFeedbackText("MISS!", false);
+                playFeedbackAnimation(false);
+                shakeStaff();
+                playSound(false);
+                enableButtons(false);
+                questionTimeout = setTimeout(() => {
+                     nextQuestion();
+                }, 1000);
+            }
+        }
+
+        function enableButtons(enabled) {
+            const buttons = document.querySelectorAll('.note-btn');
+            buttons.forEach(b => {
+                b.style.pointerEvents = enabled ? 'auto' : 'none';
+                b.style.opacity = enabled ? '1' : '0.8';
+            });
+        }
+
+        // --- LEADERBOARD SYSTEM ---
+        
+        function getHighScores(modeKey) {
+            const key = `nameThatNote_leaderboard_${modeKey}`;
+            const stored = localStorage.getItem(key);
+            return stored ? JSON.parse(stored) : [];
+        }
+
+        function saveHighScoreData(modeKey, scores) {
+            const key = `nameThatNote_leaderboard_${modeKey}`;
+            localStorage.setItem(key, JSON.stringify(scores));
+        }
+
+        function showGameOver() {
+            gameOverOverlay.classList.remove('hidden');
+            
+            const arcadeBox = document.getElementById('arcade-result-box');
+            const practiceBox = document.getElementById('practice-result-box');
+            
+            let finalMetric = 0;
+            let leaderboardKey = '';
+
+            if (gameState.type === 'arcade') {
+                arcadeBox.classList.remove('hidden');
+                practiceBox.classList.add('hidden');
+                
+                document.getElementById('res-base').textContent = gameState.scoreBase.toLocaleString();
+                document.getElementById('res-bonus').textContent = `+${gameState.scoreBonus.toLocaleString()}`;
+                finalMetric = gameState.scoreBase + gameState.scoreBonus;
+                document.getElementById('res-total').textContent = finalMetric.toLocaleString();
+                
+                leaderboardKey = activeSettings.mode === 'spelling' ? 'arcade_spelling' : 'arcade_classic';
+
+                const scores = getHighScores(leaderboardKey);
+                const isHighScore = scores.length < 5 || finalMetric > scores[scores.length - 1].score;
+
+                if (isHighScore && finalMetric > 0) {
+                    highscoreSection.classList.remove('hidden');
+                    playerInitialsInput.value = '';
+                    playerInitialsInput.focus();
+                    highscoreSection.dataset.targetKey = leaderboardKey;
+                    highscoreSection.dataset.finalMetric = finalMetric;
+                } else {
+                    highscoreSection.classList.add('hidden');
+                }
+
+            } else {
+                arcadeBox.classList.add('hidden');
+                practiceBox.classList.remove('hidden');
+                
+                finalMetric = gameState.maxStreak;
+                document.getElementById('res-streak').textContent = finalMetric;
+                
+                highscoreSection.classList.add('hidden');
+            }
+        }
+
+        function saveScore() {
+            let name = playerInitialsInput.value.toUpperCase().trim() || 'ANON';
+            
+            if (['ASS', 'GAY', 'FUC', 'FUK', 'DIK'].includes(name)) {
+                name = 'AAA';
+            }
+
+            const leaderboardKey = highscoreSection.dataset.targetKey;
+            const finalMetric = parseInt(highscoreSection.dataset.finalMetric);
+
+            let scores = getHighScores(leaderboardKey);
+            scores.push({ name, score: finalMetric });
+            scores.sort((a, b) => b.score - a.score);
+            scores = scores.slice(0, 5);
+            
+            saveHighScoreData(leaderboardKey, scores);
+            
+            highscoreSection.classList.add('hidden');
+            endGame(); 
+            setTimeout(showLeaderboardOverlay, 200); 
+        }
+
+        function showLeaderboardOverlay() {
+            const overlay = document.getElementById('leaderboard-overlay');
+            if(overlay) overlay.classList.remove('hidden');
+            
+            const classicScores = getHighScores('arcade_classic');
+            const lbColArcade = document.getElementById('lb-col-arcade');
+            if(lbColArcade) renderList(lbColArcade, classicScores);
+
+            const spellingScores = getHighScores('arcade_spelling');
+            const lbColSpelling = document.getElementById('lb-col-spelling');
+            if(lbColSpelling) renderList(lbColSpelling, spellingScores);
+        }
+
+        function closeLeaderboardOverlay() {
+            const overlay = document.getElementById('leaderboard-overlay');
+            if(overlay) overlay.classList.add('hidden');
+        }
+
+        function renderList(element, scores) {
+            element.innerHTML = '';
+            if (scores.length === 0) {
+                element.innerHTML = '<li class="text-center text-gray-400 italic font-normal text-sm">No records yet</li>';
+                return;
+            }
+            
+            scores.forEach((entry, index) => {
+                const li = document.createElement('li');
+                li.className = "flex justify-between border-b border-gray-300 py-1 last:border-0";
+                li.innerHTML = `<span>${index + 1}. ${entry.name}</span><span>${entry.score.toLocaleString()}</span>`;
+                element.appendChild(li);
+            });
+        }
+
+        // --- ANIMATION HELPERS ---
+        function showFeedbackText(text, isCorrect) {
+            const overlay = document.getElementById('feedback-overlay');
+            const el = document.getElementById('feedback-text');
+            el.textContent = text;
+            
+            if (isCorrect) {
+                el.className = "text-6xl font-black bg-gradient-to-r from-gum-yellow via-gum-pink to-gum-blue bg-clip-text text-transparent";
+            } else {
+                el.className = "text-6xl font-black text-red-500";
+            }
+
+            playFeedbackAnimation(isCorrect);
+        }
+
+        function playFeedbackAnimation(isCorrect) {
+            const overlay = document.getElementById('feedback-overlay');
+            overlay.classList.remove('opacity-0');
+            setTimeout(() => {
+                overlay.classList.add('opacity-0');
+            }, 700);
+        }
+
+        function shakeStaff() {
+            const container = svgCanvas.parentElement; 
+            container.classList.remove('shake-anim');
+            void container.offsetWidth; 
+            container.classList.add('shake-anim');
+        }
+
+        // --- AUDIO ---
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        const audioCtx = new AudioContext();
+
+        function playSound(isCorrect, midi = null) {
+            if(audioCtx.state === 'suspended') audioCtx.resume();
+            
+            const oscillator = audioCtx.createOscillator();
+            const gainNode = audioCtx.createGain();
+
+            oscillator.connect(gainNode);
+            gainNode.connect(audioCtx.destination);
+
+            if (isCorrect) {
+                if (midi !== null) {
+                    // Pitched Xylophone Synth
+                    const freq = 440 * Math.pow(2, (midi - 69) / 12);
+                    oscillator.type = 'sine';
+                    oscillator.frequency.setValueAtTime(freq, audioCtx.currentTime);
+                    
+                    // Percussive envelope (quick attack, exponential decay) to prevent clipping
+                    gainNode.gain.setValueAtTime(0, audioCtx.currentTime);
+                    gainNode.gain.linearRampToValueAtTime(0.3, audioCtx.currentTime + 0.02);
+                    gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.4);
+                    
+                    oscillator.start();
+                    oscillator.stop(audioCtx.currentTime + 0.4);
+                } else {
+                    // Fallback generic sound
+                    oscillator.type = 'sine';
+                    oscillator.frequency.setValueAtTime(523.25, audioCtx.currentTime);
+                    oscillator.frequency.exponentialRampToValueAtTime(1046.5, audioCtx.currentTime + 0.1);
+                    gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
+                    gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.3);
+                    oscillator.start();
+                    oscillator.stop(audioCtx.currentTime + 0.3);
+                }
+            } else {
+                // Buzzer sound
+                oscillator.type = 'sawtooth';
+                oscillator.frequency.setValueAtTime(150, audioCtx.currentTime);
+                oscillator.frequency.linearRampToValueAtTime(100, audioCtx.currentTime + 0.3);
+                gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
+                gainNode.gain.linearRampToValueAtTime(0.01, audioCtx.currentTime + 0.3);
+                oscillator.start();
+                oscillator.stop(audioCtx.currentTime + 0.3);
+            }
+        }
+
+        // --- RENDERING (SVG) ---
+        function drawStaff(clef, notesArray, solvedIndex) {
+            const w = 1000;
+            const h = 600;
+            const centerX = w / 2;
+            const centerY = h / 2;
+            const lineSpacing = 40;
+
+            svgCanvas.innerHTML = '';
+            
+            const staffGroup = createSVGElement('g', { id: 'staff-lines' });
+            for (let i = -2; i <= 2; i++) {
+                const y = centerY + (i * lineSpacing);
+                const line = createSVGElement('line', {
+                    x1: 50, y1: y, x2: 950, y2: y,
+                    class: 'staff-line'
+                });
+                staffGroup.appendChild(line);
+            }
+            svgCanvas.appendChild(staffGroup);
+
+            drawClef(clef, 150, centerY, lineSpacing);
+
+            const noteGroup = createSVGElement('g', { id: 'note-group' });
+            const spellingGroup = createSVGElement('g', { id: 'spelling-group' });
+
+            const noteCount = notesArray.length;
+            
+            // Shift group to the right for long words
+            let groupCenterX = centerX;
+            if (noteCount >= 6) {
+                groupCenterX += 70; 
+            }
+
+            let refNote, refY;
+            if (clef === 'treble') {
+                refNote = 71; // B4
+                refY = centerY;
+            } else {
+                refNote = 50; // D3
+                refY = centerY;
+            }
+
+            for(let i=0; i<noteCount; i++) {
+                const noteObj = notesArray[i];
+                const midi = noteObj.midi;
+                
+                const nx = (noteCount === 1) ? groupCenterX : (groupCenterX - ((noteCount-1)*50)) + (i * 100);
+
+                const diatonicRef = getDiatonicIndex(refNote);
+                const diatonicTarget = getDiatonicIndex(midi);
+                const steps = diatonicRef - diatonicTarget;
+                const halfSpace = lineSpacing / 2;
+                const noteY = refY + (steps * halfSpace);
+
+                const topLimitY = centerY - (2 * lineSpacing);
+                const bottomLimitY = centerY + (2 * lineSpacing);
+
+                if (noteY < topLimitY) {
+                    for (let y = topLimitY - lineSpacing; y >= noteY; y -= lineSpacing) {
+                        const l = createSVGElement('line', {
+                            x1: nx - 35, x2: nx + 35,
+                            y1: y, y2: y,
+                            class: 'ledger-line'
+                        });
+                        noteGroup.appendChild(l);
+                    }
+                }
+                if (noteY > bottomLimitY) {
+                    for (let y = bottomLimitY + lineSpacing; y <= noteY; y += lineSpacing) {
+                        const l = createSVGElement('line', {
+                            x1: nx - 35, x2: nx + 35,
+                            y1: y, y2: y,
+                            class: 'ledger-line'
+                        });
+                        noteGroup.appendChild(l);
+                    }
+                }
+
+                const isSolved = i < solvedIndex;
+                const head = createSVGElement('ellipse', {
+                    cx: nx, cy: noteY, rx: 26, ry: 17,
+                    transform: `rotate(-10, ${nx}, ${noteY})`, 
+                    class: isSolved ? 'note-head solved' : 'note-head'
+                });
+                noteGroup.appendChild(head);
+
+                if (activeSettings.mode === 'spelling') {
+                    const lineY = 530; 
+                    const underline = createSVGElement('line', {
+                        x1: nx - 25, x2: nx + 25,
+                        y1: lineY, y2: lineY,
+                        stroke: 'black', 
+                        'stroke-width': '4',
+                        'stroke-linecap': 'round',
+                        opacity: '0.3'
+                    });
+                    spellingGroup.appendChild(underline);
+
+                    if (isSolved) {
+                        const letter = createSVGElement('text', {
+                            x: nx, y: lineY - 15,
+                            'text-anchor': 'middle',
+                            'font-family': 'Fredoka, sans-serif',
+                            'font-weight': '900',
+                            'font-size': '40px',
+                            fill: '#23A094', 
+                            text: noteObj.char
+                        });
+                        spellingGroup.appendChild(letter);
+                    }
+                }
+            }
+
+            svgCanvas.appendChild(noteGroup);
+            if (activeSettings.mode === 'spelling') {
+                svgCanvas.appendChild(spellingGroup);
+            }
+        }
+
+        function createSVGElement(type, attributes) {
+            const el = document.createElementNS("http://www.w3.org/2000/svg", type);
+            for (let key in attributes) {
+                el.setAttribute(key, attributes[key]);
+            }
+            if (attributes.text) {
+                el.textContent = attributes.text;
+            }
+            return el;
+        }
+
+        function getDiatonicIndex(midi) {
+            const octave = Math.floor(midi / 12);
+            const semi = midi % 12;
+            const diatonicOffset = [0, 0, 1, 1, 2, 3, 3, 4, 4, 5, 5, 6][semi]; 
+            return (octave * 7) + diatonicOffset;
+        }
+
+        function drawClef(type, x, y, spacing) {
+            const g = createSVGElement('g', { transform: `translate(${x}, ${y})` });
+            if (type === 'treble') {
+                const text = createSVGElement('text', {
+                    x: 0, y: 0,
+                    class: 'clef-text',
+                    'font-size': '170px',
+                    'text-anchor': 'middle',
+                    'dominant-baseline': 'central', 
+                    text: '𝄞'
+                });
+                text.setAttribute('y', spacing * -0.4); 
+                g.appendChild(text);
+            } else {
+                const text = createSVGElement('text', {
+                    x: 0, y: 0, 
+                    class: 'clef-text',
+                    'font-size': '150px',
+                    'text-anchor': 'middle',
+                    'dominant-baseline': 'central',
+                    text: '𝄢'
+                });
+                text.setAttribute('y', -spacing * 0.5);
+                g.appendChild(text);
+            }
+            svgCanvas.appendChild(g);
+        }
+
+        // Font loading handler to prevent FOUT flash
+        document.fonts.ready.then(function () {
+           document.body.classList.remove('opacity-0');
+        });
+        
+        // Fallback safety in case fonts take too long or fail
+        setTimeout(() => {
+             document.body.classList.remove('opacity-0');
+        }, 3000);
+
+    </script>
+</body>
+</html>
