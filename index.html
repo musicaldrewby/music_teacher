@@ -64,21 +64,21 @@
             box-sizing: border-box;
         }
 
-        /* Updated Grid Setup */
+        /* 3-Column Grid Setup */
         .app-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr); /* Forces exactly 3 per row on large screens */
+            grid-template-columns: repeat(3, 1fr);
             gap: 2rem;
         }
 
-        /* Tablet Layout: Drop to 2 per row if screen is smaller than 992px */
+        /* Tablet Layout: Drop to 2 per row */
         @media (max-width: 992px) {
             .app-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
         }
 
-        /* Mobile Layout: Drop to 1 per row if screen is smaller than 650px */
+        /* Mobile Layout: Drop to 1 per row */
         @media (max-width: 650px) {
             .app-grid {
                 grid-template-columns: 1fr;
@@ -191,8 +191,7 @@
     <main class="container">
         <div class="app-grid">
             
-            <!-- App Card Link: Card Sharks -->
-            <a href="cardsharks.html" class="app-link">
+            <a href="cardsharks.html" class="app-link" target="_blank" rel="noopener noreferrer">
                 <div class="app-card">
                     <div class="icon-wrapper">🦈</div>
                     <h2 class="app-title">Card Sharks</h2>
@@ -200,10 +199,7 @@
                     <span class="launch-badge">Launch Game →</span>
                 </div>
             </a>
-            <!-- End App Card Link -->
-
-            <!-- App Card Link: Rhythm Builder -->
-            <a href="rhythmbuilder.html" class="app-link">
+            <a href="rhythmbuilder.html" class="app-link" target="_blank" rel="noopener noreferrer">
                 <div class="app-card">
                     <div class="icon-wrapper">🥁</div>
                     <h2 class="app-title">Rhythm Builder</h2>
@@ -211,10 +207,7 @@
                     <span class="launch-badge">Launch App →</span>
                 </div>
             </a>
-            <!-- End App Card Link -->
-
-            <!-- App Card Link: Interactive Xylophone -->
-            <a href="xylophone.html" class="app-link">
+            <a href="xylophone.html" class="app-link" target="_blank" rel="noopener noreferrer">
                 <div class="app-card">
                     <div class="icon-wrapper">🎶</div>
                     <h2 class="app-title">Interactive Xylophone</h2>
@@ -222,10 +215,7 @@
                     <span class="launch-badge">Launch App →</span>
                 </div>
             </a>
-            <!-- End App Card Link -->
-
-            <!-- App Card Link: Name That Note Challenge -->
-            <a href="namethatnote.html" class="app-link">
+            <a href="namethatnote.html" class="app-link" target="_blank" rel="noopener noreferrer">
                 <div class="app-card">
                     <div class="icon-wrapper">🎼</div>
                     <h2 class="app-title">Name That Note</h2>
@@ -233,10 +223,7 @@
                     <span class="launch-badge">Launch Game →</span>
                 </div>
             </a>
-            <!-- End App Card Link -->
-
-            <!-- App Card Link: Rhythm Chomper -->
-            <a href="rhythmchomper.html" class="app-link">
+            <a href="rhythmchomper.html" class="app-link" target="_blank" rel="noopener noreferrer">
                 <div class="app-card">
                     <div class="icon-wrapper">🕹️</div>
                     <h2 class="app-title">Rhythm Chomper</h2>
@@ -244,9 +231,7 @@
                     <span class="launch-badge">Launch Game →</span>
                 </div>
             </a>
-            <!-- End App Card Link -->
-
-        </div>
+            </div>
     </main>
 
     <footer>
