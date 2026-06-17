@@ -1,0 +1,1671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mr. Drew's Rhythm Builder</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Fredoka', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'neo': '4px 4px 0px 0px rgba(0,0,0,1)',
+                        'neo-sm': '2px 2px 0px 0px rgba(0,0,0,1)',
+                        'neo-lg': '6px 6px 0px 0px rgba(0,0,0,1)',
+                        'neo-xl': '8px 8px 0px 0px rgba(0,0,0,1)',
+                    },
+                    colors: {
+                        'gum-pink': '#FF90E8',
+                        'gum-yellow': '#FFC900',
+                        'gum-blue': '#23A094',
+                        'gum-bg': '#FFFBF0',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html {
+            overflow-y: scroll; /* Force scrollbar track to prevent horizontal layout shift */
+        }
+
+        body {
+            background-color: #FFFBF0;
+            background-image: radial-gradient(#E5E7EB 1.5px, transparent 1.5px);
+            background-size: 24px 24px;
+        }
+
+        /* Views Utility */
+        .view-section {
+            display: none;
+            animation: fadeIn 0.3s ease-out;
+        }
+        .view-section.active {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Flag Wave Animation */
+        @keyframes flagWave {
+            0% { transform: skewY(0deg) rotate(-2deg); }
+            25% { transform: skewY(2deg) rotate(-2deg); }
+            50% { transform: skewY(0deg) rotate(-2deg); }
+            75% { transform: skewY(-2deg) rotate(-2deg); }
+            100% { transform: skewY(0deg) rotate(-2deg); }
+        }
+
+        .animate-flag {
+            animation: flagWave 4s ease-in-out infinite;
+            transform-origin: center center;
+        }
+
+        /* Sunburst Spin Animation */
+        @keyframes spinSlow {
+            from { transform: translate(-50%, -50%) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+        .animate-spin-slow {
+            animation: spinSlow 20s linear infinite;
+        }
+
+        /* SVG Styles */
+        .note-head { fill: #000; }
+        .note-head-hollow { fill: #FFF; stroke: #000; stroke-width: 5px; }
+        .note-stem { stroke: #000; stroke-width: 5px; stroke-linecap: round; }
+        .note-beam { stroke: #000; stroke-width: 9px; stroke-linecap: butt; }
+        .note-beam-secondary { stroke: #000; stroke-width: 9px; }
+        .rest { stroke: #000; stroke-width: 5px; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+        
+        .beat-container { transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .beat-container:hover { transform: scale(1.05) rotate(1deg); }
+
+        /* PLAYING STATE STYLES (Visual Audio Sync) */
+        .beat-container.playing .note-head { fill: #FF90E8 !important; }
+        .beat-container.playing .note-stem,
+        .beat-container.playing .note-beam,
+        .beat-container.playing .note-beam-secondary,
+        .beat-container.playing .rest,
+        .beat-container.playing path,
+        .beat-container.playing line,
+        .beat-container.playing circle,
+        .beat-container.playing rect { 
+            stroke: #FF90E8 !important; 
+        }
+        .beat-container.playing .note-head-hollow {
+            stroke: #FF90E8 !important;
+        }
+        .beat-container.playing .counting-text {
+            background-color: #FF90E8 !important;
+            border-color: #000 !important;
+            color: #000 !important;
+            transform: scale(1.1);
+            box-shadow: 4px 4px 0px 0px rgba(0,0,0,1);
+            transition: all 0.1s ease-out;
+        }
+
+        /* Print Specific Styles */
+        @media print {
+            body { background: white; background-image: none; }
+            .no-print { display: none !important; }
+            #view-print { display: flex !important; }
+            .beat-container { break-inside: avoid; }
+            /* Use block display for reliable page breaking */
+            .print-grid { display: block; }
+            .print-rhythm-wrapper {
+                break-inside: avoid;
+                page-break-inside: avoid;
+                margin-bottom: 3rem;
+                display: block;
+            }
+        }
+
+        .counting-text {
+            color: #000;
+            font-weight: 700;
+            margin-top: 0.25rem;
+            white-space: nowrap;
+            background-color: #FFC900;
+            padding: 0.1rem 0.5rem;
+            border: 2px solid black;
+            border-radius: 6px;
+            box-shadow: 2px 2px 0px 0px rgba(0,0,0,1);
+        }
+        
+        @media (min-width: 768px) {
+            .counting-text {
+                font-size: 1.4rem;
+                margin-top: 0.5rem;
+                padding: 0.2rem 0.8rem;
+                border-radius: 8px;
+            }
+        }
+        @media (max-width: 767px) { .counting-text { font-size: 0.9rem; } }
+
+        /* Custom Checkboxes */
+        .rhythm-option-label { transition: all 0.15s ease; }
+        .rhythm-option-input:checked + .rhythm-option-label {
+            background-color: #FF90E8; transform: translate(2px, 2px);
+            box-shadow: 0px 0px 0px 0px rgba(0,0,0,1);
+        }
+        .rhythm-option-input:disabled + .rhythm-option-label {
+            opacity: 0.4; cursor: not-allowed; background-color: #E5E7EB;
+            transform: translate(0,0); box-shadow: none; border-style: dashed;
+        }
+        
+        /* Composer Buttons */
+        .composer-btn { transition: all 0.1s ease; }
+        .composer-btn:active { transform: translate(2px, 2px); box-shadow: none; }
+        .composer-btn:disabled {
+            opacity: 0.3; cursor: not-allowed; background-color: #E5E7EB;
+            transform: translate(2px, 2px); box-shadow: none; border-style: dashed;
+        }
+        
+        /* Specific Visual Disabled State for Split Buttons */
+        .split-btn-disabled {
+            opacity: 0.4; 
+            cursor: not-allowed; 
+            background-color: #E5E7EB;
+            box-shadow: none; 
+            border-style: dashed;
+            pointer-events: none;
+        }
+
+        .rhythm-display-area {
+            background-color: #FFFFFF;
+            background-image: linear-gradient(#E5E5E5 1px, transparent 1px);
+            background-size: 100% 3rem;
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen text-gray-900 selection:bg-gum-pink selection:text-black font-sans">
+
+    <!-- ================= VIEW 1: SPLASH SCREEN ================= -->
+    <section id="view-splash" class="view-section active flex-col items-center justify-center min-h-screen p-4 text-center overflow-x-hidden no-print">
+        
+        <!-- Updated Snazzy Logo -->
+        <div class="relative mb-16 mt-8 md:mt-0 group cursor-default select-none max-w-full">
+            
+            <!-- Rotating Sunburst Rays (Behind everything) -->
+            <div class="absolute top-1/2 left-1/2 w-[180%] h-[180%] -z-20 animate-spin-slow opacity-60 pointer-events-none" 
+                 style="-webkit-mask-image: radial-gradient(circle, black 20%, transparent 70%); mask-image: radial-gradient(circle, black 20%, transparent 70%);">
+                <svg viewBox="0 0 200 200" class="w-full h-full">
+                    <path d="M100 100 L100 0 L130 0 Z" fill="#FFC900" /> 
+                    <path d="M100 100 L150 13 L175 35 Z" fill="#FF90E8" /> 
+                    <path d="M100 100 L186 50 L200 80 Z" fill="#23A094" /> 
+                    <path d="M100 100 L200 100 L200 130 Z" fill="#FFC900" />
+                    <path d="M100 100 L186 150 L165 175 Z" fill="#FF90E8" />
+                    <path d="M100 100 L150 186 L120 200 Z" fill="#23A094" />
+                    <path d="M100 100 L100 200 L70 200 Z" fill="#FFC900" />
+                    <path d="M100 100 L50 186 L25 165 Z" fill="#FF90E8" />
+                    <path d="M100 100 L13 150 L0 120 Z" fill="#23A094" />
+                    <path d="M100 100 L0 100 L0 70 Z" fill="#FFC900" />
+                    <path d="M100 100 L13 50 L35 25 Z" fill="#FF90E8" />
+                    <path d="M100 100 L50 13 L80 0 Z" fill="#23A094" />
+                </svg>
+            </div>
+
+            <!-- Background "Sticker" Shape -->
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] md:w-[130%] h-[140%] bg-white border-4 border-black rounded-[3rem] rotate-[-3deg] shadow-neo-xl -z-10 transition-transform duration-500 group-hover:rotate-[-1deg] group-hover:scale-105"></div>
+            
+            <!-- Animated Icons -->
+            <div class="absolute -top-10 -left-6 md:-top-14 md:-left-20 text-5xl md:text-7xl animate-bounce z-20" style="animation-duration: 2.5s;">🎹</div>
+            <div class="absolute -bottom-8 -right-6 md:-bottom-10 md:-right-16 text-5xl md:text-7xl animate-bounce z-20" style="animation-duration: 3.5s;">🥁</div>
+            <div class="absolute top-0 -right-16 text-5xl md:text-6xl animate-pulse z-0 hidden md:block">✨</div>
+            
+            <!-- Main Title Text -->
+            <div class="relative animate-flag">
+                <!-- Badge -->
+                <div class="absolute -top-10 left-1/2 -translate-x-1/2 bg-black text-white px-4 py-1 rounded-full text-sm md:text-xl font-black uppercase tracking-widest -rotate-2 z-30 whitespace-nowrap shadow-neo-sm">
+                    Mr. Drew's
+                </div>
+
+                <h1 class="text-5xl md:text-9xl font-black uppercase tracking-tighter leading-[0.85] pt-4" style="-webkit-text-stroke: 1.5px black; paint-order: stroke fill;">
+                    <div class="text-gum-yellow drop-shadow-[3px_3px_0px_rgba(0,0,0,1)] md:drop-shadow-[4px_4px_0px_rgba(0,0,0,1)] relative md:left-[-15px] z-10">RHYTHM</div>
+                    <div class="text-gum-pink drop-shadow-[3px_3px_0px_rgba(0,0,0,1)] md:drop-shadow-[4px_4px_0px_rgba(0,0,0,1)] relative md:left-[15px] z-10">BUILDER</div>
+                </h1>
+                
+                <!-- Rhythm Underline Graphic -->
+                <div class="w-full h-4 md:h-6 mt-2 relative z-20">
+                    <svg viewBox="0 0 200 20" preserveAspectRatio="none" class="w-full h-full">
+                        <path d="M0 10 L20 10 L30 2 L40 18 L50 10 L80 10 L90 2 L100 18 L110 10 L140 10 L150 2 L160 18 L170 10 L200 10" 
+                              fill="none" stroke="black" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-5xl px-4 relative z-10 mt-10">
+            <button onclick="navigateTo('generator')" class="bg-gum-yellow hover:bg-yellow-300 text-black border-4 border-black rounded-2xl p-6 md:p-8 shadow-neo-lg hover:-translate-y-2 hover:shadow-neo-xl transition-all group flex flex-col items-center">
+                <div class="text-5xl mb-4 group-hover:scale-110 transition-transform">🎲</div>
+                <h2 class="text-xl md:text-2xl font-black uppercase">Generator</h2>
+                <p class="font-bold opacity-70 mt-2 text-sm">Randomize It</p>
+            </button>
+
+            <button onclick="navigateTo('composer')" class="bg-gum-blue hover:bg-teal-300 text-white border-4 border-black rounded-2xl p-6 md:p-8 shadow-neo-lg hover:-translate-y-2 hover:shadow-neo-xl transition-all group flex flex-col items-center">
+                <div class="text-5xl mb-4 group-hover:scale-110 transition-transform">✏️</div>
+                <h2 class="text-xl md:text-2xl font-black uppercase">Composer</h2>
+                <p class="font-bold opacity-70 mt-2 text-sm">Build Your Own</p>
+            </button>
+
+            <!-- Fully Unlocked Decks Button -->
+            <button onclick="navigateTo('library')" class="bg-gum-pink hover:bg-pink-300 text-black border-4 border-black rounded-2xl p-6 md:p-8 shadow-neo-lg hover:-translate-y-2 hover:shadow-neo-xl transition-all group flex flex-col items-center">
+                <div class="text-5xl mb-4 group-hover:scale-110 transition-transform">📚</div>
+                <h2 class="text-xl md:text-2xl font-black uppercase">Decks</h2>
+                <p class="font-bold opacity-70 mt-2 text-sm">Favorites</p>
+            </button>
+        </div>
+        
+        <p class="mt-12 text-xs md:text-sm font-bold text-gray-400 uppercase tracking-widest">Mr. Drew's Music Tools</p>
+    </section>
+
+
+    <!-- ================= VIEW 2: GENERATOR ================= -->
+    <section id="view-generator" class="view-section flex-col min-h-screen w-full no-print">
+        <!-- Generator Navbar -->
+        <nav class="bg-white border-b-4 border-black sticky top-0 z-50">
+            <div class="container mx-auto px-4 py-3 flex flex-wrap justify-between items-center gap-y-3">
+                <div class="flex items-center gap-2 md:gap-3 cursor-pointer" onclick="navigateTo('splash')">
+                    <div class="bg-gum-yellow w-8 h-8 md:w-10 md:h-10 flex items-center justify-center border-2 border-black shadow-neo-sm rounded">
+                        <span class="text-lg md:text-xl">⬅</span>
+                    </div>
+                    <h1 class="text-xl md:text-2xl font-bold tracking-tight uppercase">Generator</h1>
+                </div>
+                
+                <div class="flex items-center gap-2 md:gap-4 ml-auto">
+                    <!-- Quick Settings -->
+                    <div class="hidden md:flex items-center gap-3 bg-white border-2 border-black shadow-neo-sm px-4 py-2 rounded-lg">
+                        <select id="countingSystem" onchange="updateCountingSystem(this.value)" class="bg-transparent font-bold focus:outline-none cursor-pointer text-sm">
+                            <option value="kodaly" selected>Kodály</option>
+                            <option value="numeric">Numeric</option>
+                            <option value="gordon">Gordon</option>
+                            <option value="takadimi">Takadimi</option>
+                            <option value="none">None</option>
+                        </select>
+                        <div class="w-0.5 h-6 bg-black"></div>
+                        <select id="beatCount" class="bg-transparent font-bold focus:outline-none cursor-pointer text-sm">
+                            <option value="4">4 Beats</option>
+                            <option value="8">8 Beats</option>
+                        </select>
+                    </div>
+
+                    <button onclick="playCurrentSequence()" id="btn-play-gen" class="bg-white hover:bg-green-100 text-black border-2 border-black font-bold py-1.5 px-3 md:px-4 rounded-lg shadow-neo transition-all active:translate-x-[2px] active:translate-y-[2px] active:shadow-none flex items-center gap-2" title="Listen">
+                        <span class="text-xl">▶</span> <span class="hidden md:inline">Play</span>
+                    </button>
+
+                    <button onclick="saveCurrentRhythm()" class="bg-gum-pink hover:bg-pink-400 text-black border-2 border-black font-bold py-1.5 px-4 rounded-lg shadow-neo transition-all active:translate-x-[2px] active:translate-y-[2px] active:shadow-none flex items-center gap-2" title="Save to Deck">
+                        <span class="text-lg">❤️</span> <span class="hidden md:inline">Save</span>
+                    </button>
+
+                    <button onclick="generateRhythm()" class="bg-gum-blue hover:bg-teal-400 text-white border-2 border-black font-bold py-1.5 px-4 md:py-2 md:px-6 rounded-lg shadow-neo transition-all active:translate-x-[2px] active:translate-y-[2px] active:shadow-none flex items-center gap-2 text-sm md:text-base">
+                        <span>SHUFFLE</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="md:w-5 md:h-5"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 16h5v5"/></svg>
+                    </button>
+                </div>
+                
+                <!-- Mobile Settings Row -->
+                <div class="md:hidden w-full flex justify-between gap-2 mt-1">
+                     <select id="countingSystemMobile" onchange="updateCountingSystem(this.value)" class="bg-white border-2 border-black rounded px-2 py-1 text-xs font-bold w-1/2">
+                        <option value="kodaly" selected>Kodály</option>
+                        <option value="numeric">Numeric</option>
+                        <option value="gordon">Gordon</option>
+                        <option value="takadimi">Takadimi</option>
+                        <option value="none">None</option>
+                    </select>
+                    <select id="beatCountMobile" onchange="syncSelect('beatCountMobile', 'beatCount')" class="bg-white border-2 border-black rounded px-2 py-1 text-xs font-bold w-1/2">
+                        <option value="4">4 Beats</option>
+                        <option value="8">8 Beats</option>
+                    </select>
+                </div>
+            </div>
+        </nav>
+
+        <div class="flex-grow container mx-auto p-3 md:p-8 flex flex-col items-center gap-6 md:gap-10">
+            <!-- Controls Area -->
+            <div class="w-full max-w-6xl">
+                <div class="flex flex-wrap justify-between items-end mb-4 px-1 gap-y-3">
+                    <h2 class="text-lg md:text-xl font-black uppercase text-gray-800 tracking-wider">CHOOSE NOTES OR RESTS</h2>
+                    
+                    <div class="flex gap-2 md:gap-4 flex-wrap justify-end">
+                        <div class="flex items-center gap-2 bg-white border-2 border-black rounded-full px-3 py-1 md:px-4 md:py-1.5 shadow-neo-sm">
+                            <span class="text-xs md:text-sm font-bold whitespace-nowrap">No Start Rest</span>
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" id="noStartRest" class="sr-only peer">
+                                <div class="w-8 h-5 md:w-11 md:h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-black after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-2 after:border-black after:rounded-full after:h-4 after:w-4 md:after:h-5 md:after:w-5 after:transition-all peer-checked:bg-gum-blue border-2 border-black"></div>
+                            </label>
+                        </div>
+                        <div class="flex items-center gap-2 bg-white border-2 border-black rounded-full px-3 py-1 md:px-4 md:py-1.5 shadow-neo-sm">
+                            <span class="text-xs md:text-sm font-bold whitespace-nowrap">End Quarter</span>
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" id="alwaysEndQuarter" class="sr-only peer">
+                                <div class="w-8 h-5 md:w-11 md:h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-black after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-2 after:border-black after:rounded-full after:h-4 after:w-4 md:after:h-5 md:after:w-5 after:transition-all peer-checked:bg-gum-blue border-2 border-black"></div>
+                            </label>
+                        </div>
+                        <div class="flex items-center gap-2 bg-white border-2 border-black rounded-full px-3 py-1 md:px-4 md:py-1.5 shadow-neo-sm">
+                            <span class="text-xs md:text-sm font-bold whitespace-nowrap">Stick Mode</span>
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" id="stickNotation" class="sr-only peer">
+                                <div class="w-8 h-5 md:w-11 md:h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-black after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-2 after:border-black after:rounded-full after:h-4 after:w-4 md:after:h-5 md:after:w-5 after:transition-all peer-checked:bg-gum-pink border-2 border-black"></div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cards Grid -->
+                <div class="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 md:gap-4">
+                    <!-- Quarter -->
+                    <div class="relative group">
+                        <input type="checkbox" id="useQuarter" checked class="rhythm-option-input sr-only">
+                        <label for="useQuarter" class="rhythm-option-label flex flex-col items-center justify-center h-20 md:h-28 bg-white border-2 border-black rounded-xl cursor-pointer shadow-neo hover:-translate-y-1 transition-all">
+                            <span class="text-2xl md:text-4xl mb-1 group-hover:scale-110 transition-transform">♩</span>
+                            <span class="text-[10px] md:text-xs font-bold uppercase tracking-wide">Quarter</span>
+                        </label>
+                    </div>
+                    <!-- Beamed 8th -->
+                    <div class="relative group">
+                        <input type="checkbox" id="useEighth" checked class="rhythm-option-input sr-only">
+                        <label for="useEighth" class="rhythm-option-label flex flex-col items-center justify-center h-20 md:h-28 bg-white border-2 border-black rounded-xl cursor-pointer shadow-neo hover:-translate-y-1 transition-all">
+                            <span class="text-2xl md:text-4xl mb-1 group-hover:scale-110 transition-transform">♫</span>
+                            <span class="text-[10px] md:text-xs font-bold uppercase tracking-wide">Pairs</span>
+                        </label>
+                    </div>
+                    <!-- Separate 8th -->
+                    <div class="relative group">
+                        <input type="checkbox" id="useSeparateEighths" class="rhythm-option-input sr-only">
+                        <label for="useSeparateEighths" class="rhythm-option-label flex flex-col items-center justify-center h-20 md:h-28 bg-white border-2 border-black rounded-xl cursor-pointer shadow-neo hover:-translate-y-1 transition-all">
+                            <span class="text-xl md:text-3xl mb-1 group-hover:scale-110 transition-transform">♪ ♪</span>
+                            <span class="text-[10px] md:text-xs font-bold uppercase tracking-wide">Separate</span>
+                        </label>
+                    </div>
+                    <!-- Half Note -->
+                    <div class="relative group">
+                        <input type="checkbox" id="useHalf" class="rhythm-option-input sr-only">
+                        <label for="useHalf" class="rhythm-option-label flex flex-col items-center justify-center h-20 md:h-28 bg-white border-2 border-black rounded-xl cursor-pointer shadow-neo hover:-translate-y-1 transition-all">
+                            <span class="text-2xl md:text-4xl mb-1 group-hover:scale-110 transition-transform" style="display:inline-block;">d</span> 
+                            <span class="text-[10px] md:text-xs font-bold uppercase tracking-wide">Half Note</span>
+                        </label>
+                    </div>
+                    <!-- Whole Note -->
+                    <div class="relative group">
+                        <input type="checkbox" id="useWhole" class="rhythm-option-input sr-only">
+                        <label for="useWhole" class="rhythm-option-label flex flex-col items-center justify-center h-20 md:h-28 bg-white border-2 border-black rounded-xl cursor-pointer shadow-neo hover:-translate-y-1 transition-all">
+                            <svg viewBox="0 0 100 100" class="w-8 h-8 md:w-12 md:h-12 mb-1 group-hover:scale-110 transition-transform" style="fill: white; stroke: currentColor; stroke-width: 6;">
+                                <ellipse cx="50" cy="50" rx="20" ry="14" transform="rotate(-15, 50, 50)" />
+                            </svg>
+                            <span class="text-[10px] md:text-xs font-bold uppercase tracking-wide">Whole Note</span>
+                        </label>
+                    </div>
+                    <!-- Quarter Rest -->
+                    <div class="relative group">
+                        <input type="checkbox" id="useRest" class="rhythm-option-input sr-only">
+                        <label for="useRest" class="rhythm-option-label flex flex-col items-center justify-center h-20 md:h-28 bg-white border-2 border-black rounded-xl cursor-pointer shadow-neo hover:-translate-y-1 transition-all">
+                            <svg viewBox="0 0 100 100" class="w-8 h-8 md:w-12 md:h-12 mb-1 group-hover:scale-110 transition-transform" style="fill: none; stroke: currentColor; stroke-width: 5; stroke-linecap: round; stroke-linejoin: round;">
+                                <path d="M30 25 L70 25 L40 55 L70 55 L55 70 C 50 85 65 90 70 80" />
+                            </svg>
+                            <span class="text-[10px] md:text-xs font-bold uppercase tracking-wide">Rest</span>
+                        </label>
+                    </div>
+                    <!-- Half Rest -->
+                    <div class="relative group">
+                        <input type="checkbox" id="useHalfRest" class="rhythm-option-input sr-only">
+                        <label for="useHalfRest" class="rhythm-option-label flex flex-col items-center justify-center h-20 md:h-28 bg-white border-2 border-black rounded-xl cursor-pointer shadow-neo hover:-translate-y-1 transition-all">
+                            <div class="w-6 h-3 md:w-8 md:h-4 bg-black mb-2 group-hover:scale-110 transition-transform"></div>
+                            <span class="text-[10px] md:text-xs font-bold uppercase tracking-wide">Half Rest</span>
+                        </label>
+                    </div>
+                    <!-- Sixteenths -->
+                    <div class="relative group">
+                        <input type="checkbox" id="useSixteenth" checked class="rhythm-option-input sr-only">
+                        <label for="useSixteenth" class="rhythm-option-label flex flex-col items-center justify-center h-20 md:h-28 bg-white border-2 border-black rounded-xl cursor-pointer shadow-neo hover:-translate-y-1 transition-all">
+                            <svg viewBox="0 0 120 100" class="w-8 h-8 md:w-12 md:h-12 mb-1 group-hover:scale-110 transition-transform" style="fill: currentColor; stroke: currentColor;">
+                                <circle cx="5" cy="75" r="10" stroke="none" />
+                                <circle cx="35" cy="75" r="10" stroke="none" />
+                                <circle cx="65" cy="75" r="10" stroke="none" />
+                                <circle cx="95" cy="75" r="10" stroke="none" />
+                                <path d="M15 75 V 20 M45 75 V 20 M75 75 V 20 M105 75 V 20" stroke-width="4" stroke-linecap="round" />
+                                <path d="M15 20 H 105 M15 34 H 105" stroke-width="8" />
+                            </svg>
+                            <span class="text-[10px] md:text-xs font-bold uppercase tracking-wide">16ths</span>
+                        </label>
+                    </div>
+                    <!-- Mixed Split -->
+                    <div id="mixed-split-container" class="relative group flex flex-col h-20 md:h-28 bg-white border-2 border-black rounded-xl shadow-neo overflow-hidden hover:-translate-y-1 transition-transform">
+                        <div class="flex-1 relative border-b-2 border-black">
+                            <input type="checkbox" id="useTikaTi" class="peer sr-only">
+                            <label for="useTikaTi" class="absolute inset-0 flex items-center justify-center cursor-pointer hover:bg-gray-50 peer-checked:bg-gum-pink transition-colors">
+                                <span class="text-sm md:text-xl font-bold">♬♪</span>
+                            </label>
+                        </div>
+                        <div class="flex-1 relative">
+                            <input type="checkbox" id="useTiTika" class="peer sr-only">
+                            <label for="useTiTika" class="absolute inset-0 flex items-center justify-center cursor-pointer hover:bg-gray-50 peer-checked:bg-gum-pink transition-colors">
+                                <span class="text-sm md:text-xl font-bold">♪♬</span>
+                            </label>
+                        </div>
+                    </div>
+                    <!-- Syncopa -->
+                    <div class="relative group">
+                        <input type="checkbox" id="useSyncopa" class="rhythm-option-input sr-only">
+                        <label for="useSyncopa" class="rhythm-option-label flex flex-col items-center justify-center h-20 md:h-28 bg-orange-50 border-2 border-black rounded-xl cursor-pointer shadow-neo hover:-translate-y-1 transition-all">
+                            <span class="text-sm md:text-lg mb-1 font-black group-hover:scale-110 transition-transform">♪ ♩ ♪</span>
+                            <span class="text-[10px] md:text-xs font-bold uppercase tracking-wide text-orange-600">Syncopa</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- The Stage -->
+            <div class="w-full max-w-7xl relative mt-2 md:mt-4">
+                <div class="absolute top-1 left-1 md:top-2 md:left-2 w-full h-full bg-black rounded-xl z-0"></div>
+                <div id="rhythmContainer" class="relative z-10 rhythm-display-area w-full border-2 border-black rounded-xl p-4 md:p-12 flex flex-wrap justify-center items-center gap-x-0 gap-y-4 md:gap-y-8 overflow-hidden">
+                    <!-- Rhythm beats will be injected here -->
+                </div>
+                <div class="hidden md:block absolute -top-3 -left-3 w-16 h-8 bg-gum-yellow opacity-80 rotate-[-30deg] z-20"></div>
+                <div class="hidden md:block absolute -top-3 -right-3 w-16 h-8 bg-gum-pink opacity-80 rotate-[30deg] z-20"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= VIEW 5: COMPOSER ================= -->
+    <section id="view-composer" class="view-section flex-col min-h-screen w-full no-print">
+        <nav class="bg-white border-b-4 border-black sticky top-0 z-50">
+            <div class="container mx-auto px-4 py-3 flex flex-wrap justify-between items-center gap-y-3">
+                <div class="flex items-center gap-2 cursor-pointer" onclick="navigateTo('splash')">
+                    <div class="bg-gum-blue w-10 h-10 flex items-center justify-center border-2 border-black shadow-neo-sm rounded">
+                        <span class="text-xl">⬅</span>
+                    </div>
+                    <h1 class="text-xl md:text-2xl font-bold tracking-tight uppercase">Composer</h1>
+                </div>
+                
+                <div class="flex items-center gap-2 md:gap-4 ml-auto">
+                    <div class="hidden md:flex items-center gap-2 bg-white border-2 border-black shadow-neo-sm px-4 py-2 rounded-lg">
+                        <select id="comp-countingSystem" onchange="updateCountingSystem(this.value)" class="bg-transparent font-bold focus:outline-none cursor-pointer text-sm">
+                            <option value="kodaly" selected>Kodály</option>
+                            <option value="numeric">Numeric</option>
+                            <option value="gordon">Gordon</option>
+                            <option value="takadimi">Takadimi</option>
+                            <option value="none">None</option>
+                        </select>
+                        <div class="w-0.5 h-6 bg-black"></div>
+                        <select id="comp-beatCount" onchange="resetComposer()" class="bg-transparent font-bold focus:outline-none cursor-pointer text-sm">
+                            <option value="4">4 Beats</option>
+                            <option value="8">8 Beats</option>
+                        </select>
+                        <div class="w-0.5 h-6 bg-black"></div>
+                        <label class="flex items-center gap-2 cursor-pointer select-none">
+                            <input type="checkbox" id="comp-stickNotation" onchange="renderComposer()" class="accent-gum-pink">
+                            <span class="text-xs font-bold uppercase">Stick</span>
+                        </label>
+                    </div>
+                    
+                    <button onclick="playCurrentSequence()" id="btn-play-comp" class="bg-white hover:bg-green-100 text-black border-2 border-black font-bold py-1.5 px-3 md:px-4 rounded-lg shadow-neo transition-all active:translate-x-[2px] active:translate-y-[2px] active:shadow-none flex items-center gap-2" title="Listen">
+                        <span class="text-xl">▶</span> <span class="hidden md:inline">Play</span>
+                    </button>
+
+                    <button onclick="saveCurrentRhythm()" class="bg-gum-pink hover:bg-pink-400 text-black border-2 border-black font-bold py-1.5 px-4 rounded-lg shadow-neo transition-all active:translate-x-[2px] active:translate-y-[2px] active:shadow-none flex items-center gap-2 text-sm md:text-base">
+                        <span class="text-lg">❤️</span> Save
+                    </button>
+                </div>
+                
+                <!-- Mobile Settings for Composer -->
+                <div class="md:hidden w-full flex flex-col gap-2 mt-1">
+                    <div class="flex justify-between gap-2">
+                        <select id="comp-countingSystemMobile" onchange="updateCountingSystem(this.value)" class="bg-white border-2 border-black rounded px-2 py-1 text-xs font-bold w-1/2">
+                            <option value="kodaly" selected>Kodály</option>
+                            <option value="numeric">Numeric</option>
+                            <option value="gordon">Gordon</option>
+                            <option value="takadimi">Takadimi</option>
+                            <option value="none">None</option>
+                        </select>
+                        <select id="comp-beatCountMobile" onchange="syncSelect('comp-beatCountMobile', 'comp-beatCount'); resetComposer()" class="bg-white border-2 border-black rounded px-2 py-1 text-xs font-bold w-1/2">
+                            <option value="4">4 Beats</option>
+                            <option value="8">8 Beats</option>
+                        </select>
+                    </div>
+                    <label class="flex items-center justify-center gap-2 cursor-pointer select-none bg-white border-2 border-black rounded px-2 py-1 w-full">
+                        <input type="checkbox" id="comp-stickNotationMobile" onchange="syncCheckbox('comp-stickNotationMobile', 'comp-stickNotation'); renderComposer()" class="accent-gum-pink">
+                        <span class="text-xs font-bold uppercase">Stick Mode</span>
+                    </label>
+                </div>
+            </div>
+        </nav>
+
+        <div class="flex-grow container mx-auto p-4 md:p-8 flex flex-col items-center gap-6">
+            <!-- Beat Progress Indicator -->
+            <div class="w-full max-w-6xl flex flex-wrap justify-between items-end px-2 gap-y-2">
+                <div class="text-lg md:text-xl font-black uppercase text-gray-400">
+                    BEATS: <span id="comp-beat-counter" class="text-black">0 / 4</span>
+                </div>
+                <div class="flex gap-2">
+                    <button onclick="undoComposer()" class="bg-white border-2 border-black px-3 py-1 md:px-4 rounded-full font-bold shadow-neo hover:-translate-y-1 active:shadow-none text-sm md:text-base">↩ Undo</button>
+                    <button onclick="resetComposer()" class="bg-white border-2 border-black px-3 py-1 md:px-4 rounded-full font-bold shadow-neo hover:-translate-y-1 active:shadow-none text-red-500 text-sm md:text-base">🗑 Clear</button>
+                </div>
+            </div>
+
+            <!-- Palette (Buttons) -->
+            <div class="w-full max-w-6xl grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-10 gap-2">
+                <button onclick="addComposerNote('quarter')" id="btn-comp-quarter" class="composer-btn flex flex-col items-center justify-center h-20 bg-white border-2 border-black rounded-lg shadow-neo hover:-translate-y-1">
+                    <span class="text-2xl">♩</span><span class="text-[10px] font-bold uppercase">Quarter</span>
+                </button>
+                <button onclick="addComposerNote('eighthPair')" id="btn-comp-eighthPair" class="composer-btn flex flex-col items-center justify-center h-20 bg-white border-2 border-black rounded-lg shadow-neo hover:-translate-y-1">
+                    <span class="text-2xl">♫</span><span class="text-[10px] font-bold uppercase">Pairs</span>
+                </button>
+                <button onclick="addComposerNote('separateEighths')" id="btn-comp-separateEighths" class="composer-btn flex flex-col items-center justify-center h-20 bg-white border-2 border-black rounded-lg shadow-neo hover:-translate-y-1">
+                    <span class="text-xl">♪ ♪</span><span class="text-[10px] font-bold uppercase">Separate</span>
+                </button>
+                <button onclick="addComposerNote('half')" id="btn-comp-half" class="composer-btn flex flex-col items-center justify-center h-20 bg-white border-2 border-black rounded-lg shadow-neo hover:-translate-y-1">
+                    <span class="text-2xl">d</span><span class="text-[10px] font-bold uppercase">Half</span>
+                </button>
+                <button onclick="addComposerNote('whole')" id="btn-comp-whole" class="composer-btn flex flex-col items-center justify-center h-20 bg-white border-2 border-black rounded-lg shadow-neo hover:-translate-y-1">
+                    <svg viewBox="0 0 100 100" class="w-8 h-8 mb-1" style="fill: white; stroke: currentColor; stroke-width: 6;">
+                        <ellipse cx="50" cy="50" rx="20" ry="14" transform="rotate(-15, 50, 50)" />
+                    </svg>
+                    <span class="text-[10px] font-bold uppercase">Whole</span>
+                </button>
+                <button onclick="addComposerNote('rest')" id="btn-comp-rest" class="composer-btn flex flex-col items-center justify-center h-20 bg-white border-2 border-black rounded-lg shadow-neo hover:-translate-y-1">
+                    <svg viewBox="0 0 100 100" class="w-7 h-7 mb-1" style="fill: none; stroke: currentColor; stroke-width: 5; stroke-linecap: round; stroke-linejoin: round;">
+                        <path d="M30 25 L70 25 L40 55 L70 55 L55 70 C 50 85 65 90 70 80" />
+                    </svg>
+                    <span class="text-[10px] font-bold uppercase">Rest</span>
+                </button>
+                <button onclick="addComposerNote('halfRest')" id="btn-comp-halfRest" class="composer-btn flex flex-col items-center justify-center h-20 bg-white border-2 border-black rounded-lg shadow-neo hover:-translate-y-1">
+                    <div class="w-4 h-2 bg-black mb-1"></div><span class="text-[10px] font-bold uppercase">Half Rest</span>
+                </button>
+                <button onclick="addComposerNote('sixteenthGroup')" id="btn-comp-sixteenthGroup" class="composer-btn flex flex-col items-center justify-center h-20 bg-white border-2 border-black rounded-lg shadow-neo hover:-translate-y-1">
+                    <svg viewBox="0 0 120 100" class="w-8 h-8 mb-1" style="fill: currentColor; stroke: currentColor;">
+                        <circle cx="5" cy="75" r="10" stroke="none" />
+                        <circle cx="35" cy="75" r="10" stroke="none" />
+                        <circle cx="65" cy="75" r="10" stroke="none" />
+                        <circle cx="95" cy="75" r="10" stroke="none" />
+                        <path d="M15 75 V 20 M45 75 V 20 M75 75 V 20 M105 75 V 20" stroke-width="4" stroke-linecap="round" />
+                        <path d="M15 20 H 105 M15 34 H 105" stroke-width="8" />
+                    </svg>
+                    <span class="text-[10px] font-bold uppercase">16ths</span>
+                </button>
+                <button onclick="addComposerNote('twoSixteenthsEighth')" id="btn-comp-twoSixteenthsEighth" class="composer-btn flex flex-col items-center justify-center h-20 bg-white border-2 border-black rounded-lg shadow-neo hover:-translate-y-1">
+                    <span class="text-xl">♬♪</span><span class="text-[10px] font-bold uppercase">Tika-Ti</span>
+                </button>
+                <button onclick="addComposerNote('eighthTwoSixteenths')" id="btn-comp-eighthTwoSixteenths" class="composer-btn flex flex-col items-center justify-center h-20 bg-white border-2 border-black rounded-lg shadow-neo hover:-translate-y-1">
+                    <span class="text-xl">♪♬</span><span class="text-[10px] font-bold uppercase">Ti-Tika</span>
+                </button>
+                <button onclick="addComposerNote('syncopa')" id="btn-comp-syncopa" class="composer-btn flex flex-col items-center justify-center h-20 bg-orange-50 border-2 border-black rounded-lg shadow-neo hover:-translate-y-1">
+                    <span class="text-sm font-black">♪ ♩ ♪</span><span class="text-[10px] font-bold uppercase text-orange-600">Syncopa</span>
+                </button>
+            </div>
+
+            <!-- Stage -->
+            <div class="w-full max-w-7xl relative mt-4">
+                <div class="absolute top-1 left-1 md:top-2 md:left-2 w-full h-full bg-black rounded-xl z-0"></div>
+                <div id="composer-stage" class="relative z-10 rhythm-display-area w-full border-2 border-black rounded-xl p-4 md:p-12 flex flex-wrap justify-center items-center gap-x-0 gap-y-4 md:gap-y-8 overflow-hidden min-h-[200px]">
+                    <!-- Composition injected here -->
+                    <div class="text-gray-300 font-bold text-2xl md:text-4xl select-none">START CLICKING ABOVE</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= VIEW 3: LIBRARY (RHYTHM DECKS) ================= -->
+    <section id="view-library" class="view-section flex-col min-h-screen w-full no-print">
+        <nav class="bg-white border-b-4 border-black sticky top-0 z-50">
+            <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+                <div class="flex items-center gap-2 cursor-pointer" onclick="navigateTo('splash')">
+                    <div class="bg-gum-pink w-10 h-10 flex items-center justify-center border-2 border-black shadow-neo-sm rounded">
+                        <span class="text-xl">⬅</span>
+                    </div>
+                    <h1 class="text-xl md:text-2xl font-bold tracking-tight uppercase">Rhythm Decks</h1>
+                </div>
+                <div class="flex items-center gap-2">
+                    <!-- Import/Export -->
+                    <button onclick="triggerImport()" class="hidden md:flex bg-white text-black border-2 border-black font-bold py-2 px-3 rounded-lg shadow-neo active:translate-y-1 active:shadow-none items-center gap-1 hover:bg-gray-50" title="Import Decks">
+                        <span>⬇</span> <span class="text-xs">Import</span>
+                    </button>
+                    <button onclick="exportDecks()" class="hidden md:flex bg-white text-black border-2 border-black font-bold py-2 px-3 rounded-lg shadow-neo active:translate-y-1 active:shadow-none items-center gap-1 hover:bg-gray-50" title="Export All Decks">
+                        <span>⬆</span> <span class="text-xs">Export</span>
+                    </button>
+                    <input type="file" id="import-file" class="hidden" accept=".json" onchange="importDecks(event)">
+
+                    <button onclick="openCreateDeckModal()" class="bg-gum-blue text-white border-2 border-black font-bold py-2 px-4 rounded-lg shadow-neo active:translate-y-1 active:shadow-none">+ New</button>
+                </div>
+            </div>
+            <!-- Mobile Import/Export Row -->
+            <div class="md:hidden flex justify-end gap-2 px-4 pb-2">
+                 <button onclick="triggerImport()" class="bg-white text-black border-2 border-black font-bold py-1 px-3 rounded-lg text-xs">⬇ Import</button>
+                 <button onclick="exportDecks()" class="bg-white text-black border-2 border-black font-bold py-1 px-3 rounded-lg text-xs">⬆ Export</button>
+            </div>
+        </nav>
+
+        <div class="container mx-auto p-4 md:p-8">
+            <div id="deck-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Decks injected here -->
+            </div>
+            <div id="empty-state" class="hidden text-center py-20">
+                <div class="text-6xl mb-4">📭</div>
+                <h2 class="text-2xl font-bold mb-2">No Decks Yet!</h2>
+                <p class="text-gray-500">Create a new deck to get started.</p>
+                <button onclick="openCreateDeckModal()" class="mt-6 bg-gum-yellow text-black border-2 border-black font-bold py-2 px-6 rounded-lg shadow-neo hover:translate-y-[-2px] active:translate-y-[0px]">Create Deck</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= VIEW 4: FLASHCARD PLAYER ================= -->
+    <section id="view-flashcard" class="view-section flex-col min-h-screen w-full bg-gray-900 no-print">
+        <div class="flex-grow flex flex-col items-center justify-center relative p-4">
+            
+            <!-- Close Button -->
+            <button onclick="navigateTo('library')" class="absolute top-4 right-4 md:top-6 md:right-6 bg-white w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-full border-2 border-black shadow-neo hover:bg-red-100 z-50">
+                <span class="text-xl md:text-2xl font-bold">✕</span>
+            </button>
+
+            <!-- Card Container -->
+            <div class="w-full max-w-6xl relative perspective-1000">
+                <div class="bg-white rounded-3xl border-4 border-black shadow-neo-xl p-4 md:p-16 min-h-[300px] md:min-h-[400px] flex flex-col items-center justify-center relative overflow-hidden">
+                    
+                    <div class="absolute top-4 left-6 text-gray-400 font-black uppercase tracking-widest text-xs md:text-sm" id="flashcard-deck-name">DECK NAME</div>
+                    <div class="absolute top-4 right-6 text-gray-400 font-bold font-mono text-xs md:text-base" id="flashcard-counter">1 / 5</div>
+
+                    <!-- Rhythm Content -->
+                    <div id="flashcard-stage" class="w-full flex flex-wrap justify-center items-center gap-x-0 gap-y-4 md:gap-y-8">
+                        <!-- Content -->
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Controls -->
+            <div class="flex gap-4 md:gap-6 mt-6 md:mt-10">
+                <button onclick="prevCard()" class="bg-gum-yellow w-12 h-12 md:w-16 md:h-16 rounded-full border-4 border-black shadow-neo hover:translate-y-1 active:shadow-none flex items-center justify-center text-xl md:text-3xl font-black">←</button>
+                <button onclick="playCurrentSequence()" id="btn-play-flash" class="bg-white w-12 h-12 md:w-16 md:h-16 rounded-full border-4 border-black shadow-neo hover:translate-y-1 active:shadow-none flex items-center justify-center text-xl md:text-3xl pl-1" title="Play Audio">▶</button>
+                <button onclick="toggleShuffle()" id="btn-shuffle" class="bg-white w-12 h-12 md:w-16 md:h-16 rounded-full border-4 border-black shadow-neo hover:translate-y-1 active:shadow-none flex items-center justify-center text-lg md:text-2xl" title="Shuffle">🔀</button>
+                <button onclick="nextCard()" class="bg-gum-yellow w-12 h-12 md:w-16 md:h-16 rounded-full border-4 border-black shadow-neo hover:translate-y-1 active:shadow-none flex items-center justify-center text-xl md:text-3xl font-black">→</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= VIEW 6: PRINT VIEW (Hidden unless printing) ================= -->
+    <section id="view-print" class="hidden flex-col w-full p-8 bg-white min-h-screen">
+        <div class="text-center mb-8 border-b-4 border-black pb-4">
+            <h1 class="text-4xl font-black uppercase tracking-tighter">RHYTHM BUILDER</h1>
+            <h2 id="print-deck-name" class="text-2xl font-bold text-gray-600 mt-2">Deck Name</h2>
+            <p class="text-sm text-gray-400 mt-1 uppercase tracking-widest">Mr. Drew's Music Tools</p>
+        </div>
+        <div id="print-container" class="print-grid w-full">
+            <!-- Printable Rhythms Injected Here -->
+        </div>
+    </section>
+
+    <!-- ================= SAVE MODAL ================= -->
+    <div id="save-modal" class="fixed inset-0 bg-black/50 z-[100] hidden items-center justify-center p-4 backdrop-blur-sm no-print">
+        <div class="bg-white border-4 border-black rounded-2xl shadow-neo-xl p-6 md:p-8 max-w-md w-[95%] md:w-full relative">
+            <button onclick="closeModal('save-modal')" class="absolute top-4 right-4 font-bold text-xl hover:text-red-500">✕</button>
+            
+            <h2 class="text-xl md:text-2xl font-black mb-6 uppercase">Save to Deck</h2>
+            
+            <div id="save-existing-container" class="mb-4">
+                <label class="block font-bold text-sm mb-2">Add to existing deck:</label>
+                <select id="deck-select" class="w-full bg-gray-50 border-2 border-black rounded-lg p-3 font-bold focus:outline-none focus:ring-4 ring-gum-pink/50 cursor-pointer">
+                    <!-- Options populated by JS -->
+                </select>
+            </div>
+
+            <!-- Separator -->
+            <div class="relative flex py-2 items-center">
+                <div class="flex-grow border-t-2 border-gray-200"></div>
+                <span class="flex-shrink-0 mx-4 text-gray-400 text-xs font-bold uppercase">OR</span>
+                <div class="flex-grow border-t-2 border-gray-200"></div>
+            </div>
+
+            <div class="mb-6 mt-2">
+                <label class="block font-bold text-sm mb-2">Create new deck:</label>
+                <input type="text" id="new-deck-name-save" class="w-full bg-gray-50 border-2 border-black rounded-lg p-3 font-bold focus:outline-none focus:ring-4 ring-gum-pink/50" placeholder="e.g. Grade 1 Review">
+            </div>
+
+            <button onclick="confirmSave()" id="btn-confirm-save" class="w-full bg-gum-blue text-white border-2 border-black font-bold py-3 rounded-lg shadow-neo active:translate-y-1 active:shadow-none text-lg">
+                SAVE RHYTHM
+            </button>
+        </div>
+    </div>
+
+    <!-- ================= CREATE DECK MODAL ================= -->
+    <div id="create-deck-modal" class="fixed inset-0 bg-black/50 z-[100] hidden items-center justify-center p-4 backdrop-blur-sm no-print">
+        <div class="bg-white border-4 border-black rounded-2xl shadow-neo-xl p-6 md:p-8 max-w-md w-[95%] md:w-full relative">
+            <button onclick="closeModal('create-deck-modal')" class="absolute top-4 right-4 font-bold text-xl hover:text-red-500">✕</button>
+            
+            <h2 class="text-xl md:text-2xl font-black mb-6 uppercase text-gum-blue">New Deck</h2>
+            
+            <div class="mb-6">
+                <label class="block font-bold text-sm mb-2">Deck Name:</label>
+                <input type="text" id="create-deck-name-input" class="w-full bg-gray-50 border-2 border-black rounded-lg p-3 font-bold focus:outline-none focus:ring-4 ring-gum-blue/50" placeholder="e.g. Syncopa Practice">
+            </div>
+
+            <button onclick="confirmCreateDeck()" class="w-full bg-gum-yellow text-black border-2 border-black font-bold py-3 rounded-lg shadow-neo active:translate-y-1 active:shadow-none text-lg">
+                CREATE DECK
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // --- GLOBAL STATE ---
+        const STATE = {
+            currentSequence: [], 
+            composerSequence: [],
+            currentBeatCount: 4,
+            decks: JSON.parse(localStorage.getItem('rhythmDecks') || '{}'),
+            activeDeck: null,
+            activeDeckName: '',
+            cardIndex: 0,
+            isShuffle: false,
+            activeView: 'splash',
+            lastSavedDeck: localStorage.getItem('lastSavedDeck') || '' 
+        };
+
+        // --- UTILS ---
+        function escapeHTML(str) {
+            const div = document.createElement('div');
+            div.textContent = str;
+            return div.innerHTML;
+        }
+
+        // --- NAVIGATION ---
+        function navigateTo(viewId) {
+            if (typeof stopPlayback === 'function') stopPlayback();
+            STATE.activeView = viewId;
+            document.querySelectorAll('.view-section').forEach(el => el.classList.remove('active'));
+            document.getElementById(`view-${viewId}`).classList.add('active');
+            
+            if (viewId === 'library') renderLibrary();
+            if (viewId === 'generator') {
+                if (STATE.currentSequence.length === 0) generateRhythm(); 
+            }
+            if (viewId === 'composer') {
+                if(STATE.composerSequence.length === 0) resetComposer();
+                else renderComposer();
+            }
+        }
+
+        function syncSelect(sourceId, targetId) {
+            const src = document.getElementById(sourceId);
+            const tgt = document.getElementById(targetId);
+            if(src && tgt) tgt.value = src.value;
+        }
+        
+        function syncCheckbox(sourceId, targetId) {
+            const src = document.getElementById(sourceId);
+            const tgt = document.getElementById(targetId);
+            if(src && tgt) tgt.checked = src.checked;
+        }
+
+        // --- COUNTING SYSTEM UPDATE LOGIC ---
+        function updateCountingSystem(newValue) {
+            const selects = ['countingSystem', 'countingSystemMobile', 'comp-countingSystem', 'comp-countingSystemMobile'];
+            selects.forEach(id => {
+                const el = document.getElementById(id);
+                if(el) el.value = newValue;
+            });
+
+            if (STATE.activeView === 'generator') {
+                const container = document.getElementById('rhythmContainer');
+                const system = newValue;
+                const isStick = document.getElementById('stickNotation').checked;
+                renderSequenceToContainer(STATE.currentSequence, container, { system, isStick });
+            } 
+            else if (STATE.activeView === 'composer') {
+                renderComposer(); 
+            }
+        }
+
+        // --- AUDIO ENGINE ---
+        let audioCtx;
+        let isPlaying = false;
+        let activeOscillators = [];
+        let visualTimeouts = [];
+
+        function initAudio() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+        }
+
+        function stopPlayback() {
+            visualTimeouts.forEach(clearTimeout);
+            visualTimeouts = [];
+            activeOscillators.forEach(osc => {
+                try { osc.stop(); } catch(e){}
+            });
+            activeOscillators = [];
+            isPlaying = false;
+            updatePlayButtons(false);
+            document.querySelectorAll('.beat-container.playing').forEach(el => el.classList.remove('playing'));
+        }
+
+        function playTone(startTime, duration) {
+            const osc = audioCtx.createOscillator();
+            const gainNode = audioCtx.createGain();
+
+            osc.type = 'triangle'; 
+            osc.connect(gainNode);
+            gainNode.connect(audioCtx.destination);
+
+            const volume = 0.3;
+            gainNode.gain.setValueAtTime(0, startTime);
+            gainNode.gain.linearRampToValueAtTime(volume, startTime + 0.02);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, startTime + duration);
+            
+            osc.start(startTime);
+            osc.stop(startTime + duration);
+
+            activeOscillators.push(osc);
+            
+            setTimeout(() => {
+                const index = activeOscillators.indexOf(osc);
+                if (index > -1) activeOscillators.splice(index, 1);
+            }, duration * 1000 + 100);
+        }
+
+        async function playRhythm(sequence) {
+            if (isPlaying) stopPlayback();
+            initAudio();
+            isPlaying = true;
+            updatePlayButtons(true);
+
+            const tempo = 90; 
+            const secondsPerBeat = 60 / tempo;
+            const startTime = audioCtx.currentTime + 0.1;
+
+            let currentBeatTime = 0;
+            
+            let containerId = '';
+            if (STATE.activeView === 'generator') containerId = 'rhythmContainer';
+            else if (STATE.activeView === 'composer') containerId = 'composer-stage';
+            else if (STATE.activeView === 'flashcard') containerId = 'flashcard-stage';
+            
+            const container = document.getElementById(containerId);
+
+            sequence.forEach((pid, index) => {
+                const pattern = PATTERNS[pid];
+                
+                // Audio Scheduling
+                if (pattern.audioEvents) {
+                    pattern.audioEvents.forEach(event => {
+                        const noteStart = startTime + (currentBeatTime + event.t) * secondsPerBeat;
+                        const noteDur = event.dur * secondsPerBeat;
+                        playTone(noteStart, noteDur);
+                    });
+                }
+                
+                // Visual Scheduling
+                if (container) {
+                    const startTimeMs = (startTime - audioCtx.currentTime) * 1000;
+                    const noteOffsetMs = (currentBeatTime * secondsPerBeat) * 1000;
+                    const durationMs = (pattern.beats * secondsPerBeat) * 1000;
+                    
+                    const playDelay = startTimeMs + noteOffsetMs;
+                    
+                    const t1 = setTimeout(() => {
+                        const el = container.querySelector(`.beat-container[data-index="${index}"]`);
+                        if(el) el.classList.add('playing');
+                    }, playDelay);
+
+                    const t2 = setTimeout(() => {
+                        const el = container.querySelector(`.beat-container[data-index="${index}"]`);
+                        if(el) el.classList.remove('playing');
+                    }, playDelay + durationMs);
+
+                    visualTimeouts.push(t1, t2);
+                }
+                
+                currentBeatTime += pattern.beats;
+            });
+
+            const totalDurationMs = currentBeatTime * secondsPerBeat * 1000;
+            const endTimeout = setTimeout(() => {
+                isPlaying = false;
+                updatePlayButtons(false);
+            }, totalDurationMs + 200);
+            visualTimeouts.push(endTimeout);
+        }
+
+        function playCurrentSequence() {
+            let seq = [];
+            if (STATE.activeView === 'generator') seq = STATE.currentSequence;
+            else if (STATE.activeView === 'composer') seq = STATE.composerSequence;
+            else if (STATE.activeView === 'flashcard') {
+                if(STATE.activeDeck && STATE.activeDeck[STATE.cardIndex]) {
+                    seq = STATE.activeDeck[STATE.cardIndex].sequence;
+                }
+            }
+            if (seq.length > 0) playRhythm(seq);
+        }
+
+        function updatePlayButtons(playing) {
+            const btns = ['btn-play-gen', 'btn-play-comp', 'btn-play-flash'];
+            btns.forEach(id => {
+                const btn = document.getElementById(id);
+                if(btn) {
+                    if(playing) {
+                        btn.classList.add('bg-green-200');
+                        btn.classList.remove('bg-white');
+                    } else {
+                        btn.classList.remove('bg-green-200');
+                        btn.classList.add('bg-white');
+                    }
+                }
+            });
+        }
+
+        // --- PATTERNS & RENDER LOGIC ---
+        const PATTERNS = {
+            quarter: { 
+                id: 'quarter', beats: 1, drawType: 'quarter', 
+                counts: { numeric: (b)=>`${b}`, kodaly: ()=>"Ta", gordon: ()=>"Du", takadimi: ()=>"Ta" },
+                audioEvents: [{ t: 0, dur: 1 }] 
+            },
+            half: { 
+                id: 'half', beats: 2, drawType: 'half', 
+                counts: { numeric: (b)=>`${b}-${b+1}`, kodaly: ()=>"Ta-a", gordon: ()=>"Du-u", takadimi: ()=>"Ta-a" },
+                audioEvents: [{ t: 0, dur: 2 }]
+            },
+            whole: { 
+                id: 'whole', beats: 4, drawType: 'whole', 
+                counts: { numeric: (b)=>`${b}-${b+1}-${b+2}-${b+3}`, kodaly: ()=>"Ta-a-a-a", gordon: ()=>"Du-u-u-u", takadimi: ()=>"Ta-a-a-a" },
+                audioEvents: [{ t: 0, dur: 4 }]
+            },
+            rest: { 
+                id: 'rest', beats: 1, drawType: 'rest', 
+                counts: { numeric: (b)=>`(${b})`, kodaly: ()=>"Rest", gordon: ()=>"Rest", takadimi: ()=>"Rest" },
+                audioEvents: [] 
+            },
+            halfRest: { 
+                id: 'halfRest', beats: 2, drawType: 'halfRest', 
+                counts: { numeric: (b)=>`(${b}-${b+1})`, kodaly: ()=>"Rest", gordon: ()=>"Rest", takadimi: ()=>"Rest" },
+                audioEvents: [] 
+            },
+            eighthPair: { 
+                id: 'eighthPair', beats: 1, drawType: 'eighthPair', 
+                counts: { numeric: (b)=>`${b} &`, kodaly: ()=>"Ti-Ti", gordon: ()=>"Du-De", takadimi: ()=>"Ta Di" },
+                audioEvents: [{ t: 0, dur: 0.5 }, { t: 0.5, dur: 0.5 }]
+            },
+            separateEighths: { 
+                id: 'separateEighths', beats: 1, drawType: 'separateEighths', 
+                counts: { numeric: (b)=>`${b} &`, kodaly: ()=>"Ti-Ti", gordon: ()=>"Du-De", takadimi: ()=>"Ta Di" },
+                audioEvents: [{ t: 0, dur: 0.5 }, { t: 0.5, dur: 0.5 }]
+            },
+            sixteenthGroup: { 
+                id: 'sixteenthGroup', beats: 1, drawType: 'sixteenthGroup', 
+                counts: { numeric: (b)=>`${b} e & a`, kodaly: ()=>"Tika-Tika", gordon: ()=>"Du-Ta-De-Ta", takadimi: ()=>"Ta Ka Di Mi" },
+                audioEvents: [{ t: 0, dur: 0.25 }, { t: 0.25, dur: 0.25 }, { t: 0.5, dur: 0.25 }, { t: 0.75, dur: 0.25 }]
+            },
+            eighthTwoSixteenths: { 
+                id: 'eighthTwoSixteenths', beats: 1, drawType: 'eighthTwoSixteenths', 
+                counts: { numeric: (b)=>`${b} & a`, kodaly: ()=>"Ti-Tika", gordon: ()=>"Du-De-Ta", takadimi: ()=>"Ta Di Mi" },
+                audioEvents: [{ t: 0, dur: 0.5 }, { t: 0.5, dur: 0.25 }, { t: 0.75, dur: 0.25 }]
+            },
+            twoSixteenthsEighth: { 
+                id: 'twoSixteenthsEighth', beats: 1, drawType: 'twoSixteenthsEighth', 
+                counts: { numeric: (b)=>`${b} e &`, kodaly: ()=>"Tika-Ti", gordon: ()=>"Du-Ta-De", takadimi: ()=>"Ta Ka Di" },
+                audioEvents: [{ t: 0, dur: 0.25 }, { t: 0.25, dur: 0.25 }, { t: 0.5, dur: 0.5 }]
+            },
+            syncopa: { 
+                id: 'syncopa', beats: 2, drawType: 'syncopa', 
+                counts: { numeric: (b)=>`${b} & ${b+1} &`, numeric_complex: (b)=>`${b} & (${b+1}) &`, kodaly: ()=>"Syn-co-pa", gordon: ()=>"Du-De-De", takadimi: ()=>"Ta Di Di" },
+                audioEvents: [{ t: 0, dur: 0.5 }, { t: 0.5, dur: 1 }, { t: 1.5, dur: 0.5 }]
+            }
+        };
+
+        function renderSequenceToContainer(sequence, container, options = {}) {
+            container.innerHTML = '';
+            
+            if (sequence.length === 0) {
+                if(options.emptyMessage) {
+                    container.innerHTML = `<div class="text-gray-300 font-bold text-2xl md:text-4xl select-none w-full text-center">${options.emptyMessage}</div>`;
+                }
+                return;
+            }
+
+            let currentBeat = 1;
+            let beatsGenerated = 0;
+            const system = options.system || 'kodaly';
+            const isStick = options.isStick || false;
+            const targetBeats = options.beatCount || sequence.reduce((acc, pid) => acc + PATTERNS[pid].beats, 0);
+
+            sequence.forEach((pid, index) => {
+                const pattern = PATTERNS[pid];
+                const measureBeat = ((currentBeat - 1) % 4) + 1;
+                
+                const beatEl = createBeatElement(pattern, measureBeat, system, isStick);
+                beatEl.dataset.index = index; 
+                
+                container.appendChild(beatEl);
+
+                beatsGenerated += pattern.beats;
+                currentBeat += pattern.beats;
+
+                if (beatsGenerated % 4 === 0 && beatsGenerated < targetBeats) {
+                    const barline = document.createElement('div');
+                    barline.className = "h-20 md:h-32 w-1 md:w-1.5 bg-black mx-1 md:mx-4 self-center rounded-full opacity-30";
+                    container.appendChild(barline);
+
+                    if (targetBeats === 8 && beatsGenerated === 4) {
+                        const breakEl = document.createElement('div');
+                        breakEl.className = "w-full h-0"; 
+                        container.appendChild(breakEl);
+                    }
+                }
+            });
+        }
+
+        // --- COMPOSER LOGIC ---
+        function resetComposer() {
+            stopPlayback();
+            STATE.composerSequence = [];
+            renderComposer();
+        }
+
+        function undoComposer() {
+            stopPlayback();
+            STATE.composerSequence.pop();
+            renderComposer();
+        }
+
+        function addComposerNote(patternId) {
+            const beatLimit = parseInt(document.getElementById('comp-beatCount').value);
+            const currentTotal = STATE.composerSequence.reduce((sum, pid) => sum + PATTERNS[pid].beats, 0);
+            
+            if (currentTotal + PATTERNS[patternId].beats <= beatLimit) {
+                STATE.composerSequence.push(patternId);
+                renderComposer();
+            }
+        }
+
+        function renderComposer() {
+            const container = document.getElementById('composer-stage');
+            const beatLimit = parseInt(document.getElementById('comp-beatCount').value);
+            const isStick = document.getElementById('comp-stickNotation').checked;
+            const system = document.getElementById('countingSystem').value; 
+            
+            const currentTotal = STATE.composerSequence.reduce((sum, pid) => sum + PATTERNS[pid].beats, 0);
+            
+            renderSequenceToContainer(STATE.composerSequence, container, { 
+                system, 
+                isStick, 
+                beatCount: beatLimit,
+                emptyMessage: "TAP BUTTONS TO BUILD"
+            });
+
+            document.getElementById('comp-beat-counter').textContent = `${currentTotal} / ${beatLimit}`;
+
+            const remaining = beatLimit - currentTotal;
+            const remainingInMeasure = 4 - (currentTotal % 4);
+
+            const buttons = document.querySelectorAll('.composer-btn');
+            
+            buttons.forEach(btn => {
+                const patternId = btn.id.replace('btn-comp-', '');
+                if (PATTERNS[patternId]) {
+                    const beatsNeeded = PATTERNS[patternId].beats;
+                    
+                    if (beatsNeeded > remaining || beatsNeeded > remainingInMeasure) {
+                        btn.disabled = true;
+                    } else {
+                        btn.disabled = false;
+                    }
+                    
+                    if (isStick) {
+                        if (['sixteenthGroup', 'twoSixteenthsEighth', 'eighthTwoSixteenths', 'syncopa', 'separateEighths', 'half', 'whole', 'halfRest'].includes(patternId)) {
+                            btn.disabled = true;
+                        }
+                    }
+                }
+            });
+        }
+
+        // --- GENERATOR LOGIC ---
+        function generateRhythm() {
+            stopPlayback();
+            const numBeats = parseInt(document.getElementById('beatCount').value);
+            const system = document.getElementById('countingSystem').value;
+            const isStick = document.getElementById('stickNotation').checked;
+            const endOnQuarter = document.getElementById('alwaysEndQuarter').checked;
+            const noStartRest = document.getElementById('noStartRest').checked;
+            
+            let allowed = [];
+            if (document.getElementById('useQuarter').checked) allowed.push('quarter');
+            if (document.getElementById('useEighth').checked) allowed.push('eighthPair');
+            if (document.getElementById('useSeparateEighths').checked) allowed.push('separateEighths');
+            if (document.getElementById('useSixteenth').checked) allowed.push('sixteenthGroup');
+            if (document.getElementById('useRest').checked) allowed.push('rest');
+            if (document.getElementById('useHalfRest').checked) allowed.push('halfRest');
+            if (document.getElementById('useHalf').checked) allowed.push('half');
+            if (document.getElementById('useWhole').checked) allowed.push('whole');
+            if (document.getElementById('useTikaTi').checked) allowed.push('twoSixteenthsEighth');
+            if (document.getElementById('useTiTika').checked) allowed.push('eighthTwoSixteenths');
+            if (document.getElementById('useSyncopa').checked) allowed.push('syncopa');
+
+            const soundingIds = ['quarter', 'eighthPair', 'separateEighths', 'sixteenthGroup', 'eighthTwoSixteenths', 'twoSixteenthsEighth', 'syncopa', 'half', 'whole'];
+            if (!allowed.some(id => soundingIds.includes(id))) allowed = ['quarter'];
+            if (allowed.length === 0) allowed = ['quarter'];
+
+            let sequence = [];
+            let beatsGenerated = 0;
+            let currentBeat = 1;
+            let lastPatternId = null;
+            
+            let counts = { sixteenth:0, mixed:0, mixedMeasure:0, halfRest:0, quarterRest:0, quarter:0, eighth:0, whole:0 };
+
+            while (beatsGenerated < numBeats) {
+                if (beatsGenerated % 4 === 0) {
+                    counts.mixedMeasure = 0; counts.halfRest = 0; counts.quarterRest = 0;
+                }
+                const measureBeat = ((currentBeat - 1) % 4) + 1;
+                const remaining = numBeats - beatsGenerated;
+                
+                let validPatterns = allowed.filter(key => PATTERNS[key].beats <= remaining);
+
+                if (numBeats === 8) {
+                    const hasQuarters = allowed.includes('quarter');
+                    const hasEighths = allowed.includes('eighthPair') || allowed.includes('separateEighths');
+                    if (hasQuarters && hasEighths) {
+                        if (counts.eighth >= 5) validPatterns = validPatterns.filter(k => k !== 'eighthPair' && k !== 'separateEighths');
+                        if (counts.quarter >= 5) validPatterns = validPatterns.filter(k => k !== 'quarter');
+                    }
+                    if (counts.whole >= 1) validPatterns = validPatterns.filter(k => k !== 'whole');
+                }
+
+                if (measureBeat === 2 || measureBeat === 4) validPatterns = validPatterns.filter(k => k !== 'syncopa' && k !== 'half');
+                if (measureBeat !== 1) validPatterns = validPatterns.filter(k => k !== 'whole');
+                
+                // End on Quarter
+                if (endOnQuarter) {
+                    if (remaining === 1) {
+                        if (allowed.includes('quarter')) {
+                            validPatterns = ['quarter'];
+                        } else {
+                             validPatterns = validPatterns.filter(k => PATTERNS[k].beats === 1);
+                        }
+                    } else {
+                        validPatterns = validPatterns.filter(k => !(beatsGenerated + PATTERNS[k].beats === numBeats && k !== 'quarter'));
+                    }
+                }
+
+                if (noStartRest && beatsGenerated === 0) validPatterns = validPatterns.filter(k => k !== 'rest' && k !== 'halfRest');
+                if (lastPatternId === 'syncopa') validPatterns = validPatterns.filter(k => k !== 'syncopa');
+                if (beatsGenerated === 4 && lastPatternId === 'sixteenthGroup') validPatterns = validPatterns.filter(k => k !== 'sixteenthGroup');
+
+                if (counts.sixteenth >= 2) validPatterns = validPatterns.filter(k => k !== 'sixteenthGroup');
+                if (counts.mixed >= 3) validPatterns = validPatterns.filter(k => k !== 'eighthTwoSixteenths' && k !== 'twoSixteenthsEighth');
+                if (counts.mixedMeasure >= 2) validPatterns = validPatterns.filter(k => k !== 'eighthTwoSixteenths' && k !== 'twoSixteenthsEighth');
+                if (counts.halfRest >= 1) validPatterns = validPatterns.filter(k => k !== 'halfRest');
+                if (counts.quarterRest >= 2) validPatterns = validPatterns.filter(k => k !== 'rest');
+
+                if (validPatterns.length === 0) validPatterns = ['quarter'];
+                
+                const randomKey = validPatterns[Math.floor(Math.random() * validPatterns.length)];
+                
+                if(randomKey === 'sixteenthGroup') counts.sixteenth++;
+                if(randomKey === 'eighthTwoSixteenths' || randomKey === 'twoSixteenthsEighth') { counts.mixed++; counts.mixedMeasure++; }
+                if(randomKey === 'halfRest') counts.halfRest++;
+                if(randomKey === 'rest') counts.quarterRest++;
+                if(randomKey === 'quarter') counts.quarter++;
+                if(randomKey === 'eighthPair' || randomKey === 'separateEighths') counts.eighth++;
+                if(randomKey === 'whole') counts.whole++;
+
+                sequence.push(randomKey);
+                beatsGenerated += PATTERNS[randomKey].beats;
+                currentBeat += PATTERNS[randomKey].beats;
+                lastPatternId = randomKey;
+            }
+
+            STATE.currentSequence = sequence;
+            STATE.currentBeatCount = numBeats; 
+            
+            const container = document.getElementById('rhythmContainer');
+            renderSequenceToContainer(sequence, container, { system, isStick });
+        }
+
+        // --- SVG CREATION ---
+        function createBeatElement(pattern, beatNum, system, isStick) {
+            let widthClass = 'w-20 md:w-48'; 
+            let viewBoxWidth = 160;
+            if (pattern.beats === 2) { widthClass = 'w-40 md:w-96'; viewBoxWidth = 320; }
+            else if (pattern.beats === 4) { widthClass = 'w-80 md:w-[48rem]'; viewBoxWidth = 640; }
+            
+            const wrapper = document.createElement('div');
+            wrapper.className = `beat-container flex flex-col items-center justify-start ${widthClass} flex-shrink-0`;
+
+            const svgNS = "http://www.w3.org/2000/svg";
+            const svg = document.createElementNS(svgNS, "svg");
+            svg.setAttribute("class", "h-20 md:h-[150px] w-full"); 
+            svg.setAttribute("viewBox", `0 0 ${viewBoxWidth} 120`);
+            svg.style.overflow = "visible";
+
+            const stemTop = 20; const stemBottom = 85; const headY = 85; const headOffset = -12;
+            const drawHead = (x) => isStick ? '' : `<ellipse cx="${x + headOffset}" cy="${headY}" rx="14" ry="10" transform="rotate(-15, ${x + headOffset}, ${headY})" class="note-head" />`;
+            const drawHollowHead = (x) => isStick ? '' : `<ellipse cx="${x + headOffset}" cy="${headY}" rx="14" ry="10" transform="rotate(-15, ${x + headOffset}, ${headY})" class="note-head-hollow" />`;
+
+            let content = "";
+            switch (pattern.drawType) {
+                case 'quarter': content = `<line x1="80" y1="${stemTop}" x2="80" y2="${stemBottom}" class="note-stem" />${drawHead(80)}`; break;
+                case 'half': 
+                    content = `
+                        <line x1="80" y1="${stemTop}" x2="80" y2="${stemBottom}" class="note-stem" />
+                        ${drawHollowHead(80)}
+                    `; 
+                    break;
+                case 'whole': content = `<ellipse cx="${80}" cy="${headY}" rx="18" ry="12" class="note-head-hollow" stroke-width="6" />`; break;
+                case 'rest': content = isStick ? `<path d="M60,35 L100,35 L60,85 L100,85" class="rest" style="stroke-linejoin: round; fill:none; stroke-width:6px;" />` : `<path d="M65,30 L95,30 L70,60 L95,60 L80,75 C75,85 85,95 95,85" class="rest" />`; break;
+                case 'halfRest': content = `<line x1="120" y1="60" x2="200" y2="60" stroke="black" stroke-width="2" /><rect x="145" y="48" width="30" height="12" fill="black" />`; break;
+                case 'eighthPair': content = `<line x1="45" y1="${stemTop}" x2="45" y2="${stemBottom}" class="note-stem" /><line x1="115" y1="${stemTop}" x2="115" y2="${stemBottom}" class="note-stem" /><line x1="45" y1="${stemTop}" x2="115" y2="${stemTop}" class="note-beam" />${drawHead(45)}${drawHead(115)}`; break;
+                case 'separateEighths': content = `<line x1="45" y1="${stemTop}" x2="45" y2="${stemBottom}" class="note-stem" /><line x1="115" y1="${stemTop}" x2="115" y2="${stemBottom}" class="note-stem" /><path d="M45,${stemTop} Q60,${stemTop+15} 60,${stemTop+40}" style="fill:none; stroke:black; stroke-width:5px; stroke-linecap: round;" /><path d="M115,${stemTop} Q130,${stemTop+15} 130,${stemTop+40}" style="fill:none; stroke:black; stroke-width:5px; stroke-linecap: round;" />${drawHead(45)}${drawHead(115)}`; break;
+                case 'sixteenthGroup': content = `<line x1="20" y1="${stemTop}" x2="20" y2="${stemBottom}" class="note-stem" /><line x1="60" y1="${stemTop}" x2="60" y2="${stemBottom}" class="note-stem" /><line x1="100" y1="${stemTop}" x2="100" y2="${stemBottom}" class="note-stem" /><line x1="140" y1="${stemTop}" x2="140" y2="${stemBottom}" class="note-stem" /><line x1="20" y1="${stemTop}" x2="140" y2="${stemTop}" class="note-beam" /><line x1="20" y1="${stemTop + 15}" x2="140" y2="${stemTop + 15}" class="note-beam-secondary" />${drawHead(20)}${drawHead(60)}${drawHead(100)}${drawHead(140)}`; break;
+                case 'eighthTwoSixteenths': content = `<line x1="35" y1="${stemTop}" x2="35" y2="${stemBottom}" class="note-stem" /><line x1="95" y1="${stemTop}" x2="95" y2="${stemBottom}" class="note-stem" /><line x1="135" y1="${stemTop}" x2="135" y2="${stemBottom}" class="note-stem" /><line x1="35" y1="${stemTop}" x2="135" y2="${stemTop}" class="note-beam" /><line x1="95" y1="${stemTop + 15}" x2="135" y2="${stemTop + 15}" class="note-beam-secondary" />${drawHead(35)}${drawHead(95)}${drawHead(135)}`; break;
+                case 'twoSixteenthsEighth': content = `<line x1="25" y1="${stemTop}" x2="25" y2="${stemBottom}" class="note-stem" /><line x1="65" y1="${stemTop}" x2="65" y2="${stemBottom}" class="note-stem" /><line x1="125" y1="${stemTop}" x2="125" y2="${stemBottom}" class="note-stem" /><line x1="25" y1="${stemTop}" x2="125" y2="${stemTop}" class="note-beam" /><line x1="25" y1="${stemTop + 15}" x2="65" y2="${stemTop + 15}" class="note-beam-secondary" />${drawHead(25)}${drawHead(65)}${drawHead(125)}`; break;
+                case 'syncopa': content = `<line x1="50" y1="${stemTop}" x2="50" y2="${stemBottom}" class="note-stem" /><line x1="160" y1="${stemTop}" x2="160" y2="${stemBottom}" class="note-stem" /><line x1="270" y1="${stemTop}" x2="270" y2="${stemBottom}" class="note-stem" /><path d="M50,${stemTop} Q65,${stemTop+15} 65,${stemTop+40}" style="fill:none; stroke:black; stroke-width:5px; stroke-linecap: round;" /><path d="M270,${stemTop} Q285,${stemTop+15} 285,${stemTop+40}" style="fill:none; stroke:black; stroke-width:5px; stroke-linecap: round;" />${drawHead(50)}${drawHead(160)}${drawHead(270)}`; break;
+            }
+
+            svg.innerHTML = content;
+            wrapper.appendChild(svg);
+
+            const text = document.createElement('span');
+            text.className = 'counting-text';
+            
+            if (pattern.id === 'half' || pattern.id === 'whole') {
+                 text.style.width = "90%";
+                 text.style.display = "block";
+                 text.style.textAlign = "center";
+            }
+            
+            if (system === 'none') {
+                text.style.display = 'none';
+            } else {
+                if (pattern.id === 'syncopa' && system === 'numeric') text.textContent = pattern.counts.numeric_complex(beatNum);
+                else text.textContent = pattern.counts[system](beatNum);
+            }
+            
+            wrapper.appendChild(text);
+
+            return wrapper;
+        }
+
+        // --- SAVING & DECKS LOGIC ---
+        function saveCurrentRhythm() {
+            const seq = (STATE.activeView === 'composer') ? STATE.composerSequence : STATE.currentSequence;
+            
+            if (seq.length === 0) return alert("Nothing to save!");
+
+            document.getElementById('save-modal').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+            const select = document.getElementById('deck-select');
+            const container = document.getElementById('save-existing-container');
+            const decks = Object.keys(STATE.decks);
+            
+            select.innerHTML = '';
+            
+            if (decks.length === 0) {
+                container.style.display = 'none';
+            } else {
+                container.style.display = 'block';
+                decks.forEach(name => {
+                    const opt = document.createElement('option');
+                    opt.value = name;
+                    opt.textContent = name;
+                    select.appendChild(opt);
+                });
+                
+                if (STATE.lastSavedDeck && STATE.decks[STATE.lastSavedDeck]) {
+                    select.value = STATE.lastSavedDeck;
+                }
+            }
+        }
+
+        function closeModal(id) { 
+            document.getElementById(id).style.display = 'none'; 
+            document.body.style.overflow = '';
+        }
+
+        function confirmSave() {
+            const newDeckName = document.getElementById('new-deck-name-save').value.trim();
+            const existingDeckName = document.getElementById('deck-select').value;
+            let targetDeck = '';
+
+            if (newDeckName) {
+                targetDeck = newDeckName;
+                if (!STATE.decks[targetDeck]) STATE.decks[targetDeck] = [];
+            } else if (existingDeckName && document.getElementById('save-existing-container').style.display !== 'none') {
+                targetDeck = existingDeckName;
+            } else {
+                return alert("Please select a deck or create a new one!");
+            }
+
+            const seq = (STATE.activeView === 'composer') ? STATE.composerSequence : STATE.currentSequence;
+            
+            const isStick = (STATE.activeView === 'composer') 
+                ? document.getElementById('comp-stickNotation').checked 
+                : document.getElementById('stickNotation').checked;
+
+            STATE.decks[targetDeck].push({ sequence: seq, isStick: isStick, timestamp: Date.now() });
+            
+            STATE.lastSavedDeck = targetDeck;
+            localStorage.setItem('lastSavedDeck', targetDeck);
+            localStorage.setItem('rhythmDecks', JSON.stringify(STATE.decks));
+            
+            const btn = document.getElementById('btn-confirm-save');
+            const originalText = btn.textContent;
+            btn.textContent = "SAVED!";
+            btn.classList.remove('bg-gum-blue');
+            btn.classList.add('bg-gum-pink');
+            
+            setTimeout(() => {
+                closeModal('save-modal');
+                btn.textContent = originalText;
+                btn.classList.add('bg-gum-blue');
+                btn.classList.remove('bg-gum-pink');
+                document.getElementById('new-deck-name-save').value = ''; 
+            }, 700);
+        }
+
+        function openCreateDeckModal() {
+            document.getElementById('create-deck-modal').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+            document.getElementById('create-deck-name-input').focus();
+        }
+
+        function confirmCreateDeck() {
+            const name = document.getElementById('create-deck-name-input').value.trim();
+            if (!name) return alert("Please enter a name.");
+            
+            if (STATE.decks[name]) return alert("Deck already exists!");
+
+            STATE.decks[name] = [];
+            localStorage.setItem('rhythmDecks', JSON.stringify(STATE.decks));
+            
+            closeModal('create-deck-modal');
+            document.getElementById('create-deck-name-input').value = '';
+            renderLibrary();
+        }
+
+        function deleteDeck(name) {
+            if (confirm(`Delete deck "${name}"?`)) {
+                delete STATE.decks[name];
+                localStorage.setItem('rhythmDecks', JSON.stringify(STATE.decks));
+                renderLibrary();
+            }
+        }
+
+        // --- IMPORT / EXPORT LOGIC ---
+        function exportDecks() {
+            const data = JSON.stringify(STATE.decks, null, 2);
+            const blob = new Blob([data], {type: 'application/json'});
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'mr_drews_rhythm_decks.json';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        function triggerImport() {
+            document.getElementById('import-file').click();
+        }
+
+        function importDecks(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const imported = JSON.parse(e.target.result);
+                    
+                    if (typeof imported !== 'object' || imported === null || Array.isArray(imported)) {
+                        throw new Error("Invalid file root structure");
+                    }
+                    for (const key in imported) {
+                        if (!Array.isArray(imported[key])) {
+                            throw new Error("Invalid deck data structure");
+                        }
+                        imported[key].forEach(card => {
+                            if (!card.sequence || !Array.isArray(card.sequence)) {
+                                throw new Error("Invalid sequence data");
+                            }
+                        });
+                    }
+
+                    STATE.decks = { ...STATE.decks, ...imported };
+                    localStorage.setItem('rhythmDecks', JSON.stringify(STATE.decks));
+                    renderLibrary();
+                    alert("Decks imported successfully!");
+                } catch (err) {
+                    alert("Invalid file format. Please upload a valid Rhythm Decks file.");
+                }
+            };
+            reader.readAsText(file);
+            event.target.value = ''; 
+        }
+
+        function printDeck(name) {
+            const deck = STATE.decks[name];
+            if (!deck || deck.length === 0) return alert("Deck is empty!");
+            
+            const printContainer = document.getElementById('print-container');
+            const deckTitle = document.getElementById('print-deck-name');
+            
+            deckTitle.textContent = name;
+            printContainer.innerHTML = '';
+
+            const system = document.getElementById('countingSystem').value;
+
+            deck.forEach((card, idx) => {
+                const wrapper = document.createElement('div');
+                wrapper.className = "border-2 border-black rounded-xl p-4 mb-4 break-inside-avoid print-rhythm-wrapper";
+                
+                const cardLabel = document.createElement('div');
+                cardLabel.className = "text-xs font-bold text-gray-400 mb-2 uppercase";
+                cardLabel.textContent = `Rhythm ${idx + 1}`;
+                wrapper.appendChild(cardLabel);
+
+                const cardContent = document.createElement('div');
+                cardContent.className = "flex flex-wrap items-center justify-center gap-x-8 gap-y-8";
+                
+                const isStick = (card.isStick !== undefined) ? card.isStick : document.getElementById('stickNotation').checked;
+
+                renderSequenceToContainer(card.sequence, cardContent, { system, isStick });
+                
+                wrapper.appendChild(cardContent);
+                printContainer.appendChild(wrapper);
+            });
+            
+            window.print();
+        }
+
+        function renderLibrary() {
+            const list = document.getElementById('deck-list');
+            const empty = document.getElementById('empty-state');
+            list.innerHTML = '';
+            
+            if (!STATE.decks || typeof STATE.decks !== 'object') {
+                STATE.decks = {};
+            }
+
+            const names = Object.keys(STATE.decks);
+            if (names.length === 0) {
+                empty.style.display = 'block';
+                return;
+            }
+            empty.style.display = 'none';
+
+            names.forEach(name => {
+                const count = STATE.decks[name].length;
+                const safeName = name.replace(/\\/g, '\\\\').replace(/'/g, "\\'");
+                const escapedName = escapeHTML(name);
+                
+                const card = document.createElement('div');
+                card.className = "bg-white border-4 border-black rounded-xl p-6 shadow-neo hover:-translate-y-1 hover:shadow-neo-lg transition-all relative group";
+                card.innerHTML = `
+                    <h3 class="text-xl font-black uppercase mb-2 truncate pr-8">${escapedName}</h3>
+                    <div class="text-sm font-bold text-gray-500 mb-4">${count} Cards</div>
+                    <div class="flex gap-2">
+                        <button onclick="startDeck('${safeName}')" class="flex-1 bg-gum-blue text-white font-bold py-2 rounded border-2 border-black hover:bg-teal-500">PLAY</button>
+                        <button onclick="printDeck('${safeName}')" class="w-12 bg-white text-black font-bold py-2 rounded border-2 border-black hover:bg-gray-100 flex items-center justify-center" title="Print/PDF">🖨️</button>
+                    </div>
+                    <button onclick="deleteDeck('${safeName}')" class="absolute top-4 right-4 text-gray-300 hover:text-red-500 font-bold">✕</button>
+                `;
+                list.appendChild(card);
+            });
+        }
+
+        // --- FLASHCARD LOGIC ---
+        function startDeck(name) {
+            stopPlayback();
+            STATE.activeDeckName = name;
+            STATE.activeDeck = [...STATE.decks[name]];
+            STATE.cardIndex = 0;
+            STATE.isShuffle = false;
+            if (STATE.activeDeck.length === 0) return alert("This deck is empty!");
+            
+            document.getElementById('flashcard-deck-name').textContent = name;
+            document.getElementById('btn-shuffle').classList.remove('bg-gum-pink');
+            document.getElementById('btn-shuffle').classList.add('bg-white');
+            
+            navigateTo('flashcard');
+            renderFlashcard();
+        }
+
+        function renderFlashcard() {
+            const card = STATE.activeDeck[STATE.cardIndex];
+            const container = document.getElementById('flashcard-stage');
+            const counter = document.getElementById('flashcard-counter');
+            
+            counter.textContent = `${STATE.cardIndex + 1} / ${STATE.activeDeck.length}`;
+            const system = document.getElementById('countingSystem').value;
+            
+            const isStick = (card.isStick !== undefined) ? card.isStick : document.getElementById('stickNotation').checked;
+
+            renderSequenceToContainer(card.sequence, container, { system, isStick });
+        }
+
+        function nextCard() {
+            stopPlayback();
+            if (STATE.cardIndex < STATE.activeDeck.length - 1) {
+                STATE.cardIndex++;
+                renderFlashcard();
+            }
+        }
+
+        function prevCard() {
+            stopPlayback();
+            if (STATE.cardIndex > 0) {
+                STATE.cardIndex--;
+                renderFlashcard();
+            }
+        }
+
+        function toggleShuffle() {
+            stopPlayback();
+            STATE.isShuffle = !STATE.isShuffle;
+            const btn = document.getElementById('btn-shuffle');
+            
+            if (STATE.isShuffle) {
+                btn.classList.add('bg-gum-pink');
+                btn.classList.remove('bg-white');
+                for (let i = STATE.activeDeck.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [STATE.activeDeck[i], STATE.activeDeck[j]] = [STATE.activeDeck[j], STATE.activeDeck[i]];
+                }
+            } else {
+                btn.classList.remove('bg-gum-pink');
+                btn.classList.add('bg-white');
+                STATE.activeDeck = [...STATE.decks[STATE.activeDeckName]];
+            }
+            STATE.cardIndex = 0;
+            renderFlashcard();
+        }
+
+        // --- INIT ---
+        window.addEventListener('load', () => {
+            const noteIds = ['useQuarter', 'useEighth', 'useSeparateEighths', 'useSixteenth', 'useTikaTi', 'useTiTika', 'useSyncopa', 'useHalf', 'useWhole'];
+            
+            function updateControlsState() {
+                const stick = document.getElementById('stickNotation').checked;
+                const anyNote = noteIds.some(id => document.getElementById(id).checked);
+                const quarterChecked = document.getElementById('useQuarter').checked;
+                
+                // End on Quarter logic constraint
+                const endQuarterCheckbox = document.getElementById('alwaysEndQuarter');
+                if (endQuarterCheckbox) {
+                    if (!quarterChecked) {
+                        endQuarterCheckbox.checked = false;
+                        endQuarterCheckbox.disabled = true;
+                        endQuarterCheckbox.parentElement.style.opacity = '0.5';
+                    } else {
+                        endQuarterCheckbox.disabled = false;
+                        endQuarterCheckbox.parentElement.style.opacity = '1';
+                    }
+                }
+                
+                ['useSixteenth', 'useTikaTi', 'useTiTika', 'useSyncopa', 'useSeparateEighths', 'useHalf', 'useWhole'].forEach(id => {
+                    const el = document.getElementById(id);
+                    if (stick) {
+                        el.checked = false; el.disabled = true;
+                        if(el.parentElement) { 
+                            if(el.parentElement.id === 'mixed-split-container') {
+                                el.parentElement.classList.add('split-btn-disabled');
+                                el.parentElement.classList.remove('hover:-translate-y-1');
+                            } else {
+                                el.parentElement.style.opacity = '0.5'; el.parentElement.style.pointerEvents = 'none';
+                            }
+                        }
+                    } else {
+                        el.disabled = false;
+                        if(el.parentElement) {
+                            if(el.parentElement.id === 'mixed-split-container') {
+                                el.parentElement.classList.remove('split-btn-disabled');
+                                el.parentElement.classList.add('hover:-translate-y-1');
+                            } else {
+                                el.parentElement.style.opacity = '1'; el.parentElement.style.pointerEvents = 'auto';
+                            }
+                        }
+                    }
+                });
+
+                ['useRest'].forEach(id => {
+                    document.getElementById(id).disabled = !anyNote;
+                    if(!anyNote) document.getElementById(id).checked = false;
+                });
+                const halfRest = document.getElementById('useHalfRest');
+                halfRest.disabled = !anyNote || stick;
+                if(halfRest.disabled) halfRest.checked = false;
+            }
+
+            document.getElementById('useEighth').addEventListener('change', (e) => { if(e.target.checked) document.getElementById('useSeparateEighths').checked = false; updateControlsState(); });
+            document.getElementById('useSeparateEighths').addEventListener('change', (e) => { if(e.target.checked) document.getElementById('useEighth').checked = false; updateControlsState(); });
+            document.getElementById('stickNotation').addEventListener('change', (e) => {
+                if(e.target.checked && document.getElementById('useSeparateEighths').checked) {
+                    document.getElementById('useEighth').checked = true;
+                }
+                updateControlsState(); generateRhythm();
+            });
+
+            noteIds.forEach(id => document.getElementById(id).addEventListener('change', updateControlsState));
+            
+            const syncs = [['countingSystemMobile', 'countingSystem'], ['beatCountMobile', 'beatCount']];
+            syncs.forEach(([m, d]) => {
+                const el = document.getElementById(m);
+                if(el) el.value = document.getElementById(d).value;
+            });
+
+            updateControlsState();
+        });
+    </script>
+</body>
+</html>
