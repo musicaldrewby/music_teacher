@@ -9,6 +9,8 @@
             --brand-color: #6366f1; /* Soft Indigo */
             --brand-light: #e0e7ff;
             --accent-teal: #14b8a6;
+            --accent-coral: #f43f5e;
+            --accent-amber: #f59e0b;
             --bg-color: #f8fafc;
             --text-dark: #334155;
             --text-light: #64748b;
@@ -64,7 +66,6 @@
 
         .app-grid {
             display: grid;
-            /* The max-width of 350px keeps the single card from stretching too wide */
             grid-template-columns: repeat(auto-fit, minmax(280px, 350px));
             gap: 2rem;
             justify-content: center; 
@@ -86,13 +87,18 @@
             transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
             position: relative;
             overflow: hidden;
-            border-top: 6px solid var(--accent-teal);
             height: 100%;
             box-sizing: border-box;
             display: flex;
             flex-direction: column;
             align-items: center;
         }
+
+        /* Automatically alternate border colors for new apps */
+        .app-link:nth-child(4n+1) .app-card { border-top: 6px solid var(--accent-teal); }
+        .app-link:nth-child(4n+2) .app-card { border-top: 6px solid var(--accent-coral); }
+        .app-link:nth-child(4n+3) .app-card { border-top: 6px solid var(--accent-amber); }
+        .app-link:nth-child(4n+4) .app-card { border-top: 6px solid var(--brand-color); }
 
         .app-link:hover .app-card, 
         .app-link:focus .app-card {
@@ -171,13 +177,24 @@
     <main class="container">
         <div class="app-grid">
             
-            <!-- App Card Link -->
+            <!-- App Card Link: Card Sharks -->
             <a href="cardsharks.html" class="app-link">
                 <div class="app-card">
                     <div class="icon-wrapper">🦈</div>
                     <h2 class="app-title">Card Sharks</h2>
                     <p class="app-desc">A high-energy music game of higher or lower! Sing and play along with barred instruments.</p>
                     <span class="launch-badge">Launch Game →</span>
+                </div>
+            </a>
+            <!-- End App Card Link -->
+
+            <!-- App Card Link: Rhythm Builder -->
+            <a href="rhythmbuilder.html" class="app-link">
+                <div class="app-card">
+                    <div class="icon-wrapper">🥁</div>
+                    <h2 class="app-title">Rhythm Builder</h2>
+                    <p class="app-desc">Build and generate custom rhythms for your music class to review and practice.</p>
+                    <span class="launch-badge">Launch App →</span>
                 </div>
             </a>
             <!-- End App Card Link -->
