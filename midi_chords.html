@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MIDI Chord Pads</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <style>
+        /* Disable touch selection, zooming, and scrolling to make it feel like a real instrument */
+        body { touch-action: none; user-select: none; -webkit-user-select: none; }
+        
+        .pad-active {
+            transform: scale(0.96);
+            background-color: #3b82f6 !important; /* blue-500 */
+            border-color: #60a5fa !important; /* blue-400 */
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.6);
+        }
+
+        .pad-learning {
+            border-color: #ef4444 !important; /* red-500 */
+            animation: pulse-border 1.5s infinite;
+        }
+
+        @keyframes pulse-border {
+            0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+        }
+
+        /* Strum string glow effect */
+        .strum-hit { background-color: #60a5fa !important; box-shadow: 0 0 10px #60a5fa; transition: all 0.1s; }
+        .strum-string { transition: all 0.5s ease-out; }
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-100 h-screen w-screen overflow-hidden font-sans selection:bg-blue-500 selection:text-white flex flex-col">
+
+    <div class="w-full h-full p-2 md:p-4 flex flex-col gap-3 max-w-screen-2xl mx-auto">
+        <!-- Header & Controls -->
+        <header class="flex-shrink-0 bg-slate-800 p-3 md:p-4 rounded-xl border border-slate-700 shadow-lg flex flex-col md:flex-row gap-4 justify-between items-start md:items-center">
+            
+            <!-- Title & Status -->
+            <div class="flex flex-col gap-2 min-w-fit">
+                <h1 class="text-xl md:text-2xl font-bold flex items-center gap-2 text-white">
+                    <i class="ph-fill ph-sparkle text-purple-400"></i>
+                    Magical Pads
+                </h1>
+                <div id="midi-status" class="hidden text-[10px] md:text-xs px-2 py-1 rounded bg-red-500/10 text-red-300 border border-red-500/30 max-w-[200px]">
+                    <span id="midi-status-text">Error message</span>
+                </div>
+            </div>
+            
+            <!-- Control Panels -->
+            <div class="flex flex-col gap-3 w-full">
+                <!-- Top Row: MIDI & Panic -->
+                <div class="flex flex-wrap gap-2 md:gap-4 items-end bg-slate-900/50 p-2 rounded-lg">
+                    <div class="flex flex-col gap-1 w-full sm:w-auto flex-1 md:flex-none">
+                        <label class="text-[9px] md:text-[10px] text-slate-400 font-semibold uppercase tracking-wider">Input Device</label>
+                        <select id="midi-input" class="bg-slate-800 border border-slate-600 rounded-md px-2 py-1 text-xs focus:outline-none focus:border-blue-500 w-full transition-colors">
+                            <option value="">No devices found</option>
+                        </select>
+                    </div>
+                    
+                    <div class="flex flex-col gap-1 w-full sm:w-auto flex-1 md:flex-none">
+                        <label class="text-[9px] md:text-[10px] text-slate-400 font-semibold uppercase tracking-wider">Output Device</label>
+                        <select id="midi-output" class="bg-slate-800 border border-slate-600 rounded-md px-2 py-1 text-xs focus:outline-none focus:border-blue-500 w-full transition-colors">
+                            <option value="">No devices found</option>
+                        </select>
+                    </div>
+
+                    <div class="flex flex-col gap-1">
+                        <label class="text-[9px] md:text-[10px] text-slate-400 font-semibold uppercase tracking-wider">Ch</label>
+                        <select id="midi-channel" class="bg-slate-800 border border-slate-600 rounded-md px-2 py-1 text-xs focus:outline-none focus:border-blue-500 w-14 transition-colors">
+                            <!-- Populated by JS -->
+                        </select>
+                    </div>
+
+                    <div class="flex flex-col gap-1 border-l border-slate-700 pl-2 md:pl-4">
+                        <label class="text-[9px] md:text-[10px] text-slate-400 font-semibold uppercase tracking-wider flex items-center gap-1" title="Latch Mode"><i class="ph ph-lock-key"></i> Latch</label>
+                        <label class="relative inline-flex items-center cursor-pointer mt-0.5">
+                            <input type="checkbox" id="latch-toggle" class="sr-only peer" onchange="updateLatchSettings()">
+                            <div class="w-7 h-4 bg-slate-600 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-3 after:w-3 after:transition-all peer-checked:bg-red-500"></div>
+                        </label>
+                    </div>
+
+                    <button onclick="panicAllNotesOff()" class="bg-slate-700 hover:bg-slate-600 text-white px-3 py-1 rounded-md text-xs font-medium transition-colors border border-slate-600 flex items-center gap-1 h-[26px]">
+                        <i class="ph ph-warning"></i> <span class="hidden sm:inline">Panic</span>
+                    </button>
+                </div>
+
+                <!-- Bottom Row: Engines (Synth & Arp) -->
+                <div class="flex flex-wrap gap-x-4 gap-y-2 items-center bg-slate-900/50 p-2 rounded-lg">
+                    
+                    <!-- Internal Synth Controls -->
+                    <div class="flex items-center gap-2 pr-3 border-r border-slate-700">
+                        <div class="flex items-center gap-1">
+                            <i class="ph ph-speaker-high text-emerald-400 text-lg"></i>
+                            <label class="relative inline-flex items-center cursor-pointer ml-1">
+                              <input type="checkbox" id="synth-toggle" class="sr-only peer" checked onchange="updateSynthSettings()">
+                              <div class="w-7 h-4 bg-slate-600 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-3 after:w-3 after:transition-all peer-checked:bg-emerald-500"></div>
+                            </label>
+                        </div>
+                        <select id="synth-type" onchange="updateSynthSettings()" class="bg-slate-800 border border-slate-600 rounded-md px-1 py-1 text-[11px] focus:outline-none focus:border-emerald-500 w-18 transition-colors">
+                            <option value="plucked" selected>Plucked</option>
+                            <option value="pad">Pad</option>
+                        </select>
+                    </div>
+
+                    <!-- Arpeggiator Controls -->
+                    <div class="flex flex-wrap items-center gap-2">
+                        <div class="flex items-center gap-1">
+                            <i class="ph ph-wave-sine text-blue-400 text-lg"></i>
+                            <label class="relative inline-flex items-center cursor-pointer ml-1">
+                              <input type="checkbox" id="arp-toggle" class="sr-only peer" onchange="updateArpSettings()">
+                              <div class="w-7 h-4 bg-slate-600 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-3 after:w-3 after:transition-all peer-checked:bg-blue-500"></div>
+                            </label>
+                        </div>
+
+                        <select id="arp-mode" onchange="updateArpSettings()" class="bg-slate-800 border border-slate-600 rounded-md px-1 py-1 text-[11px] focus:outline-none focus:border-blue-500 w-16 transition-colors">
+                            <option value="up">Up</option>
+                            <option value="down">Down</option>
+                            <option value="updown">Up/Dn</option>
+                            <option value="random">Rand</option>
+                        </select>
+                        
+                        <div class="flex items-center bg-slate-800 border border-slate-600 rounded-md px-1">
+                            <i class="ph ph-metronome text-slate-400 text-xs mr-1"></i>
+                            <input type="number" id="arp-bpm" oninput="updateArpSettings()" value="120" min="40" max="300" class="bg-transparent py-1 text-[11px] focus:outline-none w-9 text-center">
+                        </div>
+
+                        <select id="arp-division" onchange="updateArpSettings()" class="bg-slate-800 border border-slate-600 rounded-md px-1 py-1 text-[11px] focus:outline-none focus:border-blue-500 w-12 transition-colors">
+                            <option value="4">1/4</option>
+                            <option value="8">1/8</option>
+                            <option value="16" selected>1/16</option>
+                            <option value="32">1/32</option>
+                        </select>
+
+                        <select id="arp-octaves" onchange="updateArpSettings()" class="bg-slate-800 border border-slate-600 rounded-md px-1 py-1 text-[11px] focus:outline-none focus:border-blue-500 w-12 transition-colors" title="Octaves">
+                            <option value="1">1 Oct</option>
+                            <option value="2">2 Oct</option>
+                            <option value="3">3 Oct</option>
+                        </select>
+
+                        <!-- Magical Mutate Dial -->
+                        <div class="flex items-center gap-1 border-l border-slate-700 pl-2 ml-1" title="Mutation Amount">
+                            <i class="ph ph-dna text-purple-400 text-lg"></i>
+                            <input type="range" id="arp-mutate" oninput="updateArpSettings()" min="0" max="100" value="0" class="w-12 md:w-20 accent-purple-500 cursor-pointer">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Interaction Area -->
+        <div class="flex-grow flex gap-2 md:gap-4 min-h-0 w-full">
+            
+            <!-- Pad Grid -->
+            <div id="pad-grid" class="flex-grow grid grid-cols-4 grid-rows-4 gap-2 md:gap-4 touch-none">
+                <!-- Pads generated by JS -->
+            </div>
+
+            <!-- Strum Pad -->
+            <div id="strum-pad" class="w-12 md:w-20 bg-slate-800 rounded-xl md:rounded-2xl border-2 border-slate-700 shadow-lg relative overflow-hidden flex justify-center cursor-crosshair touch-none group hover:border-blue-500 transition-colors">
+                <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                    <span class="text-slate-600 font-bold tracking-widest text-xs md:text-sm -rotate-90 whitespace-nowrap opacity-40 group-hover:opacity-100 transition-opacity">STRUM</span>
+                </div>
+                <!-- Visual Strings -->
+                <div class="absolute inset-0 flex justify-evenly pointer-events-none opacity-30 py-4">
+                    <div id="string-0" class="w-px bg-slate-400 h-full strum-string"></div>
+                    <div id="string-1" class="w-px bg-slate-400 h-full strum-string"></div>
+                    <div id="string-2" class="w-px bg-slate-400 h-full strum-string"></div>
+                    <div id="string-3" class="w-px bg-slate-400 h-full strum-string"></div>
+                    <div id="string-4" class="w-px bg-slate-400 h-full strum-string hidden md:block"></div>
+                    <div id="string-5" class="w-px bg-slate-400 h-full strum-string hidden md:block"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // --- State ---
+        let midiAccess = null;
+        let currentInputId = null;
+        let currentOutputId = null;
+        let outChannel = 1; // 1-16
+        
+        let pads = Array(16).fill().map(() => []);
+        
+        let learningPadIndex = null;
+        let heldNotes = new Set(); 
+        let tempChord = new Map();
+
+        // Latch State
+        let isLatchMode = false;
+        let latchedPadIndex = null;
+
+        // Aftertouch & Pointer State
+        const padTouchData = new Map(); // tracks pointerId -> { startX, index }
+        const maxDragPixels = 100; // Drag 100px to reach max aftertouch
+
+        // --- Web Audio Synth State ---
+        let audioCtx = null;
+        const activeOscillators = new Map();
+        let synthSettings = { on: true, type: 'plucked' };
+
+        // --- Arpeggiator & Mutate State ---
+        let arpSettings = { on: false, bpm: 120, division: 16, mode: 'up', octaves: 1, mutate: 0 };
+        let activeArpInterval = null;
+        let currentArpNotes = [];
+        let currentArpIndex = 0;
+        let currentlyPlayingArpNote = null;
+        let activeArpChord = null;
+        let activeArpPadIndex = null;
+
+        // --- Strum State ---
+        let strumChord = [];
+        let lastStrumIndex = -1;
+
+        // Load saved pads
+        try {
+            const saved = localStorage.getItem('midiChordPads');
+            if (saved) pads = JSON.parse(saved);
+        } catch(e) { console.error(e); }
+
+        // --- Utility ---
+        const noteNames = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
+        function getNoteName(midiNote) {
+            return `${noteNames[midiNote % 12]}${Math.floor(midiNote / 12) - 1}`;
+        }
+        function savePads() { localStorage.setItem('midiChordPads', JSON.stringify(pads)); }
+        function showError(msg) {
+            document.getElementById('midi-status-text').innerHTML = msg;
+            document.getElementById('midi-status').classList.remove('hidden');
+        }
+        function hideError() { document.getElementById('midi-status').classList.add('hidden'); }
+
+        // --- Audio Synth Logic ---
+        function initAudio() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+        }
+
+        function updateSynthSettings() {
+            synthSettings.on = document.getElementById('synth-toggle').checked;
+            synthSettings.type = document.getElementById('synth-type').value;
+            if (!synthSettings.on) panicSynth();
+        }
+
+        function playInternalSynth(note, velocity) {
+            if (!synthSettings.on) return;
+            initAudio();
+            
+            const freq = 440 * Math.pow(2, (note - 69) / 12);
+            if (activeOscillators.has(note)) stopInternalSynth(note);
+
+            const masterGain = audioCtx.createGain();
+            masterGain.connect(audioCtx.destination);
+            
+            const vol = (velocity / 127) * 0.15;
+            
+            const osc1 = audioCtx.createOscillator();
+            const osc2 = audioCtx.createOscillator();
+            const filter = audioCtx.createBiquadFilter();
+
+            osc1.connect(filter);
+            osc2.connect(filter);
+            filter.connect(masterGain);
+            
+            const now = audioCtx.currentTime;
+
+            if (synthSettings.type === 'plucked') {
+                osc1.type = 'sawtooth';
+                osc2.type = 'square';
+                osc2.detune.value = 10;
+                
+                filter.type = 'lowpass';
+                filter.Q.value = 3;
+                filter.frequency.setValueAtTime(5000, now);
+                filter.frequency.exponentialRampToValueAtTime(100, now + 0.3);
+                
+                masterGain.gain.setValueAtTime(0, now);
+                masterGain.gain.linearRampToValueAtTime(vol, now + 0.01);
+                masterGain.gain.exponentialRampToValueAtTime(0.001, now + 0.8);
+                
+                osc1.frequency.value = freq;
+                osc2.frequency.value = freq / 2;
+                
+                osc1.start(now); osc2.start(now);
+                osc1.stop(now + 1); osc2.stop(now + 1);
+                setTimeout(() => activeOscillators.delete(note), 1000);
+
+            } else { // Pad
+                osc1.type = 'sawtooth';
+                osc2.type = 'sawtooth';
+                osc2.detune.value = 15;
+                
+                filter.type = 'lowpass';
+                filter.frequency.value = 1000; // Lower base for aftertouch headroom
+                
+                masterGain.gain.setValueAtTime(0, now);
+                masterGain.gain.linearRampToValueAtTime(vol, now + 0.4);
+                
+                osc1.frequency.value = freq;
+                osc2.frequency.value = freq;
+                
+                osc1.start(now); osc2.start(now);
+            }
+            // Save filter node so Aftertouch can modify it
+            activeOscillators.set(note, { osc1, osc2, gain: masterGain, filter: filter });
+        }
+
+        function stopInternalSynth(note) {
+            if (!activeOscillators.has(note)) return;
+            const nodes = activeOscillators.get(note);
+            const now = audioCtx.currentTime;
+            
+            nodes.gain.gain.cancelScheduledValues(now);
+            nodes.gain.gain.setValueAtTime(nodes.gain.gain.value, now);
+            
+            if (synthSettings.type === 'pad') {
+                nodes.gain.gain.linearRampToValueAtTime(0.001, now + 0.8);
+                nodes.osc1.stop(now + 0.9); nodes.osc2.stop(now + 0.9);
+                setTimeout(() => activeOscillators.delete(note), 1000);
+            } else {
+                nodes.gain.gain.linearRampToValueAtTime(0.001, now + 0.1);
+                nodes.osc1.stop(now + 0.2); nodes.osc2.stop(now + 0.2);
+                activeOscillators.delete(note);
+            }
+        }
+
+        function panicSynth() {
+            if(!audioCtx) return;
+            const now = audioCtx.currentTime;
+            activeOscillators.forEach(nodes => {
+                try {
+                    nodes.gain.gain.cancelScheduledValues(now);
+                    nodes.gain.gain.linearRampToValueAtTime(0.001, now + 0.05);
+                    nodes.osc1.stop(now + 0.1); nodes.osc2.stop(now + 0.1);
+                } catch(e) {}
+            });
+            activeOscillators.clear();
+        }
+
+        // --- Arpeggiator & Mutate Logic ---
+        function updateArpSettings() {
+            const wasOn = arpSettings.on;
+            arpSettings.on = document.getElementById('arp-toggle').checked;
+            arpSettings.mode = document.getElementById('arp-mode').value;
+            arpSettings.bpm = parseInt(document.getElementById('arp-bpm').value) || 120;
+            arpSettings.division = parseInt(document.getElementById('arp-division').value) || 16;
+            arpSettings.octaves = parseInt(document.getElementById('arp-octaves').value) || 1;
+            arpSettings.mutate = parseInt(document.getElementById('arp-mutate').value) || 0;
+            
+            if (!arpSettings.on && wasOn) {
+                stopArp();
+            } else if (arpSettings.on && activeArpInterval && activeArpChord) {
+                startArp(activeArpChord, activeArpPadIndex); 
+            }
+        }
+
+        function buildArpSequence(chordNotes) {
+            if (!chordNotes || chordNotes.length === 0) return [];
+            let seq = [];
+            for (let oct = 0; oct < arpSettings.octaves; oct++) {
+                chordNotes.forEach(n => {
+                    let newNote = n.note + (oct * 12);
+                    if (newNote <= 127) seq.push({ note: newNote, velocity: n.velocity });
+                });
+            }
+            seq.sort((a, b) => a.note - b.note);
+            if (arpSettings.mode === 'down') seq.reverse();
+            else if (arpSettings.mode === 'updown' && seq.length > 2) {
+                seq = seq.concat([...seq].reverse().slice(1, -1));
+            } else if (arpSettings.mode === 'random') {
+                for (let i = seq.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [seq[i], seq[j]] = [seq[j], seq[i]];
+                }
+            }
+            return seq;
+        }
+
+        function startArp(chord, index) {
+            stopArp(); 
+            activeArpChord = chord;
+            activeArpPadIndex = index;
+            currentArpNotes = buildArpSequence(chord);
+            
+            if (currentArpNotes.length === 0) return;
+            currentArpIndex = 0;
+            
+            const stepMs = (60000 / arpSettings.bpm) * (4 / arpSettings.division);
+            tickArp();
+            activeArpInterval = setInterval(tickArp, stepMs);
+        }
+
+        function tickArp() {
+            if (currentlyPlayingArpNote !== null) {
+                stopInternalSynth(currentlyPlayingArpNote);
+                if (currentOutputId && midiAccess) {
+                    const outputPort = midiAccess.outputs.get(currentOutputId);
+                    if (outputPort) outputPort.send([0x80 + (outChannel - 1), currentlyPlayingArpNote, 0]);
+                }
+            }
+            
+            const baseNoteObj = currentArpNotes[currentArpIndex];
+            let noteToPlay = baseNoteObj.note;
+            let velToPlay = baseNoteObj.velocity;
+
+            // Magical Mutate Engine
+            if (arpSettings.mutate > 0) {
+                const rand = Math.random() * 100;
+                if (rand < arpSettings.mutate) {
+                    const mutType = Math.random();
+                    if (mutType < 0.2) {
+                        // 20% relative chance: Skip note (Rest)
+                        currentArpIndex = (currentArpIndex + 1) % currentArpNotes.length;
+                        return; 
+                    } else if (mutType < 0.5) {
+                        // 30% relative chance: Humanize Velocity
+                        velToPlay = Math.max(10, Math.min(127, velToPlay + (Math.random() * 60 - 30)));
+                    } else if (mutType < 0.8) {
+                        // 30% relative chance: Octave Jump
+                        let shift = (Math.random() > 0.5 ? 12 : -12);
+                        if (noteToPlay + shift >= 0 && noteToPlay + shift <= 127) {
+                            noteToPlay += shift;
+                        }
+                    } else {
+                        // 20% relative chance: Random note from the base chord
+                        const randomBase = activeArpChord[Math.floor(Math.random() * activeArpChord.length)].note;
+                        const randomOct = Math.floor(Math.random() * arpSettings.octaves) * 12;
+                        let newN = randomBase + randomOct;
+                        if(newN <= 127) noteToPlay = newN;
+                    }
+                }
+            }
+            
+            playInternalSynth(noteToPlay, velToPlay);
+            if (currentOutputId && midiAccess) {
+                const outputPort = midiAccess.outputs.get(currentOutputId);
+                if (outputPort) outputPort.send([0x90 + (outChannel - 1), noteToPlay, velToPlay]);
+            }
+            
+            currentlyPlayingArpNote = noteToPlay;
+            currentArpIndex = (currentArpIndex + 1) % currentArpNotes.length;
+        }
+
+        function stopArp() {
+            if (activeArpInterval) {
+                clearInterval(activeArpInterval);
+                activeArpInterval = null;
+            }
+            if (currentlyPlayingArpNote !== null) {
+                stopInternalSynth(currentlyPlayingArpNote);
+                if (currentOutputId && midiAccess) {
+                    const outputPort = midiAccess.outputs.get(currentOutputId);
+                    if (outputPort) outputPort.send([0x80 + (outChannel - 1), currentlyPlayingArpNote, 0]);
+                }
+                currentlyPlayingArpNote = null;
+            }
+            activeArpChord = null;
+            activeArpPadIndex = null;
+        }
+
+        // --- App Initialization ---
+        window.onload = async () => {
+            initChannelSelect();
+            renderPads();
+            initStrumPad();
+            
+            // Interaction hook to start Audio Context reliably
+            document.body.addEventListener('pointerdown', initAudio, { once: true });
+
+            try {
+                if (navigator.requestMIDIAccess) {
+                    midiAccess = await navigator.requestMIDIAccess({ sysex: false });
+                    midiAccess.onstatechange = updatePorts;
+                    updatePorts();
+                } else {
+                    showError("Web MIDI API not supported. Internal synth will still work.");
+                }
+            } catch (err) {
+                if (err.name === 'SecurityError') {
+                    showError("Hardware MIDI disabled in preview. Internal synth is ready. (Export HTML to use hardware).");
+                    console.warn("MIDI access blocked by iframe permissions policy.");
+                } else {
+                    console.error("MIDI Init Error:", err);
+                }
+            }
+        };
+
+        function initChannelSelect() {
+            const select = document.getElementById('midi-channel');
+            for (let i = 1; i <= 16; i++) {
+                const opt = document.createElement('option');
+                opt.value = i;
+                opt.innerText = i;
+                select.appendChild(opt);
+            }
+            select.addEventListener('change', (e) => outChannel = parseInt(e.target.value));
+        }
+
+        function updatePorts() {
+            if (!midiAccess) return;
+            const inputs = Array.from(midiAccess.inputs.values());
+            const outputs = Array.from(midiAccess.outputs.values());
+
+            const inputSelect = document.getElementById('midi-input');
+            const outputSelect = document.getElementById('midi-output');
+
+            inputSelect.innerHTML = inputs.length === 0 ? '<option value="">None</option>' : '<option value="">Select...</option>' + inputs.map(i => `<option value="${i.id}">${i.name}</option>`).join('');
+            if (currentInputId && inputs.find(i => i.id === currentInputId)) inputSelect.value = currentInputId;
+            else if (inputs.length > 0) { inputSelect.value = inputs[0].id; changeInput(inputs[0].id); }
+            else changeInput(null);
+
+            outputSelect.innerHTML = outputs.length === 0 ? '<option value="">None</option>' : '<option value="">Select...</option>' + outputs.map(o => `<option value="${o.id}">${o.name}</option>`).join('');
+            if (currentOutputId && outputs.find(o => o.id === currentOutputId)) outputSelect.value = currentOutputId;
+            else if (outputs.length > 0) { outputSelect.value = outputs[0].id; changeOutput(outputs[0].id); }
+            else changeOutput(null);
+
+            inputSelect.onchange = (e) => changeInput(e.target.value);
+            outputSelect.onchange = (e) => changeOutput(e.target.value);
+            hideError();
+        }
+
+        function changeInput(id) {
+            if (currentInputId && midiAccess.inputs.get(currentInputId)) midiAccess.inputs.get(currentInputId).onmidimessage = null;
+            currentInputId = id;
+            heldNotes.clear(); 
+            if (id && midiAccess.inputs.get(id)) midiAccess.inputs.get(id).onmidimessage = handleIncomingMidi;
+        }
+        function changeOutput(id) { currentOutputId = id; }
+
+        function handleIncomingMidi(msg) {
+            const [status, note, velocity] = msg.data;
+            const cmd = status >> 4;
+            const isNoteOn = cmd === 9 && velocity > 0;
+            const isNoteOff = cmd === 8 || (cmd === 9 && velocity === 0);
+
+            if (isNoteOn) {
+                heldNotes.add(note);
+                if (learningPadIndex !== null) {
+                    tempChord.set(note, velocity);
+                    updatePadDisplay(learningPadIndex);
+                }
+            } else if (isNoteOff) {
+                heldNotes.delete(note);
+                if (learningPadIndex !== null && heldNotes.size === 0 && tempChord.size > 0) {
+                    commitLearn();
+                }
+            }
+        }
+
+        function toggleLearn(index, event) {
+            event.stopPropagation();
+            if (learningPadIndex === index) {
+                learningPadIndex = null; tempChord.clear(); heldNotes.clear();
+            } else {
+                learningPadIndex = index; tempChord.clear(); heldNotes.clear();
+            }
+            renderPads();
+        }
+
+        function commitLearn() {
+            if (learningPadIndex === null) return;
+            pads[learningPadIndex] = Array.from(tempChord.entries()).map(([n, v]) => ({note: n, velocity: v})).sort((a, b) => a.note - b.note);
+            learningPadIndex = null;
+            tempChord.clear();
+            savePads();
+            renderPads();
+        }
+
+        function clearPad(index, event) {
+            event.stopPropagation();
+            pads[index] = [];
+            if (learningPadIndex === index) { learningPadIndex = null; tempChord.clear(); }
+            savePads();
+            renderPads();
+        }
+
+        function updateLatchSettings() {
+            isLatchMode = document.getElementById('latch-toggle').checked;
+            if (!isLatchMode && latchedPadIndex !== null) {
+                stopPad(latchedPadIndex, true);
+                latchedPadIndex = null;
+            }
+        }
+
+        // --- Interaction: Pads & Aftertouch ---
+        
+        function sendAftertouch(index, pressure) {
+            const chord = pads[index];
+            if (!chord) return;
+
+            // 1. Map to Internal Synth Filter
+            if (audioCtx) {
+                chord.forEach(n => {
+                    if (activeOscillators.has(n.note)) {
+                        const nodes = activeOscillators.get(n.note);
+                        if (nodes.filter) {
+                            const baseFreq = synthSettings.type === 'pad' ? 1000 : 3000;
+                            const maxFreq = 8000;
+                            const newFreq = baseFreq + ((maxFreq - baseFreq) * (pressure / 127));
+                            // Smooth transition
+                            nodes.filter.frequency.setTargetAtTime(newFreq, audioCtx.currentTime, 0.05);
+                        }
+                    }
+                });
+            }
+
+            // 2. Map to External MIDI (Channel Pressure)
+            if (currentOutputId && midiAccess) {
+                const outputPort = midiAccess.outputs.get(currentOutputId);
+                // 0xD0 is Channel Pressure (Aftertouch)
+                if (outputPort) outputPort.send([0xD0 + (outChannel - 1), pressure]);
+            }
+        }
+
+        function playPad(index) {
+            initAudio();
+
+            // --- Latch Logic ---
+            if (isLatchMode) {
+                if (latchedPadIndex === index) {
+                    stopPad(index, true); // Toggle off if clicked again
+                    latchedPadIndex = null;
+                    return; 
+                } else if (latchedPadIndex !== null) {
+                    stopPad(latchedPadIndex, true); // Stop previously latched pad
+                }
+                latchedPadIndex = index;
+            }
+
+            const padEl = document.getElementById(`pad-${index}`);
+            if (padEl) padEl.classList.add('pad-active');
+
+            const chord = pads[index];
+            if (!chord || chord.length === 0) return;
+            
+            // Load into strum pad for future strumming
+            prepareStrum(chord);
+
+            if (arpSettings.on) {
+                startArp(chord, index);
+                return;
+            }
+            
+            chord.forEach(({note, velocity}) => {
+                playInternalSynth(note, velocity);
+                if (currentOutputId && midiAccess) {
+                    const outputPort = midiAccess.outputs.get(currentOutputId);
+                    if (outputPort) outputPort.send([0x90 + (outChannel - 1), note, velocity]);
+                }
+            });
+        }
+
+        function stopPad(index, force = false) {
+            if (isLatchMode && latchedPadIndex === index && !force) return;
+
+            const padEl = document.getElementById(`pad-${index}`);
+            if (padEl) padEl.classList.remove('pad-active');
+
+            if (arpSettings.on) {
+                if (activeArpPadIndex === index) stopArp();
+                return;
+            }
+
+            const chord = pads[index];
+            if (!chord || chord.length === 0) return;
+            
+            chord.forEach(({note}) => {
+                stopInternalSynth(note);
+                if (currentOutputId && midiAccess) {
+                    const outputPort = midiAccess.outputs.get(currentOutputId);
+                    if (outputPort) outputPort.send([0x80 + (outChannel - 1), note, 0]);
+                }
+            });
+        }
+
+        function panicAllNotesOff() {
+            stopArp();
+            panicSynth();
+
+            if (latchedPadIndex !== null) {
+                const padEl = document.getElementById(`pad-${latchedPadIndex}`);
+                if (padEl) padEl.classList.remove('pad-active');
+                latchedPadIndex = null;
+            }
+
+            if (!currentOutputId || !midiAccess) return;
+            const outputPort = midiAccess.outputs.get(currentOutputId);
+            if (outputPort) outputPort.send([0xB0 + (outChannel - 1), 123, 0]); 
+        }
+
+        // --- Interaction: Strum Pad ---
+        function prepareStrum(chord) {
+            strumChord = [];
+            if(chord.length === 0) return;
+            
+            // Create a wide voicing across 3 octaves for a big harp-like strum
+            for(let i=0; i<3; i++) {
+                chord.forEach(n => {
+                    let newN = n.note + (i*12) - 12; // Start one octave down
+                    if(newN >= 0 && newN <= 127) {
+                        strumChord.push({note: newN, velocity: Math.max(40, n.velocity - (i*10))});
+                    }
+                });
+            }
+            // Sort top to bottom (high note at index 0, top of screen)
+            strumChord.sort((a,b) => b.note - a.note);
+        }
+
+        function initStrumPad() {
+            const sp = document.getElementById('strum-pad');
+            
+            const handleStrum = (e) => {
+                if(strumChord.length === 0) return;
+                if(e.buttons === 0 && e.pointerType === 'mouse') return; // Must be holding click
+                
+                e.preventDefault();
+                const rect = sp.getBoundingClientRect();
+                const y = Math.max(0, Math.min(e.clientY - rect.top, rect.height - 1));
+                
+                const segmentHeight = rect.height / strumChord.length;
+                const index = Math.floor(y / segmentHeight);
+                
+                if(index >= 0 && index < strumChord.length && index !== lastStrumIndex) {
+                    // Trigger note
+                    const noteObj = strumChord[index];
+                    
+                    initAudio();
+                    playInternalSynth(noteObj.note, noteObj.velocity);
+                    if (currentOutputId && midiAccess) {
+                        const port = midiAccess.outputs.get(currentOutputId);
+                        if(port) port.send([0x90 + (outChannel - 1), noteObj.note, noteObj.velocity]);
+                    }
+                    
+                    // Visual String plucking effect
+                    const stringId = `string-${index % 6}`;
+                    const strEl = document.getElementById(stringId);
+                    if(strEl) {
+                        strEl.classList.add('strum-hit');
+                        setTimeout(() => strEl.classList.remove('strum-hit'), 150);
+                    }
+
+                    // Schedule stop (let it ring for 1.5s like a guitar)
+                    setTimeout(() => {
+                        stopInternalSynth(noteObj.note);
+                        if (currentOutputId && midiAccess) {
+                            const port = midiAccess.outputs.get(currentOutputId);
+                            if(port) port.send([0x80 + (outChannel - 1), noteObj.note, 0]);
+                        }
+                    }, 1500);
+                    
+                    lastStrumIndex = index;
+                }
+            };
+
+            sp.onpointerdown = (e) => {
+                if(e.button !== 0 && e.pointerType === 'mouse') return;
+                
+                // Break latch if we start strumming
+                if (isLatchMode && latchedPadIndex !== null) {
+                    stopPad(latchedPadIndex, true);
+                    latchedPadIndex = null;
+                }
+
+                sp.setPointerCapture(e.pointerId);
+                lastStrumIndex = -1;
+                handleStrum(e);
+            };
+            sp.onpointermove = handleStrum;
+            sp.onpointerup = (e) => { lastStrumIndex = -1; sp.releasePointerCapture(e.pointerId); };
+            sp.onpointercancel = (e) => { lastStrumIndex = -1; sp.releasePointerCapture(e.pointerId); };
+        }
+
+        // --- Render UI ---
+        function renderPads() {
+            const grid = document.getElementById('pad-grid');
+            grid.innerHTML = '';
+
+            pads.forEach((chord, i) => {
+                const isLearning = learningPadIndex === i;
+                const hasChord = chord.length > 0;
+                
+                let notesString = '<span class="text-slate-600 italic text-[10px] md:text-xs">Empty</span>';
+                if (isLearning && tempChord.size > 0) {
+                    const tempNotes = Array.from(tempChord.keys()).sort((a,b)=>a-b).map(getNoteName).join(' ');
+                    notesString = `<span class="text-red-400 font-mono text-[10px] md:text-sm tracking-wide leading-tight">${tempNotes}</span>`;
+                } else if (hasChord) {
+                    notesString = `<span class="text-blue-300 font-mono text-[10px] md:text-sm tracking-wide font-medium drop-shadow-md leading-tight">${chord.map(c => getNoteName(c.note)).join(' ')}</span>`;
+                }
+
+                const padEl = document.createElement('div');
+                padEl.id = `pad-${i}`;
+                padEl.className = `relative rounded-xl md:rounded-2xl bg-slate-800 border-2 ${isLearning ? 'pad-learning bg-slate-800/80' : 'border-slate-700'} 
+                                   shadow-lg flex flex-col items-center justify-center cursor-pointer h-full w-full transition-all duration-75 overflow-hidden group hover:border-slate-500`;
+                
+                // --- Unified Pointer Events for X-Axis Aftertouch ---
+                padEl.onpointerdown = (e) => {
+                    if(e.button !== 0 && e.pointerType === 'mouse') return;
+                    if(e.target.closest('button')) return; // Ignore if clicking clear/learn buttons
+                    
+                    e.preventDefault();
+                    e.target.setPointerCapture(e.pointerId);
+                    
+                    // Start tracking for this specific pointer
+                    padTouchData.set(e.pointerId, { startX: e.clientX, index: i });
+                    playPad(i);
+                };
+
+                padEl.onpointermove = (e) => {
+                    if(!padTouchData.has(e.pointerId)) return;
+                    e.preventDefault();
+                    const data = padTouchData.get(e.pointerId);
+                    
+                    // Calculate horizontal drag distance
+                    const deltaX = Math.abs(e.clientX - data.startX);
+                    
+                    // Map distance (0 to maxDragPixels) to MIDI Pressure (0 to 127)
+                    let pressure = Math.floor((deltaX / maxDragPixels) * 127);
+                    pressure = Math.min(127, Math.max(0, pressure));
+                    
+                    sendAftertouch(data.index, pressure);
+                };
+
+                const endPointer = (e) => {
+                    if(!padTouchData.has(e.pointerId)) return;
+                    e.preventDefault();
+                    const data = padTouchData.get(e.pointerId);
+                    
+                    // Reset aftertouch and stop notes
+                    sendAftertouch(data.index, 0);
+                    stopPad(data.index);
+                    
+                    // Cleanup
+                    padTouchData.delete(e.pointerId);
+                    e.target.releasePointerCapture(e.pointerId);
+                };
+
+                padEl.onpointerup = endPointer;
+                padEl.onpointercancel = endPointer;
+
+                padEl.innerHTML = `
+                    <div class="absolute top-1.5 md:top-3 left-2 md:left-3 text-slate-500 font-bold text-xs md:text-lg opacity-40 group-hover:opacity-100 transition-opacity pointer-events-none">
+                        ${i + 1}
+                    </div>
+                    
+                    ${hasChord && !isLearning ? `
+                        <button onclick="clearPad(${i}, event)" class="absolute top-1 md:top-2 right-1 md:right-2 p-1 md:p-1.5 text-slate-600 hover:text-red-400 hover:bg-slate-700 rounded-md transition-colors z-10" title="Clear Pad">
+                            <i class="ph ph-trash text-sm md:text-lg pointer-events-none"></i>
+                        </button>
+                    ` : ''}
+                    
+                    <div id="pad-display-${i}" class="text-center px-1 md:px-4 mt-2 max-w-full break-words pointer-events-none">
+                        ${notesString}
+                    </div>
+                    
+                    <button onclick="toggleLearn(${i}, event)" 
+                        class="absolute bottom-1 md:bottom-2 left-1/2 -translate-x-1/2 px-2 md:px-3 py-0.5 md:py-1 rounded-full text-[9px] md:text-xs font-semibold uppercase tracking-wider transition-colors z-10
+                        ${isLearning ? 'bg-red-500 text-white shadow-[0_0_10px_rgba(239,68,68,0.5)]' : 'bg-slate-700/50 text-slate-400 hover:bg-slate-600 hover:text-white'}">
+                        <span class="pointer-events-none">${isLearning ? 'Learning...' : 'Learn'}</span>
+                    </button>
+                `;
+                grid.appendChild(padEl);
+            });
+            
+            // If pads exist and strum chord is empty, preload the first non-empty pad
+            if(strumChord.length === 0) {
+                const firstPad = pads.find(p => p && p.length > 0);
+                if(firstPad) prepareStrum(firstPad);
+            }
+        }
+
+        function updatePadDisplay(index) {
+            const displayEl = document.getElementById(`pad-display-${index}`);
+            if (displayEl && tempChord.size > 0) {
+                const tempNotes = Array.from(tempChord.keys()).sort((a,b)=>a-b).map(getNoteName).join(' ');
+                displayEl.innerHTML = `<span class="text-red-400 font-mono text-[10px] md:text-sm tracking-wide leading-tight">${tempNotes}</span>`;
+            }
+        }
+    </script>
+</body>
+</html>
