@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mr. Drew's Music Apps</title>
+    <style>
+        :root {
+            --brand-color: #6366f1; /* Soft Indigo */
+            --brand-light: #e0e7ff;
+            --accent-teal: #14b8a6;
+            --accent-coral: #f43f5e;
+            --accent-amber: #f59e0b;
+            --bg-color: #f8fafc;
+            --text-dark: #334155;
+            --text-light: #64748b;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            /* Using a friendly, rounded font stack */
+            font-family: 'Nunito', 'Segoe UI', system-ui, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            border-bottom-left-radius: 30px;
+            border-bottom-right-radius: 30px;
+            box-shadow: 0 4px 20px rgba(99, 102, 241, 0.2);
+            margin-bottom: 3rem;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 2.8rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .subtitle {
+            margin-top: 1rem;
+            font-size: 1.2rem;
+            font-weight: 400;
+            opacity: 0.9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .container {
+            flex: 1;
+            max-width: 1100px;
+            margin: 0 auto 4rem auto;
+            padding: 0 2rem;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .app-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 2rem;
+        }
+
+        .app-card {
+            background-color: white;
+            border-radius: 20px;
+            padding: 2.5rem 1.5rem;
+            text-align: center;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.025);
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Subtle top border for each card to add a pop of color */
+        .app-card:nth-child(1) { border-top: 6px solid var(--accent-teal); }
+        .app-card:nth-child(2) { border-top: 6px solid var(--brand-color); }
+        .app-card:nth-child(3) { border-top: 6px solid var(--accent-coral); }
+        .app-card:nth-child(4) { border-top: 6px solid var(--accent-amber); }
+
+        .app-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        .icon-wrapper {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 1.5rem auto;
+            background-color: var(--brand-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .app-card:hover .icon-wrapper {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .app-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin: 0 0 0.8rem 0;
+            color: var(--text-dark);
+        }
+
+        .app-desc {
+            font-size: 1rem;
+            color: var(--text-light);
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .status-badge {
+            display: inline-block;
+            margin-top: 1.5rem;
+            padding: 0.4rem 1rem;
+            background-color: #f1f5f9;
+            color: #94a3b8;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-light);
+            font-size: 0.95rem;
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>🎵 Mr. Drew's Music Hub</h1>
+        <div class="subtitle">
+            Digital instruments, games, and tools for the modern elementary music classroom.
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="app-grid">
+            
+            <div class="app-card">
+                <div class="icon-wrapper">🎛️</div>
+                <h2 class="app-title">Trackmaster</h2>
+                <p class="app-desc">Manage backing tracks and interactive beats for classroom performances.</p>
+                <span class="status-badge">In Development</span>
+            </div>
+            
+            <div class="app-card">
+                <div class="icon-wrapper">▶️</div>
+                <h2 class="app-title">Maestro Media</h2>
+                <p class="app-desc">A distraction-free media player designed specifically for seamless instruction.</p>
+                <span class="status-badge">In Development</span>
+            </div>
+            
+            <div class="app-card">
+                <div class="icon-wrapper">🎉</div>
+                <h2 class="app-title">Maestro Party</h2>
+                <p class="app-desc">Engaging, interactive group games and activities for student participation.</p>
+                <span class="status-badge">In Development</span>
+            </div>
+            
+            <div class="app-card">
+                <div class="icon-wrapper">🔡</div>
+                <h2 class="app-title">Word Wall</h2>
+                <p class="app-desc">A dynamic, visual vocabulary reference for elementary music concepts.</p>
+                <span class="status-badge">In Development</span>
+            </div>
+
+        </div>
+    </main>
+
+    <footer>
+        <p>Creating joyful, tech-integrated experiences for music education.</p>
+    </footer>
+</body>
+</html>
