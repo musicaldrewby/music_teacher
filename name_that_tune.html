@@ -1,0 +1,1976 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mr. Drew's Name That Tune!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Nunito:wght@400;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #6C63FF;
+            --beat: 0; 
+            --eq-dim: 1; /* Controls global dimming when music plays */
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 10px 20px;
+            height: 100vh;
+            overflow: hidden; 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: background-color 0.2s;
+            
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        /* --- PARALLAX LOBBY BACKGROUND --- */
+        body::before {
+            content: "";
+            position: fixed;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background-image: radial-gradient(#FFF000 15%, transparent 16%), radial-gradient(#FFF000 15%, transparent 16%);
+            background-size: 60px 60px;
+            background-position: var(--bg-x, 0px) var(--bg-y, 0px), calc(var(--bg-x, 0px) + 30px) calc(var(--bg-y, 0px) + 30px);
+            transform: scale(var(--bg-scale, 1));
+            z-index: -2; 
+            pointer-events: none;
+            will-change: background-position, transform;
+        }
+
+        /* Lightning Round Lobby Override */
+        body.lightning-active::before {
+            background-image: none !important;
+            background-color: #020205 !important;
+        }
+
+        /* The Morphing Background Layer */
+        #bgCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; 
+            pointer-events: none;
+        }
+
+        input, select, [contenteditable="true"], .answer-list {
+            -webkit-user-select: auto;
+            -moz-user-select: auto;
+            -ms-user-select: auto;
+            user-select: auto;
+        }
+
+        /* Pressure Timer Bar */
+        .timer-bar-container { position: fixed; top: 0; left: 0; width: 100%; height: 8px; background: rgba(0,0,0,0.5); z-index: 9999; }
+        .timer-bar { height: 100%; background: #FF00FF; width: 0%; box-shadow: 0 0 15px #FF00FF; }
+
+        /* Fixed HUD Buttons */
+        .hud-container {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 5px 10px;
+            z-index: 100;
+        }
+        .hud-btn {
+            font-family: 'Bangers', cursive;
+            font-size: 1.3rem;
+            padding: 10px 15px;
+            border: 4px solid #000;
+            border-radius: 15px;
+            cursor: pointer;
+            box-shadow: 4px 4px 0px #000;
+            transition: all 0.1s ease;
+            white-space: nowrap;
+        }
+        .hud-btn:hover { transform: translate(-4px, -4px); box-shadow: 8px 8px 0px #000; }
+        .hud-btn:active { transform: translate(4px, 4px); box-shadow: 0px 0px 0px #000; }
+        
+        .hud-menu { background: #B388FF; color: #FFF; }
+        .hud-remote { background: #E040FB; color: #FFF; }
+        .hud-peek { background: #333; color: #FFF; min-width: 130px;}
+        
+        .hud-mute { background: #FF9100; color: #000; }
+        .hud-stop { background: #FF007F; color: #FFF; }
+        .hud-buzzer { background: #FF0000; color: #FFF; letter-spacing: 1px;}
+        
+        .hud-roulette { background: #00E676; color: #000; }
+        .hud-lightning { background: #FFEA00; color: #000; }
+        .hud-timer { background: #00FFFF; color: #000; }
+        .hud-endgame { background: #FFEA00; color: #000; box-shadow: 0 0 15px #FFEA00 !important; }
+
+        /* Volume Slider */
+        .vol-container {
+            background: #222;
+            border: 4px solid #000;
+            border-radius: 15px;
+            padding: 5px 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 4px 4px 0px #000;
+            height: 48px;
+        }
+
+        /* Bouncy Title */
+        h1 {
+            font-family: 'Bangers', cursive;
+            font-size: 6vh; 
+            color: #FF007F;
+            text-align: center;
+            margin: 10px 0 5px 0;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            text-shadow: 3px 3px 0px #000, 6px 6px 0px #00FFFF, 9px 9px 0px #000;
+            transform: rotate(-2deg);
+            animation: floatTitle 3s ease-in-out infinite alternate;
+            z-index: 10;
+        }
+
+        @keyframes floatTitle {
+            0% { transform: translateY(0px) rotate(-2deg); }
+            100% { transform: translateY(-10px) rotate(2deg); }
+        }
+
+        /* Scoreboard Styling */
+        .scoreboard {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            width: 100%;
+            margin-bottom: 10px;
+            z-index: 10;
+        }
+
+        .team-card {
+            background: #FFF;
+            border: 6px solid #000;
+            border-radius: 20px;
+            padding: 10px 20px;
+            text-align: center;
+            box-shadow: 5px 5px 0px #000;
+            flex: 1;
+            max-width: 250px;
+            transform: rotate(-0.5deg);
+            transition: all 0.2s;
+        }
+        .team-card:nth-child(even) { transform: rotate(0.5deg); }
+        .team-card:hover { transform: translateY(-3px) scale(1.02); box-shadow: 8px 8px 0px #000; }
+        
+        /* Lightning Round Double Points Aura */
+        body.lightning-active .team-card {
+            border-color: #FFF !important;
+            box-shadow: 0 0 20px #FFEA00, inset 0 0 15px #FFEA00 !important;
+            animation: lightningAura 0.3s infinite alternate !important;
+            z-index: 15;
+        }
+        @keyframes lightningAura {
+            0% { transform: scale(1.02) rotate(-0.5deg); box-shadow: 0 0 15px #FFEA00, inset 0 0 10px #FFEA00; }
+            100% { transform: scale(1.07) rotate(0.5deg); box-shadow: 0 0 35px #FFEA00, inset 0 0 25px #FFF; }
+        }
+
+        .team-name { 
+            font-family: 'Bangers', cursive; 
+            font-size: 2.5vh; 
+            color: #2D00F7; 
+            margin: 0; 
+            line-height: 1; 
+            text-shadow: 2px 2px 0px #00FFFF; 
+            cursor: text; 
+            border-bottom: 2px dashed rgba(45,0,247,0.3); 
+            outline: none;
+        }
+        .team-name:focus { border-bottom: 2px solid #2D00F7; }
+        .team-score { font-size: 4vh; font-weight: 900; margin: 0; color: #000; line-height: 1.2; }
+        
+        .score-controls { display: flex; justify-content: space-between; margin-top: 5px; gap: 5px;}
+        .btn-minus, .btn-plus {
+            font-family: 'Bangers', cursive; font-size: 1.5rem;
+            border: 3px solid #000; border-radius: 10px; cursor: pointer; flex: 1;
+            box-shadow: 2px 2px 0px #000; transition: transform 0.1s;
+        }
+        .btn-minus { background-color: #FF007F; color: white; }
+        .btn-plus { background-color: #00E676; color: black; }
+        .btn-minus:active, .btn-plus:active { transform: translate(2px, 2px); box-shadow: 0px 0px 0px #000; }
+
+        /* Gameboard Styling */
+        .gameboard {
+            display: grid;
+            gap: 15px;
+            width: 100%;
+            flex-grow: 1;
+            padding-bottom: 20px;
+            grid-auto-rows: 1fr; 
+        }
+
+        .tune-btn {
+            --played-scale: 1; 
+            background-color: var(--base-color, #CCC);
+            
+            /* EQ Magic */
+            background-color: color-mix(in srgb, hsl(var(--eq-hue, 120), 100%, 50%) calc(var(--eq-intensity, 0) * 100%), var(--base-color, #CCC));
+
+            border: 6px solid #000;
+            border-radius: 20px;
+            font-family: 'Bangers', cursive;
+            font-size: 3.5vh;
+            color: #FFF;
+            cursor: pointer;
+            text-shadow: 2px 2px 0px #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden; 
+            
+            /* The Wiggle */
+            transform: scale(calc(var(--played-scale) + var(--eq-scale, 0))) rotate(var(--eq-rot, 0deg));
+            filter: brightness(calc(var(--eq-dim, 1) + (var(--eq-intensity, 0) * 0.6)));
+            
+            box-shadow: inset -5px -5px 15px rgba(0,0,0,0.3), 5px 5px 0px #000;
+            transition: box-shadow 0.1s ease-out; 
+        }
+
+        .tune-btn:hover {
+            transform: scale(calc((var(--played-scale) + 0.05) + var(--eq-scale, 0))) rotate(calc(2deg + var(--eq-rot, 0deg)));
+            box-shadow: inset -5px -5px 15px rgba(0,0,0,0.3), 10px 10px 0px #000;
+            z-index: 5;
+        }
+        
+        .tune-btn:active {
+            transform: scale(calc((var(--played-scale) - 0.05) + var(--eq-scale, 0)));
+            box-shadow: inset -5px -5px 15px rgba(0,0,0,0.3), 0px 0px 0px #000;
+        }
+
+        /* Playing Button - Oscilloscope Mode! */
+        .tune-btn.playing {
+            z-index: 10;
+            background-color: #111 !important; 
+            transform: scale(calc(1.05 + (var(--beat) * 0.05))) !important;
+            box-shadow: 0px 0px 20px #00FFFF, inset 0px 0px 15px rgba(0,0,0,0.8) !important;
+            border: 5px solid #FFF !important;
+            color: #FFF !important;
+            text-shadow: 2px 2px 0px #000 !important;
+        }
+
+        /* Lightning Round Button Outline Effect */
+        body.lightning-active .tune-btn.playing {
+            box-shadow: 0px 0px 30px #FFEA00, inset 0px 0px 15px rgba(0,0,0,0.8) !important;
+        }
+
+        .btn-text {
+            position: relative;
+            z-index: 2; 
+        }
+
+        .waveform-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .tune-btn.playing .waveform-canvas {
+            opacity: 1; 
+        }
+
+        /* Played Button */
+        .tune-btn.played {
+            --played-scale: 0.95;
+            color: #888;
+            border: 5px solid #222;
+            box-shadow: inset 5px 5px 10px rgba(0,0,0,0.8);
+            cursor: pointer; 
+        }
+        .tune-btn.played:hover { color: #FFF; }
+
+        .shape-1 { border-radius: 30px 10px / 10px 30px; }
+        .shape-2 { border-radius: 10px 30px / 30px 10px; }
+        .shape-3 { border-radius: 20px; }
+        .shape-4 { border-radius: 40px 5px; }
+        .shape-5 { border-radius: 5px 40px; }
+
+        @keyframes popIn {
+            0% { transform: scale(0) rotate(-20deg); opacity: 0; }
+            80% { transform: scale(1.1) rotate(5deg); opacity: 1; }
+            100% { transform: scale(1) rotate(0deg); opacity: 1; }
+        }
+        .tune-btn.pop { animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
+
+        /* Modal styling */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(8px);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: #FFF;
+            padding: 40px;
+            border-radius: 30px;
+            border: 8px solid #000;
+            box-shadow: 20px 20px 0px #FF007F;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            transform: rotate(-1deg);
+            position: relative;
+        }
+        
+        .modal-content h2 { 
+            font-family: 'Bangers', cursive; 
+            font-size: 3rem; 
+            margin-top: 0; 
+            text-align: center; 
+            color: #2D00F7; 
+            text-shadow: 3px 3px 0px #00FFFF;
+        }
+        
+        .close-modal { 
+            position: absolute; 
+            top: 15px; 
+            right: 15px; 
+            cursor: pointer; 
+            font-size: 2rem; 
+            font-family: 'Bangers', cursive;
+            color: #FFF; 
+            background: #FF0000;
+            border: 4px solid #000;
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 4px 4px 0px #000;
+            z-index: 100;
+            transition: all 0.1s ease;
+        }
+        .close-modal:hover { transform: scale(1.1) rotate(10deg); background: #CC0000; }
+
+        /* Setup Menu Grid */
+        .setup-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; text-align: left; }
+        @media (max-width: 768px) { .setup-grid { grid-template-columns: 1fr; gap: 15px; } }
+        
+        .setup-row { margin-bottom: 15px; display: flex; align-items: center; justify-content: space-between; border-bottom: 2px dashed #EEE; padding-bottom: 10px;}
+        .setup-row label { font-size: 1.2rem; font-weight: 800; color: #000; flex: 1; }
+        .setup-row input[type="text"], .setup-row input[type="number"], .setup-row select { 
+            font-family: 'Nunito', sans-serif; font-weight: bold; font-size: 1.2rem; 
+            padding: 8px; border: 4px solid #000; border-radius: 10px; width: 60%; 
+        }
+
+        .file-upload-label {
+            display: inline-block; padding: 15px 30px; cursor: pointer;
+            background-color: #FF007F; color: #FFF; font-family: 'Bangers', cursive;
+            font-size: 2rem; border: 6px solid #000; border-radius: 15px;
+            box-shadow: 6px 6px 0px #000; transition: transform 0.1s;
+            text-align: center;
+        }
+        .file-upload-label:hover { transform: translate(-2px, -2px); box-shadow: 8px 8px 0px #000; }
+        .file-upload-label:active { transform: translate(4px, 4px); box-shadow: 0px 0px 0px #000; }
+        input[type="file"] { display: none; }
+
+        /* Song Editor Grid */
+        .song-editor-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 15px;
+            max-height: 55vh;
+            overflow-y: auto;
+            padding: 15px;
+            background: #f0f0f0;
+            border-radius: 15px;
+            border: 6px inset #ccc;
+        }
+        .song-edit-btn {
+            background: #2D00F7; color: white; border: 4px solid #000; padding: 10px 20px; 
+            font-family: 'Bangers', cursive; font-size: 1.5rem; cursor: pointer; border-radius: 15px;
+            box-shadow: 4px 4px 0px #000; transition: all 0.1s ease;
+        }
+        .song-edit-btn:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0px #000; background: #FF007F; }
+        .song-edit-btn:active { transform: translate(4px, 4px); box-shadow: 0px 0px 0px #000; }
+
+        /* Answer Key */
+        .answer-list { list-style: none; padding: 0; font-size: 1.4rem; font-weight: 900; }
+        .answer-list li { margin-bottom: 15px; border-bottom: 4px dashed #CCC; padding-bottom: 10px; color: #000;}
+        .answer-list span { color: #FF007F; font-family: 'Bangers', cursive; font-size: 1.8rem; margin-right: 15px;}
+        .mult-badge { color: #FFEA00; background: #000; padding: 2px 8px; border-radius: 10px; font-size: 1rem; border: 2px solid #FFEA00; margin-left: 10px;}
+        
+        /* Multiplier Reveal Overlay */
+        .multiplier-reveal {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.85); z-index: 2000;
+            display: flex; justify-content: center; align-items: center;
+            pointer-events: none; opacity: 0; transition: opacity 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        .multiplier-reveal.active { opacity: 1; }
+        
+        .multiplier-text {
+            font-family: 'Bangers', cursive; font-size: 15rem; color: #FFF000;
+            text-align: center; text-shadow: 15px 15px 0px #FF007F, -5px -5px 0px #00FFFF;
+            transform: scale(0) rotate(-20deg); line-height: 0.9;
+        }
+        .multiplier-reveal.active .multiplier-text {
+            animation: revealScale 2.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+        @keyframes revealScale {
+            0% { transform: scale(0) rotate(-40deg); opacity: 0; }
+            15% { transform: scale(1.2) rotate(10deg); opacity: 1; }
+            25% { transform: scale(1) rotate(0deg); opacity: 1; }
+            70% { transform: scale(1.1) rotate(5deg); opacity: 1; }
+            100% { transform: scale(0) rotate(720deg); opacity: 0; filter: blur(10px); }
+        }
+
+        /* Buzzer Shake Animation */
+        @keyframes buzzerShake {
+            0% { transform: translate(15px, 15px) rotate(0deg); filter: hue-rotate(90deg) saturate(3); }
+            10% { transform: translate(-15px, -25px) rotate(-1deg); }
+            20% { transform: translate(-35px, 0px) rotate(2deg); }
+            30% { transform: translate(35px, 25px) rotate(0deg); }
+            40% { transform: translate(15px, -15px) rotate(2deg); }
+            50% { transform: translate(-15px, 25px) rotate(-1deg); }
+            60% { transform: translate(-35px, 15px) rotate(0deg); }
+            70% { transform: translate(35px, 15px) rotate(-2deg); }
+            80% { transform: translate(-15px, -15px) rotate(1deg); }
+            90% { transform: translate(15px, 25px) rotate(0deg); }
+            100% { transform: translate(0px, 0px) rotate(0deg); filter: hue-rotate(0deg); }
+        }
+        .shake-active { animation: buzzerShake 0.5s cubic-bezier(.36,.07,.19,.97) both; }
+
+        /* Winner Overlay & Celebration */
+        .winner-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.9); z-index: 10000;
+            display: none; flex-direction: column; justify-content: center; align-items: center;
+        }
+        .winner-overlay.active { display: flex; animation: bgFlashWinner 1s infinite alternate; }
+        @keyframes bgFlashWinner {
+            0% { background: rgba(0, 0, 0, 0.9); }
+            100% { background: rgba(30, 0, 50, 0.95); }
+        }
+        .winner-title { 
+            font-family: 'Bangers', cursive; font-size: 8rem; color: #FFEA00; 
+            text-shadow: 10px 10px 0px #000, 0 0 30px #FFEA00; 
+            margin: 0; animation: bounceWinner 0.5s infinite alternate; text-align: center; line-height: 1.1; z-index: 2;
+        }
+        @keyframes bounceWinner {
+            0% { transform: scale(1) translateY(0); }
+            100% { transform: scale(1.1) translateY(-20px); }
+        }
+        .winner-names { 
+            font-family: 'Nunito', sans-serif; font-size: 5rem; color: #FFF; 
+            text-shadow: 5px 5px 0px #000, 0 0 20px #00FFFF; font-weight: 900; text-align: center; z-index: 2; margin-top: 20px;
+        }
+        .close-winner {
+            margin-top: 50px; padding: 15px 50px; font-size: 2.5rem; font-family: 'Bangers', cursive;
+            background: #FF007F; color: #FFF; border: 6px solid #FFF; border-radius: 30px; cursor: pointer; z-index: 10001;
+            box-shadow: 8px 8px 0px #000; transition: transform 0.1s;
+        }
+        .close-winner:hover { transform: scale(1.1); }
+        #confettiCanvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 9999; }
+
+    </style>
+</head>
+<body>
+
+    <!-- Morphing Background Layer -->
+    <canvas id="bgCanvas"></canvas>
+
+    <div class="timer-bar-container"><div id="timerBar" class="timer-bar"></div></div>
+
+    <div class="hud-container">
+        <div style="display: flex; gap: 10px;">
+            <button class="hud-btn hud-menu" onclick="openSetup()">⚙️ DASHBOARD</button>
+            <button class="hud-btn hud-remote" onclick="openRemoteControl()">📱 HOST REMOTE</button>
+            <button class="hud-btn hud-peek" id="peekBtn">👀 PEEK (P)</button>
+        </div>
+        <div style="display: flex; gap: 10px; align-items: center;">
+            <!-- Master Volume Slider -->
+            <div class="vol-container">
+                <span style="color: #FFF; font-family: 'Bangers', cursive; font-size: 1.2rem; letter-spacing: 1px;">VOL</span>
+                <input type="range" id="masterVolume" min="0" max="1" step="0.01" value="1" style="width: 80px; cursor: pointer;">
+            </div>
+            
+            <button class="hud-btn hud-mute" id="muteBtn" onclick="toggleMute()">🔈 MUTE (M)</button>
+            <button class="hud-btn hud-stop" onclick="stopAudio()">⏹ STOP (Space)</button>
+            <button class="hud-btn hud-buzzer" onclick="playBuzzer()">🚨 BUZZER! (B)</button>
+        </div>
+    </div>
+
+    <h1>Mr. Drew's NAME THAT TUNE!</h1>
+
+    <div id="hudExtras" style="display: flex; gap: 10px; justify-content: center; margin-bottom: 10px; z-index: 10;">
+        <button class="hud-btn hud-roulette" id="btnRoulette" onclick="startRoulette()">🎲 ROULETTE</button>
+        <button class="hud-btn hud-lightning" id="btnLightning" onclick="toggleLightning()">⚡ LIGHTNING</button>
+        <button class="hud-btn hud-timer" id="btnTimer" onclick="startTimer()">⏱️ TIMER</button>
+        <button class="hud-btn hud-endgame" onclick="triggerEndGame()">🏆 END GAME</button>
+    </div>
+
+    <div class="scoreboard" id="scoreboard">
+        <!-- Scoreboard generated via JS -->
+    </div>
+
+    <div class="gameboard" id="gameboard">
+        <!-- Buttons generated via JS -->
+    </div>
+
+    <!-- Unified Host Dashboard Modal -->
+    <div class="modal" id="setupModal">
+        <div class="modal-content" style="max-width: 800px;">
+            <span class="close-modal" id="closeSetupBtn" onclick="closeSetup()" style="display: none;">X</span>
+            <h2>Host Dashboard</h2>
+            
+            <div class="setup-grid">
+                <!-- Left Column: Content -->
+                <div>
+                    <h3 style="margin-top: 0; font-family: 'Bangers', cursive; font-size: 2rem; color: #FF007F; text-shadow: 2px 2px 0px #00FFFF;">1. Master Library</h3>
+                    <div style="background: #E0F7FA; padding: 15px; border-radius: 15px; border: 4px solid #000; margin-bottom: 15px;">
+                        <label class="file-upload-label" style="display: block; width: 100%;">
+                            📁 SELECT "SONGS" FOLDER
+                            <input type="file" id="folderUpload" webkitdirectory directory multiple>
+                        </label>
+                        <p id="folderStatus" style="text-align: center; font-weight: bold; font-size: 1.1rem; color: #333; margin: 10px 0 0 0;">No folder selected.</p>
+                        
+                        <div style="display: flex; gap: 10px; margin-top: 15px;">
+                            <label class="file-upload-label" style="flex: 1; font-size: 1.2rem; background: #00FFFF; color: #000; border-color: #000; padding: 10px;">
+                                📂 LOAD PLAYLISTS
+                                <input type="file" id="playlistUpload" multiple accept=".playlist" style="display: none;" onchange="handlePlaylistUpload(event)">
+                            </label>
+                            <button onclick="openSongEditor()" id="editSongsBtn" style="flex: 1; background: #FFF; color: #000; font-size: 1.2rem; padding: 10px; border: 4px solid #000; border-radius: 10px; cursor: pointer; display: none; font-weight: bold; box-shadow: 4px 4px 0px #000;">✏️ View / Edit</button>
+                        </div>
+                    </div>
+
+                    <div class="setup-row" style="background: #FFF000; padding: 10px; border-radius: 10px; border: 3px solid #000; flex-direction: column; align-items: flex-start;">
+                        <label style="color: #FF007F; font-family: 'Bangers', cursive; font-size: 1.5rem; letter-spacing: 1px;">
+                            Active Playlist:
+                        </label>
+                        <select id="setupPlaylistFilter" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size: 1.2rem; padding: 5px; border: 4px solid #000; border-radius: 10px; width: 100%; margin-top: 5px;">
+                            <option value="all">All Loaded Songs</option>
+                            <option value="custom">Custom Selection</option>
+                        </select>
+                        <p style="margin: 5px 0 0 0; font-size: 0.9rem; color: #333; font-weight: bold;">(Select a playlist to instantly filter your songs!)</p>
+                    </div>
+                </div>
+
+                <!-- Right Column: Rules -->
+                <div>
+                    <h3 style="margin-top: 0; font-family: 'Bangers', cursive; font-size: 2rem; color: #2D00F7; text-shadow: 2px 2px 0px #00FFFF;">2. Game Rules</h3>
+                    
+                    <div class="setup-row" style="flex-wrap: wrap;">
+                        <label>Max Number of Boxes:</label>
+                        <input type="number" id="setupBoxCount" value="40" min="1" max="100" style="width: 80px;">
+                        <p style="margin: 5px 0 0 0; font-size: 0.9rem; color: #555; width: 100%; font-weight: bold;">(Will automatically shrink if you have fewer valid songs!)</p>
+                    </div>
+                    
+                    <div class="setup-row" style="flex-wrap: wrap;">
+                        <label>Active Teams:</label>
+                        <select id="setupTeamCount" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size: 1.2rem; padding: 5px; border: 4px solid #000; border-radius: 10px; width: 120px;">
+                            <option value="1">1 Team</option>
+                            <option value="2" selected>2 Teams</option>
+                            <option value="3">3 Teams</option>
+                            <option value="4">4 Teams</option>
+                        </select>
+                        <p style="margin: 5px 0 0 0; font-size: 0.9rem; color: #555; width: 100%; text-align: left; font-weight: bold;">(Click names on scoreboard to edit)</p>
+                    </div>
+
+                    <div style="margin-top: 20px; border-top: 4px dashed #000; padding-top: 15px;">
+                        <h4 style="margin: 0 0 10px 0; font-family: 'Bangers', cursive; font-size: 1.5rem;">Secret Multipliers</h4>
+                        <div class="setup-row" style="border: none; padding: 0;">
+                            <label style="flex: 0.8;">Jackpot Density:</label>
+                            <select id="setupJackpotDensity" style="font-family: 'Nunito', sans-serif; font-weight: bold; font-size: 1.2rem; padding: 5px; border: 4px solid #000; border-radius: 10px; flex: 1;">
+                                <option value="none">None (1x Only)</option>
+                                <option value="low">Low (A Few 2x spots)</option>
+                                <option value="normal" selected>Normal (2x, 3x, 4x)</option>
+                                <option value="chaos">Chaos! (Tons of Jackpots)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button id="playBtn" style="width: 100%; margin-top: 25px; font-size: 2.5rem; background: #00E676; color: #000; border: 6px solid #000; box-shadow: 8px 8px 0px #000; font-family: 'Bangers', cursive; cursor: pointer;" onclick="saveSetup()">LET'S PLAY!</button>
+            
+            <!-- Creator Credits -->
+            <div style="text-align: center; margin-top: 20px; font-family: 'Nunito', sans-serif; color: #555; font-size: 1rem; font-weight: bold;">
+                Made by Drew Wichman <br>
+                <a href="mailto:musicaldrewby@gmail.com" style="color: #FF007F; text-decoration: none; border-bottom: 2px dashed #FF007F; transition: color 0.2s;">musicaldrewby@gmail.com</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Huge Song Editor Modal -->
+    <div class="modal" id="songEditorModal" style="z-index: 10002;">
+        <div class="modal-content" style="max-width: 900px; width: 95%;">
+            <span class="close-modal" onclick="closeSongEditor()">X</span>
+            <h2 style="font-size: 4rem;">✏️ Edit Song List</h2>
+            
+            <div style="display: flex; gap: 15px; margin-bottom: 20px; justify-content: center; align-items: center; flex-wrap: wrap;">
+                <button class="song-edit-btn" style="background: #00E676; color: #000;" onclick="selectAllSongs(true)">✅ Select All</button>
+                <button class="song-edit-btn" onclick="selectAllSongs(false)">❌ Deselect All</button>
+                <button class="song-edit-btn" style="background: #FF9100; color: #000;" onclick="savePlaylist()">💾 Save Playlist</button>
+                <span id="selectedSongCount" style="font-family: 'Bangers', cursive; font-size: 1.8rem; color: #2D00F7; background: #FFF; padding: 5px 15px; border: 4px solid #000; border-radius: 10px; box-shadow: 4px 4px 0px #000; transition: background-color 0.3s;">Selected: 0 / 0</span>
+            </div>
+            
+            <div id="fullSongSelectionContainer" class="song-editor-grid">
+                <!-- Checkboxes generated here -->
+            </div>
+            
+            <button style="width: 100%; margin-top: 25px; font-size: 2.5rem; background: #00FFFF; color: #000; border: 6px solid #000; box-shadow: 8px 8px 0px #000; cursor: pointer; font-family: 'Bangers', cursive;" onclick="closeSongEditor()">DONE</button>
+        </div>
+    </div>
+
+    <!-- Answer Key Modal -->
+    <div class="modal" id="keyModal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeKey()">X</span>
+            <h2>Master Answer Key</h2>
+            <ul class="answer-list" id="answerList"></ul>
+        </div>
+    </div>
+
+    <!-- Custom Alert Modal -->
+    <div class="modal" id="customAlertModal" style="z-index: 20000;">
+        <div class="modal-content" style="max-width: 450px; text-align: center;">
+            <h2 style="color: #FF0000; font-size: 4rem; margin-bottom: 10px;">Hold Up!</h2>
+            <p id="customAlertMessage" style="font-size: 1.5rem; font-weight: 800; color: #333; margin-bottom: 30px;"></p>
+            <button onclick="document.getElementById('customAlertModal').style.display='none'" style="font-size: 2rem; background: #00E676; color: #000; border: 6px solid #000; border-radius: 15px; padding: 10px 40px; cursor: pointer; font-family: 'Bangers', cursive; box-shadow: 6px 6px 0px #000; transition: transform 0.1s;">GOT IT!</button>
+        </div>
+    </div>
+
+    <!-- Custom Confirm Modal -->
+    <div class="modal" id="customConfirmModal" style="z-index: 20000;">
+        <div class="modal-content" style="max-width: 450px; text-align: center;">
+            <h2 style="color: #2D00F7; font-size: 3.5rem; margin-bottom: 10px;">Quick Question</h2>
+            <p id="customConfirmMessage" style="font-size: 1.5rem; font-weight: 800; color: #333; margin-bottom: 30px;"></p>
+            <div style="display: flex; justify-content: center; gap: 20px;">
+                <button onclick="resolveCustomConfirm(true)" style="flex: 1; font-size: 1.8rem; background: #FF007F; color: #FFF; border: 6px solid #000; border-radius: 15px; padding: 10px; cursor: pointer; font-family: 'Bangers', cursive; box-shadow: 4px 4px 0px #000;">YES, RESET</button>
+                <button onclick="resolveCustomConfirm(false)" style="flex: 1; font-size: 1.8rem; background: #CCC; color: #000; border: 6px solid #000; border-radius: 15px; padding: 10px; cursor: pointer; font-family: 'Bangers', cursive; box-shadow: 4px 4px 0px #000;">NO, KEEP 'EM</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Multiplier Reveal Overlay -->
+    <div id="multiplierReveal" class="multiplier-reveal">
+        <div class="multiplier-text" id="multiplierText">2X<br>POINTS!</div>
+    </div>
+
+    <!-- Epic Winner Overlay -->
+    <div id="winnerOverlay" class="winner-overlay">
+        <canvas id="confettiCanvas"></canvas>
+        <h1 id="winnerTitle" class="winner-title">CHAMPIONS!</h1>
+        <div id="winnerNames" class="winner-names">Team 1</div>
+        <button class="close-winner" onclick="closeEndGame()">🏆 START NEW GAME</button>
+    </div>
+
+    <audio id="audioPlayer"></audio>
+
+<script>
+    // --- State Variables ---
+    let boxCount = 40;
+    let songsData = new Array(boxCount).fill(null); 
+    let currentPlayingIndex = -1;
+    let currentRoundMultiplier = 1; 
+    let allSelectedFiles = []; 
+    let loadedPlaylists = {}; 
+    let isGameOver = false; 
+    let hasGameStarted = false;
+    
+    // Extra Mode States
+    let isLightningRound = false;
+    let isRouletteRunning = false;
+    let isRevealing = false; 
+    let timerInterval = null;
+    let lightningTicks = 0;
+    let lightningPaths = [];
+
+    // Dual Monitor Remote Window
+    let remoteWin = null;
+    
+    // Morphing Background System
+    const bgCanvas = document.getElementById('bgCanvas');
+    const bgCtx = bgCanvas.getContext('2d', { alpha: true });
+    let themeAlpha = 0; 
+    let currentBgTheme = 0;
+    
+    const eqThemes = [
+        { startHue: 120, endHue: 0 },
+        { startHue: 240, endHue: 180 },
+        { startHue: 280, endHue: 320 },
+        { startHue: 0, endHue: 60 },
+        { startHue: 270, endHue: 30 },
+        { startHue: 180, endHue: 300 },
+        { startHue: 180, endHue: 240 },
+        { startHue: 0, endHue: 360 },
+        { startHue: 120, endHue: 280 },
+        { startHue: 330, endHue: 200 },
+        { startHue: 220, endHue: 160 },
+        { startHue: 90, endHue: 180 },
+        { startHue: 270, endHue: 350 },
+        { startHue: 240, endHue: 330 },
+        { startHue: 45, endHue: 0 },
+        { startHue: 240, endHue: 60 },
+        { startHue: 300, endHue: 360 },
+        { startHue: 60, endHue: 120 },
+        { startHue: 150, endHue: 250 },
+        { startHue: 30, endHue: 330 }
+    ];
+    let currentEqTheme = 0;
+
+    let bgState = {
+        stars: Array.from({length: 250}, () => ({x: (Math.random()-0.5)*2000, y: (Math.random()-0.5)*2000, z: Math.random()*2000})),
+        orbs: Array.from({length: 15}, () => ({x: Math.random(), y: Math.random(), vx: (Math.random()-0.5)*0.005, vy: (Math.random()-0.5)*0.005, r: 50+Math.random()*100, hue: Math.random()*360})),
+        gridOffset: 0,
+        nodes: Array.from({length: 60}, () => ({x: Math.random(), y: Math.random(), vx: (Math.random()-0.5)*0.001, vy: (Math.random()-0.5)*0.001}))
+    };
+
+    function resizeCanvas() {
+        // Resize main background
+        bgCanvas.width = window.innerWidth;
+        bgCanvas.height = window.innerHeight;
+        
+        // Resize confetti if active
+        const confettiCanvas = document.getElementById('confettiCanvas');
+        if (confettiCanvas) {
+            confettiCanvas.width = window.innerWidth;
+            confettiCanvas.height = window.innerHeight;
+        }
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+    
+    let bgPosX = 0, bgPosY = 0, bgScaleAngle = 0, bgVelocity = 0, globalBeat = 0, globalEqDim = 1.0; 
+    let smoothedEqCols = new Array(30).fill(0); 
+    let currentEqValues = new Array(150).fill(0); 
+    let currentCols = 10, numRows = 4; 
+    let rollingPeak = 100;
+
+    let teams = [
+        { name: "Team 1", score: 0, active: true },
+        { name: "Team 2", score: 0, active: true },
+        { name: "Team 3", score: 0, active: false },
+        { name: "Team 4", score: 0, active: false }
+    ];
+
+    const gameboard = document.getElementById('gameboard');
+    const scoreboard = document.getElementById('scoreboard');
+    const audioPlayer = document.getElementById('audioPlayer');
+
+    let audioCtx, analyser, source, masterMuteNode, globalVolumeNode, isVisualizerSetup = false, isMuted = false;
+
+    // --- Utility: Sanitize HTML to prevent XSS ---
+    function escapeHTML(str) {
+        return str.replace(/[&<>'"]/g, 
+            tag => ({
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                "'": '&#39;',
+                '"': '&quot;'
+            }[tag] || tag)
+        );
+    }
+
+    // --- Custom Modal System ---
+    function customAlert(msg) {
+        document.getElementById('customAlertMessage').innerText = msg;
+        document.getElementById('customAlertModal').style.display = 'flex';
+    }
+
+    let pendingConfirmResolve = null;
+    function customConfirm(msg) {
+        return new Promise(resolve => {
+            document.getElementById('customConfirmMessage').innerText = msg;
+            document.getElementById('customConfirmModal').style.display = 'flex';
+            pendingConfirmResolve = resolve;
+        });
+    }
+    function resolveCustomConfirm(result) {
+        document.getElementById('customConfirmModal').style.display = 'none';
+        if (pendingConfirmResolve) pendingConfirmResolve(result);
+    }
+
+    // --- Keyboard Shortcuts ---
+    window.addEventListener('keydown', (e) => {
+        if(e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT' || e.target.isContentEditable) return;
+        const key = e.key.toLowerCase();
+        if (key === ' ') { e.preventDefault(); stopAudio(); }
+        else if (key === 'b') { e.preventDefault(); playBuzzer(); }
+        else if (key === 'm') { e.preventDefault(); toggleMute(); }
+        else if (key === 'p') { e.preventDefault(); showPeek(); }
+    });
+
+    window.addEventListener('keyup', (e) => {
+        if(e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT' || e.target.isContentEditable) return;
+        if (e.key.toLowerCase() === 'p') { e.preventDefault(); hidePeek(); }
+    });
+    
+    // Resume AudioContext on first user interaction to fix browser autoplay policies
+    document.body.addEventListener('click', () => {
+        if (audioCtx && audioCtx.state === 'suspended') {
+            audioCtx.resume();
+        }
+    }, { once: true });
+
+    // --- Audio System Setup ---
+    function setupAudioAnalyzer() {
+        if (isVisualizerSetup) return;
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        source = audioCtx.createMediaElementSource(audioPlayer);
+        analyser = audioCtx.createAnalyser();
+        
+        masterMuteNode = audioCtx.createGain();
+        masterMuteNode.gain.value = 1;
+        
+        globalVolumeNode = audioCtx.createGain();
+        globalVolumeNode.gain.value = document.getElementById('masterVolume').value;
+
+        const boostGain = audioCtx.createGain();
+        boostGain.gain.value = 1.2; 
+        
+        const compressor = audioCtx.createDynamicsCompressor();
+        compressor.threshold.value = -24; 
+        compressor.knee.value = 30;
+        compressor.ratio.value = 12; 
+        compressor.attack.value = 0.01;
+        compressor.release.value = 0.25;
+        
+        source.connect(boostGain);
+        boostGain.connect(compressor);
+        compressor.connect(analyser);
+        analyser.connect(masterMuteNode);
+        masterMuteNode.connect(globalVolumeNode);
+        globalVolumeNode.connect(audioCtx.destination);
+        
+        analyser.fftSize = 256;
+        analyser.minDecibels = -85; 
+        analyser.maxDecibels = -10;
+        analyser.smoothingTimeConstant = 0.8;
+        isVisualizerSetup = true;
+    }
+
+    document.getElementById('masterVolume').addEventListener('input', (e) => {
+        if (globalVolumeNode) {
+            globalVolumeNode.gain.value = e.target.value;
+        }
+    });
+
+    function masterRenderLoop() {
+        let isPlaying = (audioPlayer && !audioPlayer.paused && currentPlayingIndex !== -1 && !isRevealing);
+        let targetVel = isPlaying ? 0.8 : 0.1;
+        bgVelocity += (targetVel - bgVelocity) * 0.05; 
+        bgPosX += 1.0 * bgVelocity; 
+        bgPosY += 0.5 * bgVelocity; 
+        bgScaleAngle += 0.015 * bgVelocity; 
+        let scale = 1 + Math.sin(bgScaleAngle) * 0.1; 
+        document.documentElement.style.setProperty('--bg-x', `${bgPosX}px`);
+        document.documentElement.style.setProperty('--bg-y', `${bgPosY}px`);
+        document.documentElement.style.setProperty('--bg-scale', scale);
+
+        let beatIntensity = 0;
+        let dataArray = null, timeDataArray = null; 
+
+        if (analyser && isPlaying) {
+            dataArray = new Uint8Array(analyser.frequencyBinCount);
+            analyser.getByteFrequencyData(dataArray);
+            timeDataArray = new Uint8Array(analyser.frequencyBinCount);
+            analyser.getByteTimeDomainData(timeDataArray);
+            let frameMax = 0;
+            for(let i=0; i<dataArray.length; i++) if (dataArray[i] > frameMax) frameMax = dataArray[i];
+            if (frameMax > rollingPeak) rollingPeak += (frameMax - rollingPeak) * 0.2; 
+            else rollingPeak += (frameMax - rollingPeak) * 0.005; 
+            let effectivePeak = Math.max(rollingPeak, 60); 
+            let bassSum = 0;
+            for(let i=0; i<10; i++) bassSum += dataArray[i];
+            beatIntensity = (bassSum / 10) / 255;
+            
+            if (beatIntensity > 0.8 && !isLightningRound) document.documentElement.style.setProperty('--bg-color', '#FF007F');
+            else if (beatIntensity > 0.6 && !isLightningRound) document.documentElement.style.setProperty('--bg-color', '#00FFFF');
+            else if (!isLightningRound) document.documentElement.style.setProperty('--bg-color', '#6C63FF');
+            
+            for(let c=0; c<currentCols; c++) {
+                let percent = c / currentCols;
+                let binIndex = Math.floor(2 + Math.pow(percent, 1.2) * 75); 
+                let rawEq = dataArray[binIndex] / effectivePeak; 
+                let eqBoost = 0.7 + (percent * 1.5); 
+                rawEq = Math.min(1.0, rawEq * eqBoost);
+                rawEq = Math.pow(rawEq, 1.6);
+                if (rawEq < 0.05) rawEq = 0; 
+                smoothedEqCols[c] += (rawEq - smoothedEqCols[c]) * 0.25;
+            }
+        } else {
+            if (!isLightningRound) document.documentElement.style.setProperty('--bg-color', '#6C63FF');
+            for(let c=0; c<currentCols; c++) smoothedEqCols[c] += (0 - smoothedEqCols[c]) * 0.1;
+        }
+
+        globalBeat += (beatIntensity - globalBeat) * 0.1;
+        document.documentElement.style.setProperty('--beat', globalBeat);
+        document.documentElement.style.setProperty('--rhythm-hue', `${globalBeat * 360}deg`);
+        let targetDim = isPlaying ? 0.35 : 1.0;
+        globalEqDim += (targetDim - globalEqDim) * 0.1;
+        document.documentElement.style.setProperty('--eq-dim', globalEqDim);
+
+        themeAlpha += ((isPlaying ? 1 : 0) - themeAlpha) * 0.05;
+        bgCtx.clearRect(0, 0, bgCanvas.width, bgCanvas.height);
+        
+        let w = bgCanvas.width, h = bgCanvas.height;
+        
+        if (isLightningRound && !isPlaying) {
+            bgCtx.globalAlpha = 1.0;
+            bgCtx.fillStyle = '#020205'; 
+            bgCtx.fillRect(0, 0, w, h);
+            
+            // Slower, longer-lasting thunder strikes
+            if (lightningTicks <= 0 && Math.random() > 0.985) { 
+                lightningTicks = 15 + Math.floor(Math.random() * 10); // Hold for 15-25 frames
+                lightningPaths = [];
+                let lx = Math.random() * w;
+                let ly = 0;
+                let currentPath = [{x: lx, y: ly}];
+                
+                while(ly < h) {
+                    lx += (Math.random() - 0.5) * 120;
+                    ly += Math.random() * 80;
+                    currentPath.push({x: lx, y: ly});
+                    
+                    // Branching lightning
+                    if (Math.random() > 0.75) {
+                        let bx = lx, by = ly;
+                        let branchPath = [{x: bx, y: by}];
+                        for (let b = 0; b < 4; b++) { 
+                            bx += (Math.random() - 0.5) * 150;
+                            by += Math.random() * 100;
+                            branchPath.push({x: bx, y: by});
+                        }
+                        lightningPaths.push(branchPath);
+                    }
+                }
+                lightningPaths.push(currentPath);
+            }
+            
+            if (lightningTicks > 0) {
+                // Flicker effect fading out
+                let fade = lightningTicks / 25;
+                let flashOpacity = (Math.random() * 0.3 + 0.1) * fade;
+                
+                bgCtx.fillStyle = `rgba(255, 255, 255, ${flashOpacity})`; 
+                bgCtx.fillRect(0, 0, w, h);
+                
+                bgCtx.beginPath();
+                lightningPaths.forEach(path => {
+                    bgCtx.moveTo(path[0].x, path[0].y);
+                    for (let p = 1; p < path.length; p++) {
+                        // Tiny jitter so the held bolt crackles
+                        let jitterX = (Math.random() - 0.5) * 15;
+                        bgCtx.lineTo(path[p].x + jitterX, path[p].y);
+                    }
+                });
+                
+                bgCtx.strokeStyle = `rgba(255, 255, 255, ${0.5 + fade * 0.5})`;
+                bgCtx.lineWidth = 3 + Math.random() * 5;
+                bgCtx.shadowBlur = 15 + Math.random() * 20;
+                bgCtx.shadowColor = '#00FFFF';
+                bgCtx.stroke();
+                bgCtx.shadowBlur = 0;
+                
+                lightningTicks--;
+            }
+        } else if (themeAlpha > 0.01) {
+            bgCtx.globalAlpha = themeAlpha;
+            if (currentBgTheme === 0) {
+                // THEME 0: Starfield
+                bgCtx.fillStyle = '#000'; bgCtx.fillRect(0, 0, w, h);
+                let cx = w/2, cy = h/2; bgCtx.lineWidth = 3;
+                bgState.stars.forEach(s => {
+                    let pz = s.z; s.z -= 4 + (beatIntensity * 20);
+                    if (s.z <= 1) { s.z = 2000; s.x = (Math.random()-0.5)*2000; s.y = (Math.random()-0.5)*2000; pz = s.z; }
+                    let px = cx + (s.x / pz) * 800, py = cy + (s.y / pz) * 800;
+                    let nx = cx + (s.x / s.z) * 800, ny = cy + (s.y / s.z) * 800;
+                    let hue = (s.z % 360) + (beatIntensity*100);
+                    bgCtx.strokeStyle = `hsl(${hue}, 100%, 70%)`; bgCtx.beginPath(); bgCtx.moveTo(px, py); bgCtx.lineTo(nx, ny); bgCtx.stroke();
+                });
+            } else if (currentBgTheme === 1) {
+                // THEME 1: Constellation Network
+                bgCtx.fillStyle = '#08051A'; bgCtx.fillRect(0, 0, w, h);
+                let maxDist = Math.min(w, h) * 0.18;
+                bgCtx.lineWidth = 1 + beatIntensity * 2;
+                let hueBase = (performance.now() / 40) % 360;
+
+                bgState.nodes.forEach((n, i) => {
+                    n.x += n.vx * (1 + beatIntensity);
+                    n.y += n.vy * (1 + beatIntensity);
+                    if (n.x < 0 || n.x > 1) n.vx *= -1;
+                    if (n.y < 0 || n.y > 1) n.vy *= -1;
+                    
+                    let px = n.x * w, py = n.y * h;
+                    bgCtx.fillStyle = `hsl(${hueBase + i*2}, 100%, 70%)`;
+                    bgCtx.beginPath(); bgCtx.arc(px, py, 2 + beatIntensity*4, 0, Math.PI*2); bgCtx.fill();
+
+                    for (let j = i + 1; j < bgState.nodes.length; j++) {
+                        let n2 = bgState.nodes[j];
+                        let dx = px - (n2.x * w), dy = py - (n2.y * h);
+                        let dist = Math.sqrt(dx*dx + dy*dy);
+                        if (dist < maxDist) {
+                            bgCtx.strokeStyle = `hsla(${hueBase + i*2}, 100%, 70%, ${1 - (dist/maxDist)})`;
+                            bgCtx.beginPath(); bgCtx.moveTo(px, py); bgCtx.lineTo(n2.x * w, n2.y * h); bgCtx.stroke();
+                        }
+                    }
+                });
+            } else if (currentBgTheme === 2) {
+                // THEME 2: Screen Orbs
+                bgCtx.fillStyle = '#0F0C29'; bgCtx.fillRect(0, 0, w, h); bgCtx.globalCompositeOperation = 'screen';
+                bgState.orbs.forEach(o => {
+                    o.x += o.vx * (1 + beatIntensity*1.5); o.y += o.vy * (1 + beatIntensity*1.5);
+                    if (o.x < 0 || o.x > 1) o.vx *= -1; if (o.y < 0 || o.y > 1) o.vy *= -1;
+                    let px = o.x * w, py = o.y * h, pr = o.r * (1 + beatIntensity*0.3);
+                    let grad = bgCtx.createRadialGradient(px, py, 0, px, py, pr);
+                    grad.addColorStop(0, `hsla(${o.hue + beatIntensity*100}, 100%, 60%, 0.8)`); grad.addColorStop(1, `hsla(${o.hue}, 100%, 60%, 0)`);
+                    bgCtx.fillStyle = grad; bgCtx.beginPath(); bgCtx.arc(px, py, pr, 0, Math.PI*2); bgCtx.fill();
+                });
+                bgCtx.globalCompositeOperation = 'source-over';
+            } else if (currentBgTheme === 3) {
+                // THEME 3: Neon Hyperspace Tunnel
+                bgCtx.fillStyle = '#050014'; bgCtx.fillRect(0, 0, w, h);
+                let cx = w/2, cy = h/2;
+                bgState.tunnelZ = (bgState.tunnelZ || 0) + 0.015 + beatIntensity * 0.075;
+                bgCtx.lineWidth = 4 + beatIntensity * 5;
+                for(let i=0; i<12; i++) {
+                    let z = ((i - bgState.tunnelZ) % 12 + 12) % 12; 
+                    if (z < 0.1) continue;
+                    let scale = 12 / z; 
+                    let alpha = Math.min(1, z / 3); 
+                    let hue = ((performance.now() / 20) + z * 20) % 360;
+                    bgCtx.strokeStyle = `hsla(${hue}, 100%, 50%, ${alpha})`;
+                    bgCtx.shadowBlur = 15; bgCtx.shadowColor = bgCtx.strokeStyle;
+                    bgCtx.strokeRect(cx - (w*0.1*scale), cy - (h*0.1*scale), w*0.2*scale, h*0.2*scale);
+                }
+                bgCtx.shadowBlur = 0;
+            } else if (currentBgTheme === 4) {
+                // THEME 4: Laser Light Show
+                bgCtx.fillStyle = '#020005'; bgCtx.fillRect(0, 0, w, h);
+                let time = performance.now() / 2500;
+                let numLasers = 8;
+                bgCtx.globalCompositeOperation = 'screen';
+                
+                for (let i = 0; i < numLasers; i++) {
+                    let originX = (i % 2 === 0) ? 0 : w; 
+                    let originY = h; 
+                    let angleOffset = Math.sin(time + i) * 0.5; 
+                    let baseAngle = (i % 2 === 0) ? -Math.PI/4 : -3*Math.PI/4;
+                    let angle = baseAngle + angleOffset;
+                    
+                    let hue = (time * 50 + i * 40) % 360;
+                    let laserWidth = 2 + beatIntensity * 25; 
+                    let alpha = 0.3 + beatIntensity * 0.7;
+                    
+                    bgCtx.beginPath();
+                    bgCtx.moveTo(originX, originY);
+                    bgCtx.lineTo(originX + Math.cos(angle) * w * 1.5, originY + Math.sin(angle) * w * 1.5);
+                    
+                    bgCtx.lineWidth = laserWidth;
+                    bgCtx.strokeStyle = `hsla(${hue}, 100%, 60%, ${alpha})`;
+                    bgCtx.shadowBlur = 20;
+                    bgCtx.shadowColor = bgCtx.strokeStyle;
+                    bgCtx.stroke();
+                    
+                    bgCtx.lineWidth = laserWidth * 0.3;
+                    bgCtx.strokeStyle = `hsla(0, 0%, 100%, ${alpha})`;
+                    bgCtx.stroke();
+                }
+                bgCtx.shadowBlur = 0;
+                bgCtx.globalCompositeOperation = 'source-over';
+            } else if (currentBgTheme === 5) {
+                // THEME 5: Synthwave Triangle Vortex
+                bgCtx.fillStyle = '#050014'; 
+                bgCtx.fillRect(0, 0, w, h);
+                let cx = w/2, cy = h/2;
+                
+                bgState.tunnelZ = (bgState.tunnelZ || 0) + 0.02 + beatIntensity * 0.05;
+                let numTriangles = 18;
+                bgCtx.globalCompositeOperation = 'screen';
+                
+                for(let i = numTriangles; i > 0; i--) {
+                    let z = ((i - bgState.tunnelZ) % numTriangles + numTriangles) % numTriangles;
+                    if (z < 0.1) continue; 
+                    
+                    let scale = 18 / z; 
+                    let alpha = Math.min(1, z / 4); 
+                    let isCyan = (Math.floor(i - bgState.tunnelZ) % 2 === 0);
+                    let hue = isCyan ? 180 : 300; 
+                    let twist = z * 0.25 + (performance.now() * 0.0002);
+                    
+                    bgCtx.save();
+                    bgCtx.translate(cx, cy + (h * 0.1)); 
+                    bgCtx.rotate(twist);
+                    
+                    bgCtx.beginPath();
+                    let radius = Math.min(w, h) * 0.15 * scale; 
+                    for(let j=0; j<3; j++) {
+                        let angle = (j * Math.PI * 2) / 3 + Math.PI / 2; 
+                        let px = Math.cos(angle) * radius;
+                        let py = Math.sin(angle) * radius;
+                        if(j === 0) bgCtx.moveTo(px, py);
+                        else bgCtx.lineTo(px, py);
+                    }
+                    bgCtx.closePath();
+                    
+                    bgCtx.lineWidth = 2 + beatIntensity * 3;
+                    bgCtx.strokeStyle = `hsla(${hue}, 100%, 60%, ${alpha})`;
+                    bgCtx.shadowBlur = 10 + beatIntensity * 20;
+                    bgCtx.shadowColor = bgCtx.strokeStyle;
+                    bgCtx.stroke();
+                    
+                    bgCtx.lineWidth = 1;
+                    bgCtx.strokeStyle = `hsla(0, 0%, 100%, ${alpha * 0.8})`;
+                    bgCtx.shadowBlur = 0;
+                    bgCtx.stroke();
+                    
+                    bgCtx.restore();
+                }
+                bgCtx.globalCompositeOperation = 'source-over';
+            }
+            bgCtx.globalAlpha = 1.0; 
+        }
+
+        const btns = document.querySelectorAll('.tune-btn');
+        btns.forEach((btn, idx) => {
+            if (btn.classList.contains('playing') || !btn.classList.contains('has-song')) return;
+            let col = idx % currentCols, row = Math.floor(idx / currentCols), rowFromBottom = numRows - 1 - row;
+            
+            let colEq = smoothedEqCols[col], litRows = colEq * numRows * 1.05; 
+            
+            let targetIntensity = Math.max(0, Math.min(1, litRows - rowFromBottom));
+            let theme = eqThemes[currentEqTheme], hue = theme.startHue;
+            if (numRows > 1) hue = theme.startHue + ((rowFromBottom / (numRows - 1)) * (theme.endHue - theme.startHue));
+            currentEqValues[idx] += (targetIntensity - currentEqValues[idx]) * 0.15;
+            let intensity = currentEqValues[idx];
+            btn.style.setProperty('--eq-intensity', intensity); btn.style.setProperty('--eq-hue', hue);
+            btn.style.setProperty('--eq-scale', intensity * 0.08); 
+            btn.style.setProperty('--eq-rot', `0deg`); 
+            
+            btn.style.boxShadow = '';
+            btn.style.borderColor = '';
+        });
+
+        if (isPlaying && currentPlayingIndex !== -1 && timeDataArray) {
+            const playingBtn = btns[currentPlayingIndex];
+            if (playingBtn) {
+                const canvas = playingBtn.querySelector('.waveform-canvas');
+                if (canvas) {
+                    if (canvas.width !== canvas.offsetWidth) canvas.width = canvas.offsetWidth;
+                    if (canvas.height !== canvas.offsetHeight) canvas.height = canvas.offsetHeight;
+                    const ctx = canvas.getContext('2d'); ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    ctx.beginPath(); let sliceWidth = canvas.width * 1.0 / timeDataArray.length, x = 0;
+                    for (let i = 0; i < timeDataArray.length; i++) {
+                        let v = timeDataArray[i] / 128.0, y = v * (canvas.height / 2); 
+                        if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+                        x += sliceWidth;
+                    }
+                    ctx.lineJoin = 'round'; ctx.lineCap = 'round';
+                    let hue = (performance.now() / 4) % 360;
+                    ctx.lineWidth = 5; ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`; ctx.shadowBlur = 12; ctx.shadowColor = ctx.strokeStyle; ctx.stroke();
+                    ctx.lineWidth = 2; ctx.strokeStyle = '#FFF'; ctx.shadowBlur = 0; ctx.stroke();
+                }
+            }
+        }
+        requestAnimationFrame(masterRenderLoop);
+    }
+
+    audioPlayer.addEventListener('play', () => { setupAudioAnalyzer(); if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume(); pushToRemote(); });
+    audioPlayer.addEventListener('pause', () => { if (currentPlayingIndex !== -1) { currentPlayingIndex = -1; updateBoardState(); } pushToRemote(); });
+
+    function toggleMute() {
+        isMuted = !isMuted; const muteBtn = document.getElementById('muteBtn');
+        if (isMuted) { 
+            if (masterMuteNode) masterMuteNode.gain.value = 0; 
+            muteBtn.innerText = '🔇 UNMUTE (M)'; muteBtn.style.background = '#333'; muteBtn.style.color = '#FFF'; 
+            if(remoteWin && !remoteWin.closed) { let rm = remoteWin.document.getElementById('remoteBtnMute'); if(rm) { rm.innerText = '🔇 UNMUTE'; rm.style.background = '#333'; rm.style.color = '#FFF'; } }
+        } 
+        else { 
+            if (masterMuteNode) masterMuteNode.gain.value = 1; 
+            muteBtn.innerText = '🔈 MUTE (M)'; muteBtn.style.background = '#FF9100'; muteBtn.style.color = '#000'; 
+            if(remoteWin && !remoteWin.closed) { let rm = remoteWin.document.getElementById('remoteBtnMute'); if(rm) { rm.innerText = '🔈 MUTE'; rm.style.background = '#FF9100'; rm.style.color = '#000'; } }
+        }
+    }
+    function ensureUnmuted() { if (isMuted) toggleMute(); }
+    function stopAudio() { audioPlayer.pause(); audioPlayer.currentTime = 0; }
+
+    function getAudioDest() { return globalVolumeNode ? globalVolumeNode : audioCtx.destination; }
+
+    function playDing() {
+        if (!audioCtx) setupAudioAnalyzer(); if (audioCtx.state === 'suspended') audioCtx.resume();
+        const osc = audioCtx.createOscillator(); const gainNode = audioCtx.createGain();
+        osc.type = 'sine'; osc.frequency.setValueAtTime(880, audioCtx.currentTime); 
+        osc.frequency.exponentialRampToValueAtTime(1760, audioCtx.currentTime + 0.1); 
+        gainNode.gain.setValueAtTime(0, audioCtx.currentTime); gainNode.gain.linearRampToValueAtTime(0.5, audioCtx.currentTime + 0.05); gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.5);
+        osc.connect(gainNode); gainNode.connect(getAudioDest()); osc.start(); osc.stop(audioCtx.currentTime + 0.5);
+    }
+
+    function playBuzzer() {
+        stopAudio(); if (!audioCtx) setupAudioAnalyzer(); if (audioCtx.state === 'suspended') audioCtx.resume();
+        document.body.classList.add('shake-active'); setTimeout(() => document.body.classList.remove('shake-active'), 500);
+        const duration = 0.7; const gainNode = audioCtx.createGain(); gainNode.connect(getAudioDest()); gainNode.gain.setValueAtTime(1, audioCtx.currentTime); gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + duration);
+        const osc1 = audioCtx.createOscillator(); osc1.type = 'sawtooth'; osc1.frequency.setValueAtTime(150, audioCtx.currentTime);
+        const osc2 = audioCtx.createOscillator(); osc2.type = 'square'; osc2.frequency.setValueAtTime(155, audioCtx.currentTime);
+        osc1.connect(gainNode); osc2.connect(gainNode); osc1.start(); osc2.start(); osc1.stop(audioCtx.currentTime + duration); osc2.stop(audioCtx.currentTime + duration);
+    }
+
+    function playJackpot() {
+        if (!audioCtx) setupAudioAnalyzer(); if (audioCtx.state === 'suspended') audioCtx.resume();
+        const startTime = audioCtx.currentTime;
+        for (let i = 0; i < 7; i++) {
+            const osc = audioCtx.createOscillator(); const gainNode = audioCtx.createGain();
+            osc.type = 'square'; osc.frequency.setValueAtTime(440 + (i * 110), startTime + (i * 0.1));
+            gainNode.gain.setValueAtTime(0.3, startTime + (i * 0.1)); gainNode.gain.exponentialRampToValueAtTime(0.01, startTime + (i * 0.1) + 0.2);
+            osc.connect(gainNode); gainNode.connect(getAudioDest()); osc.start(startTime + (i * 0.1)); osc.stop(startTime + (i * 0.1) + 0.2);
+        }
+        const finalOsc = audioCtx.createOscillator(); const finalGain = audioCtx.createGain();
+        finalOsc.type = 'sine'; finalOsc.frequency.setValueAtTime(1046.50, startTime + 0.7); 
+        finalGain.gain.setValueAtTime(0.5, startTime + 0.7); finalGain.gain.exponentialRampToValueAtTime(0.01, startTime + 2.0);
+        finalOsc.connect(finalGain); finalGain.connect(getAudioDest()); finalOsc.start(startTime + 0.7); finalOsc.stop(startTime + 2.0);
+    }
+
+    function playTick() {
+        if (!audioCtx) setupAudioAnalyzer(); if (audioCtx.state === 'suspended') audioCtx.resume();
+        const osc = audioCtx.createOscillator(); const gain = audioCtx.createGain();
+        osc.type = 'triangle'; osc.frequency.setValueAtTime(800, audioCtx.currentTime); osc.frequency.exponentialRampToValueAtTime(100, audioCtx.currentTime + 0.05);
+        gain.gain.setValueAtTime(0.5, audioCtx.currentTime); gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.05);
+        osc.connect(gain); gain.connect(getAudioDest()); osc.start(); osc.stop(audioCtx.currentTime + 0.05);
+    }
+
+    function playVictoryFanfare() {
+        if (!audioCtx) setupAudioAnalyzer(); if (audioCtx.state === 'suspended') audioCtx.resume();
+        const notes = [{ f: 523.25, d: 0.15 }, { f: 659.25, d: 0.15 }, { f: 783.99, d: 0.15 }, { f: 1046.50, d: 0.8 }];
+        let startTime = audioCtx.currentTime;
+        notes.forEach((n) => {
+            const osc = audioCtx.createOscillator(); const gain = audioCtx.createGain(); osc.type = 'square'; osc.frequency.value = n.f;
+            gain.gain.setValueAtTime(0.3, startTime); gain.gain.exponentialRampToValueAtTime(0.01, startTime + n.d);
+            osc.connect(gain); gain.connect(getAudioDest()); osc.start(startTime); osc.stop(startTime + n.d); startTime += n.d;
+        });
+    }
+
+    function renderScoreboard() {
+        scoreboard.innerHTML = '';
+        teams.forEach((team, index) => {
+            if (team.active) {
+                const card = document.createElement('div'); card.className = 'team-card';
+                const plusText = currentRoundMultiplier > 1 ? `+${currentRoundMultiplier}` : '+';
+                card.innerHTML = `
+                    <h3 class="team-name" contenteditable="true" onblur="updateTeamName(${index}, this.innerText)" title="Click to rename!">${escapeHTML(team.name)}</h3>
+                    <div class="team-score">${team.score}</div>
+                    <div class="score-controls">
+                        <button class="btn-minus" onclick="updateScore(${index}, -1)">-</button>
+                        <button class="btn-plus" onclick="updateScore(${index}, 1)">${plusText}</button>
+                    </div>
+                `;
+                scoreboard.appendChild(card);
+            }
+        });
+    }
+
+    function updateTeamName(index, newName) { 
+        teams[index].name = newName.trim() || `Team ${index + 1}`; 
+        pushToRemote();
+    }
+    
+    function updateScore(teamIndex, change) {
+        const actualChange = change > 0 ? (change * currentRoundMultiplier) : change;
+        teams[teamIndex].score += actualChange; 
+        if (change > 0) playDing(); 
+        renderScoreboard();
+        pushToRemote();
+        if (change > 0 && !isGameOver) {
+            let hasValidSongs = false, allPlayed = true;
+            songsData.forEach(song => { if (song) { hasValidSongs = true; if (!song.played) allPlayed = false; } });
+            if (hasValidSongs && allPlayed) setTimeout(() => { triggerEndGame(); }, 2000);
+        }
+    }
+
+    function updateBoardGrid() {
+        let cols; if (boxCount % 10 === 0) cols = 10; else if (boxCount % 9 === 0) cols = 9; else if (boxCount % 8 === 0) cols = 8; else if (boxCount % 7 === 0) cols = 7; else if (boxCount % 6 === 0) cols = 6; else if (boxCount % 5 === 0) cols = 5; else cols = Math.ceil(Math.sqrt(boxCount * 1.8));
+        if (cols > 12) cols = 12; if (cols < 4 && boxCount >= 4) cols = 4; currentCols = cols; numRows = Math.ceil(boxCount / currentCols); gameboard.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
+    }
+
+    function renderBoard() {
+        gameboard.innerHTML = '';
+        const baseColors = ['#FF007F', '#00FFFF', '#00E676', '#FFEA00', '#B388FF', '#FF9100'];
+        for (let i = 0; i < boxCount; i++) {
+            const btn = document.createElement('button'); btn.className = 'tune-btn pop'; 
+            if (songsData[i]) {
+                if (!songsData[i].bgColor) { songsData[i].bgColor = baseColors[Math.floor(Math.random() * baseColors.length)]; songsData[i].shapeClass = `shape-${Math.floor(Math.random() * 5) + 1}`; }
+                if (songsData[i].played) { btn.classList.add('played'); btn.style.setProperty('--base-color', '#333'); } else { btn.style.setProperty('--base-color', songsData[i].bgColor); }
+                btn.classList.add(songsData[i].shapeClass); btn.classList.add('has-song');
+                btn.innerHTML = `<span class="btn-text">${i + 1}</span><canvas class="waveform-canvas"></canvas>`;
+                if (i === currentPlayingIndex) btn.classList.add('playing');
+                btn.onclick = () => { playSong(i); };
+            }
+            gameboard.appendChild(btn);
+        }
+    }
+
+    function updateBoardState() {
+        const btns = document.querySelectorAll('.tune-btn');
+        for (let i = 0; i < boxCount; i++) {
+            if (songsData[i] && btns[i]) {
+                btns[i].className = 'tune-btn has-song ' + songsData[i].shapeClass;
+                if (songsData[i].played) { btns[i].classList.add('played'); btns[i].style.setProperty('--base-color', '#333'); } 
+                else { btns[i].style.setProperty('--base-color', songsData[i].bgColor); }
+                if (i === currentPlayingIndex) btns[i].classList.add('playing');
+            }
+        }
+    }
+
+    function playSong(index) {
+        if (!songsData[index]) return; if (isRouletteRunning || isRevealing) return; stopAudio(); 
+        if (currentPlayingIndex !== -1 && currentPlayingIndex !== index) songsData[currentPlayingIndex].played = true; 
+        let baseMult = songsData[index].multiplier || 1; currentRoundMultiplier = isLightningRound ? (baseMult * 2) : baseMult; renderScoreboard(); 
+        if (currentRoundMultiplier > 1 && !songsData[index].played) {
+            isRevealing = true; const revealEl = document.getElementById('multiplierReveal'); const textEl = document.getElementById('multiplierText');
+            textEl.innerHTML = `${currentRoundMultiplier}X<br>POINTS!`; revealEl.classList.add('active'); playJackpot(); updateBoardState();
+            setTimeout(() => { revealEl.classList.remove('active'); isRevealing = false; startActualPlayback(index); }, 2500);
+        } else { startActualPlayback(index); }
+    }
+
+    function startActualPlayback(index) {
+        ensureUnmuted(); currentPlayingIndex = index;
+        currentBgTheme = Math.floor(Math.random() * 6); 
+        currentEqTheme = Math.floor(Math.random() * eqThemes.length);
+        audioPlayer.src = songsData[index].dataUrl; audioPlayer.play(); songsData[index].played = true; updateBoardState(); 
+        pushToRemote();
+    }
+
+    function assignMultipliers() {
+        const density = document.getElementById('setupJackpotDensity').value;
+        let c2 = 0, c3 = 0, c4 = 0;
+        if (density === 'low') c2 = Math.max(1, Math.floor(boxCount * 0.1)); 
+        else if (density === 'normal') { c2 = Math.max(2, Math.floor(boxCount * 0.15)); c3 = Math.max(1, Math.floor(boxCount * 0.05)); c4 = 1; } 
+        else if (density === 'chaos') { c2 = Math.max(3, Math.floor(boxCount * 0.25)); c3 = Math.max(2, Math.floor(boxCount * 0.15)); c4 = Math.max(1, Math.floor(boxCount * 0.05)); }
+        if (c2+c3+c4 > boxCount) { c2 = 1; c3 = 0; c4 = 0; }
+        let indices = []; for (let i = 0; i < boxCount; i++) { indices.push(i); if(songsData[i]) songsData[i].multiplier = 1; }
+        indices.sort(() => Math.random() - 0.5); 
+        for (let i = 0; i < c2; i++) if(indices.length) songsData[indices.pop()].multiplier = 2;
+        for (let i = 0; i < c3; i++) if(indices.length) songsData[indices.pop()].multiplier = 3;
+        for (let i = 0; i < c4; i++) if(indices.length) songsData[indices.pop()].multiplier = 4;
+    }
+
+    function openSetup() { 
+        document.getElementById('setupModal').style.display = 'flex'; 
+        
+        const closeBtn = document.getElementById('closeSetupBtn');
+        const playBtn = document.getElementById('playBtn');
+        
+        // If a game is active, show the 'X' button and warn them about resetting
+        if (hasGameStarted) {
+            closeBtn.style.display = 'flex';
+            playBtn.innerHTML = "APPLY & RESTART GAME";
+            playBtn.style.background = "#FF9100"; 
+        } else {
+            closeBtn.style.display = 'none';
+            playBtn.innerHTML = "LET'S PLAY!";
+            playBtn.style.background = "#00E676";
+        }
+    }
+    
+    function closeSetup() { document.getElementById('setupModal').style.display = 'none'; }
+    function openSongEditor() { document.getElementById('songEditorModal').style.display = 'flex'; }
+    function closeSongEditor() { document.getElementById('songEditorModal').style.display = 'none'; updateMaxBoxesUI(); }
+    
+    function selectAllSongs(s) { 
+        document.querySelectorAll('.song-checkbox').forEach(cb => cb.checked = s); 
+        document.getElementById('setupPlaylistFilter').value = 'custom';
+        updateMaxBoxesUI(); 
+    }
+
+    function handlePlaylistUpload(e) {
+        const files = Array.from(e.target.files);
+        if (files.length === 0) return;
+        
+        let processed = 0;
+        files.forEach(file => {
+            const reader = new FileReader();
+            reader.onload = function(evt) {
+                try {
+                    const data = JSON.parse(evt.target.result);
+                    if (data.type === "NameThatTunePlaylist" && Array.isArray(data.songs)) {
+                        let pName = file.name.replace(/\.[^/.]+$/, ""); // Use filename as playlist name
+                        loadedPlaylists[pName] = data.songs;
+                    }
+                } catch(err) {
+                    console.error("Invalid playlist file:", file.name);
+                }
+                
+                processed++;
+                if (processed === files.length) {
+                    updatePlaylistDropdown();
+                    customAlert(`✅ Successfully loaded ${files.length} playlist(s)! Select one from the Active Playlist dropdown.`);
+                }
+            };
+            reader.readAsText(file);
+        });
+        e.target.value = ''; // reset so they can be loaded again if needed
+    }
+
+    function updatePlaylistDropdown() {
+        const select = document.getElementById('setupPlaylistFilter');
+        let current = select.value;
+        
+        select.innerHTML = '<option value="all">All Loaded Songs</option><option value="custom">Custom Selection</option>';
+        
+        for (let pName in loadedPlaylists) {
+            let opt = document.createElement('option');
+            opt.value = pName;
+            opt.innerText = "🎵 " + pName;
+            select.appendChild(opt);
+        }
+        
+        if (loadedPlaylists[current]) select.value = current;
+        else select.value = 'all';
+    }
+
+    async function savePlaylist() {
+        let selectedSongs = [];
+        document.querySelectorAll('.song-checkbox').forEach(cb => {
+            if (cb.checked && allSelectedFiles[cb.value]) {
+                selectedSongs.push(allSelectedFiles[cb.value].name);
+            }
+        });
+        
+        if (selectedSongs.length === 0) {
+            customAlert("No songs selected! Please select at least one song to save a playlist.");
+            return;
+        }
+
+        const playlistData = { type: "NameThatTunePlaylist", songs: selectedSongs };
+        const jsonString = JSON.stringify(playlistData);
+
+        try {
+            // Modern Web API: Opens a native "Save As..." dialog box
+            if (window.showSaveFilePicker) {
+                const handle = await window.showSaveFilePicker({
+                    suggestedName: 'My_Playlist.playlist',
+                    types: [{
+                        description: 'Name That Tune Playlist',
+                        accept: {'application/json': ['.playlist']}
+                    }]
+                });
+                const writable = await handle.createWritable();
+                await writable.write(jsonString);
+                await writable.close();
+                return; // Success! File saved exactly where the user wanted.
+            } else {
+                throw new Error("Modern File System API not supported. Using fallback.");
+            }
+        } catch (err) {
+            // If the user simply clicked "Cancel" on the dialog box, do nothing.
+            if (err.name === 'AbortError') return; 
+            
+            // Fallback for older browsers or restricted iframe environments
+            let defaultName = "My_Playlist";
+            let listName = prompt("Enter a name for this playlist:", defaultName);
+            if (listName === null) return; // User cancelled
+            if (listName.trim() === "") listName = defaultName;
+
+            // Clean the filename
+            listName = listName.replace(/[^a-z0-9_\- ]/gi, '_');
+
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(jsonString);
+            const a = document.createElement('a');
+            a.href = dataStr;
+            a.download = `${listName}.playlist`;
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+        }
+    }
+
+    function buildEditorList() {
+        const statusEl = document.getElementById('folderStatus');
+        const listContainer = document.getElementById('fullSongSelectionContainer');
+        const editBtn = document.getElementById('editSongsBtn');
+        
+        listContainer.innerHTML = '';
+        
+        if (allSelectedFiles.length > 0) {
+            statusEl.innerText = `✅ Loaded ${allSelectedFiles.length} audio files!`; 
+            statusEl.style.color = "#00C853"; 
+            editBtn.style.display = 'block';
+            
+            const currentFilter = document.getElementById('setupPlaylistFilter').value;
+            let targetSongs = null;
+            if (currentFilter !== 'all' && currentFilter !== 'custom' && loadedPlaylists[currentFilter]) {
+                targetSongs = new Set(loadedPlaylists[currentFilter]);
+            }
+            
+            allSelectedFiles.forEach((file, index) => {
+                const itemContainer = document.createElement('div');
+                itemContainer.style.cssText = 'display:flex; justify-content:space-between; align-items:center; padding:12px 15px; border-radius:12px; border:4px solid #000; box-shadow:4px 4px 0px #000; transition:all 0.2s ease; background:#FFF;';
+                itemContainer.onmouseenter = () => { itemContainer.style.transform = 'translate(-2px,-2px)'; itemContainer.style.boxShadow = '6px 6px 0px #000'; };
+                itemContainer.onmouseleave = () => { itemContainer.style.transform = 'none'; itemContainer.style.boxShadow = '4px 4px 0px #000'; };
+                
+                const label = document.createElement('label'); 
+                label.style.cssText = 'display:flex; align-items:center; font-size:1.1rem; font-weight:bold; cursor:pointer; word-break:break-word; width: 100%;';
+                
+                const cb = document.createElement('input'); 
+                cb.type = 'checkbox'; 
+                cb.value = index; 
+                
+                // Determine if checked based on current active playlist
+                if (currentFilter === 'custom') {
+                    cb.checked = true; // Default to true if somehow in custom mode, but normally handled manually
+                } else if (targetSongs) {
+                    cb.checked = targetSongs.has(file.name);
+                } else {
+                    cb.checked = true; // 'all' selected
+                }
+                
+                cb.className = 'song-checkbox'; 
+                cb.style.cssText = 'margin-right:15px; transform:scale(1.8); cursor:pointer; flex-shrink:0;';
+                cb.onchange = () => {
+                    document.getElementById('setupPlaylistFilter').value = 'custom';
+                    updateMaxBoxesUI();
+                };
+
+                label.appendChild(cb); 
+                label.appendChild(document.createTextNode(file.name)); 
+
+                itemContainer.appendChild(label); 
+                listContainer.appendChild(itemContainer);
+            });
+            updateMaxBoxesUI(); 
+        } else { 
+            statusEl.innerText = `❌ No audio files found.`; 
+            statusEl.style.color = "#FF0000"; 
+            editBtn.style.display = 'none'; 
+        }
+    }
+
+    document.getElementById('folderUpload').addEventListener('change', function(e) {
+        allSelectedFiles = Array.from(e.target.files).filter(f => f.type.startsWith('audio/') || f.name.endsWith('.mp3') || f.name.endsWith('.wav'));
+        document.getElementById('setupPlaylistFilter').value = 'all';
+        buildEditorList();
+    });
+
+    document.getElementById('setupPlaylistFilter').addEventListener('change', function(e) {
+        const filter = e.target.value;
+        let targetSongs = null;
+        
+        if (filter !== 'all' && filter !== 'custom' && loadedPlaylists[filter]) {
+            targetSongs = new Set(loadedPlaylists[filter]);
+        }
+        
+        if (filter !== 'custom') {
+            document.querySelectorAll('.song-checkbox').forEach(cb => {
+                const file = allSelectedFiles[cb.value]; 
+                if (targetSongs) {
+                    cb.checked = targetSongs.has(file.name);
+                } else {
+                    cb.checked = true; // 'all' selected
+                }
+            });
+        }
+        updateMaxBoxesUI(); 
+    });
+
+    function updateMaxBoxesUI() {
+        let rawCheckedCount = 0;
+        let totalCount = 0;
+
+        document.querySelectorAll('.song-checkbox').forEach(cb => {
+            totalCount++;
+            if (cb.checked) rawCheckedCount++;
+        });
+
+        const countEl = document.getElementById('selectedSongCount');
+        if (countEl) countEl.innerText = `Selected: ${rawCheckedCount} / ${totalCount}`;
+
+        const input = document.getElementById('setupBoxCount');
+        if (rawCheckedCount > 0) {
+            input.max = rawCheckedCount; 
+            if (parseInt(input.value) > rawCheckedCount) { 
+                input.value = rawCheckedCount; 
+                input.style.backgroundColor = '#00FFFF'; 
+                setTimeout(() => input.style.backgroundColor = '', 500); 
+            }
+        }
+    }
+
+    async function saveSetup() {
+        if (!allSelectedFiles || allSelectedFiles.length === 0) {
+            customAlert("Please select a folder of songs first before starting the game.");
+            return;
+        }
+
+        const nTeams = parseInt(document.getElementById('setupTeamCount').value);
+        teams.forEach((t, i) => t.active = (i < nTeams));
+        
+        let files = [];
+        document.querySelectorAll('.song-checkbox').forEach(cb => {
+            if (cb.checked) files.push(allSelectedFiles[cb.value]);
+        });
+        
+        if (!files.length && allSelectedFiles.length) {
+            customAlert("No songs are selected for this game! Check your Playlist filter.");
+            return;
+        }
+
+        if (teams.some(t => t.score > 0)) {
+            let doReset = await customConfirm("Do you want to reset the team scores to zero for the new game?");
+            if (doReset) {
+                teams.forEach(t => t.score = 0);
+            }
+        }
+
+        // Clean up old ObjectURLs to prevent memory leaks!
+        if (songsData && songsData.length > 0) {
+            songsData.forEach(song => {
+                if (song && song.dataUrl) URL.revokeObjectURL(song.dataUrl);
+            });
+        }
+
+        let requested = parseInt(document.getElementById('setupBoxCount').value) || 40; 
+        boxCount = Math.min(requested, files.length); 
+        if (!boxCount) boxCount = 40; 
+        
+        files.sort(() => Math.random() - 0.5); 
+        isGameOver = false; 
+        stopAudio(); 
+        
+        songsData = new Array(boxCount).fill(null);
+        for (let i = 0; i < boxCount && i < files.length; i++) {
+            let f = files[i]; 
+            songsData[i] = { name: f.name.replace(/\.[^/.]+$/, ""), dataUrl: URL.createObjectURL(f), played: false, bgColor: null, shapeClass: null, multiplier: 1 };
+        }
+        
+        updateBoardGrid(); 
+        assignMultipliers(); 
+        currentRoundMultiplier = 1; 
+        renderScoreboard(); 
+        renderBoard(); 
+        hasGameStarted = true;
+        closeSetup();
+        pushToRemote();
+    }
+
+    function generateKey() {
+        const list = document.getElementById('answerList'); list.innerHTML = '';
+        songsData.forEach((s, i) => {
+            if (s) {
+                const li = document.createElement('li'); const m = (s.multiplier > 1) ? `<span class="mult-badge">${s.multiplier}X POINTS</span>` : '';
+                li.innerHTML = `<span>#${i + 1}</span> ${escapeHTML(s.name)} ${m}`; list.appendChild(li);
+            }
+        });
+        document.getElementById('keyModal').style.display = 'flex';
+    }
+    function closeKey() { document.getElementById('keyModal').style.display = 'none'; }
+    
+    const peekBtn = document.getElementById('peekBtn');
+    function showPeek() { if (currentPlayingIndex !== -1 && songsData[currentPlayingIndex]) { peekBtn.innerText = `🎵 ${songsData[currentPlayingIndex].name}`; peekBtn.style.background = '#FF007F'; } else peekBtn.innerText = "NO SONG"; }
+    function hidePeek() { peekBtn.innerText = "👀 PEEK (P)"; peekBtn.style.background = '#333'; }
+    peekBtn.addEventListener('mousedown', showPeek); peekBtn.addEventListener('mouseup', hidePeek); peekBtn.addEventListener('mouseleave', hidePeek);
+    peekBtn.addEventListener('touchstart', (e) => { e.preventDefault(); showPeek(); }); peekBtn.addEventListener('touchend', (e) => { e.preventDefault(); hidePeek(); });
+
+    // --- Dual Monitor / Remote Control Support ---
+    function openRemoteControl() {
+        if (remoteWin && !remoteWin.closed) {
+            remoteWin.focus();
+            pushToRemote(); 
+            return;
+        }
+        
+        let lightningBg = isLightningRound ? '#FFF' : '#FFEA00';
+        let lightningTxt = isLightningRound ? '🛑 STOP LIGHTNING' : '⚡ LIGHTNING';
+        let muteBg = isMuted ? '#333' : '#FF9100';
+        let muteCol = isMuted ? '#FFF' : '#000';
+        let muteTxt = isMuted ? '🔇 UNMUTE' : '🔈 MUTE';
+
+        remoteWin = window.open('', 'NameThatTuneRemote', 'width=500,height=850,menubar=no,toolbar=no,location=no,status=no');
+        
+        let html = `
+        <html>
+        <head>
+            <title>Host Remote - Name That Tune</title>
+            <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Nunito:wght@400;800;900&display=swap" rel="stylesheet">
+            <style>
+                body { font-family: 'Nunito', sans-serif; background: #222; color: white; padding: 20px; }
+                h2 { font-family: 'Bangers', cursive; color: #E040FB; font-size: 3rem; margin-top:0; text-align:center; text-shadow: 3px 3px 0px #000; letter-spacing:2px;}
+                .btn { font-family: 'Bangers', cursive; font-size: 1.4rem; padding: 10px; cursor:pointer; border:4px solid #000; border-radius:10px; box-shadow: 4px 4px 0 #000; width:100%; transition: transform 0.1s; }
+                .btn:active { transform: translate(4px,4px); box-shadow:0 0 0 #000; }
+                .btn-stop { background: #FF007F; color:white; }
+                .btn-buzzer { background: #FF0000; color:white; }
+                .btn-mute { background: ${muteBg}; color:${muteCol}; }
+                .btn-roulette { background: #00E676; color: black; }
+                .btn-lightning { background: ${lightningBg}; color: black; }
+                .btn-timer { background: #00FFFF; color: black; }
+                .btn-endgame { background: #FFEA00; color: black; border-color:#FF007F; }
+                .song-item { background: #333; padding: 12px; margin-bottom: 8px; border-radius: 8px; display:flex; justify-content: space-between; align-items:center; border:2px solid #000; }
+                .song-btn { background: #00E676; color: black; border: 3px solid #000; border-radius:5px; padding: 5px 15px; font-weight:bold; font-family:'Bangers'; font-size:1.2rem; cursor:pointer; box-shadow: 2px 2px 0px #000; transition: transform 0.1s;}
+                .song-btn:active { transform: translate(2px,2px); box-shadow: 0 0 0 #000; }
+                .mult { color: #FFEA00; font-weight:bold; }
+                .score-panel { background: #444; padding: 15px; border-radius: 10px; margin-bottom: 20px; border: 4px solid #000;}
+                .team-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+                .team-controls button { font-family:'Bangers'; font-size: 1.5rem; width: 40px; height: 40px; cursor:pointer; border: 3px solid #000; border-radius:8px; box-shadow: 2px 2px 0px #000;}
+                .team-controls button:active { transform:translate(2px,2px); box-shadow:0 0 0 #000;}
+            </style>
+        </head>
+        <body>
+            <h2>📱 HOST REMOTE</h2>
+            <p style="text-align:center; margin-top:-15px; color:#AAA;">Drag this to your screen. Put the game on the projector.</p>
+            
+            <div style="display:grid; grid-template-columns: 1fr 1fr 1fr; gap:10px; margin-bottom: 10px;">
+                <button class="btn btn-stop" onclick="window.opener.stopAudio()">⏹ STOP</button>
+                <button class="btn btn-buzzer" onclick="window.opener.playBuzzer()">🚨 BUZZER</button>
+                <button class="btn btn-mute" id="remoteBtnMute" onclick="window.opener.toggleMute()">${muteTxt}</button>
+            </div>
+            
+            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px; margin-bottom: 20px;">
+                <button class="btn btn-roulette" onclick="window.opener.startRoulette()">🎲 ROULETTE</button>
+                <button class="btn btn-lightning" id="remoteBtnLightning" onclick="window.opener.toggleLightning()">${lightningTxt}</button>
+                <button class="btn btn-timer" onclick="window.opener.startTimer()">⏱️ TIMER</button>
+                <button class="btn btn-endgame" onclick="window.opener.triggerEndGame()">🏆 END GAME</button>
+            </div>
+
+            <div class="score-panel" id="remoteScoreboard">
+                <!-- Populated dynamically -->
+            </div>
+
+            <h3 style="font-family:'Bangers'; color:#00FFFF; font-size: 2.2rem; border-bottom: 4px dashed #555; padding-bottom:5px;">Song List & Answer Key</h3>
+            <div id="remoteSongList"></div>
+            
+            <script>
+                // Utility to escape HTML on the remote too
+                function escapeHTML(str) {
+                    return str.replace(/[&<>'"]/g, 
+                        tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag)
+                    );
+                }
+
+                function updateRemoteScores(teams) {
+                    const sb = document.getElementById('remoteScoreboard');
+                    sb.innerHTML = '';
+                    teams.forEach((t, i) => {
+                        if(t.active) {
+                            sb.innerHTML += \`
+                            <div class="team-row">
+                                <span style="font-family:'Bangers'; font-size:1.8rem; color:#FFF; letter-spacing:1px;">\${escapeHTML(t.name)}: \${t.score}</span>
+                                <div class="team-controls">
+                                    <button style="background:#FF007F; color:white;" onclick="window.opener.updateScore(\${i}, -1)">-</button>
+                                    <button style="background:#00E676; color:black;" onclick="window.opener.updateScore(\${i}, 1)">+</button>
+                                </div>
+                            </div>\`;
+                        }
+                    });
+                }
+                
+                function buildSongList(songsData) {
+                    const list = document.getElementById('remoteSongList');
+                    if(!songsData || songsData.length === 0 || !songsData[0]) {
+                        list.innerHTML = '<p style="color:#FF007F; font-weight:bold;">No songs loaded yet! Load a folder in the Main Window first.</p>';
+                        return;
+                    }
+
+                    let newHTML = '';
+                    songsData.forEach((s, i) => {
+                        if(s) {
+                            let multHTML = s.multiplier > 1 ? \`<span class="mult">(\${s.multiplier}X)</span>\` : '';
+                            let playedStyle = s.played ? 'opacity:0.4; filter: grayscale(1);' : '';
+                            
+                            newHTML += \`
+                            <div class="song-item" style="\${playedStyle}">
+                                <div style="flex:1; padding-right:10px; word-wrap: break-word;">
+                                    <span style="color:#00FFFF; font-family:'Bangers'; font-size:1.5rem; margin-right:10px;">#\${i+1}</span> 
+                                    <span style="font-weight:bold; font-size:1.1rem;">\${escapeHTML(s.name)}</span> \${multHTML}
+                                </div>
+                                <button class="song-btn" onclick="window.opener.playSong(\${i})">▶ PLAY</button>
+                            </div>\`;
+                        }
+                    });
+                    
+                    // Only update if it changed, preventing scroll jumping when hosts scroll!
+                    if (list.innerHTML !== newHTML) {
+                        list.innerHTML = newHTML;
+                    }
+                }
+
+                window.onload = function() {
+                    if (window.opener && typeof window.opener.pushToRemote === 'function') {
+                        window.opener.pushToRemote();
+                    }
+                };
+            <\/script>
+        </body>
+        </html>
+        `;
+        remoteWin.document.write(html);
+        remoteWin.document.close();
+        setTimeout(pushToRemote, 250);
+    }
+    
+    function pushToRemote() {
+        if (remoteWin && !remoteWin.closed && typeof remoteWin.updateRemoteScores === 'function') {
+            const scrollTop = remoteWin.document.documentElement.scrollTop;
+            remoteWin.updateRemoteScores(teams);
+            remoteWin.buildSongList(songsData);
+            // Restore scroll position
+            remoteWin.document.documentElement.scrollTop = scrollTop;
+        }
+    }
+
+    function toggleLightning() {
+        isLightningRound = !isLightningRound; const b = document.getElementById('btnLightning');
+        if (isLightningRound) { 
+            document.body.classList.add('lightning-active'); 
+            b.style.background = '#FFF'; b.innerText = '🛑 STOP LIGHTNING'; 
+            if(remoteWin && !remoteWin.closed && remoteWin.document.getElementById('remoteBtnLightning')) {
+                remoteWin.document.getElementById('remoteBtnLightning').style.background = '#FFF';
+                remoteWin.document.getElementById('remoteBtnLightning').innerText = '🛑 STOP LIGHTNING';
+            }
+            if(currentPlayingIndex!==-1) playSong(currentPlayingIndex); 
+        } 
+        else { 
+            document.body.classList.remove('lightning-active'); 
+            b.style.background = '#FFEA00'; b.innerText = '⚡ LIGHTNING'; 
+            if(remoteWin && !remoteWin.closed && remoteWin.document.getElementById('remoteBtnLightning')) {
+                remoteWin.document.getElementById('remoteBtnLightning').style.background = '#FFEA00';
+                remoteWin.document.getElementById('remoteBtnLightning').innerText = '⚡ LIGHTNING';
+            }
+            if(currentPlayingIndex!==-1) playSong(currentPlayingIndex); 
+        }
+    }
+
+    function startTimer() {
+        const bar = document.getElementById('timerBar'); if (timerInterval) { clearInterval(timerInterval); bar.style.transition = 'none'; bar.style.width = '0%'; timerInterval = null; return; }
+        bar.style.transition = 'none'; bar.style.width = '100%'; void bar.offsetWidth; bar.style.transition = 'width 10s linear'; bar.style.width = '0%';
+        let t = 10; timerInterval = setInterval(() => { t--; if (t > 0) playTick(); else { playBuzzer(); clearInterval(timerInterval); timerInterval = null; } }, 1000);
+    }
+
+    function startRoulette() {
+        if (isRouletteRunning) return; let valid = []; songsData.forEach((s, i) => { if (s && !s.played) valid.push(i); });
+        if (!valid.length) return; isRouletteRunning = true; let f = 25, curr = -1;
+        const spin = setInterval(() => {
+            const b = document.querySelectorAll('.tune-btn'); if(curr !== -1) b[curr].classList.remove('playing');
+            curr = valid[Math.floor(Math.random() * valid.length)]; if (b[curr]) b[curr].classList.add('playing'); playTick(); f--;
+            if(f <= 0) { clearInterval(spin); setTimeout(() => { if (b[curr]) b[curr].classList.remove('playing'); isRouletteRunning = false; playSong(curr); }, 500); }
+        }, 100);
+    }
+
+    let confettiActive = false, confettiParticles = []; 
+    const cColors = ['#FF007F', '#00FFFF', '#FFF000', '#00E676', '#B388FF'];
+    
+    function startConfetti() {
+        confettiActive = true; 
+        const canvas = document.getElementById('confettiCanvas');
+        const ctx = canvas.getContext('2d'); 
+        
+        // Using global size to prevent squishing if resized
+        canvas.width = window.innerWidth; 
+        canvas.height = window.innerHeight;
+        
+        confettiParticles = Array.from({length: 200}, () => ({ 
+            x: Math.random() * canvas.width, 
+            y: Math.random() * canvas.height - canvas.height, 
+            w: Math.random() * 10 + 8, 
+            h: Math.random() * 10 + 8, 
+            dx: Math.random() * 6 - 3, 
+            dy: Math.random() * 5 + 3, 
+            color: cColors[Math.floor(Math.random() * cColors.length)], 
+            rot: Math.random() * 360, 
+            rotSpeed: Math.random() * 10 - 5 
+        }));
+        
+        function renderConfettiLoop() { 
+            if(!confettiActive) return; 
+            ctx.clearRect(0, 0, canvas.width, canvas.height); 
+            
+            confettiParticles.forEach(p => { 
+                p.x += p.dx; 
+                p.y += p.dy; 
+                p.rot += p.rotSpeed; 
+                
+                if(p.y > canvas.height) { 
+                    p.y = -10; 
+                    p.x = Math.random() * canvas.width; 
+                } 
+                
+                ctx.save(); 
+                ctx.translate(p.x, p.y); 
+                ctx.rotate(p.rot * Math.PI / 180); 
+                ctx.fillStyle = p.color; 
+                ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h); 
+                ctx.restore(); 
+            }); 
+            
+            requestAnimationFrame(renderConfettiLoop); 
+        }
+        
+        renderConfettiLoop();
+    }
+    
+    function triggerEndGame() {
+        if (isGameOver) return; 
+        isGameOver = true; 
+        stopAudio();
+        
+        let max = -Infinity;
+        let win = []; 
+        
+        teams.forEach(t => { 
+            if (t.active) { 
+                if (t.score > max) { 
+                    max = t.score; 
+                    win = [t.name]; 
+                } else if (t.score === max) {
+                    win.push(t.name); 
+                }
+            } 
+        });
+        
+        const tEl = document.getElementById('winnerTitle');
+        const nEl = document.getElementById('winnerNames');
+        
+        if (win.length > 1) { 
+            tEl.innerText = "IT'S A TIE!"; 
+            nEl.innerText = win.join(" & "); 
+        } else { 
+            tEl.innerText = "CHAMPIONS!"; 
+            nEl.innerText = win[0] || "Nobody?"; 
+        }
+        
+        document.getElementById('winnerOverlay').classList.add('active'); 
+        playVictoryFanfare(); 
+        startConfetti();
+    }
+    
+    function closeEndGame() { 
+        document.getElementById('winnerOverlay').classList.remove('active'); 
+        confettiActive = false; 
+        openSetup(); 
+    }
+
+    updateBoardGrid(); renderScoreboard(); renderBoard(); masterRenderLoop(); openSetup(); 
+</script>
+</body>
+</html>
