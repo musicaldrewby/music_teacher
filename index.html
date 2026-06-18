@@ -6,36 +6,49 @@
     <title>Mr. Drew's Music Class</title>
     <style>
         :root {
-            --brand-color: #6366f1; /* Soft Indigo */
+            --brand-color: #6366f1;
             --brand-light: #e0e7ff;
             --accent-teal: #14b8a6;
             --accent-coral: #f43f5e;
             --accent-amber: #f59e0b;
-            --bg-color: #f8fafc;
-            --text-dark: #334155;
-            --text-light: #64748b;
+            --text-dark: #1e293b;
+            --text-light: #475569;
         }
 
         body {
             margin: 0;
             padding: 0;
             font-family: 'Nunito', 'Segoe UI', system-ui, sans-serif;
-            background-color: var(--bg-color);
             color: var(--text-dark);
             display: flex;
             flex-direction: column;
             min-height: 100vh;
+            overflow-x: hidden;
+            background-color: #0b0f19; 
+        }
+
+        #bgCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
         }
 
         header {
-            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
-            color: white;
-            padding: 4rem 2rem;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 3rem 2rem;
             text-align: center;
             border-bottom-left-radius: 30px;
             border-bottom-right-radius: 30px;
-            box-shadow: 0 4px 20px rgba(99, 102, 241, 0.2);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
             margin-bottom: 3rem;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         h1 {
@@ -43,13 +56,16 @@
             font-size: 2.8rem;
             font-weight: 800;
             letter-spacing: -0.5px;
+            background: linear-gradient(135deg, #6366f1 0%, #f43f5e 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .subtitle {
             margin-top: 1rem;
             font-size: 1.2rem;
-            font-weight: 400;
-            opacity: 0.9;
+            font-weight: 600;
+            color: var(--text-light);
             max-width: 600px;
             margin-left: auto;
             margin-right: auto;
@@ -64,25 +80,18 @@
             box-sizing: border-box;
         }
 
-        /* 3-Column Grid Setup */
         .app-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 2rem;
         }
 
-        /* Tablet Layout: Drop to 2 per row */
         @media (max-width: 992px) {
-            .app-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
+            .app-grid { grid-template-columns: repeat(2, 1fr); }
         }
 
-        /* Mobile Layout: Drop to 1 per row */
         @media (max-width: 650px) {
-            .app-grid {
-                grid-template-columns: 1fr;
-            }
+            .app-grid { grid-template-columns: 1fr; }
         }
 
         .app-link {
@@ -93,11 +102,13 @@
         }
 
         .app-card {
-            background-color: white;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             border-radius: 20px;
             padding: 2.5rem 1.5rem;
             text-align: center;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.025);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
             transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
             position: relative;
             overflow: hidden;
@@ -106,9 +117,9 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            border: 1px solid rgba(255, 255, 255, 0.5);
         }
 
-        /* Automatically alternate border colors for new apps */
         .app-link:nth-child(4n+1) .app-card { border-top: 6px solid var(--accent-teal); }
         .app-link:nth-child(4n+2) .app-card { border-top: 6px solid var(--accent-coral); }
         .app-link:nth-child(4n+3) .app-card { border-top: 6px solid var(--accent-amber); }
@@ -117,7 +128,8 @@
         .app-link:hover .app-card, 
         .app-link:focus .app-card {
             transform: translateY(-8px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            box-shadow: 0 20px 35px rgba(0, 0, 0, 0.3);
+            background: rgba(255, 255, 255, 0.95);
         }
 
         .icon-wrapper {
@@ -131,16 +143,16 @@
             justify-content: center;
             font-size: 2rem;
             transition: transform 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
 
-        .app-link:hover .icon-wrapper,
-        .app-link:focus .icon-wrapper {
+        .app-link:hover .icon-wrapper {
             transform: scale(1.1) rotate(5deg);
         }
 
         .app-title {
             font-size: 1.4rem;
-            font-weight: 700;
+            font-weight: 800;
             margin: 0 0 0.8rem 0;
             color: var(--text-dark);
         }
@@ -150,41 +162,47 @@
             color: var(--text-light);
             line-height: 1.6;
             margin: 0;
-            flex-grow: 1; /* Pushes the badge to the bottom */
+            flex-grow: 1;
+            font-weight: 500;
         }
 
         .launch-badge {
             display: inline-block;
             margin-top: 1.5rem;
-            padding: 0.5rem 1.2rem;
+            padding: 0.6rem 1.4rem;
             background-color: var(--brand-color);
             color: white;
-            font-size: 0.9rem;
-            font-weight: 600;
-            border-radius: 20px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            border-radius: 25px;
             letter-spacing: 0.5px;
-            transition: background-color 0.2s ease;
+            transition: background-color 0.2s ease, transform 0.2s ease;
         }
 
-        .app-link:hover .launch-badge,
-        .app-link:focus .launch-badge {
-            background-color: #4f46e5; /* Slightly darker indigo on hover */
+        .app-link:hover .launch-badge {
+            background-color: #4f46e5;
+            transform: scale(1.05);
         }
 
         footer {
             text-align: center;
             padding: 2rem;
-            color: var(--text-light);
+            color: rgba(255,255,255,0.8);
             font-size: 0.95rem;
             margin-top: auto;
+            background: rgba(0,0,0,0.4);
+            backdrop-filter: blur(5px);
         }
     </style>
 </head>
 <body>
+    
+    <canvas id="bgCanvas"></canvas>
+
     <header>
-        <h1>🎵 Mr. Drew's Music Class</h1>
+        <h1>Mr. Drew's Music Class</h1>
         <div class="subtitle">
-            Digital instruments, games, and tools for the modern elementary music classroom.
+            Digital instruments, games, and tools for the modern elementary classroom.
         </div>
     </header>
 
@@ -199,6 +217,7 @@
                     <span class="launch-badge">Launch Game →</span>
                 </div>
             </a>
+
             <a href="rhythmbuilder.html" class="app-link" target="_blank" rel="noopener noreferrer">
                 <div class="app-card">
                     <div class="icon-wrapper">🥁</div>
@@ -207,6 +226,7 @@
                     <span class="launch-badge">Launch App →</span>
                 </div>
             </a>
+
             <a href="xylophone.html" class="app-link" target="_blank" rel="noopener noreferrer">
                 <div class="app-card">
                     <div class="icon-wrapper">🎶</div>
@@ -215,6 +235,7 @@
                     <span class="launch-badge">Launch App →</span>
                 </div>
             </a>
+
             <a href="namethatnote.html" class="app-link" target="_blank" rel="noopener noreferrer">
                 <div class="app-card">
                     <div class="icon-wrapper">🎼</div>
@@ -223,6 +244,7 @@
                     <span class="launch-badge">Launch Game →</span>
                 </div>
             </a>
+
             <a href="rhythmchomper.html" class="app-link" target="_blank" rel="noopener noreferrer">
                 <div class="app-card">
                     <div class="icon-wrapper">🕹️</div>
@@ -231,6 +253,7 @@
                     <span class="launch-badge">Launch Game →</span>
                 </div>
             </a>
+
             <a href="ukestrum.html" class="app-link" target="_blank" rel="noopener noreferrer">
                 <div class="app-card">
                     <div class="icon-wrapper">🎸</div>
@@ -239,6 +262,7 @@
                     <span class="launch-badge">Launch App →</span>
                 </div>
             </a>
+
             <a href="radical_recorder.html" class="app-link" target="_blank" rel="noopener noreferrer">
                 <div class="app-card">
                     <div class="icon-wrapper">🪈</div>
@@ -247,11 +271,201 @@
                     <span class="launch-badge">Launch App →</span>
                 </div>
             </a>
-            </div>
+
+        </div>
     </main>
 
     <footer>
         <p>Creating joyful, tech-integrated experiences for music education.</p>
     </footer>
+
+    <script>
+        const canvas = document.getElementById('bgCanvas');
+        const ctx = canvas.getContext('2d');
+        let width, height;
+
+        const MUSIC_SYMBOLS = ['♪', '♫', '♬', '♩'];
+        let buildings = [];
+        let stars = [];
+        let notes = [];
+
+        // Randomly decide on page load: true = Sunset, false = Night
+        const isSunset = Math.random() > 0.5;
+
+        // Set static colors based on the chosen theme
+        let skyTop, skyBot, citySilhouette, starBaseOpacity;
+
+        if (isSunset) {
+            skyTop = [100, 65, 165]; // Deep Purple
+            skyBot = [255, 81, 47];  // Vibrant Orange
+            starBaseOpacity = 0.4;   // Faint stars in sunset
+            citySilhouette = [30, 20, 30]; // Warmer silhouette
+        } else {
+            skyTop = [11, 15, 25];   // Dark Navy
+            skyBot = [31, 40, 51];   // Deep Blue
+            starBaseOpacity = 1.0;   // Bright stars
+            citySilhouette = [10, 10, 15]; // Darker silhouette
+        }
+
+        function init() {
+            resize();
+            window.addEventListener('resize', resize);
+            
+            // Generate Stars
+            for(let i=0; i<150; i++) {
+                stars.push({
+                    x: Math.random(),
+                    y: Math.random() * 0.8, // Allow stars to reach lower into the expanded sky
+                    size: Math.random() * 2,
+                    blink: Math.random() * Math.PI * 2,
+                    speed: 0.01 + Math.random() * 0.02
+                });
+            }
+
+            // Generate Notes
+            for(let i=0; i<30; i++) {
+                resetNote(true);
+            }
+
+            requestAnimationFrame(animate);
+        }
+
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+            generateCity();
+        }
+
+        function generateCity() {
+            buildings = [];
+            let x = 0;
+            // Generate 3 layers of buildings
+            for(let layer = 0; layer < 3; layer++) {
+                x = 0;
+                let layerOpacity = 1 - (layer * 0.2); 
+                
+                // LOWERED CITY: Base height is much smaller (10% to 30% max based on layer)
+                let baseHeight = height * (0.05 + (layer * 0.08));
+                
+                while (x < width) {
+                    let w = 30 + Math.random() * 70;
+                    // LOWERED CITY: Random height variation is much smaller
+                    let h = baseHeight + Math.random() * (height * 0.2);
+                    
+                    // Windows
+                    let windowCols = Math.floor(w / 15);
+                    let windowRows = Math.floor((h - 20) / 20);
+                    let windows = [];
+                    for(let r=0; r<windowRows; r++) {
+                        for(let c=0; c<windowCols; c++) {
+                            // 30% chance a window is active
+                            if(Math.random() < 0.3) {
+                                windows.push({r, c});
+                            }
+                        }
+                    }
+
+                    buildings.push({
+                        layer,
+                        x, w, h,
+                        layerOpacity,
+                        windows,
+                        windowCols
+                    });
+                    x += w + (Math.random() * 15 - 5);
+                }
+            }
+            // Sort to draw back layers first
+            buildings.sort((a,b) => b.layer - a.layer);
+        }
+
+        function resetNote(initial = false) {
+            let n = {
+                x: Math.random() * width,
+                y: initial ? Math.random() * height : height + 50,
+                speed: 0.3 + Math.random() * 1.2,
+                char: MUSIC_SYMBOLS[Math.floor(Math.random() * MUSIC_SYMBOLS.length)],
+                size: 15 + Math.random() * 25,
+                opacity: 0,
+                maxOpacity: 0.1 + Math.random() * 0.25, 
+                wobbleOffset: Math.random() * Math.PI * 2,
+                wobbleSpeed: 0.005 + Math.random() * 0.015
+            };
+            notes.push(n);
+        }
+
+        function animate() {
+            // Draw Sky Gradient
+            let gradient = ctx.createLinearGradient(0, 0, 0, height);
+            gradient.addColorStop(0, `rgb(${skyTop.join(',')})`);
+            gradient.addColorStop(1, `rgb(${skyBot.join(',')})`);
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, width, height);
+
+            // Draw Stars
+            if (starBaseOpacity > 0) {
+                ctx.fillStyle = `rgba(255, 255, 255, 1)`;
+                stars.forEach(s => {
+                    s.blink += s.speed;
+                    let o = ((Math.sin(s.blink) + 1) / 2) * starBaseOpacity; 
+                    ctx.globalAlpha = o;
+                    ctx.beginPath();
+                    ctx.arc(s.x * width, s.y * height, s.size, 0, Math.PI*2);
+                    ctx.fill();
+                });
+                ctx.globalAlpha = 1;
+            }
+
+            // Draw City
+            buildings.forEach(b => {
+                ctx.fillStyle = `rgba(${citySilhouette.join(',')}, ${b.layerOpacity})`;
+                ctx.fillRect(b.x, height - b.h, b.w, b.h);
+
+                // Draw Windows
+                ctx.fillStyle = `rgba(255, 220, 100, ${b.layerOpacity * 0.8})`;
+                let paddingX = (b.w - (b.windowCols * 10)) / 2;
+                b.windows.forEach(win => {
+                    let wx = b.x + paddingX + (win.c * 10);
+                    let wy = height - b.h + 20 + (win.r * 20);
+                    ctx.fillRect(wx, wy, 5, 10);
+                });
+            });
+
+            // Draw Notes
+            ctx.textBaseline = 'middle';
+            ctx.textAlign = 'center';
+            for (let i = notes.length - 1; i >= 0; i--) {
+                let n = notes[i];
+                n.y -= n.speed;
+                n.wobbleOffset += n.wobbleSpeed;
+                
+                // Fade in at bottom, fade out at top
+                if (n.y > height - 100) {
+                    n.opacity += 0.01;
+                } else if (n.y < 100) {
+                    n.opacity -= 0.01;
+                } else {
+                    n.opacity = n.maxOpacity;
+                }
+                
+                if (n.opacity < 0) n.opacity = 0;
+
+                let currentX = n.x + Math.sin(n.wobbleOffset) * 20;
+
+                ctx.font = `${n.size}px Arial`;
+                ctx.fillStyle = `rgba(255, 255, 255, ${n.opacity})`;
+                ctx.fillText(n.char, currentX, n.y);
+
+                if (n.y < -50) {
+                    notes.splice(i, 1);
+                    resetNote();
+                }
+            }
+
+            requestAnimationFrame(animate);
+        }
+
+        init();
+    </script>
 </body>
 </html>
