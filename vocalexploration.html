@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mr. Drew's Animated Vocal Explorations</title>
+    <style>
+        :root {
+            --primary: #4a90e2;
+            --accent: #ff6b6b;
+            --text: #ffffff;
+            --panel-bg: rgba(20, 20, 30, 0.9);
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            user-select: none;
+            background: #000;
+            touch-action: none; 
+        }
+
+        #app-container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            touch-action: none;
+        }
+
+        /* --- THEME BACKGROUNDS --- */
+        #background-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            transition: all 1s ease-in-out;
+        }
+
+        #decor-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        /* Space */
+        .decor-space .star { position: absolute; background: white; border-radius: 50%; animation: twinkle var(--speed) infinite ease-in-out; }
+        .decor-space .shooting-star { position: absolute; width: 100px; height: 2px; background: linear-gradient(90deg, white, transparent); transform: rotate(-45deg); opacity: 0; animation: shoot var(--speed) infinite linear; }
+        /* Removed infinite animation here so JS can handle it gracefully to stop "popping" */
+        .decor-space .planet { position: absolute; font-size: 150px; opacity: 0.6; left: 110vw; will-change: left; }
+        
+        /* Ocean */
+        .bg-ocean { background: linear-gradient(to bottom, #4facfe 0%, #0062a8 100%); }
+        .decor-ocean .bubble { position: absolute; background: rgba(255, 255, 255, 0.4); border: 1px solid rgba(255,255,255,0.6); border-radius: 50%; bottom: -50px; animation: float-up var(--speed) infinite linear; z-index: 5; }
+        .decor-ocean .ray { position: absolute; top: -100px; left: 50%; width: var(--w); height: 150vh; background: linear-gradient(to bottom, rgba(255, 255, 255, 0.3) 0%, transparent 60%); transform-origin: top center; filter: blur(20px); pointer-events: none; mix-blend-mode: overlay; animation: ray-sway var(--speed) infinite ease-in-out alternate; margin-left: var(--offset); z-index: 0; }
+        .decor-ocean .coral-reef { position: absolute; bottom: 0; left: 0; width: 100%; height: 140px; display: flex; align-items: flex-end; justify-content: space-around; z-index: 4; filter: drop-shadow(0 0 10px rgba(0,0,0,0.3)); }
+        .coral-lump { width: var(--w); height: var(--h); background: var(--c); border-radius: 50% 50% 0 0; margin-right: -20px; opacity: 0.95; }
+        .coral-weed { width: 8px; height: var(--h); background: #2ecc71; border-radius: 4px; animation: sway var(--speed) infinite ease-in-out; transform-origin: bottom center; }
+        /* Sky */
+        .bg-sky { background: linear-gradient(to bottom, #87ceeb 0%, #e0f6ff 100%); }
+        .decor-sky .cloud { position: absolute; font-size: 250px; opacity: 0.5; animation: drift var(--speed) infinite linear; }
+        
+        /* Graveyard */
+        .bg-graveyard { 
+            background: linear-gradient(to bottom, #000000 0%, #151525 60%, #353b48 100%); 
+        }
+        .decor-graveyard .moon { position: absolute; top: 10%; right: 15%; width: 180px; height: 180px; background: radial-gradient(circle, #fff 0%, #eee 70%, #ccc 100%); border-radius: 50%; box-shadow: 0 0 60px rgba(255,255,255,0.4); z-index: 1; }
+        .decor-graveyard .dark-cloud { position: absolute; font-size: 200px; opacity: 0.3; animation: drift var(--speed) infinite linear; z-index: 2; }
+        .decor-graveyard .grave-silhouette { position: absolute; bottom: 0; background: #000; width: 100%; height: 60px; z-index: 4; }
+        .decor-graveyard .grave { position: absolute; bottom: 40px; background: #080808; width: var(--w); height: var(--h); clip-path: polygon(0% 100%, 0% 20%, 20% 0%, 80% 0%, 100% 20%, 100% 100%); z-index: 3; transform-origin: bottom center; }
+        .decor-graveyard .glowing-eyes {
+            position: absolute; width: 5px; height: 5px;
+            border-radius: 50%;
+            animation: blink-eyes var(--speed) infinite ease-in-out;
+            opacity: 0; z-index: 2;
+        }
+        @keyframes blink-eyes { 0% { opacity: 0; } 5% { opacity: 1; } 10% { opacity: 0; } 15% { opacity: 1; } 20% { opacity: 0; } 100% { opacity: 0; } }
+
+        /* Garden */
+        .bg-garden { background: linear-gradient(to bottom, #a8e063 0%, #56ab2f 100%); }
+        .flower-container { position: absolute; bottom: -5px; width: 80px; transform-origin: bottom center; animation: sway var(--speed) infinite ease-in-out; display: flex; flex-direction: column; align-items: center; }
+        .flower-head { position: relative; width: 60px; height: 60px; }
+        .flower-petal { position: absolute; width: 30px; height: 50px; background: var(--color); border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%; left: 15px; top: 5px; opacity: 0.95; box-shadow: inset 0 0 10px rgba(0,0,0,0.1); }
+        .flower-center { position: absolute; width: 18px; height: 18px; background: #f1c40f; border-radius: 50%; left: 21px; top: 21px; z-index: 2; }
+        .flower-stem { width: 4px; background: #2d5a27; border-radius: 2px; }
+        /* Winter/Arctic */
+        .bg-winter { background: linear-gradient(to bottom, #cbd5e1 0%, #94a3b8 100%); }
+        .bg-arctic { background: linear-gradient(to bottom, #e0f2fe 0%, #7dd3fc 100%); }
+        .mountain-container, .iceberg-container { position: absolute; bottom: 0; display: flex; align-items: flex-end; will-change: transform; height: 100%; white-space: nowrap; }
+        .mountain-far, .iceberg-far { animation: parallax-continuous 60s linear infinite; }
+        .mountain-near, .iceberg-near { animation: parallax-continuous 30s linear infinite; }
+        .scrolling-group { display: inline-flex; align-items: flex-end; min-width: 100vw; }
+        .mountain { position: relative; width: 0; height: 0; border-left: var(--size) solid transparent; border-right: var(--size) solid transparent; border-bottom: calc(var(--size) * 1.5) solid var(--color); margin-right: -50px; }
+        .mountain::after { content: ''; position: absolute; top: 0; left: calc(var(--size) * -0.33); width: 0; height: 0; border-left: calc(var(--size) * 0.33) solid transparent; border-right: calc(var(--size) * 0.33) solid transparent; border-bottom: calc(var(--size) * 0.5) solid #fff; }
+        .iceberg { position: relative; width: var(--size); height: calc(var(--size) * 0.6); background: #fff; clip-path: polygon(10% 0%, 30% 20%, 50% 0%, 80% 30%, 100% 10%, 90% 100%, 0% 100%); margin-right: 40px; opacity: 0.9; filter: drop-shadow(0 0 10px rgba(255,255,255,0.5)); }
+        .snowflake { position: absolute; background: white; border-radius: 50%; animation: fall var(--speed) infinite linear; }
+        /* Fantasy */
+        .bg-fantasy { background: linear-gradient(to bottom, #6a11cb 0%, #2575fc 100%); }
+        .decor-fantasy .orb { position: absolute; width: 10px; height: 10px; background: #fff; box-shadow: 0 0 10px #fff, 0 0 20px #e040fb; border-radius: 50%; animation: pulse-orb var(--speed) infinite ease-in-out; }
+
+        /* --- ANIMATIONS --- */
+        @keyframes twinkle { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
+        @keyframes shoot { 0% { transform: translateX(100vw) translateY(-100vh) rotate(-45deg); opacity: 0; } 10% { opacity: 1; } 30% { transform: translateX(-100vw) translateY(100vh) rotate(-45deg); opacity: 0; } 100% { opacity: 0; } }
+        @keyframes float-up { 0% { transform: translateY(0) translateX(0); opacity: 0; } 20% { opacity: 1; } 80% { opacity: 1; } 100% { transform: translateY(-120vh) translateX(20px); opacity: 0; } }
+        @keyframes ray-sway { from { transform: rotate(var(--angle-start)); opacity: 0.3; } to { transform: rotate(var(--angle-end)); opacity: 0.6; } }
+        @keyframes drift { 0% { left: -400px; } 100% { left: 120vw; } }
+        @keyframes drift-slow { 0% { left: 110vw; } 100% { left: -400px; } }
+        @keyframes fall { 0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; } 100% { transform: translateY(110vh) rotate(360deg); opacity: 0.3; } }
+        @keyframes sway { 0%, 100% { transform: rotate(-8deg); } 50% { transform: rotate(8deg); } }
+        @keyframes pulse-orb { 0%, 100% { transform: scale(1); opacity: 0.5; } 50% { transform: scale(1.5); opacity: 1; } }
+        @keyframes parallax-continuous { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+        /* --- UI ELEMENTS --- */
+        
+        /* New Floating Header Layout */
+        .top-ui-container {
+            position: absolute;
+            top: 20px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            pointer-events: none; /* Let clicks pass through on sides */
+            z-index: 100;
+        }
+
+        .glass-capsule {
+            background: rgba(20, 20, 30, 0.65);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-radius: 50px;
+            padding: 8px 25px;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            border: 1px solid var(--glass-border);
+            pointer-events: auto; /* Re-enable clicks for buttons */
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .glass-capsule:hover {
+            background: rgba(30, 30, 45, 0.85);
+            border-color: rgba(255,255,255,0.4);
+        }
+
+        /* App Title inside Capsule */
+        #app-title { 
+            margin: 0; 
+            font-size: 0.9rem; 
+            color: #ddd; 
+            margin-right: 15px; 
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            border-right: 1px solid rgba(255,255,255,0.2);
+            padding-right: 15px;
+        }
+
+        /* Small Buttons (Top) */
+        .btn-small {
+            padding: 8px 12px; 
+            border: none; 
+            border-radius: 8px; 
+            cursor: pointer;
+            font-weight: 600; 
+            font-size: 0.8rem; 
+            transition: all 0.2s;
+            display: flex; align-items: center; gap: 6px; 
+            background: rgba(255,255,255,0.1);
+            color: white;
+        }
+        .btn-small:hover { background: rgba(255,255,255,0.25); transform: translateY(-2px); }
+        .btn-small:active { transform: scale(0.95); }
+        
+        .sound-on { color: #ffa502; background: rgba(255, 165, 2, 0.2); }
+        .loop-active { background: #a55eea; color: white; box-shadow: 0 0 10px #a55eea; }
+
+        /* Bottom Action Buttons (Big) */
+        .bottom-controls {
+            position: absolute; 
+            bottom: 40px; 
+            width: 100%; 
+            display: flex; 
+            justify-content: center; 
+            gap: 40px; 
+            z-index: 100; 
+            pointer-events: none;
+        }
+
+        .btn-big {
+            width: 90px; height: 90px; 
+            border-radius: 50%; 
+            border: 4px solid rgba(255,255,255,0.1);
+            pointer-events: auto; 
+            font-size: 2.5rem; 
+            display: flex; justify-content: center; align-items: center;
+            cursor: pointer;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5); 
+            transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            backdrop-filter: blur(5px);
+        }
+        
+        .btn-big:active { transform: scale(0.9); box-shadow: 0 5px 15px rgba(0,0,0,0.5); }
+        .btn-big:disabled { opacity: 0.5; filter: grayscale(1); cursor: not-allowed; transform: none; }
+
+        .btn-record { background: linear-gradient(135deg, #ff4757, #ff6b81); color: white; }
+        .btn-play { background: linear-gradient(135deg, #2ed573, #7bed9f); color: white; }
+        .is-recording { background: linear-gradient(135deg, #2f3542, #57606f) !important; animation: pulse-border 1.5s infinite; }
+        .is-playing-btn { background: linear-gradient(135deg, #ffa502, #ffc048) !important; }
+
+        @keyframes pulse-border { 0% { box-shadow: 0 0 0 0 rgba(255, 71, 87, 0.7); } 70% { box-shadow: 0 0 0 20px rgba(255, 71, 87, 0); } 100% { box-shadow: 0 0 0 0 rgba(255, 71, 87, 0); } }
+
+        canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; cursor: default; z-index: 5; }
+        
+        #voyager-object {
+            position: absolute; z-index: 10; cursor: grab; display: flex; justify-content: center; align-items: center;
+            font-size: 110px; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
+            transition: transform 0.2s, filter 0.1s, opacity 0.2s; pointer-events: auto; left: -500px; top: -500px;
+        }
+        #voyager-object:active { cursor: grabbing; }
+
+        .face-right-ufo { transform: translate(-50%, -50%) rotate(45deg); }
+        .face-right-fish { transform: translate(-50%, -50%) scaleX(-1); }
+        .face-right-balloon { transform: translate(-50%, -50%); }
+        .face-right-bee { transform: translate(-50%, -50%) scaleX(-1); }
+        .face-right-skier { transform: translate(-50%, -50%) scaleX(-1); } 
+        .face-right-dragon { transform: translate(-50%, -50%) scaleX(-1); }
+        .face-right-penguin { transform: translate(-50%, -50%) scaleX(-1); }
+        .face-right-ghost { transform: translate(-50%, -50%); }
+
+        .instruction-overlay {
+            position: absolute; bottom: 140px; /* Moved up to clear big buttons */
+            left: 50%; transform: translateX(-50%);
+            background: rgba(0,0,0,0.6); color: rgba(255,255,255,0.9); 
+            padding: 8px 20px; border-radius: 50px;
+            pointer-events: none; z-index: 20; font-size: 0.9rem; text-align: center;
+            border: 1px solid rgba(255,255,255,0.1); 
+            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+        }
+
+        /* SETTINGS PANEL */
+        #settings-panel {
+            position: absolute; top: 80px; left: 50%; transform: translateX(-50%) scale(0.9); 
+            width: 280px;
+            background: var(--panel-bg); backdrop-filter: blur(25px);
+            border-radius: 20px; padding: 20px; z-index: 200;
+            color: white; border: 1px solid rgba(255,255,255,0.1);
+            opacity: 0; pointer-events: none;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex; flex-direction: column; gap: 15px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+        }
+        #settings-panel.open { transform: translateX(-50%) scale(1); opacity: 1; pointer-events: auto; }
+        
+        .setting-row { display: flex; flex-direction: column; gap: 8px; }
+        .setting-label { font-size: 0.8rem; font-weight: 700; color: #aaa; text-transform: uppercase; letter-spacing: 1px; }
+        select {
+            width: 100%; padding: 12px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.1);
+            background: rgba(0,0,0,0.3); color: white; font-size: 0.95rem;
+            cursor: pointer; outline: none; transition: border 0.3s;
+        }
+        select:focus { border-color: var(--primary); }
+        select option { background: #2f3542; color: white; }
+        .toggle-row { display: flex; align-items: center; justify-content: space-between; cursor: pointer; padding: 5px 0; }
+        .toggle-switch {
+            position: relative; width: 44px; height: 24px; background: rgba(255,255,255,0.2);
+            border-radius: 20px; cursor: pointer; transition: background 0.3s;
+        }
+        .toggle-switch::after {
+            content: ''; position: absolute; top: 2px; left: 2px; width: 20px; height: 20px;
+            background: white; border-radius: 50%; transition: left 0.3s; box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        .toggle-active { background: #2ed573; }
+        .toggle-active::after { left: 22px; }
+    </style>
+</head>
+<body>
+
+<div id="app-container">
+    <div id="background-layer" class="bg-space"></div>
+    <div id="decor-layer"></div>
+
+    <!-- NEW TOP FLOATING CAPSULE -->
+    <div class="top-ui-container">
+        <div class="glass-capsule">
+            <h1 id="app-title">Space</h1>
+            <button class="btn-small" id="sound-btn" onclick="toggleSound()">🔇 Sound</button>
+            <button class="btn-small" onclick="cycleTheme()">✨ Theme</button>
+            <button class="btn-small" id="loop-btn" onclick="toggleLoop()">🔁 Loop</button>
+            <button class="btn-small" onclick="resetApp()">🗑️ Reset</button>
+            <button class="btn-small" onclick="toggleSettings()">⚙️</button>
+        </div>
+    </div>
+
+    <!-- NEW BOTTOM ACTION BUTTONS -->
+    <div class="bottom-controls">
+        <button class="btn-big btn-record" id="record-btn" onclick="toggleRecordingMode()" title="Draw Path">⏺️</button>
+        <button class="btn-big btn-play" id="play-btn" onclick="togglePlay()" disabled title="Play Song">▶️</button>
+    </div>
+
+    <!-- Settings Panel (Centered) -->
+    <div id="settings-panel">
+        <div class="setting-row">
+            <span class="setting-label">Instrument Sound</span>
+            <select id="inst-select" onchange="changeInstrument(this.value)">
+                <option value="triangle">Triangle (Classic)</option>
+                <option value="sine">Sine (Flute-like)</option>
+                <option value="sawtooth">Sawtooth (Synth)</option>
+                <option value="square">Square (8-bit)</option>
+            </select>
+        </div>
+        <div class="setting-row">
+            <span class="setting-label">Pitch Scale</span>
+            <select id="scale-select" onchange="changeScale(this.value)">
+                <option value="continuous">Continuous (Slide)</option>
+                <option value="chromatic">Chromatic (All Notes)</option>
+                <option value="major">C Major (Happy)</option>
+                <option value="minor">C Minor (Sad)</option>
+                <option value="pentatonic">Pentatonic (Folk)</option>
+            </select>
+        </div>
+        <!-- NEW FEATURE: SKIPS & LEAPS -->
+        <div class="toggle-row" onclick="toggleMultiStroke()">
+            <span class="setting-label">Draw Skips & Leaps</span>
+            <div id="multistroke-toggle" class="toggle-switch"></div>
+        </div>
+        <div class="toggle-row" onclick="toggleReverb()">
+            <span class="setting-label">Space Echo</span>
+            <div id="reverb-toggle" class="toggle-switch"></div>
+        </div>
+    </div>
+
+    <div id="voyager-object" class="face-right-ufo">🚀</div>
+    <canvas id="canvas"></canvas>
+
+    <div class="instruction-overlay" id="status">
+        Drag the voyager to your starting position!
+    </div>
+</div>
+
+<script>
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    const voyager = document.getElementById('voyager-object');
+    const bgLayer = document.getElementById('background-layer');
+    const decorLayer = document.getElementById('decor-layer');
+    const appContainer = document.getElementById('app-container');
+    const appTitle = document.getElementById('app-title');
+    const statusText = document.getElementById('status');
+    const playBtn = document.getElementById('play-btn');
+    const recordBtn = document.getElementById('record-btn');
+    const soundBtn = document.getElementById('sound-btn');
+    const loopBtn = document.getElementById('loop-btn');
+    const settingsPanel = document.getElementById('settings-panel');
+    const reverbToggle = document.getElementById('reverb-toggle');
+
+    const DEFAULT_SIZE = 110;
+    let isPositioning = true, isRecordingMode = false, isDrawing = false, isPlaying = false;
+    let path = [], animationId = null, playbackStartTime = 0, recordingStartTime = 0, voyagerX = 0, voyagerY = 0;
+    
+    // Offsets
+    let dragOffsetX = 0, dragOffsetY = 0;
+
+    // Settings State
+    let isLooping = false;
+    let isMultiStroke = false; // New feature toggle
+    let currentInstrument = 'triangle';
+    let currentScale = 'continuous';
+    let isReverbOn = false;
+    let particles = [];
+
+    // Audio Context
+    let audioCtx = null, oscillator = null, gainNode = null, delayNode = null, feedbackNode = null, wetGainNode = null, soundEnabled = false;
+
+    // --- AUDIO ENGINE ---
+    function initAudio() {
+        if (!audioCtx) {
+            audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            oscillator = audioCtx.createOscillator();
+            gainNode = audioCtx.createGain(); 
+            
+            delayNode = audioCtx.createDelay();
+            delayNode.delayTime.value = 0.3; 
+            
+            feedbackNode = audioCtx.createGain();
+            feedbackNode.gain.value = 0.4; 
+
+            wetGainNode = audioCtx.createGain(); 
+            wetGainNode.gain.value = 0; 
+
+            oscillator.type = currentInstrument;
+            gainNode.gain.setValueAtTime(0, audioCtx.currentTime);
+
+            oscillator.connect(gainNode);
+            gainNode.connect(audioCtx.destination); 
+            gainNode.connect(delayNode);
+            delayNode.connect(wetGainNode);
+            wetGainNode.connect(audioCtx.destination);
+            delayNode.connect(feedbackNode);
+            feedbackNode.connect(delayNode);
+            
+            oscillator.start();
+            updateReverbState();
+        }
+    }
+
+    function toggleSound() {
+        if (!audioCtx) initAudio();
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+        soundEnabled = !soundEnabled;
+        soundBtn.innerHTML = soundEnabled ? "🔊 Sound" : "🔇 Sound";
+        soundBtn.classList.toggle('sound-on', soundEnabled);
+        if (!soundEnabled) gainNode.gain.setTargetAtTime(0, audioCtx.currentTime, 0.05);
+    }
+
+    function changeInstrument(type) {
+        currentInstrument = type;
+        if (oscillator) oscillator.type = type;
+    }
+
+    function changeScale(scale) {
+        currentScale = scale;
+    }
+
+    function toggleReverb() {
+        isReverbOn = !isReverbOn;
+        reverbToggle.classList.toggle('toggle-active', isReverbOn);
+        if(audioCtx) updateReverbState();
+    }
+
+    // New Toggle for skips/leaps
+    function toggleMultiStroke() {
+        isMultiStroke = !isMultiStroke;
+        document.getElementById('multistroke-toggle').classList.toggle('toggle-active', isMultiStroke);
+    }
+
+    function updateReverbState() {
+        if(!audioCtx || !wetGainNode) return;
+        const wetLevel = isReverbOn ? 0.4 : 0;
+        wetGainNode.gain.setTargetAtTime(wetLevel, audioCtx.currentTime, 0.1);
+    }
+
+    // --- PITCH LOGIC ---
+    function getQuantizedFrequency(y) {
+        const ratio = 1 - (y / window.innerHeight); 
+        const baseNote = 48; // MIDI note for C3
+        const range = 48; // 4 Octaves
+        let continuousNote = baseNote + (ratio * range);
+        
+        if (currentScale === 'continuous') return 130.81 * Math.pow(2, ratio * 4);
+
+        const roundedNote = Math.round(continuousNote);
+        const noteInOctave = roundedNote % 12;
+        const octave = Math.floor(roundedNote / 12);
+        
+        let validNotes = [];
+        if (currentScale === 'chromatic') validNotes = [0,1,2,3,4,5,6,7,8,9,10,11];
+        else if (currentScale === 'major') validNotes = [0,2,4,5,7,9,11]; 
+        else if (currentScale === 'minor') validNotes = [0,2,3,5,7,8,10]; 
+        else if (currentScale === 'pentatonic') validNotes = [0,3,5,7,10]; 
+
+        let snappedNote = validNotes.reduce((prev, curr) => 
+            Math.abs(curr - noteInOctave) < Math.abs(prev - noteInOctave) ? curr : prev
+        );
+
+        const finalMidi = (octave * 12) + snappedNote;
+        return 440 * Math.pow(2, (finalMidi - 69) / 12);
+    }
+
+    function updatePitch(y) {
+        const freq = getQuantizedFrequency(y);
+        const pitchRatio = 1 - (y / window.innerHeight);
+        const glowSize = 10 + (pitchRatio * 40);
+        voyager.style.filter = `drop-shadow(0 0 ${glowSize}px var(--line-color)) brightness(${1 + pitchRatio * 0.5})`;
+        
+        if (!soundEnabled || !audioCtx) return;
+        oscillator.frequency.setTargetAtTime(freq, audioCtx.currentTime, 0.03);
+        let volume = 0.2;
+        if (currentInstrument === 'sawtooth' || currentInstrument === 'square') volume = 0.15;
+        gainNode.gain.setTargetAtTime(volume, audioCtx.currentTime, 0.03);
+    }
+
+    function stopPitch() { 
+        if (gainNode && audioCtx) gainNode.gain.setTargetAtTime(0, audioCtx.currentTime, 0.05); 
+        voyager.style.filter = `drop-shadow(0 10px 20px rgba(0,0,0,0.5))`;
+    }
+
+    // --- PARTICLES ---
+    function createParticle(x, y) {
+        const angle = Math.random() * Math.PI * 2;
+        const speed = Math.random() * 2 + 0.5;
+        const themeColor = themes[currentThemeIndex].line;
+        particles.push({ x: x, y: y, vx: Math.cos(angle) * speed, vy: Math.sin(angle) * speed, life: 1.0, color: themeColor });
+    }
+
+    function updateParticles() {
+        for (let i = particles.length - 1; i >= 0; i--) {
+            let p = particles[i];
+            p.x += p.vx; p.y += p.vy; p.life -= 0.02;
+            if (p.life <= 0) particles.splice(i, 1);
+        }
+    }
+
+    function drawParticles() {
+        for (let p of particles) {
+            ctx.globalAlpha = p.life; ctx.fillStyle = p.color; ctx.beginPath();
+            ctx.arc(p.x, p.y, Math.random() * 3 + 1, 0, Math.PI * 2); ctx.fill();
+        }
+        ctx.globalAlpha = 1.0;
+    }
+
+    // --- MAIN RENDER LOOP ---
+    function updateDecor() {
+        decorLayer.innerHTML = '';
+        const theme = themes[currentThemeIndex].name;
+        decorLayer.className = 'decor-' + theme.toLowerCase();
+        document.documentElement.style.setProperty('--line-color', themes[currentThemeIndex].line);
+
+        if (theme === 'Space') {
+            for (let i = 0; i < 50; i++) {
+                const s = document.createElement('div');
+                s.className = 'star'; s.style.left = Math.random() * 100 + '%'; s.style.top = Math.random() * 100 + '%';
+                const size = Math.random() * 3 + 1 + 'px'; s.style.width = size; s.style.height = size;
+                s.style.setProperty('--speed', Math.random() * 3 + 2 + 's'); decorLayer.appendChild(s);
+            }
+            const p = document.createElement('div'); p.className = 'planet';
+            
+            // FIX: Run animation once, reset, and start again to prevent popping
+            const randomizePlanet = (el) => {
+                const planetEmojis = ['🌍', '🪐', '🔴', '🌕', '☄️']; 
+                el.innerText = planetEmojis[Math.floor(Math.random() * planetEmojis.length)];
+                el.style.top = (Math.random() * 70 + 10) + '%'; 
+                
+                // Clear the current animation and trigger a reflow to reset its state
+                el.style.animation = 'none';
+                void el.offsetWidth; 
+                
+                // Start a fresh, non-infinite animation
+                const speed = (Math.random() * 30 + 45) + 's'; 
+                el.style.animation = `drift-slow ${speed} linear forwards`;
+            };
+            
+            randomizePlanet(p); 
+            // Listen for the end of the animation to trigger the next pass
+            p.addEventListener('animationend', () => randomizePlanet(p)); 
+            decorLayer.appendChild(p);
+            
+        } else if (theme === 'Ocean') {
+            for(let i=0; i<5; i++) {
+                const ray = document.createElement('div'); ray.className = 'ray';
+                const startAngle = (Math.random() * 40 - 20) + 'deg'; const endAngle = (parseFloat(startAngle) + (Math.random() * 10 - 5)) + 'deg';
+                ray.style.setProperty('--angle-start', startAngle); ray.style.setProperty('--angle-end', endAngle);
+                ray.style.setProperty('--speed', (Math.random() * 5 + 5) + 's'); ray.style.setProperty('--offset', (Math.random() * 300 - 150) + 'px'); ray.style.setProperty('--w', (Math.random() * 100 + 80) + 'px');
+                decorLayer.appendChild(ray);
+            }
+            for (let i = 0; i < 25; i++) { 
+                const b = document.createElement('div'); b.className = 'bubble'; b.style.left = Math.random() * 100 + '%'; const size = Math.random() * 20 + 10 + 'px'; b.style.width = size; b.style.height = size;
+                b.style.setProperty('--speed', Math.random() * 4 + 4 + 's'); b.style.animationDelay = Math.random() * 5 + 's'; decorLayer.appendChild(b);
+            }
+            const reef = document.createElement('div'); reef.className = 'coral-reef'; const coralColors = ['#ff7e5f', '#feb47b', '#86a8e7', '#91eae4', '#ff6b6b', '#d291bc'];
+            for (let i = 0; i < 25; i++) {
+                if (Math.random() > 0.4) {
+                    const c = document.createElement('div'); c.className = 'coral-lump'; c.style.setProperty('--w', (Math.random()*40 + 30) + 'px'); c.style.setProperty('--h', (Math.random()*60 + 30) + 'px'); c.style.setProperty('--c', coralColors[Math.floor(Math.random() * coralColors.length)]); reef.appendChild(c);
+                } else {
+                    const s = document.createElement('div'); s.className = 'coral-weed'; s.style.setProperty('--h', (Math.random()*60 + 50) + 'px'); s.style.setProperty('--speed', (Math.random()*2 + 2) + 's'); s.style.animationDelay = -Math.random() + 's'; reef.appendChild(s);
+                }
+            }
+            decorLayer.appendChild(reef);
+        } else if (theme === 'Sky') {
+            for (let i = 0; i < 6; i++) {
+                const cl = document.createElement('div'); cl.className = 'cloud'; cl.innerText = '☁️';
+                cl.style.top = Math.random() * 60 + '%'; cl.style.setProperty('--speed', Math.random() * 20 + 20 + 's');
+                cl.style.animationDelay = '-' + Math.random() * 20 + 's'; decorLayer.appendChild(cl);
+            }
+        } else if (theme === 'Graveyard') {
+            const moon = document.createElement('div'); moon.className = 'moon'; decorLayer.appendChild(moon);
+            for (let i = 0; i < 5; i++) {
+                const cl = document.createElement('div'); cl.className = 'dark-cloud'; cl.innerText = '☁️';
+                cl.style.top = (Math.random() * 40) + '%'; cl.style.setProperty('--speed', Math.random() * 15 + 15 + 's');
+                cl.style.animationDelay = '-' + Math.random() * 20 + 's'; decorLayer.appendChild(cl);
+            }
+            for (let i = 0; i < 6; i++) {
+                const e = document.createElement('div'); e.className = 'glowing-eyes';
+                e.style.left = (Math.random() * 90 + 5) + '%'; e.style.top = (Math.random() * 40 + 40) + '%'; 
+                const color = Math.random() > 0.5 ? '#ff3333' : '#ffea00'; e.style.backgroundColor = color; e.style.boxShadow = `12px 0 0 ${color}, 0 0 8px ${color}`; 
+                e.style.setProperty('--speed', (Math.random() * 5 + 4) + 's'); e.style.animationDelay = (Math.random() * 5) + 's'; decorLayer.appendChild(e);
+            }
+            for (let i = 0; i < 10; i++) {
+                const g = document.createElement('div'); g.className = 'grave';
+                g.style.left = (i * 12) + (Math.random() * 5) + '%'; g.style.setProperty('--w', (50 + Math.random() * 30) + 'px'); g.style.setProperty('--h', (80 + Math.random() * 70) + 'px'); 
+                const tilt = (Math.random() * 14 - 7); g.style.transform = `rotate(${tilt}deg)`; decorLayer.appendChild(g);
+            }
+            const ground = document.createElement('div'); ground.className = 'grave-silhouette'; decorLayer.appendChild(ground);
+        } else if (theme === 'Garden') {
+            const colors = ['#ff79c6', '#ffb86c', '#ff5555', '#f1c40f', '#bd93f9'];
+            for (let i = 0; i < 12; i++) {
+                const fCont = document.createElement('div'); fCont.className = 'flower-container'; fCont.style.left = (i * 8.5) + (Math.random() * 4) + '%'; fCont.style.setProperty('--speed', Math.random() * 1.5 + 2 + 's'); fCont.style.animationDelay = Math.random() * 2 + 's';
+                const fHead = document.createElement('div'); fHead.className = 'flower-head'; const color = colors[Math.floor(Math.random() * colors.length)];
+                for(let p = 0; p < 6; p++) { const petal = document.createElement('div'); petal.className = 'flower-petal'; petal.style.setProperty('--color', color); petal.style.transform = `rotate(${p * 60}deg) translateY(-10px)`; fHead.appendChild(petal); }
+                const center = document.createElement('div'); center.className = 'flower-center'; fHead.appendChild(center); const stem = document.createElement('div'); stem.className = 'flower-stem'; stem.style.height = (Math.random() * 40 + 60) + 'px';
+                fCont.appendChild(fHead); fCont.appendChild(stem); decorLayer.appendChild(fCont);
+            }
+        } else if (theme === 'Winter') {
+            const createMountainRow = (count, baseSize, color, cssClass) => {
+                const container = document.createElement('div'); container.className = `mountain-container ${cssClass}`;
+                for (let g = 0; g < 2; g++) {
+                    const group = document.createElement('div'); group.className = 'scrolling-group';
+                    for (let i = 0; i < count; i++) { const m = document.createElement('div'); m.className = 'mountain'; m.style.setProperty('--size', (Math.random() * baseSize + (baseSize * 0.6)) + 'px'); m.style.setProperty('--color', color); group.appendChild(m); }
+                    container.appendChild(group);
+                }
+                return container;
+            };
+            decorLayer.appendChild(createMountainRow(12, 120, '#64748b', 'mountain-far')); decorLayer.appendChild(createMountainRow(8, 200, '#94a3b8', 'mountain-near'));
+            for (let i = 0; i < 35; i++) { const sn = document.createElement('div'); sn.className = 'snowflake'; sn.style.left = Math.random() * 100 + '%'; sn.style.width = sn.style.height = (Math.random() * 5 + 2) + 'px'; sn.style.setProperty('--speed', (Math.random() * 5 + 5) + 's'); sn.style.animationDelay = Math.random() * 5 + 's'; decorLayer.appendChild(sn); }
+        } else if (theme === 'Arctic') {
+            const createIcebergRow = (count, baseSize, cssClass) => {
+                const container = document.createElement('div'); container.className = `iceberg-container ${cssClass}`;
+                for (let g = 0; g < 2; g++) {
+                    const group = document.createElement('div'); group.className = 'scrolling-group';
+                    for (let i = 0; i < count; i++) { const m = document.createElement('div'); m.className = 'iceberg'; m.style.setProperty('--size', (Math.random() * baseSize + (baseSize * 0.8)) + 'px'); group.appendChild(m); }
+                    container.appendChild(group);
+                }
+                return container;
+            };
+            decorLayer.appendChild(createIcebergRow(10, 100, 'iceberg-far')); decorLayer.appendChild(createIcebergRow(6, 180, 'iceberg-near'));
+            for (let i = 0; i < 35; i++) { const sn = document.createElement('div'); sn.className = 'snowflake'; sn.style.left = Math.random() * 100 + '%'; sn.style.width = sn.style.height = (Math.random() * 5 + 2) + 'px'; sn.style.setProperty('--speed', (Math.random() * 5 + 5) + 's'); sn.style.animationDelay = Math.random() * 5 + 's'; decorLayer.appendChild(sn); }
+        } else if (theme === 'Fantasy') {
+            for (let i = 0; i < 20; i++) { const o = document.createElement('div'); o.className = 'orb'; o.style.left = Math.random() * 100 + '%'; o.style.top = Math.random() * 100 + '%'; o.style.setProperty('--speed', Math.random() * 2 + 1 + 's'); decorLayer.appendChild(o); }
+        }
+    }
+
+    const themes = [
+        { name: 'Space', emoji: '🚀', bg: 'bg-space', title: "Space", line: '#ffffff', face: 'face-right-ufo' },
+        { name: 'Ocean', emoji: '🐠', bg: 'bg-ocean', title: "Ocean", line: '#e0f7fa', face: 'face-right-fish' },
+        { name: 'Sky', emoji: '🎈', bg: 'bg-sky', title: "Clouds", line: '#ff8c00', face: 'face-right-balloon' },
+        { name: 'Garden', emoji: '🐝', bg: 'bg-garden', title: "Garden", line: '#ffff00', face: 'face-right-bee' },
+        { name: 'Graveyard', emoji: '👻', bg: 'bg-graveyard', title: "Graveyard", line: '#a29bfe', face: 'face-right-ghost' },
+        { name: 'Winter', emoji: '⛷️', bg: 'bg-winter', title: "Winter", line: '#2563eb', face: 'face-right-skier' },
+        { name: 'Fantasy', emoji: '🐉', bg: 'bg-fantasy', title: "Fantasy", line: '#e040fb', face: 'face-right-dragon' },
+        { name: 'Arctic', emoji: '🐧', bg: 'bg-arctic', title: "Arctic", line: '#00bcd4', face: 'face-right-penguin' }
+    ];
+    let currentThemeIndex = 0;
+
+    function initCanvas() {
+        canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+        const h = window.innerHeight;
+        if (h > 100) {
+            voyagerX = 100; voyagerY = h / 2;
+            updateVoyagerPos(voyagerX, voyagerY); updateDecor();
+        } else { requestAnimationFrame(initCanvas); }
+    }
+
+    function updateVoyagerPos(x, y) {
+        voyagerX = x; voyagerY = y;
+        voyager.style.left = `${x}px`; voyager.style.top = `${y}px`;
+    }
+
+    function handleStart(e) {
+        if (isPlaying) return;
+        if (audioCtx && audioCtx.state === 'suspended') { audioCtx.resume(); }
+
+        const pos = getEventPos(e);
+        
+        if (isPositioning) {
+            if (Math.hypot(pos.x - voyagerX, pos.y - voyagerY) < DEFAULT_SIZE * 1.2) { 
+                isDrawing = true; 
+                dragOffsetX = voyagerX - pos.x; dragOffsetY = voyagerY - pos.y;
+                updatePitch(voyagerY); 
+            }
+        } else if (isRecordingMode) {
+            // First stroke of a recording session always requires grabbing the object
+            if (path.length === 0) {
+                if (Math.hypot(pos.x - voyagerX, pos.y - voyagerY) < DEFAULT_SIZE * 1.2) {
+                    isDrawing = true; recordingStartTime = Date.now();
+                    dragOffsetX = voyagerX - pos.x; dragOffsetY = voyagerY - pos.y;
+                    path = [{ type: 'down', x: voyagerX, y: voyagerY, t: 0 }]; 
+                    statusText.innerText = isMultiStroke ? "Recording! Lift and click elsewhere to skip/leap." : "Recording motion... lead the way!";
+                    updatePitch(voyagerY);
+                }
+            } 
+            // In multi-stroke, subsequent strokes can just start wherever you click
+            else if (isMultiStroke) {
+                isDrawing = true;
+                const t = Date.now() - recordingStartTime;
+                dragOffsetX = 0; dragOffsetY = 0; // Teleport to exact click
+                updateVoyagerPos(pos.x, pos.y);
+                path.push({ type: 'down', x: pos.x, y: pos.y, t: t });
+                updatePitch(pos.y);
+            }
+        }
+        if(settingsPanel.classList.contains('open')) toggleSettings();
+    }
+
+    function handleMove(e) {
+        if (!isDrawing || isPlaying) return;
+        const pos = getEventPos(e);
+        const targetX = pos.x + dragOffsetX; const targetY = pos.y + dragOffsetY;
+
+        if (isPositioning) { 
+            updateVoyagerPos(targetX, targetY); updatePitch(targetY); 
+            statusText.innerText = "Positioned! Hit 'Record' to start."; 
+        } else if (isRecordingMode) {
+            const t = Date.now() - recordingStartTime; 
+            path.push({ type: 'move', x: targetX, y: targetY, t });
+            drawPath(); updateVoyagerPos(targetX, targetY); updatePitch(targetY);
+        }
+    }
+
+    function handleEnd() {
+        if (!isDrawing) return;
+        isDrawing = false; stopPitch();
+        
+        if (isRecordingMode) {
+            const t = Date.now() - recordingStartTime;
+            path.push({ type: 'up', x: voyagerX, y: voyagerY, t: t }); // Mark the gap
+
+            if (!isMultiStroke) {
+                // Legacy behavior: immediately stop and get ready to play
+                finishRecordingSession();
+            } else {
+                statusText.innerText = "Draw another line, or hit Stop (⏹️) to finish!";
+            }
+        }
+    }
+
+    function getEventPos(e) {
+        const rect = canvas.getBoundingClientRect();
+        let clientX, clientY;
+        if (e.touches && e.touches.length > 0) { clientX = e.touches[0].clientX; clientY = e.touches[0].clientY; } 
+        else if (e.changedTouches && e.changedTouches.length > 0) { clientX = e.changedTouches[0].clientX; clientY = e.changedTouches[0].clientY; } 
+        else { clientX = e.clientX; clientY = e.clientY; }
+        return { x: clientX - rect.left, y: clientY - rect.top };
+    }
+
+    function toggleRecordingMode() {
+        if (isPlaying) stopPlayback();
+        
+        if (!isRecordingMode) {
+            isPositioning = false; isRecordingMode = true; path = []; clearCanvas();
+            recordBtn.innerHTML = "⏹️"; recordBtn.classList.add('is-recording');
+            statusText.innerText = isMultiStroke ? "Grab object to start. Draw, lift, draw again!" : "Grab the object and move it to record!"; 
+            playBtn.disabled = true;
+        } else { 
+            // Manual Stop clicked
+            finishRecordingSession(); 
+        }
+    }
+    
+    function finishRecordingSession() {
+        if (isDrawing) {
+            // Force an 'up' event if they hit stop mid-draw
+            isDrawing = false; stopPitch();
+            path.push({ type: 'up', x: voyagerX, y: voyagerY, t: Date.now() - recordingStartTime });
+        }
+
+        if (path.length > 2) { // Allow slightly smaller lengths for single clicks
+            isRecordingMode = false; playBtn.disabled = false;
+            recordBtn.classList.remove('is-recording'); recordBtn.innerHTML = "⏺️";
+            statusText.innerText = "Motion Captured! Ready to Sing!";
+        } else { 
+            statusText.innerText = "Too short! Try moving more."; 
+            clearCanvas(); path = []; resetToPositioning();
+        }
+    }
+
+    function resetToPositioning() {
+        isRecordingMode = false; isPositioning = true; isDrawing = false;
+        recordBtn.innerHTML = "⏺️"; recordBtn.classList.remove('is-recording');
+        statusText.innerText = "Drag to your starting position!"; 
+        voyager.style.opacity = '1';
+        stopPitch();
+    }
+
+    function drawPath() {
+        if(!isPlaying && !isRecordingMode && path.length === 0) return;
+        if (!isPlaying) clearCanvas();
+        
+        ctx.beginPath(); ctx.strokeStyle = themes[currentThemeIndex].line; ctx.lineWidth = 6;
+        ctx.setLineDash([12, 18]); ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+        ctx.shadowBlur = 10; ctx.shadowColor = themes[currentThemeIndex].line;
+        
+        if (path.length > 0) {
+            for (let i = 0; i < path.length; i++) {
+                const p = path[i];
+                if (p.type === 'down' || i === 0) {
+                    ctx.moveTo(p.x, p.y);
+                } else if (p.type === 'move' || (!p.type && i > 0)) {
+                    ctx.lineTo(p.x, p.y);
+                } // Ignore 'up' to leave gaps in the line
+            }
+            ctx.stroke();
+        }
+    }
+
+    function clearCanvas() { ctx.clearRect(0, 0, canvas.width, canvas.height); }
+
+    function resetApp() {
+        stopPlayback(); path = []; particles = []; clearCanvas(); playBtn.disabled = true;
+        voyagerX = window.innerWidth / 2; voyagerY = window.innerHeight / 2; 
+        initCanvas(); resetToPositioning(); 
+    }
+
+    function toggleLoop() {
+        isLooping = !isLooping;
+        loopBtn.classList.toggle('loop-active', isLooping);
+    }
+    
+    function toggleSettings() {
+        settingsPanel.classList.toggle('open');
+    }
+
+    function togglePlay() { if (path.length < 2) return; isPlaying ? stopPlayback() : startPlayback(); }
+
+    function startPlayback() {
+        isPlaying = true; playbackStartTime = Date.now();
+        playBtn.innerHTML = "⏹️"; playBtn.classList.add('is-playing-btn');
+        appContainer.classList.add('is-playing'); statusText.innerText = isLooping ? "Looping! 🎶" : "Follow and sing! 🎶"; animate();
+    }
+
+    function stopPlayback() {
+        isPlaying = false; cancelAnimationFrame(animationId);
+        playBtn.innerHTML = "▶️"; playBtn.classList.remove('is-playing-btn');
+        appContainer.classList.remove('is-playing'); 
+        voyager.style.opacity = '1'; stopPitch();
+        particles = []; clearCanvas(); drawPath(); 
+        if (path.length > 0) updateVoyagerPos(path[0].x, path[0].y);
+    }
+
+    function animate() {
+        if (!isPlaying) return;
+        
+        clearCanvas(); drawPath();
+        const now = Date.now() - playbackStartTime;
+        const totalDuration = path[path.length - 1].t;
+
+        if (now > totalDuration) {
+            if (isLooping) {
+                playbackStartTime = Date.now();
+                updateVoyagerPos(path[0].x, path[0].y);
+            } else {
+                updateVoyagerPos(path[path.length-1].x, path[path.length-1].y);
+                stopPlayback();
+                return;
+            }
+        }
+
+        let currentPoint = path[0];
+        let isGap = false;
+
+        for (let i = 0; i < path.length; i++) {
+            if (path[i].t <= (isLooping ? (Date.now() - playbackStartTime) : now)) { 
+                currentPoint = path[i]; 
+                if (currentPoint.type === 'up') isGap = true;
+                else isGap = false;
+            } else break;
+        }
+
+        if (isGap) {
+            // During a gap, drop the audio instantly and fade out the object to indicate it's not active
+            if (gainNode && audioCtx) gainNode.gain.setTargetAtTime(0, audioCtx.currentTime, 0.05);
+            voyager.style.opacity = '0.3';
+            updateVoyagerPos(currentPoint.x, currentPoint.y); 
+        } else {
+            voyager.style.opacity = '1';
+            updateVoyagerPos(currentPoint.x, currentPoint.y); 
+            updatePitch(currentPoint.y);
+            if (Math.random() > 0.5) createParticle(currentPoint.x, currentPoint.y);
+        }
+
+        updateParticles(); drawParticles();
+        animationId = requestAnimationFrame(animate);
+    }
+
+    function cycleTheme() {
+        currentThemeIndex = (currentThemeIndex + 1) % themes.length;
+        const t = themes[currentThemeIndex]; bgLayer.className = t.bg; appTitle.innerText = t.title;
+        voyager.innerText = t.emoji; voyager.className = ''; voyager.classList.add(t.face);
+        updateDecor(); drawPath();
+    }
+
+    window.addEventListener('resize', () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; drawPath(); });
+
+    // --- INPUT HANDLING ---
+    const touchOptions = { passive: false }; 
+
+    canvas.addEventListener('mousedown', handleStart);
+    voyager.addEventListener('mousedown', handleStart);
+    window.addEventListener('mousemove', handleMove);
+    window.addEventListener('mouseup', handleEnd);
+
+    canvas.addEventListener('touchstart', (e) => { e.preventDefault(); handleStart(e); }, touchOptions);
+    voyager.addEventListener('touchstart', (e) => { e.preventDefault(); handleStart(e); }, touchOptions);
+    
+    window.addEventListener('touchmove', (e) => { 
+        if(isDrawing || isPositioning) e.preventDefault();
+        handleMove(e); 
+    }, touchOptions);
+    
+    window.addEventListener('touchend', (e) => { handleEnd(); }, touchOptions);
+
+    window.onload = function() { initCanvas(); setTimeout(initCanvas, 500); };
+</script>
+</body>
+</html>
