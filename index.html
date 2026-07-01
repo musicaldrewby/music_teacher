@@ -209,6 +209,7 @@
     <main class="container">
         <div class="app-grid">
 
+            <!-- App Card Link: Production Media Player (FIRST) -->
             <a href="production_media_player.html" class="app-link" target="_blank" rel="noopener noreferrer">
                 <div class="app-card">
                     <div class="icon-wrapper">🎬</div>
@@ -217,6 +218,9 @@
                     <span class="launch-badge">Launch App →</span>
                 </div>
             </a>
+            <!-- End App Card Link -->
+            
+            <!-- App Card Link: Name That Tune -->
             <a href="name_that_tune.html" class="app-link" target="_blank" rel="noopener noreferrer">
                 <div class="app-card">
                     <div class="icon-wrapper">🎧</div>
@@ -225,6 +229,9 @@
                     <span class="launch-badge">Launch Game →</span>
                 </div>
             </a>
+            <!-- End App Card Link -->
+
+            <!-- App Card Link: Rhythm Builder -->
             <a href="rhythmbuilder.html" class="app-link" target="_blank" rel="noopener noreferrer">
                 <div class="app-card">
                     <div class="icon-wrapper">🥁</div>
@@ -233,6 +240,9 @@
                     <span class="launch-badge">Launch App →</span>
                 </div>
             </a>
+            <!-- End App Card Link -->
+
+            <!-- App Card Link: Interactive Xylophone -->
             <a href="xylophone.html" class="app-link" target="_blank" rel="noopener noreferrer">
                 <div class="app-card">
                     <div class="icon-wrapper">🎶</div>
@@ -241,6 +251,9 @@
                     <span class="launch-badge">Launch App →</span>
                 </div>
             </a>
+            <!-- End App Card Link -->
+
+            <!-- App Card Link: Name That Note Challenge -->
             <a href="namethatnote.html" class="app-link" target="_blank" rel="noopener noreferrer">
                 <div class="app-card">
                     <div class="icon-wrapper">🎼</div>
@@ -249,6 +262,9 @@
                     <span class="launch-badge">Launch Game →</span>
                 </div>
             </a>
+            <!-- End App Card Link -->
+
+            <!-- App Card Link: Rhythm Chomper -->
             <a href="rhythmchomper.html" class="app-link" target="_blank" rel="noopener noreferrer">
                 <div class="app-card">
                     <div class="icon-wrapper">🕹️</div>
@@ -257,6 +273,9 @@
                     <span class="launch-badge">Launch Game →</span>
                 </div>
             </a>
+            <!-- End App Card Link -->
+
+            <!-- App Card Link: Mr. Drew's Uke Strum -->
             <a href="ukestrum.html" class="app-link" target="_blank" rel="noopener noreferrer">
                 <div class="app-card">
                     <div class="icon-wrapper">🎸</div>
@@ -265,6 +284,9 @@
                     <span class="launch-badge">Launch App →</span>
                 </div>
             </a>
+            <!-- End App Card Link -->
+
+            <!-- App Card Link: Radical Recorder -->
             <a href="radical_recorder.html" class="app-link" target="_blank" rel="noopener noreferrer">
                 <div class="app-card">
                     <div class="icon-wrapper">🪈</div>
@@ -273,6 +295,9 @@
                     <span class="launch-badge">Launch App →</span>
                 </div>
             </a>
+            <!-- End App Card Link -->
+
+            <!-- App Card Link: Mr. Drew's BINGO MAKER -->
             <a href="bingo_maker.html" class="app-link" target="_blank" rel="noopener noreferrer">
                 <div class="app-card">
                     <div class="icon-wrapper">🎯</div>
@@ -281,6 +306,9 @@
                     <span class="launch-badge">Launch App →</span>
                 </div>
             </a>
+            <!-- End App Card Link -->
+
+            <!-- App Card Link: Vocal Exploration -->
             <a href="vocalexploration.html" class="app-link" target="_blank" rel="noopener noreferrer">
                 <div class="app-card">
                     <div class="icon-wrapper">🎤</div>
@@ -289,6 +317,9 @@
                     <span class="launch-badge">Launch App →</span>
                 </div>
             </a>
+            <!-- End App Card Link -->
+
+            <!-- App Card Link: Card Sharks (LAST) -->
             <a href="cardsharks.html" class="app-link" target="_blank" rel="noopener noreferrer">
                 <div class="app-card">
                     <div class="icon-wrapper">🦈</div>
@@ -297,7 +328,9 @@
                     <span class="launch-badge">Launch Game →</span>
                 </div>
             </a>
-            </div>
+            <!-- End App Card Link -->
+
+        </div>
     </main>
 
     <footer>
@@ -333,7 +366,11 @@
         }
 
         function init() {
-            resize();
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+            
+            generateCity(); // Generate city ONCE on load
+
             window.addEventListener('resize', resize);
             
             // Generate Stars
@@ -356,25 +393,26 @@
         }
 
         function resize() {
+            // Update canvas bounds to match new window size, but DO NOT regenerate the city
             width = canvas.width = window.innerWidth;
             height = canvas.height = window.innerHeight;
-            generateCity();
         }
 
         function generateCity() {
             buildings = [];
             let x = 0;
+            // Generate city far past the normal screen bounds (up to 4000px) 
+            // so if they resize the window larger, there's still city to see!
+            let maxCityWidth = Math.max(width, 4000);
+
             // Generate 3 layers of buildings
             for(let layer = 0; layer < 3; layer++) {
                 x = 0;
                 let layerOpacity = 1 - (layer * 0.2); 
-                
-                // LOWERED CITY: Base height is much smaller (10% to 30% max based on layer)
                 let baseHeight = height * (0.05 + (layer * 0.08));
                 
-                while (x < width) {
+                while (x < maxCityWidth) {
                     let w = 30 + Math.random() * 70;
-                    // LOWERED CITY: Random height variation is much smaller
                     let h = baseHeight + Math.random() * (height * 0.2);
                     
                     // Windows
