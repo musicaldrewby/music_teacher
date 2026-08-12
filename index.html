@@ -60,7 +60,6 @@
             letter-spacing: 2px;
             text-transform: uppercase;
             color: #ffffff;
-            /* Glowing neon base with a sharp retro 3D offset */
             text-shadow: 
                 0 0 15px rgba(99, 102, 241, 0.6),
                 0 0 30px rgba(99, 102, 241, 0.4),
@@ -88,24 +87,20 @@
             box-sizing: border-box;
         }
 
-        /* 4-Column Grid Setup */
         .app-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 2rem;
         }
 
-        /* Large Tablet / Small Desktop Layout: Drop to 3 per row */
         @media (max-width: 1200px) {
             .app-grid { grid-template-columns: repeat(3, 1fr); }
         }
 
-        /* Tablet Layout: Drop to 2 per row */
         @media (max-width: 992px) {
             .app-grid { grid-template-columns: repeat(2, 1fr); }
         }
 
-        /* Mobile Layout: Drop to 1 per row */
         @media (max-width: 650px) {
             .app-grid { grid-template-columns: 1fr; }
         }
@@ -219,7 +214,6 @@
     <main class="container">
         <div class="app-grid">
 
-            <!-- App Card Link: Production Media Player (FIRST) -->
             <a href="production_media_player.html" class="app-link" target="_blank" rel="noopener noreferrer">
                 <div class="app-card">
                     <div class="icon-wrapper">🎬</div>
@@ -229,7 +223,6 @@
                 </div>
             </a>
             
-            <!-- App Card Link: Name That Tune -->
             <a href="name_that_tune.html" class="app-link" target="_blank" rel="noopener noreferrer">
                 <div class="app-card">
                     <div class="icon-wrapper">🎧</div>
@@ -239,7 +232,6 @@
                 </div>
             </a>
 
-            <!-- App Card Link: Rhythm Builder -->
             <a href="rhythmbuilder.html" class="app-link" target="_blank" rel="noopener noreferrer">
                 <div class="app-card">
                     <div class="icon-wrapper">🥁</div>
@@ -249,7 +241,6 @@
                 </div>
             </a>
 
-            <!-- App Card Link: Interactive Xylophone -->
             <a href="xylophone.html" class="app-link" target="_blank" rel="noopener noreferrer">
                 <div class="app-card">
                     <div class="icon-wrapper">🎶</div>
@@ -259,7 +250,6 @@
                 </div>
             </a>
 
-            <!-- App Card Link: Name That Note Challenge -->
             <a href="namethatnote.html" class="app-link" target="_blank" rel="noopener noreferrer">
                 <div class="app-card">
                     <div class="icon-wrapper">🎼</div>
@@ -269,7 +259,6 @@
                 </div>
             </a>
 
-            <!-- App Card Link: Rhythm Chomper -->
             <a href="rhythmchomper.html" class="app-link" target="_blank" rel="noopener noreferrer">
                 <div class="app-card">
                     <div class="icon-wrapper">🕹️</div>
@@ -279,7 +268,6 @@
                 </div>
             </a>
 
-            <!-- App Card Link: Mr. Drew's Uke Strum -->
             <a href="ukestrum.html" class="app-link" target="_blank" rel="noopener noreferrer">
                 <div class="app-card">
                     <div class="icon-wrapper">🎸</div>
@@ -289,7 +277,6 @@
                 </div>
             </a>
 
-            <!-- App Card Link: Radical Recorder -->
             <a href="radical_recorder.html" class="app-link" target="_blank" rel="noopener noreferrer">
                 <div class="app-card">
                     <div class="icon-wrapper">🪈</div>
@@ -299,7 +286,6 @@
                 </div>
             </a>
 
-            <!-- App Card Link: Mr. Drew's BINGO MAKER -->
             <a href="bingo_maker.html" class="app-link" target="_blank" rel="noopener noreferrer">
                 <div class="app-card">
                     <div class="icon-wrapper">🎯</div>
@@ -309,7 +295,6 @@
                 </div>
             </a>
 
-            <!-- App Card Link: Vocal Exploration -->
             <a href="vocalexploration.html" class="app-link" target="_blank" rel="noopener noreferrer">
                 <div class="app-card">
                     <div class="icon-wrapper">🎤</div>
@@ -318,8 +303,7 @@
                     <span class="launch-badge">Launch App →</span>
                 </div>
             </a>
-
-            <!-- App Card Link: Classroom Drum Machine -->
+            
             <a href="drum_machine.html" class="app-link" target="_blank" rel="noopener noreferrer">
                 <div class="app-card">
                     <div class="icon-wrapper">🎛️</div>
@@ -328,6 +312,17 @@
                     <span class="launch-badge">Launch App →</span>
                 </div>
             </a>
+
+            <!-- App Card Link: Round Helper -->
+            <a href="roundhelper.html" class="app-link" target="_blank" rel="noopener noreferrer">
+                <div class="app-card">
+                    <div class="icon-wrapper">🔁</div>
+                    <h2 class="app-title">Round Helper</h2>
+                    <p class="app-desc">A visual aid to assist you and your students with performing rounds and canons.</p>
+                    <span class="launch-badge">Launch App →</span>
+                </div>
+            </a>
+            <!-- End App Card Link -->
 
         </div>
     </main>
@@ -349,37 +344,35 @@
         let skyTop, skyBot, citySilhouette, starBaseOpacity;
 
         if (isSunset) {
-            skyTop = [100, 65, 165]; // Deep Purple
-            skyBot = [255, 81, 47];  // Vibrant Orange
-            starBaseOpacity = 0.4;   // Faint stars in sunset
-            citySilhouette = [30, 20, 30]; // Warmer silhouette
+            skyTop = [100, 65, 165]; 
+            skyBot = [255, 81, 47];  
+            starBaseOpacity = 0.4;   
+            citySilhouette = [30, 20, 30]; 
         } else {
-            skyTop = [11, 15, 25];   // Dark Navy
-            skyBot = [31, 40, 51];   // Deep Blue
-            starBaseOpacity = 1.0;   // Bright stars
-            citySilhouette = [10, 10, 15]; // Darker silhouette
+            skyTop = [11, 15, 25];   
+            skyBot = [31, 40, 51];   
+            starBaseOpacity = 1.0;   
+            citySilhouette = [10, 10, 15]; 
         }
 
         function init() {
             width = canvas.width = window.innerWidth;
             height = canvas.height = window.innerHeight;
             
-            generateCity(); // Generate city ONCE on load
+            generateCity(); 
 
             window.addEventListener('resize', resize);
             
-            // Generate Stars
             for(let i=0; i<150; i++) {
                 stars.push({
                     x: Math.random(),
-                    y: Math.random() * 0.8, // Allow stars to reach lower into the expanded sky
+                    y: Math.random() * 0.8, 
                     size: Math.random() * 2,
                     blink: Math.random() * Math.PI * 2,
                     speed: 0.01 + Math.random() * 0.02
                 });
             }
 
-            // Generate Notes
             for(let i=0; i<30; i++) {
                 resetNote(true);
             }
@@ -388,7 +381,6 @@
         }
 
         function resize() {
-            // Update canvas bounds to match new window size, but DO NOT regenerate the city
             width = canvas.width = window.innerWidth;
             height = canvas.height = window.innerHeight;
         }
@@ -396,11 +388,8 @@
         function generateCity() {
             buildings = [];
             let x = 0;
-            // Generate city far past the normal screen bounds (up to 4000px) 
-            // so if they resize the window larger, there's still city to see!
             let maxCityWidth = Math.max(width, 4000);
 
-            // Generate 3 layers of buildings
             for(let layer = 0; layer < 3; layer++) {
                 x = 0;
                 let layerOpacity = 1 - (layer * 0.2); 
@@ -410,13 +399,11 @@
                     let w = 30 + Math.random() * 70;
                     let h = baseHeight + Math.random() * (height * 0.2);
                     
-                    // Windows
                     let windowCols = Math.floor(w / 15);
                     let windowRows = Math.floor((h - 20) / 20);
                     let windows = [];
                     for(let r=0; r<windowRows; r++) {
                         for(let c=0; c<windowCols; c++) {
-                            // 30% chance a window is active
                             if(Math.random() < 0.3) {
                                 windows.push({r, c});
                             }
@@ -433,7 +420,6 @@
                     x += w + (Math.random() * 15 - 5);
                 }
             }
-            // Sort to draw back layers first
             buildings.sort((a,b) => b.layer - a.layer);
         }
 
@@ -453,14 +439,12 @@
         }
 
         function animate() {
-            // Draw Sky Gradient
             let gradient = ctx.createLinearGradient(0, 0, 0, height);
             gradient.addColorStop(0, `rgb(${skyTop.join(',')})`);
             gradient.addColorStop(1, `rgb(${skyBot.join(',')})`);
             ctx.fillStyle = gradient;
             ctx.fillRect(0, 0, width, height);
 
-            // Draw Stars
             if (starBaseOpacity > 0) {
                 ctx.fillStyle = `rgba(255, 255, 255, 1)`;
                 stars.forEach(s => {
@@ -474,12 +458,10 @@
                 ctx.globalAlpha = 1;
             }
 
-            // Draw City
             buildings.forEach(b => {
                 ctx.fillStyle = `rgba(${citySilhouette.join(',')}, ${b.layerOpacity})`;
                 ctx.fillRect(b.x, height - b.h, b.w, b.h);
 
-                // Draw Windows
                 ctx.fillStyle = `rgba(255, 220, 100, ${b.layerOpacity * 0.8})`;
                 let paddingX = (b.w - (b.windowCols * 10)) / 2;
                 b.windows.forEach(win => {
@@ -489,7 +471,6 @@
                 });
             });
 
-            // Draw Notes
             ctx.textBaseline = 'middle';
             ctx.textAlign = 'center';
             for (let i = notes.length - 1; i >= 0; i--) {
@@ -497,7 +478,6 @@
                 n.y -= n.speed;
                 n.wobbleOffset += n.wobbleSpeed;
                 
-                // Fade in at bottom, fade out at top
                 if (n.y > height - 100) {
                     n.opacity += 0.01;
                 } else if (n.y < 100) {
