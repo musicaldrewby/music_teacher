@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Round Helper</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- React & ReactDOM -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    
+    <!-- Babel (for JSX) -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
+    <!-- Google Fonts: Space Grotesk for that geometric feel -->
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background-color: #fff1f2; /* Light pink bg */
+            background-image: radial-gradient(#000 10%, transparent 11%), radial-gradient(#000 10%, transparent 11%);
+            background-size: 20px 20px;
+            background-position: 0 0, 10px 10px;
+            background-attachment: fixed;
+            opacity: 0.95; /* Slight fade to pattern */
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar { width: 12px; }
+        ::-webkit-scrollbar-track { background: #fff; border-left: 2px solid black; }
+        ::-webkit-scrollbar-thumb { background: #000; border: 2px solid white; }
+        ::-webkit-scrollbar-thumb:hover { background: #333; }
+
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(-3deg); }
+            50% { transform: rotate(3deg); }
+        }
+        
+        .animate-wiggle:hover {
+            animation: wiggle 0.3s ease-in-out infinite;
+        }
+        
+        /* Beat Flash Animations */
+        @keyframes flash-fill-yellow {
+            0% { fill: #FACC15; } /* Bright Yellow */
+            100% { fill: #ffffff; }
+        }
+        @keyframes flash-fill-pink {
+            0% { fill: #F472B6; } /* Hot Pink */
+            100% { fill: #ffffff; }
+        }
+        .animate-flash-yellow {
+            animation: flash-fill-yellow 0.4s ease-out forwards;
+        }
+        .animate-flash-pink {
+            animation: flash-fill-pink 0.4s ease-out forwards;
+        }
+
+        /* Memphis "Hard Shadow" Utility */
+        .memphis-box {
+            border: 3px solid black;
+            box-shadow: 6px 6px 0px 0px black;
+        }
+        
+        .memphis-input {
+            border: 3px solid black;
+            box-shadow: 4px 4px 0px 0px #cbd5e1;
+        }
+        .memphis-input:focus {
+            outline: none;
+            box-shadow: 4px 4px 0px 0px #F472B6; /* Pink shadow on focus */
+        }
+        
+        /* Utility for solid press effect (color inversion) */
+        .btn-solid-press {
+            transition: all 0.1s;
+        }
+        .btn-solid-press:active {
+            background-color: black !important;
+            color: white !important;
+            border-color: black !important;
+        }
+        /* Handle SVG fill inversion on press */
+        .btn-solid-press:active svg {
+            fill: white !important;
+        }
+    </style>
+</head>
+<body class="h-screen overflow-hidden flex flex-col">
+    <div id="root" class="h-full"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect, useRef, useMemo } = React;
+
+        // --- Icons ---
+        const IconWrapper = ({ children, size = 24, className = "" }) => (
+            <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className={className}>{children}</svg>
+        );
+        const Play = (p) => <IconWrapper {...p}><polygon points="5 3 19 12 5 21 5 3"></polygon></IconWrapper>;
+        const Pause = (p) => <IconWrapper {...p}><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></IconWrapper>;
+        const RotateCcw = (p) => <IconWrapper {...p}><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 12"></path><path d="M3 3v9h9"></path></IconWrapper>;
+        const Volume2 = (p) => <IconWrapper {...p}><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></IconWrapper>;
+        const VolumeX = (p) => <IconWrapper {...p}><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></IconWrapper>;
+        const Music = (p) => <IconWrapper {...p}><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></IconWrapper>;
+        const Clock = (p) => <IconWrapper {...p}><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></IconWrapper>;
+        const Repeat = (p) => <IconWrapper {...p}><polyline points="17 1 21 5 17 9"></polyline><path d="M3 11V9a4 4 0 0 1 4-4h14"></path><polyline points="7 23 3 19 7 15"></polyline><path d="M21 13v2a4 4 0 0 1-4 4H3"></path></IconWrapper>;
+        const Settings = (p) => <IconWrapper {...p}><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.38a2 2 0 0 0-.73-2.73l-.15-.1a2 2 0 0 1-1-1.72v-.51a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path><circle cx="12" cy="12" r="3"></circle></IconWrapper>;
+        const Hand = (p) => <IconWrapper {...p}><path d="M18 11V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v0"></path><path d="M14 10V4a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v2"></path><path d="M10 10.5V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v8"></path><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"></path></IconWrapper>;
+
+        // --- Main App Component ---
+        function CanonConductor() {
+            // --- State ---
+            const [bpm, setBpm] = useState(100);
+            const [measures, setMeasures] = useState(8);
+            const [timeSignature, setTimeSignature] = useState('4/4');
+            const [groupCount, setGroupCount] = useState(3);
+            const [metronomeStyle, setMetronomeStyle] = useState('accent'); 
+            
+            const [offsetValue, setOffsetValue] = useState(2); 
+            const [offsetUnit, setOffsetUnit] = useState('measures'); 
+            
+            const [repeats, setRepeats] = useState(2);
+            const [soundEnabled, setSoundEnabled] = useState(true);
+            const [highPitchAccent, setHighPitchAccent] = useState(true);
+
+            // --- Playback State ---
+            const [isPlaying, setIsPlaying] = useState(false);
+            const [currentBeat, setCurrentBeat] = useState(-1);
+            const [smoothBeat, setSmoothBeat] = useState(-1);
+            
+            // --- Refs ---
+            const audioContextRef = useRef(null);
+            const nextNoteTimeRef = useRef(0);
+            const timerIDRef = useRef(null);
+            const beatCountRef = useRef(-1);
+            const isPlayingRef = useRef(false);
+            const animationFrameRef = useRef(null);
+            const anchorTimeRef = useRef(0);
+            const anchorBeatRef = useRef(0);
+            const lastBpmRef = useRef(bpm);
+            const tapTimesRef = useRef([]); 
+            
+            const bpmRef = useRef(bpm);
+            const soundEnabledRef = useRef(soundEnabled);
+            const metronomeStyleRef = useRef(metronomeStyle); 
+            
+            useEffect(() => {
+                soundEnabledRef.current = soundEnabled;
+            }, [soundEnabled]);
+            
+            useEffect(() => {
+                metronomeStyleRef.current = metronomeStyle;
+            }, [metronomeStyle]);
+
+            useEffect(() => {
+                bpmRef.current = bpm; 
+
+                if (isPlayingRef.current && audioContextRef.current) {
+                    const now = audioContextRef.current.currentTime;
+                    const timeElapsed = now - anchorTimeRef.current;
+                    const prevBpmValue = lastBpmRef.current;
+                    const beatsCovered = timeElapsed * (prevBpmValue / 60.0);
+                    const currentBeatPos = anchorBeatRef.current + beatsCovered;
+                    
+                    anchorBeatRef.current = currentBeatPos;
+                    anchorTimeRef.current = now;
+                }
+                
+                lastBpmRef.current = bpm;
+            }, [bpm]);
+
+            const handleTap = () => {
+                const now = performance.now();
+                if (tapTimesRef.current.length > 0 && now - tapTimesRef.current[tapTimesRef.current.length - 1] > 2000) {
+                    tapTimesRef.current = [];
+                }
+                tapTimesRef.current.push(now);
+                if (tapTimesRef.current.length > 4) tapTimesRef.current.shift();
+                
+                if (tapTimesRef.current.length > 1) {
+                    let totalInterval = 0;
+                    for (let i = 1; i < tapTimesRef.current.length; i++) {
+                        totalInterval += tapTimesRef.current[i] - tapTimesRef.current[i - 1];
+                    }
+                    const avgInterval = totalInterval / (tapTimesRef.current.length - 1);
+                    if (avgInterval > 0) {
+                        const newBpm = Math.round(60000 / avgInterval);
+                        setBpm(Math.max(40, Math.min(200, newBpm)));
+                    }
+                }
+            };
+
+            const beatsPerMeasure = useMemo(() => {
+                if (timeSignature === '6/8') return 2; 
+                if (timeSignature === '2/4') return 2;
+                if (timeSignature === '3/4') return 3;
+                return 4; 
+            }, [timeSignature]);
+
+            const beatsPerLoop = measures * beatsPerMeasure;
+            
+            const offsetBeats = useMemo(() => {
+                if (offsetUnit === 'measures') {
+                    return offsetValue * beatsPerMeasure;
+                }
+                return offsetValue; 
+            }, [offsetValue, offsetUnit, beatsPerMeasure]);
+            
+            const totalDurationBeats = ((groupCount - 1) * offsetBeats) + (beatsPerLoop * repeats);
+
+            const memphisColors = ['#F472B6', '#22D3EE', '#FACC15', '#A78BFA'];
+
+            const playClick = (beatNumber) => {
+                if (!soundEnabledRef.current) return;
+                
+                if (!audioContextRef.current) return;
+                const ctx = audioContextRef.current;
+                const osc = ctx.createOscillator();
+                const gainNode = ctx.createGain();
+
+                osc.connect(gainNode);
+                gainNode.connect(ctx.destination);
+
+                osc.type = 'square'; 
+
+                const isDownbeat = beatNumber % beatsPerMeasure === 0;
+                const isLoopStart = beatNumber >= 0 && beatNumber % beatsPerLoop === 0; 
+                const isCountIn = beatNumber < 0;
+                
+                const isFlat = metronomeStyleRef.current === 'flat';
+
+                if (isFlat) {
+                    osc.frequency.value = 1000; 
+                    gainNode.gain.value = 0.1;
+                    osc.start();
+                    gainNode.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.05);
+                    osc.stop(ctx.currentTime + 0.05);
+                } else {
+                    if (isCountIn) {
+                        if (isDownbeat) {
+                            osc.frequency.value = 880; 
+                        } else {
+                            osc.frequency.value = 660; 
+                        }
+                    } else if (highPitchAccent && isLoopStart) {
+                        osc.frequency.value = 1046.50; 
+                    } else if (highPitchAccent && isDownbeat) {
+                        osc.frequency.value = 880; 
+                    } else {
+                        osc.frequency.value = 440; 
+                    }
+
+                    gainNode.gain.value = 0.1;
+                    osc.start();
+                    gainNode.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.1);
+                    osc.stop(ctx.currentTime + 0.1);
+                }
+            };
+
+            const schedule = () => {
+                const lookahead = 25.0;
+                const scheduleAheadTime = 0.1;
+
+                if (!isPlayingRef.current) return;
+
+                const secondsPerBeat = 60.0 / bpmRef.current;
+                const ctx = audioContextRef.current; 
+                const currentTime = ctx ? ctx.currentTime : 0;
+
+                while (nextNoteTimeRef.current < currentTime + scheduleAheadTime) {
+                    if (beatCountRef.current < totalDurationBeats) {
+                        beatCountRef.current++;
+                        setCurrentBeat(beatCountRef.current);
+                        playClick(beatCountRef.current);
+                        nextNoteTimeRef.current += (60.0 / bpmRef.current);
+                    } else {
+                        stop();
+                        return;
+                    }
+                }
+                timerIDRef.current = setTimeout(schedule, lookahead);
+            };
+
+            const animateVisuals = () => {
+                if (!isPlayingRef.current || !audioContextRef.current) return;
+
+                const ctx = audioContextRef.current;
+                const currentTime = ctx.currentTime;
+                
+                const timeElapsed = currentTime - anchorTimeRef.current;
+                const beatsElapsed = timeElapsed * (bpmRef.current / 60.0);
+                
+                const currentSmoothPos = anchorBeatRef.current + beatsElapsed;
+
+                if (currentSmoothPos <= totalDurationBeats + 1) {
+                    setSmoothBeat(currentSmoothPos);
+                    animationFrameRef.current = requestAnimationFrame(animateVisuals);
+                }
+            };
+
+            const start = () => {
+                if (isPlayingRef.current) return;
+                
+                if (!audioContextRef.current) {
+                    audioContextRef.current = new (window.AudioContext || window.webkitAudioContext)();
+                }
+                if (audioContextRef.current.state === 'suspended') {
+                    audioContextRef.current.resume();
+                }
+                
+                setIsPlaying(true);
+                isPlayingRef.current = true;
+                
+                const nextNoteDelay = 0.1; 
+                const ctxTime = audioContextRef.current.currentTime;
+                nextNoteTimeRef.current = ctxTime + nextNoteDelay;
+                
+                anchorTimeRef.current = nextNoteTimeRef.current;
+                
+                const countInLength = beatsPerMeasure; 
+                const startBeat = -1 - countInLength; 
+                
+                beatCountRef.current = startBeat; 
+                anchorBeatRef.current = startBeat + 1; 
+
+                if (beatCountRef.current < 0) {
+                     setSmoothBeat(startBeat + 1);
+                } else {
+                     setSmoothBeat(0);
+                }
+
+                schedule();
+                cancelAnimationFrame(animationFrameRef.current);
+                animateVisuals();
+            };
+
+            const pause = () => {
+                setIsPlaying(false);
+                isPlayingRef.current = false;
+                if (timerIDRef.current) clearTimeout(timerIDRef.current);
+                if (animationFrameRef.current) cancelAnimationFrame(animationFrameRef.current);
+            };
+
+            const reset = () => {
+                pause();
+                setCurrentBeat(-1);
+                setSmoothBeat(-1);
+                beatCountRef.current = -1;
+            };
+            
+            const stop = () => {
+                pause();
+                setIsPlaying(false);
+            };
+
+            useEffect(() => {
+                return () => { 
+                    isPlayingRef.current = false;
+                    if (timerIDRef.current) clearTimeout(timerIDRef.current); 
+                    if (animationFrameRef.current) cancelAnimationFrame(animationFrameRef.current);
+                };
+            }, []);
+
+            const getGroupState = (groupIndex, beatValue) => {
+                if (beatValue < 0) return { status: 'waiting', repetition: 0, beatInLoop: 0 };
+                const startBeat = groupIndex * offsetBeats;
+                const endBeat = startBeat + (beatsPerLoop * repeats);
+                if (beatValue >= startBeat && beatValue < endBeat) {
+                    const relativeBeat = beatValue - startBeat;
+                    const repetition = Math.floor(relativeBeat / beatsPerLoop) + 1;
+                    const beatInLoop = (relativeBeat % beatsPerLoop); 
+                    return { status: 'singing', repetition, beatInLoop };
+                }
+                if (beatValue < startBeat) return { status: 'waiting' };
+                return { status: 'done' };
+            };
+
+            const polarToCartesian = (centerX, centerY, radius, angleInDegrees) => {
+                const angleInRadians = (angleInDegrees - 90) * Math.PI / 180.0;
+                return {
+                    x: centerX + (radius * Math.cos(angleInRadians)),
+                    y: centerY + (radius * Math.sin(angleInRadians))
+                };
+            };
+
+            const describeDonutSegment = (x, y, innerRadius, outerRadius, startAngle, endAngle) => {
+                const outerStart = polarToCartesian(x, y, outerRadius, startAngle);
+                const outerEnd = polarToCartesian(x, y, outerRadius, endAngle);
+                const innerStart = polarToCartesian(x, y, innerRadius, startAngle);
+                const innerEnd = polarToCartesian(x, y, innerRadius, endAngle);
+                let diff = endAngle - startAngle;
+                if (diff < 0) { diff += 360; }
+                if (diff >= 360) diff = 359.99;
+                const largeArcFlag = diff > 180 ? "1" : "0";
+                return [
+                    "M", outerStart.x, outerStart.y,
+                    "A", outerRadius, outerRadius, 0, largeArcFlag, 1, outerEnd.x, outerEnd.y,
+                    "L", innerEnd.x, innerEnd.y,
+                    "A", innerRadius, innerRadius, 0, largeArcFlag, 0, innerStart.x, innerStart.y,
+                    "Z"
+                ].join(" ");
+            };
+
+            const renderShape = (type, x, y, size, color) => {
+                const half = size / 2;
+                if (type === 'triangle') {
+                    return <polygon points={`${x},${y-half} ${x+half},${y+half} ${x-half},${y+half}`} fill={color} stroke="black" strokeWidth="2" />;
+                }
+                if (type === 'square') {
+                    return <rect x={x-half} y={y-half} width={size} height={size} fill={color} stroke="black" strokeWidth="2" />;
+                }
+                if (type === 'circle') {
+                    return <circle cx={x} cy={y} r={half} fill={color} stroke="black" strokeWidth="2" />;
+                }
+                if (type === 'diamond') {
+                    return <polygon points={`${x},${y-half} ${x+half},${y} ${x},${y+half} ${x-half},${y}`} fill={color} stroke="black" strokeWidth="2" />;
+                }
+                return null;
+            };
+
+            const renderCircularVisualizer = () => {
+                const size = 600; 
+                const center = size / 2;
+                const maxRadius = size / 2 - 40; 
+                const laneWidth = 40; 
+                const gap = 20;
+
+                let playheadAngle = 0;
+                if (smoothBeat < 0) {
+                    const countInProgress = (beatsPerMeasure + smoothBeat) / beatsPerMeasure;
+                    playheadAngle = countInProgress * 360;
+                } else {
+                    const loopProgress = (smoothBeat % beatsPerLoop) / beatsPerLoop;
+                    playheadAngle = loopProgress * 360;
+                }
+
+                let centerText = "0";
+                let subText = "BEAT";
+                
+                if (currentBeat < 0) {
+                    const countVal = (beatsPerMeasure + currentBeat) + 1;
+                    centerText = countVal > 0 ? countVal : "READY";
+                    subText = "READY";
+                } else {
+                    centerText = (currentBeat % beatsPerMeasure) + 1;
+                    subText = "BEAT";
+                }
+                
+                let pulseClass = "";
+                if (isPlaying) {
+                     if (metronomeStyle === 'flat') {
+                         pulseClass = "animate-flash-yellow";
+                     } else {
+                         if (currentBeat < 0 || (currentBeat % beatsPerMeasure === 0)) {
+                             pulseClass = "animate-flash-pink";
+                         } else {
+                             pulseClass = "animate-flash-yellow";
+                         }
+                     }
+                }
+
+                return (
+                    <svg viewBox={`0 0 ${size} ${size}`} className="w-full h-full max-h-[70vh]">
+                        <g transform={`translate(${center}, ${center})`}>
+                            <circle 
+                                key={currentBeat} 
+                                r="55" 
+                                fill="white" 
+                                stroke="black" 
+                                strokeWidth="4"
+                                className={isPlaying ? pulseClass : ""}
+                            />
+                            
+                            <text y="8" textAnchor="middle" className="font-bold text-4xl fill-black" style={{ fontFamily: 'Space Grotesk' }}>
+                                {centerText}
+                            </text>
+                            <text y="30" textAnchor="middle" className="text-xs font-bold tracking-widest fill-black uppercase">
+                                {subText}
+                            </text>
+                        </g>
+
+                        {Array.from({ length: groupCount }).map((_, i) => {
+                            const radius = maxRadius - (i * (laneWidth + gap));
+                            const startBeat = i * offsetBeats;
+                            const endBeat = startBeat + (beatsPerLoop * repeats);
+                            const isSinging = (smoothBeat >= startBeat && smoothBeat < endBeat);
+                            const groupState = getGroupState(i, smoothBeat);
+
+                            const color = memphisColors[i % memphisColors.length];
+                            const shapes = ['triangle', 'circle', 'square', 'diamond'];
+                            const shape = shapes[i % shapes.length];
+
+                            const startBeatInLoop = (startBeat % beatsPerLoop);
+                            const startAngle = (startBeatInLoop / beatsPerLoop) * 360;
+                            const startPos = polarToCartesian(center, center, radius, startAngle);
+
+                            const rOuter = radius + (laneWidth / 2);
+                            const rInner = radius - (laneWidth / 2);
+
+                            // Calculate measure lines for this specific track
+                            const measureLines = [];
+                            if (isSinging) {
+                                const sungBeats = groupState.beatInLoop;
+                                const completedMeasures = Math.floor(sungBeats / beatsPerMeasure);
+                                
+                                // Only draw lines every X measure if there are too many to keep it clean
+                                const step = measures > 16 ? 2 : 1;
+
+                                for (let m = 1; m <= completedMeasures; m += step) {
+                                    const beatOffset = m * beatsPerMeasure;
+                                    const angleOffset = (beatOffset / beatsPerLoop) * 360;
+                                    const lineAngle = startAngle + angleOffset;
+                                    
+                                    const p1 = polarToCartesian(center, center, rInner, lineAngle);
+                                    const p2 = polarToCartesian(center, center, rOuter, lineAngle);
+                                    
+                                    measureLines.push(
+                                        <line 
+                                            key={m}
+                                            x1={p1.x} y1={p1.y} 
+                                            x2={p2.x} y2={p2.y} 
+                                            stroke="rgba(0,0,0,0.3)" 
+                                            strokeWidth="2"
+                                        />
+                                    );
+                                }
+                            }
+
+                            return (
+                                <g key={i}>
+                                    <circle cx={center} cy={center} r={radius} fill="none" stroke="black" strokeWidth="1" strokeDasharray="4 4" opacity="0.3" />
+                                    
+                                    {isSinging && (
+                                        <path 
+                                            d={describeDonutSegment(center, center, rInner, rOuter, startAngle, playheadAngle)} 
+                                            fill={color} 
+                                            stroke="black"
+                                            strokeWidth="3"
+                                        />
+                                    )}
+                                    
+                                    {/* Measure Divider Lines Overlay */}
+                                    {measureLines}
+
+                                    <g transform={`translate(${startPos.x}, ${startPos.y})`}>
+                                        {renderShape(shape, 0, 0, 24, isSinging ? color : '#e2e8f0')}
+                                        <text y="4" textAnchor="middle" fontSize="12" fontWeight="bold" fill="black">{i + 1}</text>
+                                    </g>
+
+                                    {isSinging && (
+                                        <g transform={`rotate(${playheadAngle} ${center} ${center})`}>
+                                            <g transform={`translate(0, ${-radius})`}>
+                                                <circle r="16" fill="white" stroke="black" strokeWidth="2" />
+                                                <text y="4" textAnchor="middle" fontSize="14" fontWeight="bold" fill="black" transform={`rotate(${-playheadAngle})`}>
+                                                    {groupState.repetition}
+                                                </text>
+                                            </g>
+                                        </g>
+                                    )}
+                                </g>
+                            );
+                        })}
+
+                        <line 
+                            x1={center} y1={center} 
+                            x2={center} y2={20} 
+                            stroke={currentBeat < 0 ? "#F472B6" : "black"} 
+                            strokeWidth="4" 
+                            transform={`rotate(${playheadAngle} ${center} ${center})`} 
+                        />
+                    </svg>
+                );
+            };
+
+            return (
+                <div className="flex flex-col h-full font-sans text-black relative z-10">
+                    <header className="bg-white border-b-4 border-black p-4 flex items-center justify-between sticky top-0 z-50">
+                        <div className="flex items-center gap-3">
+                            <div className="bg-yellow-400 p-2 border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]">
+                                <Music size={28} className="text-black" />
+                            </div>
+                            <h1 className="text-2xl font-black uppercase tracking-tight">Round Helper</h1>
+                        </div>
+                        <button 
+                            onClick={() => setSoundEnabled(!soundEnabled)}
+                            className={`p-3 border-2 border-black shadow-[3px_3px_0px_0px_black] btn-solid-press ${soundEnabled ? 'bg-green-300' : 'bg-red-300'}`}
+                        >
+                            {soundEnabled ? <Volume2 size={24} /> : <VolumeX size={24} />}
+                        </button>
+                    </header>
+
+                    <main className="flex-1 overflow-hidden flex flex-col lg:flex-row gap-8 p-6 max-w-7xl mx-auto w-full">
+                        
+                        <div className="w-full lg:w-1/3 flex flex-col gap-6 overflow-y-auto pr-2">
+                            <div className="bg-white p-6 memphis-box relative">
+                                <div className="absolute -top-4 -right-4 w-12 h-12 bg-pink-400 border-2 border-black rounded-full z-0"></div>
+                                
+                                <h2 className="text-xl font-bold mb-6 flex items-center gap-2 relative z-10">
+                                    <Settings size={24} /> SETUP
+                                </h2>
+                                
+                                <div className="space-y-6 relative z-10">
+                                    <div className="space-y-2">
+                                        <div className="flex justify-between font-bold items-center">
+                                            <label>TEMPO</label>
+                                            <div className="flex gap-2 items-center">
+                                                <button 
+                                                    onClick={handleTap}
+                                                    className="bg-black text-white text-xs px-3 py-1 font-bold tracking-widest border-2 border-transparent hover:bg-gray-800 active:bg-white active:text-black active:border-black transition-colors"
+                                                >
+                                                    TAP
+                                                </button>
+                                                <span className="bg-black text-white px-2">{bpm} BPM</span>
+                                            </div>
+                                        </div>
+                                        <input 
+                                            type="range" min="40" max="200" value={bpm} 
+                                            onChange={(e) => setBpm(Number(e.target.value))}
+                                            className="w-full h-4 bg-gray-200 rounded-none border-2 border-black appearance-none accent-black"
+                                            style={{ accentColor: 'black' }}
+                                        />
+                                        
+                                        <div className="flex items-center justify-end mt-2 gap-2">
+                                            <span className="text-[10px] font-bold tracking-wider">CLICK:</span>
+                                            <div className="flex border-2 border-black bg-white">
+                                                <button 
+                                                    onClick={() => setMetronomeStyle('accent')}
+                                                    className={`px-2 py-0.5 text-[10px] font-bold tracking-wider ${metronomeStyle === 'accent' ? 'bg-black text-white' : 'bg-white text-black'}`}
+                                                >
+                                                    ACCENT
+                                                </button>
+                                                <div className="w-[2px] bg-black"></div>
+                                                <button 
+                                                    onClick={() => setMetronomeStyle('flat')}
+                                                    className={`px-2 py-0.5 text-[10px] font-bold tracking-wider ${metronomeStyle === 'flat' ? 'bg-black text-white' : 'bg-white text-black'}`}
+                                                >
+                                                    FLAT
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className="grid grid-cols-2 gap-4">
+                                        <div>
+                                            <label className="text-xs font-bold block mb-1">TIME SIG</label>
+                                            <select value={timeSignature} onChange={(e) => setTimeSignature(e.target.value)} className="w-full p-2 memphis-input font-bold text-lg bg-white">
+                                                <option value="2/4">2/4</option>
+                                                <option value="3/4">3/4</option>
+                                                <option value="4/4">4/4</option>
+                                                <option value="6/8">6/8</option>
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <label className="text-xs font-bold block mb-1"># OF MEASURES</label>
+                                            <input type="number" min="1" max="32" value={measures} onChange={(e) => setMeasures(Number(e.target.value))} className="w-full p-2 memphis-input font-bold text-lg" />
+                                        </div>
+                                    </div>
+
+                                    <div className="grid grid-cols-2 gap-4">
+                                        <div>
+                                            <label className="text-xs font-bold block mb-1">GROUPS</label>
+                                            <select value={groupCount} onChange={(e) => setGroupCount(Number(e.target.value))} className="w-full p-2 memphis-input font-bold text-lg bg-white">
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                            </select>
+                                        </div>
+                                        
+                                        <div className="flex flex-col">
+                                            <div className="flex justify-between items-baseline mb-1">
+                                                <label className="text-xs font-bold">ENTER AFTER</label>
+                                            </div>
+                                            <div className="flex items-stretch border-3 border-black shadow-[4px_4px_0px_0px_#cbd5e1] h-12 bg-white">
+                                                <input 
+                                                    type="number" 
+                                                    min="1" 
+                                                    step="1" 
+                                                    value={offsetValue} 
+                                                    onChange={(e) => setOffsetValue(Math.max(1, Math.floor(Number(e.target.value))))}
+                                                    className="w-16 p-2 text-lg font-bold outline-none text-center bg-transparent border-r-2 border-black"
+                                                />
+                                                <div className="flex-1 flex flex-col">
+                                                    <button 
+                                                        onClick={() => setOffsetUnit('measures')}
+                                                        className={`flex-1 text-[10px] font-bold tracking-wider hover:bg-gray-100 ${offsetUnit === 'measures' ? 'bg-black text-white' : 'bg-white text-black'}`}
+                                                    >
+                                                        MEAS
+                                                    </button>
+                                                    <div className="h-[2px] bg-black"></div>
+                                                    <button 
+                                                        onClick={() => setOffsetUnit('beats')}
+                                                        className={`flex-1 text-[10px] font-bold tracking-wider hover:bg-gray-100 ${offsetUnit === 'beats' ? 'bg-black text-white' : 'bg-white text-black'}`}
+                                                    >
+                                                        BEATS
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div>
+                                        <label className="text-xs font-bold block mb-1">TOTAL REPEATS</label>
+                                        <div className="flex items-center gap-4">
+                                            <button onClick={() => setRepeats(Math.max(1, repeats - 1))} className="w-10 h-10 bg-white border-2 border-black font-bold text-xl hover:bg-gray-100 btn-solid-press">-</button>
+                                            <span className="font-black text-2xl w-8 text-center">{repeats}</span>
+                                            <button onClick={() => setRepeats(repeats + 1)} className="w-10 h-10 bg-white border-2 border-black font-bold text-xl hover:bg-gray-100 btn-solid-press">+</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="bg-teal-300 p-6 memphis-box flex items-center justify-around">
+                                <button 
+                                    onClick={reset}
+                                    className="flex flex-col items-center gap-1 group"
+                                >
+                                    <div className="p-3 bg-white border-2 border-black shadow-[4px_4px_0px_0px_black] btn-solid-press">
+                                        <RotateCcw size={24} />
+                                    </div>
+                                    <span className="text-xs font-bold mt-1">RESET</span>
+                                </button>
+
+                                <button 
+                                    onClick={isPlaying ? pause : start}
+                                    className={`
+                                        w-20 h-20 flex items-center justify-center border-4 border-black shadow-[6px_6px_0px_0px_black] btn-solid-press
+                                        ${isPlaying ? 'bg-yellow-400' : 'bg-pink-400 animate-wiggle'}
+                                    `}
+                                >
+                                    {isPlaying ? <Pause size={40} fill="black" /> : <Play size={40} fill="black" className="ml-1" />}
+                                </button>
+                            </div>
+                        </div>
+
+                        <div className="w-full lg:w-2/3 bg-white memphis-box p-4 flex flex-col items-center justify-center relative overflow-hidden">
+                            <div className="absolute inset-0 opacity-10 pointer-events-none" style={{ backgroundImage: 'linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px)', backgroundSize: '40px 40px' }}></div>
+                            
+                            {renderCircularVisualizer()}
+                            
+                            <div className="absolute bottom-4 right-4 bg-black text-white px-2 py-1 text-xs font-bold border-2 border-white">
+                                DURATION: {totalDurationBeats} BEATS
+                            </div>
+                        </div>
+                    </main>
+                </div>
+            );
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<CanonConductor />);
+    </script>
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="musicaldrewby" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>
+</body>
+</html>
