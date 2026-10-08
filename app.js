@@ -10,14 +10,14 @@
  const featured=['drew-uke-strum','sneaky-cat','drews-boomwhacker-creator'];
  const ordered=[...featured.map(id=>byId.get(id)),...apps.filter(a=>!featured.includes(a.id))].filter(Boolean);
  let category='all', shelfApps=ordered, firstVisible=0, currentApp=null, previousRandom='', browseCategory='all', favoritesOnly=false, toastTimer, scrollFrame=0, resizeFrame=0;
- const motionQuery=window.matchMedia('(prefers-reduced-motion: reduce)'), narrowQuery=window.matchMedia('(max-width: 600px) and (orientation: portrait)'), finePointer=window.matchMedia('(hover: hover) and (pointer: fine)');
+ const motionQuery=window.matchMedia('(prefers-reduced-motion: reduce)'), narrowQuery=window.matchMedia('(max-width: 680px)'), finePointer=window.matchMedia('(hover: hover) and (pointer: fine)');
  let paused=motionQuery.matches||storage.get('drews-arcade-motion-paused',false)===true;
  const perPage=()=>narrowQuery.matches?1:3;
  const icon=(name,extra='')=>`<svg aria-hidden="true" ${extra}><use href="#i-${name}"/></svg>`;
  const short=a=>a.shortTitle||a.title;
- function cover(a,{sticker=false,mini=false}={}){
+ function cover(a,{sticker=false,mini=false,screen=false}={}){
   const index=a.cover??19, x=(index%4)*100/3, y=Math.floor(index/4)*25;
-  return `<span class="cover-art${mini?' rail-thumb':''}" style="--cover-x:${x}%;--cover-y:${y}%" aria-hidden="true">${mini?'':`<span class="cover-title${short(a).length>19?' long-title':''}">${esc(short(a))}</span>`}${sticker&&!a.url?'<span class="pending-sticker">Link coming soon</span>':''}</span>`;
+  return `<span class="cover-art${mini?' rail-thumb':''}" style="--cover-x:${x}%;--cover-y:${y}%" aria-hidden="true">${mini||screen?'':`<span class="cover-title${short(a).length>19?' long-title':''}">${esc(short(a))}</span>`}${sticker&&!a.url?'<span class="pending-sticker">Link coming soon</span>':''}</span>`;
  }
  function toast(message){clearTimeout(toastTimer);$('toast').textContent=message;$('toast').classList.add('visible');toastTimer=setTimeout(()=>$('toast').classList.remove('visible'),2600)}
  function syncMotion(){
@@ -44,17 +44,50 @@
   document.addEventListener('fullscreenchange',()=>{const label=document.fullscreenElement?'Exit full screen':'Enter full screen';$('fullscreenButton').setAttribute('aria-label',label);$('fullscreenButton').title=label});
  }
  const categoryEntries=[{id:'all',name:'All Apps'},...categories];
- $('categories').innerHTML=categoryEntries.map(c=>`<button class="category-tab" type="button" data-category="${c.id}" aria-pressed="${c.id==='all'}">${esc(c.name)}</button>`).join('');
+ $('categories').innerHTML=categories.map(c=>`<button class="category-tab" type="button" data-category="${c.id}" aria-pressed="${c.id==='all'}">${esc(c.name)}</button>`).join('');
  $('browseCategories').innerHTML=categoryEntries.map(c=>`<button class="browse-category" type="button" data-browse-category="${c.id}" aria-pressed="${c.id==='all'}">${esc(c.name)}</button>`).join('');
  $('totalApps').textContent=String(apps.length);
+ // Give each marquee one or two complete lines; never truncate an app name.
+ function marqueeLines(name){
+  const words=name.trim().split(/\s+/);
+  if(name.length<=12||words.length<2)return [name];
+  let best=[name],score=Infinity;
+  for(let i=1;i<words.length;i++){
+   const pair=[words.slice(0,i).join(' '),words.slice(i).join(' ')];
+   const balance=Math.max(...pair.map(s=>s.length))*2+Math.abs(pair[0].length-pair[1].length);
+   if(balance<score){best=pair;score=balance}
+  }
+  return best;
+ }
+ function fitMarqueeTitles(){
+  if(typeof getComputedStyle!=='function')return;
+  document.querySelectorAll('.machine-title').forEach(title=>{
+   title.style.removeProperty('font-size');
+   const style=getComputedStyle(title),size=parseFloat(style.fontSize);
+   const width=title.clientWidth-parseFloat(style.paddingLeft)-parseFloat(style.paddingRight);
+   const height=title.clientHeight-parseFloat(style.paddingTop)-parseFloat(style.paddingBottom);
+   const lines=[...title.children];
+   const widest=Math.max(0,...lines.map(line=>line.scrollWidth));
+   const textHeight=parseFloat(style.lineHeight)*lines.length;
+   if(width<=0||height<=0||!widest||!Number.isFinite(size))return;
+   const scale=Math.min(1,width/widest,height/textHeight);
+   if(scale<1)title.style.fontSize=(Math.floor(size*scale*10)/10)+'px';
+  });
+ }
+ if(document.fonts?.ready)document.fonts.ready.then(()=>requestAnimationFrame(fitMarqueeTitles));
+ const skinFor=a=>a.id==='sneaky-cat'||a.region==='games'?1:a.region==='ridge'||a.region==='tower'?2:0;
+ function machine(a){
+  const skin=skinFor(a),name=short(a),lines=marqueeLines(name);
+  return `<div class="record-slot"><div class="machine skin-${skin}"><a class="machine-link" href="${esc(a.url)}" target="_blank" rel="noopener noreferrer" aria-label="Open ${esc(a.title)} in a new tab"><span class="machine-shell" aria-hidden="true"></span><span class="machine-title${lines.length===2?' two-lines':''}">${lines.map(line=>`<span class="title-line">${esc(line)}</span>`).join('')}</span><span class="machine-screen">${cover(a,{screen:true})}<span class="screen-glass" aria-hidden="true"></span></span><span class="launch-hint">Open app ↗</span></a><div class="machine-actions"><button class="machine-detail" type="button" data-app="${a.id}" aria-haspopup="dialog" aria-label="About ${esc(a.title)}">${icon('info')}</button><button class="machine-save" type="button" data-save="${a.id}" aria-label="Save ${esc(a.title)} to favorites" aria-pressed="${favorites.has(a.id)}">${icon('heart')}</button></div></div></div>`;
+ }
  function renderShelf(){
   shelfApps=category==='all'?ordered:ordered.filter(a=>a.region===category);firstVisible=0;
-  $('recordShelf').innerHTML=shelfApps.map(a=>`<div class="record-slot"><button class="record-button" data-app="${a.id}" type="button" aria-label="View ${esc(a.title)}${a.url?'':', link coming soon'}" aria-haspopup="dialog">${cover(a,{sticker:true})}<span class="cover-corner" aria-hidden="true">${icon('arrow')}</span></button></div>`).join('');
+  $('recordShelf').innerHTML=shelfApps.map(machine).join('');
   $('recordShelf').scrollLeft=0;
   $('recordShelf').classList.remove('shelf-changing');
   if(!paused){void $('recordShelf').offsetWidth;$('recordShelf').classList.add('shelf-changing')}
   document.querySelectorAll('[data-category]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.category===category)));
-  syncShelf();
+  syncFavorites();syncShelf();requestAnimationFrame(fitMarqueeTitles);
  }
  function syncShelf(){
   const shelf=$('recordShelf'),slots=shelf.children, step=slots.length>1?slots[1].offsetLeft-slots[0].offsetLeft:1;
@@ -64,22 +97,20 @@
   $('shelfPosition').textContent=`${firstVisible+1}${visible.length>1?`–${firstVisible+visible.length}`:''} / ${shelfApps.length}`;
   $('previousRecords').disabled=firstVisible===0;
   $('nextRecords').disabled=firstVisible+perPage()>=shelfApps.length;
-  const signature=visible.map(a=>a.id).join('|');
-  if($('featuredRail').dataset.visible!==signature){
-   $('featuredRail').dataset.visible=signature;
-   $('featuredRail').innerHTML=visible.map(a=>`<button class="rail-app" type="button" data-app="${a.id}" aria-label="View ${esc(a.title)}" aria-haspopup="dialog">${cover(a,{mini:true})}<span class="rail-name">${esc(short(a))}</span>${icon('arrow')}</button>`).join('');
-  }
+
  }
  function shiftShelf(direction){
   const shelf=$('recordShelf'),slots=shelf.children;if(!slots.length)return;
   const target=Math.min(Math.max(0,shelfApps.length-perPage()),Math.max(0,firstVisible+direction*perPage()));
   shelf.scrollTo({left:slots[target].offsetLeft-slots[0].offsetLeft,behavior:paused?'auto':'smooth'});
  }
+ $('featuredButton').addEventListener('click',()=>{category='all';renderShelf()});
+ $('recordShelf').addEventListener('click',e=>{const b=e.target.closest('[data-save]');if(b)toggleFavorite(b.dataset.save)});
  $('previousRecords').addEventListener('click',()=>shiftShelf(-1));$('nextRecords').addEventListener('click',()=>shiftShelf(1));
  $('recordShelf').addEventListener('scroll',()=>{if(!scrollFrame)scrollFrame=requestAnimationFrame(()=>{scrollFrame=0;syncShelf()})},{passive:true});
  $('recordShelf').addEventListener('keydown',e=>{if(e.target!==$('recordShelf'))return;if(e.key==='ArrowRight'||e.key==='ArrowLeft'){e.preventDefault();shiftShelf(e.key==='ArrowRight'?1:-1)}});
- $('categories').addEventListener('click',e=>{const b=e.target.closest('[data-category]');if(!b)return;category=b.dataset.category;renderShelf();b.scrollIntoView({block:'nearest',inline:'nearest',behavior:paused?'auto':'smooth'})});
- window.addEventListener('resize',()=>{cancelAnimationFrame(resizeFrame);resizeFrame=requestAnimationFrame(syncShelf)},{passive:true});
+ $('categories').addEventListener('click',e=>{const b=e.target.closest('[data-category]');if(!b)return;category=b.dataset.category;renderShelf();});
+ window.addEventListener('resize',()=>{cancelAnimationFrame(resizeFrame);resizeFrame=requestAnimationFrame(()=>{syncShelf();fitMarqueeTitles()})},{passive:true});
  narrowQuery.addEventListener('change',()=>{const shelf=$('recordShelf');shelf.scrollLeft=0;syncShelf()});
  const dialogOpeners=new WeakMap();
  function openDialog(dialog,focus){
@@ -91,7 +122,7 @@
  function afterClose(dialog){
   document.documentElement.classList.toggle('modal-open',!!document.querySelector('dialog[open]'));
   let opener=dialogOpeners.get(dialog);
-  // The collection can re-render while a record is open. Restore to its replacement.
+  // The collection can re-render while a app is open. Restore to its replacement.
   if(opener&&!opener.isConnected&&opener.dataset?.app)opener=$('browseGrid').querySelector(`[data-app="${opener.dataset.app}"]`);
   if(opener?.isConnected)opener.focus({preventScroll:true});else if($('browseDialog').open)$('searchInput').focus({preventScroll:true});
  }
@@ -110,6 +141,7 @@
   const appButton=e.target.closest('[data-app]');if(appButton)showApp(appButton.dataset.app);
  });
  function syncFavorites(){
+  document.querySelectorAll('.machine-save').forEach(b=>{const a=byId.get(b.dataset.save),saved=favorites.has(a.id);b.setAttribute('aria-pressed',String(saved));b.setAttribute('aria-label',`${saved?'Remove':'Save'} ${a.title} ${saved?'from':'to'} favorites`)});
   $('favoriteCount').textContent=String(favorites.size);$('favoriteCount').hidden=favorites.size===0;
   $('favoritesButton').setAttribute('aria-label',`Browse favorites${favorites.size?`, ${favorites.size} saved`:''}`);
   if(currentApp){const saved=favorites.has(currentApp.id);$('detailFavorite').setAttribute('aria-pressed',String(saved));$('detailFavorite').querySelector('span').textContent=saved?'Saved to favorites':'Save favorite';$('detailFavorite').setAttribute('aria-label',`${saved?'Remove':'Save'} ${currentApp.title} ${saved?'from':'to'} favorites`)}
@@ -142,7 +174,7 @@
   document.querySelectorAll('[data-browse-category]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.browseCategory===browseCategory)));
   $('browseGrid').innerHTML=visible.map(a=>`<article class="browse-item"><button class="browse-record" type="button" data-app="${a.id}" aria-label="View ${esc(a.title)}${a.url?'':', link coming soon'}" aria-haspopup="dialog">${cover(a,{sticker:true})}<strong>${esc(short(a))}</strong><small>${esc(byCategory.get(a.region).name)}</small></button><button type="button" class="browse-save" data-save="${a.id}" aria-pressed="${favorites.has(a.id)}" aria-label="${favorites.has(a.id)?'Remove':'Save'} ${esc(a.title)} ${favorites.has(a.id)?'from':'to'} favorites">${icon('heart')}</button></article>`).join('');
   $('browseEmpty').hidden=visible.length>0;
-  $('emptyTitle').textContent=favoritesOnly&&favorites.size===0?'Your favorites start here.':'No records found';
+  $('emptyTitle').textContent=favoritesOnly&&favorites.size===0?'Your favorites start here.':'No apps found';
   $('emptyDescription').textContent=favoritesOnly&&favorites.size===0?'Save an app with its heart to keep it handy on this device.':'Try another name, activity, or category.';
  }
  function openBrowse({saved=false,search=false}={}){favoritesOnly=saved;browseCategory='all';$('searchInput').value='';renderBrowse();openDialog($('browseDialog'),search?$('searchInput'):undefined)}

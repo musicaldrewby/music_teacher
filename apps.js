@@ -81,7 +81,7 @@ window.ARCADE_APPS = [
   {
     "id": "drews-boomwhacker-creator",
     "cover": 2,
-    "title": "Boomwhacker Play-Along",
+    "title": "Boomwhacker Play-Along Creator",
     "art": "tubes",
     "region": "ridge",
     "description": "Create colorful arrangements with tubes, Orff instruments, percussion, and lyrics.",
