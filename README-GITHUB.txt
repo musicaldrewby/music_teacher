@@ -1,5 +1,5 @@
 MR. DREW'S MUSIC ARCADE — RECORD SHOP
-GITHUB HOMEPAGE PACKAGE — 14 GPT SITE APPS
+GITHUB HOMEPAGE PACKAGE — 15 GPT SITE APPS
 Prepared October 8, 2026
 
 USE YOUR EXISTING GITHUB HOMEPAGE ADDRESS
@@ -17,7 +17,7 @@ FILES
 index.html — the immersive record-shop homepage
 style.css — layout, wood display, lighting and animation
 app.js — browsing, search, app details and favorites
-apps.js — exactly the 14 approved apps and their GPT Site links
+apps.js — exactly the 15 approved apps and their GPT Site links
 directory.html — simple app list that works without JavaScript
 assets/record-shop.webp — the illustrated room
 assets/album-covers.webp — the illustrated album artwork
@@ -29,7 +29,7 @@ README-GITHUB.txt — these instructions
 
 WHAT IS INCLUDED
 
-All 14 approved apps below, with exact GPT Site destinations. The five unselected apps and their coming-soon entries are removed from the directory. Your original record-shop design, solid wooden backing, category tabs, featured albums, search, favorites, animations, mobile browsing, and Buy Me a Coffee link are included.
+All 15 approved apps below, with exact GPT Site destinations. The four unselected apps and their coming-soon entries are removed from the directory. Your original record-shop design, solid wooden backing, category tabs, featured albums, search, favorites, animations, mobile browsing, and Buy Me a Coffee link are included.
 
 The homepage runs on GitHub Pages. Clicking an album's Open app control opens its GPT Site in a new tab. The apps themselves continue to run on their GPT Sites. No installation, build step, API key, backend, or ChatGPT connector is required for the homepage. All artwork and fonts are included locally.
 
@@ -63,6 +63,8 @@ APP LINKS
    https://sneaky-cat.musicaldrewby.chatgpt.site
 14. Soundroom
    https://soundroom.musicaldrewby.chatgpt.site
+15. Round Helper
+   https://round-helper.musicaldrewby.chatgpt.site/
 
 Favorites are saved in each visitor's browser for this website address. Motion respects reduced-motion settings and can be paused with the top toolbar.
 

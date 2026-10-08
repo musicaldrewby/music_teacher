@@ -1,4 +1,4 @@
-/* Mr. Drew’s approved 14-app collection. All app destinations are GPT Sites. */
+/* Mr. Drew’s approved 15-app collection. All app destinations are GPT Sites. */
 window.ARCADE_REGIONS = [
   {
     "id": "grove",
@@ -240,6 +240,22 @@ window.ARCADE_APPS = [
       "teacher"
     ],
     "url": "https://mr-drews-bingo-maker.musicaldrewby.chatgpt.site"
+  },
+  {
+    "id": "round-helper",
+    "cover": 17,
+    "title": "Round Helper",
+    "art": "round",
+    "region": "tower",
+    "description": "Keep singing groups together with clear entry cues, progress, and a steady beat.",
+    "tags": [
+      "canon",
+      "singing",
+      "conductor",
+      "metronome",
+      "teacher"
+    ],
+    "url": "https://round-helper.musicaldrewby.chatgpt.site/"
   },
   {
     "id": "mr-drews-production-media-player",
