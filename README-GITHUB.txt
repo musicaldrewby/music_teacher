@@ -1,5 +1,5 @@
 MR. DREW'S ARCADE — SEASIDE BOARDWALK
-GITHUB HOMEPAGE PACKAGE — 15 GPT SITE APPS
+GITHUB HOMEPAGE PACKAGE — 16 GPT SITE APPS
 
 KEEP YOUR EXISTING HOMEPAGE ADDRESS
 
@@ -22,7 +22,7 @@ FILES
 index.html — homepage
 style.css — seaside layout, illustrated machines and animation
 app.js — navigation, search, favorites and dialogs
-apps.js — the approved 15 app destinations
+apps.js — the approved 16 app destinations
 directory.html — all links, usable without JavaScript
 assets/boardwalk.webp — seaside pavilion
 assets/cabinets.webp — original three illustrated cabinet shells
@@ -43,29 +43,31 @@ APP LINKS
    https://pocket-orff.musicaldrewby.chatgpt.site
 3. Interactive Xylophone
    https://interactive-xylophone.musicaldrewby.chatgpt.site
-4. Boomwhacker Play-Along Creator
+4. Mr. Drew’s Animated Vocal Explorations
+   https://mr-drew-vocal-explorations.musicaldrewby.chatgpt.site
+5. Boomwhacker Play-Along Creator
    https://drews-boomwhacker-creator.musicaldrewby.chatgpt.site
-5. Rhythm Builder
+6. Rhythm Builder
    https://mr-drews-rhythm-builder.musicaldrewby.chatgpt.site
-6. Sneaky Cat
+7. Sneaky Cat
    https://sneaky-cat.musicaldrewby.chatgpt.site
-7. Mr. Drew’s Name That Tune!
+8. Mr. Drew’s Name That Tune!
    https://mr-drews-name-that-tune.musicaldrewby.chatgpt.site
-8. Four in a Row
+9. Four in a Row
    https://classroom-connect-four.musicaldrewby.chatgpt.site
-9. Mr. Drew’s Name That Note Challenge
+10. Mr. Drew’s Name That Note Challenge
    https://mr-drews-name-that-note.musicaldrewby.chatgpt.site
-10. Soundroom
+11. Soundroom
    https://soundroom.musicaldrewby.chatgpt.site
-11. Felt & Fable Studio
+12. Felt & Fable Studio
    https://felt-and-fable-studio.musicaldrewby.chatgpt.site
-12. Mr. Drew’s Music Lab VR
+13. Mr. Drew’s Music Lab VR
    https://drews-music-lab-vr.musicaldrewby.chatgpt.site
-13. Bingo Maker
+14. Bingo Maker
    https://mr-drews-bingo-maker.musicaldrewby.chatgpt.site
-14. Round Helper
+15. Round Helper
    https://round-helper.musicaldrewby.chatgpt.site/
-15. Mr. Drew’s Production Media Player
+16. Mr. Drew’s Production Media Player
    https://mr-drews-production-media-player.musicaldrewby.chatgpt.site
 
 To add or change an app later, edit apps.js and update directory.html to match. The cover number selects an illustration from the existing atlas; keep existing cover numbers unchanged.

@@ -79,7 +79,7 @@
  // 0 tropical, 1 moonlight, 2 rainbow, 3 copper, 4 seafoam, 5 nautical, 6 carnival.
  const cabinetStyles={
   'drew-uke-strum':0,'sneaky-cat':1,'drews-boomwhacker-creator':2,
-  'pocket-orff':3,'interactive-xylophone':4,'rhythm-builder':0,
+  'pocket-orff':3,'interactive-xylophone':4,'mr-drew-vocal-explorations':1,'rhythm-builder':0,
   'mr-drews-name-that-tune':6,'classroom-connect-four':5,'mr-drews-name-that-note':4,
   'soundroom':3,'felt-and-fable-studio':0,'drews-music-lab-vr':1,
   'bingo-maker':6,'round-helper':2,'mr-drews-production-media-player':5

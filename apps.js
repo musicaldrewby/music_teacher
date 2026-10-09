@@ -1,4 +1,4 @@
-/* Mr. Drew’s approved 15-app collection. All app destinations are GPT Sites. */
+/* Mr. Drew’s approved 16-app collection. All app destinations are GPT Sites. */
 window.ARCADE_REGIONS = [
   {
     "id": "grove",
@@ -77,6 +77,17 @@ window.ARCADE_APPS = [
       "melody"
     ],
     "url": "https://interactive-xylophone.musicaldrewby.chatgpt.site"
+  },
+  {
+    "id": "mr-drew-vocal-explorations",
+    "cover": 6,
+    "title": "Mr. Drew’s Animated Vocal Explorations",
+    "shortTitle": "Vocal Explorations",
+    "art": "vocal",
+    "region": "grove",
+    "description": "Draw animated pitch paths and follow them with your voice, with themed scenes, looping, and optional sound.",
+    "tags": ["voice", "vocal", "singing", "pitch", "paths", "warmups", "draw", "loop"],
+    "url": "https://mr-drew-vocal-explorations.musicaldrewby.chatgpt.site"
   },
   {
     "id": "drews-boomwhacker-creator",
