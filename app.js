@@ -78,19 +78,20 @@
   });
  }
  if(document.fonts?.ready)document.fonts.ready.then(()=>requestAnimationFrame(fitMarqueeTitles));
- // Stable per-app shells: mix all fourteen designs within the categories, too.
+ // Stable per-app shells: mix all fifteen designs within the categories, too.
  // 0 tropical, 1 moonlight, 2 rainbow, 3 copper, 4 seafoam, 5 nautical, 6 carnival.
  // 7 Grand Theater, 8 Orbit, 9 Midnight Vector, 10 Sunset Stripe.
  // 11 Laser Lime, 12 Indigo Wave, 13 glowing circuit cabinet with MCP backdrop.
- // New apps cycle through all fourteen designs.
+ // 14 exclusive Felt & Fable storybook theater; Indigo Wave (12) is reserved for a future app.
+ // New apps cycle through all fifteen designs.
  const cabinetStyles={
   'drew-uke-strum':0,'sneaky-cat':1,'drews-boomwhacker-creator':2,
   'pocket-orff':3,'interactive-xylophone':4,'mr-drew-vocal-explorations':7,'rhythm-builder':8,
   'mr-drews-name-that-tune':6,'classroom-connect-four':10,'mr-drews-name-that-note':11,
-  'soundroom':9,'felt-and-fable-studio':12,'drews-music-lab-vr':13,
+  'soundroom':9,'felt-and-fable-studio':14,'drews-music-lab-vr':13,
   'bingo-maker':10,'round-helper':2,'mr-drews-production-media-player':5
  };
- const cabinetCount=14;
+ const cabinetCount=15;
  const skinFor=a=>cabinetStyles[a.id]??Math.max(0,apps.indexOf(a))%cabinetCount;
  function arrangeCabinets(list){
   const remaining=[...list],arranged=[];
@@ -108,8 +109,8 @@
   return arranged;
  }
  function machine(a,skin=skinFor(a)){
-  const name=short(a),lines=marqueeLines(name);
-  return `<div class="record-slot"><div class="machine skin-${skin}"><a class="machine-link" href="${esc(a.url)}" target="_blank" rel="noopener noreferrer" aria-label="Open ${esc(a.title)} in a new tab"><span class="machine-shell" aria-hidden="true"></span><span class="machine-title${lines.length===2?' two-lines':''}">${lines.map(line=>`<span class="title-line">${esc(line)}</span>`).join('')}</span><span class="machine-screen">${cover(a,{screen:true})}<span class="screen-glass" aria-hidden="true"></span></span><span class="launch-hint">Open app ↗</span></a><div class="machine-actions"><button class="machine-detail" type="button" data-app="${a.id}" aria-haspopup="dialog" aria-label="About ${esc(a.title)}">${icon('info')}</button><button class="machine-save" type="button" data-save="${a.id}" aria-label="Save ${esc(a.title)} to favorites" aria-pressed="${favorites.has(a.id)}">${icon('heart')}</button></div></div></div>`;
+  const name=short(a),lines=a.id==='felt-and-fable-studio'?['Felt & Fable','Studio']:marqueeLines(name);
+  return `<div class="record-slot floor-${skin}"><div class="machine skin-${skin}"><a class="machine-link" href="${esc(a.url)}" target="_blank" rel="noopener noreferrer" aria-label="Open ${esc(a.title)} in a new tab"><span class="machine-shell" aria-hidden="true"></span><span class="machine-title${lines.length===2?' two-lines':''}">${lines.map(line=>`<span class="title-line">${esc(line)}</span>`).join('')}</span><span class="machine-screen">${cover(a,{screen:true})}<span class="screen-glass" aria-hidden="true"></span></span><span class="launch-hint">Open app ↗</span></a><div class="machine-actions"><button class="machine-detail" type="button" data-app="${a.id}" aria-haspopup="dialog" aria-label="About ${esc(a.title)}">${icon('info')}</button><button class="machine-save" type="button" data-save="${a.id}" aria-label="Save ${esc(a.title)} to favorites" aria-pressed="${favorites.has(a.id)}">${icon('heart')}</button></div></div></div>`;
  }
  function renderShelf(){
   const arrangement=arrangeCabinets(category==='all'?ordered:ordered.filter(a=>inCategory(a,category)));
