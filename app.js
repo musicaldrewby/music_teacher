@@ -78,16 +78,18 @@
   });
  }
  if(document.fonts?.ready)document.fonts.ready.then(()=>requestAnimationFrame(fitMarqueeTitles));
- // Stable per-app shells: mix all seven designs within the categories, too.
+ // Stable per-app shells: mix all eleven designs within the categories, too.
  // 0 tropical, 1 moonlight, 2 rainbow, 3 copper, 4 seafoam, 5 nautical, 6 carnival.
+ // 7 Grand Theater, 8 Orbit, 9 Midnight Vector, 10 Sunset Stripe.
+ // New apps cycle through all eleven designs.
  const cabinetStyles={
   'drew-uke-strum':0,'sneaky-cat':1,'drews-boomwhacker-creator':2,
-  'pocket-orff':3,'interactive-xylophone':4,'mr-drew-vocal-explorations':1,'rhythm-builder':0,
-  'mr-drews-name-that-tune':6,'classroom-connect-four':5,'mr-drews-name-that-note':4,
-  'soundroom':3,'felt-and-fable-studio':0,'drews-music-lab-vr':1,
-  'bingo-maker':6,'round-helper':2,'mr-drews-production-media-player':5
+  'pocket-orff':3,'interactive-xylophone':4,'mr-drew-vocal-explorations':7,'rhythm-builder':8,
+  'mr-drews-name-that-tune':6,'classroom-connect-four':10,'mr-drews-name-that-note':9,
+  'soundroom':9,'felt-and-fable-studio':7,'drews-music-lab-vr':8,
+  'bingo-maker':10,'round-helper':2,'mr-drews-production-media-player':5
  };
- const skinFor=a=>cabinetStyles[a.id]??Math.max(0,apps.indexOf(a))%7;
+ const skinFor=a=>cabinetStyles[a.id]??Math.max(0,apps.indexOf(a))%11;
  function machine(a){
   const skin=skinFor(a),name=short(a),lines=marqueeLines(name);
   return `<div class="record-slot"><div class="machine skin-${skin}"><a class="machine-link" href="${esc(a.url)}" target="_blank" rel="noopener noreferrer" aria-label="Open ${esc(a.title)} in a new tab"><span class="machine-shell" aria-hidden="true"></span><span class="machine-title${lines.length===2?' two-lines':''}">${lines.map(line=>`<span class="title-line">${esc(line)}</span>`).join('')}</span><span class="machine-screen">${cover(a,{screen:true})}<span class="screen-glass" aria-hidden="true"></span></span><span class="launch-hint">Open app ↗</span></a><div class="machine-actions"><button class="machine-detail" type="button" data-app="${a.id}" aria-haspopup="dialog" aria-label="About ${esc(a.title)}">${icon('info')}</button><button class="machine-save" type="button" data-save="${a.id}" aria-label="Save ${esc(a.title)} to favorites" aria-pressed="${favorites.has(a.id)}">${icon('heart')}</button></div></div></div>`;

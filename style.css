@@ -11,6 +11,17 @@
 .skin-4{--cabinet-image:url('assets/cabinet-seafoam.webp');--sheet-size:100%;--sheet-pos:50%;--screen-left:23.3%;--screen-width:53.4%;--screen-top:20.7%;--screen-height:20.6%;--title-left:22%;--title-width:56%;--title-top:5%;--title-height:7.8%}
 .skin-5{--cabinet-image:url('assets/cabinet-nautical.webp');--sheet-size:100%;--sheet-pos:50%;--screen-left:22.4%;--screen-width:55.3%;--screen-top:18.3%;--screen-height:20.8%;--title-left:22%;--title-width:56%;--title-top:5%;--title-height:7.6%}
 .skin-6{--cabinet-image:url('assets/cabinet-carnival.webp');--sheet-size:100%;--sheet-pos:50%;--screen-left:25.9%;--screen-width:48.2%;--screen-top:22.3%;--screen-height:19.2%;--title-left:24.2%;--title-width:51.4%;--title-top:8.2%;--title-height:7.1%}
+.skin-7{--cabinet-image:url('assets/cabinet-grand-theater.webp');--sheet-size:100%;--sheet-pos:50%;--screen-left:28.4%;--screen-width:43.3%;--screen-top:24.3%;--screen-height:18.7%;--title-left:28%;--title-width:44%;--title-top:12%;--title-height:6.5%}
+.skin-8{--cabinet-image:url('assets/cabinet-orbit.webp');--sheet-size:100%;--sheet-pos:50%;--screen-left:24.8%;--screen-width:51.1%;--screen-top:18.1%;--screen-height:21.1%;--title-left:26%;--title-width:48%;--title-top:4.8%;--title-height:7.4%}
+.skin-9{--cabinet-image:url('assets/cabinet-midnight-vector.webp');--sheet-size:100%;--sheet-pos:50%;--screen-left:31.9%;--screen-width:36.4%;--screen-top:19.55%;--screen-height:18.2%;--title-left:21.8%;--title-width:56.4%;--title-top:3.7%;--title-height:7.3%}
+.skin-10{--cabinet-image:url('assets/cabinet-sunset-stripe.webp');--sheet-size:100%;--sheet-pos:50%;--screen-left:30%;--screen-width:40%;--screen-top:19.2%;--screen-height:18.8%;--title-left:29%;--title-width:42%;--title-top:3.5%;--title-height:7.4%}
+.skin-9 .machine-title{color:#fff4cf;text-shadow:0 1px 2px #041b22;padding:.8cqw .8cqw}.skin-10 .machine-title{color:#672b12;padding:.8cqw .8cqw}
+.skin-9 .machine-screen{border-radius:16% 16% 9% 9%/14% 14% 9% 9%;clip-path:inset(0 round 16% 16% 9% 9%/14% 14% 9% 9%)}.skin-10 .machine-screen{border-radius:5%;clip-path:inset(0 round 5%)}
+.skin-9 .screen-glass,.skin-10 .screen-glass{border-radius:inherit}
+.skin-9 .machine-actions,.skin-10 .machine-actions{left:30%;right:30%;bottom:12%;justify-content:space-between}
+.skin-7 .machine-title{color:#6a2d28;padding:.8cqw .6cqw}.skin-8 .machine-title{color:#20575f;padding:.8cqw .6cqw}
+.skin-7 .machine-screen{clip-path:polygon(3% 0,97% 0,100% 100%,0 100%)}.skin-8 .machine-screen{clip-path:polygon(5% 0,95% 0,100% 100%,0 100%)}
+.skin-7 .machine-actions{left:30%;right:30%;bottom:14%;justify-content:space-between}.skin-8 .machine-actions{left:30%;right:30%;bottom:12%;justify-content:space-between}
 .skin-3 .machine-title{color:#683712}.skin-4 .machine-title{color:#205f62}.skin-5 .machine-title{color:#19394f}.skin-6 .machine-title{color:#8c271d}
 .skin-3 .machine-actions,.skin-4 .machine-actions,.skin-5 .machine-actions,.skin-6 .machine-actions{left:24%;right:24%;bottom:12%;justify-content:space-between}
 @media(hover:hover) and (pointer:fine){.machine:hover{transform:translateY(-5px);filter:drop-shadow(0 12px 10px #3b180c80)}.machine-link:hover .launch-hint{opacity:1;transform:none}.machine-link:hover .machine-screen{box-shadow:0 0 26px #ffe5a57d}.machine-actions button:hover{background:#b46343;transform:translateY(-2px)}}
@@ -38,3 +49,68 @@
 .day-night-ready .daylight-effects{animation:seaside-daylight 80s ease-in-out infinite}
 @keyframes seaside-night{0%,37.5%{opacity:0}50%,87.5%{opacity:1}100%{opacity:0}}
 @keyframes seaside-daylight{0%,37.5%{opacity:1}50%,87.5%{opacity:0}100%{opacity:1}}
+
+/* Occasional surprises are positioned in the original painting's coordinates,
+   then scaled with its cover crop. These decorations never receive input. */
+.surprise-scene-plane{position:absolute;transform-origin:0 0;pointer-events:none}
+.surprise-sea-window{position:absolute;left:740px;top:436px;width:368px;height:78px;overflow:hidden;mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent)}
+.surprise-sailboat{position:absolute;left:0;top:13px;width:62px;height:62px;background:url('assets/sailboat.webp') center/contain no-repeat;opacity:0;pointer-events:none}
+.surprise-sailboat.is-active{animation:distant-sail 42s linear both;will-change:transform}
+.surprise-night-event{opacity:var(--night-light,0);transition:opacity .3s linear;pointer-events:none}
+.surprise-ship-window{position:absolute;left:740px;top:427px;width:368px;height:50px;overflow:hidden;mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+.surprise-night-ship{position:absolute;left:0;top:5px;width:66px;height:34px;opacity:0;pointer-events:none}
+.surprise-night-ship.is-active{animation:night-passage var(--ship-duration,32s) linear both;will-change:transform}
+.ship-hull{position:absolute;left:0;top:14px;width:66px;height:7px;background:#091b2ed9;clip-path:polygon(0 5%,89% 15%,100% 0,93% 87%,12% 100%)}
+.ship-cabins{position:absolute;left:10px;top:6px;width:43px;height:10px;background:#173044;clip-path:polygon(0 40%,29% 40%,29% 0,77% 0,84% 45%,100% 45%,100% 100%,0 100%)}
+.ship-windows{position:absolute;left:9px;top:12px;width:44px;height:2px;background:repeating-linear-gradient(90deg,#ffe4a7 0 1.4px,transparent 1.4px 5px);filter:drop-shadow(0 0 1.3px #ffce8599)}
+.ship-windows:after{content:'';position:absolute;left:14px;top:-4px;width:14px;height:1.5px;background:repeating-linear-gradient(90deg,#ffe9b9 0 1.2px,transparent 1.2px 4px);opacity:.8}
+.ship-mast-light{position:absolute;left:34px;top:0;width:1px;height:7px;background:#18344c}
+.ship-mast-light:before{content:'';position:absolute;left:-.5px;top:0;width:2px;height:2px;border-radius:50%;background:#ffedd3;box-shadow:0 0 3px #ffe2a5aa}
+.ship-reflection{position:absolute;left:12px;top:23px;width:39px;height:8px;background:repeating-linear-gradient(90deg,transparent 0 3px,#efcf923d 4px 5px,transparent 6px 7px);mask-image:linear-gradient(#0009,transparent);transform:skewX(-17deg);filter:blur(.6px)}
+.surprise-ferris-window{position:absolute;left:1628px;top:251px;width:44px;height:102px;overflow:hidden}
+.surprise-ferris-lights{position:absolute;left:0;top:0;width:66px;height:100px;opacity:0}
+.surprise-ferris-lights.is-active{animation:ferris-light-show 14s ease-in-out both}
+.ferris-bulb{position:absolute;width:2.3px;height:2.3px;border-radius:50%;transform:translate(-50%,-50%);background:var(--bulb-color);box-shadow:0 0 3.5px 1px var(--bulb-color);opacity:.12}
+.surprise-ferris-lights.is-active .ferris-bulb{animation:ferris-light-chase 8s ease-in-out var(--bulb-delay) infinite}
+.surprise-sky-window{position:absolute;left:570px;top:178px;width:536px;height:264px;overflow:hidden;clip-path:polygon(0 51%,5% 33%,16% 16%,32% 5%,50% 0,69% 5%,85% 17%,96% 35%,100% 52%,100% 100%,0 100%)}
+.surprise-shooting-star{position:absolute;left:110px;top:70px;width:95px;height:2px;opacity:0;background:linear-gradient(90deg,transparent,#d8f4ff80 65%,#fff9e5);border-radius:50%;transform-origin:right center;pointer-events:none}
+.surprise-shooting-star:after{content:'';position:absolute;right:-1px;top:-1px;width:4px;height:4px;border-radius:50%;background:#fffbea;box-shadow:0 0 8px #d0edff}
+.surprise-shooting-star.is-active{animation:night-wish 1.6s ease-out both;will-change:transform,opacity}
+.surprise-gull{position:fixed;left:0;top:0;z-index:6;opacity:0;pointer-events:none;contain:layout style;transform:translate(-200px,-200px)}
+.surprise-gull-sprite{width:100%;height:100%;background:url('assets/seagull-sprites.webp') 0 0/200% 200% no-repeat}
+.surprise-gull.is-active{animation:gull-visit 16s ease-in-out both;will-change:transform}
+.surprise-gull.is-active .surprise-gull-sprite{animation:gull-flap .7s steps(1,end) infinite}
+.surprise-gull.is-perched .surprise-gull-sprite{animation:none;background-position:0 100%}
+.surprise-gull.is-curious .surprise-gull-sprite{background-position:100% 100%;transform:translateX(5.6%)}
+.surprise-crab{position:fixed;left:0;top:0;z-index:2;opacity:0;pointer-events:none;transform:translate(-200px,-200px)}
+.surprise-crab-sprite{width:100%;height:100%;background:url('assets/boardwalk-crab.webp') center/contain no-repeat;opacity:var(--day-visibility,1);filter:drop-shadow(0 2px 1px #24180e55);transition:opacity .3s}
+.surprise-crab.is-active{animation:crab-crossing 14s ease-in-out both;will-change:transform}
+.surprise-crab.is-active .surprise-crab-sprite{animation:crab-scuttle .26s ease-in-out infinite alternate;transform-origin:50% 80%}
+.surprise-crab.is-resting .surprise-crab-sprite{animation-play-state:paused}
+.surprise-moth-window{position:absolute;width:0;height:0;pointer-events:none}
+.surprise-moth{position:absolute;left:-14px;top:-14px;width:28px;height:28px;opacity:0;pointer-events:none}
+.surprise-moth-sprite{width:100%;height:100%;background:url('assets/lantern-moth.webp') center/contain no-repeat;filter:drop-shadow(0 0 1.3px #ffdaa366)}
+.surprise-moth.is-active{animation:lantern-visit 18s ease-in-out both;will-change:transform}
+.surprise-moth.is-active .surprise-moth-sprite{animation:moth-wingbeat .17s ease-in-out infinite alternate}
+.cabinet-attract .machine-title{animation:marquee-warmth 4.2s ease-in-out both}
+.cabinet-attract .screen-glass:before{content:'';position:absolute;inset:-20%;background:linear-gradient(115deg,transparent 36%,#fff3cb44 50%,transparent 64%);animation:attract-sweep 4.2s ease-in-out both}
+.cabinet-attract .machine-actions button:first-child{animation:attract-button-one 4.2s ease-in-out both}
+.cabinet-attract .machine-actions button:last-child{animation:attract-button-two 4.2s ease-in-out both}
+.modal-open .surprise-scene-plane *,.modal-open .surprise-gull,.modal-open .surprise-gull *,.modal-open .surprise-crab,.modal-open .surprise-crab *,.modal-open .cabinet-attract *,.modal-open .cabinet-attract *:before{animation-play-state:paused!important}
+@keyframes distant-sail{0%{opacity:0;transform:translate3d(-60px,0,0)}8%{opacity:.9}32%{transform:translate3d(77px,-.7px,0)}65%{transform:translate3d(218px,.7px,0)}92%{opacity:.9}100%{opacity:0;transform:translate3d(370px,0,0)}}
+@keyframes night-passage{0%{opacity:0;transform:translate3d(-70px,0,0)}12%,86%{opacity:.85}100%{opacity:0;transform:translate3d(370px,0,0)}}
+@keyframes ferris-light-show{0%,100%{opacity:0}16%,80%{opacity:.85}}
+@keyframes ferris-light-chase{0%,100%{opacity:.12}20%{opacity:.22}42%,53%{opacity:.9}76%{opacity:.22}}
+@keyframes night-wish{0%{opacity:0;transform:translate3d(-40px,-24px,0) rotate(24deg) scaleX(.2)}12%{opacity:.8}75%{opacity:.6}100%{opacity:0;transform:translate3d(180px,74px,0) rotate(24deg) scaleX(1)}}
+@keyframes gull-visit{0%{opacity:0;transform:translate3d(-130px,var(--gull-start-y),0)}8%{opacity:1}25%,75%{opacity:1;transform:translate3d(var(--gull-x),var(--gull-y),0)}94%{opacity:1}100%{opacity:0;transform:translate3d(var(--gull-exit-x),var(--gull-exit-y),0)}}
+@keyframes gull-flap{0%,100%{background-position:0 0;transform:none}50%{background-position:100% 0;transform:translate(8%,16%)}}
+@keyframes crab-crossing{0%{opacity:0;transform:translate3d(var(--crab-start-x),var(--crab-y),0)}10%{opacity:1}35%,55%{opacity:1;transform:translate3d(var(--crab-pause-x),var(--crab-y),0)}88%{opacity:1}100%{opacity:0;transform:translate3d(var(--crab-end-x),var(--crab-y),0)}}
+@keyframes crab-scuttle{from{transform:translateY(-.7px) rotate(-1.2deg)}to{transform:translateY(.5px) rotate(1.2deg)}}
+@keyframes lantern-visit{0%{opacity:0;transform:translate(-72px,-42px) rotate(24deg)}12%{opacity:.95;transform:translate(16px,-26px) rotate(50deg)}27%{transform:translate(39px,10px) rotate(110deg)}42%{transform:translate(3px,31px) rotate(195deg)}57%{transform:translate(-31px,3px) rotate(285deg)}72%{transform:translate(6px,-29px) rotate(355deg)}86%{opacity:.95;transform:translate(35px,-12px) rotate(405deg)}100%{opacity:0;transform:translate(84px,-68px) rotate(390deg)}}
+@keyframes moth-wingbeat{from{transform:scaleX(.48)}to{transform:scaleX(1)}}
+@keyframes marquee-warmth{0%,100%{filter:brightness(1)}40%,60%{filter:brightness(1.18);text-shadow:0 0 10px #fff3be99,0 1px 0 #fff9}}
+@keyframes attract-sweep{0%,15%{opacity:0;transform:translateX(-100%)}30%{opacity:.5}70%{opacity:.5}85%,100%{opacity:0;transform:translateX(100%)}}
+@keyframes attract-button-one{0%,48%,100%{filter:brightness(1)}24%{filter:brightness(1.6);box-shadow:0 0 12px #ffdd8577,0 3px 3px #07192588}}
+@keyframes attract-button-two{0%,40%,100%{filter:brightness(1)}66%{filter:brightness(1.6);box-shadow:0 0 12px #a9f3ee77,0 3px 3px #07192588}}
+@media(prefers-reduced-motion:reduce){.surprise-gull,.surprise-crab,.surprise-scene-plane{display:none!important}}
+@media print{.surprise-gull,.surprise-crab{display:none!important}}
