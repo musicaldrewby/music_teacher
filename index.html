@@ -4,14 +4,16 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#163e52"><meta name="description" content="Step inside Mr. Drew’s Music Arcade. Browse illustrated arcade cabinets to discover music games, instruments, creative studios, and classroom tools by Drew Wichman.">
 <title>Mr. Drew’s Arcade — Seaside Boardwalk</title>
-<link rel="icon" href="assets/favicon.svg"><link rel="preload" href="assets/boardwalk.webp" as="image"><link rel="preload" href="assets/cabinets.webp" as="image"><link rel="preload" href="assets/album-covers.webp" as="image"><link rel="stylesheet" href="style.css">
-<script src="apps.js?v=16-apps-20261009" defer></script><script src="app.js?v=16-apps-20261009" defer></script>
+<link rel="icon" href="assets/favicon.svg"><link rel="preload" href="assets/boardwalk.webp" as="image"><link rel="preload" href="assets/cabinets.webp" as="image"><link rel="preload" href="assets/album-covers.webp" as="image"><link rel="stylesheet" href="style.css?v=beach-20261009">
+<script src="apps.js?v=teacher-tools-20261009" defer></script><script src="app.js?v=teacher-tools-20261009" defer></script><script src="beach-audio.js?v=default-on-20261009" defer></script>
 </head>
 <body>
 <a class="skip-link" href="#recordShelf">Skip to apps</a>
 <svg class="svg-symbols" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs>
 <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></symbol>
 <symbol id="i-heart" viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></symbol>
+<symbol id="i-sound-on" viewBox="0 0 24 24"><path d="M11 4 6 8H3v8h3l5 4ZM15 8a6 6 0 0 1 0 8m3-11a10 10 0 0 1 0 14"/></symbol>
+<symbol id="i-sound-off" viewBox="0 0 24 24"><path d="M11 4 6 8H3v8h3l5 4Zm5 5 6 6m0-6-6 6"/></symbol>
 <symbol id="i-pause" viewBox="0 0 24 24"><path d="M8 5v14M16 5v14"/></symbol>
 <symbol id="i-play" viewBox="0 0 24 24"><path d="m8 4 12 8-12 8Z"/></symbol>
 <symbol id="i-expand" viewBox="0 0 24 24"><path d="M9 3H3v6m12-6h6v6M3 15v6h6m12-6v6h-6"/></symbol>
@@ -27,6 +29,7 @@
 <nav class="shop-tools" aria-label="Arcade tools">
 <button id="searchButton" class="tool-button" type="button" aria-label="Search all apps" title="Search apps" aria-haspopup="dialog"><svg><use href="#i-search"/></svg></button>
 <button id="favoritesButton" class="tool-button" type="button" aria-label="Browse favorites" title="Favorites" aria-haspopup="dialog"><svg><use href="#i-heart"/></svg><span id="favoriteCount" class="favorite-count" hidden>0</span></button>
+<button id="beachToggle" class="tool-button beach-toggle" type="button" aria-pressed="true" aria-label="Mute beach sounds" title="Mute beach sounds"><svg aria-hidden="true"><use id="beachIcon" href="#i-sound-on"/></svg></button>
 <button id="motionToggle" class="tool-button" type="button" aria-pressed="false" aria-label="Pause animation" title="Pause animation"><svg><use id="motionIcon" href="#i-pause"/></svg></button>
 <button id="fullscreenButton" class="tool-button" type="button" aria-label="Enter full screen" title="Full screen" hidden><svg><use href="#i-expand"/></svg></button>
 <button id="aboutButton" class="tool-button" type="button" aria-label="About Drew and support" title="About & support" aria-haspopup="dialog"><svg><use href="#i-info"/></svg></button>

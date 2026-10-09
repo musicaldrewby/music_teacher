@@ -25,3 +25,7 @@
 @media(pointer:coarse){.tool-button{min-width:40px;min-height:40px}.machine-actions button{min-width:40px;min-height:40px}.category-tab{min-height:40px}.close-button,.browse-save{min-width:40px;min-height:40px}.small-plaque{min-height:40px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}.room-image{transform:none!important}}
 @media print{.room,.shop-header,.shop-main,.shop-footer,dialog,.toast{display:none!important}body:after{content:'Mr. Drew’s Arcade — open the Simple app directory to print all app links.';display:block;background:white;color:black;padding:30px;font:20px Georgia}}
+
+/* Match the existing brass controls, with a clear sound-on state. */
+.beach-toggle[aria-pressed=true]{background:linear-gradient(#fff2be,#e4bd70);color:#174d58;box-shadow:0 0 0 1px #f5dc9a,0 3px 5px #28180c55}
+.beach-toggle[aria-busy=true]{opacity:.7}

@@ -5,7 +5,7 @@ KEEP YOUR EXISTING HOMEPAGE ADDRESS
 
 1. Unzip the package.
 2. Open the same GitHub repository and published folder that currently contains your homepage index.html.
-3. Upload the EXTRACTED CONTENTS: index.html, style.css, app.js, apps.js, directory.html, and the complete assets folder. Include .nojekyll if visible. Preserve the folder structure.
+3. Upload the EXTRACTED CONTENTS: index.html, style.css, app.js, apps.js, beach-audio.js, directory.html, and the complete assets folder. Include .nojekyll if visible. Preserve the folder structure.
 4. Replace the matching homepage files and assets. Keep unrelated apps, your CNAME if present, and your existing GitHub Pages settings. The README is optional to upload.
 5. Commit the upload. After your usual GitHub Pages publication completes, open your existing homepage URL and refresh.
 
@@ -13,7 +13,7 @@ Upload the contents, not the ZIP or an extra enclosing folder. Keeping index.htm
 
 HOW IT WORKS
 
-The seaside room fills the page. Each illustrated cabinet opens its app's GPT Site in a new tab. Category signs and arrows browse the collection; phones show one cabinet at a time and support swiping. The small information button shows details. Hearts save favorites in the visitor's browser. Search, a plain app directory, reduced motion, an animation pause control, and Buy Me a Coffee are included. There is no autoplay audio.
+The seaside room fills the page. Each illustrated cabinet opens its app's GPT Site in a new tab. Apps can appear in more than one category, including Teacher Tools. All Apps lists each app once. Category signs and arrows browse the collection; phones show one cabinet at a time and support swiping. The small information button shows details. Hearts save favorites in the visitor's browser. Search, a plain app directory, reduced motion, an animation pause control, and Buy Me a Coffee are included. Beach and seagull ambience is on by default on every fresh visit and starts automatically when the browser permits. Otherwise, it begins after the first click, tap, Enter, or Space. The speaker button mutes or resumes it for the current visit; a fresh page load starts with sound on again. It fades out and pauses while the page is hidden, then resumes when you return. The 94-second lossless loop uses an eight-second crossfade and gap-free Web Audio playback.
 
 All artwork and fonts are included. No installation, build, backend, API key, or ChatGPT subscription is required to run this static homepage. The linked apps remain on their GPT Sites and follow those sites' availability and access settings.
 
@@ -22,6 +22,8 @@ FILES
 index.html — homepage
 style.css — seaside layout, illustrated machines and animation
 app.js — navigation, search, favorites and dialogs
+beach-audio.js — background sound and speaker control
+assets/audio/beach-seagulls-loop.wav — seamless beach and seagull recording
 apps.js — the approved 16 app destinations
 directory.html — all links, usable without JavaScript
 assets/boardwalk.webp — seaside pavilion
@@ -70,6 +72,6 @@ APP LINKS
 16. Mr. Drew’s Production Media Player
    https://mr-drews-production-media-player.musicaldrewby.chatgpt.site
 
-To add or change an app later, edit apps.js and update directory.html to match. The cover number selects an illustration from the existing atlas; keep existing cover numbers unchanged.
+To add or change an app later, edit apps.js and update directory.html to match. The region field sets the primary category; optional additionalRegions lists other category IDs (tower is Teacher Tools). The cover number selects an illustration from the existing atlas; keep existing cover numbers unchanged.
 
 Created by Drew Wichman.

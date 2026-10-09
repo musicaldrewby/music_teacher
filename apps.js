@@ -39,6 +39,7 @@ window.ARCADE_APPS = [
     "shortTitle": "Uke Strum",
     "art": "uke",
     "region": "grove",
+    "additionalRegions": ["tower"],
     "description": "Strum through songs with chord diagrams, lyrics, and classroom play-alongs.",
     "tags": [
       "ukulele",
@@ -69,6 +70,7 @@ window.ARCADE_APPS = [
     "title": "Interactive Xylophone",
     "art": "xylophone",
     "region": "grove",
+    "additionalRegions": ["tower"],
     "description": "Play the bars, choose your pitches, and record, loop, or overdub a melody.",
     "tags": [
       "mallets",
@@ -95,6 +97,7 @@ window.ARCADE_APPS = [
     "title": "Boomwhacker Play-Along Creator",
     "art": "tubes",
     "region": "ridge",
+    "additionalRegions": ["tower"],
     "description": "Create colorful arrangements with tubes, Orff instruments, percussion, and lyrics.",
     "edition": "Creator Edition",
     "tags": [
@@ -112,6 +115,7 @@ window.ARCADE_APPS = [
     "title": "Rhythm Builder",
     "art": "rhythm",
     "region": "ridge",
+    "additionalRegions": ["tower"],
     "description": "Compose or generate rhythms, hear them, and save or print your favorites.",
     "tags": [
       "notation",
@@ -208,6 +212,7 @@ window.ARCADE_APPS = [
     "title": "Felt & Fable Studio",
     "art": "felt",
     "region": "cove",
+    "additionalRegions": ["tower"],
     "description": "Bring felt stories to life with characters, animation, narration, and music.",
     "tags": [
       "storytelling",

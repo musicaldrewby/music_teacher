@@ -2,6 +2,9 @@
  'use strict';
  const apps=window.ARCADE_APPS, categories=window.ARCADE_REGIONS;
  const byId=new Map(apps.map(a=>[a.id,a])), byCategory=new Map(categories.map(c=>[c.id,c]));
+ const categoryIds=a=>[a.region,...(a.additionalRegions||[])];
+ const inCategory=(a,id)=>categoryIds(a).includes(id);
+ const categoryLabel=a=>categoryIds(a).map(id=>byCategory.get(id).name).join(' · ');
  const $=id=>document.getElementById(id);
  const esc=v=>String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
  const normalized=v=>String(v).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();
@@ -90,7 +93,7 @@
   return `<div class="record-slot"><div class="machine skin-${skin}"><a class="machine-link" href="${esc(a.url)}" target="_blank" rel="noopener noreferrer" aria-label="Open ${esc(a.title)} in a new tab"><span class="machine-shell" aria-hidden="true"></span><span class="machine-title${lines.length===2?' two-lines':''}">${lines.map(line=>`<span class="title-line">${esc(line)}</span>`).join('')}</span><span class="machine-screen">${cover(a,{screen:true})}<span class="screen-glass" aria-hidden="true"></span></span><span class="launch-hint">Open app ↗</span></a><div class="machine-actions"><button class="machine-detail" type="button" data-app="${a.id}" aria-haspopup="dialog" aria-label="About ${esc(a.title)}">${icon('info')}</button><button class="machine-save" type="button" data-save="${a.id}" aria-label="Save ${esc(a.title)} to favorites" aria-pressed="${favorites.has(a.id)}">${icon('heart')}</button></div></div></div>`;
  }
  function renderShelf(){
-  shelfApps=category==='all'?ordered:ordered.filter(a=>a.region===category);firstVisible=0;
+  shelfApps=category==='all'?ordered:ordered.filter(a=>inCategory(a,category));firstVisible=0;
   $('recordShelf').innerHTML=shelfApps.map(machine).join('');
   $('recordShelf').scrollLeft=0;
   $('recordShelf').classList.remove('shelf-changing');
@@ -165,7 +168,7 @@
  function showApp(id){
   const a=byId.get(id);if(!a)return;currentApp=a;
   $('detailCover').innerHTML=cover(a);
-  $('detailCategory').textContent=byCategory.get(a.region).name;
+  $('detailCategory').textContent=categoryLabel(a);
   $('detailTitle').textContent=a.title;$('detailDescription').textContent=a.description;
   $('detailEdition').textContent=a.edition||'';$('detailEdition').hidden=!a.edition;
   $('detailLaunch').hidden=!a.url;$('detailPending').hidden=!!a.url;$('detailNewTab').hidden=!a.url;
@@ -176,12 +179,12 @@
  $('surpriseButton').addEventListener('click',()=>{const available=apps.filter(a=>a.url);const pool=available.length>1?available.filter(a=>a.id!==previousRandom):available;const a=pool[Math.floor(Math.random()*pool.length)];if(a){previousRandom=a.id;showApp(a.id)}});
  function renderBrowse(){
   const query=$('searchInput').value.trim(),terms=normalized(query).split(' ').filter(Boolean);
-  const visible=ordered.filter(a=>(browseCategory==='all'||a.region===browseCategory)&&(!favoritesOnly||favorites.has(a.id))&&terms.every(t=>normalized(`${a.title} ${a.description} ${a.tags.join(' ')} ${byCategory.get(a.region).name}`).includes(t)));
+  const visible=ordered.filter(a=>(browseCategory==='all'||inCategory(a,browseCategory))&&(!favoritesOnly||favorites.has(a.id))&&terms.every(t=>normalized(`${a.title} ${a.description} ${a.tags.join(' ')} ${categoryLabel(a)}`).includes(t)));
   $('browseTitle').textContent=favoritesOnly?'Your favorites':browseCategory==='all'?'All apps':byCategory.get(browseCategory).name;
   $('browseCount').textContent=`${visible.length} ${visible.length===1?'app':'apps'}${query?` matching “${query}”`:''}`;
   $('browseFavorites').setAttribute('aria-pressed',String(favoritesOnly));
   document.querySelectorAll('[data-browse-category]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.browseCategory===browseCategory)));
-  $('browseGrid').innerHTML=visible.map(a=>`<article class="browse-item"><button class="browse-record" type="button" data-app="${a.id}" aria-label="View ${esc(a.title)}${a.url?'':', link coming soon'}" aria-haspopup="dialog">${cover(a,{sticker:true})}<strong>${esc(short(a))}</strong><small>${esc(byCategory.get(a.region).name)}</small></button><button type="button" class="browse-save" data-save="${a.id}" aria-pressed="${favorites.has(a.id)}" aria-label="${favorites.has(a.id)?'Remove':'Save'} ${esc(a.title)} ${favorites.has(a.id)?'from':'to'} favorites">${icon('heart')}</button></article>`).join('');
+  $('browseGrid').innerHTML=visible.map(a=>`<article class="browse-item"><button class="browse-record" type="button" data-app="${a.id}" aria-label="View ${esc(a.title)}${a.url?'':', link coming soon'}" aria-haspopup="dialog">${cover(a,{sticker:true})}<strong>${esc(short(a))}</strong><small>${esc(categoryLabel(a))}</small></button><button type="button" class="browse-save" data-save="${a.id}" aria-pressed="${favorites.has(a.id)}" aria-label="${favorites.has(a.id)?'Remove':'Save'} ${esc(a.title)} ${favorites.has(a.id)?'from':'to'} favorites">${icon('heart')}</button></article>`).join('');
   $('browseEmpty').hidden=visible.length>0;
   $('emptyTitle').textContent=favoritesOnly&&favorites.size===0?'Your favorites start here.':'No apps found';
   $('emptyDescription').textContent=favoritesOnly&&favorites.size===0?'Save an app with its heart to keep it handy on this device.':'Try another name, activity, or category.';
