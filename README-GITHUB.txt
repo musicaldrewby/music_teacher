@@ -5,7 +5,7 @@ KEEP YOUR EXISTING HOMEPAGE ADDRESS
 
 1. Unzip the package.
 2. Open the same GitHub repository and published folder that currently contains your homepage index.html.
-3. Upload the EXTRACTED CONTENTS: index.html, style.css, app.js, apps.js, beach-audio.js, directory.html, and the complete assets folder. Include .nojekyll if visible. Preserve the folder structure.
+3. Upload the EXTRACTED CONTENTS: index.html, style.css, app.js, apps.js, beach-audio.js, day-night.js, directory.html, and the complete assets folder. Include .nojekyll if visible. Preserve the folder structure.
 4. Replace the matching homepage files and assets. Keep unrelated apps, your CNAME if present, and your existing GitHub Pages settings. The README is optional to upload.
 5. Commit the upload. After your usual GitHub Pages publication completes, open your existing homepage URL and refresh.
 
@@ -13,7 +13,7 @@ Upload the contents, not the ZIP or an extra enclosing folder. Keeping index.htm
 
 HOW IT WORKS
 
-The seaside room fills the page. Each illustrated cabinet opens its app's GPT Site in a new tab. Apps can appear in more than one category, including Teacher Tools. All Apps lists each app once. Category signs and arrows browse the collection; phones show one cabinet at a time and support swiping. The small information button shows details. Hearts save favorites in the visitor's browser. Search, a plain app directory, reduced motion, an animation pause control, and Buy Me a Coffee are included. Beach and seagull ambience is on by default on every fresh visit and starts automatically when the browser permits. Otherwise, it begins after the first click, tap, Enter, or Space. The speaker button mutes or resumes it for the current visit; a fresh page load starts with sound on again. It fades out and pauses while the page is hidden, then resumes when you return. The 94-second lossless loop uses an eight-second crossfade and gap-free Web Audio playback.
+The seaside room fills the page. Its background repeats an 80-second cycle: 30 seconds at sunset, a 10-second fade to night, 30 seconds at night, and a 10-second fade back to sunset. The animation pause button freezes the cycle, and reduced-motion preferences keep the sunset still. The original sunset remains visible if the night image cannot load. Each illustrated cabinet opens its app's GPT Site in a new tab. Apps can appear in more than one category, including Teacher Tools. All Apps lists each app once. Category signs and arrows browse the collection; phones show one cabinet at a time and support swiping. The small information button shows details. Hearts save favorites in the visitor's browser. Search, a plain app directory, reduced motion, an animation pause control, and Buy Me a Coffee are included. Beach and seagull ambience is on by default on every fresh visit and starts automatically when the browser permits. Otherwise, it begins after the first click, tap, Enter, or Space. The speaker button mutes or resumes it for the current visit; a fresh page load starts with sound on again. It fades out and pauses while the page is hidden, then resumes when you return. The 94-second lossless loop uses an eight-second crossfade and gap-free Web Audio playback.
 
 All artwork and fonts are included. No installation, build, backend, API key, or ChatGPT subscription is required to run this static homepage. The linked apps remain on their GPT Sites and follow those sites' availability and access settings.
 
@@ -23,10 +23,12 @@ index.html — homepage
 style.css — seaside layout, illustrated machines and animation
 app.js — navigation, search, favorites and dialogs
 beach-audio.js — background sound and speaker control
+day-night.js — loads the matching backgrounds before starting the cycle
 assets/audio/beach-seagulls-loop.wav — seamless beach and seagull recording
 apps.js — the approved 16 app destinations
 directory.html — all links, usable without JavaScript
-assets/boardwalk.webp — seaside pavilion
+assets/boardwalk.webp — original sunset seaside pavilion
+assets/boardwalk-night.webp — matching nighttime seaside pavilion
 assets/cabinets.webp — original three illustrated cabinet shells
 assets/cabinet-copper.webp — copper sunburst cabinet
 assets/cabinet-seafoam.webp — seafoam streamliner cabinet

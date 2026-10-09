@@ -29,3 +29,12 @@
 /* Match the existing brass controls, with a clear sound-on state. */
 .beach-toggle[aria-pressed=true]{background:linear-gradient(#fff2be,#e4bd70);color:#174d58;box-shadow:0 0 0 1px #f5dc9a,0 3px 5px #28180c55}
 .beach-toggle[aria-busy=true]{opacity:.7}
+
+/* 30 seconds at sunset, 10 to night, 30 at night, 10 back; 80 seconds total.
+   Both paintings share one transformed parent and the same responsive crop. */
+.room-image-night{position:absolute;inset:0;background-image:url('assets/boardwalk-night.webp');background-repeat:no-repeat;background-size:inherit;background-position:inherit;opacity:0}
+.daylight-effects{position:absolute;inset:0;opacity:1}
+.day-night-ready .room-image-night{animation:seaside-night 80s ease-in-out infinite}
+.day-night-ready .daylight-effects{animation:seaside-daylight 80s ease-in-out infinite}
+@keyframes seaside-night{0%,37.5%{opacity:0}50%,87.5%{opacity:1}100%{opacity:0}}
+@keyframes seaside-daylight{0%,37.5%{opacity:1}50%,87.5%{opacity:0}100%{opacity:1}}
