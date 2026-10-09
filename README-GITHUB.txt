@@ -25,7 +25,11 @@ app.js — navigation, search, favorites and dialogs
 apps.js — the approved 15 app destinations
 directory.html — all links, usable without JavaScript
 assets/boardwalk.webp — seaside pavilion
-assets/cabinets.webp — three illustrated cabinet shells
+assets/cabinets.webp — original three illustrated cabinet shells
+assets/cabinet-copper.webp — copper sunburst cabinet
+assets/cabinet-seafoam.webp — seafoam streamliner cabinet
+assets/cabinet-nautical.webp — navy and brass nautical cabinet
+assets/cabinet-carnival.webp — cherry-red carnival cabinet
 assets/album-covers.webp — app screen artwork
 assets/favicon.svg — arcade icon
 assets/fonts/ — bundled fonts and licenses
