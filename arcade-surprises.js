@@ -1,7 +1,6 @@
 /* Independent seaside visitors. Each has its own randomized schedule and
    preferred light; occasional overlaps are intentional. Only visible,
-   unpaused time counts, and each kind can have just one active instance.
-   The fair has two gentle, continuous motions whenever nighttime is visible. */
+   unpaused time counts, and each kind can have just one active instance. */
 (()=>{
  'use strict';
  const root=document.documentElement;
@@ -29,54 +28,6 @@
  decoration('ship-windows',ship);
  decoration('ship-mast-light',ship);
  decoration('ship-reflection',ship);
- const fair=decoration('surprise-fair',plane);
- const wheelWindow=decoration('surprise-ferris-window fair-detail',fair);
- const wheel=decoration('surprise-ferris-lights',wheelWindow);
- // Trace the distant wheel in the existing night painting: center (1661,301),
- // radius (33,50). The artwork ends partway through its right-hand side.
- for(let i=0;i<24;i++){
-  const angle=i/24*Math.PI*2;
-  const bulb=decoration('ferris-bulb',wheel);
-  bulb.style.left=`${33+33*Math.cos(angle)}px`;
-  bulb.style.top=`${50+50*Math.sin(angle)}px`;
-  bulb.style.setProperty('--bulb-delay',`${-i/2}s`);
-  bulb.style.setProperty('--bulb-color',['#ffe4a3','#a8ebec','#ebafd5'][i%3]);
- }
- // A circular rotor is compressed to the painted wheel's perspective.
- // Only the lights move; the support legs and neighboring artwork stay fixed.
- const rotor=decoration('ferris-rotor',wheel);
- const spokes=decoration('ferris-spokes',rotor);
- for(let i=0;i<12;i++){
-  const spoke=decoration('ferris-spoke',spokes);
-  spoke.style.setProperty('--spoke-angle',`${i*30}deg`);
-  spoke.style.setProperty('--spoke-color',i%2?'#a8ebec':'#ebafd5');
- }
- const fairLayers=[{el:wheelWindow,bounds:[1628,251,44,102]}];
- // Each string stays inside an open view of the pier, away from the pavilion
- // posts and the painted foreground machines. Coordinates match the 1672x940 art.
- const pierStrings=[
-  {bounds:[254,370,268,75],points:[[4,12],[65,22],[125,34],[190,46],[263,66]],bulbs:28,duration:7.8,offset:0},
-  {bounds:[574,418,163,38],points:[[2,20],[68,25],[159,30]],bulbs:18,duration:9.4,offset:2.6},
-  {bounds:[1307,376,92,63],points:[[2,43],[43,28],[88,14]],bulbs:14,duration:8.6,offset:1.4},
-  {bounds:[1500,337,172,55],points:[[2,43],[54,32],[111,19],[169,8]],bulbs:20,duration:10.2,offset:4.1}
- ];
- for(const string of pierStrings){
-  const strip=decoration('surprise-pier-lights fair-detail',fair);
-  const [x,y,width,height]=string.bounds;
-  Object.assign(strip.style,{left:`${x}px`,top:`${y}px`,width:`${width}px`,height:`${height}px`});
-  strip.style.setProperty('--pier-period',`${string.duration}s`);
-  for(let i=0;i<string.bulbs;i++){
-   const position=i/(string.bulbs-1)*(string.points.length-1);
-   const segment=Math.min(string.points.length-2,Math.floor(position)),fraction=position-segment;
-   const a=string.points[segment],b=string.points[segment+1];
-   const bulb=decoration('pier-bulb',strip);
-   bulb.style.left=`${a[0]+(b[0]-a[0])*fraction}px`;
-   bulb.style.top=`${a[1]+(b[1]-a[1])*fraction}px`;
-   bulb.style.setProperty('--pier-delay',`${-i/string.bulbs*string.duration-string.offset}s`);
-   bulb.style.setProperty('--pier-color',['#ffe0a0','#ffecc4','#b5e4e5','#f0b8c7'][i%4]);
-  }
-  fairLayers.push({el:strip,bounds:string.bounds});
- }
  const gull=decoration('surprise-gull',document.body);
  decoration('surprise-gull-sprite',gull);
  const crab=decoration('surprise-crab',document.body);
@@ -119,7 +70,6 @@
   plane.style.left=`${(room.clientWidth-1672*scale)*(mobile.matches?.55:.5)}px`;
   plane.style.top=`${(room.clientHeight-940*scale)*.5}px`;
   plane.style.transform=`scale(${scale})`;
-  syncFair();
  }
  layout();
  function sceneVisible(x,y,width,height){
@@ -130,16 +80,6 @@
   const top=r.top+(room.clientHeight-940*scale)*.5+y*scale;
   return Math.min(innerWidth,left+width*scale)-Math.max(0,left)>6&&
    Math.min(innerHeight,top+height*scale)-Math.max(0,top)>16;
- }
- function syncFair(){
-  const darkness=Number.parseFloat(getComputedStyle(night).opacity)||0;
-  const glow=motion.matches?0:Math.pow(Math.max(0,(darkness-.25)/.75),1.6);
-  fair.style.setProperty('--fair-light',String(glow));
-  for(const layer of fairLayers){
-   const visible=sceneVisible(...layer.bounds);
-   layer.el.hidden=!visible;
-   layer.el.classList.toggle('is-running',visible&&glow>0&&!blocked());
-  }
  }
  function finish(kind){
   const event=active.get(kind);
@@ -277,7 +217,6 @@
   // Reset the wall clock at every pause boundary; never count time away.
   wasBlocked=blocked();lastTick=performance.now();
   if(motion.matches)for(const kind of [...active.keys()])finish(kind);
-  syncFair();
  }
  new MutationObserver(syncPause).observe(root,{attributes:true,attributeFilter:['class']});
  document.addEventListener('visibilitychange',syncPause);
@@ -292,7 +231,6 @@
  shelf.addEventListener('scroll',()=>{activity();leaveCrab();},{passive:true});
  setInterval(()=>{
   const now=performance.now(),delta=now-lastTick;lastTick=now;
-  syncFair();
   if(blocked()){wasBlocked=true;return;}
   if(wasBlocked){wasBlocked=false;return;}
   // A suspended browser or busy device must not cause a burst of old events.
