@@ -15,6 +15,13 @@
 .skin-8{--cabinet-image:url('assets/cabinet-orbit.webp');--sheet-size:100%;--sheet-pos:50%;--screen-left:24.8%;--screen-width:51.1%;--screen-top:18.1%;--screen-height:21.1%;--title-left:26%;--title-width:48%;--title-top:4.8%;--title-height:7.4%}
 .skin-9{--cabinet-image:url('assets/cabinet-midnight-vector.webp');--sheet-size:100%;--sheet-pos:50%;--screen-left:31.9%;--screen-width:36.4%;--screen-top:19.55%;--screen-height:18.2%;--title-left:21.8%;--title-width:56.4%;--title-top:3.7%;--title-height:7.3%}
 .skin-10{--cabinet-image:url('assets/cabinet-sunset-stripe.webp');--sheet-size:100%;--sheet-pos:50%;--screen-left:30%;--screen-width:40%;--screen-top:19.2%;--screen-height:18.8%;--title-left:29%;--title-width:42%;--title-top:3.5%;--title-height:7.4%}
+.skin-11{--cabinet-image:url('assets/cabinet-laser-lime.webp');--sheet-size:100%;--sheet-pos:50%;--screen-left:26%;--screen-width:48.2%;--screen-top:21.8%;--screen-height:22.4%;--title-left:22%;--title-width:56%;--title-top:7.3%;--title-height:6.7%}
+.skin-12{--cabinet-image:url('assets/cabinet-indigo-wave.webp');--sheet-size:100%;--sheet-pos:50%;--screen-left:27.3%;--screen-width:45.7%;--screen-top:17.3%;--screen-height:21.5%;--title-left:21%;--title-width:58%;--title-top:4%;--title-height:8%}
+.skin-13{--cabinet-image:url('assets/cabinet-mcp-circuit.webp');--sheet-size:100%;--sheet-pos:50%;--screen-left:31.7%;--screen-width:36.6%;--screen-top:34.5%;--screen-height:14%;--title-left:25%;--title-width:50%;--title-top:7.1%;--title-height:5.4%}
+.skin-11 .machine-title{color:#34420c;padding:.8cqw .8cqw}.skin-12 .machine-title{color:#342c66;padding:.8cqw .8cqw}.skin-13 .machine-title{color:#fff0c4;text-shadow:0 0 5px #f7b35288;padding:.65cqw .8cqw}
+.skin-11 .machine-screen{border-radius:5%}.skin-12 .machine-screen{border-radius:7%}.skin-13 .machine-screen{clip-path:polygon(12% 0,88% 0,100% 100%,0 100%);border-radius:1%;background:#071632}
+.skin-11 .screen-glass,.skin-12 .screen-glass,.skin-13 .screen-glass{border-radius:inherit}
+.skin-11 .machine-actions,.skin-12 .machine-actions,.skin-13 .machine-actions{left:30%;right:30%;bottom:12%;justify-content:space-between}
 .skin-9 .machine-title{color:#fff4cf;text-shadow:0 1px 2px #041b22;padding:.8cqw .8cqw}.skin-10 .machine-title{color:#672b12;padding:.8cqw .8cqw}
 .skin-9 .machine-screen{border-radius:16% 16% 9% 9%/14% 14% 9% 9%;clip-path:inset(0 round 16% 16% 9% 9%/14% 14% 9% 9%)}.skin-10 .machine-screen{border-radius:5%;clip-path:inset(0 round 5%)}
 .skin-9 .screen-glass,.skin-10 .screen-glass{border-radius:inherit}
@@ -68,10 +75,16 @@
 .ship-mast-light:before{content:'';position:absolute;left:-.5px;top:0;width:2px;height:2px;border-radius:50%;background:#ffedd3;box-shadow:0 0 3px #ffe2a5aa}
 .ship-reflection{position:absolute;left:12px;top:23px;width:39px;height:8px;background:repeating-linear-gradient(90deg,transparent 0 3px,#efcf923d 4px 5px,transparent 6px 7px);mask-image:linear-gradient(#0009,transparent);transform:skewX(-17deg);filter:blur(.6px)}
 .surprise-ferris-window{position:absolute;left:1628px;top:251px;width:44px;height:102px;overflow:hidden}
-.surprise-ferris-lights{position:absolute;left:0;top:0;width:66px;height:100px;opacity:0}
-.surprise-ferris-lights.is-active{animation:ferris-light-show 14s ease-in-out both}
+.surprise-fair{position:absolute;inset:0;opacity:var(--fair-light,0);transition:opacity .3s linear;pointer-events:none}
+.surprise-ferris-lights{position:absolute;left:0;top:0;width:66px;height:100px;opacity:.8}
 .ferris-bulb{position:absolute;width:2.3px;height:2.3px;border-radius:50%;transform:translate(-50%,-50%);background:var(--bulb-color);box-shadow:0 0 3.5px 1px var(--bulb-color);opacity:.12}
-.surprise-ferris-lights.is-active .ferris-bulb{animation:ferris-light-chase 8s ease-in-out var(--bulb-delay) infinite}
+.ferris-bulb{animation:ferris-light-chase 12s ease-in-out var(--bulb-delay) infinite paused}
+.ferris-rotor{position:absolute;left:-17px;top:0;width:100px;height:100px;transform:scaleX(.66);transform-origin:center}
+.ferris-spokes{position:absolute;inset:0;animation:fair-wheel-turn 36s linear infinite paused}
+.ferris-spoke{position:absolute;left:50%;top:50%;width:48px;height:1px;transform:rotate(var(--spoke-angle));transform-origin:0 50%;background:linear-gradient(90deg,transparent,var(--spoke-color) 35%,var(--spoke-color));box-shadow:0 0 2px var(--spoke-color);opacity:.27}
+.surprise-pier-lights{position:absolute;overflow:hidden;pointer-events:none}
+.pier-bulb{position:absolute;width:2px;height:2px;border-radius:50%;transform:translate(-50%,-50%);background:var(--pier-color);box-shadow:0 0 3px 1px var(--pier-color);opacity:.1;animation:pier-light-chase var(--pier-period) ease-in-out var(--pier-delay) infinite paused}
+.fair-detail.is-running .ferris-bulb,.fair-detail.is-running .ferris-spokes,.fair-detail.is-running .pier-bulb{animation-play-state:running}
 .surprise-sky-window{position:absolute;left:570px;top:178px;width:536px;height:264px;overflow:hidden;clip-path:polygon(0 51%,5% 33%,16% 16%,32% 5%,50% 0,69% 5%,85% 17%,96% 35%,100% 52%,100% 100%,0 100%)}
 .surprise-shooting-star{position:absolute;left:110px;top:70px;width:95px;height:2px;opacity:0;background:linear-gradient(90deg,transparent,#d8f4ff80 65%,#fff9e5);border-radius:50%;transform-origin:right center;pointer-events:none}
 .surprise-shooting-star:after{content:'';position:absolute;right:-1px;top:-1px;width:4px;height:4px;border-radius:50%;background:#fffbea;box-shadow:0 0 8px #d0edff}
@@ -83,8 +96,9 @@
 .surprise-gull.is-perched .surprise-gull-sprite{animation:none;background-position:0 100%}
 .surprise-gull.is-curious .surprise-gull-sprite{background-position:100% 100%;transform:translateX(5.6%)}
 .surprise-crab{position:fixed;left:0;top:0;z-index:2;opacity:0;pointer-events:none;transform:translate(-200px,-200px)}
-.surprise-crab-sprite{width:100%;height:100%;background:url('assets/boardwalk-crab.webp') center/contain no-repeat;opacity:var(--day-visibility,1);filter:drop-shadow(0 2px 1px #24180e55);transition:opacity .3s}
-.surprise-crab.is-active{animation:crab-crossing 14s ease-in-out both;will-change:transform}
+.surprise-crab-sprite{width:100%;height:100%;background:url('assets/boardwalk-crab.webp') center/contain no-repeat;filter:brightness(var(--crab-brightness,1)) drop-shadow(0 2px 1px #24180e55);transition:filter .3s}
+.surprise-crab.is-active{animation:crab-arrive 4.9s ease-out both,crab-depart var(--crab-exit-duration) linear 7.7s forwards;will-change:transform}
+.surprise-crab.is-active.is-leaving{animation:crab-leave var(--crab-exit-duration) linear both}
 .surprise-crab.is-active .surprise-crab-sprite{animation:crab-scuttle .26s ease-in-out infinite alternate;transform-origin:50% 80%}
 .surprise-crab.is-resting .surprise-crab-sprite{animation-play-state:paused}
 .surprise-moth-window{position:absolute;width:0;height:0;pointer-events:none}
@@ -99,12 +113,15 @@
 .modal-open .surprise-scene-plane *,.modal-open .surprise-gull,.modal-open .surprise-gull *,.modal-open .surprise-crab,.modal-open .surprise-crab *,.modal-open .cabinet-attract *,.modal-open .cabinet-attract *:before{animation-play-state:paused!important}
 @keyframes distant-sail{0%{opacity:0;transform:translate3d(-60px,0,0)}8%{opacity:.9}32%{transform:translate3d(77px,-.7px,0)}65%{transform:translate3d(218px,.7px,0)}92%{opacity:.9}100%{opacity:0;transform:translate3d(370px,0,0)}}
 @keyframes night-passage{0%{opacity:0;transform:translate3d(-70px,0,0)}12%,86%{opacity:.85}100%{opacity:0;transform:translate3d(370px,0,0)}}
-@keyframes ferris-light-show{0%,100%{opacity:0}16%,80%{opacity:.85}}
 @keyframes ferris-light-chase{0%,100%{opacity:.12}20%{opacity:.22}42%,53%{opacity:.9}76%{opacity:.22}}
+@keyframes fair-wheel-turn{to{transform:rotate(360deg)}}
+@keyframes pier-light-chase{0%,100%{opacity:.1}22%{opacity:.16}42%,51%{opacity:.82}76%{opacity:.16}}
 @keyframes night-wish{0%{opacity:0;transform:translate3d(-40px,-24px,0) rotate(24deg) scaleX(.2)}12%{opacity:.8}75%{opacity:.6}100%{opacity:0;transform:translate3d(180px,74px,0) rotate(24deg) scaleX(1)}}
 @keyframes gull-visit{0%{opacity:0;transform:translate3d(-130px,var(--gull-start-y),0)}8%{opacity:1}25%,75%{opacity:1;transform:translate3d(var(--gull-x),var(--gull-y),0)}94%{opacity:1}100%{opacity:0;transform:translate3d(var(--gull-exit-x),var(--gull-exit-y),0)}}
 @keyframes gull-flap{0%,100%{background-position:0 0;transform:none}50%{background-position:100% 0;transform:translate(8%,16%)}}
-@keyframes crab-crossing{0%{opacity:0;transform:translate3d(var(--crab-start-x),var(--crab-y),0)}10%{opacity:1}35%,55%{opacity:1;transform:translate3d(var(--crab-pause-x),var(--crab-y),0)}88%{opacity:1}100%{opacity:0;transform:translate3d(var(--crab-end-x),var(--crab-y),0)}}
+@keyframes crab-arrive{0%{opacity:0;transform:translate3d(var(--crab-start-x),var(--crab-y),0)}25%{opacity:1}100%{opacity:1;transform:translate3d(var(--crab-pause-x),var(--crab-y),0)}}
+@keyframes crab-depart{from{opacity:1;transform:translate3d(var(--crab-pause-x),var(--crab-y),0)}to{opacity:1;transform:translate3d(var(--crab-end-x),var(--crab-y),0)}}
+@keyframes crab-leave{from{opacity:1;transform:translate3d(var(--crab-leave-x),var(--crab-leave-y),0)}to{opacity:1;transform:translate3d(var(--crab-end-x),var(--crab-leave-y),0)}}
 @keyframes crab-scuttle{from{transform:translateY(-.7px) rotate(-1.2deg)}to{transform:translateY(.5px) rotate(1.2deg)}}
 @keyframes lantern-visit{0%{opacity:0;transform:translate(-72px,-42px) rotate(24deg)}12%{opacity:.95;transform:translate(16px,-26px) rotate(50deg)}27%{transform:translate(39px,10px) rotate(110deg)}42%{transform:translate(3px,31px) rotate(195deg)}57%{transform:translate(-31px,3px) rotate(285deg)}72%{transform:translate(6px,-29px) rotate(355deg)}86%{opacity:.95;transform:translate(35px,-12px) rotate(405deg)}100%{opacity:0;transform:translate(84px,-68px) rotate(390deg)}}
 @keyframes moth-wingbeat{from{transform:scaleX(.48)}to{transform:scaleX(1)}}

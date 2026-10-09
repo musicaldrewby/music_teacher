@@ -1,6 +1,7 @@
 /* Independent seaside visitors. Each has its own randomized schedule and
    preferred light; occasional overlaps are intentional. Only visible,
-   unpaused time counts, and each kind can have just one active instance. */
+   unpaused time counts, and each kind can have just one active instance.
+   The fair has two gentle, continuous motions whenever nighttime is visible. */
 (()=>{
  'use strict';
  const root=document.documentElement;
@@ -28,7 +29,8 @@
  decoration('ship-windows',ship);
  decoration('ship-mast-light',ship);
  decoration('ship-reflection',ship);
- const wheelWindow=decoration('surprise-ferris-window surprise-night-event',plane);
+ const fair=decoration('surprise-fair',plane);
+ const wheelWindow=decoration('surprise-ferris-window fair-detail',fair);
  const wheel=decoration('surprise-ferris-lights',wheelWindow);
  // Trace the distant wheel in the existing night painting: center (1661,301),
  // radius (33,50). The artwork ends partway through its right-hand side.
@@ -37,8 +39,43 @@
   const bulb=decoration('ferris-bulb',wheel);
   bulb.style.left=`${33+33*Math.cos(angle)}px`;
   bulb.style.top=`${50+50*Math.sin(angle)}px`;
-  bulb.style.setProperty('--bulb-delay',`${-i/3}s`);
+  bulb.style.setProperty('--bulb-delay',`${-i/2}s`);
   bulb.style.setProperty('--bulb-color',['#ffe4a3','#a8ebec','#ebafd5'][i%3]);
+ }
+ // A circular rotor is compressed to the painted wheel's perspective.
+ // Only the lights move; the support legs and neighboring artwork stay fixed.
+ const rotor=decoration('ferris-rotor',wheel);
+ const spokes=decoration('ferris-spokes',rotor);
+ for(let i=0;i<12;i++){
+  const spoke=decoration('ferris-spoke',spokes);
+  spoke.style.setProperty('--spoke-angle',`${i*30}deg`);
+  spoke.style.setProperty('--spoke-color',i%2?'#a8ebec':'#ebafd5');
+ }
+ const fairLayers=[{el:wheelWindow,bounds:[1628,251,44,102]}];
+ // Each string stays inside an open view of the pier, away from the pavilion
+ // posts and the painted foreground machines. Coordinates match the 1672x940 art.
+ const pierStrings=[
+  {bounds:[254,370,268,75],points:[[4,12],[65,22],[125,34],[190,46],[263,66]],bulbs:28,duration:7.8,offset:0},
+  {bounds:[574,418,163,38],points:[[2,20],[68,25],[159,30]],bulbs:18,duration:9.4,offset:2.6},
+  {bounds:[1307,376,92,63],points:[[2,43],[43,28],[88,14]],bulbs:14,duration:8.6,offset:1.4},
+  {bounds:[1500,337,172,55],points:[[2,43],[54,32],[111,19],[169,8]],bulbs:20,duration:10.2,offset:4.1}
+ ];
+ for(const string of pierStrings){
+  const strip=decoration('surprise-pier-lights fair-detail',fair);
+  const [x,y,width,height]=string.bounds;
+  Object.assign(strip.style,{left:`${x}px`,top:`${y}px`,width:`${width}px`,height:`${height}px`});
+  strip.style.setProperty('--pier-period',`${string.duration}s`);
+  for(let i=0;i<string.bulbs;i++){
+   const position=i/(string.bulbs-1)*(string.points.length-1);
+   const segment=Math.min(string.points.length-2,Math.floor(position)),fraction=position-segment;
+   const a=string.points[segment],b=string.points[segment+1];
+   const bulb=decoration('pier-bulb',strip);
+   bulb.style.left=`${a[0]+(b[0]-a[0])*fraction}px`;
+   bulb.style.top=`${a[1]+(b[1]-a[1])*fraction}px`;
+   bulb.style.setProperty('--pier-delay',`${-i/string.bulbs*string.duration-string.offset}s`);
+   bulb.style.setProperty('--pier-color',['#ffe0a0','#ffecc4','#b5e4e5','#f0b8c7'][i%4]);
+  }
+  fairLayers.push({el:strip,bounds:string.bounds});
  }
  const gull=decoration('surprise-gull',document.body);
  decoration('surprise-gull-sprite',gull);
@@ -54,8 +91,7 @@
   star:{duration:1600,cooldown:[140000,260000],first:[52000,65000]},
   attract:{duration:4200,cooldown:[85000,150000],first:[68000,90000]},
   boat:{duration:42000,cooldown:[210000,340000],first:[25000,40000]},
-  ship:{duration:32000,cooldown:[240000,390000],first:[119000,132000]},
-  wheel:{duration:14000,cooldown:[170000,290000],first:[198000,214000]}
+  ship:{duration:32000,cooldown:[240000,390000],first:[119000,132000]}
  };
  let clock=0,lastTick=performance.now(),idleSince=0;
  const active=new Map();
@@ -83,6 +119,7 @@
   plane.style.left=`${(room.clientWidth-1672*scale)*(mobile.matches?.55:.5)}px`;
   plane.style.top=`${(room.clientHeight-940*scale)*.5}px`;
   plane.style.transform=`scale(${scale})`;
+  syncFair();
  }
  layout();
  function sceneVisible(x,y,width,height){
@@ -94,10 +131,20 @@
   return Math.min(innerWidth,left+width*scale)-Math.max(0,left)>6&&
    Math.min(innerHeight,top+height*scale)-Math.max(0,top)>16;
  }
+ function syncFair(){
+  const darkness=Number.parseFloat(getComputedStyle(night).opacity)||0;
+  const glow=motion.matches?0:Math.pow(Math.max(0,(darkness-.25)/.75),1.6);
+  fair.style.setProperty('--fair-light',String(glow));
+  for(const layer of fairLayers){
+   const visible=sceneVisible(...layer.bounds);
+   layer.el.hidden=!visible;
+   layer.el.classList.toggle('is-running',visible&&glow>0&&!blocked());
+  }
+ }
  function finish(kind){
   const event=active.get(kind);
   if(!event)return;
-  event.el.classList.remove('is-active','is-perched','is-curious','is-resting','cabinet-attract');
+  event.el.classList.remove('is-active','is-perched','is-curious','is-resting','is-leaving','cabinet-attract');
   active.delete(kind);
   due[kind]=clock+between(...rules[kind].cooldown);
   retryAt[kind]=0;
@@ -133,6 +180,7 @@
  }
  function start(kind,machines){
   let el,anchor=null;
+  let duration=rules[kind].duration;
   if(kind==='gull'){
    const r=categories.getBoundingClientRect(),size=mobile.matches?82:106;
    if(r.top<60||r.top>innerHeight-70)return false;
@@ -150,12 +198,16 @@
    if(!anchor)return false;
    const r=anchor.getBoundingClientRect(),size=mobile.matches?68:82;
    const x=r.left+Math.min(30,r.width*.1)-size*.45;
+   const restX=Math.max(16,x-65),endX=-size-24;
+   const exitDuration=Math.max(2600,(restX-endX)/75*1000);
    crab.style.width=crab.style.height=`${size}px`;
-   crab.style.setProperty('--crab-start-x',`${x}px`);
-   crab.style.setProperty('--crab-pause-x',`${x-65}px`);
-   crab.style.setProperty('--crab-end-x',`${x-220}px`);
+   crab.style.setProperty('--crab-start-x',`${Math.max(x,restX+45)}px`);
+   crab.style.setProperty('--crab-pause-x',`${restX}px`);
+   crab.style.setProperty('--crab-end-x',`${endX}px`);
+   crab.style.setProperty('--crab-exit-duration',`${exitDuration}ms`);
    crab.style.setProperty('--crab-y',`${r.bottom-size*.83}px`);
-   crab.style.setProperty('--day-visibility','1');
+   crab.style.setProperty('--crab-brightness','1');
+   duration=7700+exitDuration;
    el=crab;
   }else if(kind==='moth'){
    const lantern=visibleLantern();if(!lantern)return false;
@@ -166,22 +218,35 @@
    if(!el)return false;
   }else if(kind==='boat')el=boat;
   else if(kind==='ship')el=ship;
-  else if(kind==='wheel')el=wheel;
   else el=star;
-  let duration=rules[kind].duration;
   if(kind==='ship'){
    // A slow 24–32 second pass, ending by dawn instead of lingering in daylight.
    duration=Math.min(duration,80000-nightPhase());
    ship.style.setProperty('--ship-duration',`${duration}ms`);
   }
   const event={kind,el,anchor,started:clock,duration};
-  if(kind==='ship'||kind==='wheel'||kind==='moth'){
-   event.nightSurface=kind==='ship'?shipWindow:kind==='wheel'?wheelWindow:mothWindow;
+  if(kind==='ship'||kind==='moth'){
+   event.nightSurface=kind==='ship'?shipWindow:mothWindow;
    event.nightSurface.style.setProperty('--night-light',getComputedStyle(night).opacity);
   }
   active.set(kind,event);
   el.classList.add(kind==='attract'?'cabinet-attract':'is-active');
   return true;
+ }
+ function leaveCrab(){
+  const event=active.get('crab');
+  if(!event||event.leaving)return;
+  // Scrolling or changing a category must not make a visible crab vanish.
+  // Continue from its current screen position until the whole sprite is outside.
+  const r=crab.getBoundingClientRect(),endX=-r.width-24;
+  if(r.right<=0||r.top>=innerHeight||r.bottom<=0){finish('crab');return;}
+  event.leaving=true;event.started=clock;
+  event.duration=Math.max(1600,(r.left-endX)/90*1000);
+  crab.style.setProperty('--crab-leave-x',`${r.left}px`);
+  crab.style.setProperty('--crab-leave-y',`${r.top}px`);
+  crab.style.setProperty('--crab-end-x',`${endX}px`);
+  crab.style.setProperty('--crab-exit-duration',`${event.duration}ms`);
+  crab.classList.remove('is-resting');crab.classList.add('is-leaving');
  }
  function updateActive(event){
   const {kind}=event;
@@ -193,7 +258,6 @@
   if(event.nightSurface){
    event.nightSurface.style.setProperty('--night-light',String(darkness));
    if(darkness<.04){finish(kind);return;}
-   if(kind==='wheel'&&!sceneVisible(1628,251,44,102)){finish(kind);return;}
   }
   if(kind==='gull'){
    if(darkness>.9){finish(kind);return;}
@@ -201,9 +265,9 @@
    gull.classList.toggle('is-curious',elapsed>=7500&&elapsed<9500);
   }
   if(kind==='crab'){
-   crab.classList.toggle('is-resting',elapsed>=4900&&elapsed<7700);
-   crab.style.setProperty('--day-visibility',String(1-darkness));
-   if(darkness>.9||!event.anchor.isConnected){finish(kind);return;}
+   crab.classList.toggle('is-resting',!event.leaving&&elapsed>=4900&&elapsed<7700);
+   crab.style.setProperty('--crab-brightness',String(1-darkness*.4));
+   if(!event.leaving&&!event.anchor.isConnected){leaveCrab();return;}
   }
   if(kind==='attract'&&(!event.el.isConnected||!visibleMachines().includes(event.el))){finish(kind);return;}
   if(kind==='gull'||kind==='boat')event.el.style.filter=`brightness(${1-darkness*.4})`;
@@ -213,20 +277,22 @@
   // Reset the wall clock at every pause boundary; never count time away.
   wasBlocked=blocked();lastTick=performance.now();
   if(motion.matches)for(const kind of [...active.keys()])finish(kind);
+  syncFair();
  }
  new MutationObserver(syncPause).observe(root,{attributes:true,attributeFilter:['class']});
  document.addEventListener('visibilitychange',syncPause);
  motion.addEventListener('change',syncPause);
  addEventListener('pageshow',syncPause);
- addEventListener('resize',()=>{layout();finish('gull');finish('crab');finish('moth');});
- addEventListener('scroll',()=>finish('crab'),{passive:true});
+ addEventListener('resize',()=>{layout();finish('gull');leaveCrab();finish('moth');});
+ addEventListener('scroll',leaveCrab,{passive:true});
  function activity(){idleSince=clock;finish('attract');}
  document.addEventListener('pointerdown',activity,{passive:true});
  document.addEventListener('pointermove',activity,{passive:true});
  document.addEventListener('keydown',activity);
- shelf.addEventListener('scroll',()=>{activity();finish('crab');},{passive:true});
+ shelf.addEventListener('scroll',()=>{activity();leaveCrab();},{passive:true});
  setInterval(()=>{
   const now=performance.now(),delta=now-lastTick;lastTick=now;
+  syncFair();
   if(blocked()){wasBlocked=true;return;}
   if(wasBlocked){wasBlocked=false;return;}
   // A suspended browser or busy device must not cause a burst of old events.
@@ -247,7 +313,6 @@
    else if(kind==='moth')eligible=nightEnough(58000)&&!!visibleLantern();
    else if(kind==='star')eligible=nightEnough();
    else if(kind==='ship')eligible=nightEnough(56000)&&sceneVisible(740,427,368,50);
-   else if(kind==='wheel')eligible=nightEnough(60000)&&sceneVisible(1628,251,44,102);
    else if(kind==='attract'){
     machines=clock-idleSince>=15000?visibleMachines():[];eligible=machines.length>0;
    }

@@ -78,25 +78,43 @@
   });
  }
  if(document.fonts?.ready)document.fonts.ready.then(()=>requestAnimationFrame(fitMarqueeTitles));
- // Stable per-app shells: mix all eleven designs within the categories, too.
+ // Stable per-app shells: mix all fourteen designs within the categories, too.
  // 0 tropical, 1 moonlight, 2 rainbow, 3 copper, 4 seafoam, 5 nautical, 6 carnival.
  // 7 Grand Theater, 8 Orbit, 9 Midnight Vector, 10 Sunset Stripe.
- // New apps cycle through all eleven designs.
+ // 11 Laser Lime, 12 Indigo Wave, 13 glowing circuit cabinet with MCP backdrop.
+ // New apps cycle through all fourteen designs.
  const cabinetStyles={
   'drew-uke-strum':0,'sneaky-cat':1,'drews-boomwhacker-creator':2,
   'pocket-orff':3,'interactive-xylophone':4,'mr-drew-vocal-explorations':7,'rhythm-builder':8,
-  'mr-drews-name-that-tune':6,'classroom-connect-four':10,'mr-drews-name-that-note':9,
-  'soundroom':9,'felt-and-fable-studio':7,'drews-music-lab-vr':8,
+  'mr-drews-name-that-tune':6,'classroom-connect-four':10,'mr-drews-name-that-note':11,
+  'soundroom':9,'felt-and-fable-studio':12,'drews-music-lab-vr':13,
   'bingo-maker':10,'round-helper':2,'mr-drews-production-media-player':5
  };
- const skinFor=a=>cabinetStyles[a.id]??Math.max(0,apps.indexOf(a))%11;
- function machine(a){
-  const skin=skinFor(a),name=short(a),lines=marqueeLines(name);
+ const cabinetCount=14;
+ const skinFor=a=>cabinetStyles[a.id]??Math.max(0,apps.indexOf(a))%cabinetCount;
+ function arrangeCabinets(list){
+  const remaining=[...list],arranged=[];
+  let previous=-1;
+  while(remaining.length){
+   // Keep the existing order wherever possible, moving a different design
+   // forward only when two matching cabinets would become neighbors.
+   const next=remaining.findIndex(a=>skinFor(a)!==previous);
+   const app=remaining.splice(Math.max(0,next),1)[0],preferred=skinFor(app);
+   // A future category may contain only one design. In that case, give
+   // this occurrence another shell so even that shelf has no matching pair.
+   const skin=preferred===previous?(preferred+1)%cabinetCount:preferred;
+   arranged.push({app,skin});previous=skin;
+  }
+  return arranged;
+ }
+ function machine(a,skin=skinFor(a)){
+  const name=short(a),lines=marqueeLines(name);
   return `<div class="record-slot"><div class="machine skin-${skin}"><a class="machine-link" href="${esc(a.url)}" target="_blank" rel="noopener noreferrer" aria-label="Open ${esc(a.title)} in a new tab"><span class="machine-shell" aria-hidden="true"></span><span class="machine-title${lines.length===2?' two-lines':''}">${lines.map(line=>`<span class="title-line">${esc(line)}</span>`).join('')}</span><span class="machine-screen">${cover(a,{screen:true})}<span class="screen-glass" aria-hidden="true"></span></span><span class="launch-hint">Open app ↗</span></a><div class="machine-actions"><button class="machine-detail" type="button" data-app="${a.id}" aria-haspopup="dialog" aria-label="About ${esc(a.title)}">${icon('info')}</button><button class="machine-save" type="button" data-save="${a.id}" aria-label="Save ${esc(a.title)} to favorites" aria-pressed="${favorites.has(a.id)}">${icon('heart')}</button></div></div></div>`;
  }
  function renderShelf(){
-  shelfApps=category==='all'?ordered:ordered.filter(a=>inCategory(a,category));firstVisible=0;
-  $('recordShelf').innerHTML=shelfApps.map(machine).join('');
+  const arrangement=arrangeCabinets(category==='all'?ordered:ordered.filter(a=>inCategory(a,category)));
+  shelfApps=arrangement.map(entry=>entry.app);firstVisible=0;
+  $('recordShelf').innerHTML=arrangement.map(entry=>machine(entry.app,entry.skin)).join('');
   $('recordShelf').scrollLeft=0;
   $('recordShelf').classList.remove('shelf-changing');
   if(!paused){void $('recordShelf').offsetWidth;$('recordShelf').classList.add('shelf-changing')}
