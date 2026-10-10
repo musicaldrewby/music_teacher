@@ -11,12 +11,19 @@
  if(!room||!night||!categories||!shelf)return;
  const motion=matchMedia('(prefers-reduced-motion: reduce)');
  const mobile=matchMedia('(max-width: 680px)');
+ const sceneWidth=1672,sceneHeight=940;
  const between=(min,max)=>min+Math.random()*(max-min);
  function decoration(className,parent){
   const el=document.createElement('div');el.className=className;
   el.setAttribute('aria-hidden','true');parent.append(el);return el;
  }
  const plane=decoration('surprise-scene-plane',room);
+ // Paint and animate in the same coordinate system. The room retains its
+ // cover background as a fallback until this scene has been laid out.
+ plane.append(night);
+ const water=decoration('surprise-water-window',plane);
+ const shimmer=document.querySelector('.ocean-shimmer');
+ if(shimmer)water.append(shimmer);
  const sea=decoration('surprise-sea-window',plane);
  const boat=decoration('surprise-sailboat',sea);
  const sky=decoration('surprise-sky-window',plane);
@@ -63,23 +70,36 @@
   return document.hidden||motion.matches||root.classList.contains('motion-paused')||root.classList.contains('modal-open');
  }
  let wasBlocked=blocked();
+ function cropOffset(position,remaining){
+  const value=Number.parseFloat(position);
+  if(!Number.isFinite(value))return remaining*.5;
+  return position.endsWith('%')?remaining*value/100:value;
+ }
  function layout(){
-  // Match background-size:cover and the existing desktop/mobile crop exactly.
-  const scale=Math.max(room.clientWidth/1672,room.clientHeight/940);
-  plane.style.width='1672px';plane.style.height='940px';
-  plane.style.left=`${(room.clientWidth-1672*scale)*(mobile.matches?.55:.5)}px`;
-  plane.style.top=`${(room.clientHeight-940*scale)*.5}px`;
+  // Fractional dimensions matter with the room's 1.5% overscan. Read the
+  // crop from CSS rather than duplicating its mobile breakpoint in JS.
+  // The room only translates for parallax; its measured size is unscaled.
+  const {width,height}=room.getBoundingClientRect();
+  if(!width||!height)return;
+  const crop=getComputedStyle(room);
+  const scale=Math.max(width/sceneWidth,height/sceneHeight);
+  plane.style.width=`${sceneWidth}px`;plane.style.height=`${sceneHeight}px`;
+  plane.style.left=`${cropOffset(crop.backgroundPositionX,width-sceneWidth*scale)}px`;
+  plane.style.top=`${cropOffset(crop.backgroundPositionY,height-sceneHeight*scale)}px`;
   plane.style.transform=`scale(${scale})`;
+  room.classList.add('scene-aligned');
  }
  layout();
  function sceneVisible(x,y,width,height){
   // Don't spend an event on scenery outside a narrow screen's natural crop.
-  const r=room.getBoundingClientRect();
-  const scale=Math.max(room.clientWidth/1672,room.clientHeight/940);
-  const left=r.left+(room.clientWidth-1672*scale)*(mobile.matches?.55:.5)+x*scale;
-  const top=r.top+(room.clientHeight-940*scale)*.5+y*scale;
+  // Use the rendered scene (including parallax), not a second cover formula.
+  const r=plane.getBoundingClientRect(),scale=r.width/sceneWidth;
+  const left=r.left+x*scale,top=r.top+y*scale;
   return Math.min(innerWidth,left+width*scale)-Math.max(0,left)>6&&
    Math.min(innerHeight,top+height*scale)-Math.max(0,top)>16;
+ }
+ function windowVisible(el){
+  return sceneVisible(el.offsetLeft,el.offsetTop,el.offsetWidth,el.offsetHeight);
  }
  function finish(kind){
   const event=active.get(kind);
@@ -221,7 +241,12 @@
  new MutationObserver(syncPause).observe(root,{attributes:true,attributeFilter:['class']});
  document.addEventListener('visibilitychange',syncPause);
  motion.addEventListener('change',syncPause);
- addEventListener('pageshow',syncPause);
+ addEventListener('pageshow',()=>{layout();syncPause();});
+ // Safari can resize the fixed room as browser chrome changes, independently
+ // of the first orientation/resize event. Observe the actual containing box.
+ if(typeof ResizeObserver==='function')new ResizeObserver(layout).observe(room);
+ window.visualViewport?.addEventListener('resize',layout);
+ mobile.addEventListener('change',layout);
  addEventListener('resize',()=>{layout();finish('gull');leaveCrab();finish('moth');});
  addEventListener('scroll',leaveCrab,{passive:true});
  function activity(){idleSince=clock;finish('attract');}
@@ -250,7 +275,8 @@
    else if(kind==='gull'||kind==='crab')eligible=daytime();
    else if(kind==='moth')eligible=nightEnough(58000)&&!!visibleLantern();
    else if(kind==='star')eligible=nightEnough();
-   else if(kind==='ship')eligible=nightEnough(56000)&&sceneVisible(740,427,368,50);
+   else if(kind==='boat')eligible=windowVisible(sea);
+   else if(kind==='ship')eligible=nightEnough(56000)&&windowVisible(shipWindow);
    else if(kind==='attract'){
     machines=clock-idleSince>=15000?visibleMachines():[];eligible=machines.length>0;
    }

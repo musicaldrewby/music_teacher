@@ -60,14 +60,19 @@
 @keyframes seaside-night{0%,37.5%{opacity:0}50%,87.5%{opacity:1}100%{opacity:0}}
 @keyframes seaside-daylight{0%,37.5%{opacity:1}50%,87.5%{opacity:0}100%{opacity:1}}
 
-/* Occasional surprises are positioned in the original painting's coordinates,
-   then scaled with its cover crop. These decorations never receive input. */
-.surprise-scene-plane{position:absolute;transform-origin:0 0;pointer-events:none}
-.surprise-sea-window{position:absolute;left:740px;top:436px;width:368px;height:78px;overflow:hidden;mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent)}
+/* One cover-scaled canvas holds both paintings and all anchored scenery.
+   Keep the room background as the no-JS fallback. The central water opening
+   ends before the column at x=1102 and the railing posts starting at y=505. */
+.room-image.scene-aligned{background-image:none}
+.surprise-scene-plane{position:absolute;background:url('assets/boardwalk.webp') 0 0/100% 100% no-repeat;transform-origin:0 0;pointer-events:none}
+.surprise-scene-plane>.room-image-night{background-size:100% 100%;background-position:0 0}
+.surprise-water-window{position:absolute;left:740px;top:451px;width:356px;height:49px;overflow:hidden}
+.surprise-water-window>.ocean-shimmer{inset:0;height:auto}
+.surprise-sea-window{position:absolute;left:740px;top:420px;width:356px;height:80px;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent)}
 .surprise-sailboat{position:absolute;left:0;top:13px;width:62px;height:62px;background:url('assets/sailboat.webp') center/contain no-repeat;opacity:0;pointer-events:none}
 .surprise-sailboat.is-active{animation:distant-sail 42s linear both;will-change:transform}
 .surprise-night-event{opacity:var(--night-light,0);transition:opacity .3s linear;pointer-events:none}
-.surprise-ship-window{position:absolute;left:740px;top:427px;width:368px;height:50px;overflow:hidden;mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+.surprise-ship-window{position:absolute;left:740px;top:427px;width:356px;height:50px;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
 .surprise-night-ship{position:absolute;left:0;top:5px;width:66px;height:34px;opacity:0;pointer-events:none}
 .surprise-night-ship.is-active{animation:night-passage var(--ship-duration,32s) linear both;will-change:transform}
 .ship-hull{position:absolute;left:0;top:14px;width:66px;height:7px;background:#091b2ed9;clip-path:polygon(0 5%,89% 15%,100% 0,93% 87%,12% 100%)}
@@ -102,7 +107,8 @@
 .cabinet-attract .screen-glass:before{content:'';position:absolute;inset:-20%;background:linear-gradient(115deg,transparent 36%,#fff3cb44 50%,transparent 64%);animation:attract-sweep 4.2s ease-in-out both}
 .cabinet-attract .machine-actions button:first-child{animation:attract-button-one 4.2s ease-in-out both}
 .cabinet-attract .machine-actions button:last-child{animation:attract-button-two 4.2s ease-in-out both}
-.modal-open .surprise-scene-plane *,.modal-open .surprise-gull,.modal-open .surprise-gull *,.modal-open .surprise-crab,.modal-open .surprise-crab *,.modal-open .cabinet-attract *,.modal-open .cabinet-attract *:before{animation-play-state:paused!important}
+/* Dialogs pause visitors; the background light cycle and shimmer keep going. */
+.modal-open .surprise-scene-plane>:not(.room-image-night):not(.surprise-water-window),.modal-open .surprise-scene-plane>:not(.room-image-night):not(.surprise-water-window) *,.modal-open .surprise-gull,.modal-open .surprise-gull *,.modal-open .surprise-crab,.modal-open .surprise-crab *,.modal-open .cabinet-attract *,.modal-open .cabinet-attract *:before{animation-play-state:paused!important}
 @keyframes distant-sail{0%{opacity:0;transform:translate3d(-60px,0,0)}8%{opacity:.9}32%{transform:translate3d(77px,-.7px,0)}65%{transform:translate3d(218px,.7px,0)}92%{opacity:.9}100%{opacity:0;transform:translate3d(370px,0,0)}}
 @keyframes night-passage{0%{opacity:0;transform:translate3d(-70px,0,0)}12%,86%{opacity:.85}100%{opacity:0;transform:translate3d(370px,0,0)}}
 @keyframes night-wish{0%{opacity:0;transform:translate3d(-40px,-24px,0) rotate(24deg) scaleX(.2)}12%{opacity:.8}75%{opacity:.6}100%{opacity:0;transform:translate3d(180px,74px,0) rotate(24deg) scaleX(1)}}
@@ -118,7 +124,7 @@
 @keyframes attract-sweep{0%,15%{opacity:0;transform:translateX(-100%)}30%{opacity:.5}70%{opacity:.5}85%,100%{opacity:0;transform:translateX(100%)}}
 @keyframes attract-button-one{0%,48%,100%{filter:brightness(1)}24%{filter:brightness(1.6);box-shadow:0 0 12px #ffdd8577,0 3px 3px #07192588}}
 @keyframes attract-button-two{0%,40%,100%{filter:brightness(1)}66%{filter:brightness(1.6);box-shadow:0 0 12px #a9f3ee77,0 3px 3px #07192588}}
-@media(prefers-reduced-motion:reduce){.surprise-gull,.surprise-crab,.surprise-scene-plane{display:none!important}}
+@media(prefers-reduced-motion:reduce){.surprise-gull,.surprise-crab,.surprise-scene-plane>div:not(.room-image-night){display:none!important}}
 @media print{.surprise-gull,.surprise-crab{display:none!important}}
 
 /* Floor shadows belong to the cabinet slot, so they follow scrolling and
