@@ -1,4 +1,4 @@
-/* Mr. Drew’s approved 16-app collection. All app destinations are GPT Sites. */
+/* Mr. Drew’s approved 17-app collection. All app destinations are GPT Sites. */
 window.ARCADE_REGIONS = [
   {
     "id": "grove",
@@ -125,6 +125,30 @@ window.ARCADE_APPS = [
       "rests"
     ],
     "url": "https://mr-drews-rhythm-builder.musicaldrewby.chatgpt.site"
+  },
+  {
+    "id": "music-stoplight",
+    "title": "Music Stoplight",
+    "art": "stoplight",
+    "region": "games",
+    "description": "Follow colorful musical signals to walk, jog, skip, gallop, and explore different ways to move.",
+    "tags": [
+      "movement",
+      "stoplight",
+      "red light",
+      "walk",
+      "jog",
+      "skip",
+      "gallop",
+      "tiptoe",
+      "march",
+      "hop",
+      "jump",
+      "slide",
+      "music"
+    ],
+    "url": "https://drews-movement-stoplight.musicaldrewby.chatgpt.site",
+    "thumbnail": "assets/cabinet-music-stoplight.webp"
   },
   {
     "id": "sneaky-cat",
@@ -292,3 +316,4 @@ window.ARCADE_APPS = [
     "url": "https://mr-drews-production-media-player.musicaldrewby.chatgpt.site"
   }
 ];
+

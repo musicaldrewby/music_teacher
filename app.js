@@ -19,6 +19,7 @@
  const icon=(name,extra='')=>`<svg aria-hidden="true" ${extra}><use href="#i-${name}"/></svg>`;
  const short=a=>a.shortTitle||a.title;
  function cover(a,{sticker=false,mini=false,screen=false}={}){
+  if(a.thumbnail)return `<span class="cover-art custom-cover" aria-hidden="true"><img src="${esc(a.thumbnail)}" alt="" loading="lazy" decoding="async"></span>`;
   const index=a.cover??19, x=(index%4)*100/3, y=Math.floor(index/4)*25;
   return `<span class="cover-art${mini?' rail-thumb':''}" style="--cover-x:${x}%;--cover-y:${y}%" aria-hidden="true">${mini||screen?'':`<span class="cover-title${short(a).length>19?' long-title':''}">${esc(short(a))}</span>`}${sticker&&!a.url?'<span class="pending-sticker">Link coming soon</span>':''}</span>`;
  }
@@ -83,9 +84,9 @@
  // 7 Grand Theater, 8 Orbit, 9 Midnight Vector, 10 Sunset Stripe.
  // 11 Laser Lime, 12 Indigo Wave, 13 glowing circuit cabinet with MCP backdrop.
  // 14 exclusive Felt & Fable storybook theater; Indigo Wave (12) is reserved for a future app.
- // New apps cycle through all fifteen designs.
+ // Music Stoplight has exclusive skin 15; other new apps cycle through the original fifteen.
  const cabinetStyles={
-  'drew-uke-strum':0,'sneaky-cat':1,'drews-boomwhacker-creator':2,
+  'music-stoplight':15,'drew-uke-strum':0,'sneaky-cat':1,'drews-boomwhacker-creator':2,
   'pocket-orff':3,'interactive-xylophone':4,'mr-drew-vocal-explorations':7,'rhythm-builder':8,
   'mr-drews-name-that-tune':6,'classroom-connect-four':10,'mr-drews-name-that-note':11,
   'soundroom':9,'felt-and-fable-studio':14,'drews-music-lab-vr':13,
@@ -221,3 +222,4 @@
  document.addEventListener('keydown',e=>{if(e.key==='/'&&!e.ctrlKey&&!e.metaKey&&!e.altKey&&!['INPUT','TEXTAREA','SELECT'].includes(e.target.tagName)&&!e.target.isContentEditable&&!document.querySelector('dialog[open]')){e.preventDefault();openBrowse({search:true})}});
  syncFavorites();renderShelf();
 })();
+
