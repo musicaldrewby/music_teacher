@@ -1,4 +1,4 @@
-/* Mr. Drew’s approved 17-app collection. All app destinations are GPT Sites. */
+/* Mr. Drew’s app collection. All app destinations are GPT Sites. */
 window.ARCADE_REGIONS = [
   {
     "id": "grove",
@@ -32,6 +32,17 @@ window.ARCADE_REGIONS = [
   }
 ];
 window.ARCADE_APPS = [
+  {
+    "id": "orbit-polyrhythm-studio",
+    "title": "Orbit — Polyrhythm Studio",
+    "shortTitle": "Orbit",
+    "art": "orbit",
+    "region": "cove",
+    "additionalRegions": ["ridge"],
+    "description": "Explore evolving ambient worlds and interlocking rhythms with eight instruments, deep reverb, 46 presets, and an immersive listening view.",
+    "tags": ["ambient", "polyrhythm", "euclidean", "synthesizer", "pads", "space", "event horizon", "sequencer"],
+    "url": "https://orbit-polyrhythm-studio.musicaldrewby.chatgpt.site"
+  },
   {
     "id": "drew-uke-strum",
     "cover": 0,
@@ -316,4 +327,3 @@ window.ARCADE_APPS = [
     "url": "https://mr-drews-production-media-player.musicaldrewby.chatgpt.site"
   }
 ];
-
