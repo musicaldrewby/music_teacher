@@ -32,6 +32,27 @@ window.ARCADE_REGIONS = [
   }
 ];
 window.ARCADE_APPS = [
+{
+  "id": "poison-rhythm",
+  "title": "Poison Rhythm",
+  "shortTitle": "Poison Rhythm",
+  "art": "poison",
+  "region": "games",
+  "additionalRegions": [
+    "ridge"
+  ],
+  "description": "Outsmart the Musical Mastermind: echo the safe rhythms and stay silent when the poison rhythm returns. Customize your rhythms, tempo, stages, and classroom rounds.",
+  "tags": [
+    "poison",
+    "rhythm",
+    "clapping",
+    "listening",
+    "memory",
+    "mastermind"
+  ],
+  "url": "https://poison-rhythm.musicaldrewby.chatgpt.site",
+  "thumbnail": "assets/poison-rhythm-screen.webp"
+},
   {
     "id": "orbit-polyrhythm-studio",
     "title": "Orbit — Polyrhythm Studio",

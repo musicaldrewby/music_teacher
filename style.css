@@ -172,3 +172,13 @@
 .skin-orbit-studio .machine-actions{left:25%;right:25%;bottom:9.7%;justify-content:space-between}
 .skin-orbit-studio .machine-actions button{border-color:#93a9d6;background:linear-gradient(#252f51,#111a32);color:#cceeff}
 .floor-orbit-studio{--floor-left:5.5%;--floor-width:89%;--floor-bottom:1.7%}
+
+/* Poison Rhythm: exclusive Musical Mastermind cabinet, aligned to the illustrated shell. */
+.skin-poison{--cabinet-image:url('assets/cabinet-poison-rhythm.webp');--sheet-size:100%;--sheet-pos:50%;--screen-left:21.5%;--screen-width:57%;--screen-top:19.1%;--screen-height:19.5%;--title-left:22.5%;--title-width:55%;--title-top:3.6%;--title-height:6.6%}
+.skin-poison .machine-title{color:#c5ff4a;text-shadow:0 2px 1px #16091f,0 0 10px #914bee;padding:.3cqw .5cqw}
+.skin-poison .machine-title.two-lines{font-size:6.2cqw}
+.skin-poison .machine-screen{background:#160d23;border-radius:4%;box-shadow:0 0 12px #ab68ff44}
+.skin-poison .machine-screen .custom-cover{height:100%;aspect-ratio:auto;top:0;transform:none;background-image:none;background-color:#160d23}
+.skin-poison .machine-actions{left:39%;right:39%;bottom:7.4%;justify-content:center;gap:8px}
+.skin-poison .machine-actions button{border-color:#c49b58;background:linear-gradient(#53236f,#241131);color:#d9ffa3}
+.floor-poison{--floor-left:5%;--floor-width:90%;--floor-bottom:1.7%}
