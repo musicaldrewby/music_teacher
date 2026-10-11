@@ -87,6 +87,7 @@
  // 14 exclusive Felt & Fable storybook theater; Indigo Wave (12) is reserved for a future app.
  // Music Stoplight has exclusive skin 15; other new apps cycle through the original fifteen.
  const cabinetStyles={
+  'mr-drews-autoharp':'autoharp',
   'poison-rhythm':'poison',
   'music-stoplight':15,'drew-uke-strum':0,'sneaky-cat':1,'drews-boomwhacker-creator':2,
   'orbit-polyrhythm-studio':'orbit-studio',

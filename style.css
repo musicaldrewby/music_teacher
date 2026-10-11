@@ -182,3 +182,10 @@
 .skin-poison .machine-actions{left:39%;right:39%;bottom:7.4%;justify-content:center;gap:8px}
 .skin-poison .machine-actions button{border-color:#c49b58;background:linear-gradient(#53236f,#241131);color:#d9ffa3}
 .floor-poison{--floor-left:5%;--floor-width:90%;--floor-bottom:1.7%}
+
+/* Auto Harp uses its finished front-facing artwork at the shared cabinet size. */
+.skin-autoharp{--cabinet-image:url('assets/cabinet-autoharp.webp');--sheet-size:100%;--sheet-pos:50%;--screen-left:16%;--screen-width:68%;--screen-top:20.8%;--screen-height:27.2%}
+.skin-autoharp .machine-title,.skin-autoharp .machine-screen{display:none}
+.skin-autoharp .machine-actions{left:17%;right:17%;bottom:12%;justify-content:space-between}
+.skin-autoharp .machine-actions button{border-color:#cda458;background:linear-gradient(#385949,#14392d);color:#fff1cb}
+.floor-autoharp{--floor-left:4.5%;--floor-width:91%;--floor-bottom:1.2%}

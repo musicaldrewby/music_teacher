@@ -32,6 +32,17 @@ window.ARCADE_REGIONS = [
   }
 ];
 window.ARCADE_APPS = [
+  {
+    "id": "mr-drews-autoharp",
+    "title": "Mr. Drew’s Auto Harp",
+    "shortTitle": "Auto Harp",
+    "art": "autoharp",
+    "region": "grove",
+    "description": "Choose a chord, brush the strings, and record your performance. Explore six instrument sounds and four inviting rooms with this playable photographic autoharp.",
+    "tags": ["autoharp", "auto harp", "chords", "strumming", "dulcimer", "acoustic", "recording"],
+    "url": "https://mr-drews-autoharp.musicaldrewby.chatgpt.site",
+    "thumbnail": "assets/autoharp-screen.webp"
+  },
 {
   "id": "poison-rhythm",
   "title": "Poison Rhythm",
