@@ -6,13 +6,14 @@
  const inCategory=(a,id)=>categoryIds(a).includes(id);
  const categoryLabel=a=>categoryIds(a).map(id=>byCategory.get(id).name).join(' · ');
  const $=id=>document.getElementById(id);
+ const parallax=$('roomImage');
  const esc=v=>String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
  const normalized=v=>String(v).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();
  const storage={get(key,fallback){try{return JSON.parse(localStorage.getItem(key))??fallback}catch{return fallback}},set(key,value){try{localStorage.setItem(key,JSON.stringify(value));return true}catch{return false}}};
  const saved=storage.get('drews-arcade-favorites',[]), favorites=new Set((Array.isArray(saved)?saved:[]).filter(id=>byId.has(id)));
  const featured=['drew-uke-strum','drews-boomwhacker-creator','felt-and-fable-studio'];
  const ordered=[...featured.map(id=>byId.get(id)),...apps.filter(a=>!featured.includes(a.id))].filter(Boolean);
- let category='all', shelfApps=ordered, firstVisible=0, currentApp=null, previousRandom='', browseCategory='all', favoritesOnly=false, toastTimer, scrollFrame=0, resizeFrame=0;
+ let category='all', shelfApps=ordered, firstVisible=0, currentApp=null, browseCategory='all', favoritesOnly=false, toastTimer, scrollFrame=0, resizeFrame=0;
  const motionQuery=window.matchMedia('(prefers-reduced-motion: reduce)'), narrowQuery=window.matchMedia('(max-width: 680px)'), finePointer=window.matchMedia('(hover: hover) and (pointer: fine)');
  let paused=motionQuery.matches||storage.get('drews-arcade-motion-paused',false)===true;
  const perPage=()=>narrowQuery.matches?1:3;
@@ -30,7 +31,7 @@
   const label=motionQuery.matches?'Animation paused by your device setting':paused?'Resume animation':'Pause animation';
   $('motionToggle').setAttribute('aria-pressed',String(paused));$('motionToggle').setAttribute('aria-label',label);$('motionToggle').title=label;$('motionToggle').disabled=motionQuery.matches;
   $('motionIcon').setAttribute('href',paused?'#i-play':'#i-pause');
-  if(paused){document.documentElement.style.setProperty('--px','0px');document.documentElement.style.setProperty('--py','0px')}
+  if(paused){parallax.style.setProperty('--px','0px');parallax.style.setProperty('--py','0px')}
  }
  syncMotion();
  $('motionToggle').addEventListener('click',()=>{paused=!paused;storage.set('drews-arcade-motion-paused',paused);syncMotion()});
@@ -40,9 +41,9 @@
  document.addEventListener('pointermove',e=>{
   if(paused||!finePointer.matches||document.hidden||document.querySelector('dialog[open]'))return;
   pointerX=(e.clientX/window.innerWidth-.5)*-11;pointerY=(e.clientY/window.innerHeight-.5)*-7;
-  if(!pointerFrame)pointerFrame=requestAnimationFrame(()=>{pointerFrame=0;if(paused)return;document.documentElement.style.setProperty('--px',`${pointerX.toFixed(2)}px`);document.documentElement.style.setProperty('--py',`${pointerY.toFixed(2)}px`)});
+  if(!pointerFrame)pointerFrame=requestAnimationFrame(()=>{pointerFrame=0;if(paused)return;parallax.style.setProperty('--px',`${pointerX.toFixed(2)}px`);parallax.style.setProperty('--py',`${pointerY.toFixed(2)}px`)});
  },{passive:true});
- document.documentElement.addEventListener('pointerleave',()=>{document.documentElement.style.setProperty('--px','0px');document.documentElement.style.setProperty('--py','0px')});
+ document.documentElement.addEventListener('pointerleave',()=>{parallax.style.setProperty('--px','0px');parallax.style.setProperty('--py','0px')});
  if(document.fullscreenEnabled&&document.documentElement.requestFullscreen){
   $('fullscreenButton').hidden=false;
   $('fullscreenButton').addEventListener('click',async()=>{try{if(document.fullscreenElement)await document.exitFullscreen();else await document.documentElement.requestFullscreen()}catch{toast('Full screen is unavailable in this browser.')}});
@@ -51,7 +52,6 @@
  const categoryEntries=[{id:'all',name:'All Apps'},...categories];
  $('categories').innerHTML=categoryEntries.map(c=>`<button class="category-tab" type="button" data-category="${c.id}" aria-pressed="${c.id==='all'}">${esc(c.name)}</button>`).join('');
  $('browseCategories').innerHTML=categoryEntries.map(c=>`<button class="browse-category" type="button" data-browse-category="${c.id}" aria-pressed="${c.id==='all'}">${esc(c.name)}</button>`).join('');
- $('totalApps').textContent=String(apps.length);
  // Give each marquee one or two complete lines; never truncate an app name.
  function marqueeLines(name){
   const words=name.trim().split(/\s+/);
@@ -131,9 +131,6 @@
  function syncShelf(){
   const shelf=$('recordShelf'),slots=shelf.children, step=slots.length>1?slots[1].offsetLeft-slots[0].offsetLeft:1;
   firstVisible=Math.min(Math.max(0,shelfApps.length-perPage()),Math.max(0,Math.round(shelf.scrollLeft/Math.max(1,step))));
-  const visible=shelfApps.slice(firstVisible,firstVisible+perPage());
-  $('shelfLabel').textContent=category==='all'?(firstVisible===0?'Featured Apps':'All Apps'):byCategory.get(category).name;
-  $('shelfPosition').textContent=`${firstVisible+1}${visible.length>1?`–${firstVisible+visible.length}`:''} / ${shelfApps.length}`;
   $('previousRecords').disabled=firstVisible===0;
   $('nextRecords').disabled=firstVisible+perPage()>=shelfApps.length;
 
@@ -143,7 +140,6 @@
   const target=Math.min(Math.max(0,shelfApps.length-perPage()),Math.max(0,firstVisible+direction*perPage()));
   shelf.scrollTo({left:slots[target].offsetLeft-slots[0].offsetLeft,behavior:paused?'auto':'smooth'});
  }
- $('featuredButton').addEventListener('click',()=>{category='all';renderShelf()});
  $('recordShelf').addEventListener('click',e=>{const b=e.target.closest('[data-save]');if(b)toggleFavorite(b.dataset.save)});
  $('previousRecords').addEventListener('click',()=>shiftShelf(-1));$('nextRecords').addEventListener('click',()=>shiftShelf(1));
  $('recordShelf').addEventListener('scroll',()=>{if(!scrollFrame)scrollFrame=requestAnimationFrame(()=>{scrollFrame=0;syncShelf()})},{passive:true});
@@ -203,7 +199,6 @@
   syncFavorites();openDialog($('appDialog'));
  }
  $('detailFavorite').addEventListener('click',()=>{if(currentApp)toggleFavorite(currentApp.id)});
- $('surpriseButton').addEventListener('click',()=>{const available=apps.filter(a=>a.url);const pool=available.length>1?available.filter(a=>a.id!==previousRandom):available;const a=pool[Math.floor(Math.random()*pool.length)];if(a){previousRandom=a.id;showApp(a.id)}});
  function renderBrowse(){
   const query=$('searchInput').value.trim(),terms=normalized(query).split(' ').filter(Boolean);
   const visible=ordered.filter(a=>(browseCategory==='all'||inCategory(a,browseCategory))&&(!favoritesOnly||favorites.has(a.id))&&terms.every(t=>normalized(`${a.title} ${a.description} ${a.tags.join(' ')} ${categoryLabel(a)}`).includes(t)));
@@ -217,7 +212,7 @@
   $('emptyDescription').textContent=favoritesOnly&&favorites.size===0?'Save an app with its heart to keep it handy on this device.':'Try another name, activity, or category.';
  }
  function openBrowse({saved=false,search=false}={}){favoritesOnly=saved;browseCategory='all';$('searchInput').value='';renderBrowse();openDialog($('browseDialog'),search?$('searchInput'):undefined)}
- $('browseButton').addEventListener('click',()=>openBrowse());$('searchButton').addEventListener('click',()=>openBrowse({search:true}));$('favoritesButton').addEventListener('click',()=>openBrowse({saved:true}));
+ $('searchButton').addEventListener('click',()=>openBrowse({search:true}));$('favoritesButton').addEventListener('click',()=>openBrowse({saved:true}));
  $('searchInput').addEventListener('input',renderBrowse);
  $('browseFavorites').addEventListener('click',()=>{favoritesOnly=!favoritesOnly;renderBrowse()});
  $('browseCategories').addEventListener('click',e=>{const b=e.target.closest('[data-browse-category]');if(b){browseCategory=b.dataset.browseCategory;renderBrowse()}});

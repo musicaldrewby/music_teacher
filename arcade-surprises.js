@@ -100,18 +100,19 @@
   });
  }
  function nightPhase(){
-  // Use the actual background animation, so pausing never desynchronizes us.
-  const cycle=night.getAnimations?.().find(a=>a.animationName==='seaside-night');
-  return cycle&&typeof cycle.currentTime==='number'?cycle.currentTime%80000:null;
+  return window.ARCADE_DAY_NIGHT?.read().phase??null;
+ }
+ function nightMix(){
+  return window.ARCADE_DAY_NIGHT?.read().mix||0;
  }
  function nightEnough(latest=67500){
-  if(Number.parseFloat(getComputedStyle(night).opacity)<.98)return false;
+  if(nightMix()<.98)return false;
   const phase=nightPhase();
   return phase!==null&&phase>=40000&&phase<=latest;
  }
  function daytime(){
   const phase=nightPhase();
-  return Number.parseFloat(getComputedStyle(night).opacity)<.1&&(phase===null||phase<=16000);
+  return nightMix()<.1&&(phase===null||phase<=16000);
  }
  function visibleLantern(){
   // Prefer brass lanterns; central string lights remain in the mobile crop.
@@ -167,7 +168,7 @@
   const event={kind,el,anchor,started:clock,duration};
   if(kind==='ship'||kind==='moth'){
    event.nightSurface=kind==='ship'?shipWindow:mothWindow;
-   event.nightSurface.style.setProperty('--night-light',getComputedStyle(night).opacity);
+   event.nightSurface.style.setProperty('--night-light',String(nightMix()));
   }
   active.set(kind,event);
   el.classList.add(kind==='attract'?'cabinet-attract':'is-active');
@@ -191,7 +192,7 @@
  function updateActive(event){
   const {kind}=event;
   const elapsed=clock-event.started;
-  const darkness=Number.parseFloat(getComputedStyle(night).opacity)||0;
+  const darkness=nightMix();
   // The day/night cycle continues behind dialogs; discard a paused meteor if
   // that interval carried us into daylight before the dialog closed.
   if(kind==='star'&&darkness<.98){finish(kind);return;}
