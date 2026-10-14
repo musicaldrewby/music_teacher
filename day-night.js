@@ -4,7 +4,7 @@
  if(!room)return;
  const night=room.querySelector('.room-image-night');
  const reducedMotion=matchMedia('(prefers-reduced-motion: reduce)');
- let cycle=null,lastTime=null,lastState={phase:null,mix:0};
+ let cycle=null,lastTime=null,settled=false,lastState={phase:null,mix:0,elapsed:0};
  function captureCycle(){
   cycle=night?.getAnimations?.().find(animation=>animation.animationName==='seaside-night')||null;
   lastTime=null;
@@ -24,14 +24,14 @@
  }
  function read(){
   const time=cycle?.currentTime;
-  if(reducedMotion.matches||!cycle||cycle.playState==='idle'||typeof time!=='number')return {phase:null,mix:0};
+  if(reducedMotion.matches||!cycle||cycle.playState==='idle'||typeof time!=='number')return {phase:null,mix:0,elapsed:0};
   if(time===lastTime)return lastState;
   const phase=((time%80000)+80000)%80000;
   const mix=phase<=30000?0:phase<40000?ease((phase-30000)/10000):phase<=70000?1:1-ease((phase-70000)/10000);
-  lastTime=time;lastState={phase,mix};
+  lastTime=time;lastState={phase,mix,elapsed:time};
   return lastState;
  }
- window.ARCADE_DAY_NIGHT=Object.freeze({read});
+ window.ARCADE_DAY_NIGHT=Object.freeze({read,ready:()=>settled});
  night?.addEventListener('animationstart',event=>{
   if(event.animationName==='seaside-night')captureCycle();
  });
@@ -50,5 +50,6 @@
  // Start both synchronized animations only after both layers can paint.
  Promise.all([ready('assets/boardwalk.webp'),ready('assets/boardwalk-night.webp')])
   .then(()=>{room.classList.add('day-night-ready');captureCycle();})
-  .catch(()=>{/* Keep the original sunset if the night image is unavailable. */});
+  .catch(()=>{/* Keep the original sunset if the night image is unavailable. */})
+  .finally(()=>{settled=true;window.dispatchEvent(new Event('arcade:scene-ready'));});
 })();

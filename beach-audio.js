@@ -4,20 +4,22 @@
  if(!button)return;
  const AudioContext=window.AudioContext||window.webkitAudioContext;
  if(!AudioContext){button.disabled=true;button.setAttribute('aria-pressed','false');button.setAttribute('aria-label','Arcade sound is unavailable in this browser');button.title='Arcade sound is unavailable in this browser';icon.setAttribute('href','#i-sound-off');return;}
- const tracks={beach:'assets/audio/beach-seagulls-loop.wav',night:'assets/audio/weightless-dawn-night.mp3'};
- const positions={beach:0,night:0},levels={beach:.45,night:3};
- // Exactly one media element and one output: changing tracks always pauses the
- // old file first. There is no second audio player or overlapping crossfade.
+ const tracks={cycle:'assets/audio/arcade-day-night.mp3',beach:'assets/audio/arcade-beach.mp3'};
+ const motion=matchMedia('(prefers-reduced-motion: reduce)'),downloads=new Map();
  let enabled=true,context=null,gain=null,audio=null,selected=null,pageAway=false;
- let starting=false,blocked=false,attempt=0,lastTarget=null,restorePosition=false;
- let timer=0,suspendTimer=0,errorTimer=0;
- function available(){return enabled&&!document.hidden&&!pageAway;}
+ let starting=false,blocked=false,loading=false,attempt=0,needsAlign=true,sourceVersion=0;
+ let suspendTimer=0,errorTimer=0;
+ const scene=()=>window.ARCADE_DAY_NIGHT?.read()||{phase:null,mix:0,elapsed:0};
+ const sceneReady=()=>window.ARCADE_DAY_NIGHT?.ready()??true;
+ // The animated soundtrack pauses with the scene so its baked fades stay in step.
+ // Reduced motion uses a separate, uninterrupted beach loop.
+ function scenePaused(){return selected==='cycle'&&document.documentElement.classList.contains('motion-paused');}
+ function available(){return enabled&&!document.hidden&&!pageAway&&!scenePaused();}
  function render(){
-  const loading=available()&&audio&&!blocked&&audio.readyState<2;
   const playing=available()&&audio&&!audio.paused&&context?.state==='running';
-  const label=enabled?(loading?'Loading arcade sound — click to mute':playing?'Mute arcade sound':'Arcade sound on — tap anywhere to start, or here to mute'):'Turn on arcade sound';
+  const label=!enabled?'Turn on arcade sound':loading?'Loading arcade sound — click to mute':scenePaused()?'Arcade sound paused with animation — click to mute':playing?'Mute arcade sound':'Arcade sound on — tap anywhere to start, or here to mute';
   button.setAttribute('aria-pressed',String(enabled));button.setAttribute('aria-label',label);button.title=label;
-  button.setAttribute('aria-busy',String(Boolean(loading)));icon.setAttribute('href',enabled?'#i-sound-on':'#i-sound-off');
+  button.setAttribute('aria-busy',String(loading));icon.setAttribute('href',enabled?'#i-sound-on':'#i-sound-off');
  }
  function notifyError(){
   const toast=document.getElementById('toast');if(!toast)return;
@@ -30,42 +32,19 @@
   else{const current=param.value;param.cancelScheduledValues(now);param.setValueAtTime(current,now);}
   param.linearRampToValueAtTime(value,now+duration);
  }
- function makeContext(){
-  if(context)return;
-  context=new AudioContext({latencyHint:'playback',sampleRate:44100});
-  gain=context.createGain();gain.gain.value=0;gain.connect(context.destination);
-  audio=new Audio();audio.loop=true;audio.preload='auto';audio.setAttribute('playsinline','');
-  context.createMediaElementSource(audio).connect(gain);
-  audio.addEventListener('loadedmetadata',()=>{
-   if(!restorePosition||!selected||audio.readyState<1)return;
-   restorePosition=false;
-   if(positions[selected]>0&&Number.isFinite(audio.duration)){
-    try{audio.currentTime=Math.min(positions[selected],Math.max(0,audio.duration-.1));}catch{}
-   }
-  });
-  audio.addEventListener('playing',()=>{
-   // A delayed download or resumed stream must enter gently as well.
-   setLevel(0,0);setLevel(lastTarget??0,selected==='beach'?.9:.5);render();
-  });
-  audio.addEventListener('canplay',render);
-  audio.addEventListener('error',()=>{blocked=true;render();if(available())notifyError();});
-  context.addEventListener('statechange',render);
- }
- function selectTrack(track){
-  if(selected===track)return false;
-  audio.pause(); // Stop the outgoing file before changing the source or gain.
-  if(selected&&Number.isFinite(audio.currentTime))positions[selected]=audio.currentTime;
-  ++attempt;starting=false;blocked=false;
-  setLevel(0,0);lastTarget=null;
-  selected=track;restorePosition=true;
-  audio.src=tracks[track];audio.load();
-  return true;
+ function align(){
+  if(!needsAlign||audio.readyState<1)return;
+  needsAlign=false;
+  // Seek only on initial start, resume, or recovery — never at dusk or dawn.
+  if(selected==='cycle'){
+   const target=((scene().elapsed||0)/1000)%480;
+   if(Math.abs(audio.currentTime-target)>.1)audio.currentTime=target;
+  }
  }
  function start(retry=false){
-  if(!available()||!audio||starting||(!retry&&blocked)||!audio.paused)return;
-  if(retry&&audio.error){blocked=false;restorePosition=true;audio.load();}
+  if(!available()||!audio||loading||audio.readyState<1||starting||(!retry&&blocked)||!audio.paused)return;
+  clearTimeout(suspendTimer);needsAlign=true;align();
   const ticket=++attempt;starting=true;
-  // Run in the gesture when supplied, without awaiting context.resume().
   Promise.resolve(audio.play()).then(()=>{
    if(ticket!==attempt)return;
    blocked=false;if(!available())audio.pause();
@@ -74,37 +53,65 @@
    blocked=true;if(error?.name!=='NotAllowedError')notifyError();
   }).finally(()=>{if(ticket===attempt)starting=false;render();});
  }
- function sync(retry=false){
-  if(!context||!available())return;
-  const scene=window.ARCADE_DAY_NIGHT?.read()||{phase:null,mix:0};
-  const phase=scene.phase,track=phase!==null&&phase>=30000?'night':'beach';
-  const switched=selectTrack(track);
-  // Beach fades over 2.5 seconds, reaches silence before dusk, then pauses.
-  // Night follows the picture all the way back to zero at full daylight.
-  const target=track==='night'?levels.night*scene.mix:levels.beach*(phase===null?1:Math.max(0,Math.min(1,(29800-phase)/2500)));
-  if(target!==lastTarget){
-   setLevel(target,switched?(track==='beach'?.9:.5):.1);lastTarget=target;
-  }
-  if(track==='beach'&&phase!==null&&phase>=29900){
-   ++attempt;starting=false;audio.pause();
-  }else start(retry);
+ function makeContext(){
+  if(context)return;
+  context=new AudioContext({latencyHint:'playback'});
+  gain=context.createGain();gain.gain.value=0;gain.connect(context.destination);
+  audio=new Audio();audio.loop=true;audio.preload='auto';audio.setAttribute('playsinline','');
+  context.createMediaElementSource(audio).connect(gain);
+  audio.addEventListener('loadedmetadata',()=>{start();render();});
+  audio.addEventListener('playing',()=>{
+   if(!available()){audio.pause();setLevel(0,0);return;}
+   align();setLevel(1,.6);render();
+  });
+  audio.addEventListener('waiting',()=>{needsAlign=true;setLevel(0,.1);});
+  audio.addEventListener('error',()=>{blocked=true;render();if(available())notifyError();});
+  context.addEventListener('statechange',()=>{
+   if(context.state!=='running')needsAlign=true;
+   else if(available()&&!audio.paused){align();setLevel(1,.6);}
+   render();
+  });
  }
- function watch(){clearInterval(timer);sync();timer=setInterval(sync,100);}
+ async function prepare(){
+  if(!sceneReady())return;
+  const track=motion.matches||scene().phase===null?'beach':'cycle';
+  if(selected===track&&audio.src&&!audio.error){start();return;}
+  if(selected===track&&loading)return;
+  const version=++sourceVersion;
+  ++attempt;starting=false;audio.pause();setLevel(0,0);
+  selected=track;loading=true;blocked=false;needsAlign=true;render();
+  try{
+   // Download the compressed recording once. All subsequent fades and six
+   // day/night cycles play locally, without stream fetches or source changes.
+   if(!downloads.has(track))downloads.set(track,fetch(tracks[track]).then(response=>{
+    if(!response.ok)throw Error('Audio download failed');
+    return response.blob();
+   }).then(blob=>URL.createObjectURL(blob)).catch(error=>{downloads.delete(track);throw error;}));
+   const url=await downloads.get(track);
+   if(version!==sourceVersion)return;
+   loading=false;audio.src=url;audio.load();render();
+  }catch(error){
+   if(version!==sourceVersion)return;
+   loading=false;selected=null;blocked=true;render();if(enabled)notifyError();
+  }
+ }
  async function playSound(){
-  if(!available())return;
-  clearTimeout(suspendTimer);
-  makeContext();
+  if(!enabled||document.hidden||pageAway)return;
+  clearTimeout(suspendTimer);makeContext();
+  // Resume immediately in a gesture, even if the initial download is pending.
+  if(scenePaused()){pauseSound();return;}
   const resume=context.resume();
-  lastTarget=null;sync(true);
-  try{await resume;if(available())sync();}
+  blocked=false;void prepare();start(true);
+  if(available()&&!audio.paused&&needsAlign){align();setLevel(1,.6);}
+  try{await resume;if(available())start();}
   catch(error){if(error?.name!=='NotAllowedError')notifyError();}
   render();
  }
  function pauseSound(){
-  ++attempt;starting=false;clearTimeout(suspendTimer);lastTarget=null;
+  ++attempt;starting=false;needsAlign=true;clearTimeout(suspendTimer);
   if(context){
-   setLevel(0,.2);
-   suspendTimer=setTimeout(()=>{if(!available()){audio.pause();context.suspend().catch(()=>{});}},250);
+   setLevel(0,.15);
+   suspendTimer=setTimeout(()=>{if(!available()){audio.pause();context.suspend().catch(()=>{});}},180);
   }
   render();
  }
@@ -116,11 +123,11 @@
  }
  document.addEventListener('click',firstInteraction,true);
  document.addEventListener('keydown',firstInteraction,true);
- document.addEventListener('visibilitychange',()=>{
-  if(document.hidden){clearInterval(timer);pauseSound();}
-  else{watch();if(enabled)void playSound();}
- });
- window.addEventListener('pagehide',()=>{pageAway=true;clearInterval(timer);pauseSound();});
- window.addEventListener('pageshow',event=>{pageAway=false;if(event.persisted&&!document.hidden){watch();if(enabled)void playSound();}});
- render();watch();void playSound();
+ document.addEventListener('visibilitychange',()=>{if(document.hidden)pauseSound();else if(enabled)void playSound();});
+ window.addEventListener('pagehide',()=>{pageAway=true;pauseSound();});
+ window.addEventListener('pageshow',event=>{pageAway=false;if(event.persisted&&!document.hidden&&enabled)void playSound();});
+ window.addEventListener('arcade:scene-ready',()=>{if(enabled)void playSound();});
+ window.addEventListener('arcade:motionchange',()=>{if(scenePaused())pauseSound();else if(enabled)void playSound();});
+ motion.addEventListener('change',()=>{if(context){selected=null;if(enabled)void playSound();}});
+ render();void playSound();
 })();

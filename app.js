@@ -32,6 +32,7 @@
   $('motionToggle').setAttribute('aria-pressed',String(paused));$('motionToggle').setAttribute('aria-label',label);$('motionToggle').title=label;$('motionToggle').disabled=motionQuery.matches;
   $('motionIcon').setAttribute('href',paused?'#i-play':'#i-pause');
   if(paused){parallax.style.setProperty('--px','0px');parallax.style.setProperty('--py','0px')}
+  window.dispatchEvent(new Event('arcade:motionchange'));
  }
  syncMotion();
  $('motionToggle').addEventListener('click',()=>{paused=!paused;storage.set('drews-arcade-motion-paused',paused);syncMotion()});
