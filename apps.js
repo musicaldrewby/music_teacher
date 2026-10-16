@@ -292,22 +292,6 @@ window.ARCADE_APPS = [
     "url": "https://drews-music-lab-vr.musicaldrewby.chatgpt.site"
   },
   {
-    "id": "bingo-maker",
-    "cover": 16,
-    "title": "Bingo Maker",
-    "art": "bingo",
-    "region": "tower",
-    "description": "Create word, picture, or audio bingo, print cards, and lead the game.",
-    "tags": [
-      "print",
-      "classroom",
-      "cards",
-      "caller",
-      "teacher"
-    ],
-    "url": "https://mr-drews-bingo-maker.musicaldrewby.chatgpt.site"
-  },
-  {
     "id": "round-helper",
     "cover": 17,
     "title": "Round Helper",

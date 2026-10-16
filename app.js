@@ -96,7 +96,7 @@
   'pocket-orff':3,'interactive-xylophone':4,'mr-drew-vocal-explorations':7,'rhythm-builder':8,
   'mr-drews-name-that-tune':6,'classroom-connect-four':10,'mr-drews-name-that-note':11,
   'soundroom':9,'drews-music-lab-vr':13,
-  'bingo-maker':10,'round-helper':2,'mr-drews-production-media-player':5
+  'round-helper':2,'mr-drews-production-media-player':5
  };
  const cabinetCount=15;
  const skinFor=a=>cabinetStyles[a.id]??Math.max(0,apps.indexOf(a))%cabinetCount;
