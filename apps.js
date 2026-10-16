@@ -274,23 +274,6 @@ window.ARCADE_APPS = [
     "url": "https://soundroom.musicaldrewby.chatgpt.site"
   },
   {
-    "id": "felt-and-fable-studio",
-    "cover": 14,
-    "title": "Felt & Fable Studio",
-    "art": "felt",
-    "region": "cove",
-    "additionalRegions": ["tower"],
-    "description": "Bring felt stories to life with characters, animation, narration, and music.",
-    "tags": [
-      "storytelling",
-      "art",
-      "video",
-      "scenes",
-      "drawing"
-    ],
-    "url": "https://felt-and-fable-studio.musicaldrewby.chatgpt.site"
-  },
-  {
     "id": "drews-music-lab-vr",
     "cover": 15,
     "title": "Mr. Drew’s Music Lab VR",
