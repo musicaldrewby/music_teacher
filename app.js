@@ -11,7 +11,7 @@
  const normalized=v=>String(v).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();
  const storage={get(key,fallback){try{return JSON.parse(localStorage.getItem(key))??fallback}catch{return fallback}},set(key,value){try{localStorage.setItem(key,JSON.stringify(value));return true}catch{return false}}};
  const saved=storage.get('drews-arcade-favorites',[]), favorites=new Set((Array.isArray(saved)?saved:[]).filter(id=>byId.has(id)));
- const featured=['drew-uke-strum','drews-boomwhacker-creator'];
+ const featured=['from-tips-to-tours','drew-uke-strum','drews-boomwhacker-creator'];
  const ordered=[...featured.map(id=>byId.get(id)),...apps.filter(a=>!featured.includes(a.id))].filter(Boolean);
  let category='all', shelfApps=ordered, firstVisible=0, currentApp=null, browseCategory='all', favoritesOnly=false, toastTimer, scrollFrame=0, resizeFrame=0;
  const motionQuery=window.matchMedia('(prefers-reduced-motion: reduce)'), narrowQuery=window.matchMedia('(max-width: 680px)'), finePointer=window.matchMedia('(hover: hover) and (pointer: fine)');
@@ -88,6 +88,7 @@
  // Storybook theater (14) and Indigo Wave (12) are reserved for future apps.
  // Music Stoplight has exclusive skin 15; other new apps cycle through the original fifteen.
  const cabinetStyles={
+  'from-tips-to-tours':'tips-to-tours',
   'mr-drews-autoharp':'autoharp',
   'poison-rhythm':'poison',
   'music-stoplight':15,'drew-uke-strum':0,'sneaky-cat':1,'drews-boomwhacker-creator':2,

@@ -194,3 +194,14 @@
 .skin-autoharp .machine-actions{left:17%;right:17%;bottom:12%;justify-content:space-between}
 .skin-autoharp .machine-actions button{border-color:#cda458;background:linear-gradient(#385949,#14392d);color:#fff1cb}
 .floor-autoharp{--floor-left:4.5%;--floor-width:91%;--floor-bottom:1.2%}
+
+/* From Tips to Tours: guitar-amplifier cabinet with a live marquee and screen. */
+.skin-tips-to-tours{--cabinet-image:url('assets/cabinet-from-tips-to-tours.webp');--sheet-size:100%;--sheet-pos:50%;--screen-left:22%;--screen-width:56%;--screen-top:19.6%;--screen-height:18.8%;--title-left:22.5%;--title-width:55%;--title-top:3.6%;--title-height:6.6%}
+.skin-tips-to-tours .machine-title{color:#ffe6a5;text-shadow:0 1px 2px #2b0d09,0 0 10px #ef9a2b88;padding:.3cqw .5cqw;letter-spacing:.1cqw}
+.skin-tips-to-tours .machine-title.two-lines{font-size:5.8cqw}
+.skin-tips-to-tours .machine-screen{background:#120d1a;border-radius:3%;box-shadow:0 0 12px #f4a42c33}
+.skin-tips-to-tours .machine-screen .custom-cover{height:100%;aspect-ratio:auto;top:0;transform:none;background-image:none;background-color:#120d1a}
+.skin-tips-to-tours .machine-screen .custom-cover img{object-fit:cover;object-position:center}
+.skin-tips-to-tours .machine-actions{left:25%;right:25%;bottom:11%;justify-content:space-between;gap:8px}
+.skin-tips-to-tours .machine-actions button{border-color:#e9b85f;background:linear-gradient(#62332a,#231718);color:#fff0b9}
+.floor-tips-to-tours{--floor-left:4%;--floor-width:92%;--floor-bottom:1.2%}

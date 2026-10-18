@@ -32,6 +32,31 @@ window.ARCADE_REGIONS = [
   }
 ];
 window.ARCADE_APPS = [
+{
+  "id": "from-tips-to-tours",
+  "title": "From Tips to Tours",
+  "shortTitle": "From Tips to Tours",
+  "art": "rock",
+  "region": "games",
+  "description": "Start with a borrowed guitar and build an idle music career from bedroom practice to stadium shows, alien audiences, and interdimensional encores. Upgrade your instruments, grow your band, and keep earning while away.",
+  "edition": "First playable · Idle rock odyssey",
+  "tags": [
+    "idle",
+    "clicker",
+    "musician",
+    "guitar",
+    "band",
+    "rock",
+    "pixel art",
+    "SNES",
+    "space",
+    "aliens",
+    "upgrades",
+    "tour"
+  ],
+  "url": "https://from-tips-to-tours.musicaldrewby.chatgpt.site",
+  "thumbnail": "assets/from-tips-to-tours-screen.webp"
+},
   {
     "id": "mr-drews-autoharp",
     "title": "Mr. Drew’s Auto Harp",
