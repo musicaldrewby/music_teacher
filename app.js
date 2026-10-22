@@ -11,7 +11,7 @@
  const normalized=v=>String(v).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();
  const storage={get(key,fallback){try{return JSON.parse(localStorage.getItem(key))??fallback}catch{return fallback}},set(key,value){try{localStorage.setItem(key,JSON.stringify(value));return true}catch{return false}}};
  const saved=storage.get('drews-arcade-favorites',[]), favorites=new Set((Array.isArray(saved)?saved:[]).filter(id=>byId.has(id)));
- const featured=['drew-uke-strum','drews-boomwhacker-creator'];
+ const featured=['drew-uke-strum','drews-boomwhacker-creator','mallet-measure-free'];
  const ordered=[...featured.map(id=>byId.get(id)),...apps.filter(a=>!featured.includes(a.id))].filter(Boolean);
  let category='all', shelfApps=ordered, firstVisible=0, currentApp=null, browseCategory='all', favoritesOnly=false, toastTimer, scrollFrame=0, resizeFrame=0;
  const motionQuery=window.matchMedia('(prefers-reduced-motion: reduce)'), narrowQuery=window.matchMedia('(max-width: 680px)'), finePointer=window.matchMedia('(hover: hover) and (pointer: fine)');
@@ -88,6 +88,7 @@
  // Storybook theater (14) and Indigo Wave (12) are reserved for future apps.
  // Music Stoplight has exclusive skin 15; other new apps cycle through the original fifteen.
  const cabinetStyles={
+  'mallet-measure-free':'mallet-measure',
   'from-tips-to-tours':'tips-to-tours',
   'mr-drews-autoharp':'autoharp',
   'poison-rhythm':'poison',
@@ -118,7 +119,7 @@
  }
  function machine(a,skin=skinFor(a)){
   const name=short(a),lines=marqueeLines(name);
-  return `<div class="record-slot floor-${skin}"><div class="machine skin-${skin}"><a class="machine-link" href="${esc(a.url)}" target="_blank" rel="noopener noreferrer" aria-label="Open ${esc(a.title)} in a new tab"><span class="machine-shell" aria-hidden="true"></span><span class="machine-title${lines.length===2?' two-lines':''}">${lines.map(line=>`<span class="title-line">${esc(line)}</span>`).join('')}</span><span class="machine-screen">${cover(a,{screen:true})}<span class="screen-glass" aria-hidden="true"></span></span><span class="launch-hint">Open app ↗</span></a><div class="machine-actions"><button class="machine-detail" type="button" data-app="${a.id}" aria-haspopup="dialog" aria-label="About ${esc(a.title)}">${icon('info')}</button><button class="machine-save" type="button" data-save="${a.id}" aria-label="Save ${esc(a.title)} to favorites" aria-pressed="${favorites.has(a.id)}">${icon('heart')}</button></div></div></div>`;
+  return `<div class="record-slot floor-${skin}"><div class="machine skin-${skin}"><a class="machine-link" href="${esc(a.url)}" target="_blank" rel="noopener noreferrer" aria-label="Open ${esc(a.title)} in a new tab"><span class="machine-shell" aria-hidden="true"></span><span class="machine-title${lines.length===2?' two-lines':''}">${lines.map(line=>`<span class="title-line">${esc(line)}</span>`).join('')}</span>${a.cabinetLabel?`<span class="machine-edition">${esc(a.cabinetLabel)}</span>`:''}<span class="machine-screen">${cover(a,{screen:true})}<span class="screen-glass" aria-hidden="true"></span></span><span class="launch-hint">Open app ↗</span></a><div class="machine-actions"><button class="machine-detail" type="button" data-app="${a.id}" aria-haspopup="dialog" aria-label="About ${esc(a.title)}">${icon('info')}</button><button class="machine-save" type="button" data-save="${a.id}" aria-label="Save ${esc(a.title)} to favorites" aria-pressed="${favorites.has(a.id)}">${icon('heart')}</button></div></div></div>`;
  }
  function renderShelf(){
   const arrangement=arrangeCabinets(category==='all'?ordered:ordered.filter(a=>inCategory(a,category)));

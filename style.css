@@ -205,3 +205,14 @@
 .skin-tips-to-tours .machine-actions{left:25%;right:25%;bottom:11%;justify-content:space-between;gap:8px}
 .skin-tips-to-tours .machine-actions button{border-color:#e9b85f;background:linear-gradient(#62332a,#231718);color:#fff0b9}
 .floor-tips-to-tours{--floor-left:4%;--floor-width:92%;--floor-bottom:1.2%}
+
+/* Mallet & Measure free classroom cabinet: copper shell, green studio screen. */
+.skin-mallet-measure{--cabinet-image:url('assets/cabinet-copper.webp');--sheet-size:100%;--sheet-pos:50%;--screen-left:17.25%;--screen-width:65.5%;--screen-top:24.15%;--screen-height:21.55%;--title-left:20%;--title-width:61%;--title-top:11.7%;--title-height:7.5%}
+.skin-mallet-measure .machine-title{color:#294d38;text-shadow:0 1px 0 #fff7df;padding:.3cqw .7cqw}
+.skin-mallet-measure .machine-title.two-lines{font-size:6.5cqw}
+.machine-edition{position:absolute;top:20.1%;left:18%;width:64%;height:3.1%;display:flex;align-items:center;justify-content:center;background:#214936;color:#fff2c9;border:1px solid #c7a567;border-radius:3px;font:900 2.5cqw/1 Nunito,system-ui,sans-serif;letter-spacing:.15cqw;white-space:nowrap;box-shadow:0 1px 3px #1a120c80}
+.skin-mallet-measure .machine-screen{background:#163d2d;box-shadow:0 0 15px #d6c08944}
+.skin-mallet-measure .machine-screen .custom-cover{height:100%;aspect-ratio:auto;top:0;transform:none;background-image:none;background-color:#163d2d}
+.skin-mallet-measure .machine-screen .custom-cover img{object-fit:contain}
+.skin-mallet-measure .machine-actions{left:24%;right:24%;bottom:12%;justify-content:space-between}
+.skin-mallet-measure .machine-actions button{border-color:#d7b46b;background:linear-gradient(#3b6249,#183c2d);color:#fff0c8}

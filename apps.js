@@ -33,6 +33,35 @@ window.ARCADE_REGIONS = [
 ];
 window.ARCADE_APPS = [
   {
+  "id": "mallet-measure-free",
+  "title": "Mallet & Measure — Free Classroom Edition",
+  "shortTitle": "Mallet & Measure",
+  "art": "mallets",
+  "region": "cove",
+  "additionalRegions": [
+    "grove",
+    "tower"
+  ],
+  "description": "Play eight classroom instruments, including soprano recorder, xylophones, glockenspiel, hand drum, wood block and triangle. Layer up to five tracks in four-measure loops, record your playing, edit notes and save your music.",
+  "edition": "Free Classroom Edition",
+  "cabinetLabel": "FREE CLASSROOM EDITION",
+  "tags": [
+    "orff",
+    "mallets",
+    "xylophone",
+    "glockenspiel",
+    "recorder",
+    "percussion",
+    "compose",
+    "sequencer",
+    "recording",
+    "free",
+    "classroom"
+  ],
+  "url": "https://mallet-measure-free.musicaldrewby.chatgpt.site",
+  "thumbnail": "assets/mallet-measure-free-screen.svg"
+},
+  {
     "id": "mr-drews-autoharp",
     "title": "Mr. Drew’s Auto Harp",
     "shortTitle": "Auto Harp",

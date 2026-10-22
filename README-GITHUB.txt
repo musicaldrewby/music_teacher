@@ -1,5 +1,5 @@
 MR. DREW'S ARCADE — SEASIDE BOARDWALK
-GITHUB HOMEPAGE PACKAGE — 19 GPT SITE APPS
+GITHUB HOMEPAGE PACKAGE — 20 GPT SITE APPS
 
 KEEP YOUR EXISTING HOMEPAGE ADDRESS
 
@@ -13,7 +13,7 @@ Upload the contents, not the ZIP or an extra enclosing folder. Keeping index.htm
 
 HOW IT WORKS
 
-The seaside room fills the page. Its background repeats an 80-second cycle: 30 seconds at sunset, a 10-second fade to night, 30 seconds at night, and a 10-second fade back to sunset. The animation pause button freezes the cycle, and reduced-motion preferences keep the sunset still. The original sunset remains visible if the night image cannot load. A seagull visits the category rail during the day, and a small crab occasionally scuttles beside a cabinet, pauses, and walks completely off the left edge without fading out. If you scroll or switch cabinets, it continues from its current position to the edge. At night, a moth circles a warm light, shooting stars cross the sky, and a faint ship with tiny warm windows passes along the horizon. A sailboat can cross the water at either time of day, and an idle cabinet occasionally lights up. The seven occasional events each have their own randomized schedule, so small overlaps can occur naturally. Daytime and nighttime visitors keep their appropriate light setting. The first sailboat pass begins about 25–40 seconds into an active visit. All events follow the animation pause control, stop counting time while the page is hidden or a dialog is open, and are disabled by reduced-motion preferences. Twenty illustrated cabinet designs are included. From Tips to Tours has an exclusive guitar-amplifier cabinet with amber trim, cherry-red details and a pixel-art musician on its screen. It appears last in the arcade lineup and in Games. Auto Harp has a simple walnut-and-brass cabinet with cream lettering and the sunlit instrument on its screen. Poison Rhythm has an exclusive purple-and-gold Mastermind cabinet with green illumination. Orbit has a dedicated dark space cabinet with cyan/violet lighting and orbital screen art. Music Stoplight has its own front-facing traffic-signal cabinet. The former Indigo Wave cabinet is preserved as skin 12, ready for a future app. Each cabinet has a fitted dark contact shadow and a broader soft floor shadow; both follow the cabinet layout when browsing, resizing or rotating a device. Every shelf, including category views, separates matching designs so no two neighboring cabinets look the same. The original order and each app's usual design are kept wherever possible; a different shell is used only when a future selection cannot be separated by reordering. Grand Theater appears on Vocal Explorations; Orbit appears on Rhythm Builder. Midnight Vector appears on Soundroom; Sunset Stripe appears on Four in a Row. Laser Lime appears on Name That Note, and the glowing circuit cabinet with an MCP backdrop on Music Lab VR. Each cabinet opens its app's GPT Site in a new tab. Apps can appear in more than one category, including Teacher Tools. All Apps lists each app once. Category signs and arrows browse the collection; phones show one cabinet at a time and support swiping. The small information button shows details. Hearts save favorites in the visitor's browser. Search, a plain app directory, reduced motion, an animation pause control, and Buy Me a Coffee are included. Beach and seagull ambience is on by default on every fresh visit and starts automatically when the browser permits. Otherwise, it begins after the first click, tap, Enter, or Space. The speaker button mutes or resumes it for the current visit; a fresh page load starts with sound on again. It fades out and pauses while the page is hidden, then resumes when you return. One compressed soundtrack contains six complete day/night cycles, with all fades prepared in advance. The beach fades completely out before dusk; Weightless Dawn then fades in with the picture. Its fade reaches silence at full daylight, then the beach fades back in. The recordings never overlap. A single player downloads this eight-minute soundtrack once and plays it continuously; it does not load, seek, switch files, or adjust volume at dusk or dawn. The five-minute night recording progresses across six nights. Pausing animation also pauses this soundtrack so both remain synchronized. Reduced-motion settings use a separate uninterrupted beach loop. Muting, leaving the page, and resuming keep the soundtrack aligned with the scene. Fade layers are prepared for compositing, and visitors follow the shared background animation timing without repeated computed-style reads.
+The seaside room fills the page. Its background repeats an 80-second cycle: 30 seconds at sunset, a 10-second fade to night, 30 seconds at night, and a 10-second fade back to sunset. The animation pause button freezes the cycle, and reduced-motion preferences keep the sunset still. The original sunset remains visible if the night image cannot load. A seagull visits the category rail during the day, and a small crab occasionally scuttles beside a cabinet, pauses, and walks completely off the left edge without fading out. If you scroll or switch cabinets, it continues from its current position to the edge. At night, a moth circles a warm light, shooting stars cross the sky, and a faint ship with tiny warm windows passes along the horizon. A sailboat can cross the water at either time of day, and an idle cabinet occasionally lights up. The seven occasional events each have their own randomized schedule, so small overlaps can occur naturally. Daytime and nighttime visitors keep their appropriate light setting. The first sailboat pass begins about 25–40 seconds into an active visit. All events follow the animation pause control, stop counting time while the page is hidden or a dialog is open, and are disabled by reduced-motion preferences. Twenty illustrated cabinet designs are included. Mallet & Measure — Free Classroom Edition appears third, with a copper-and-wood cabinet, a green instrument screen, and a free-edition badge. From Tips to Tours has an exclusive guitar-amplifier cabinet with amber trim, cherry-red details and a pixel-art musician on its screen. It appears last in the arcade lineup and in Games. Auto Harp has a simple walnut-and-brass cabinet with cream lettering and the sunlit instrument on its screen. Poison Rhythm has an exclusive purple-and-gold Mastermind cabinet with green illumination. Orbit has a dedicated dark space cabinet with cyan/violet lighting and orbital screen art. Music Stoplight has its own front-facing traffic-signal cabinet. The former Indigo Wave cabinet is preserved as skin 12, ready for a future app. Each cabinet has a fitted dark contact shadow and a broader soft floor shadow; both follow the cabinet layout when browsing, resizing or rotating a device. Every shelf, including category views, separates matching designs so no two neighboring cabinets look the same. The original order and each app's usual design are kept wherever possible; a different shell is used only when a future selection cannot be separated by reordering. Grand Theater appears on Vocal Explorations; Orbit appears on Rhythm Builder. Midnight Vector appears on Soundroom; Sunset Stripe appears on Four in a Row. Laser Lime appears on Name That Note, and the glowing circuit cabinet with an MCP backdrop on Music Lab VR. Each cabinet opens its app's GPT Site in a new tab. Apps can appear in more than one category, including Teacher Tools. All Apps lists each app once. Category signs and arrows browse the collection; phones show one cabinet at a time and support swiping. The small information button shows details. Hearts save favorites in the visitor's browser. Search, a plain app directory, reduced motion, an animation pause control, and Buy Me a Coffee are included. Beach and seagull ambience is on by default on every fresh visit and starts automatically when the browser permits. Otherwise, it begins after the first click, tap, Enter, or Space. The speaker button mutes or resumes it for the current visit; a fresh page load starts with sound on again. It fades out and pauses while the page is hidden, then resumes when you return. One compressed soundtrack contains six complete day/night cycles, with all fades prepared in advance. The beach fades completely out before dusk; Weightless Dawn then fades in with the picture. Its fade reaches silence at full daylight, then the beach fades back in. The recordings never overlap. A single player downloads this eight-minute soundtrack once and plays it continuously; it does not load, seek, switch files, or adjust volume at dusk or dawn. The five-minute night recording progresses across six nights. Pausing animation also pauses this soundtrack so both remain synchronized. Reduced-motion settings use a separate uninterrupted beach loop. Muting, leaving the page, and resuming keep the soundtrack aligned with the scene. Fade layers are prepared for compositing, and visitors follow the shared background animation timing without repeated computed-style reads.
 
 All artwork and fonts are included. No installation, build, backend, API key, or ChatGPT subscription is required to run this static homepage. The linked apps remain on their GPT Sites and follow those sites' availability and access settings.
 
@@ -31,11 +31,12 @@ assets/seagull-sprites.webp — four illustrated seagull poses
 assets/sailboat.webp — distant illustrated sailboat
 assets/audio/arcade-beach.mp3 — static beach ambience for reduced motion
 assets/audio/arcade-day-night.mp3 — continuous soundtrack with non-overlapping day/night fades
-apps.js — the approved 19 app destinations
+apps.js — the approved 20 app destinations
 directory.html — all links, usable without JavaScript
 assets/boardwalk.webp — original sunset seaside pavilion
 assets/boardwalk-night.webp — matching nighttime seaside pavilion
 assets/cabinets.webp — original three illustrated cabinet shells
+assets/mallet-measure-free-screen.svg — thirteen-bar xylophone and recorder studio artwork
 assets/cabinet-copper.webp — copper sunburst cabinet
 assets/cabinet-seafoam.webp — seafoam streamliner cabinet
 assets/cabinet-nautical.webp — navy and brass nautical cabinet
@@ -61,43 +62,45 @@ assets/fonts/ — bundled fonts and licenses
 
 APP LINKS
 
-1. Mr. Drew’s Auto Harp
+1. Mallet & Measure — Free Classroom Edition
+   https://mallet-measure-free.musicaldrewby.chatgpt.site
+2. Mr. Drew’s Auto Harp
    https://mr-drews-autoharp.musicaldrewby.chatgpt.site
-2. Poison Rhythm
+3. Poison Rhythm
    https://poison-rhythm.musicaldrewby.chatgpt.site
-3. Orbit — Polyrhythm Studio
+4. Orbit — Polyrhythm Studio
    https://orbit-polyrhythm-studio.musicaldrewby.chatgpt.site
-4. Mr. Drew’s Uke Strum
+5. Mr. Drew’s Uke Strum
    https://drew-uke-strum.musicaldrewby.chatgpt.site
-5. Pocket Orff
+6. Pocket Orff
    https://pocket-orff.musicaldrewby.chatgpt.site
-6. Interactive Xylophone
+7. Interactive Xylophone
    https://interactive-xylophone.musicaldrewby.chatgpt.site
-7. Mr. Drew’s Animated Vocal Explorations
+8. Mr. Drew’s Animated Vocal Explorations
    https://mr-drew-vocal-explorations.musicaldrewby.chatgpt.site
-8. Boomwhacker Play-Along Creator
+9. Boomwhacker Play-Along Creator
    https://drews-boomwhacker-creator.musicaldrewby.chatgpt.site
-9. Rhythm Builder
+10. Rhythm Builder
    https://mr-drews-rhythm-builder.musicaldrewby.chatgpt.site
-10. Music Stoplight
+11. Music Stoplight
    https://drews-movement-stoplight.musicaldrewby.chatgpt.site
-11. Sneaky Cat
+12. Sneaky Cat
    https://sneaky-cat.musicaldrewby.chatgpt.site
-12. Mr. Drew’s Name That Tune!
+13. Mr. Drew’s Name That Tune!
    https://mr-drews-name-that-tune.musicaldrewby.chatgpt.site
-13. Four in a Row
+14. Four in a Row
    https://classroom-connect-four.musicaldrewby.chatgpt.site
-14. Mr. Drew’s Name That Note Challenge
+15. Mr. Drew’s Name That Note Challenge
    https://mr-drews-name-that-note.musicaldrewby.chatgpt.site
-15. Soundroom
+16. Soundroom
    https://soundroom.musicaldrewby.chatgpt.site
-16. Mr. Drew’s Music Lab VR
+17. Mr. Drew’s Music Lab VR
    https://drews-music-lab-vr.musicaldrewby.chatgpt.site
-17. Round Helper
+18. Round Helper
    https://round-helper.musicaldrewby.chatgpt.site/
-18. Mr. Drew’s Production Media Player
+19. Mr. Drew’s Production Media Player
    https://mr-drews-production-media-player.musicaldrewby.chatgpt.site
-19. From Tips to Tours
+20. From Tips to Tours
    https://from-tips-to-tours.musicaldrewby.chatgpt.site
 
 To add or change an app later, edit apps.js and update directory.html to match. The region field sets the primary category; optional additionalRegions lists other category IDs (tower is Teacher Tools). The cover number selects an illustration from the existing atlas; keep existing cover numbers unchanged.
