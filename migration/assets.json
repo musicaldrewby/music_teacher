@@ -645,10 +645,9 @@
   },
   {
     "path": "apps/mallet-measure-free/index.html",
-    "url": "https://mallet-measure-free.musicaldrewby.chatgpt.site/index.html",
+    "url": "https://mr-drews-name-that-note.musicaldrewby.chatgpt.site/_arcade_migration_20261025/81f85a2eb1bdc99fa303075478dff123e0c9a495b08ecc3d5017c0356c2b07cf",
     "sha256": "81f85a2eb1bdc99fa303075478dff123e0c9a495b08ecc3d5017c0356c2b07cf",
-    "size": 7671,
-    "source_sha256": "81f85a2eb1bdc99fa303075478dff123e0c9a495b08ecc3d5017c0356c2b07cf"
+    "size": 7671
   },
   {
     "path": "apps/mallet-measure-free/instrument-art.js",
@@ -2346,10 +2345,9 @@
   },
   {
     "path": "apps/mr-drews-autoharp/index.html",
-    "url": "https://mr-drews-autoharp.musicaldrewby.chatgpt.site/index.html",
+    "url": "https://mr-drews-name-that-note.musicaldrewby.chatgpt.site/_arcade_migration_20261025/8faebcec1962c655dd6fa1753b4510cc5c76bade04d87bb681379bb2a2e2df2f",
     "sha256": "8faebcec1962c655dd6fa1753b4510cc5c76bade04d87bb681379bb2a2e2df2f",
-    "size": 16261,
-    "source_sha256": "8faebcec1962c655dd6fa1753b4510cc5c76bade04d87bb681379bb2a2e2df2f"
+    "size": 16261
   },
   {
     "path": "apps/mr-drews-autoharp/music.js",
@@ -2505,15 +2503,9 @@
   },
   {
     "path": "apps/poison-rhythm/index.html",
-    "url": "https://poison-rhythm.musicaldrewby.chatgpt.site/index.html",
+    "url": "https://mr-drews-name-that-note.musicaldrewby.chatgpt.site/_arcade_migration_20261025/a6ee83ff3142f29760379e13ae46bc6423825d1d60e91f43d5e5546a8975d5c6",
     "sha256": "a6ee83ff3142f29760379e13ae46bc6423825d1d60e91f43d5e5546a8975d5c6",
-    "size": 11252674,
-    "source_sha256": "a118617e0d26fdaf7056302fc67aa0da0325c439e6582e493a6847dedabb8830",
-    "patch": {
-      "start": 28499,
-      "end": 28546,
-      "insert": "dXNpY2FsZHJld2J5LmdpdGh1Yi5pby9tdXNpY190ZWFjaGVyLw=="
-    }
+    "size": 11252674
   },
   {
     "path": "apps/orbit-polyrhythm-studio/agent/SHOWS.md",
@@ -2755,10 +2747,9 @@
   },
   {
     "path": "apps/orbit-polyrhythm-studio/index.html",
-    "url": "https://orbit-polyrhythm-studio.musicaldrewby.chatgpt.site/index.html",
+    "url": "https://mr-drews-name-that-note.musicaldrewby.chatgpt.site/_arcade_migration_20261025/4352a440a079556dab6907523bc2e839c4b901f089b5e01d8217f9737760ac58",
     "sha256": "4352a440a079556dab6907523bc2e839c4b901f089b5e01d8217f9737760ac58",
-    "size": 33193,
-    "source_sha256": "4352a440a079556dab6907523bc2e839c4b901f089b5e01d8217f9737760ac58"
+    "size": 33193
   },
   {
     "path": "apps/orbit-polyrhythm-studio/living.css",
@@ -2853,10 +2844,9 @@
   },
   {
     "path": "apps/orbit-polyrhythm-studio/show-guide.html",
-    "url": "https://orbit-polyrhythm-studio.musicaldrewby.chatgpt.site/show-guide.html",
+    "url": "https://mr-drews-name-that-note.musicaldrewby.chatgpt.site/_arcade_migration_20261025/1442c6039d432ff2747de1f2f7b1c3b69042ea9e8721f6f684fcb1d7b7fc8cbc",
     "sha256": "1442c6039d432ff2747de1f2f7b1c3b69042ea9e8721f6f684fcb1d7b7fc8cbc",
-    "size": 4464,
-    "source_sha256": "1442c6039d432ff2747de1f2f7b1c3b69042ea9e8721f6f684fcb1d7b7fc8cbc"
+    "size": 4464
   },
   {
     "path": "apps/orbit-polyrhythm-studio/show-mp3-worker.js",
@@ -3133,10 +3123,9 @@
   },
   {
     "path": "apps/drew-uke-strum/index.html",
-    "url": "https://drew-uke-strum.musicaldrewby.chatgpt.site/index.html",
+    "url": "https://mr-drews-name-that-note.musicaldrewby.chatgpt.site/_arcade_migration_20261025/13a282649cf44f823d1fecdebdc2f408603f5b31c790752c4b2a8a0a6edc9170",
     "sha256": "13a282649cf44f823d1fecdebdc2f408603f5b31c790752c4b2a8a0a6edc9170",
-    "size": 55414,
-    "source_sha256": "13a282649cf44f823d1fecdebdc2f408603f5b31c790752c4b2a8a0a6edc9170"
+    "size": 55414
   },
   {
     "path": "apps/drew-uke-strum/soundfont.js",
@@ -3203,10 +3192,9 @@
   },
   {
     "path": "apps/pocket-orff/index.html",
-    "url": "https://pocket-orff.musicaldrewby.chatgpt.site/index.html",
+    "url": "https://mr-drews-name-that-note.musicaldrewby.chatgpt.site/_arcade_migration_20261025/76833b0bd3cc80ec8d59d7eaeecf7c84083fc8ad3bb52296ddb729b9bff1cb6d",
     "sha256": "76833b0bd3cc80ec8d59d7eaeecf7c84083fc8ad3bb52296ddb729b9bff1cb6d",
-    "size": 4077,
-    "source_sha256": "76833b0bd3cc80ec8d59d7eaeecf7c84083fc8ad3bb52296ddb729b9bff1cb6d"
+    "size": 4077
   },
   {
     "path": "apps/pocket-orff/styles.css",
@@ -3294,10 +3282,9 @@
   },
   {
     "path": "apps/interactive-xylophone/index.html",
-    "url": "https://interactive-xylophone.musicaldrewby.chatgpt.site/index.html",
+    "url": "https://mr-drews-name-that-note.musicaldrewby.chatgpt.site/_arcade_migration_20261025/2a8e9004f86f60a77410accac45a160146f3bfe67a034b75b173397639bca966",
     "sha256": "2a8e9004f86f60a77410accac45a160146f3bfe67a034b75b173397639bca966",
-    "size": 81451,
-    "source_sha256": "2a8e9004f86f60a77410accac45a160146f3bfe67a034b75b173397639bca966"
+    "size": 81451
   },
   {
     "path": "apps/mr-drew-vocal-explorations/assets/arctic-background.webp",
@@ -3441,10 +3428,9 @@
   },
   {
     "path": "apps/mr-drew-vocal-explorations/index.html",
-    "url": "https://mr-drew-vocal-explorations.musicaldrewby.chatgpt.site/index.html",
+    "url": "https://mr-drews-name-that-note.musicaldrewby.chatgpt.site/_arcade_migration_20261025/5f9a95f2d23a4fb6d645b0bf23df876b80a3b710ab67261424cd70c9581ffd19",
     "sha256": "5f9a95f2d23a4fb6d645b0bf23df876b80a3b710ab67261424cd70c9581ffd19",
-    "size": 62728,
-    "source_sha256": "5f9a95f2d23a4fb6d645b0bf23df876b80a3b710ab67261424cd70c9581ffd19"
+    "size": 62728
   },
   {
     "path": "apps/drews-boomwhacker-creator/assets/002c74269c56b306967d.svg",
@@ -4071,17 +4057,15 @@
   },
   {
     "path": "apps/drews-boomwhacker-creator/index.html",
-    "url": "https://drews-boomwhacker-creator.musicaldrewby.chatgpt.site/index.html",
+    "url": "https://mr-drews-name-that-note.musicaldrewby.chatgpt.site/_arcade_migration_20261025/ff25d48357289e38d6601dd61701b21846ff4b7e9ad44c9f4df463ba642847ac",
     "sha256": "ff25d48357289e38d6601dd61701b21846ff4b7e9ad44c9f4df463ba642847ac",
-    "size": 836204,
-    "source_sha256": "ff25d48357289e38d6601dd61701b21846ff4b7e9ad44c9f4df463ba642847ac"
+    "size": 836204
   },
   {
     "path": "apps/mr-drews-rhythm-builder/index.html",
-    "url": "https://mr-drews-rhythm-builder.musicaldrewby.chatgpt.site/index.html",
+    "url": "https://mr-drews-name-that-note.musicaldrewby.chatgpt.site/_arcade_migration_20261025/881e7ca45ebf158a02cfc68c5283c8d1099fac9e9189403a23b0ca571db2969f",
     "sha256": "881e7ca45ebf158a02cfc68c5283c8d1099fac9e9189403a23b0ca571db2969f",
-    "size": 340989,
-    "source_sha256": "881e7ca45ebf158a02cfc68c5283c8d1099fac9e9189403a23b0ca571db2969f"
+    "size": 340989
   },
   {
     "path": "apps/drews-movement-stoplight/app.js",
@@ -4505,10 +4489,9 @@
   },
   {
     "path": "apps/drews-movement-stoplight/index.html",
-    "url": "https://drews-movement-stoplight.musicaldrewby.chatgpt.site/index.html",
+    "url": "https://mr-drews-name-that-note.musicaldrewby.chatgpt.site/_arcade_migration_20261025/d59a191ca752fa8b63dbcf7e4f0252dc140e3e7d568e3cd1ccea0abed0541aee",
     "sha256": "d59a191ca752fa8b63dbcf7e4f0252dc140e3e7d568e3cd1ccea0abed0541aee",
-    "size": 17547,
-    "source_sha256": "d59a191ca752fa8b63dbcf7e4f0252dc140e3e7d568e3cd1ccea0abed0541aee"
+    "size": 17547
   },
   {
     "path": "apps/drews-movement-stoplight/music/Movement-Stoplight-MIDI.zip",
@@ -5322,10 +5305,9 @@
   },
   {
     "path": "apps/sneaky-cat/index.html",
-    "url": "https://sneaky-cat.musicaldrewby.chatgpt.site/index.html",
+    "url": "https://mr-drews-name-that-note.musicaldrewby.chatgpt.site/_arcade_migration_20261025/6defac7aeb8079cc13218db2a952659690cbadd42262dd54382960d73ebd3738",
     "sha256": "6defac7aeb8079cc13218db2a952659690cbadd42262dd54382960d73ebd3738",
-    "size": 8413,
-    "source_sha256": "6defac7aeb8079cc13218db2a952659690cbadd42262dd54382960d73ebd3738"
+    "size": 8413
   },
   {
     "path": "apps/mr-drews-name-that-tune/assets/fonts/Bangers-LICENSE.txt",
@@ -5399,15 +5381,9 @@
   },
   {
     "path": "apps/mr-drews-name-that-tune/index.html",
-    "url": "https://mr-drews-name-that-tune.musicaldrewby.chatgpt.site/index.html",
+    "url": "https://mr-drews-name-that-note.musicaldrewby.chatgpt.site/_arcade_migration_20261025/dd638fd203272e54698e9a8d3ac68a56b46a9f244030e0bf20ca87d41cd074a2",
     "sha256": "dd638fd203272e54698e9a8d3ac68a56b46a9f244030e0bf20ca87d41cd074a2",
-    "size": 139108,
-    "source_sha256": "e8301af0710a96f6169d681d05df423e5be811826eb9636f4bb3925bac46b70c",
-    "patch": {
-      "start": 21605,
-      "end": 35628,
-      "insert": "YXNzZXRzL2ZvbnRzL2JhbmdlcnMtbGF0aW4tNDAwLW5vcm1hbC53b2ZmMicpIGZvcm1hdCgnd29mZjInKTtmb250LXdlaWdodDo0MDA7Zm9udC1kaXNwbGF5OnN3YXB9CkBmb250LWZhY2V7Zm9udC1mYW1pbHk6TnVuaXRvO3NyYzp1cmwoJ2Fzc2V0cy9mb250cy9udW5pdG8tbGF0aW4tNDAwLW5vcm1hbC53b2ZmMicpIGZvcm1hdCgnd29mZjInKTtmb250LXdlaWdodDo0MDA7Zm9udC1kaXNwbGF5OnN3YXB9CkBmb250LWZhY2V7Zm9udC1mYW1pbHk6TnVuaXRvO3NyYzp1cmwoJ2Fzc2V0cy9mb250cy9udW5pdG8tbGF0aW4tODAwLW5vcm1hbC53b2ZmMicpIGZvcm1hdCgnd29mZjInKTtmb250LXdlaWdodDo4MDA7Zm9udC1kaXNwbGF5OnN3YXB9CkBmb250LWZhY2V7Zm9udC1mYW1pbHk6TnVuaXRvO3NyYzp1cmwoJ2Fzc2V0cy9mb250cy9udW5pdG8tbGF0aW4tOTAwLW5vcm1hbC53b2ZmMicpIGZvcm1hdCgnd29mZjInKTtmb250LXdlaWdodDo5MDA7Zm9udC1kaXNwbGF5OnN3YXB9Cjpyb290ey0tY3lhbjojMDBlYWZmOy0tcGluazojZmYzOGEwOy0tZ29sZDojZmZlYTAwOy0tcHVycGxlOiNiYjg1ZmY7LS1tdXRlZDojYmRjOWU5Oy0taW5rOiMxMjBiMjk7LS1wYXJ0eS14OjBweDstLXBhcnR5LXk6MHB4fQpib2R5e2ZvbnQtZmFtaWx5Ok51bml0byx1aS1zYW5zLXNlcmlmLHN5c3RlbS11aSxzYW5zLXNlcmlmO2JhY2tncm91bmQ6IzZjNGJlY30KLnN0YWdlLWJne2JhY2tncm91bmQ6IzZjNGJlYztiYWNrZ3JvdW5kLWltYWdlOnJhZGlhbC1ncmFkaWVudCgjZmZmMDAwIDNweCx0cmFuc3BhcmVudCA0cHgpLHJhZGlhbC1ncmFkaWVudCgjZmZmMDAwIDNweCx0cmFuc3BhcmVudCA0cHgpO2JhY2tncm91bmQtc2l6ZTozNnB4IDM2cHg7YmFja2dyb3VuZC1wb3NpdGlvbjp2YXIoLS1wYXJ0eS14KSB2YXIoLS1wYXJ0eS15KSxjYWxjKHZhcigtLXBhcnR5LXgpICsgMThweCkgY2FsYyh2YXIoLS1wYXJ0eS15KSArIDE4cHgpO3RyYW5zaXRpb246YmFja2dyb3VuZC1jb2xvciAuOHN9Ci5zdGFnZS1iZzpiZWZvcmUsLnN0YWdlLWJnOmFmdGVye2Rpc3BsYXk6bm9uZX0uc3RhZ2UtZmxvb3J7ZGlzcGxheTpub25lfQojcGFydHlDYW52YXN7cG9zaXRpb246YWJzb2x1dGU7aW5zZXQ6MDt3aWR0aDoxMDAlO2hlaWdodDoxMDAlO29wYWNpdHk6MDt0cmFuc2l0aW9uOm9wYWNpdHkgLjY1cztwb2ludGVyLWV2ZW50czpub25lfQpib2R5LnBsYXlpbmcgI3BhcnR5Q2FudmFzLGJvZHkubGlnaHRuaW5nICNwYXJ0eUNhbnZhc3tvcGFjaXR5OjF9Ym9keS5wbGF5aW5nIC5zdGFnZS1iZ3tiYWNrZ3JvdW5kLWNvbG9yOiMyMDEwNDd9Ym9keS5saWdodG5pbmcgLnN0YWdlLWJne2JhY2tncm91bmQtY29sb3I6IzEwMDcyY30KYm9keS5mdWxsLWVmZmVjdHMubGlnaHRuaW5nIC5zdGFnZS1iZ3tiYWNrZ3JvdW5kOiMxMDA3MmN9LnNoZWxse2dhcDoxNXB4fQouYnJhbmQtbWFya3tiYWNrZ3JvdW5kOiMwMGVhZmY7Ym9yZGVyOjNweCBzb2xpZCB2YXIoLS1pbmspO2JveC1zaGFkb3c6NHB4IDRweCAwIHZhcigtLWluayk7Y29sb3I6dmFyKC0taW5rKTtib3JkZXItcmFkaXVzOjE4cHggOHB4IDE4cHggOHB4O3dpZHRoOjUycHg7aGVpZ2h0OjUycHg7dHJhbnNmb3JtOnJvdGF0ZSgtOWRlZyl9Ci5icmFuZCAuZXllYnJvd3tmb250LWZhbWlseTpCYW5nZXJzLEltcGFjdCxzYW5zLXNlcmlmO2ZvbnQtd2VpZ2h0OjQwMDtmb250LXNpemU6MTdweDtsZXR0ZXItc3BhY2luZzoyLjVweDtjb2xvcjojZmZmO3RleHQtc2hhZG93OjJweCAycHggMCB2YXIoLS1pbmspO2xpbmUtaGVpZ2h0OjEuMX0KLm1hc3RoZWFkIGgxe2ZvbnQtZmFtaWx5OkJhbmdlcnMsSW1wYWN0LHNhbnMtc2VyaWY7Zm9udC13ZWlnaHQ6NDAwO2ZvbnQtc2l6ZTpjbGFtcCgzNXB4LDR2dyw1OXB4KTtsZXR0ZXItc3BhY2luZzoxLjVweDtjb2xvcjojZmY0ZmE3Oy13ZWJraXQtdGV4dC1zdHJva2U6MXB4IHZhcigtLWluayk7cGFpbnQtb3JkZXI6c3Ryb2tlIGZpbGw7dGV4dC1zaGFkb3c6M3B4IDNweCAwIHZhcigtLWluayksNXB4IDVweCAwICMwMGVhZmYsN3B4IDdweCAwIHZhcigtLWluayk7bGluZS1oZWlnaHQ6MS4wNTt0cmFuc2Zvcm06cm90YXRlKC0xZGVnKX0KLm1hc3RoZWFkIGgxIHNwYW57Y29sb3I6I2ZmZWEwMH0ubWFzdGhlYWQgLmJyYW5ke3BhZGRpbmctYm90dG9tOjdweH0KLmZ1bGwtZWZmZWN0cyAuYnJhbmR7YW5pbWF0aW9uOnBhcnR5VGl0bGUgNHMgZWFzZS1pbi1vdXQgaW5maW5pdGUgYWx0ZXJuYXRlfQpAa2V5ZnJhbWVzIHBhcnR5VGl0bGV7ZnJvbXt0cmFuc2Zvcm06dHJhbnNsYXRlWSgwKSByb3RhdGUoLS4zNWRlZyl9dG97dHJhbnNmb3JtOnRyYW5zbGF0ZVkoLTNweCkgcm90YXRlKC4zNWRlZyl9fQoubWFzdC1hY3Rpb25zIC5idG57YmFja2dyb3VuZDojZThkY2ZmO2NvbG9yOiMyMTEwMzc7Ym9yZGVyOjJweCBzb2xpZCB2YXIoLS1pbmspO2JveC1zaGFkb3c6M3B4IDNweCAwIHZhcigtLWluayk7Zm9udC13ZWlnaHQ6OTAwfS5tYXN0LWFjdGlvbnMgLmJ0bjpudGgtY2hpbGQoMil7YmFja2dyb3VuZDojZmY5YWQwfS5tYXN0LWFjdGlvbnMgLmJ0bjpudGgtY2hpbGQoMyl7YmFja2dyb3VuZDojZmZmMDAwfS5tYXN0LWFjdGlvbnMgLmJ0bjpob3Zlcjpub3QoOmRpc2FibGVkKXtiYWNrZ3JvdW5kOndoaXRlO2JvcmRlci1jb2xvcjp2YXIoLS1pbmspO3RyYW5zZm9ybTp0cmFuc2xhdGVZKC0ycHgpfQoucm91bmQtc3RyaXB7YmFja2dyb3VuZDojMjMxMzQ1ZWQ7Ym9yZGVyOjNweCBzb2xpZCB2YXIoLS1pbmspO2JveC1zaGFkb3c6NHB4IDRweCAwIHZhcigtLWluayk7Ym9yZGVyLXJhZGl1czoxOHB4IDlweCAxOHB4IDlweDtwYWRkaW5nOjhweCAxNHB4fS5yb3VuZC10aXRsZXtmb250LXdlaWdodDo5MDA7Zm9udC1zaXplOjE2cHh9LnJvdW5kLWljb257YmFja2dyb3VuZDojMDBlYWZmO2NvbG9yOiMxNjExMmM7Ym9yZGVyOjJweCBzb2xpZCAjMGIxMDIwO2JvcmRlci1yYWRpdXM6MTBweH0ucm91bmQtc3VidGl0bGV7Y29sb3I6I2RlZDdmMjtmb250LXNpemU6MTFweH0ucm91bmQtbWV0YXtjb2xvcjojZGZkNWY1fS5waWxsLmN5YW57YmFja2dyb3VuZDojMDBlYWZmO2NvbG9yOiMwODIyMzh9LnBpbGwuZ29sZHtiYWNrZ3JvdW5kOiNmZmVhMDA7Y29sb3I6IzJhMTYzMn0uY291bnRkb3due2ZvbnQtZmFtaWx5OkJhbmdlcnMsSW1wYWN0LHNhbnMtc2VyaWY7Zm9udC1zaXplOjI5cHg7Y29sb3I6I2ZmZWEwMDt0ZXh0LXNoYWRvdzoycHggMnB4IGJsYWNrfS5wcm9ncmVzcy10cmFja3toZWlnaHQ6NHB4fQoudGlsZXstLXJlYWN0aXZlOjA7LS10aWx0OjBkZWc7Ym9yZGVyOjRweCBzb2xpZCB2YXIoLS1pbmspO2JvcmRlci1ib3R0b206NXB4IHNvbGlkIHZhcigtLWluayk7Ym9yZGVyLXJhZGl1czoyNnB4IDEwcHggMjJweCAxMnB4O2JhY2tncm91bmQ6bGluZWFyLWdyYWRpZW50KDE0NWRlZyxjb2xvci1taXgoaW4gc3JnYix2YXIoLS10aWxlKSA4OCUsd2hpdGUpLHZhcigtLXRpbGUpKTtib3gtc2hhZG93OjRweCA1cHggMCB2YXIoLS1pbmspLGluc2V0IC00cHggLTVweCAwICMwMDAwMDAxNjt0cmFuc2Zvcm06cm90YXRlKHZhcigtLXRpbHQpKTtvdmVyZmxvdzp2aXNpYmxlO3RyYW5zaXRpb246ZmlsdGVyIC4xNHMsYm94LXNoYWRvdyAuMTRzLGJhY2tncm91bmQgLjE0cztpc29sYXRpb246aXNvbGF0ZX0KLnRpbGU6bnRoLWNoaWxkKDVuKzIpe2JvcmRlci1yYWRpdXM6MTJweCAyOHB4IDEycHggMjRweDstLXRpbHQ6LjZkZWd9LnRpbGU6bnRoLWNoaWxkKDVuKzMpe2JvcmRlci1yYWRpdXM6MjRweDstLXRpbHQ6LS41ZGVnfS50aWxlOm50aC1jaGlsZCg1bis0KXtib3JkZXItcmFkaXVzOjMwcHggOXB4IDI2cHggMTBweDstLXRpbHQ6LjdkZWd9LnRpbGU6bnRoLWNoaWxkKDVuKXtib3JkZXItcmFkaXVzOjlweCAyOHB4IDEycHggMzBweDstLXRpbHQ6LS43ZGVnfQoudGlsZTpiZWZvcmV7Ym9yZGVyLXJhZGl1czppbmhlcml0O2luc2V0OjNweDt6LWluZGV4Oi0xO2JhY2tncm91bmQ6bGluZWFyLWdyYWRpZW50KDE0NWRlZywjZmZmZmZmMWYsdHJhbnNwYXJlbnQgNTUlKX0KLnRpbGUtbnVtYmVye2ZvbnQtZmFtaWx5OkJhbmdlcnMsSW1wYWN0LHNhbnMtc2VyaWY7Zm9udC13ZWlnaHQ6NDAwO2ZvbnQtc2l6ZTpjbGFtcCgyNXB4LDQuNnZoLDU1cHgpO2xldHRlci1zcGFjaW5nOjFweDtjb2xvcjojZmZmOy13ZWJraXQtdGV4dC1zdHJva2U6MS41cHggdmFyKC0taW5rKTtwYWludC1vcmRlcjpzdHJva2UgZmlsbDt0ZXh0LXNoYWRvdzoycHggM3B4IDAgdmFyKC0taW5rKX0KLnRpbGU6aG92ZXI6bm90KDpkaXNhYmxlZCl7dHJhbnNmb3JtOnRyYW5zbGF0ZVkoLTNweCkgcm90YXRlKGNhbGModmFyKC0tdGlsdCkgKyAxZGVnKSkgc2NhbGUoMS4wMyk7ei1pbmRleDo1O2JveC1zaGFkb3c6NXB4IDhweCAwIHZhcigtLWluayk7ZmlsdGVyOmJyaWdodG5lc3MoMS4wNyl9Ci50aWxlLnBsYXllZHtiYWNrZ3JvdW5kOiMyYzIwNTA7Ym9yZGVyOjRweCBzb2xpZCAjMTcwZjJlO2JveC1zaGFkb3c6aW5zZXQgM3B4IDNweCAwICMwYzA3MWI3NywycHggM3B4IDAgdmFyKC0taW5rKTtmaWx0ZXI6bm9uZX0KLnRpbGUucGxheWVkIC50aWxlLW51bWJlcntjb2xvcjojOTM4NGFjO3RleHQtc2hhZG93OjJweCAycHggMCAjMTAwNzIwfS50aWxlLW1hcmt7cmlnaHQ6N3B4O3RvcDo0cHg7Zm9udC1mYW1pbHk6TnVuaXRvLHNhbnMtc2VyaWY7Zm9udC13ZWlnaHQ6OTAwO2NvbG9yOiNhOTlhYzU7Zm9udC1zaXplOjEycHh9Ci50aWxlLnNlbGVjdGVke2JhY2tncm91bmQ6IzEzMGUyYjtib3JkZXI6NHB4IHNvbGlkICNmZmY7Ym94LXNoYWRvdzowIDAgMCAzcHggIzAwZWFmZiwwIDAgMjVweCAjMDBlYWZmODg7ei1pbmRleDo0O3RyYW5zZm9ybTpyb3RhdGUoMGRlZykgc2NhbGUoMS4wMjUpfQoudGlsZS5zZWxlY3RlZCAudGlsZS1udW1iZXJ7Y29sb3I6I2ZmZjt0ZXh0LXNoYWRvdzoycHggM3B4IDAgIzAwMCwwIDAgMThweCAjMDBlYWZmfS50aWxlLnNlbGVjdGVkIC50aWxlLW1hcmt7Y29sb3I6IzAwZWFmZn0udGlsZSBjYW52YXN7Ym9yZGVyLXJhZGl1czppbmhlcml0O292ZXJmbG93OmhpZGRlbjtvcGFjaXR5Oi44O3BvaW50ZXItZXZlbnRzOm5vbmV9Ci5mdWxsLWVmZmVjdHMucGxheWluZyAudGlsZS5oYXMtbXVzaWM6bm90KC5zZWxlY3RlZCl7ZmlsdGVyOmJyaWdodG5lc3MoY2FsYyguOCArIHZhcigtLXJlYWN0aXZlKSouNSkpO3RyYW5zZm9ybTpyb3RhdGUodmFyKC0tdGlsdCkpIHNjYWxlKGNhbGMoMSArIHZhcigtLXJlYWN0aXZlKSouMDUpKTtiYWNrZ3JvdW5kOmxpbmVhci1ncmFkaWVudCgxNDVkZWcsY29sb3ItbWl4KGluIHNyZ2IsdmFyKC0tdGlsZSkgY2FsYygxMDAlIC0gdmFyKC0tcmVhY3RpdmUpKjc1JSksaHNsKHZhcigtLWVxLWh1ZSwxODApLDEwMCUsNTglKSksdmFyKC0tdGlsZSkpO2JvcmRlci1jb2xvcjpjb2xvci1taXgoaW4gc3JnYix2YXIoLS1pbmspIGNhbGMoMTAwJSAtIHZhcigtLXJlYWN0aXZlKSo3MCUpLCNmZmYpO30KLmZ1bGwtZWZmZWN0cy5wbGF5aW5nIC50aWxlLnBsYXllZDpub3QoLnNlbGVjdGVkKXtiYWNrZ3JvdW5kOmxpbmVhci1ncmFkaWVudCgxNDVkZWcsY29sb3ItbWl4KGluIHNyZ2IsIzJjMjA1MCBjYWxjKDEwMCUgLSB2YXIoLS1yZWFjdGl2ZSkqNzUlKSxoc2wodmFyKC0tZXEtaHVlLDE4MCksMTAwJSw1NSUpKSwjMjAxNTM0KX0KLmZ1bGwtZWZmZWN0cy5wbGF5aW5nIC50aWxlLnNlbGVjdGVke2JveC1zaGFkb3c6MCAwIDAgM3B4ICMwMGVhZmYsMCAwIGNhbGMoMjJweCArIHZhcigtLWVuZXJneSkqMzVweCkgIzAwZWFmZjt0cmFuc2Zvcm06c2NhbGUoY2FsYygxLjAyNSArIHZhcigtLWVuZXJneSkqLjAyKSl9Ci50aWxlLnJvdWxldHRle2JhY2tncm91bmQ6I2ZmZjAwMCFpbXBvcnRhbnQ7Ym9yZGVyLWNvbG9yOiNmZmY7Ym94LXNoYWRvdzowIDAgMCAzcHggI2ZmMzhhMCwwIDAgMjVweCAjZmZmMDAwO3RyYW5zZm9ybTpzY2FsZSgxLjA0NSk7ei1pbmRleDo2fS50aWxlLnJvdWxldHRlIC50aWxlLW51bWJlcntjb2xvcjojZmYzOGEwfQouYm9hcmQtY2FwdGlvbntjb2xvcjojZmZmO3RleHQtc2hhZG93OjFweCAxcHggMnB4ICMxODA4Mzg7Zm9udC13ZWlnaHQ6OTAwO2xldHRlci1zcGFjaW5nOi43cHg7Zm9udC1zaXplOjEwcHh9LmJvYXJkLWVtcHR5e2JhY2tncm91bmQ6IzI1MTI0M2Q5O2JvcmRlcjozcHggc29saWQgdmFyKC0taW5rKTtib3gtc2hhZG93OjVweCA1cHggMCB2YXIoLS1pbmspO2JvcmRlci1yYWRpdXM6MjZweCAxMnB4fS5ib2FyZC1lbXB0eSBoMntmb250LWZhbWlseTpCYW5nZXJzLEltcGFjdCxzYW5zLXNlcmlmO2ZvbnQtd2VpZ2h0OjQwMDtmb250LXNpemU6MzhweDtjb2xvcjojZmZmMDAwO2xldHRlci1zcGFjaW5nOjFweH0KLnBvZGl1bXtiYWNrZ3JvdW5kOiNmZmY7Ym9yZGVyOjRweCBzb2xpZCB2YXIoLS1pbmspO2JveC1zaGFkb3c6NHB4IDVweCAwIHZhcigtLWluayk7Ym9yZGVyLXJhZGl1czoxOXB4IDEycHggMTZweCAxNHB4O3BhZGRpbmc6MTBweCAxNHB4O3RyYW5zZm9ybTpyb3RhdGUoLS41ZGVnKTtjb2xvcjojMTQxMTI4fS5wb2RpdW06bnRoLWNoaWxkKGV2ZW4pe3RyYW5zZm9ybTpyb3RhdGUoLjVkZWcpfS5wb2RpdW06YmVmb3Jle2xlZnQ6MThweDtyaWdodDoxOHB4O3RvcDowO2hlaWdodDo1cHg7b3BhY2l0eToxO2JhY2tncm91bmQ6dmFyKC0tdGVhbSk7Ym9yZGVyLXJhZGl1czowIDAgOHB4IDhweH0ucG9kaXVtLmFjdGl2ZXtib3JkZXItY29sb3I6dmFyKC0taW5rKTtiYWNrZ3JvdW5kOmxpbmVhci1ncmFkaWVudCgxMzVkZWcsI2ZmZixjb2xvci1taXgoaW4gc3JnYix2YXIoLS10ZWFtKSAxNyUsd2hpdGUpKTtib3gtc2hhZG93OjRweCA1cHggMCB2YXIoLS1pbmspLDAgMCAwIDJweCAjZmZmMDAwLDAgMCAyNHB4ICNmZmYwMDA1NX0udGVhbS1uYW1lLWJ1dHRvbntmb250LWZhbWlseTpCYW5nZXJzLEltcGFjdCxzYW5zLXNlcmlmO2ZvbnQtd2VpZ2h0OjQwMDtmb250LXNpemU6MjFweDtjb2xvcjojMzIxNjdlO2xldHRlci1zcGFjaW5nOi43cHh9LnNjb3Jle2ZvbnQtZmFtaWx5OkJhbmdlcnMsSW1wYWN0LHNhbnMtc2VyaWY7Zm9udC13ZWlnaHQ6NDAwO2NvbG9yOiMxNzEwMjU7Zm9udC1zaXplOjQ0cHg7bGV0dGVyLXNwYWNpbmc6MXB4fS50ZWFtLXR1cm57Y29sb3I6IzgxMjM1MTtmb250LXNpemU6OXB4O2xldHRlci1zcGFjaW5nOjFweDtmb250LXdlaWdodDo5MDB9LnNjb3JlLWNvbnRyb2xzIC5idG57Y29sb3I6IzM3MTUyOTtiYWNrZ3JvdW5kOiNmZmI4ZDc7Ym9yZGVyOjJweCBzb2xpZCB2YXIoLS1pbmspO2JvcmRlci1yYWRpdXM6OHB4O2ZvbnQtd2VpZ2h0OjkwMH0uc2NvcmUtY29udHJvbHMgLmF3YXJke2NvbG9yOiMwNzE5MmE7YmFja2dyb3VuZDojN2JmM2IwO2JvcmRlci1jb2xvcjp2YXIoLS1pbmspO2ZvbnQtd2VpZ2h0OjkwMH0uc2NvcmUtY29udHJvbHMgLmJ0bjpob3Zlcjpub3QoOmRpc2FibGVkKXtiYWNrZ3JvdW5kOiNmZmYwMDA7Ym9yZGVyLWNvbG9yOnZhcigtLWluayl9LnNjb3JlLWJ1cnN0e2ZvbnQtZmFtaWx5OkJhbmdlcnMsSW1wYWN0LHNhbnMtc2VyaWY7Zm9udC13ZWlnaHQ6NDAwO2ZvbnQtc2l6ZTo1MnB4O2NvbG9yOiNmZmYwMDA7LXdlYmtpdC10ZXh0LXN0cm9rZToycHggdmFyKC0taW5rKTtwYWludC1vcmRlcjpzdHJva2UgZmlsbDt0ZXh0LXNoYWRvdzozcHggNHB4IDAgI2ZmMzhhMH0uZnVsbC1lZmZlY3RzLmxpZ2h0bmluZyAucG9kaXVtLmFjdGl2ZXthbmltYXRpb246amFja3BvdFBvZGl1bSAxcyBlYXNlLWluLW91dCBpbmZpbml0ZSBhbHRlcm5hdGV9QGtleWZyYW1lcyBqYWNrcG90UG9kaXVte3Rve2JveC1zaGFkb3c6NHB4IDVweCAwIHZhcigtLWluayksMCAwIDAgM3B4ICNmZmYwMDAsMCAwIDMwcHggI2ZmZGQwMH19Ci50b29sYmFye2JhY2tncm91bmQ6IzI5MTY0YWU4O2JvcmRlcjozcHggc29saWQgdmFyKC0taW5rKTtib3gtc2hhZG93OjRweCA0cHggMCB2YXIoLS1pbmspO2JvcmRlci1yYWRpdXM6MTZweCAxMHB4O3BhZGRpbmc6OXB4IDEycHh9LnRvb2xiYXI+LmJ0biwudG9vbGJhciBzdW1tYXJ5e2JvcmRlcjoycHggc29saWQgdmFyKC0taW5rKTtiYWNrZ3JvdW5kOiNkY2NjZmY7Y29sb3I6IzI2MTIzZTtib3gtc2hhZG93OjJweCAzcHggMCB2YXIoLS1pbmspO2ZvbnQtd2VpZ2h0OjkwMH0udG9vbGJhcj4uYnRuOmhvdmVyOm5vdCg6ZGlzYWJsZWQpe2JhY2tncm91bmQ6I2ZmZjtib3JkZXItY29sb3I6dmFyKC0taW5rKX0udG9vbGJhcj4uYnRuLnByaW1hcnl7YmFja2dyb3VuZDojMDBlYWZmfS50b29sYmFyPi5idG4uZ29sZHtiYWNrZ3JvdW5kOiNmZmYwMDB9LnRvb2xiYXIgI3N0b3BCdG57YmFja2dyb3VuZDojZmY4N2JkfS50b29sYmFyIC5idG46ZGlzYWJsZWR7b3BhY2l0eTouNTI7Ym94LXNoYWRvdzpub25lfS50b29sYmFyIC5jbGlwLWNvbnRyb2x7Y29sb3I6I2ZmZn0udG9vbGJhciBzZWxlY3R7Ym9yZGVyOjJweCBzb2xpZCB2YXIoLS1pbmspO2JhY2tncm91bmQ6I2ZmZjtjb2xvcjojMjUxNDQyO2ZvbnQtd2VpZ2h0OjkwMDtib3gtc2hhZG93OjJweCAzcHggMCB2YXIoLS1pbmspfS50b29sYmFyIC5kaXZpZGVye2JhY2tncm91bmQ6IzcwNTQ4ZH0udG9vbGJhciAubW9yZS1tZW51e2JhY2tncm91bmQ6IzI2MTYzZjtib3JkZXI6M3B4IHNvbGlkIHZhcigtLWluayk7Ym94LXNoYWRvdzo1cHggNXB4IDAgdmFyKC0taW5rKX0KLnJldmVhbC1jYXJke2JhY2tncm91bmQ6I2ZmZjtib3JkZXI6NnB4IHNvbGlkIHZhcigtLWluayk7Ym9yZGVyLXJhZGl1czozNXB4IDE0cHggMzVweCAxNHB4O2JveC1zaGFkb3c6MTJweCAxMnB4IDAgI2ZmMzhhMDtjb2xvcjojMWQxMDM0O3RyYW5zZm9ybTpyb3RhdGUoLTFkZWcpfS5yZXZlYWwtY2FyZCBoMntmb250LWZhbWlseTpCYW5nZXJzLEltcGFjdCxzYW5zLXNlcmlmO2ZvbnQtd2VpZ2h0OjQwMDtjb2xvcjojNmIyNmRmO2xldHRlci1zcGFjaW5nOjFweDt0ZXh0LXNoYWRvdzozcHggM3B4IDAgIzAwZWFmZjtmb250LXNpemU6Y2xhbXAoMzVweCw2dncsODRweCl9LnJldmVhbC1jYXJkIC5leWVicm93e2NvbG9yOiM3NjJiYmQ7Zm9udC1zaXplOjEycHh9LnJldmVhbC1jYXJkIHB7Y29sb3I6IzQwMjI1MH0ucmV2ZWFsLWNhcmQgLnJldmVhbC1zb25nLW51bWJlcntjb2xvcjojYWQyMDVlO2ZvbnQtd2VpZ2h0OjkwMH0ucmV2ZWFsLWNhcmQgLmJ0bntiYWNrZ3JvdW5kOiNlNmQ5ZmY7Y29sb3I6IzM1MTg0OTtib3JkZXI6MnB4IHNvbGlkIHZhcigtLWluayk7Zm9udC13ZWlnaHQ6OTAwO2JveC1zaGFkb3c6M3B4IDNweCAwIHZhcigtLWluayl9LnJldmVhbC1jYXJkIC5idG4ucHJpbWFyeSwucmV2ZWFsLWNhcmQgLmJ0bi5nb2xke2JhY2tncm91bmQ6I2ZmZjAwMH0ucmV2ZWFsLWNhcmQgLmFjdGlvbnMgYnV0dG9uW3N0eWxlXXtjb2xvcjojMzIxNTRlIWltcG9ydGFudH0ucmV2ZWFsLWNhcmQgLmRpc21pc3N7YmFja2dyb3VuZDojZmY4YmMxO2NvbG9yOiMyNTEwMzN9Lm92ZXJsYXl7YmFja2dyb3VuZDojMTcwNzJkZTZ9Ci5qYWNrcG90LWNhcmR7Ym9yZGVyOjA7YmFja2dyb3VuZDpub25lO2JveC1zaGFkb3c6bm9uZTtpc29sYXRpb246aXNvbGF0ZX0uamFja3BvdC1jYXJkOmJlZm9yZXtjb250ZW50OiIiO3Bvc2l0aW9uOmFic29sdXRlO2luc2V0Oi0yMHB4IDA7ei1pbmRleDotMTtiYWNrZ3JvdW5kOiNmZmYwMDA7Y2xpcC1wYXRoOnBvbHlnb24oNTAlIDAsNTclIDE1JSw3MCUgMyUsNzIlIDIzJSw5MCUgMTQlLDg2JSAzMyUsMTAwJSAzOCUsODglIDUwJSwxMDAlIDY1JSw4MiUgNjclLDg4JSA4OCUsNjglIDc5JSw2NSUgMTAwJSw1MSUgODYlLDM3JSAxMDAlLDMzJSA4MiUsMTMlIDkyJSwxOSUgNzIlLDAgNjklLDEzJSA1MyUsMCAzOSUsMTklIDMyJSwxMiUgMTIlLDMzJSAyMyUsMzQlIDIlLDQ1JSAxNSUpO2ZpbHRlcjpkcm9wLXNoYWRvdyg3cHggN3B4IDAgI2ZmMDBhNik7dHJhbnNmb3JtOnJvdGF0ZSgtOGRlZyl9LmphY2twb3QtY2FyZCBoMntmb250LXNpemU6Y2xhbXAoMTAwcHgsMTh2dywyMjBweCk7Y29sb3I6I2ZmMzhhMDstd2Via2l0LXRleHQtc3Ryb2tlOjRweCB2YXIoLS1pbmspO3BhaW50LW9yZGVyOnN0cm9rZSBmaWxsO3RleHQtc2hhZG93OjdweCA3cHggMCAjMDBlYWZmLDEwcHggMTBweCAwIHZhcigtLWluayl9LmphY2twb3QtY2FyZCBwe2ZvbnQtZmFtaWx5OkJhbmdlcnMsSW1wYWN0LHNhbnMtc2VyaWY7Zm9udC1zaXplOmNsYW1wKDIycHgsM3Z3LDM0cHgpO2ZvbnQtd2VpZ2h0OjQwMDtsZXR0ZXItc3BhY2luZzoycHg7Y29sb3I6IzMxMTA0N30ud2lubmVyLWNhcmR7YmFja2dyb3VuZDpsaW5lYXItZ3JhZGllbnQoMTQ1ZGVnLCNmZmZkZTksI2ZmZil9Lndpbm5lci1jYXJkIGgye2NvbG9yOiNmZjM4YTA7LXdlYmtpdC10ZXh0LXN0cm9rZToycHggdmFyKC0taW5rKTtwYWludC1vcmRlcjpzdHJva2UgZmlsbDt0ZXh0LXNoYWRvdzo0cHggNHB4IDAgI2ZmZjAwMCw2cHggNnB4IDAgIzE0MTAyYn0ud2lubmVyLXJhbmt7YmFja2dyb3VuZDojZWFkZmZmO2NvbG9yOiMzMjE3NGE7Ym9yZGVyOjNweCBzb2xpZCB2YXIoLS1pbmspIWltcG9ydGFudDtib3gtc2hhZG93OjNweCAzcHggMCAjMTQwYjI1fS53aW5uZXItcmFuayBzdHJvbmd7Zm9udC1mYW1pbHk6QmFuZ2VycyxJbXBhY3Qsc2Fucy1zZXJpZjtmb250LXNpemU6NDBweH0uZnVsbC1lZmZlY3RzLndyb25nLWFuc3dlciAuc2hlbGx7YW5pbWF0aW9uOmNvbWljU2hha2UgLjRzIGVhc2UgYm90aH1Aa2V5ZnJhbWVzIGNvbWljU2hha2V7MCUsMTAwJXt0cmFuc2Zvcm06dHJhbnNsYXRlWCgwKX0yMCV7dHJhbnNmb3JtOnRyYW5zbGF0ZVgoLThweCkgcm90YXRlKC0uM2RlZyl9NDAle3RyYW5zZm9ybTp0cmFuc2xhdGVYKDhweCkgcm90YXRlKC4zZGVnKX02MCV7dHJhbnNmb3JtOnRyYW5zbGF0ZVgoLTVweCl9ODAle3RyYW5zZm9ybTp0cmFuc2xhdGVYKDVweCl9fQouZGlhbG9ne2JvcmRlcjo0cHggc29saWQgdmFyKC0taW5rKTtib3gtc2hhZG93OjlweCA5cHggMCAjZmYzOGEwfS5kaWFsb2ctaGVhZGVyIGgye2ZvbnQtZmFtaWx5OkJhbmdlcnMsSW1wYWN0LHNhbnMtc2VyaWY7Zm9udC13ZWlnaHQ6NDAwO2ZvbnQtc2l6ZTozOHB4O2xldHRlci1zcGFjaW5nOjFweDtjb2xvcjojZmZmMDAwfS5kaWFsb2cgLmV5ZWJyb3d7Y29sb3I6IzAwZWFmZn0uZGlhbG9nIC5idG4ucHJpbWFyeXtjb2xvcjojMTYyMjQwfS50aGVtZS1zd2F0Y2h7YmFja2dyb3VuZDojNmM0YmVjO2JhY2tncm91bmQtaW1hZ2U6cmFkaWFsLWdyYWRpZW50KCNmZmYwMDAgMnB4LHRyYW5zcGFyZW50IDNweCk7YmFja2dyb3VuZC1zaXplOjE1cHggMTVweDtib3JkZXI6M3B4IHNvbGlkIHZhcigtLWluayl9LnRoZW1lLXN3YXRjaCBpe2JvcmRlcjoycHggc29saWQgdmFyKC0taW5rKTtib3JkZXItcmFkaXVzOjhweCAzcHg7Ym94LXNoYWRvdzoycHggMnB4IDAgdmFyKC0taW5rKX0KYm9keS5wcm9qZWN0b3IgLm1hc3RoZWFkIGgxe2ZvbnQtc2l6ZTpjbGFtcCgzOHB4LDV2dyw3OHB4KX1ib2R5LnByb2plY3RvciAucG9kaXVte3BhZGRpbmc6MTNweCAyMHB4fWJvZHkucHJvamVjdG9yIC50ZWFtLW5hbWUtYnV0dG9ue2ZvbnQtc2l6ZToyNnB4fWJvZHkucHJvamVjdG9yIC5zY29yZXtmb250LXNpemU6NTlweH0uZXhpdC1wcm9qZWN0b3J7Ym9yZGVyOjJweCBzb2xpZCB2YXIoLS1pbmspO2JhY2tncm91bmQ6IzMxMWQ1NX0uc3RpbGwgLmJyYW5ke3RyYW5zZm9ybTpub25lIWltcG9ydGFudH0uc3RpbGwgLnRpbGV7LS1yZWFjdGl2ZTowIWltcG9ydGFudH0KQG1lZGlhKG1heC13aWR0aDoxMjAwcHgpey5tYXN0aGVhZCBoMXtmb250LXNpemU6NDRweH0uYnJhbmQgLmV5ZWJyb3d7Zm9udC1zaXplOjE0cHh9LnNoZWxse2dhcDoxMnB4fS50ZWFtLW5hbWUtYnV0dG9ue2ZvbnQtc2l6ZToxOXB4fS5zY29yZXtmb250LXNpemU6MzlweH0udG9vbGJhcntwYWRkaW5nOjhweH0udGlsZXtib3JkZXItd2lkdGg6M3B4O2JveC1zaGFkb3c6M3B4IDRweCAwIHZhcigtLWluayl9fQpAbWVkaWEobWF4LWhlaWdodDo3NjBweCkgYW5kIChtaW4td2lkdGg6NzYxcHgpey5tYXN0aGVhZCBoMXtmb250LXNpemU6MzlweH0uYnJhbmQgLmV5ZWJyb3d7Zm9udC1zaXplOjEzcHh9LmJyYW5kLW1hcmt7d2lkdGg6NDJweDtoZWlnaHQ6NDJweH0ucm91bmQtc3RyaXB7cGFkZGluZzo2cHggMTJweH0ucm91bmQtdGl0bGV7Zm9udC1zaXplOjE0cHh9LnNoZWxse2dhcDoxMHB4fS50aWxlLW51bWJlcntmb250LXNpemU6MzNweH0ucG9kaXVte3BhZGRpbmc6N3B4IDEycHh9LnRlYW0tbmFtZS1idXR0b257Zm9udC1zaXplOjE4cHh9LnNjb3Jle2ZvbnQtc2l6ZTozNnB4fS5zY29yZS1jb250cm9sc3ttYXJnaW4tdG9wOjRweH0uYm9hcmQtY2FwdGlvbntmb250LXNpemU6OXB4fX0KQG1lZGlhKG1heC13aWR0aDo3NjBweCl7Lm1hc3RoZWFkIGgxe2ZvbnQtc2l6ZTpjbGFtcCgyOHB4LDh2dyw0MnB4KTtsZXR0ZXItc3BhY2luZzouNXB4Oy13ZWJraXQtdGV4dC1zdHJva2U6LjhweDt0ZXh0LXNoYWRvdzoycHggMnB4IDAgdmFyKC0taW5rKSw0cHggNHB4IDAgIzAwZWFmZiw1cHggNXB4IDAgdmFyKC0taW5rKX0uYnJhbmQgLmV5ZWJyb3d7Zm9udC1zaXplOjEzcHh9LmJyYW5ke2dhcDoxMHB4fS5icmFuZC1tYXJre3dpZHRoOjQwcHg7aGVpZ2h0OjQwcHh9LmJyYW5kLW1hcmsgLmljb257d2lkdGg6MjVweDtoZWlnaHQ6MjVweH0ubWFzdGhlYWR7Z2FwOjEwcHh9Lm1hc3QtYWN0aW9ucyAuYnRue2JveC1zaGFkb3c6MnB4IDJweCAwIHZhcigtLWluayl9LnJvdW5kLXRpdGxle2ZvbnQtc2l6ZToxM3B4fS5yb3VuZC1zdWJ0aXRsZXtmb250LXNpemU6MTBweH0ucm91bmQtc3RyaXB7cGFkZGluZzo4cHggMTBweH0ucm91bmQtbWV0YXtmbGV4LXdyYXA6d3JhcDtqdXN0aWZ5LWNvbnRlbnQ6ZmxleC1lbmR9LnRpbGV7Ym9yZGVyLXdpZHRoOjNweDtib3gtc2hhZG93OjNweCAzcHggMCB2YXIoLS1pbmspO2JvcmRlci1yYWRpdXM6MThweCA4cHggMThweCA4cHh9LnRpbGUtbnVtYmVye2ZvbnQtc2l6ZTozMXB4Oy13ZWJraXQtdGV4dC1zdHJva2U6MXB4fS50aWxlOm50aC1jaGlsZCg1bisyKXtib3JkZXItcmFkaXVzOjhweCAyMHB4IDhweCAyMHB4fS50aWxlOm50aC1jaGlsZCg1biszKXtib3JkZXItcmFkaXVzOjE4cHh9LnRpbGU6bnRoLWNoaWxkKDVuKzQpe2JvcmRlci1yYWRpdXM6MjJweCA2cHggMThweCA3cHh9LnRpbGU6bnRoLWNoaWxkKDVuKXtib3JkZXItcmFkaXVzOjdweCAxOXB4IDhweCAyMHB4fS50ZWFtLW5hbWUtYnV0dG9ue2ZvbnQtc2l6ZToxOXB4fS5zY29yZXtmb250LXNpemU6NDBweH0ucG9kaXVte3BhZGRpbmc6OXB4O2JvcmRlci13aWR0aDozcHh9LnRlYW0tdHVybntmb250LXNpemU6OHB4fS50b29sYmFye2dhcDo4cHh9LnJldmVhbC1jYXJke3BhZGRpbmc6MzVweCAyMHB4O2JvcmRlci13aWR0aDo0cHg7Ym94LXNoYWRvdzo2cHggNnB4IDAgI2ZmMzhhMH0ucmV2ZWFsLWNhcmQgaDJ7Zm9udC1zaXplOjQwcHh9LmphY2twb3QtY2FyZCBoMntmb250LXNpemU6MTEwcHh9LmphY2twb3QtY2FyZHtib3JkZXI6MDtib3gtc2hhZG93Om5vbmV9LmJvYXJkLWNhcHRpb257Zm9udC1zaXplOjlweH1ib2R5LnByb2plY3RvciAubWFzdGhlYWQgaDF7Zm9udC1zaXplOmNsYW1wKDM0cHgsOXZ3LDU1cHgpfWJvZHkucHJvamVjdG9yIC5icmFuZC1tYXJre3dpZHRoOjQ1cHg7aGVpZ2h0OjQ1cHh9Ym9keS5wcm9qZWN0b3IgLnRlYW0tbmFtZS1idXR0b257Zm9udC1zaXplOjIycHh9Ym9keS5wcm9qZWN0b3IgLnNjb3Jle2ZvbnQtc2l6ZTo0NXB4fS5kaWFsb2ctaGVhZGVyIGgye2ZvbnQtc2l6ZTozM3B4fX0KCi8qIFNlbGVjdGFibGUgc2hvdyB0aGVtZXM7IGxheW91dCBhbmQgY29udHJvbHMgYXJlIHNoYXJlZC4gKi8KQGZvbnQtZmFjZXtmb250LWZhbWlseTpPcmJpdHJvbjtzcmM6dXJsKCdhc3NldHMvZm9udHMvb3JiaXRyb24tbGF0aW4tODAwLW5vcm1hbC53b2ZmMicpIGZvcm1hdCgnd29mZjInKTtmb250LXdlaWdodDo4MDA7Zm9udC1kaXNwbGF5OnN3YXB9CkBmb250LWZhY2V7Zm9udC1mYW1pbHk6UmlnaHRlb3VzO3NyYzp1cmwoJw=="
-    }
+    "size": 139108
   },
   {
     "path": "apps/classroom-connect-four/app.js",
@@ -5691,10 +5667,9 @@
   },
   {
     "path": "apps/classroom-connect-four/index.html",
-    "url": "https://classroom-connect-four.musicaldrewby.chatgpt.site/index.html",
+    "url": "https://mr-drews-name-that-note.musicaldrewby.chatgpt.site/_arcade_migration_20261025/13a9b7199e4eccefe020f01974c7e85b7c53850d15cccc435ac6e28c398ac60c",
     "sha256": "13a9b7199e4eccefe020f01974c7e85b7c53850d15cccc435ac6e28c398ac60c",
-    "size": 9466,
-    "source_sha256": "13a9b7199e4eccefe020f01974c7e85b7c53850d15cccc435ac6e28c398ac60c"
+    "size": 9466
   },
   {
     "path": "apps/classroom-connect-four/style.css",
@@ -5719,15 +5694,9 @@
   },
   {
     "path": "apps/mr-drews-name-that-note/index.html",
-    "url": "https://mr-drews-name-that-note.musicaldrewby.chatgpt.site/index.html",
+    "url": "https://mr-drews-name-that-note.musicaldrewby.chatgpt.site/_arcade_migration_20261025/dd5fec64ec570153f4417c6186e27eaaa03072318e8fbec4f335ca3f81529d8d",
     "sha256": "dd5fec64ec570153f4417c6186e27eaaa03072318e8fbec4f335ca3f81529d8d",
-    "size": 64648,
-    "source_sha256": "c4e077a2227cbc757acdfe4b061a8ca8ae992a961f23302e1cdf65efadc118a4",
-    "patch": {
-      "start": 251,
-      "end": 593,
-      "insert": "dmVuZG9yL3RhaWx3aW5kLWJyb3dzZXIuanMiPjwvc2NyaXB0PgogICAgPGxpbmsgaHJlZj0iYXNzZXRzL2ZvbnRzL2dvb2dsZS0wOGM2NmZlNWZmMGIuY3NzIiByZWw9InN0eWxlc2hlZXQiPgogICAgPGxpbmsgaHJlZj0iYXNzZXRzL2ZvbnRzL2dvb2dsZS00YmY3MTI0YTQ3ZGUuY3NzIiByZWw9InN0eWxlc2hlZXQiPgogICAgPGxpbmsgaHJlZj0iYXNzZXRzL2ZvbnRzL2dvb2dsZS0wZGM4YTZhNDgxNDMuY3Nz"
-    }
+    "size": 64648
   },
   {
     "path": "apps/soundroom/assets/app.js",
@@ -5878,10 +5847,9 @@
   },
   {
     "path": "apps/soundroom/index.html",
-    "url": "https://soundroom.musicaldrewby.chatgpt.site/index.html",
+    "url": "https://mr-drews-name-that-note.musicaldrewby.chatgpt.site/_arcade_migration_20261025/4b6952f175707407d7434fc284121227915613ab548725e5aed365a86122f140",
     "sha256": "4b6952f175707407d7434fc284121227915613ab548725e5aed365a86122f140",
-    "size": 88142,
-    "source_sha256": "4b6952f175707407d7434fc284121227915613ab548725e5aed365a86122f140"
+    "size": 88142
   },
   {
     "path": "apps/drews-music-lab-vr/app.js",
@@ -5951,10 +5919,9 @@
   },
   {
     "path": "apps/drews-music-lab-vr/index.html",
-    "url": "https://drews-music-lab-vr.musicaldrewby.chatgpt.site/index.html",
+    "url": "https://mr-drews-name-that-note.musicaldrewby.chatgpt.site/_arcade_migration_20261025/aedf9a9045021e185ea43bdf04c862582853797fab43a9c33e46dc3cffdacd8e",
     "sha256": "aedf9a9045021e185ea43bdf04c862582853797fab43a9c33e46dc3cffdacd8e",
-    "size": 6285,
-    "source_sha256": "aedf9a9045021e185ea43bdf04c862582853797fab43a9c33e46dc3cffdacd8e"
+    "size": 6285
   },
   {
     "path": "apps/drews-music-lab-vr/listening-visualizer.js",
@@ -6523,10 +6490,9 @@
   },
   {
     "path": "apps/round-helper/index.html",
-    "url": "https://round-helper.musicaldrewby.chatgpt.site/index.html",
+    "url": "https://mr-drews-name-that-note.musicaldrewby.chatgpt.site/_arcade_migration_20261025/4e42a7e990d0b60d3f9a2ca395ce57ee5964ade09f6df55d7cb20d2ac74f6dca",
     "sha256": "4e42a7e990d0b60d3f9a2ca395ce57ee5964ade09f6df55d7cb20d2ac74f6dca",
-    "size": 837,
-    "source_sha256": "4e42a7e990d0b60d3f9a2ca395ce57ee5964ade09f6df55d7cb20d2ac74f6dca"
+    "size": 837
   },
   {
     "path": "apps/round-helper/transport.js",
@@ -6628,10 +6594,9 @@
   },
   {
     "path": "apps/mr-drews-production-media-player/index.html",
-    "url": "https://mr-drews-production-media-player.musicaldrewby.chatgpt.site/index.html",
+    "url": "https://mr-drews-name-that-note.musicaldrewby.chatgpt.site/_arcade_migration_20261025/1dfea40cbcaadedb1dd935eda73b95d2a24b2f1d922a3f3f1f0bacd826fd1035",
     "sha256": "1dfea40cbcaadedb1dd935eda73b95d2a24b2f1d922a3f3f1f0bacd826fd1035",
-    "size": 76683,
-    "source_sha256": "1dfea40cbcaadedb1dd935eda73b95d2a24b2f1d922a3f3f1f0bacd826fd1035"
+    "size": 76683
   },
   {
     "path": "apps/from-tips-to-tours/app.js",
@@ -6775,10 +6740,9 @@
   },
   {
     "path": "apps/from-tips-to-tours/index.html",
-    "url": "https://from-tips-to-tours.musicaldrewby.chatgpt.site/index.html",
+    "url": "https://mr-drews-name-that-note.musicaldrewby.chatgpt.site/_arcade_migration_20261025/650be46c32e22f428dc4d7e8d62417ed24d5e9e611f3eecdceea979e451943a0",
     "sha256": "650be46c32e22f428dc4d7e8d62417ed24d5e9e611f3eecdceea979e451943a0",
-    "size": 8501,
-    "source_sha256": "650be46c32e22f428dc4d7e8d62417ed24d5e9e611f3eecdceea979e451943a0"
+    "size": 8501
   },
   {
     "path": "apps/from-tips-to-tours/live-jam.js",
@@ -8970,4 +8934,3 @@
     "size": 17521
   }
 ]
-
