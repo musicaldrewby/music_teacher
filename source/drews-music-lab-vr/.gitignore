@@ -1,8 +1,0 @@
-.sites-runtime/
-node_modules/
-.env*
-dist/client/
-dist/server/
-dist/.openai/
-
-!.env.example

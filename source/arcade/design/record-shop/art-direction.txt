@@ -1,7 +1,0 @@
-Approved direction: immersive full-viewport record shop based on the upper-left concept in the user's four-design comparison, then the approved single-screen record shop. Rich warm semi-realistic illustrated animated-film aesthetic. Wood, green hanging lamps, afternoon sunlight, plants and vinyl shelves. No slogans or decorative text. Brand, categories and app names are real HTML.
-
-Production room prompt: preserve the approved shop environment; remove all UI, brand lettering, foreground app sleeves, central display crate and turntable. Reconstruct a clean spacious floor and lower center for the coded cabinet. Side bins, window, hanging lamps and plants frame the room. No readable text, UI, people or watermarks. Wide 16:9.
-
-Production atlas prompt: exactly four columns and five rows, twenty equal square illustrations with no gutters, perspective, borders or text. Rich tactile illustrated album art. Tile order: Uke Strum; Sneaky Cat; Boomwhacker; Radical Recorder; Pocket Orff; Interactive Xylophone; Vocal Exploration; Drum Machine; Rhythm Builder; Name That Tune; Four in a Row; Name That Note; Rhythm Chomper; Soundroom; Felt & Fable; Music Lab VR; Bingo; Round Helper; Production Media Player; spare vinyl illustration.
-
-Both production images generated with the built-in image generation tool and converted to WebP without cropping. Original PNGs and the approved concept are retained beside this file. Tile selection uses CSS background positioning.

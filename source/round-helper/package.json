@@ -1,7 +1,0 @@
-{
-  "name": "round-helper",
-  "version": "1.0.0",
-  "private": true,
-  "scripts": { "build": "node scripts/build.cjs" },
-  "devDependencies": { "@babel/standalone": "7.26.10" }
-}

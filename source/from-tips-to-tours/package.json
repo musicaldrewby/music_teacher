@@ -1,1 +1,0 @@
-{"name":"from-tips-to-tours","version":"1.0.0","private":true,"type":"module","scripts":{"test":"node --test tests/*.test.mjs","balance":"node tools/simulate.mjs"}}

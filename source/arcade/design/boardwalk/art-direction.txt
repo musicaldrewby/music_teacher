@@ -1,9 +1,0 @@
-Approved direction: Seaside Boardwalk Arcade, selected by Drew on October 8, 2026.
-Source reference: approved-concept.png, uploaded image(20261008-214521).png.
-Generated using the built-in image generation tool, edited from the reference.
-
-ROOM PROMPT: Keep the same golden sunset seaside arcade pavilion, cream and teal timber architecture, arch openings, ocean sparkle, warm string lights and distant side arcade machines. Remove all three foreground machines, brand/category signs and navigation arrows. Inpaint a continuous open central floor and rafters naturally; no words or controls. Preserve the reference lighting, camera and illustrated animated-feature quality.
-
-CABINET PROMPT: Transparent 3-column, 1-row sprite atlas of isolated front-facing full-height vintage wooden arcade cabinet shells. Teal tropical waves, purple moonlit motifs, and coral/rainbow musical motifs. Same general geometry, flat blank cream marquees and black screen openings for live HTML text and images. Detailed bevels, joysticks, buttons, painted wood, gold trim. No words. Genuine alpha background.
-
-Production notes: originals retained; WebP compression preserves alpha. Shell sprite positioning is calibrated in style.css. Background is continuous and independent of the cabinets so category changes do not create gaps.

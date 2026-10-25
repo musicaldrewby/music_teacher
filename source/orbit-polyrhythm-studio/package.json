@@ -1,1 +1,0 @@
-{"name":"orbit-polyrhythm-studio","private":true,"type":"module","scripts":{"show":"node scripts/show.mjs","render:show":"node scripts/render-show.mjs","verify:show":"node verify-show.mjs"},"optionalDependencies":{"skia-canvas":"3.0.8"}}

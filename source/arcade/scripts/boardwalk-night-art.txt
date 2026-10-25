@@ -1,9 +1,0 @@
-NIGHT BACKGROUND ART NOTES
-
-Created with the built-in image generation tool in lighting-weather edit mode.
-Edit target: dist/assets/boardwalk.webp
-Selected output: dist/assets/boardwalk-night.webp
-The original sunset asset is preserved. The selected PNG was encoded as WebP for delivery.
-
-Final prompt:
-Use case: lighting-weather. Asset type: exact matching nighttime background layer for an existing immersive seaside arcade website. Input image is the EDIT TARGET. Change ONLY the time of day and lighting from sunset to full night. Keep every object, exact pixel framing, perspective, architecture, wooden floorboards, railings, ropes, pillars, arches, lamps, strings of lightbulbs, left ship wheel, right starfish, far left and right arcade cabinets, both distant piers, distant buildings and ferris wheel in precisely the same positions and sizes. Do not move, add or remove structures or alter silhouette edges. This nighttime image will crossfade over the original so precise alignment is essential. Same wide landscape aspect ratio. Preserve the detailed polished illustrated cinematic 3D style. The sky outside becomes a deep midnight blue with a few subtle stars, the ocean becomes deep navy with soft silvery reflections. The sunset sun disappears into night; no bright sun remains and no new large moon is needed. All existing hanging string bulbs and wall lanterns remain warmly illuminated amber, their warm light pools on the darkened wood floor. Existing pier lights and arcade cabinet screens glow gently. Interior teal paint and timber stay readable with warm lamp light and cool ambient night light. Night is clearly night, cozy and beautiful, not pitch black. Remove golden sunlight and long strong sunset sunbeams from the floor. Keep interior geometry untouched and no people, no new text, no UI, no logos, no crop, no camera change.

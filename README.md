@@ -1,54 +1,38 @@
-# Mr. Drew’s Music Arcade
+# Drew Wichman — Additional App Source Projects
 
-[Open the arcade](https://musicaldrewby.github.io/music_teacher/) · [Simple app directory](https://musicaldrewby.github.io/music_teacher/directory.html)
+This public `additional-apps` branch contains the 26 apps outside Mr. Drew’s Music Arcade, prepared for importing into Google AI Studio or another development environment.
 
-Created by Drew Wichman. This repository contains the arcade and all 20 apps from its October 25, 2026 collection, including their HTML, JavaScript, styles, images, instrument samples, soundfonts, music, and bundled libraries.
+The arcade and its 20 listed apps remain on the `main` branch. No app was added to the arcade index or directory. This branch holds source projects and bundled media; it is not a GitHub Pages deployment.
 
-| App | Website | Folder under `apps/` |
-| --- | --- | --- |
-| Mallet & Measure — Free Classroom Edition | [Open app](https://musicaldrewby.github.io/music_teacher/apps/mallet-measure-free/) | `mallet-measure-free` |
-| Mr. Drew’s Autoharp | [Open app](https://musicaldrewby.github.io/music_teacher/apps/mr-drews-autoharp/) | `mr-drews-autoharp` |
-| Poison Rhythm | [Open app](https://musicaldrewby.github.io/music_teacher/apps/poison-rhythm/) | `poison-rhythm` |
-| Orbit — Polyrhythm Studio | [Open app](https://musicaldrewby.github.io/music_teacher/apps/orbit-polyrhythm-studio/) | `orbit-polyrhythm-studio` |
-| Mr. Drew's Uke Strum | [Open app](https://musicaldrewby.github.io/music_teacher/apps/drew-uke-strum/) | `drew-uke-strum` |
-| Mr. Drew's Pocket Orff | [Open app](https://musicaldrewby.github.io/music_teacher/apps/pocket-orff/) | `pocket-orff` |
-| Interactive Xylophone | [Open app](https://musicaldrewby.github.io/music_teacher/apps/interactive-xylophone/) | `interactive-xylophone` |
-| Mr. Drew's Animated Vocal Explorations | [Open app](https://musicaldrewby.github.io/music_teacher/apps/mr-drew-vocal-explorations/) | `mr-drew-vocal-explorations` |
-| Boomwhacker Play-Along — Teacher Edition | [Open app](https://musicaldrewby.github.io/music_teacher/apps/drews-boomwhacker-creator/) | `drews-boomwhacker-creator` |
-| Mr. Drew's Rhythm Builder | [Open app](https://musicaldrewby.github.io/music_teacher/apps/mr-drews-rhythm-builder/) | `mr-drews-rhythm-builder` |
-| Movement Stoplight | [Open app](https://musicaldrewby.github.io/music_teacher/apps/drews-movement-stoplight/) | `drews-movement-stoplight` |
-| Sneaky Cat | [Open app](https://musicaldrewby.github.io/music_teacher/apps/sneaky-cat/) | `sneaky-cat` |
-| Mr. Drew’s Name That Tune! | [Open app](https://musicaldrewby.github.io/music_teacher/apps/mr-drews-name-that-tune/) | `mr-drews-name-that-tune` |
-| Four in a Row | [Open app](https://musicaldrewby.github.io/music_teacher/apps/classroom-connect-four/) | `classroom-connect-four` |
-| Mr. Drew's Name That Note Challenge | [Open app](https://musicaldrewby.github.io/music_teacher/apps/mr-drews-name-that-note/) | `mr-drews-name-that-note` |
-| Soundroom | [Open app](https://musicaldrewby.github.io/music_teacher/apps/soundroom/) | `soundroom` |
-| Mr. Drew’s Music Lab · VR | [Open app](https://musicaldrewby.github.io/music_teacher/apps/drews-music-lab-vr/) | `drews-music-lab-vr` |
-| Round Helper | [Open app](https://musicaldrewby.github.io/music_teacher/apps/round-helper/) | `round-helper` |
-| Mr. Drew's Production Media Player | [Open app](https://musicaldrewby.github.io/music_teacher/apps/mr-drews-production-media-player/) | `mr-drews-production-media-player` |
-| From Tips to Tours | [Open app](https://musicaldrewby.github.io/music_teacher/apps/from-tips-to-tours/) | `from-tips-to-tours` |
+| App | Source folder |
+| --- | --- |
+| Circuit 16 — Sequencing Studio by Drew Wichman | [drew-circuit-16](additional-apps/drew-circuit-16/) |
+| Drew’s 8-Bit Lounge — NES Emulator | [drews-8bit-lounge](additional-apps/drews-8bit-lounge/) |
+| Rewind Room · 1989 | [drew-rewind-room-1989](additional-apps/drew-rewind-room-1989/) |
+| Movie Rental Empire | [movie-rental-empire](additional-apps/movie-rental-empire/) |
+| Chroma Orchestra | [chroma-orchestra](additional-apps/chroma-orchestra/) |
+| Prism Motion Studio | [prism-motion-studio](additional-apps/prism-motion-studio/) |
+| Mallet & Measure — The Orff Ensemble Studio by Drew Wichman | [orff-studio-atelier](additional-apps/orff-studio-atelier/) |
+| Morning Pledges | [morning-pledges](additional-apps/morning-pledges/) |
+| Mr. Drew’s Beginning Band Board | [mr-drews-beginning-band-board](additional-apps/mr-drews-beginning-band-board/) |
+| Living Background Engine | [living-background-engine](additional-apps/living-background-engine/) |
+| Mr. Drew’s Play-Along Studio | [mr-drews-play-along-studio](additional-apps/mr-drews-play-along-studio/) |
+| Drew’s Music Engine | [drews-music-engine](additional-apps/drews-music-engine/) |
+| Mr. Drew’s Four Corners Studio | [mr-drews-four-corners-studio](additional-apps/mr-drews-four-corners-studio/) |
+| Mr. Drew's Uke Strum — Teacher Studio | [drew-uke-strum-teacher-studio](additional-apps/drew-uke-strum-teacher-studio/) |
+| Boomwhacker Play-Along — Creator Edition | [drews-boomwhacker-creator-private](additional-apps/drews-boomwhacker-creator-private/) |
+| Pixel Palace Casino | [pixel-palace](additional-apps/pixel-palace/) |
+| Music Sketchbook | [drews-music-sketchbook](additional-apps/drews-music-sketchbook/) |
+| Radical Recorder | [radical-recorder](additional-apps/radical-recorder/) |
+| Mr. Drew's Bingo Maker | [mr-drews-bingo-maker](additional-apps/mr-drews-bingo-maker/) |
+| Train Window Studio | [train-window-studio](additional-apps/train-window-studio/) |
+| Motion Layer Studio | [motion-layer-studio](additional-apps/motion-layer-studio/) |
+| FLUID SPACE | [fluid-space](additional-apps/fluid-space/) |
+| Felt & Fable Studio | [felt-and-fable-studio](additional-apps/felt-and-fable-studio/) |
+| Music Whiteboard | [music-whiteboard](additional-apps/music-whiteboard/) |
+| Sound Garden | [sound-garden-playground](additional-apps/sound-garden-playground/) |
+| Mr. Drew’s Music Classroom | [drews-music-classroom](additional-apps/drews-music-classroom/) |
 
-## Hosting
+Use an individual app folder as the project root. See [project formats and import notes](additional-apps/README.md). Static projects include `dist/`; framework apps include source code and dependency/build configuration. Databases, browser-saved projects, runtime credentials, installed dependency folders, caches, and original Sites hosting identity are excluded. Existing hosted apps and their access settings are unchanged.
 
-The existing `main` branch and GitHub Pages publishing location are retained. The arcade is at the repository root; each app has its own folder under `apps/`. `.nojekyll` makes these static files publish unchanged. No ChatGPT sign-in is needed for the public apps.
-
-Nineteen apps run entirely as static websites. **Music Lab VR’s shared Listening Room still uses its existing server and database** at `drews-music-lab-vr.musicaldrewby.chatgpt.site`. Its complete browser and server code are included here; GitHub Pages cannot run that database server. Private song saving and file export/import stay on the visitor’s device. Owner moderation continues through the original Music Lab website. The server accepts the GitHub website as a client, with the original validation, rate limits, publisher deletion tokens, and owner access restrictions.
-
-## Existing saved work
-
-Browser storage belongs to a website address. Songs, arrangements, favorites, uploaded audio, and game progress previously saved in a ChatGPT Site do not automatically appear at its new GitHub address. Use each app’s export/import controls to transfer supported projects. The original sites are retained so existing saved work remains accessible. No visitor database contents or private songs are copied into this public repository.
-
-## Source and assets
-
-`apps/` contains the runnable applications. `source/<app>/` preserves the accompanying original source modules, build scripts, tests, documentation, artwork and music source files outside each original `dist` folder. To reconstruct an original working project, copy that source folder into a new directory, then copy `apps/<app>/` into its `dist/` folder. `source/arcade/` contains the arcade’s companion source material; its runtime files are at the repository root. Original Git history remains in Sites, and original source commit IDs are recorded in `migration/apps.json`.
-
-Fonts and browser libraries formerly loaded from CDNs are bundled locally. Their source URLs and checksums are recorded in `migration/font-sources.json`; existing bundled licenses and asset credits are retained. Links to YouTube, teaching references, Teachers Pay Teachers, and Buy Me a Coffee remain external destinations.
-
-## Migration record
-
-`migration/assets.json` records the source URL and SHA-256 hashes for every app file, plus the reviewed path/link adjustments. `migration/import_assets.py` imports that exact snapshot and refuses content drift. The one-time import workflow runs only on `migration/complete-arcade-2026-10-25`; it does not continuously synchronize or overwrite future changes on `main`.
-
-The previous homepage is preserved in branch `backup/arcade-before-app-migration-2026-10-25`.
-
-## Additional projects
-
-[26 additional app projects](additional-apps/README.md) are stored under `additional-apps/` for source import and further development. They are intentionally absent from the arcade homepage and simple app directory. Their full project layouts and bundled assets are preserved; framework/server projects require their own build/runtime.
+The owner authorized public source access for import. Original source commit IDs are recorded in [the inventory](additional-apps/apps.json). File hashes are recorded in `migration/additional-apps-manifest.json`; its temporary transfer endpoint is only an audit record and is disabled after verification.
