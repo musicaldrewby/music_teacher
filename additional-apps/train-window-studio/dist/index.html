@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#141b20">
+<meta name="description" content="Create immersive train-window journeys with six scenic locations, realistic rain and snow, eight carriage interiors, and video export up to 20 minutes at 60 FPS.">
+<title>Train Window Studio — Scenic Rides &amp; Carriage Interiors</title>
+<link rel="stylesheet" href="studio.css?v=startup-5"></head>
+<body>
+<div class="studio-app"><header class="top chrome"><div class="title-block"><div class="eyebrow" id="sceneNumber">TRAIN WINDOW STUDIO · SCENE 05</div><div class="brand" id="sceneTitle">Halloween Village at Dusk</div><div class="sub" id="sceneDescription">Glowing pumpkins. Victorian porches. The last violet light of October.</div></div><div class="actions"><button id="sound" aria-pressed="false" title="Enable or mute the audio mixer">Sound off</button><button id="cinema" title="Hide controls (H)" aria-pressed="false">Cinema</button><button id="fullscreen" title="Fullscreen (F)">⛶ <span class="fullscreen-label">Fullscreen</span></button><button id="settings" aria-expanded="false" aria-controls="panel">Customize</button></div></header>
+<div class="scene-controls chrome"><nav class="presets glass" role="tablist" aria-label="Scenic presets"><button id="tab-country" class="preset" role="tab" aria-controls="scenePanel" aria-selected="false" tabindex="-1"><span class="full-label">Twilight Countryside</span><span class="short-label">Countryside</span></button><button id="tab-city" class="preset" role="tab" aria-controls="scenePanel" aria-selected="false" tabindex="-1">Japan at Night</button><button id="tab-desert" class="preset" role="tab" aria-controls="scenePanel" aria-selected="false" tabindex="-1"><span class="full-label">Southwestern Sunset</span><span class="short-label">Desert Sunset</span></button><button id="tab-christmas" class="preset" role="tab" aria-controls="scenePanel" aria-selected="false" tabindex="-1">Christmas Night</button><button id="tab-halloween" class="preset" role="tab" aria-controls="scenePanel" aria-selected="true" tabindex="0">Halloween Village</button><button id="tab-bayou" class="preset" role="tab" aria-controls="scenePanel" aria-selected="false" tabindex="-1">Louisiana Bayou</button></nav><div class="window-picker glass"><label for="carriage">Carriage</label><select id="carriage" aria-label="Window and partial carriage interior"><option value="original" selected>Original warm walnut</option><option value="commuter">Japanese commuter</option><option value="sleeper">Cozy sleeper cabin</option><option value="panorama">Modern panoramic</option><option value="vintage">Vintage railway</option><option value="luxury">Luxury night train</option><option value="alpine">Alpine observation</option><option value="retro">Retro stainless steel</option></select><button id="previousCarriage" class="cycle-window" aria-label="Previous carriage" title="Previous carriage">‹</button><button id="nextCarriage" class="cycle-window" aria-label="Next carriage" title="Next carriage">›</button></div></div>
+<div class="studio-workspace"><main id="scenePanel" class="world" role="tabpanel" aria-labelledby="tab-halloween"><canvas id="view" width="1920" height="1080" aria-label="Animated view through a train window past a Halloween village at dusk"></canvas></main>
+<aside id="panel" class="panel glass chrome" hidden aria-labelledby="customizeTitle">
+<div class="panel-heading"><h2 id="customizeTitle">Your window seat</h2><button id="closeSettings" aria-label="Close customization panel" title="Close customization panel">×</button></div><p class="panel-intro">Settle in. Make the ride your own.</p><details class="experience" open name="seat-settings"><summary>Journey &amp; passing events</summary>
+<label class="switch" for="journey"><span>Connect three scenes</span><input id="journey" type="checkbox"></label>
+<div id="routeControls" hidden><label class="label" for="route0">First scene</label><select id="route0"></select><label class="label" for="route1">Second scene</label><select id="route1"></select><label class="label" for="route2">Third scene</label><select id="route2"></select><p class="micro">Five minutes per scene at normal speed. Tunnels connect each scene and close the full journey loop.</p></div>
+<label class="switch" for="tunnels"><span>Extra scenic tunnel</span><input id="tunnels" type="checkbox" checked></label>
+<label class="switch" for="bridges"><span>River crossing between tunnels</span><input id="bridges" type="checkbox" checked></label>
+<p class="micro">Land → tunnel → river bridge → tunnel → land. Both river tunnels are included with the crossing.</p>
+<label class="switch" for="stations"><span>Station stops</span><input id="stations" type="checkbox"></label>
+<p class="micro">Station stops ease to a 16-second pause at normal speed. Train sounds follow the stops and tunnels.</p>
+<div class="event-jumps"><button id="previewTunnel">Tunnel approach</button><button id="previewStation">Station approach</button><button id="previewBridge">River approach</button></div>
+<p id="journeyStatus" class="micro" aria-live="polite"></p>
+</details>
+<details class="experience" name="seat-settings"><summary>Cabin &amp; view</summary>
+<label class="label" for="graphicsMode">Graphics mode</label><select id="graphicsMode"><option value="auto">Automatic</option><option value="compatible">Compatibility · lighter preview</option><option value="full">Full quality · 1080p preview</option></select><p id="graphicsStatus" class="micro">Video size and frame rate are set separately.</p><p class="micro">Changing modes reloads the app. Save your setup as a favorite first.</p>
+<div class="row"><label class="label" for="seatDistance">Window-seat distance <span id="seatDistanceValue" class="value">Roomier</span></label><input id="seatDistance" type="range" min="0" max="100" value="100"><p class="micro">Close to the glass ← → More of the carriage</p></div>
+<label class="switch" for="curtain"><span>Gently swaying curtain</span><input id="curtain" type="checkbox"></label>
+<label class="switch" for="mug"><span>Steaming coffee on the sill</span><input id="mug" type="checkbox"></label>
+<div class="row"><label class="label" for="readingLamp">Warm reading light <span id="readingLampValue" class="value">25%</span></label><input id="readingLamp" type="range" min="0" max="100" value="25"></div>
+<div class="row"><label class="label" for="glassWear">Subtle glass marks <span id="glassWearValue" class="value">18%</span></label><input id="glassWear" type="range" min="0" max="100" value="18"></div>
+<div class="row"><label class="label" for="vibration">Carriage movement <span class="value" id="vibrationValue">30%</span></label><input id="vibration" type="range" min="0" max="100" value="30"></div>
+<div class="row"><label class="label" for="reflection">Window reflections <span class="value" id="reflectionValue">25%</span></label><input id="reflection" type="range" min="0" max="100" value="25"></div>
+<div class="row"><label class="label" for="motionBlur">Passing motion blur <span class="value" id="motionBlurValue">70%</span></label><input id="motionBlur" type="range" min="0" max="100" value="70"></div>
+<div class="row"><label class="label" for="windowDepth">Window recess depth <span class="value" id="windowDepthValue">65%</span></label><input id="windowDepth" type="range" min="0" max="100" value="65"></div>
+<p class="micro">Near scenery blurs with speed. Reflections follow the carriage and show through most clearly at night.</p>
+<div class="row"><label class="label" for="exposure">Scene brightness <span class="value" id="exposureValue">100%</span></label><input id="exposure" type="range" min="65" max="140" value="100"></div>
+<label class="switch" for="near"><span id="nearLabel">Snowy fence &amp; evergreens</span><input type="checkbox" id="near" checked></label>
+<label class="switch" for="frame"><span>Show train interior</span><input type="checkbox" id="frame" checked></label>
+<div class="row"><label class="label" for="lighting">Changing carriage light <span class="value" id="lightingValue">65%</span></label><input id="lighting" type="range" min="0" max="100" value="65"></div>
+</details>
+<details class="experience" id="weatherOptions" name="seat-settings"><summary>Weather</summary><label class="switch" for="weatherCycle"><span>Rain builds and clears</span><input id="weatherCycle" type="checkbox"></label><p class="micro">A slow passing shower that returns to its starting conditions. The rain slider sets its peak.</p><div class="row"><label class="label" for="fogAmount">Low mist outside <span id="fogAmountValue" class="value">0%</span></label><input id="fogAmount" type="range" min="0" max="100" value="0"></div>
+<div class="row"><label class="label" for="rainAmount">Rain on the glass <span class="value" id="rainAmountValue">0%</span></label><input id="rainAmount" type="range" min="0" max="100" value="0"></div>
+<div class="weather-presets" role="group" aria-label="Rain presets"><button id="weather-clear" aria-pressed="true">Dry glass</button><button id="weather-drizzle" aria-pressed="false">Drizzle</button><button id="weather-rain" aria-pressed="false">Rainy ride</button></div>
+<div class="row"><label class="label" for="rainFocus">Focus on raindrops <span class="value" id="rainFocusValue">65%</span></label><input id="rainFocus" type="range" min="0" max="100" value="65"></div>
+<div class="row"><label class="label" for="snowAmount">Snowfall outside <span class="value" id="snowAmountValue">0%</span></label><input id="snowAmount" type="range" min="0" max="100" value="0"></div>
+<p class="micro">Snow falls between the scenery layers. Wind direction and gusts also shape the snowfall.</p>
+<div class="row"><label class="label" for="condensation">Condensation with rain <span class="value" id="condensationValue">55%</span></label><input id="condensation" type="range" min="0" max="100" value="55"></div>
+<div class="row"><label class="label" for="wind">Wind direction · ← / → <span class="value" id="windValue">−40%</span></label><input id="wind" type="range" min="-100" max="100" value="-40"></div>
+<div class="row"><label class="label" for="gust">Shifting gusts <span class="value" id="gustValue">55%</span></label><input id="gust" type="range" min="0" max="100" value="55"></div>
+<p class="micro">Fine beads collect into rivulets, clearing paths through the mist. Tunnels shelter the glass from fresh rain. Sideways drift eases to a stop at stations and builds as the train pulls away.</p>
+</details><details class="experience" id="audioOptions" name="seat-settings"><summary>Sound &amp; music</summary><button id="enableAudio" class="sound-enable">Enable sound</button><p class="micro" id="audioStatus" aria-live="polite">Sound starts when you enable it.</p>
+<div class="row"><label class="label" for="master">Master volume <span class="value" id="masterValue">65%</span></label><input id="master" type="range" min="0" max="100" value="65"></div>
+<div class="mixer-grid">
+<div class="row"><label class="label" for="rumble">Carriage rumble <span class="value" id="rumbleValue">55%</span></label><input id="rumble" type="range" min="0" max="100" value="55"></div>
+<div class="row"><label class="label" for="wheels">Wheel rhythm <span class="value" id="wheelsValue">35%</span></label><input id="wheels" type="range" min="0" max="100" value="35"></div>
+<div class="row"><label class="label" for="rainVolume">Rain recording <span class="value" id="rainVolumeValue">0%</span></label><input id="rainVolume" type="range" min="0" max="100" value="0"></div>
+<div class="row"><label class="label" for="music">Your music <span class="value" id="musicValue">75%</span></label><input id="music" type="range" min="0" max="100" value="75"></div>
+</div>
+<p class="micro">Generated train ambience · Recorded rain. Rain sound and rain on the glass can be adjusted independently.</p>
+<label class="audio-file" for="musicFile">Add your ambient track<input id="musicFile" type="file" accept="audio/*"></label>
+<p class="micro track-label" id="musicName">No music loaded · choose an MP3, WAV, M4A, or OGG.</p><button id="removeMusic" hidden>Remove music</button>
+<label class="switch" for="musicLoop"><span>Loop imported music</span><input id="musicLoop" type="checkbox" checked></label>
+<p class="micro">Imported music stays on this device for this session. Short tracks get a gentle join when looping.</p>
+</details><details class="experience" id="videoOptions" name="seat-settings"><summary>Video export</summary><label class="switch" for="exportAudio"><span>Include mixer audio in video</span><input id="exportAudio" type="checkbox" checked></label><label class="label" for="resolution">Video size</label><select id="resolution"><option value="1080">1920 × 1080 · Full HD</option><option value="720">1280 × 720 · Smaller file</option></select>
+<div class="row"><label class="label" for="fps">Frame rate</label><select id="fps"><option value="30" selected>30 FPS · Standard</option><option value="60">60 FPS · Smoother motion</option></select></div>
+<div class="row"><label class="label" for="length">Video length</label><select id="length"><option value="20">20-second preview</option><option value="loop">One complete seamless loop</option><option value="600">10 minutes</option><option value="720">12 minutes</option><option value="900" selected>15 minutes</option><option value="1200">20 minutes</option></select></div>
+<p class="micro">Long videos repeat the scenery seamlessly while your soundtrack continues. Fixed durations stay the same at every travel speed. 60 FPS gives smoother motion and larger files.</p>
+<p class="small">Video + optional stereo audio · 30 or 60 FPS · WebM<br>Runs in your browser. Your music stays on your device. Space: pause · H: cinema · F: fullscreen.</p>
+<p class="small">The complete scene repeats after <span id="cycleText">5 minutes</span>. Nearby textures recur within the longer journey.</p>
+</details><details class="experience" name="seat-settings"><summary>Favorites &amp; export queue</summary>
+<label class="label" for="favoriteName">Name this window seat</label><input id="favoriteName" type="text" maxlength="80" placeholder="Rainy Halloween sleeper">
+<div class="button-pair"><button id="saveFavorite">Save favorite</button><button id="updateFavorite">Update selected</button></div>
+<label class="label" for="favorites">Saved favorites</label><select id="favorites"><option value="">Choose a favorite…</option></select>
+<div class="button-pair"><button id="loadFavorite">Load</button><button id="deleteFavorite">Delete</button></div>
+<div class="button-pair"><button id="backupFavorites">Back up favorites</button><button id="restoreFavorites">Import favorites</button><input id="favoriteFile" type="file" accept=".json,application/json" hidden></div>
+<p id="favoriteStatus" class="micro" aria-live="polite">Favorites save on this browser. Back them up to carry them to another device or app copy. Music files stay in the current session.</p>
+<hr><button id="queueAdd" class="wide">Add current setup to export queue</button><p class="micro">Each item remembers its scene, controls, mixer, current music, and video size, frame rate, and length.</p>
+<ol id="queueList" class="queue-list"></ol>
+<div class="button-pair"><button id="runQueue" class="primary">Render queue</button><button id="clearQueue">Clear queue</button></div><p id="queueStatus" class="micro" aria-live="polite">Queue is empty.</p>
+</details>
+
+</aside>
+</div><nav class="dock glass chrome" aria-label="Playback controls"><button id="play" class="play" aria-label="Pause">Ⅱ</button><div class="transport"><div class="transport-top"><span><span class="dot"></span><span id="sceneLabel">HALLOWEEN VILLAGE</span></span><span class="time"><span id="clock">0:00</span> / <span id="duration">5:00</span></span></div><input type="range" id="seek" min="0" max="300" value="0" step="0.05" aria-label="Journey position"></div><select class="dock-select" id="speed" aria-label="Travel speed"><option value="0.75">0.75×</option><option value="1" selected>1×</option><option value="1.5">1.5×</option></select><div class="divider"></div><button class="export-main" id="export">Export video</button></nav>
+<div class="footer-note chrome">SPACE · PAUSE     H · CINEMA     F · FULLSCREEN</div>
+</div><button id="show" class="reveal" aria-label="Leave cinema mode and show controls">Show controls · H</button>
+<div id="loading"><h1 id="loadTitle">Train Window Studio</h1><p id="loadStatus" role="status" aria-live="polite">Preparing your window seat…</p><p id="loadHint">Loading taking too long? Try a lighter preview.</p><div class="load-actions"><a class="primary" href="?graphics=compatible">Open compatibility mode</a><button id="loadRetry">Retry</button></div><details id="loadDiagnostics" hidden><summary>Startup details</summary><pre id="loadDetails"></pre></details></div>
+<div id="exportModal" class="modal-bg" hidden><div class="modal" role="dialog" aria-modal="true" aria-labelledby="exportTitle"><h2 id="exportTitle">Take the journey with you</h2><p id="exportCopy"></p><div id="batchProgress" class="queue-progress" hidden></div><div id="progressBox" hidden><div class="progress"><div id="progressFill"></div></div><div id="progressText" class="status" aria-live="polite"></div></div><a id="downloadVideo" hidden>Download video</a><div class="buttons"><button id="videoSettings">Video settings</button><button id="closeExport">Close</button><button id="continueBatch" class="primary" hidden>Save video &amp; continue</button><button id="startExport" class="primary">Create video</button></div></div></div>
+<script src="app.js?v=journey-rain-8" defer></script>
+</body>
+</html>

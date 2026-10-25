@@ -1,0 +1,24 @@
+import fs from 'node:fs';import assert from 'node:assert/strict';import {createRequire} from 'node:module';
+const {createCanvas,loadImage,GlobalFonts}=createRequire(import.meta.url)('@napi-rs/canvas');
+import {newProject,validateProject,addCue,ART_STYLES,TRANSITIONS,showTiming,songToShow} from '../dist/project.mjs';import {drawScene,setSceneAssets,SCENE_ASSET_URLS} from '../dist/scene.mjs';
+const dir='/workspace/scratch/d11c79fdfaca/creator-qa';fs.mkdirSync(dir,{recursive:true});for(const file of ['studio-sans','studio-sans-bold'])GlobalFonts.registerFromPath(new URL('../dist/assets/fonts/'+file+'.ttf',import.meta.url).pathname,'Studio Sans');
+setSceneAssets(Object.fromEntries(await Promise.all(Object.entries(SCENE_ASSET_URLS).map(async([key,path])=>[key,await loadImage(new URL('../dist/'+path,import.meta.url).pathname)]))));
+let p=validateProject({...newProject(),title:'A Little Rhythm, A Whole Adventure',audio:{id:'test',name:'Test.wav',duration:20},trimIn:0,trimOut:20});for(let i=0;i<24;i++)p=addCue(p,i*.6,['pat','clap','stomp','snap','tap','tap','wave','freeze'][i%8],p.word,i%8<5?2:1);
+const canvas=createCanvas(1920,1080),ctx=canvas.getContext('2d');let texts=0;const realText=ctx.fillText.bind(ctx);ctx.fillText=(...args)=>{texts++;realText(...args);};
+for(const [name,time]of [['title',2],['instructions',5.5],['countdown',8.2],['activity',10.3],['pair-second-hit',10.55],['next-page',14],['ending',30.5]]){drawScene(ctx,p,time,{playing:true});fs.writeFileSync(dir+'/'+name+'.png',canvas.toBuffer('image/png'));}
+for(const transition of Object.keys(TRANSITIONS)){const q=validateProject({...p,show:{...p.show,transition}});drawScene(ctx,q,q.show.titleSeconds+.25,{exporting:true});fs.writeFileSync(dir+'/transition-'+transition+'.png',canvas.toBuffer('image/png'));}
+for(const artStyle of Object.keys(ART_STYLES)){const q=validateProject({...p,artStyle,textFree:true});for(const sec of [0,2,5.5,8.8,9,14,30.5,33]){texts=0;drawScene(ctx,q,sec,{exporting:true});assert.equal(texts,0,'text-free '+artStyle+' at '+sec);}drawScene(ctx,q,11,{playing:true});fs.writeFileSync(dir+'/art-'+artStyle+'.png',canvas.toBuffer('image/png'));}
+// Inspect all eight pixel gestures, including paired cards, in every new world.
+let pixel=validateProject({...p,title:'Pixel Party',artStyle:'pixel',events:[]});for(const [i,key]of ['pat','clap','stomp','snap','say','tap','wave','freeze'].entries())pixel=addCue(pixel,i*.6,key,'Hey!',['pat','clap','stomp','snap','tap'].includes(key)?2:1);
+for(const theme of ['pixel-meadow','pixel-cosmos','pixel-city','pixel-castle']){const q=validateProject({...pixel,theme});drawScene(ctx,q,songToShow(q,.94),{exporting:true});fs.writeFileSync(dir+'/'+theme+'.png',canvas.toBuffer('image/png'));}
+for(const theme of ['clay-garden','clay-seaside','clay-moon','brick-city','brick-space']){const artStyle=theme.startsWith('clay-')?'claymation':'bricks',q=validateProject({...pixel,title:artStyle==='claymation'?'A Little Clay, A Lot of Rhythm':'Build a Beat',theme,artStyle});drawScene(ctx,q,songToShow(q,.94),{exporting:true});fs.writeFileSync(dir+'/'+theme+'.png',canvas.toBuffer('image/png'));}
+let rhythmic=validateProject({...p,title:'Swing & Compound',theme:'pixel-cosmos',artStyle:'pixel',events:[],rhythm:{...p.rhythm,enabled:true,bpm:90,meter:'6/8'}});
+for(let i=0;i<8;i++)rhythmic=addCue(rhythmic,i*2/3,['clap','pat','stomp','snap','clap','pat','tap','clap'][i],'',i%2?3:2,i%2?{rhythm:'compound',slots:i===3?[1,2]:i===5?[2]:[0,1,2]}:{rhythm:'swing'});
+for(const [name,at]of [['swing-second',.45],['compound-third',1.12],['silent-start',2.02]]){drawScene(ctx,rhythmic,songToShow(rhythmic,at),{exporting:true});fs.writeFileSync(dir+'/rhythm-'+name+'.png',canvas.toBuffer('image/png'));}
+for(const [artStyle,theme]of [['claymation','clay-garden'],['bricks','brick-city']]){const q=validateProject({...rhythmic,artStyle,theme});drawScene(ctx,q,songToShow(q,1.12),{exporting:true});fs.writeFileSync(dir+'/compound-'+artStyle+'.png',canvas.toBuffer('image/png'));}
+for(const artStyle of Object.keys(ART_STYLES)){const q=validateProject({...rhythmic,artStyle,textFree:true});texts=0;drawScene(ctx,q,songToShow(q,1.12),{exporting:true});assert.equal(texts,0);}
+drawScene(ctx,p,showTiming(p).total,{exporting:true});const pix=ctx.getImageData(0,0,1,1).data;assert.deepEqual(Array.from(pix),[16,24,22,255]);
+// At the first cue the full score is present; the wipe finishes before audio starts.
+drawScene(ctx,p,showTiming(p).lead,{exporting:true});const first=ctx.getImageData(145,190,1,1).data;assert.ok(first[0]>160);
+const small=createCanvas(1280,720);drawScene(small.getContext('2d'),p,songToShow(p,2),{playing:true});fs.writeFileSync(dir+'/720p.png',small.toBuffer('image/png'));
+console.log('Native 1080p scenes, six transitions, all text-free art sets, first cue visibility, final exit, and 720p verified: '+dir);

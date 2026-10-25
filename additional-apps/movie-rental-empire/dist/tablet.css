@@ -1,0 +1,115 @@
+/* Touch controls share the existing art, economy and saves. */
+html{overscroll-behavior-y:none}button,a,input,select,[role=button]{touch-action:manipulation}#scene{touch-action:pan-y pinch-zoom}#touchDock,.touch-manage-note{display:none}#touchDock[hidden]{display:none!important}
+.touch-ui{--dock-height:76px;scroll-padding-top:calc(var(--touch-header-height,110px) + 90px);-webkit-tap-highlight-color:transparent}
+.touch-ui body{padding-bottom:calc(var(--dock-height) + env(safe-area-inset-bottom));overflow-x:clip}
+.touch-ui #game{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+.touch-ui input,.touch-ui textarea{user-select:text;-webkit-user-select:text}
+.touch-ui button,.touch-ui select,.touch-ui input:not([type=checkbox]):not([type=range]),.touch-ui [role=button]{min-height:48px}
+.touch-ui button{font-size:14px;padding:11px 14px;min-width:44px}
+.touch-ui button:hover:not(:disabled){transform:none}
+.touch-ui button:active:not(:disabled){filter:brightness(1.2)}
+.touch-ui input,.touch-ui select{font-size:16px}
+.touch-ui input[type=checkbox]{width:24px;height:24px;flex-shrink:0}
+.touch-ui input[type=range]{min-height:44px}
+.touch-ui .topbar{position:sticky;top:0;z-index:9;background:#191720;border-bottom-color:#60505b;padding:10px max(14px,env(safe-area-inset-right)) 10px max(14px,env(safe-area-inset-left));gap:10px 20px}
+.touch-ui .topbar .brand{font-size:20px}.touch-ui .topbar .brand small{font-size:9px}
+.touch-ui .ledger{gap:20px}.touch-ui .ledger small{font-size:9px}.touch-ui .ledger strong{font-size:21px}
+.touch-ui .utility button{font-size:13px;padding:8px 12px;min-height:44px}
+.touch-ui .floor-section{padding:14px}.touch-ui .floor-head{padding-bottom:10px}
+.touch-ui .floor-head h1{font-size:24px}.touch-ui .floor-head .eyebrow{font-size:10px}
+.touch-ui .scene-wrap{aspect-ratio:1300/850}.touch-ui .scene-top button{font-size:12px;min-height:44px;padding:8px 12px}
+.touch-ui .scene-top span{font-size:11px}.touch-ui .scene-bottom{font-size:11px}
+.touch-ui .stations{gap:8px}.touch-ui .station{font-size:14px;min-height:64px;padding:10px;gap:8px}
+.touch-ui .station small{font-size:12px}.touch-ui .station kbd{display:none}
+.touch-ui .shiftbar{gap:12px;flex-wrap:wrap}.touch-ui .goal span,.touch-ui .streak{font-size:12px}
+.touch-ui .time-controls{display:none}.touch-ui .work-panel{min-width:0;overscroll-behavior-y:contain;-webkit-overflow-scrolling:touch;padding:18px}
+.touch-ui .panel-heading h2{font-size:27px}.touch-ui .panel-heading .eyebrow{font-size:10px}
+.touch-ui .panel-heading{position:relative}.touch-ui .pill{font-size:10px}
+.touch-ui .quote,.touch-ui .brief p,.touch-ui .empty-state p{font-size:14px}
+.touch-ui .customer-head strong{font-size:16px}.touch-ui .customer-head small{font-size:12px;line-height:1.45}
+.touch-ui .customer-movie strong{font-size:15px}.touch-ui .customer-movie small{font-size:12px;line-height:1.45}
+.touch-ui .customer-movie .cover{width:68px}.touch-ui .customer-movie .cover-title{font-size:11px}
+.touch-ui .action-row{gap:8px}.touch-ui .action-row button{font-size:13px;padding:10px 8px}
+.touch-ui .return-card{gap:12px;padding:14px 0}.touch-ui .return-card strong,.touch-ui .mini-movie strong{font-size:14px;line-height:1.4}
+.touch-ui .return-card small,.touch-ui .mini-movie small{font-size:12px;line-height:1.4}
+.touch-ui .return-card button,.touch-ui .mini-movie button{font-size:14px;padding:10px 12px}
+.touch-ui .mini-movie .cover{width:45px;min-height:68px}.touch-ui .mini-movie{gap:12px;padding:13px 0}
+.touch-ui .work-panel h4{font-size:12px}.touch-ui .deck p{font-size:12px;line-height:1.4}
+.touch-ui .note{font-size:13px;line-height:1.6}.touch-ui .deck-window span{font-size:13px}
+.touch-ui #touchDock{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));position:fixed;inset:auto 0 0;z-index:12;background:#201b29;border-top:1px solid #81664f;box-shadow:0 -8px 25px #0005;gap:6px;padding:8px max(10px,env(safe-area-inset-right)) calc(8px + env(safe-area-inset-bottom)) max(10px,env(safe-area-inset-left));}
+.touch-ui #touchDock button{min-width:0;min-height:60px;padding:7px 4px;font-size:14px;line-height:1.3;white-space:normal;overflow-wrap:normal}
+.touch-ui #touchDock small{display:block;font-size:11px;color:var(--muted);margin-top:5px;line-height:1.2}
+.touch-ui #touchDock .primary small{color:#5a4128}.touch-ui #touchDock button[aria-pressed=true]{border-color:var(--gold);background:#4a3932;color:var(--gold)}
+.touch-ui #touchDock .primary:disabled{opacity:.85}
+.touch-ui[data-touch-view=play] .business{display:none}
+.touch-ui[data-touch-view=manage] .layout{display:none}
+.touch-ui .business{margin:12px 14px 20px;max-width:none}
+.touch-ui .touch-manage-note{display:block;padding:14px 18px;background:#3b3033;color:#f1d7a8;border-bottom:1px solid var(--line);font-size:13px;line-height:1.5}
+.touch-ui .business-nav{padding:8px 12px;gap:6px 12px;justify-content:flex-start}
+.touch-ui .business-nav button{font-size:14px;padding:10px 12px;border-radius:6px}.touch-ui .business-nav button.active{background:#3b3033}
+.touch-ui .business-body{padding:20px}.touch-ui .section-head{align-items:flex-start;flex-direction:column;gap:18px}
+.touch-ui .section-head p{font-size:14px;line-height:1.6}.touch-ui .filters{gap:8px;width:100%}
+.touch-ui .filters button{font-size:13px;padding:10px 12px}.touch-ui .filters input{font-size:16px;max-width:240px;flex:1;min-width:160px}
+.touch-ui .movie-grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:22px 18px}
+.touch-ui .movie-card h3{font-size:14px;line-height:1.5;min-height:42px}.touch-ui .stockline{font-size:12px;line-height:1.5}
+.touch-ui .buyrow{flex-wrap:wrap}.touch-ui .buyrow span{font-size:13px}.touch-ui .buyrow button{font-size:13px;flex:1}
+.touch-ui .cover-title{font-size:25px}.touch-ui .cover .genre-ribbon{font-size:9px}
+.touch-ui .crew-grid,.touch-ui .upgrade-grid,.touch-ui .snack-grid{grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:18px}
+.touch-ui .staff-card p,.touch-ui .staff-card .role,.touch-ui .upgrade-card p,.touch-ui .snack-card p{font-size:13px}
+.touch-ui .field-row{flex-wrap:wrap;gap:10px;font-size:14px}.touch-ui .field-row label{min-height:44px}
+.touch-ui .field-row select{max-width:100%;width:170px;font-size:16px}
+.touch-ui .morale{font-size:12px;line-height:1.6}.touch-ui .pricing-row{gap:20px}
+.touch-ui .pricing-row label{font-size:14px;flex-wrap:wrap}.touch-ui .history-table{font-size:13px}.touch-ui .history-table th{font-size:11px}
+.touch-ui .log div{font-size:13px;line-height:1.5}.touch-ui footer{font-size:10px;line-height:1.5;padding:0 16px 18px}
+.touch-ui .toasts{bottom:calc(var(--dock-height) + env(safe-area-inset-bottom) + 14px);max-width:90vw}.touch-ui .toast{font-size:14px;padding:13px 17px}
+.touch-ui dialog{max-height:calc(100dvh - 32px);padding:30px 24px;overscroll-behavior:contain}.touch-ui dialog h2{padding-right:36px}
+.touch-ui .close-modal{position:sticky;float:right;top:0;right:0;min-width:48px;min-height:48px;padding:6px 10px;background:#372b3c;border:1px solid #735b64;border-radius:50%;margin:-15px -10px 6px 6px}
+.touch-ui dialog p,.touch-ui .intro-steps>div{font-size:14px}.touch-ui .modal-actions{gap:12px}
+.touch-ui .modal-actions button{flex:1;min-width:150px}.touch-ui .movie-detail .cover-title{font-size:25px}.touch-ui .receipt div{font-size:14px}
+.number-stepper{display:contents}.number-stepper>button{display:none}
+.touch-ui .number-stepper{display:inline-flex;gap:0;align-items:center;border:1px solid #685363;border-radius:8px;overflow:hidden;max-width:100%;flex-shrink:0}
+.touch-ui .number-stepper>button{display:block;min-width:44px;min-height:48px;border:0;border-radius:0;font-size:24px;padding:4px 9px}
+.touch-ui .number-stepper input{border:0;border-radius:0;width:72px;min-width:0;min-height:48px;text-align:center;padding:8px 3px;appearance:textfield;-moz-appearance:textfield}
+.touch-ui .number-stepper input::-webkit-inner-spin-button,.touch-ui .number-stepper input::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
+.touch-ui .number-stepper:focus-within{outline:2px solid var(--teal);outline-offset:2px}
+@media(min-width:960px) and (orientation:landscape){
+ .touch-ui .layout{grid-template-columns:minmax(0,1fr) minmax(330px,35%);align-items:start}
+ .touch-ui .topbar{flex-wrap:nowrap}.touch-ui .topbar .brand{font-size:18px}.touch-ui .ledger{gap:15px}
+ .touch-ui .floor-section{position:sticky;top:var(--touch-header-height,84px)}
+ .touch-ui .scene-wrap{height:clamp(180px,calc(100dvh - var(--touch-header-height,84px) - 255px),470px);aspect-ratio:auto}
+ .touch-ui .floor-head h1{font-size:22px}.touch-ui .floor-head h1 em{display:none}
+ .touch-ui .work-panel{max-height:calc(100dvh - var(--touch-header-height,84px) - var(--dock-height) - env(safe-area-inset-bottom));overflow-y:auto;position:sticky;top:var(--touch-header-height,84px)}
+ .touch-ui .work-panel #workContent{display:block}.touch-ui .work-panel .customer-card,.touch-ui .work-panel .brief,.touch-ui .work-panel .empty-state{margin-bottom:14px}
+ .touch-ui .station{font-size:13px;gap:6px;padding:9px 6px}.touch-ui .station-icon{display:none}
+ .touch-ui .scene-top span{max-width:65%}.touch-ui .scene-bottom{font-size:10px}
+ .touch-ui .shiftbar{margin-top:13px}.touch-ui .shiftbar .goal{min-width:60%}
+}
+@media(max-width:959px),(orientation:portrait){
+ .touch-ui .topbar{flex-wrap:wrap}.touch-ui .ledger{order:3;width:100%;margin-left:0;justify-content:space-between}.touch-ui .utility{margin-left:auto}
+ .touch-ui .layout{display:flex;flex-direction:column}.touch-ui .floor-section{display:contents}
+ .touch-ui .floor-head{padding:12px 16px 6px;order:0}.touch-ui .floor-head .eyebrow{display:none}
+ .touch-ui .scene-wrap{order:1;margin:8px 14px;width:calc(100% - 28px);height:clamp(180px,27dvh,310px);aspect-ratio:auto}
+ .touch-ui .shiftbar{order:2;margin:8px 16px 14px}.touch-ui .goal{min-width:55%}
+ .touch-ui .stations{order:3;position:sticky;top:var(--touch-header-height,120px);z-index:7;margin:0;padding:10px 14px;background:#1c1824;border-bottom:1px solid #574354;grid-template-columns:repeat(4,minmax(0,1fr))}
+ .touch-ui .station{font-size:13px;gap:6px;padding:9px 7px}.touch-ui .station-icon{font-size:18px;width:19px}
+ .touch-ui .work-panel{order:4;max-height:none;overflow:visible;border:0}.touch-ui .work-panel #workContent{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;align-items:start}
+ .touch-ui .work-panel .customer-card,.touch-ui .work-panel .brief,.touch-ui .work-panel .empty-state{margin:0 0 14px}
+}
+@media(max-width:599px){
+ .touch-ui{--dock-height:80px}.touch-ui .topbar .brand{font-size:17px}.touch-ui .tape-logo{display:none}
+ .touch-ui .topbar{gap:8px;padding:8px 10px}.touch-ui .utility{gap:4px}.touch-ui .utility button{min-width:44px;padding:8px;font-size:12px}
+ .touch-ui .brand small{letter-spacing:1.8px}.touch-ui .ledger{gap:8px}.touch-ui .ledger strong{font-size:19px}.touch-ui .ledger small{font-size:8px}
+ .touch-ui #touchDock{gap:4px;padding-left:6px;padding-right:6px}.touch-ui #touchDock button{font-size:12px;min-height:64px}.touch-ui #touchDock small{font-size:10px}
+ .touch-ui .floor-head h1{font-size:23px}.touch-ui .scene-top span{display:none}.touch-ui .scene-top{justify-content:flex-end}
+ .touch-ui .stations{padding:8px;gap:5px}.touch-ui .station{font-size:11px;flex-direction:column;align-items:flex-start;padding:9px 5px;justify-content:center;min-height:62px}
+ .touch-ui .station-icon{display:none}.touch-ui .station small{font-size:10px}.touch-ui .work-panel{padding:17px 12px}
+ .touch-ui .work-panel #workContent{display:block}.touch-ui .business{margin:10px 8px}.touch-ui .business-body{padding:16px 12px}
+ .touch-ui .business-nav{gap:5px;padding:7px}.touch-ui .business-nav button{font-size:12px;padding:9px 10px}
+ .touch-ui .movie-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 12px}.touch-ui .movie-card h3{font-size:13px}
+ .touch-ui .cover-title{font-size:22px}.touch-ui .buyrow button{width:100%;font-size:12px}
+ .touch-ui .crew-grid,.touch-ui .snack-grid,.touch-ui .upgrade-grid{grid-template-columns:minmax(0,1fr)}
+ .touch-ui dialog{padding:25px 18px}.touch-ui .movie-detail{grid-template-columns:100px minmax(0,1fr);gap:15px}
+ .touch-ui .movie-detail .cover-title{font-size:17px}.touch-ui .movie-detail h2{font-size:25px}.touch-ui .movie-detail button{font-size:13px}
+ .touch-ui .filters input{max-width:none;width:100%;flex-basis:100%}.touch-ui .filters button{font-size:12px}
+ .touch-ui .receipt div{font-size:12px}.touch-ui .volume-controls label{flex-wrap:wrap}
+}

@@ -1,0 +1,115 @@
+{
+  "prepared": "2026-10-17",
+  "license": "CC0-1.0",
+  "sources": [
+    {
+      "author": "Versilian Studios LLC",
+      "collection": "Versilian Community Sample Library",
+      "page": "https://versilian-studios.com/vcsl/",
+      "commit": "c1ea7bcc3c7309650ab0da9d15c9cd1fbc4a4c7e"
+    },
+    {
+      "author": "Joseph SARDIN",
+      "collection": "BigSoundBank",
+      "page": "https://bigsoundbank.com/block-meinl-in-wood-s0466.html",
+      "title": "Block \"Meinl\" in wood"
+    }
+  ],
+  "qualityNotes": [
+    "Low and high use different acoustic wooden blocks, with their native pitches retained.",
+    "High is a documented Meinl wood block recorded by Joseph Sardin in studio conditions.",
+    "No temple-block reuse, synthetic layers, pitch shifts, compression or added reverberation.",
+    "Quiet lead/tails trimmed and levels balanced; high recording gently high-passed to remove handling rumble.",
+    "Source stereo/mono channels preserved; source and derived hashes retained.",
+    "Low note 77 and high note 76 keep existing saved parts and notation identities."
+  ],
+  "instrumentSamples": {
+    "woodblock": {
+      "credit": "Versilian Studios LLC / VCSL (low); Joseph SARDIN / BigSoundBank (high)",
+      "license": "CC0-1.0",
+      "sourceInstrument": "Two independently recorded acoustic wooden blocks, native pitches",
+      "notes": {
+        "77": {
+          "url": "assets/audio/recorded/woodblock/low.wav",
+          "gain": 1,
+          "tuningSemitones": 0,
+          "duration": 0.55,
+          "articulation": "Low",
+          "source": "https://raw.githubusercontent.com/sgossner/VCSL/c1ea7bcc3c7309650ab0da9d15c9cd1fbc4a4c7e/Idiophones/Struck%20Idiophones/Woodblock/wood_click_f_rr1.wav"
+        },
+        "76": {
+          "url": "assets/audio/recorded/woodblock/high.wav",
+          "gain": 1,
+          "tuningSemitones": 0,
+          "duration": 0.45,
+          "articulation": "High",
+          "source": "https://bigsoundbank.com/UPLOAD/bwf-en/0466.wav"
+        }
+      }
+    }
+  },
+  "assets": [
+    {
+      "file": "low.wav",
+      "sha256": "c73c8f7f19fcbc268fa34e184dba7ce5ff1804ac3524b2a7503057054bdc30c7",
+      "note": 77,
+      "label": "Low",
+      "sourceUrl": "https://raw.githubusercontent.com/sgossner/VCSL/c1ea7bcc3c7309650ab0da9d15c9cd1fbc4a4c7e/Idiophones/Struck%20Idiophones/Woodblock/wood_click_f_rr1.wav",
+      "sourceSha256": "86b690a393ad62d65dc6832948adb0cc164fe22f544a8065809f000c65d615fc",
+      "sampleRate": 44100,
+      "channels": 2,
+      "format": "PCM signed 16-bit WAV",
+      "duration": 0.55,
+      "peak": 0.3775634765625,
+      "first100msRms": 0.0550962787990823,
+      "dominantResonanceHz": 1331.6940307617188,
+      "clippedSamples": 0,
+      "processing": {
+        "cropSeconds": [
+          0.002,
+          0.552
+        ],
+        "gain": 0.96,
+        "highpassHz": null,
+        "highpassOrder": null,
+        "filterBeforeCrop": false,
+        "fadeInSeconds": 0.00029478458049886624,
+        "fadeOutSeconds": 0.04,
+        "resampling": null,
+        "dither": "TPDF at one 16-bit LSB",
+        "pitchShift": 0
+      }
+    },
+    {
+      "file": "high.wav",
+      "sha256": "36b9c5aee2f7e8c146fb7fe0dd6bcf2a03ed88e64b4954f90ef1958989d83a13",
+      "note": 76,
+      "label": "High",
+      "sourceUrl": "https://bigsoundbank.com/UPLOAD/bwf-en/0466.wav",
+      "sourceSha256": "1157de27643ed05ccbf3376cf6f7cee5e60c732d7cf24889d98be5e8025ba6bf",
+      "sampleRate": 44100,
+      "channels": 1,
+      "format": "PCM signed 16-bit WAV",
+      "duration": 0.45,
+      "peak": 0.43035888671875,
+      "first100msRms": 0.05523942948733887,
+      "dominantResonanceHz": 1628.7849426269531,
+      "clippedSamples": 0,
+      "processing": {
+        "cropSeconds": [
+          9.869,
+          10.319
+        ],
+        "gain": 0.99,
+        "highpassHz": 100,
+        "highpassOrder": 2,
+        "filterBeforeCrop": true,
+        "fadeInSeconds": 0.00029478458049886624,
+        "fadeOutSeconds": 0.04,
+        "resampling": "48000 Hz to 44100 Hz polyphase",
+        "dither": "TPDF at one 16-bit LSB",
+        "pitchShift": 0
+      }
+    }
+  ]
+}

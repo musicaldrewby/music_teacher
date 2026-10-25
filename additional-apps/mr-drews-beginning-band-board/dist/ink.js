@@ -1,0 +1,32 @@
+const COLORS=['#172d3a','#d8323c','#17695f','#285bd3','#8244b1'];
+const read=(k)=>{try{return JSON.parse(localStorage.getItem(k))}catch{return null}};
+export class InkLayer {
+ constructor(canvas,{background=null,notify=()=>{}}={}){
+  this.canvas=canvas;this.ctx=canvas.getContext('2d');this.background=background;this.notify=notify;
+  this.color=COLORS[0];this.width=4;this.eraser=false;this.penOnly=false;this.key='';this.history=[];this.cursor=0;this.current=null;this.pointer=null;this.saveTimer=null;this.warning=false;
+  canvas.addEventListener('pointerdown',e=>this.down(e));canvas.addEventListener('pointermove',e=>this.move(e));
+  canvas.addEventListener('pointerup',e=>this.up(e));canvas.addEventListener('pointercancel',e=>this.up(e));
+  canvas.addEventListener('lostpointercapture',e=>this.up(e));
+  this.observer=new ResizeObserver(()=>this.resize());this.observer.observe(canvas);
+  window.addEventListener('pagehide',()=>this.persist());
+ }
+ setKey(key){if(this.key==='band-board:ink:'+key)return;this.finish();this.persist();this.key='band-board:ink:'+key;const saved=read(this.key);this.history=Array.isArray(saved?.strokes)?saved.strokes:[];this.cursor=this.history.length;this.render();this.refreshTools()}
+ point(e){const r=this.canvas.getBoundingClientRect();return {x:(e.clientX-r.left)/r.width,y:(e.clientY-r.top)/r.height,p:e.pressure>0?e.pressure:.5}}
+ down(e){if(this.pointer!==null||e.button!==0||!e.isPrimary)return;if(this.penOnly&&e.pointerType!=='pen')return;e.preventDefault();this.pointer=e.pointerId;this.canvas.setPointerCapture(e.pointerId);this.current={color:this.color,width:this.eraser?26:this.width,erase:this.eraser,points:[this.point(e)]};this.render()}
+ move(e){if(e.pointerId!==this.pointer||!this.current)return;e.preventDefault();const events=e.getCoalescedEvents?.()||[e];for(const v of events){const p=this.point(v),last=this.current.points.at(-1);if(Math.hypot((p.x-last.x)*this.w,(p.y-last.y)*this.h)>.6)this.current.points.push(p)}this.render()}
+ up(e){if(e.pointerId!==this.pointer)return;this.finish()}
+ finish(){if(!this.current){this.pointer=null;return}this.history=this.history.slice(0,this.cursor);this.history.push(this.current);this.cursor=this.history.length;this.current=null;this.pointer=null;this.render();this.refreshTools();clearTimeout(this.saveTimer);this.saveTimer=setTimeout(()=>this.persist(),350)}
+ persist(){if(!this.key)return;clearTimeout(this.saveTimer);try{localStorage.setItem(this.key,JSON.stringify({strokes:this.history.slice(0,this.cursor)}))}catch{if(!this.warning){this.notify('Browser storage is full. Use Save image to keep your drawing.');this.warning=true}}}
+ resize(){const r=this.canvas.getBoundingClientRect();if(r.width<1||r.height<1)return;this.w=r.width;this.h=r.height;const d=Math.min(devicePixelRatio||1,2.5);this.canvas.width=Math.round(r.width*d);this.canvas.height=Math.round(r.height*d);this.ctx.setTransform(d,0,0,d,0,0);this.render()}
+ paint(stroke){const c=this.ctx,pts=stroke.points;if(!pts?.length)return;c.globalCompositeOperation=stroke.erase?'destination-out':'source-over';c.strokeStyle=stroke.color;c.fillStyle=stroke.color;c.lineCap='round';c.lineJoin='round';c.lineWidth=stroke.width*Math.min(this.w/1200,this.h/700)*1.4;c.lineWidth=Math.max(stroke.erase?10:1.5,c.lineWidth);c.beginPath();c.moveTo(pts[0].x*this.w,pts[0].y*this.h);for(let i=1;i<pts.length;i++)c.lineTo(pts[i].x*this.w,pts[i].y*this.h);if(pts.length===1){c.arc(pts[0].x*this.w,pts[0].y*this.h,c.lineWidth/2,0,Math.PI*2);c.fill()}else c.stroke();c.globalCompositeOperation='source-over'}
+ render(){if(!this.w)return;this.ctx.clearRect(0,0,this.w,this.h);for(let i=0;i<this.cursor;i++)this.paint(this.history[i]);if(this.current)this.paint(this.current)}
+ undo(){this.finish();if(this.cursor>0){this.cursor--;this.render();this.persist();this.refreshTools()}}
+ redo(){if(this.cursor<this.history.length){this.cursor++;this.render();this.persist();this.refreshTools()}}
+ clear(){this.finish();if(this.cursor===0)return;this.history=this.history.slice(0,this.cursor);this.history.push({erase:true,color:'#fff',width:20000,points:[{x:.5,y:.5,p:.5}]});this.cursor++;this.render();this.persist();this.refreshTools();this.notify('Ink cleared. Undo brings it back.')}
+ refreshTools(){if(!this.tools)return;this.tools.querySelector('[data-action=undo]').disabled=this.cursor===0;this.tools.querySelector('[data-action=redo]').disabled=this.cursor>=this.history.length;this.tools.querySelector('[data-action=erase]').classList.toggle('active',this.eraser);this.tools.querySelector('[data-action=pen]').classList.toggle('active',!this.eraser);for(const b of this.tools.querySelectorAll('[data-color]'))b.classList.toggle('selected',b.dataset.color===this.color)}
+ mountTools(el,onSave){this.tools=el;el.innerHTML=`<button data-action="pen" title="Pen">✎ Pen</button><button data-action="erase">Eraser</button><span class="tool-divider"></span>${COLORS.map((color,i)=>`<button class="color-button" data-color="${color}" style="background:${color}" aria-label="${['Ink','Red','Green','Blue','Purple'][i]} pen"></button>`).join('')}<select aria-label="Pen thickness"><option value="2">Fine</option><option value="4" selected>Medium</option><option value="8">Thick</option></select><span class="tool-divider"></span><button data-action="undo" title="Undo">↶</button><button data-action="redo" title="Redo">↷</button><button data-action="clear">Clear ink</button><button data-action="save">Save image</button><label title="Enable only when your display recognizes the pen as a stylus."><input type="checkbox">Pen only</label>`;
+  el.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;if(b.dataset.color){this.color=b.dataset.color;this.eraser=false}else switch(b.dataset.action){case'pen':this.eraser=false;break;case'erase':this.eraser=true;break;case'undo':this.undo();break;case'redo':this.redo();break;case'clear':this.clear();break;case'save':onSave();break}this.refreshTools()});el.querySelector('select').onchange=e=>this.width=Number(e.target.value);el.querySelector('input').onchange=e=>{this.penOnly=e.target.checked;if(this.penOnly)this.notify('Pen only is on. Turn it off if your classroom pen behaves like a mouse.')};this.refreshTools()
+ }
+}
+
+export function downloadCanvas(canvas,name){canvas.toBlob(blob=>{if(!blob)return;const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)},'image/png')}

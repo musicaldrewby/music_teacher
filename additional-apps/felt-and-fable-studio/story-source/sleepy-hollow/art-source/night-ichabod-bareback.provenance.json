@@ -1,0 +1,17 @@
+{
+  "asset": "ichabod-bareback.png",
+  "status": "generation_failed",
+  "tool": "built-in image_gen",
+  "reference_path": "/workspace/scratch/110acee071c2/felt-studio/story-source/sleepy-hollow/art-source/ichabod-mounted.png",
+  "prompt": "Use case: identity-preserve. Edit the provided needle-felt character atlas to create ONE new transparent PNG atlas containing exactly TWO horse-and-rider poses side by side in one row. Preserve the exact felt design and colors: lanky Ichabod Crane with long expressive face, brown broad-brim hat staying on his head, tied dark hair, teal colonial tailcoat, rusty waistcoat, cream cravat, tan trousers, gray stockings and brown shoes, riding shabby dark-gray horse Gunpowder with pale facial blaze and brown bridle/reins. Narrative change: his saddle has slipped off already, so remove saddle, saddle blanket, stirrups, belly girth, and chest tack completely. Ichabod is riding BAREBACK on the bare gray horse body. Bridle and reins remain. Keep hat on rider in both poses.\nLEFT pose: horse facing RIGHT in gathered gallop with four anatomically sensible legs bent/gathered; terrified Ichabod clings LOW forward over the horse's bare neck with hunched shoulders and hands holding mane/reins.\nRIGHT pose: same horse facing RIGHT in complementary extended gallop with forelegs reaching forward and hind legs reaching back; Ichabod remains leaning forward low over the bare horse neck but turns his face back over his shoulder anxiously to look toward the left.\nEach complete horse and rider must fit FULLY in its own left or right half, including every hoof and full tail. WIDE CLEAR EMPTY GUTTER between poses and at all outer edges. Same consistent scale. Handmade fuzzy wool texture, matching expressive children's felt storybook puppet style. Groundless cutouts: NO floor, NO ground, NO cast shadow, NO background, NO glowing outline. Genuine transparent alpha around the figures, not a painted checkerboard. NO text, labels, border, watermark, extra poses or objects. Wide landscape format suited to two horizontally arranged cutouts.",
+  "transparent_background": true,
+  "error": {
+    "code": "moderation_blocked",
+    "stage": "output",
+    "categories": [
+      "other"
+    ],
+    "request_id": "e4112925-95c4-4744-8bd2-3d0bdfc1938e"
+  },
+  "inspection": "Reference inspected before requested edit. Generation returned no image, so no output copied and no alpha check possible."
+}

@@ -1,0 +1,1290 @@
+{
+  "revision": "Journey-aware window rain and tunnel shelter",
+  "controlChecks": "All existing controls, values and labels preserved; six scene tabs, eight carriages, inspector, Cinema, Escape and video settings passed DOM-simulated interaction checks.",
+  "shaderChecks": "Complete production GLSL compiled and linked in native GLES. Actual tunnel code rendered against original photographic atlas before/after entry and exit.",
+  "insideEntry": {
+    "timeSeconds": 48.4,
+    "oldBackfacePixels": 15306,
+    "newBackfacePixels": 0
+  },
+  "insideExit": {
+    "timeSeconds": 67.6,
+    "oldBackfacePixels": 15311,
+    "newBackfacePixels": 0
+  },
+  "visualReview": "Exterior masonry remains visible; the two interior rim appearances are gone. Interior frames match the cylindrical lining alone.",
+  "limitations": "No browser layout or end-to-end browser export test: control-browser is unavailable in the managed environment. Native rendering is an isolated tunnel check, not a browser screenshot.",
+  "riverbanks": {
+    "method": "Native GLES production shader and textures, including atlas repacking checks",
+    "scenesReviewed": 6,
+    "framelessFrames": 42,
+    "panoramicCarriageFrames": 36,
+    "loopChecks": [
+      {
+        "scene": 0,
+        "maxPixelDifference": 1,
+        "meanPixelDifference": 0.0035313786008230453
+      },
+      {
+        "scene": 1,
+        "maxPixelDifference": 1,
+        "meanPixelDifference": 0.005005144032921811
+      },
+      {
+        "scene": 2,
+        "maxPixelDifference": 1,
+        "meanPixelDifference": 0.005601851851851852
+      },
+      {
+        "scene": 3,
+        "maxPixelDifference": 1,
+        "meanPixelDifference": 0.004086934156378601
+      },
+      {
+        "scene": 4,
+        "maxPixelDifference": 1,
+        "meanPixelDifference": 0.0037988683127572016
+      },
+      {
+        "scene": 5,
+        "maxPixelDifference": 1,
+        "meanPixelDifference": 0.004434156378600823
+      }
+    ],
+    "oldAtlasPreserved": "Every original RGBA pixel exactly preserved, including numeric object anchor maps",
+    "controls": "All simulated control and export-plan checks pass",
+    "browserTested": false,
+    "supersededBy": "riverTunnels"
+  },
+  "bridgeRetainingWall": {
+    "geometry": "Continuous world-space masonry wall with sloped approaches at both bridge ends, seven connected coping planes, lower parapet over the river, and solid face extending below the view. Wall is in front of the bridge girders and river; no opacity transition.",
+    "material": "Existing photographic masonry atlas, separate face and top-plane coordinates, scene tint, snow on the Christmas coping, narrow slab joints and cap contact shadow. Eight texture samplers retained.",
+    "nativeRenderer": "Production GLSL compiled and linked in native GLES, rendered with production photographic textures and panoramic carriage.",
+    "scenesReviewed": 6,
+    "frameTimesSeconds": [
+      184,
+      194,
+      201,
+      207,
+      220,
+      233,
+      240,
+      248,
+      256
+    ],
+    "finalFrames": 54,
+    "visualReview": "Approach walls cover the lower land/water join before entry and after exit, and descend to a lower parapet within the span. Upper landscape remains visible. Grounded outer ramps enter and leave below the window.",
+    "controls": "Existing simulated initialization, scene, carriage, menu and video-plan checks pass; JavaScript syntax and Git whitespace checks pass.",
+    "browserTested": false,
+    "limitations": "Native frame review is not browser playback or an end-to-end video encoding test.",
+    "supersededBy": "riverTunnels"
+  },
+  "startupCompatibility": {
+    "diagnosis": "Code inspection found synchronous shader compile/status/link operations immediately after the final image count, plus duplicate scenery call sites. The user device failure is not confirmed.",
+    "changes": [
+      "Separate image, compile and first-frame messages",
+      "Image timeout and bounded decoding concurrency",
+      "Asynchronous graphics preparation with KHR polling where supported",
+      "One shared scenery call site",
+      "Direct compatibility link; lighter shader and preview; automatic failure recovery",
+      "Visible texture-limit, context-loss and compile diagnostics",
+      "Asynchronous renderer awaited by video export"
+    ],
+    "simulatedChecks": "Normal/full/compatibility startup, fallback after compile or first-frame failure, interrupted-session recovery, forced full mode, image failure and timeout, visible error details, nonblocking poll ordering, timeout and context-loss cleanup; existing control and export-plan checks.",
+    "nativeGLES": {
+      "fullFrames": 12,
+      "compatibilityFrames": 12,
+      "scenes": 6,
+      "timesSeconds": [
+        0,
+        220
+      ],
+      "fullQualityBridgeComparisonMaxPixelDifference": 0
+    },
+    "limitations": "No browser playback, reported-laptop test or end-to-end encoding test. KHR polling cannot prevent blocking status queries when the extension is absent. Compatibility requires WebGL and sufficient texture capacity."
+  },
+  "bridgeRiverReveal": {
+    "userRequirement": "Land/grass, then the approach wall, then bridge water; reverse on departure.",
+    "changes": "Bridge-generated water and ground openings are enabled/disabled only when the taller opaque approach wall covers them. Tall object anchors remain world-stable; ground remains filled before and after the wall. Bridge approach preview begins at 180 seconds.",
+    "nativeChecks": {
+      "occlusionComparisons": [
+        {
+          "mode": "full",
+          "scene": 0,
+          "stations": false,
+          "boundary": "entry",
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "full",
+          "scene": 0,
+          "stations": false,
+          "boundary": "exit",
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "full",
+          "scene": 0,
+          "stations": true,
+          "boundary": "entry",
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "full",
+          "scene": 0,
+          "stations": true,
+          "boundary": "exit",
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "full",
+          "scene": 1,
+          "stations": false,
+          "boundary": "entry",
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "full",
+          "scene": 1,
+          "stations": false,
+          "boundary": "exit",
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "full",
+          "scene": 1,
+          "stations": true,
+          "boundary": "entry",
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "full",
+          "scene": 1,
+          "stations": true,
+          "boundary": "exit",
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "full",
+          "scene": 2,
+          "stations": false,
+          "boundary": "entry",
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "full",
+          "scene": 2,
+          "stations": false,
+          "boundary": "exit",
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "full",
+          "scene": 2,
+          "stations": true,
+          "boundary": "entry",
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "full",
+          "scene": 2,
+          "stations": true,
+          "boundary": "exit",
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "full",
+          "scene": 3,
+          "stations": false,
+          "boundary": "entry",
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "full",
+          "scene": 3,
+          "stations": false,
+          "boundary": "exit",
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "full",
+          "scene": 3,
+          "stations": true,
+          "boundary": "entry",
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "full",
+          "scene": 3,
+          "stations": true,
+          "boundary": "exit",
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "full",
+          "scene": 4,
+          "stations": false,
+          "boundary": "entry",
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "full",
+          "scene": 4,
+          "stations": false,
+          "boundary": "exit",
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "full",
+          "scene": 4,
+          "stations": true,
+          "boundary": "entry",
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "full",
+          "scene": 4,
+          "stations": true,
+          "boundary": "exit",
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "full",
+          "scene": 5,
+          "stations": false,
+          "boundary": "entry",
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "full",
+          "scene": 5,
+          "stations": false,
+          "boundary": "exit",
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "full",
+          "scene": 5,
+          "stations": true,
+          "boundary": "entry",
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "full",
+          "scene": 5,
+          "stations": true,
+          "boundary": "exit",
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "compatible",
+          "scene": 0,
+          "stations": false,
+          "boundary": "entry",
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "compatible",
+          "scene": 0,
+          "stations": false,
+          "boundary": "exit",
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "compatible",
+          "scene": 0,
+          "stations": true,
+          "boundary": "entry",
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "compatible",
+          "scene": 0,
+          "stations": true,
+          "boundary": "exit",
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "compatible",
+          "scene": 1,
+          "stations": false,
+          "boundary": "entry",
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "compatible",
+          "scene": 1,
+          "stations": false,
+          "boundary": "exit",
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "compatible",
+          "scene": 1,
+          "stations": true,
+          "boundary": "entry",
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "compatible",
+          "scene": 1,
+          "stations": true,
+          "boundary": "exit",
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "compatible",
+          "scene": 2,
+          "stations": false,
+          "boundary": "entry",
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "compatible",
+          "scene": 2,
+          "stations": false,
+          "boundary": "exit",
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "compatible",
+          "scene": 2,
+          "stations": true,
+          "boundary": "entry",
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "compatible",
+          "scene": 2,
+          "stations": true,
+          "boundary": "exit",
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "compatible",
+          "scene": 3,
+          "stations": false,
+          "boundary": "entry",
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "compatible",
+          "scene": 3,
+          "stations": false,
+          "boundary": "exit",
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "compatible",
+          "scene": 3,
+          "stations": true,
+          "boundary": "entry",
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "compatible",
+          "scene": 3,
+          "stations": true,
+          "boundary": "exit",
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "compatible",
+          "scene": 4,
+          "stations": false,
+          "boundary": "entry",
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "compatible",
+          "scene": 4,
+          "stations": false,
+          "boundary": "exit",
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "compatible",
+          "scene": 4,
+          "stations": true,
+          "boundary": "entry",
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "compatible",
+          "scene": 4,
+          "stations": true,
+          "boundary": "exit",
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "compatible",
+          "scene": 5,
+          "stations": false,
+          "boundary": "entry",
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "compatible",
+          "scene": 5,
+          "stations": false,
+          "boundary": "exit",
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "compatible",
+          "scene": 5,
+          "stations": true,
+          "boundary": "entry",
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "compatible",
+          "scene": 5,
+          "stations": true,
+          "boundary": "exit",
+          "maxPixelChange": 0
+        }
+      ],
+      "wallBoundaryComparisons": 48,
+      "earlyAndLateRiverChecks": 96,
+      "openRiverChecks": 24,
+      "result": "PASS: land/grass remains before the wall; river changes are completely occluded at both ends; river visible in the open span. Both graphics modes, all six scenes, with/without station stops."
+    },
+    "visualFrames": 66,
+    "visualTimesSeconds": [
+      176,
+      184,
+      192,
+      201,
+      207,
+      220,
+      233,
+      240,
+      248,
+      256,
+      264
+    ],
+    "limits": "Native GLES production-shader checks, not a browser recording. Bayou water that belongs to the base scene remains; this gate controls the separately introduced bridge river.",
+    "supersededBy": "riverTunnels"
+  },
+  "riverTunnels": {
+    "rule": "Land \u2192 tunnel \u2192 open-water bridge \u2192 tunnel \u2192 land; no approach walls or near-bank join.",
+    "timingSeconds": {
+      "entryTunnel": [
+        188,
+        202
+      ],
+      "waterStartInsideEntry": 195,
+      "departureTunnel": [
+        238,
+        252
+      ],
+      "waterEndInsideDeparture": 245,
+      "preview": 186
+    },
+    "controlBehavior": "Both river tunnels remain mandatory when the optional scenic tunnel is disabled. Station stops and connected routes use production journeyFrame timing. Preview starts before entry.",
+    "nativeChecks": {
+      "occlusionComparisons": [
+        {
+          "mode": "full",
+          "scene": 0,
+          "stations": false,
+          "scenicTunnels": false,
+          "time": 195,
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "full",
+          "scene": 0,
+          "stations": false,
+          "scenicTunnels": false,
+          "time": 245,
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "full",
+          "scene": 0,
+          "stations": false,
+          "scenicTunnels": true,
+          "time": 195,
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "full",
+          "scene": 0,
+          "stations": false,
+          "scenicTunnels": true,
+          "time": 245,
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "full",
+          "scene": 0,
+          "stations": true,
+          "scenicTunnels": false,
+          "time": 195,
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "full",
+          "scene": 0,
+          "stations": true,
+          "scenicTunnels": false,
+          "time": 245,
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "full",
+          "scene": 0,
+          "stations": true,
+          "scenicTunnels": true,
+          "time": 195,
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "full",
+          "scene": 0,
+          "stations": true,
+          "scenicTunnels": true,
+          "time": 245,
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "full",
+          "scene": 1,
+          "stations": false,
+          "scenicTunnels": false,
+          "time": 195,
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "full",
+          "scene": 1,
+          "stations": false,
+          "scenicTunnels": false,
+          "time": 245,
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "full",
+          "scene": 1,
+          "stations": false,
+          "scenicTunnels": true,
+          "time": 195,
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "full",
+          "scene": 1,
+          "stations": false,
+          "scenicTunnels": true,
+          "time": 245,
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "full",
+          "scene": 1,
+          "stations": true,
+          "scenicTunnels": false,
+          "time": 195,
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "full",
+          "scene": 1,
+          "stations": true,
+          "scenicTunnels": false,
+          "time": 245,
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "full",
+          "scene": 1,
+          "stations": true,
+          "scenicTunnels": true,
+          "time": 195,
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "full",
+          "scene": 1,
+          "stations": true,
+          "scenicTunnels": true,
+          "time": 245,
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "full",
+          "scene": 2,
+          "stations": false,
+          "scenicTunnels": false,
+          "time": 195,
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "full",
+          "scene": 2,
+          "stations": false,
+          "scenicTunnels": false,
+          "time": 245,
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "full",
+          "scene": 2,
+          "stations": false,
+          "scenicTunnels": true,
+          "time": 195,
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "full",
+          "scene": 2,
+          "stations": false,
+          "scenicTunnels": true,
+          "time": 245,
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "full",
+          "scene": 2,
+          "stations": true,
+          "scenicTunnels": false,
+          "time": 195,
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "full",
+          "scene": 2,
+          "stations": true,
+          "scenicTunnels": false,
+          "time": 245,
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "full",
+          "scene": 2,
+          "stations": true,
+          "scenicTunnels": true,
+          "time": 195,
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "full",
+          "scene": 2,
+          "stations": true,
+          "scenicTunnels": true,
+          "time": 245,
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "full",
+          "scene": 3,
+          "stations": false,
+          "scenicTunnels": false,
+          "time": 195,
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "full",
+          "scene": 3,
+          "stations": false,
+          "scenicTunnels": false,
+          "time": 245,
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "full",
+          "scene": 3,
+          "stations": false,
+          "scenicTunnels": true,
+          "time": 195,
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "full",
+          "scene": 3,
+          "stations": false,
+          "scenicTunnels": true,
+          "time": 245,
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "full",
+          "scene": 3,
+          "stations": true,
+          "scenicTunnels": false,
+          "time": 195,
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "full",
+          "scene": 3,
+          "stations": true,
+          "scenicTunnels": false,
+          "time": 245,
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "full",
+          "scene": 3,
+          "stations": true,
+          "scenicTunnels": true,
+          "time": 195,
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "full",
+          "scene": 3,
+          "stations": true,
+          "scenicTunnels": true,
+          "time": 245,
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "full",
+          "scene": 4,
+          "stations": false,
+          "scenicTunnels": false,
+          "time": 195,
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "full",
+          "scene": 4,
+          "stations": false,
+          "scenicTunnels": false,
+          "time": 245,
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "full",
+          "scene": 4,
+          "stations": false,
+          "scenicTunnels": true,
+          "time": 195,
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "full",
+          "scene": 4,
+          "stations": false,
+          "scenicTunnels": true,
+          "time": 245,
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "full",
+          "scene": 4,
+          "stations": true,
+          "scenicTunnels": false,
+          "time": 195,
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "full",
+          "scene": 4,
+          "stations": true,
+          "scenicTunnels": false,
+          "time": 245,
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "full",
+          "scene": 4,
+          "stations": true,
+          "scenicTunnels": true,
+          "time": 195,
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "full",
+          "scene": 4,
+          "stations": true,
+          "scenicTunnels": true,
+          "time": 245,
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "full",
+          "scene": 5,
+          "stations": false,
+          "scenicTunnels": false,
+          "time": 195,
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "full",
+          "scene": 5,
+          "stations": false,
+          "scenicTunnels": false,
+          "time": 245,
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "full",
+          "scene": 5,
+          "stations": false,
+          "scenicTunnels": true,
+          "time": 195,
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "full",
+          "scene": 5,
+          "stations": false,
+          "scenicTunnels": true,
+          "time": 245,
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "full",
+          "scene": 5,
+          "stations": true,
+          "scenicTunnels": false,
+          "time": 195,
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "full",
+          "scene": 5,
+          "stations": true,
+          "scenicTunnels": false,
+          "time": 245,
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "full",
+          "scene": 5,
+          "stations": true,
+          "scenicTunnels": true,
+          "time": 195,
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "full",
+          "scene": 5,
+          "stations": true,
+          "scenicTunnels": true,
+          "time": 245,
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "compatible",
+          "scene": 0,
+          "stations": false,
+          "scenicTunnels": false,
+          "time": 195,
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "compatible",
+          "scene": 0,
+          "stations": false,
+          "scenicTunnels": false,
+          "time": 245,
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "compatible",
+          "scene": 0,
+          "stations": false,
+          "scenicTunnels": true,
+          "time": 195,
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "compatible",
+          "scene": 0,
+          "stations": false,
+          "scenicTunnels": true,
+          "time": 245,
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "compatible",
+          "scene": 0,
+          "stations": true,
+          "scenicTunnels": false,
+          "time": 195,
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "compatible",
+          "scene": 0,
+          "stations": true,
+          "scenicTunnels": false,
+          "time": 245,
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "compatible",
+          "scene": 0,
+          "stations": true,
+          "scenicTunnels": true,
+          "time": 195,
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "compatible",
+          "scene": 0,
+          "stations": true,
+          "scenicTunnels": true,
+          "time": 245,
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "compatible",
+          "scene": 1,
+          "stations": false,
+          "scenicTunnels": false,
+          "time": 195,
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "compatible",
+          "scene": 1,
+          "stations": false,
+          "scenicTunnels": false,
+          "time": 245,
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "compatible",
+          "scene": 1,
+          "stations": false,
+          "scenicTunnels": true,
+          "time": 195,
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "compatible",
+          "scene": 1,
+          "stations": false,
+          "scenicTunnels": true,
+          "time": 245,
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "compatible",
+          "scene": 1,
+          "stations": true,
+          "scenicTunnels": false,
+          "time": 195,
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "compatible",
+          "scene": 1,
+          "stations": true,
+          "scenicTunnels": false,
+          "time": 245,
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "compatible",
+          "scene": 1,
+          "stations": true,
+          "scenicTunnels": true,
+          "time": 195,
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "compatible",
+          "scene": 1,
+          "stations": true,
+          "scenicTunnels": true,
+          "time": 245,
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "compatible",
+          "scene": 2,
+          "stations": false,
+          "scenicTunnels": false,
+          "time": 195,
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "compatible",
+          "scene": 2,
+          "stations": false,
+          "scenicTunnels": false,
+          "time": 245,
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "compatible",
+          "scene": 2,
+          "stations": false,
+          "scenicTunnels": true,
+          "time": 195,
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "compatible",
+          "scene": 2,
+          "stations": false,
+          "scenicTunnels": true,
+          "time": 245,
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "compatible",
+          "scene": 2,
+          "stations": true,
+          "scenicTunnels": false,
+          "time": 195,
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "compatible",
+          "scene": 2,
+          "stations": true,
+          "scenicTunnels": false,
+          "time": 245,
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "compatible",
+          "scene": 2,
+          "stations": true,
+          "scenicTunnels": true,
+          "time": 195,
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "compatible",
+          "scene": 2,
+          "stations": true,
+          "scenicTunnels": true,
+          "time": 245,
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "compatible",
+          "scene": 3,
+          "stations": false,
+          "scenicTunnels": false,
+          "time": 195,
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "compatible",
+          "scene": 3,
+          "stations": false,
+          "scenicTunnels": false,
+          "time": 245,
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "compatible",
+          "scene": 3,
+          "stations": false,
+          "scenicTunnels": true,
+          "time": 195,
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "compatible",
+          "scene": 3,
+          "stations": false,
+          "scenicTunnels": true,
+          "time": 245,
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "compatible",
+          "scene": 3,
+          "stations": true,
+          "scenicTunnels": false,
+          "time": 195,
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "compatible",
+          "scene": 3,
+          "stations": true,
+          "scenicTunnels": false,
+          "time": 245,
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "compatible",
+          "scene": 3,
+          "stations": true,
+          "scenicTunnels": true,
+          "time": 195,
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "compatible",
+          "scene": 3,
+          "stations": true,
+          "scenicTunnels": true,
+          "time": 245,
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "compatible",
+          "scene": 4,
+          "stations": false,
+          "scenicTunnels": false,
+          "time": 195,
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "compatible",
+          "scene": 4,
+          "stations": false,
+          "scenicTunnels": false,
+          "time": 245,
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "compatible",
+          "scene": 4,
+          "stations": false,
+          "scenicTunnels": true,
+          "time": 195,
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "compatible",
+          "scene": 4,
+          "stations": false,
+          "scenicTunnels": true,
+          "time": 245,
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "compatible",
+          "scene": 4,
+          "stations": true,
+          "scenicTunnels": false,
+          "time": 195,
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "compatible",
+          "scene": 4,
+          "stations": true,
+          "scenicTunnels": false,
+          "time": 245,
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "compatible",
+          "scene": 4,
+          "stations": true,
+          "scenicTunnels": true,
+          "time": 195,
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "compatible",
+          "scene": 4,
+          "stations": true,
+          "scenicTunnels": true,
+          "time": 245,
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "compatible",
+          "scene": 5,
+          "stations": false,
+          "scenicTunnels": false,
+          "time": 195,
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "compatible",
+          "scene": 5,
+          "stations": false,
+          "scenicTunnels": false,
+          "time": 245,
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "compatible",
+          "scene": 5,
+          "stations": false,
+          "scenicTunnels": true,
+          "time": 195,
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "compatible",
+          "scene": 5,
+          "stations": false,
+          "scenicTunnels": true,
+          "time": 245,
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "compatible",
+          "scene": 5,
+          "stations": true,
+          "scenicTunnels": false,
+          "time": 195,
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "compatible",
+          "scene": 5,
+          "stations": true,
+          "scenicTunnels": false,
+          "time": 245,
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "compatible",
+          "scene": 5,
+          "stations": true,
+          "scenicTunnels": true,
+          "time": 195,
+          "maxPixelChange": 0
+        },
+        {
+          "mode": "compatible",
+          "scene": 5,
+          "stations": true,
+          "scenicTunnels": true,
+          "time": 245,
+          "maxPixelChange": 0
+        }
+      ],
+      "tunnelBoundaryComparisons": 96,
+      "outsideRiverChecks": 96,
+      "openRiverChecks": 48,
+      "result": "PASS: both land/water changes completely hidden by tunnel lining; river appears only between its tunnels. Both graphics modes, all six scenes, station stops and optional scenic tunnels on/off."
+    },
+    "visualFrames": 60,
+    "visualTimesSeconds": [
+      186,
+      188,
+      195,
+      202,
+      204,
+      220,
+      237,
+      245,
+      252,
+      254
+    ],
+    "browserTested": false,
+    "limitations": "No live browser playback, reported ProBook test, or end-to-end video export. Native rendering and simulated controls only."
+  },
+  "journeyRain": {
+    "method": "Production journey, wet-glass and audio functions exercised with native Canvas and simulated live audio gains.",
+    "tunnelCoverage": "All six scenes; scenic tunnels on/off; required river tunnels; connected-route portals; station stops on/off. No arrivals at or inside either portal plane.",
+    "stationPhysics": "Both wind directions, gusts at 0 and 100 percent, all three travel speeds. Sideways motion decelerates progressively, reaches zero while stopped, and accelerates progressively on departure; gravity continues.",
+    "existingWater": "Droplet episodes span the entrance; no instant glass reset. Pre-existing beads and cleared condensation paths remain.",
+    "determinism": "Identical native Canvas pixel hashes at common timestamps after 15, 30 and 60 FPS histories; exact single and connected loop closure; unchanged after arbitrary scrubbing and trajectory cache eviction.",
+    "audio": "Live and offline rain gains follow the same geometric tunnel shelter.",
+    "cacheBytesAtFullRain": 2227632,
+    "details": "checks/journey-rain-results.json",
+    "browserTested": false,
+    "limitations": "No browser playback, user-device performance or end-to-end browser video encoding test; supported browser QA is unavailable in this managed environment."
+  }
+}

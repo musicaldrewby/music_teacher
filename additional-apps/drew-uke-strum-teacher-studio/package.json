@@ -1,0 +1,6 @@
+{
+  "name": "uke-strum-teacher-studio-checks",
+  "private": true,
+  "scripts": { "check:fast-video": "node checks/video-fast.cjs" },
+  "devDependencies": { "node-web-audio-api": "1.0.7" }
+}

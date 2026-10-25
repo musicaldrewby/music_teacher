@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#152522">
+  <meta name="description" content="Explore Mr. Drew’s music classroom in 3D, with Orff instruments, ukuleles, piano, and percussion.">
+  <title>Mr. Drew’s Music Classroom · 3D</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23152522'/%3E%3Cpath d='M10 22V9l14-3v13M10 12l14-3' fill='none' stroke='%23ddc68d' stroke-width='2'/%3E%3Cellipse cx='7' cy='23' rx='4' ry='3' fill='%23ddc68d'/%3E%3Cellipse cx='21' cy='20' rx='4' ry='3' fill='%23ddc68d'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="./style.css">
+  <script type="importmap">{"imports":{"three":"./vendor/three.module.js"}}</script>
+</head>
+<body class="haunted">
+  <main id="viewer" aria-label="Interactive three dimensional music classroom">
+    <canvas id="scene" tabindex="0" aria-label="Classroom. Drag to look around; use W A S D or arrow keys to walk. Use the wall view buttons to change viewpoints. Press F to toggle the flashlight."></canvas>
+    <header class="topbar">
+      <div class="identity"><span class="monogram" aria-hidden="true">D<span>♩</span></span><div><h1>Mr. Drew’s <span>Music Classroom</span></h1><p id="sceneTagline">AFTER HOURS · ULTIMATE SPOOKY</p></div></div>
+      <div class="utilities">
+        <button id="helpButton" class="icon-button" aria-label="How to explore" title="How to explore"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 8.5a2.5 2.5 0 0 1 5 .5c0 2-2.5 2-2.5 4M12 16.5v.1"/></svg></button>
+        <button id="settingsButton" class="icon-button" aria-label="View settings" aria-expanded="false" aria-controls="settings" title="View settings"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/><circle cx="9" cy="6" r="2"/><circle cx="16" cy="12" r="2"/><circle cx="8" cy="18" r="2"/></svg></button>
+        <button id="fullscreenButton" class="icon-button" aria-label="Enter fullscreen" title="Fullscreen"><svg viewBox="0 0 24 24"><path d="M8 3H3v5M16 3h5v5M3 16v5h5M21 16v5h-5"/></svg></button>
+      </div>
+    </header>
+    <button id="hauntToggle" class="haunt-toggle" aria-pressed="true" title="Switch spooky mode on or off"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14A9 9 0 0 1 10 3.5 9 9 0 1 0 20.5 14Z"/></svg><span id="hauntToggleLabel">Spooky mode: on</span></button>
+    <button id="flashlightToggle" class="flashlight-toggle" aria-pressed="false" aria-keyshortcuts="F" title="Toggle flashlight (F)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m4 15 5 5 6-6-5-5-6 6Zm6-6 1-4 8 8-4 1M16 3v3m5 2h-3m1-6-2 2"/></svg><span id="flashlightLabel">Flashlight off</span><kbd>F</kbd></button>
+    <button id="vrButton" class="vr-button" disabled>Checking VR…</button>
+    <div class="view-label"><span id="viewNumber">01</span><div><p id="viewTitle">Front of the room</p><span id="viewSubtitle">Display & teaching area</span></div></div>
+    <aside id="settings" class="panel" hidden aria-label="View settings">
+      <div class="panel-heading"><h2>Make yourself at home</h2><button id="closeSettings" aria-label="Close settings">×</button></div>
+      <label for="mood">Lighting</label><select id="mood"><option value="haunted" selected>Ultimate Spooky</option><option value="welcoming">Welcoming</option><option value="daylight">Natural daylight</option><option value="bluehour">Blue hour</option></select>
+      <div id="hauntControls"><label class="toggle"><span>Animate fog &amp; lighting</span><input id="spookyMotion" type="checkbox" checked></label></div>
+      <label for="light">Brightness <output id="lightValue">Natural</output></label><input id="light" type="range" min="0.65" max="1.4" step="0.05" value="1">
+      <label class="toggle"><span>VR thumbstick walking</span><input id="vrWalking" type="checkbox"></label>
+      <label for="quality">Render quality</label><select id="quality"><option value="balanced">Balanced</option><option value="high" selected>High detail</option></select>
+      <label class="toggle"><span>Colored floor spots</span><input id="spots" type="checkbox" checked></label>
+      <div class="panel-actions"><button id="photoButton">Save this view <span>PNG</span></button><button id="modelButton">Download 3D model <span>GLB</span></button></div>
+      <p class="note">Recreated from classroom photos. Dimensions and some placements are approximate.</p>
+    </aside>
+    <div class="navigation">
+      <div class="nav-caption"><span>EXPLORE THE CLASSROOM</span><span class="desktop-hint">Drag to look · Scroll to move</span></div>
+      <nav class="views" aria-label="Classroom viewpoints">
+        <button class="view active" data-view="front" aria-pressed="true"><span class="index">01</span><span>Front</span><small>Display</small></button>
+        <button class="view" data-view="right" aria-pressed="false"><span class="index">02</span><span>Right</span><small>Teaching wall</small></button>
+        <button class="view" data-view="rear" aria-pressed="false"><span class="index">03</span><span>Rear</span><small>Piano & drums</small></button>
+        <button class="view" data-view="left" aria-pressed="false"><span class="index">04</span><span>Left</span><small>Ukuleles & Orff</small></button>
+        <button class="view overview" data-view="overview" aria-pressed="false"><svg viewBox="0 0 24 24"><path d="m12 3 9 5-9 5-9-5 9-5Zm-9 9 9 5 9-5M3 16l9 5 9-5"/></svg><span>Overview</span></button>
+      </nav>
+    </div>
+    <div id="walkPad" aria-label="Movement controls"><button data-move="forward" aria-label="Move forward">↑</button><button data-move="left" aria-label="Move left">←</button><button data-move="back" aria-label="Move backward">↓</button><button data-move="right" aria-label="Move right">→</button></div>
+    <div class="key-hint"><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd><span>to walk</span></div>
+    <div id="toast" role="status" aria-live="polite"></div>
+    <div id="loading"><div class="loading-card"><span class="loading-mark">D♩</span><h2>Opening the classroom</h2><p>The lights are fading. The room is empty…</p><div class="loading-line"></div></div></div>
+    <dialog id="help"><form method="dialog"><button class="dialog-close" aria-label="Close help">×</button><span class="eyebrow">WELCOME TO THE MUSIC ROOM</span><h2>Take a look around.</h2><p>Drag anywhere in the room to turn your view. Scroll to move forward or back.</p><div class="help-row"><strong>Walk</strong><span>W A S D, arrow keys, or the on-screen arrows.</span></div><div class="help-row"><strong>Change view</strong><span>Choose a wall from the bar at the bottom.</span></div><div class="help-row"><strong>On a touchscreen</strong><span>Swipe to look. Pinch or use the arrows to move.</span></div><div class="help-row"><strong>Flashlight</strong><span>Press F or tap the flashlight button. The beam follows your view.</span></div><div class="help-row"><strong>Spooky mode</strong><span>Use the purple button to return to normal lighting. View settings can pause the fog and lighting.</span></div><div class="help-row"><strong>Quest VR</strong><span>Open this site in Quest Browser and choose Enter VR. Left trigger: hold and release to teleport. Right stick: snap turn. Right grip or A: flashlight. Left grip or X / right B: menu. Point and pull either trigger to select a menu button.</span></div><div class="help-row"><strong>Save</strong><span>Open view settings to save a picture or the 3D model.</span></div><button class="primary">Explore the room</button></form></dialog>
+    <noscript><div class="error-message">Please enable JavaScript to explore the 3D classroom.</div></noscript>
+  </main>
+  <script type="module" src="./app.js"></script>
+</body>
+</html>

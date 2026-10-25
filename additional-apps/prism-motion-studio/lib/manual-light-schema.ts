@@ -1,0 +1,6 @@
+import {z} from 'zod';
+import {lightPatternSchema} from './light-pattern-schema';
+const v=z.tuple([z.number().finite().min(-10000).max(10000),z.number().finite().min(-10000).max(10000),z.number().finite().min(-10000).max(10000)]);
+export const manualLightSchema=z.object({id:z.string().min(1).max(80),name:z.string().min(1).max(80),kind:z.enum(['point','spot','directional']),enabled:z.boolean().default(true),color:z.string().regex(/^#[0-9a-fA-F]{6}$/).default('#ffffff'),intensity:z.number().finite().min(0).max(20000).default(100),position:v.default([3,4,5]),target:v.default([0,0,0]),distance:z.number().min(0).max(2000).default(0),angle:z.number().min(1).max(89).default(35),penumbra:z.number().min(0).max(1).default(.4),shadow:z.boolean().default(false),pattern:lightPatternSchema.default({})});
+export const manualRigSchema=z.object({mode:z.enum(['preset','custom']).default('preset'),lights:z.array(manualLightSchema).max(8).default([]),ambient:z.number().min(0).max(3).default(0),environment:z.number().min(0).max(3).default(0),fixtures:z.boolean().default(false)}).superRefine((r,c)=>{if(new Set(r.lights.map(l=>l.id)).size!==r.lights.length)c.addIssue({code:'custom',message:'Light IDs must be unique',path:['lights']});});
+export type ManualLight=z.infer<typeof manualLightSchema>;

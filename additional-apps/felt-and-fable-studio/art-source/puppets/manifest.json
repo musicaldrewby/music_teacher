@@ -1,0 +1,210 @@
+[
+  {
+    "slug": "maya",
+    "name": "Maya",
+    "kind": "puppet-atlas",
+    "path": "art-source/cinema/puppets/maya-atlas.png",
+    "width": 1254,
+    "height": 1254,
+    "parts": {
+      "head": [
+        49,
+        180,
+        337,
+        318
+      ],
+      "torso": [
+        493,
+        216,
+        276,
+        284
+      ],
+      "leftArm": [
+        993,
+        160,
+        164,
+        388
+      ],
+      "rightArm": [
+        117,
+        709,
+        188,
+        425
+      ],
+      "leftLeg": [
+        477,
+        703,
+        229,
+        439
+      ],
+      "rightLeg": [
+        965,
+        702,
+        225,
+        441
+      ]
+    },
+    "skin": "#be6e39",
+    "theme": "cast",
+    "prompt": "Use case: illustration-story.\nAsset type: a SINGLE reusable character puppet texture atlas for a felt-board animation app. A clean square sprite atlas containing EXACTLY SIX separate construction parts, on genuine transparent alpha.\nPrimary request: Maya, a cute child cut out of flat craft felt: medium warm brown skin, dark brown curly hair, coral-red long-sleeve shirt, navy trousers, dark brown shoes.\nComposition is mandatory: invisible 3 COLUMN by 2 ROW equal rectangular cell layout on a 1536x1536 square. No visible grid or labels. EACH part isolated, centered within its own cell with at least 12% empty padding on all four sides. Do not assemble a person. Top row left: large rounded child head with curly dark hair and both ears, entirely BLANK FACE no eyes no eyebrows no mouth no nose. Top row center: coral shirt TORSO ONLY from neck opening to waist, narrow rounded shoulders, no arms no limbs no head. Top row right: single LEFT ARM detached long coral sleeve from rounded shoulder to medium-brown mitten hand, pointing straight down, hand attached at bottom. Bottom row left: single RIGHT ARM detached matching coral sleeve and mitten hand pointing straight down. Bottom row center: single LEFT LEG detached navy trouser leg from hip to dark brown shoe, pointing straight down. Bottom row right: single RIGHT LEG matching detached navy trouser leg and shoe pointing straight down.\nArt style: real densely matted wool felt fiber texture, crisp hand-cut rounded edges, flat layered appliqu\u00e9 thickness only, orthographic straight-on. Cheerful oversized child head and short friendly body proportions. Soft neutral illumination, minimal contact shading within each part only. Subtle realistic fiber detail, not fuzzy blurred edges. The head is a flat felt disk, not a spherical face. Flat one-color felt hair silhouette shaped in rounded curls. Each part looks cut from felt sheets. Plain shirt with small rounded collar at top, no buttons required.\nConstraints: actual transparency between all parts and behind the image. Exactly six parts, exactly one per cell, visible separation. No complete character. No facial features; these will be drawn by the application. No text, no watermark, no background, no drop shadow, no ground, no vignette. No stuffed plush, no sculpted 3D, no Pixar, no realistic human anatomy, no gradients or glossy surface.",
+    "layoutCorrectionPrompt": "Use case: precise-object-edit. Edit this single felt puppet atlas. KEEP exactly its six isolated flat felt parts, beautiful wool fibers, blank face, all colors and shapes. CHANGE ONLY their layout and size to a precise invisible 3-column 2-row grid. Canvas square 1536x1536 transparent. Each column has exactly one third of canvas width, each row exactly half of height. Absolutely no part crosses any cell boundary. SIX parts centered at normalized positions: head (.1667,.25), torso (.5,.25), left arm (.8333,.25), right arm (.1667,.75), left leg (.5,.75), right leg (.8333,.75). Each part must fit into the central 70% width and 75% height of its cell. Reduce head and torso until they fit, keep each original aspect ratio. This means head maximum width 23% of the whole canvas and torso maximum width 23% of whole canvas. Give obvious empty transparent gutters between columns. For arms and legs keep them pointing straight downward. Maintain EXACTLY the same parts and appearance, no added pieces or facial features, no letters or grid lines or background.",
+    "rigVersion": 2,
+    "renderPath": "art-source/puppets/torso-v2/maya-atlas.png"
+  },
+  {
+    "slug": "leo",
+    "name": "Leo",
+    "kind": "puppet-atlas",
+    "path": "art-source/cinema/puppets/leo-atlas.png",
+    "width": 1254,
+    "height": 1254,
+    "parts": {
+      "head": [
+        59,
+        189,
+        324,
+        309
+      ],
+      "torso": [
+        489,
+        226,
+        295,
+        298
+      ],
+      "leftArm": [
+        985,
+        163,
+        148,
+        407
+      ],
+      "rightArm": [
+        144,
+        706,
+        161,
+        446
+      ],
+      "leftLeg": [
+        487,
+        699,
+        235,
+        469
+      ],
+      "rightLeg": [
+        950,
+        700,
+        233,
+        467
+      ]
+    },
+    "skin": "#f8ba90",
+    "theme": "cast",
+    "prompt": "Use case: illustration-story. Asset type: ONE character puppet texture atlas, square 1536x1536, true transparent alpha, EXACTLY six separate felt construction parts. Character Leo: fair warm peach skin, medium-brown side-part hair, teal long-sleeve shirt, navy trousers, brown shoes. Cute rounded child.\nStyle: flat craft-felt cutouts with real dense wool fiber texture and crisp rounded hand-cut edges. Orthographic front view. Flat layers of felt only, no stuffed volume, no 3D. Felt hair with gently rounded simple edges. Soft neutral illumination and minimal contact shading confined inside each part.\nCRITICAL ATLAS LAYOUT: invisible 3-column by 2-row equalcell grid. Each column exactly one third the canvaswidth; each row exactly half the height. Allparts centered within their owncell and fit strictly inside central70% cellwidth and75%cellheight. NOpart can cross acellboundary. Entirehead maximum23%totalcanvaswidth; entiretorso maximum23%totalcanvaswidth. Transparentgutters must be obvious.\nTOP LEFT cell, center at16.7%width,25%height: ONE large round child head with its hair andears, completely blankface with NOeyes, NOmouth, NOnose, NOeyebrows. A flat skincoloredfeltcircle with separatehairapplique. TOP MIDDLE, center at50%width25%height: ONE shirt TORSO ONLY fromneckopening towaist, smallroundcollar, roundedshoulders, NOarms NOhead NOlimbs. TOP RIGHT, center at83.3%width25%height: ONE detached LEFT ARM, shirt sleeve fromroundedshoulder toskincolored mittenhand, straightdown, handatbottom. BOTTOM LEFT, center at16.7%width75%height: ONE detached RIGHT ARM matchingsleeve andmittenhand, straightdown. BOTTOM MIDDLE, center at50%width75%height: ONE detached LEFT LEG trouser fromhip toshoe pointingstraightdown. BOTTOM RIGHT, centerat83.3%width75%height: ONE detached RIGHT LEG matchingtrouser andshoe straightdown.\nThe upper shoulder starts round for a rotationjoint; trouserlegstartsflat. The twosleeves must be EXACTsameclothcolor astorso. Legs match eachother.\nAllsixparts distinctclearlyseparated andcontainedintheircells. Preserve aspectratio ofeachcutout: headround, torsosquarish, limbsnarrowvertical. NOassembledperson, NOlabels, NOgrid, NOtext, NOwatermark, NObackground, NOshadowsoutsidecutouts. No facialfeatures becauseappwilldrawthem. Realtransparency, crispfeltfiberdetail. NotPixar, notplush, notrealistichumananatomy.",
+    "layoutCorrectionPrompt": "Use case: precise-object-edit. Edit this single felt puppet atlas. KEEP exactly its six isolated flat felt parts, beautiful wool fibers, blank face, all colors and shapes. CHANGE ONLY their layout and size to a precise invisible 3-column 2-row grid. Canvas square 1536x1536 transparent. Each column has exactly one third of canvas width, each row exactly half of height. Absolutely no part crosses any cell boundary. SIX parts centered at normalized positions: head (.1667,.25), torso (.5,.25), left arm (.8333,.25), right arm (.1667,.75), left leg (.5,.75), right leg (.8333,.75). Each part must fit into the central 70% width and 75% height of its cell. Reduce head and torso until they fit, keep each original aspect ratio. This means head maximum width 23% of the whole canvas and torso maximum width 23% of whole canvas. Give obvious empty transparent gutters between columns. For arms and legs keep them pointing straight downward. Maintain EXACTLY the same parts and appearance, no added pieces or facial features, no letters or grid lines or background.",
+    "rigVersion": 2,
+    "renderPath": "art-source/puppets/torso-v2/leo-atlas.png"
+  },
+  {
+    "slug": "asha",
+    "name": "Asha",
+    "kind": "puppet-atlas",
+    "path": "art-source/cinema/puppets/asha-atlas.png",
+    "width": 1254,
+    "height": 1254,
+    "parts": {
+      "head": [
+        46,
+        189,
+        347,
+        308
+      ],
+      "torso": [
+        505,
+        246,
+        270,
+        254
+      ],
+      "leftArm": [
+        1021,
+        154,
+        139,
+        426
+      ],
+      "rightArm": [
+        150,
+        741,
+        141,
+        427
+      ],
+      "leftLeg": [
+        549,
+        733,
+        166,
+        431
+      ],
+      "rightLeg": [
+        960,
+        732,
+        168,
+        433
+      ]
+    },
+    "skin": "#8e4e30",
+    "theme": "cast",
+    "prompt": "Use case: illustration-story. Asset type: ONE character puppet texture atlas, square 1536x1536, true transparent alpha, EXACTLY six separate felt construction parts. Character Asha: deep rich brown skin, dark black hair with two round puffs, mustard yellow long-sleeve shirt, teal trousers, brown shoes. Cute rounded child.\nStyle: flat craft-felt cutouts with real dense wool fiber texture and crisp rounded hand-cut edges. Orthographic front view. Flat layers of felt only, no stuffed volume, no 3D. Felt hair with gently rounded simple edges. Soft neutral illumination and minimal contact shading confined inside each part.\nCRITICAL ATLAS LAYOUT: invisible 3-column by 2-row equalcell grid. Each column exactly one third the canvaswidth; each row exactly half the height. Allparts centered within their owncell and fit strictly inside central70% cellwidth and75%cellheight. NOpart can cross acellboundary. Entirehead maximum23%totalcanvaswidth; entiretorso maximum23%totalcanvaswidth. Transparentgutters must be obvious.\nTOP LEFT cell, center at16.7%width,25%height: ONE large round child head with its hair andears, completely blankface with NOeyes, NOmouth, NOnose, NOeyebrows. A flat skincoloredfeltcircle with separatehairapplique. TOP MIDDLE, center at50%width25%height: ONE shirt TORSO ONLY fromneckopening towaist, smallroundcollar, roundedshoulders, NOarms NOhead NOlimbs. TOP RIGHT, center at83.3%width25%height: ONE detached LEFT ARM, shirt sleeve fromroundedshoulder toskincolored mittenhand, straightdown, handatbottom. BOTTOM LEFT, center at16.7%width75%height: ONE detached RIGHT ARM matchingsleeve andmittenhand, straightdown. BOTTOM MIDDLE, center at50%width75%height: ONE detached LEFT LEG trouser fromhip toshoe pointingstraightdown. BOTTOM RIGHT, centerat83.3%width75%height: ONE detached RIGHT LEG matchingtrouser andshoe straightdown.\nThe upper shoulder starts round for a rotationjoint; trouserlegstartsflat. The twosleeves must be EXACTsameclothcolor astorso. Legs match eachother.\nAllsixparts distinctclearlyseparated andcontainedintheircells. Preserve aspectratio ofeachcutout: headround, torsosquarish, limbsnarrowvertical. NOassembledperson, NOlabels, NOgrid, NOtext, NOwatermark, NObackground, NOshadowsoutsidecutouts. No facialfeatures becauseappwilldrawthem. Realtransparency, crispfeltfiberdetail. NotPixar, notplush, notrealistichumananatomy.",
+    "layoutCorrectionPrompt": "Use case: precise-object-edit. Edit this single felt puppet atlas. KEEP exactly its six isolated flat felt parts, beautiful wool fibers, blank face, all colors and shapes. CHANGE ONLY their layout and size to a precise invisible 3-column 2-row grid. Canvas square 1536x1536 transparent. Each column has exactly one third of canvas width, each row exactly half of height. Absolutely no part crosses any cell boundary. SIX parts centered at normalized positions: head (.1667,.25), torso (.5,.25), left arm (.8333,.25), right arm (.1667,.75), left leg (.5,.75), right leg (.8333,.75). Each part must fit into the central 70% width and 75% height of its cell. Reduce head and torso until they fit, keep each original aspect ratio. This means head maximum width 23% of the whole canvas and torso maximum width 23% of whole canvas. Give obvious empty transparent gutters between columns. For arms and legs keep them pointing straight downward. Maintain EXACTLY the same parts and appearance, no added pieces or facial features, no letters or grid lines or background.",
+    "rigVersion": 2,
+    "renderPath": "art-source/puppets/torso-v2/asha-atlas.png"
+  },
+  {
+    "slug": "jun",
+    "name": "Jun",
+    "kind": "puppet-atlas",
+    "path": "art-source/cinema/puppets/jun-atlas.png",
+    "width": 1254,
+    "height": 1254,
+    "parts": {
+      "head": [
+        53,
+        207,
+        344,
+        297
+      ],
+      "torso": [
+        499,
+        245,
+        290,
+        277
+      ],
+      "leftArm": [
+        990,
+        161,
+        141,
+        424
+      ],
+      "rightArm": [
+        140,
+        717,
+        151,
+        431
+      ],
+      "leftLeg": [
+        515,
+        718,
+        196,
+        441
+      ],
+      "rightLeg": [
+        965,
+        717,
+        200,
+        442
+      ]
+    },
+    "skin": "#f0ba87",
+    "theme": "cast",
+    "prompt": "Use case: illustration-story. Asset type: ONE character puppet texture atlas, square 1536x1536, true transparent alpha, EXACTLY six separate felt construction parts. Character Jun: light tan skin, straight black bob hairstyle, muted plum long-sleeve shirt, navy trousers, brown shoes. Cute rounded child.\nStyle: flat craft-felt cutouts with real dense wool fiber texture and crisp rounded hand-cut edges. Orthographic front view. Flat layers of felt only, no stuffed volume, no 3D. Felt hair with gently rounded simple edges. Soft neutral illumination and minimal contact shading confined inside each part.\nCRITICAL ATLAS LAYOUT: invisible 3-column by 2-row equalcell grid. Each column exactly one third the canvaswidth; each row exactly half the height. Allparts centered within their owncell and fit strictly inside central70% cellwidth and75%cellheight. NOpart can cross acellboundary. Entirehead maximum23%totalcanvaswidth; entiretorso maximum23%totalcanvaswidth. Transparentgutters must be obvious.\nTOP LEFT cell, center at16.7%width,25%height: ONE large round child head with its hair andears, completely blankface with NOeyes, NOmouth, NOnose, NOeyebrows. A flat skincoloredfeltcircle with separatehairapplique. TOP MIDDLE, center at50%width25%height: ONE shirt TORSO ONLY fromneckopening towaist, smallroundcollar, roundedshoulders, NOarms NOhead NOlimbs. TOP RIGHT, center at83.3%width25%height: ONE detached LEFT ARM, shirt sleeve fromroundedshoulder toskincolored mittenhand, straightdown, handatbottom. BOTTOM LEFT, center at16.7%width75%height: ONE detached RIGHT ARM matchingsleeve andmittenhand, straightdown. BOTTOM MIDDLE, center at50%width75%height: ONE detached LEFT LEG trouser fromhip toshoe pointingstraightdown. BOTTOM RIGHT, centerat83.3%width75%height: ONE detached RIGHT LEG matchingtrouser andshoe straightdown.\nThe upper shoulder starts round for a rotationjoint; trouserlegstartsflat. The twosleeves must be EXACTsameclothcolor astorso. Legs match eachother.\nAllsixparts distinctclearlyseparated andcontainedintheircells. Preserve aspectratio ofeachcutout: headround, torsosquarish, limbsnarrowvertical. NOassembledperson, NOlabels, NOgrid, NOtext, NOwatermark, NObackground, NOshadowsoutsidecutouts. No facialfeatures becauseappwilldrawthem. Realtransparency, crispfeltfiberdetail. NotPixar, notplush, notrealistichumananatomy.",
+    "layoutCorrectionPrompt": "Use case: precise-object-edit. Edit this single felt puppet atlas. KEEP exactly its six isolated flat felt parts, beautiful wool fibers, blank face, all colors and shapes. CHANGE ONLY their layout and size to a precise invisible 3-column 2-row grid. Canvas square 1536x1536 transparent. Each column has exactly one third of canvas width, each row exactly half of height. Absolutely no part crosses any cell boundary. SIX parts centered at normalized positions: head (.1667,.25), torso (.5,.25), left arm (.8333,.25), right arm (.1667,.75), left leg (.5,.75), right leg (.8333,.75). Each part must fit into the central 70% width and 75% height of its cell. Reduce head and torso until they fit, keep each original aspect ratio. This means head maximum width 23% of the whole canvas and torso maximum width 23% of whole canvas. Give obvious empty transparent gutters between columns. For arms and legs keep them pointing straight downward. Maintain EXACTLY the same parts and appearance, no added pieces or facial features, no letters or grid lines or background.",
+    "rigVersion": 2,
+    "renderPath": "art-source/puppets/torso-v2/jun-atlas.png"
+  }
+]

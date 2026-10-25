@@ -1,0 +1,15 @@
+CHROMA ORCHESTRA — SEASONAL MUSIC
+
+Jingle Bells: refrain by James Lord Pierpont (1857). Public domain.
+Melody checked against the public-domain LilyPond transcription on Wikimedia Commons:
+https://commons.wikimedia.org/wiki/File:Jingle_Bells_refrain_vector.svg
+Transcription credited to Niamh O'C; public-domain dedication.
+Chroma's celesta, marimba, and percussion accompaniment is a new arrangement.
+
+The Clock Strikes Thirteen: original instrumental miniature created for Chroma Orchestra.
+Haunted music box, pizzicato, and timpani in a minor-key waltz.
+
+Sounds use the selected soundfont. See /soundfonts/CREDITS.txt for the bundled bank.
+
+The Brasswater Waltz: original Chroma Orchestra demonstration music.
+Midnight Pipeworks: organ arrangement of the original Chroma piece The Clock Strikes Thirteen.

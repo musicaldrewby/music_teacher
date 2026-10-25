@@ -1,0 +1,4707 @@
+{
+  "version": 1,
+  "source": "GeneralUser GS 1.471",
+  "sourceSha256": "f45b6b4a68b6bf3d792fcbb6d7de24dc701a0f89c5900a21ef3aaece993b839a",
+  "sampleRate": 22050,
+  "channels": 1,
+  "codec": "MP3",
+  "bitrateKbps": 64,
+  "renderer": "TinySoundFont (MIT)",
+  "families": {
+    "marimba": {
+      "bank": 0,
+      "program": 12,
+      "notes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        68,
+        69,
+        70,
+        71,
+        72,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79,
+        80,
+        81,
+        82,
+        83,
+        84,
+        85,
+        86,
+        87,
+        88,
+        89,
+        90,
+        91,
+        92,
+        93
+      ],
+      "duration": 4.5,
+      "hold": 4.4,
+      "description": "GeneralUser GS Marimba; xylophones and contrabass bar approximation"
+    },
+    "vibraphone": {
+      "bank": 0,
+      "program": 11,
+      "notes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        68,
+        69,
+        70,
+        71,
+        72,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79,
+        80,
+        81,
+        82,
+        83,
+        84,
+        85,
+        86,
+        87,
+        88,
+        89,
+        90,
+        91,
+        92,
+        93
+      ],
+      "duration": 4.5,
+      "hold": 4.4,
+      "removeTremolo": true,
+      "description": "GeneralUser GS Vibraphone, modulation disabled; metallophone approximation"
+    },
+    "glockenspiel": {
+      "bank": 0,
+      "program": 9,
+      "notes": [
+        60,
+        61,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        68,
+        69,
+        70,
+        71,
+        72,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79,
+        80,
+        81,
+        82,
+        83,
+        84,
+        85,
+        86,
+        87,
+        88,
+        89,
+        90,
+        91,
+        92,
+        93,
+        94,
+        95,
+        96,
+        97,
+        98,
+        99,
+        100,
+        101,
+        102,
+        103,
+        104,
+        105
+      ],
+      "duration": 4.5,
+      "hold": 4.4,
+      "description": "GeneralUser GS Glockenspiel"
+    },
+    "timpani": {
+      "bank": 0,
+      "program": 47,
+      "notes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60
+      ],
+      "duration": 4.2,
+      "hold": 4.1,
+      "description": "GeneralUser GS Timpani; one virtual drum with selectable pitch"
+    },
+    "recorder": {
+      "bank": 0,
+      "program": 74,
+      "notes": [
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        68,
+        69,
+        70,
+        71,
+        72,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79,
+        80,
+        81,
+        82,
+        83,
+        84,
+        85,
+        86,
+        87,
+        88,
+        89,
+        90,
+        91,
+        92,
+        93,
+        94,
+        95,
+        96
+      ],
+      "duration": 3.3,
+      "hold": 2.8,
+      "loopStart": 0.8,
+      "loopEnd": 1.8,
+      "description": "GeneralUser GS Recorder; transposed range for the recorder family. Per-note loop points in samples.",
+      "loops": {
+        "48": {
+          "loopStart": 0.7751927,
+          "loopEnd": 1.7711565
+        },
+        "49": {
+          "loopStart": 0.8403628,
+          "loopEnd": 1.8524263
+        },
+        "50": {
+          "loopStart": 0.7658503,
+          "loopEnd": 1.7823583
+        },
+        "51": {
+          "loopStart": 0.7872109,
+          "loopEnd": 1.7788662
+        },
+        "52": {
+          "loopStart": 0.7795011,
+          "loopEnd": 1.7643537
+        },
+        "53": {
+          "loopStart": 0.7987302,
+          "loopEnd": 1.7917007
+        },
+        "54": {
+          "loopStart": 0.8078912,
+          "loopEnd": 1.8155556
+        },
+        "55": {
+          "loopStart": 0.839229,
+          "loopEnd": 1.8260771
+        },
+        "56": {
+          "loopStart": 0.8452154,
+          "loopEnd": 1.8542857
+        },
+        "57": {
+          "loopStart": 0.8021769,
+          "loopEnd": 1.7728798
+        },
+        "58": {
+          "loopStart": 0.8258957,
+          "loopEnd": 1.8582313
+        },
+        "59": {
+          "loopStart": 0.7714286,
+          "loopEnd": 1.7699773
+        },
+        "60": {
+          "loopStart": 0.7856236,
+          "loopEnd": 1.7895238
+        },
+        "61": {
+          "loopStart": 0.8248526,
+          "loopEnd": 1.8445805
+        },
+        "62": {
+          "loopStart": 0.7819048,
+          "loopEnd": 1.7818141
+        },
+        "63": {
+          "loopStart": 0.824898,
+          "loopEnd": 1.8269841
+        },
+        "64": {
+          "loopStart": 0.8088889,
+          "loopEnd": 1.8063039
+        },
+        "65": {
+          "loopStart": 0.8238549,
+          "loopEnd": 1.8199093
+        },
+        "66": {
+          "loopStart": 0.848254,
+          "loopEnd": 1.8586848
+        },
+        "67": {
+          "loopStart": 0.7663039,
+          "loopEnd": 1.7978685
+        },
+        "68": {
+          "loopStart": 0.8282086,
+          "loopEnd": 1.8571429
+        },
+        "69": {
+          "loopStart": 0.7794558,
+          "loopEnd": 1.777415
+        },
+        "70": {
+          "loopStart": 0.8559184,
+          "loopEnd": 1.8407256
+        },
+        "71": {
+          "loopStart": 0.8462132,
+          "loopEnd": 1.8568254
+        },
+        "72": {
+          "loopStart": 0.8005442,
+          "loopEnd": 1.7972336
+        },
+        "73": {
+          "loopStart": 0.8419501,
+          "loopEnd": 1.8473469
+        },
+        "74": {
+          "loopStart": 0.8170522,
+          "loopEnd": 1.8195465
+        },
+        "75": {
+          "loopStart": 0.8388209,
+          "loopEnd": 1.830068
+        },
+        "76": {
+          "loopStart": 0.7855782,
+          "loopEnd": 1.7956463
+        },
+        "77": {
+          "loopStart": 0.8404989,
+          "loopEnd": 1.8556463
+        },
+        "78": {
+          "loopStart": 0.7873469,
+          "loopEnd": 1.7869388
+        },
+        "79": {
+          "loopStart": 0.8526984,
+          "loopEnd": 1.8495692
+        },
+        "80": {
+          "loopStart": 0.8142404,
+          "loopEnd": 1.8055782
+        },
+        "81": {
+          "loopStart": 0.8289342,
+          "loopEnd": 1.8214059
+        },
+        "82": {
+          "loopStart": 0.8197732,
+          "loopEnd": 1.8185941
+        },
+        "83": {
+          "loopStart": 0.8577324,
+          "loopEnd": 1.8590476
+        },
+        "84": {
+          "loopStart": 0.8294331,
+          "loopEnd": 1.8297959
+        },
+        "85": {
+          "loopStart": 0.765805,
+          "loopEnd": 1.7666667
+        },
+        "86": {
+          "loopStart": 0.8493424,
+          "loopEnd": 1.850068
+        },
+        "87": {
+          "loopStart": 0.8223583,
+          "loopEnd": 1.835873
+        },
+        "88": {
+          "loopStart": 0.778458,
+          "loopEnd": 1.7819048
+        },
+        "89": {
+          "loopStart": 0.8577324,
+          "loopEnd": 1.842585
+        },
+        "90": {
+          "loopStart": 0.8451701,
+          "loopEnd": 1.852381
+        },
+        "91": {
+          "loopStart": 0.8058503,
+          "loopEnd": 1.8073469
+        },
+        "92": {
+          "loopStart": 0.8260771,
+          "loopEnd": 1.8302041
+        },
+        "93": {
+          "loopStart": 0.8478005,
+          "loopEnd": 1.8533787
+        },
+        "94": {
+          "loopStart": 0.8305669,
+          "loopEnd": 1.8288435
+        },
+        "95": {
+          "loopStart": 0.8207256,
+          "loopEnd": 1.8220408
+        },
+        "96": {
+          "loopStart": 0.7912925,
+          "loopEnd": 1.7916553
+        }
+      }
+    },
+    "drum": {
+      "bank": 128,
+      "program": 0,
+      "notes": [
+        31,
+        41,
+        43,
+        45,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        60,
+        61,
+        62,
+        63,
+        64,
+        69,
+        70,
+        73,
+        74,
+        75,
+        76,
+        77,
+        80,
+        81,
+        82,
+        83,
+        84,
+        85,
+        86,
+        87
+      ],
+      "duration": 4.5,
+      "hold": 4.4,
+      "description": "GeneralUser GS Standard percussion kit"
+    }
+  },
+  "drumNotes": [
+    31,
+    41,
+    43,
+    45,
+    47,
+    48,
+    49,
+    50,
+    51,
+    52,
+    53,
+    54,
+    55,
+    56,
+    57,
+    60,
+    61,
+    62,
+    63,
+    64,
+    69,
+    70,
+    73,
+    74,
+    75,
+    76,
+    77,
+    80,
+    81,
+    82,
+    83,
+    84,
+    85,
+    86,
+    87
+  ],
+  "drumNames": {
+    "31": "Sticks",
+    "41": "Low floor tom",
+    "43": "High floor tom",
+    "45": "Low tom",
+    "47": "Low-mid tom",
+    "48": "High-mid tom",
+    "49": "Crash cymbal 1",
+    "50": "High tom",
+    "51": "Ride cymbal",
+    "52": "Chinese cymbal",
+    "53": "Ride bell",
+    "54": "Tambourine",
+    "55": "Splash cymbal",
+    "56": "Cowbell",
+    "57": "Crash cymbal 2",
+    "60": "High bongo",
+    "61": "Low bongo",
+    "62": "Muted high conga",
+    "63": "Open high conga",
+    "64": "Low conga",
+    "69": "Cabasa",
+    "70": "Maracas",
+    "73": "Short guiro",
+    "74": "Long guiro",
+    "75": "Claves",
+    "76": "High wood block",
+    "77": "Low wood block",
+    "80": "Muted triangle",
+    "81": "Open triangle",
+    "82": "Shaker",
+    "83": "Jingle bell",
+    "84": "Chimes / bell tree",
+    "85": "Castanets",
+    "86": "Muted surdo",
+    "87": "Open surdo"
+  },
+  "samples": {
+    "marimba": {
+      "36": {
+        "url": "assets/audio/marimba/36.mp3",
+        "duration": 4.5,
+        "peak": 0.56997,
+        "rms": 0.10006,
+        "bytes": 36824
+      },
+      "37": {
+        "url": "assets/audio/marimba/37.mp3",
+        "duration": 4.5,
+        "peak": 0.57033,
+        "rms": 0.09956,
+        "bytes": 36824
+      },
+      "38": {
+        "url": "assets/audio/marimba/38.mp3",
+        "duration": 4.5,
+        "peak": 0.56993,
+        "rms": 0.09905,
+        "bytes": 36824
+      },
+      "39": {
+        "url": "assets/audio/marimba/39.mp3",
+        "duration": 4.5,
+        "peak": 0.57058,
+        "rms": 0.09848,
+        "bytes": 36824
+      },
+      "40": {
+        "url": "assets/audio/marimba/40.mp3",
+        "duration": 4.5,
+        "peak": 0.57068,
+        "rms": 0.09777,
+        "bytes": 36824
+      },
+      "41": {
+        "url": "assets/audio/marimba/41.mp3",
+        "duration": 4.5,
+        "peak": 0.56952,
+        "rms": 0.09708,
+        "bytes": 36824
+      },
+      "42": {
+        "url": "assets/audio/marimba/42.mp3",
+        "duration": 4.5,
+        "peak": 0.57169,
+        "rms": 0.09621,
+        "bytes": 36824
+      },
+      "43": {
+        "url": "assets/audio/marimba/43.mp3",
+        "duration": 4.5,
+        "peak": 0.56854,
+        "rms": 0.09542,
+        "bytes": 36824
+      },
+      "44": {
+        "url": "assets/audio/marimba/44.mp3",
+        "duration": 4.5,
+        "peak": 0.57134,
+        "rms": 0.09461,
+        "bytes": 36824
+      },
+      "45": {
+        "url": "assets/audio/marimba/45.mp3",
+        "duration": 4.5,
+        "peak": 0.57006,
+        "rms": 0.09389,
+        "bytes": 36824
+      },
+      "46": {
+        "url": "assets/audio/marimba/46.mp3",
+        "duration": 4.5,
+        "peak": 0.56852,
+        "rms": 0.09329,
+        "bytes": 36824
+      },
+      "47": {
+        "url": "assets/audio/marimba/47.mp3",
+        "duration": 4.5,
+        "peak": 0.57114,
+        "rms": 0.09227,
+        "bytes": 36824
+      },
+      "48": {
+        "url": "assets/audio/marimba/48.mp3",
+        "duration": 4.5,
+        "peak": 0.57002,
+        "rms": 0.0844,
+        "bytes": 36824
+      },
+      "49": {
+        "url": "assets/audio/marimba/49.mp3",
+        "duration": 4.5,
+        "peak": 0.5707,
+        "rms": 0.08167,
+        "bytes": 36824
+      },
+      "50": {
+        "url": "assets/audio/marimba/50.mp3",
+        "duration": 4.5,
+        "peak": 0.56933,
+        "rms": 0.08053,
+        "bytes": 36824
+      },
+      "51": {
+        "url": "assets/audio/marimba/51.mp3",
+        "duration": 4.5,
+        "peak": 0.56696,
+        "rms": 0.07909,
+        "bytes": 36824
+      },
+      "52": {
+        "url": "assets/audio/marimba/52.mp3",
+        "duration": 4.5,
+        "peak": 0.57265,
+        "rms": 0.07832,
+        "bytes": 36824
+      },
+      "53": {
+        "url": "assets/audio/marimba/53.mp3",
+        "duration": 4.5,
+        "peak": 0.56917,
+        "rms": 0.07691,
+        "bytes": 36824
+      },
+      "54": {
+        "url": "assets/audio/marimba/54.mp3",
+        "duration": 4.5,
+        "peak": 0.56782,
+        "rms": 0.07608,
+        "bytes": 36824
+      },
+      "55": {
+        "url": "assets/audio/marimba/55.mp3",
+        "duration": 4.5,
+        "peak": 0.57806,
+        "rms": 0.07523,
+        "bytes": 36824
+      },
+      "56": {
+        "url": "assets/audio/marimba/56.mp3",
+        "duration": 4.5,
+        "peak": 0.58392,
+        "rms": 0.07419,
+        "bytes": 36824
+      },
+      "57": {
+        "url": "assets/audio/marimba/57.mp3",
+        "duration": 4.5,
+        "peak": 0.57269,
+        "rms": 0.07337,
+        "bytes": 36824
+      },
+      "58": {
+        "url": "assets/audio/marimba/58.mp3",
+        "duration": 4.5,
+        "peak": 0.56427,
+        "rms": 0.0728,
+        "bytes": 36824
+      },
+      "59": {
+        "url": "assets/audio/marimba/59.mp3",
+        "duration": 4.5,
+        "peak": 0.57294,
+        "rms": 0.07185,
+        "bytes": 36824
+      },
+      "60": {
+        "url": "assets/audio/marimba/60.mp3",
+        "duration": 4.5,
+        "peak": 0.56245,
+        "rms": 0.07154,
+        "bytes": 36824
+      },
+      "61": {
+        "url": "assets/audio/marimba/61.mp3",
+        "duration": 4.5,
+        "peak": 0.57342,
+        "rms": 0.06983,
+        "bytes": 36824
+      },
+      "62": {
+        "url": "assets/audio/marimba/62.mp3",
+        "duration": 4.5,
+        "peak": 0.56892,
+        "rms": 0.06967,
+        "bytes": 36824
+      },
+      "63": {
+        "url": "assets/audio/marimba/63.mp3",
+        "duration": 4.5,
+        "peak": 0.56914,
+        "rms": 0.06961,
+        "bytes": 36824
+      },
+      "64": {
+        "url": "assets/audio/marimba/64.mp3",
+        "duration": 4.5,
+        "peak": 0.56858,
+        "rms": 0.06917,
+        "bytes": 36824
+      },
+      "65": {
+        "url": "assets/audio/marimba/65.mp3",
+        "duration": 4.5,
+        "peak": 0.57357,
+        "rms": 0.06784,
+        "bytes": 36824
+      },
+      "66": {
+        "url": "assets/audio/marimba/66.mp3",
+        "duration": 4.5,
+        "peak": 0.56915,
+        "rms": 0.06942,
+        "bytes": 36824
+      },
+      "67": {
+        "url": "assets/audio/marimba/67.mp3",
+        "duration": 4.5,
+        "peak": 0.57782,
+        "rms": 0.06925,
+        "bytes": 36824
+      },
+      "68": {
+        "url": "assets/audio/marimba/68.mp3",
+        "duration": 4.5,
+        "peak": 0.57524,
+        "rms": 0.06813,
+        "bytes": 36824
+      },
+      "69": {
+        "url": "assets/audio/marimba/69.mp3",
+        "duration": 4.5,
+        "peak": 0.57505,
+        "rms": 0.06786,
+        "bytes": 36824
+      },
+      "70": {
+        "url": "assets/audio/marimba/70.mp3",
+        "duration": 4.5,
+        "peak": 0.57079,
+        "rms": 0.07026,
+        "bytes": 36824
+      },
+      "71": {
+        "url": "assets/audio/marimba/71.mp3",
+        "duration": 4.5,
+        "peak": 0.57007,
+        "rms": 0.06915,
+        "bytes": 36824
+      },
+      "72": {
+        "url": "assets/audio/marimba/72.mp3",
+        "duration": 4.5,
+        "peak": 0.57118,
+        "rms": 0.06764,
+        "bytes": 36824
+      },
+      "73": {
+        "url": "assets/audio/marimba/73.mp3",
+        "duration": 4.5,
+        "peak": 0.57009,
+        "rms": 0.06603,
+        "bytes": 36824
+      },
+      "74": {
+        "url": "assets/audio/marimba/74.mp3",
+        "duration": 4.5,
+        "peak": 0.5697,
+        "rms": 0.06469,
+        "bytes": 36824
+      },
+      "75": {
+        "url": "assets/audio/marimba/75.mp3",
+        "duration": 4.5,
+        "peak": 0.56852,
+        "rms": 0.06336,
+        "bytes": 36824
+      },
+      "76": {
+        "url": "assets/audio/marimba/76.mp3",
+        "duration": 4.5,
+        "peak": 0.56955,
+        "rms": 0.06201,
+        "bytes": 36824
+      },
+      "77": {
+        "url": "assets/audio/marimba/77.mp3",
+        "duration": 4.5,
+        "peak": 0.5706,
+        "rms": 0.06105,
+        "bytes": 36824
+      },
+      "78": {
+        "url": "assets/audio/marimba/78.mp3",
+        "duration": 4.5,
+        "peak": 0.57107,
+        "rms": 0.05964,
+        "bytes": 36824
+      },
+      "79": {
+        "url": "assets/audio/marimba/79.mp3",
+        "duration": 4.5,
+        "peak": 0.56939,
+        "rms": 0.05847,
+        "bytes": 36824
+      },
+      "80": {
+        "url": "assets/audio/marimba/80.mp3",
+        "duration": 4.5,
+        "peak": 0.57018,
+        "rms": 0.05741,
+        "bytes": 36824
+      },
+      "81": {
+        "url": "assets/audio/marimba/81.mp3",
+        "duration": 4.5,
+        "peak": 0.5696,
+        "rms": 0.05618,
+        "bytes": 36824
+      },
+      "82": {
+        "url": "assets/audio/marimba/82.mp3",
+        "duration": 4.5,
+        "peak": 0.56914,
+        "rms": 0.05556,
+        "bytes": 36824
+      },
+      "83": {
+        "url": "assets/audio/marimba/83.mp3",
+        "duration": 4.5,
+        "peak": 0.56563,
+        "rms": 0.05419,
+        "bytes": 36824
+      },
+      "84": {
+        "url": "assets/audio/marimba/84.mp3",
+        "duration": 4.5,
+        "peak": 0.57067,
+        "rms": 0.05348,
+        "bytes": 36824
+      },
+      "85": {
+        "url": "assets/audio/marimba/85.mp3",
+        "duration": 4.5,
+        "peak": 0.56991,
+        "rms": 0.05349,
+        "bytes": 36824
+      },
+      "86": {
+        "url": "assets/audio/marimba/86.mp3",
+        "duration": 4.5,
+        "peak": 0.57082,
+        "rms": 0.05342,
+        "bytes": 36824
+      },
+      "87": {
+        "url": "assets/audio/marimba/87.mp3",
+        "duration": 4.5,
+        "peak": 0.57167,
+        "rms": 0.05294,
+        "bytes": 36824
+      },
+      "88": {
+        "url": "assets/audio/marimba/88.mp3",
+        "duration": 4.5,
+        "peak": 0.56956,
+        "rms": 0.05341,
+        "bytes": 36824
+      },
+      "89": {
+        "url": "assets/audio/marimba/89.mp3",
+        "duration": 4.5,
+        "peak": 0.57234,
+        "rms": 0.0539,
+        "bytes": 36824
+      },
+      "90": {
+        "url": "assets/audio/marimba/90.mp3",
+        "duration": 4.5,
+        "peak": 0.56591,
+        "rms": 0.05411,
+        "bytes": 36824
+      },
+      "91": {
+        "url": "assets/audio/marimba/91.mp3",
+        "duration": 4.5,
+        "peak": 0.56987,
+        "rms": 0.05628,
+        "bytes": 36824
+      },
+      "92": {
+        "url": "assets/audio/marimba/92.mp3",
+        "duration": 4.5,
+        "peak": 0.55801,
+        "rms": 0.05686,
+        "bytes": 36824
+      },
+      "93": {
+        "url": "assets/audio/marimba/93.mp3",
+        "duration": 4.5,
+        "peak": 0.56973,
+        "rms": 0.06696,
+        "bytes": 36824
+      }
+    },
+    "vibraphone": {
+      "36": {
+        "url": "assets/audio/vibraphone/36.mp3",
+        "duration": 4.5,
+        "peak": 0.57252,
+        "rms": 0.11127,
+        "bytes": 36824
+      },
+      "37": {
+        "url": "assets/audio/vibraphone/37.mp3",
+        "duration": 4.5,
+        "peak": 0.56575,
+        "rms": 0.11134,
+        "bytes": 36824
+      },
+      "38": {
+        "url": "assets/audio/vibraphone/38.mp3",
+        "duration": 4.5,
+        "peak": 0.5771,
+        "rms": 0.11133,
+        "bytes": 36824
+      },
+      "39": {
+        "url": "assets/audio/vibraphone/39.mp3",
+        "duration": 4.5,
+        "peak": 0.56826,
+        "rms": 0.11124,
+        "bytes": 36824
+      },
+      "40": {
+        "url": "assets/audio/vibraphone/40.mp3",
+        "duration": 4.5,
+        "peak": 0.56774,
+        "rms": 0.11123,
+        "bytes": 36824
+      },
+      "41": {
+        "url": "assets/audio/vibraphone/41.mp3",
+        "duration": 4.5,
+        "peak": 0.57151,
+        "rms": 0.11118,
+        "bytes": 36824
+      },
+      "42": {
+        "url": "assets/audio/vibraphone/42.mp3",
+        "duration": 4.5,
+        "peak": 0.5729,
+        "rms": 0.11139,
+        "bytes": 36824
+      },
+      "43": {
+        "url": "assets/audio/vibraphone/43.mp3",
+        "duration": 4.5,
+        "peak": 0.57121,
+        "rms": 0.11194,
+        "bytes": 36824
+      },
+      "44": {
+        "url": "assets/audio/vibraphone/44.mp3",
+        "duration": 4.5,
+        "peak": 0.57423,
+        "rms": 0.11124,
+        "bytes": 36824
+      },
+      "45": {
+        "url": "assets/audio/vibraphone/45.mp3",
+        "duration": 4.5,
+        "peak": 0.56948,
+        "rms": 0.11149,
+        "bytes": 36824
+      },
+      "46": {
+        "url": "assets/audio/vibraphone/46.mp3",
+        "duration": 4.5,
+        "peak": 0.57086,
+        "rms": 0.11226,
+        "bytes": 36824
+      },
+      "47": {
+        "url": "assets/audio/vibraphone/47.mp3",
+        "duration": 4.5,
+        "peak": 0.57992,
+        "rms": 0.11216,
+        "bytes": 36824
+      },
+      "48": {
+        "url": "assets/audio/vibraphone/48.mp3",
+        "duration": 4.5,
+        "peak": 0.56332,
+        "rms": 0.11173,
+        "bytes": 36824
+      },
+      "49": {
+        "url": "assets/audio/vibraphone/49.mp3",
+        "duration": 4.5,
+        "peak": 0.56987,
+        "rms": 0.12887,
+        "bytes": 36824
+      },
+      "50": {
+        "url": "assets/audio/vibraphone/50.mp3",
+        "duration": 4.5,
+        "peak": 0.57073,
+        "rms": 0.1295,
+        "bytes": 36824
+      },
+      "51": {
+        "url": "assets/audio/vibraphone/51.mp3",
+        "duration": 4.5,
+        "peak": 0.57037,
+        "rms": 0.12925,
+        "bytes": 36824
+      },
+      "52": {
+        "url": "assets/audio/vibraphone/52.mp3",
+        "duration": 4.5,
+        "peak": 0.57061,
+        "rms": 0.12926,
+        "bytes": 36824
+      },
+      "53": {
+        "url": "assets/audio/vibraphone/53.mp3",
+        "duration": 4.5,
+        "peak": 0.5708,
+        "rms": 0.12888,
+        "bytes": 36824
+      },
+      "54": {
+        "url": "assets/audio/vibraphone/54.mp3",
+        "duration": 4.5,
+        "peak": 0.57124,
+        "rms": 0.12878,
+        "bytes": 36824
+      },
+      "55": {
+        "url": "assets/audio/vibraphone/55.mp3",
+        "duration": 4.5,
+        "peak": 0.5703,
+        "rms": 0.12912,
+        "bytes": 36824
+      },
+      "56": {
+        "url": "assets/audio/vibraphone/56.mp3",
+        "duration": 4.5,
+        "peak": 0.57017,
+        "rms": 0.12901,
+        "bytes": 36824
+      },
+      "57": {
+        "url": "assets/audio/vibraphone/57.mp3",
+        "duration": 4.5,
+        "peak": 0.57048,
+        "rms": 0.1324,
+        "bytes": 36824
+      },
+      "58": {
+        "url": "assets/audio/vibraphone/58.mp3",
+        "duration": 4.5,
+        "peak": 0.56924,
+        "rms": 0.13266,
+        "bytes": 36824
+      },
+      "59": {
+        "url": "assets/audio/vibraphone/59.mp3",
+        "duration": 4.5,
+        "peak": 0.56956,
+        "rms": 0.13267,
+        "bytes": 36824
+      },
+      "60": {
+        "url": "assets/audio/vibraphone/60.mp3",
+        "duration": 4.5,
+        "peak": 0.56998,
+        "rms": 0.13285,
+        "bytes": 36824
+      },
+      "61": {
+        "url": "assets/audio/vibraphone/61.mp3",
+        "duration": 4.5,
+        "peak": 0.57008,
+        "rms": 0.13271,
+        "bytes": 36824
+      },
+      "62": {
+        "url": "assets/audio/vibraphone/62.mp3",
+        "duration": 4.5,
+        "peak": 0.57043,
+        "rms": 0.1327,
+        "bytes": 36824
+      },
+      "63": {
+        "url": "assets/audio/vibraphone/63.mp3",
+        "duration": 4.5,
+        "peak": 0.57215,
+        "rms": 0.13242,
+        "bytes": 36824
+      },
+      "64": {
+        "url": "assets/audio/vibraphone/64.mp3",
+        "duration": 4.5,
+        "peak": 0.57038,
+        "rms": 0.13241,
+        "bytes": 36824
+      },
+      "65": {
+        "url": "assets/audio/vibraphone/65.mp3",
+        "duration": 4.5,
+        "peak": 0.56942,
+        "rms": 0.13258,
+        "bytes": 36824
+      },
+      "66": {
+        "url": "assets/audio/vibraphone/66.mp3",
+        "duration": 4.5,
+        "peak": 0.56863,
+        "rms": 0.12583,
+        "bytes": 36824
+      },
+      "67": {
+        "url": "assets/audio/vibraphone/67.mp3",
+        "duration": 4.5,
+        "peak": 0.5708,
+        "rms": 0.12559,
+        "bytes": 36824
+      },
+      "68": {
+        "url": "assets/audio/vibraphone/68.mp3",
+        "duration": 4.5,
+        "peak": 0.57185,
+        "rms": 0.12534,
+        "bytes": 36824
+      },
+      "69": {
+        "url": "assets/audio/vibraphone/69.mp3",
+        "duration": 4.5,
+        "peak": 0.56897,
+        "rms": 0.12509,
+        "bytes": 36824
+      },
+      "70": {
+        "url": "assets/audio/vibraphone/70.mp3",
+        "duration": 4.5,
+        "peak": 0.56914,
+        "rms": 0.12607,
+        "bytes": 36824
+      },
+      "71": {
+        "url": "assets/audio/vibraphone/71.mp3",
+        "duration": 4.5,
+        "peak": 0.56895,
+        "rms": 0.12481,
+        "bytes": 36824
+      },
+      "72": {
+        "url": "assets/audio/vibraphone/72.mp3",
+        "duration": 4.5,
+        "peak": 0.57132,
+        "rms": 0.12441,
+        "bytes": 36824
+      },
+      "73": {
+        "url": "assets/audio/vibraphone/73.mp3",
+        "duration": 4.5,
+        "peak": 0.57217,
+        "rms": 0.12514,
+        "bytes": 36824
+      },
+      "74": {
+        "url": "assets/audio/vibraphone/74.mp3",
+        "duration": 4.5,
+        "peak": 0.57178,
+        "rms": 0.11145,
+        "bytes": 36824
+      },
+      "75": {
+        "url": "assets/audio/vibraphone/75.mp3",
+        "duration": 4.5,
+        "peak": 0.56593,
+        "rms": 0.11956,
+        "bytes": 36824
+      },
+      "76": {
+        "url": "assets/audio/vibraphone/76.mp3",
+        "duration": 4.5,
+        "peak": 0.56532,
+        "rms": 0.10972,
+        "bytes": 36824
+      },
+      "77": {
+        "url": "assets/audio/vibraphone/77.mp3",
+        "duration": 4.5,
+        "peak": 0.58151,
+        "rms": 0.11879,
+        "bytes": 36824
+      },
+      "78": {
+        "url": "assets/audio/vibraphone/78.mp3",
+        "duration": 4.5,
+        "peak": 0.57081,
+        "rms": 0.11439,
+        "bytes": 36824
+      },
+      "79": {
+        "url": "assets/audio/vibraphone/79.mp3",
+        "duration": 4.5,
+        "peak": 0.55159,
+        "rms": 0.11028,
+        "bytes": 36824
+      },
+      "80": {
+        "url": "assets/audio/vibraphone/80.mp3",
+        "duration": 4.5,
+        "peak": 0.5728,
+        "rms": 0.12954,
+        "bytes": 36824
+      },
+      "81": {
+        "url": "assets/audio/vibraphone/81.mp3",
+        "duration": 4.5,
+        "peak": 0.58548,
+        "rms": 0.1154,
+        "bytes": 36824
+      },
+      "82": {
+        "url": "assets/audio/vibraphone/82.mp3",
+        "duration": 4.5,
+        "peak": 0.55733,
+        "rms": 0.11822,
+        "bytes": 36824
+      },
+      "83": {
+        "url": "assets/audio/vibraphone/83.mp3",
+        "duration": 4.5,
+        "peak": 0.57135,
+        "rms": 0.13193,
+        "bytes": 36824
+      },
+      "84": {
+        "url": "assets/audio/vibraphone/84.mp3",
+        "duration": 4.5,
+        "peak": 0.55787,
+        "rms": 0.12658,
+        "bytes": 36824
+      },
+      "85": {
+        "url": "assets/audio/vibraphone/85.mp3",
+        "duration": 4.5,
+        "peak": 0.57106,
+        "rms": 0.12635,
+        "bytes": 36824
+      },
+      "86": {
+        "url": "assets/audio/vibraphone/86.mp3",
+        "duration": 4.5,
+        "peak": 0.57027,
+        "rms": 0.13371,
+        "bytes": 36824
+      },
+      "87": {
+        "url": "assets/audio/vibraphone/87.mp3",
+        "duration": 4.5,
+        "peak": 0.60377,
+        "rms": 0.13039,
+        "bytes": 36824
+      },
+      "88": {
+        "url": "assets/audio/vibraphone/88.mp3",
+        "duration": 4.5,
+        "peak": 0.57229,
+        "rms": 0.11623,
+        "bytes": 36824
+      },
+      "89": {
+        "url": "assets/audio/vibraphone/89.mp3",
+        "duration": 4.5,
+        "peak": 0.58052,
+        "rms": 0.11399,
+        "bytes": 36824
+      },
+      "90": {
+        "url": "assets/audio/vibraphone/90.mp3",
+        "duration": 4.5,
+        "peak": 0.57208,
+        "rms": 0.11754,
+        "bytes": 36824
+      },
+      "91": {
+        "url": "assets/audio/vibraphone/91.mp3",
+        "duration": 4.5,
+        "peak": 0.577,
+        "rms": 0.11337,
+        "bytes": 36824
+      },
+      "92": {
+        "url": "assets/audio/vibraphone/92.mp3",
+        "duration": 4.5,
+        "peak": 0.56323,
+        "rms": 0.11442,
+        "bytes": 36824
+      },
+      "93": {
+        "url": "assets/audio/vibraphone/93.mp3",
+        "duration": 4.5,
+        "peak": 0.56434,
+        "rms": 0.11208,
+        "bytes": 36824
+      }
+    },
+    "glockenspiel": {
+      "60": {
+        "url": "assets/audio/glockenspiel/60.mp3",
+        "duration": 4.5,
+        "peak": 0.56496,
+        "rms": 0.03092,
+        "bytes": 36824
+      },
+      "61": {
+        "url": "assets/audio/glockenspiel/61.mp3",
+        "duration": 4.5,
+        "peak": 0.57419,
+        "rms": 0.03043,
+        "bytes": 36824
+      },
+      "62": {
+        "url": "assets/audio/glockenspiel/62.mp3",
+        "duration": 4.5,
+        "peak": 0.56974,
+        "rms": 0.02975,
+        "bytes": 36824
+      },
+      "63": {
+        "url": "assets/audio/glockenspiel/63.mp3",
+        "duration": 4.5,
+        "peak": 0.56276,
+        "rms": 0.02925,
+        "bytes": 36824
+      },
+      "64": {
+        "url": "assets/audio/glockenspiel/64.mp3",
+        "duration": 4.5,
+        "peak": 0.56022,
+        "rms": 0.02847,
+        "bytes": 36824
+      },
+      "65": {
+        "url": "assets/audio/glockenspiel/65.mp3",
+        "duration": 4.5,
+        "peak": 0.56227,
+        "rms": 0.02814,
+        "bytes": 36824
+      },
+      "66": {
+        "url": "assets/audio/glockenspiel/66.mp3",
+        "duration": 4.5,
+        "peak": 0.58642,
+        "rms": 0.02759,
+        "bytes": 36824
+      },
+      "67": {
+        "url": "assets/audio/glockenspiel/67.mp3",
+        "duration": 4.5,
+        "peak": 0.55042,
+        "rms": 0.02684,
+        "bytes": 36824
+      },
+      "68": {
+        "url": "assets/audio/glockenspiel/68.mp3",
+        "duration": 4.5,
+        "peak": 0.55335,
+        "rms": 0.02794,
+        "bytes": 36824
+      },
+      "69": {
+        "url": "assets/audio/glockenspiel/69.mp3",
+        "duration": 4.5,
+        "peak": 0.57457,
+        "rms": 0.02675,
+        "bytes": 36824
+      },
+      "70": {
+        "url": "assets/audio/glockenspiel/70.mp3",
+        "duration": 4.5,
+        "peak": 0.58155,
+        "rms": 0.02625,
+        "bytes": 36824
+      },
+      "71": {
+        "url": "assets/audio/glockenspiel/71.mp3",
+        "duration": 4.5,
+        "peak": 0.59664,
+        "rms": 0.02501,
+        "bytes": 36824
+      },
+      "72": {
+        "url": "assets/audio/glockenspiel/72.mp3",
+        "duration": 4.5,
+        "peak": 0.55443,
+        "rms": 0.02391,
+        "bytes": 36824
+      },
+      "73": {
+        "url": "assets/audio/glockenspiel/73.mp3",
+        "duration": 4.5,
+        "peak": 0.56302,
+        "rms": 0.02245,
+        "bytes": 36824
+      },
+      "74": {
+        "url": "assets/audio/glockenspiel/74.mp3",
+        "duration": 4.5,
+        "peak": 0.55172,
+        "rms": 0.02183,
+        "bytes": 36824
+      },
+      "75": {
+        "url": "assets/audio/glockenspiel/75.mp3",
+        "duration": 4.5,
+        "peak": 0.57201,
+        "rms": 0.02116,
+        "bytes": 36824
+      },
+      "76": {
+        "url": "assets/audio/glockenspiel/76.mp3",
+        "duration": 4.5,
+        "peak": 0.5818,
+        "rms": 0.0208,
+        "bytes": 36824
+      },
+      "77": {
+        "url": "assets/audio/glockenspiel/77.mp3",
+        "duration": 4.5,
+        "peak": 0.56401,
+        "rms": 0.02044,
+        "bytes": 36824
+      },
+      "78": {
+        "url": "assets/audio/glockenspiel/78.mp3",
+        "duration": 4.5,
+        "peak": 0.56481,
+        "rms": 0.01833,
+        "bytes": 36824
+      },
+      "79": {
+        "url": "assets/audio/glockenspiel/79.mp3",
+        "duration": 4.5,
+        "peak": 0.56252,
+        "rms": 0.01975,
+        "bytes": 36824
+      },
+      "80": {
+        "url": "assets/audio/glockenspiel/80.mp3",
+        "duration": 4.5,
+        "peak": 0.55813,
+        "rms": 0.01816,
+        "bytes": 36824
+      },
+      "81": {
+        "url": "assets/audio/glockenspiel/81.mp3",
+        "duration": 4.5,
+        "peak": 0.55027,
+        "rms": 0.01791,
+        "bytes": 36824
+      },
+      "82": {
+        "url": "assets/audio/glockenspiel/82.mp3",
+        "duration": 4.5,
+        "peak": 0.5522,
+        "rms": 0.01819,
+        "bytes": 36824
+      },
+      "83": {
+        "url": "assets/audio/glockenspiel/83.mp3",
+        "duration": 4.5,
+        "peak": 0.56487,
+        "rms": 0.01895,
+        "bytes": 36824
+      },
+      "84": {
+        "url": "assets/audio/glockenspiel/84.mp3",
+        "duration": 4.5,
+        "peak": 0.57679,
+        "rms": 0.01824,
+        "bytes": 36824
+      },
+      "85": {
+        "url": "assets/audio/glockenspiel/85.mp3",
+        "duration": 4.5,
+        "peak": 0.55444,
+        "rms": 0.01809,
+        "bytes": 36824
+      },
+      "86": {
+        "url": "assets/audio/glockenspiel/86.mp3",
+        "duration": 4.5,
+        "peak": 0.55743,
+        "rms": 0.01718,
+        "bytes": 36824
+      },
+      "87": {
+        "url": "assets/audio/glockenspiel/87.mp3",
+        "duration": 4.5,
+        "peak": 0.58358,
+        "rms": 0.01658,
+        "bytes": 36824
+      },
+      "88": {
+        "url": "assets/audio/glockenspiel/88.mp3",
+        "duration": 4.5,
+        "peak": 0.56955,
+        "rms": 0.01643,
+        "bytes": 36824
+      },
+      "89": {
+        "url": "assets/audio/glockenspiel/89.mp3",
+        "duration": 4.5,
+        "peak": 0.57684,
+        "rms": 0.01693,
+        "bytes": 36824
+      },
+      "90": {
+        "url": "assets/audio/glockenspiel/90.mp3",
+        "duration": 4.5,
+        "peak": 0.55723,
+        "rms": 0.0159,
+        "bytes": 36824
+      },
+      "91": {
+        "url": "assets/audio/glockenspiel/91.mp3",
+        "duration": 4.5,
+        "peak": 0.5597,
+        "rms": 0.01847,
+        "bytes": 36824
+      },
+      "92": {
+        "url": "assets/audio/glockenspiel/92.mp3",
+        "duration": 4.5,
+        "peak": 0.57023,
+        "rms": 0.02184,
+        "bytes": 36824
+      },
+      "93": {
+        "url": "assets/audio/glockenspiel/93.mp3",
+        "duration": 4.5,
+        "peak": 0.56217,
+        "rms": 0.02036,
+        "bytes": 36824
+      },
+      "94": {
+        "url": "assets/audio/glockenspiel/94.mp3",
+        "duration": 4.5,
+        "peak": 0.572,
+        "rms": 0.02097,
+        "bytes": 36824
+      },
+      "95": {
+        "url": "assets/audio/glockenspiel/95.mp3",
+        "duration": 4.5,
+        "peak": 0.56957,
+        "rms": 0.02797,
+        "bytes": 36824
+      },
+      "96": {
+        "url": "assets/audio/glockenspiel/96.mp3",
+        "duration": 4.5,
+        "peak": 0.5628,
+        "rms": 0.03277,
+        "bytes": 36824
+      },
+      "97": {
+        "url": "assets/audio/glockenspiel/97.mp3",
+        "duration": 4.5,
+        "peak": 0.59146,
+        "rms": 0.02923,
+        "bytes": 36824
+      },
+      "98": {
+        "url": "assets/audio/glockenspiel/98.mp3",
+        "duration": 4.5,
+        "peak": 0.57348,
+        "rms": 0.02443,
+        "bytes": 36824
+      },
+      "99": {
+        "url": "assets/audio/glockenspiel/99.mp3",
+        "duration": 4.5,
+        "peak": 0.49247,
+        "rms": 0.02514,
+        "bytes": 36824
+      },
+      "100": {
+        "url": "assets/audio/glockenspiel/100.mp3",
+        "duration": 4.5,
+        "peak": 0.45095,
+        "rms": 0.03562,
+        "bytes": 36824
+      },
+      "101": {
+        "url": "assets/audio/glockenspiel/101.mp3",
+        "duration": 4.5,
+        "peak": 0.57465,
+        "rms": 0.04466,
+        "bytes": 36824
+      },
+      "102": {
+        "url": "assets/audio/glockenspiel/102.mp3",
+        "duration": 4.5,
+        "peak": 0.51456,
+        "rms": 0.04311,
+        "bytes": 36824
+      },
+      "103": {
+        "url": "assets/audio/glockenspiel/103.mp3",
+        "duration": 4.5,
+        "peak": 0.53826,
+        "rms": 0.03965,
+        "bytes": 36824
+      },
+      "104": {
+        "url": "assets/audio/glockenspiel/104.mp3",
+        "duration": 4.5,
+        "peak": 0.43648,
+        "rms": 0.02682,
+        "bytes": 36824
+      },
+      "105": {
+        "url": "assets/audio/glockenspiel/105.mp3",
+        "duration": 4.5,
+        "peak": 0.47366,
+        "rms": 0.01755,
+        "bytes": 36824
+      }
+    },
+    "timpani": {
+      "36": {
+        "url": "assets/audio/timpani/36.mp3",
+        "duration": 4.2,
+        "peak": 0.56821,
+        "rms": 0.05906,
+        "bytes": 34316
+      },
+      "37": {
+        "url": "assets/audio/timpani/37.mp3",
+        "duration": 4.2,
+        "peak": 0.57426,
+        "rms": 0.05773,
+        "bytes": 34316
+      },
+      "38": {
+        "url": "assets/audio/timpani/38.mp3",
+        "duration": 4.2,
+        "peak": 0.5669,
+        "rms": 0.05641,
+        "bytes": 34316
+      },
+      "39": {
+        "url": "assets/audio/timpani/39.mp3",
+        "duration": 4.2,
+        "peak": 0.56589,
+        "rms": 0.05496,
+        "bytes": 34316
+      },
+      "40": {
+        "url": "assets/audio/timpani/40.mp3",
+        "duration": 4.2,
+        "peak": 0.58179,
+        "rms": 0.05368,
+        "bytes": 34316
+      },
+      "41": {
+        "url": "assets/audio/timpani/41.mp3",
+        "duration": 4.2,
+        "peak": 0.56224,
+        "rms": 0.05235,
+        "bytes": 34316
+      },
+      "42": {
+        "url": "assets/audio/timpani/42.mp3",
+        "duration": 4.2,
+        "peak": 0.56836,
+        "rms": 0.05113,
+        "bytes": 34316
+      },
+      "43": {
+        "url": "assets/audio/timpani/43.mp3",
+        "duration": 4.2,
+        "peak": 0.56925,
+        "rms": 0.0498,
+        "bytes": 34316
+      },
+      "44": {
+        "url": "assets/audio/timpani/44.mp3",
+        "duration": 4.2,
+        "peak": 0.5715,
+        "rms": 0.04865,
+        "bytes": 34316
+      },
+      "45": {
+        "url": "assets/audio/timpani/45.mp3",
+        "duration": 4.2,
+        "peak": 0.56838,
+        "rms": 0.04726,
+        "bytes": 34316
+      },
+      "46": {
+        "url": "assets/audio/timpani/46.mp3",
+        "duration": 4.2,
+        "peak": 0.56687,
+        "rms": 0.04619,
+        "bytes": 34316
+      },
+      "47": {
+        "url": "assets/audio/timpani/47.mp3",
+        "duration": 4.2,
+        "peak": 0.56972,
+        "rms": 0.04505,
+        "bytes": 34316
+      },
+      "48": {
+        "url": "assets/audio/timpani/48.mp3",
+        "duration": 4.2,
+        "peak": 0.58038,
+        "rms": 0.04383,
+        "bytes": 34316
+      },
+      "49": {
+        "url": "assets/audio/timpani/49.mp3",
+        "duration": 4.2,
+        "peak": 0.56377,
+        "rms": 0.0427,
+        "bytes": 34316
+      },
+      "50": {
+        "url": "assets/audio/timpani/50.mp3",
+        "duration": 4.2,
+        "peak": 0.56736,
+        "rms": 0.04168,
+        "bytes": 34316
+      },
+      "51": {
+        "url": "assets/audio/timpani/51.mp3",
+        "duration": 4.2,
+        "peak": 0.57447,
+        "rms": 0.04066,
+        "bytes": 34316
+      },
+      "52": {
+        "url": "assets/audio/timpani/52.mp3",
+        "duration": 4.2,
+        "peak": 0.5637,
+        "rms": 0.03945,
+        "bytes": 34316
+      },
+      "53": {
+        "url": "assets/audio/timpani/53.mp3",
+        "duration": 4.2,
+        "peak": 0.56363,
+        "rms": 0.03847,
+        "bytes": 34316
+      },
+      "54": {
+        "url": "assets/audio/timpani/54.mp3",
+        "duration": 4.2,
+        "peak": 0.56567,
+        "rms": 0.03747,
+        "bytes": 34316
+      },
+      "55": {
+        "url": "assets/audio/timpani/55.mp3",
+        "duration": 4.2,
+        "peak": 0.54906,
+        "rms": 0.0365,
+        "bytes": 34316
+      },
+      "56": {
+        "url": "assets/audio/timpani/56.mp3",
+        "duration": 4.2,
+        "peak": 0.57661,
+        "rms": 0.03577,
+        "bytes": 34316
+      },
+      "57": {
+        "url": "assets/audio/timpani/57.mp3",
+        "duration": 4.2,
+        "peak": 0.56636,
+        "rms": 0.03471,
+        "bytes": 34316
+      },
+      "58": {
+        "url": "assets/audio/timpani/58.mp3",
+        "duration": 4.2,
+        "peak": 0.58125,
+        "rms": 0.03402,
+        "bytes": 34316
+      },
+      "59": {
+        "url": "assets/audio/timpani/59.mp3",
+        "duration": 4.2,
+        "peak": 0.55554,
+        "rms": 0.03295,
+        "bytes": 34316
+      },
+      "60": {
+        "url": "assets/audio/timpani/60.mp3",
+        "duration": 4.2,
+        "peak": 0.5673,
+        "rms": 0.03231,
+        "bytes": 34316
+      }
+    },
+    "recorder": {
+      "48": {
+        "url": "assets/audio/recorder/48.mp3",
+        "duration": 3.3,
+        "peak": 0.56972,
+        "rms": 0.27686,
+        "bytes": 27211,
+        "loopStart": 0.7751927,
+        "loopEnd": 1.7711565,
+        "loopBoundaryError": 0.001308
+      },
+      "49": {
+        "url": "assets/audio/recorder/49.mp3",
+        "duration": 3.3,
+        "peak": 0.56954,
+        "rms": 0.27776,
+        "bytes": 27211,
+        "loopStart": 0.8403628,
+        "loopEnd": 1.8524263,
+        "loopBoundaryError": 0.004516
+      },
+      "50": {
+        "url": "assets/audio/recorder/50.mp3",
+        "duration": 3.3,
+        "peak": 0.57003,
+        "rms": 0.27838,
+        "bytes": 27211,
+        "loopStart": 0.7658503,
+        "loopEnd": 1.7823583,
+        "loopBoundaryError": 0.003276
+      },
+      "51": {
+        "url": "assets/audio/recorder/51.mp3",
+        "duration": 3.3,
+        "peak": 0.57025,
+        "rms": 0.27936,
+        "bytes": 27211,
+        "loopStart": 0.7872109,
+        "loopEnd": 1.7788662,
+        "loopBoundaryError": 0.002442
+      },
+      "52": {
+        "url": "assets/audio/recorder/52.mp3",
+        "duration": 3.3,
+        "peak": 0.57217,
+        "rms": 0.27998,
+        "bytes": 27211,
+        "loopStart": 0.7795011,
+        "loopEnd": 1.7643537,
+        "loopBoundaryError": 0.001872
+      },
+      "53": {
+        "url": "assets/audio/recorder/53.mp3",
+        "duration": 3.3,
+        "peak": 0.57129,
+        "rms": 0.28067,
+        "bytes": 27211,
+        "loopStart": 0.7987302,
+        "loopEnd": 1.7917007,
+        "loopBoundaryError": 0.003048
+      },
+      "54": {
+        "url": "assets/audio/recorder/54.mp3",
+        "duration": 3.3,
+        "peak": 0.56959,
+        "rms": 0.28147,
+        "bytes": 27211,
+        "loopStart": 0.8078912,
+        "loopEnd": 1.8155556,
+        "loopBoundaryError": 0.000867
+      },
+      "55": {
+        "url": "assets/audio/recorder/55.mp3",
+        "duration": 3.3,
+        "peak": 0.56963,
+        "rms": 0.28201,
+        "bytes": 27211,
+        "loopStart": 0.839229,
+        "loopEnd": 1.8260771,
+        "loopBoundaryError": 0.00087
+      },
+      "56": {
+        "url": "assets/audio/recorder/56.mp3",
+        "duration": 3.3,
+        "peak": 0.57086,
+        "rms": 0.2824,
+        "bytes": 27211,
+        "loopStart": 0.8452154,
+        "loopEnd": 1.8542857,
+        "loopBoundaryError": 0.002912
+      },
+      "57": {
+        "url": "assets/audio/recorder/57.mp3",
+        "duration": 3.3,
+        "peak": 0.57113,
+        "rms": 0.28353,
+        "bytes": 27211,
+        "loopStart": 0.8021769,
+        "loopEnd": 1.7728798,
+        "loopBoundaryError": 0.003334
+      },
+      "58": {
+        "url": "assets/audio/recorder/58.mp3",
+        "duration": 3.3,
+        "peak": 0.56988,
+        "rms": 0.28338,
+        "bytes": 27211,
+        "loopStart": 0.8258957,
+        "loopEnd": 1.8582313,
+        "loopBoundaryError": 0.001272
+      },
+      "59": {
+        "url": "assets/audio/recorder/59.mp3",
+        "duration": 3.3,
+        "peak": 0.57029,
+        "rms": 0.28431,
+        "bytes": 27211,
+        "loopStart": 0.7714286,
+        "loopEnd": 1.7699773,
+        "loopBoundaryError": 2.9e-05
+      },
+      "60": {
+        "url": "assets/audio/recorder/60.mp3",
+        "duration": 3.3,
+        "peak": 0.56881,
+        "rms": 0.28475,
+        "bytes": 27211,
+        "loopStart": 0.7856236,
+        "loopEnd": 1.7895238,
+        "loopBoundaryError": 0.000509
+      },
+      "61": {
+        "url": "assets/audio/recorder/61.mp3",
+        "duration": 3.3,
+        "peak": 0.57024,
+        "rms": 0.28563,
+        "bytes": 27211,
+        "loopStart": 0.8248526,
+        "loopEnd": 1.8445805,
+        "loopBoundaryError": 0.004088
+      },
+      "62": {
+        "url": "assets/audio/recorder/62.mp3",
+        "duration": 3.3,
+        "peak": 0.571,
+        "rms": 0.28581,
+        "bytes": 27211,
+        "loopStart": 0.7819048,
+        "loopEnd": 1.7818141,
+        "loopBoundaryError": 0.002927
+      },
+      "63": {
+        "url": "assets/audio/recorder/63.mp3",
+        "duration": 3.3,
+        "peak": 0.57026,
+        "rms": 0.28588,
+        "bytes": 27211,
+        "loopStart": 0.824898,
+        "loopEnd": 1.8269841,
+        "loopBoundaryError": 0.002017
+      },
+      "64": {
+        "url": "assets/audio/recorder/64.mp3",
+        "duration": 3.3,
+        "peak": 0.57065,
+        "rms": 0.28644,
+        "bytes": 27211,
+        "loopStart": 0.8088889,
+        "loopEnd": 1.8063039,
+        "loopBoundaryError": 6.3e-05
+      },
+      "65": {
+        "url": "assets/audio/recorder/65.mp3",
+        "duration": 3.3,
+        "peak": 0.57195,
+        "rms": 0.28644,
+        "bytes": 27211,
+        "loopStart": 0.8238549,
+        "loopEnd": 1.8199093,
+        "loopBoundaryError": 0.000434
+      },
+      "66": {
+        "url": "assets/audio/recorder/66.mp3",
+        "duration": 3.3,
+        "peak": 0.57156,
+        "rms": 0.28699,
+        "bytes": 27211,
+        "loopStart": 0.848254,
+        "loopEnd": 1.8586848,
+        "loopBoundaryError": 0.003222
+      },
+      "67": {
+        "url": "assets/audio/recorder/67.mp3",
+        "duration": 3.3,
+        "peak": 0.57443,
+        "rms": 0.33519,
+        "bytes": 27211,
+        "loopStart": 0.7663039,
+        "loopEnd": 1.7978685,
+        "loopBoundaryError": 0.00084
+      },
+      "68": {
+        "url": "assets/audio/recorder/68.mp3",
+        "duration": 3.3,
+        "peak": 0.56994,
+        "rms": 0.33539,
+        "bytes": 27211,
+        "loopStart": 0.8282086,
+        "loopEnd": 1.8571429,
+        "loopBoundaryError": 0.000656
+      },
+      "69": {
+        "url": "assets/audio/recorder/69.mp3",
+        "duration": 3.3,
+        "peak": 0.57285,
+        "rms": 0.33557,
+        "bytes": 27211,
+        "loopStart": 0.7794558,
+        "loopEnd": 1.777415,
+        "loopBoundaryError": 0.000357
+      },
+      "70": {
+        "url": "assets/audio/recorder/70.mp3",
+        "duration": 3.3,
+        "peak": 0.57301,
+        "rms": 0.33859,
+        "bytes": 27211,
+        "loopStart": 0.8559184,
+        "loopEnd": 1.8407256,
+        "loopBoundaryError": 0.000863
+      },
+      "71": {
+        "url": "assets/audio/recorder/71.mp3",
+        "duration": 3.3,
+        "peak": 0.57479,
+        "rms": 0.33871,
+        "bytes": 27211,
+        "loopStart": 0.8462132,
+        "loopEnd": 1.8568254,
+        "loopBoundaryError": 0.000444
+      },
+      "72": {
+        "url": "assets/audio/recorder/72.mp3",
+        "duration": 3.3,
+        "peak": 0.56865,
+        "rms": 0.30545,
+        "bytes": 27211,
+        "loopStart": 0.8005442,
+        "loopEnd": 1.7972336,
+        "loopBoundaryError": 0.00076
+      },
+      "73": {
+        "url": "assets/audio/recorder/73.mp3",
+        "duration": 3.3,
+        "peak": 0.57299,
+        "rms": 0.30544,
+        "bytes": 27211,
+        "loopStart": 0.8419501,
+        "loopEnd": 1.8473469,
+        "loopBoundaryError": 0.000214
+      },
+      "74": {
+        "url": "assets/audio/recorder/74.mp3",
+        "duration": 3.3,
+        "peak": 0.57024,
+        "rms": 0.32783,
+        "bytes": 27211,
+        "loopStart": 0.8170522,
+        "loopEnd": 1.8195465,
+        "loopBoundaryError": 0.000582
+      },
+      "75": {
+        "url": "assets/audio/recorder/75.mp3",
+        "duration": 3.3,
+        "peak": 0.56999,
+        "rms": 0.32876,
+        "bytes": 27211,
+        "loopStart": 0.8388209,
+        "loopEnd": 1.830068,
+        "loopBoundaryError": 0.000262
+      },
+      "76": {
+        "url": "assets/audio/recorder/76.mp3",
+        "duration": 3.3,
+        "peak": 0.57214,
+        "rms": 0.32945,
+        "bytes": 27211,
+        "loopStart": 0.7855782,
+        "loopEnd": 1.7956463,
+        "loopBoundaryError": 0.000417
+      },
+      "77": {
+        "url": "assets/audio/recorder/77.mp3",
+        "duration": 3.3,
+        "peak": 0.5689,
+        "rms": 0.32958,
+        "bytes": 27211,
+        "loopStart": 0.8404989,
+        "loopEnd": 1.8556463,
+        "loopBoundaryError": 0.000525
+      },
+      "78": {
+        "url": "assets/audio/recorder/78.mp3",
+        "duration": 3.3,
+        "peak": 0.57374,
+        "rms": 0.28477,
+        "bytes": 27211,
+        "loopStart": 0.7873469,
+        "loopEnd": 1.7869388,
+        "loopBoundaryError": 1.9e-05
+      },
+      "79": {
+        "url": "assets/audio/recorder/79.mp3",
+        "duration": 3.3,
+        "peak": 0.57264,
+        "rms": 0.28505,
+        "bytes": 27211,
+        "loopStart": 0.8526984,
+        "loopEnd": 1.8495692,
+        "loopBoundaryError": 4.8e-05
+      },
+      "80": {
+        "url": "assets/audio/recorder/80.mp3",
+        "duration": 3.3,
+        "peak": 0.56713,
+        "rms": 0.28317,
+        "bytes": 27211,
+        "loopStart": 0.8142404,
+        "loopEnd": 1.8055782,
+        "loopBoundaryError": 0.000271
+      },
+      "81": {
+        "url": "assets/audio/recorder/81.mp3",
+        "duration": 3.3,
+        "peak": 0.56857,
+        "rms": 0.33699,
+        "bytes": 27211,
+        "loopStart": 0.8289342,
+        "loopEnd": 1.8214059,
+        "loopBoundaryError": 0.00081
+      },
+      "82": {
+        "url": "assets/audio/recorder/82.mp3",
+        "duration": 3.3,
+        "peak": 0.5694,
+        "rms": 0.33814,
+        "bytes": 27211,
+        "loopStart": 0.8197732,
+        "loopEnd": 1.8185941,
+        "loopBoundaryError": 0.000436
+      },
+      "83": {
+        "url": "assets/audio/recorder/83.mp3",
+        "duration": 3.3,
+        "peak": 0.56764,
+        "rms": 0.34003,
+        "bytes": 27211,
+        "loopStart": 0.8577324,
+        "loopEnd": 1.8590476,
+        "loopBoundaryError": 0.000626
+      },
+      "84": {
+        "url": "assets/audio/recorder/84.mp3",
+        "duration": 3.3,
+        "peak": 0.57071,
+        "rms": 0.33722,
+        "bytes": 27211,
+        "loopStart": 0.8294331,
+        "loopEnd": 1.8297959,
+        "loopBoundaryError": 0.000507
+      },
+      "85": {
+        "url": "assets/audio/recorder/85.mp3",
+        "duration": 3.3,
+        "peak": 0.57099,
+        "rms": 0.33867,
+        "bytes": 27211,
+        "loopStart": 0.765805,
+        "loopEnd": 1.7666667,
+        "loopBoundaryError": 0.000568
+      },
+      "86": {
+        "url": "assets/audio/recorder/86.mp3",
+        "duration": 3.3,
+        "peak": 0.56703,
+        "rms": 0.34168,
+        "bytes": 27211,
+        "loopStart": 0.8493424,
+        "loopEnd": 1.850068,
+        "loopBoundaryError": 0.000754
+      },
+      "87": {
+        "url": "assets/audio/recorder/87.mp3",
+        "duration": 3.3,
+        "peak": 0.57027,
+        "rms": 0.33981,
+        "bytes": 27211,
+        "loopStart": 0.8223583,
+        "loopEnd": 1.835873,
+        "loopBoundaryError": 0.000516
+      },
+      "88": {
+        "url": "assets/audio/recorder/88.mp3",
+        "duration": 3.3,
+        "peak": 0.56956,
+        "rms": 0.3416,
+        "bytes": 27211,
+        "loopStart": 0.778458,
+        "loopEnd": 1.7819048,
+        "loopBoundaryError": 0.000636
+      },
+      "89": {
+        "url": "assets/audio/recorder/89.mp3",
+        "duration": 3.3,
+        "peak": 0.57033,
+        "rms": 0.33824,
+        "bytes": 27211,
+        "loopStart": 0.8577324,
+        "loopEnd": 1.842585,
+        "loopBoundaryError": 0.000268
+      },
+      "90": {
+        "url": "assets/audio/recorder/90.mp3",
+        "duration": 3.3,
+        "peak": 0.56746,
+        "rms": 0.34178,
+        "bytes": 27211,
+        "loopStart": 0.8451701,
+        "loopEnd": 1.852381,
+        "loopBoundaryError": 9.7e-05
+      },
+      "91": {
+        "url": "assets/audio/recorder/91.mp3",
+        "duration": 3.3,
+        "peak": 0.57819,
+        "rms": 0.34529,
+        "bytes": 27211,
+        "loopStart": 0.8058503,
+        "loopEnd": 1.8073469,
+        "loopBoundaryError": 0.000513
+      },
+      "92": {
+        "url": "assets/audio/recorder/92.mp3",
+        "duration": 3.3,
+        "peak": 0.57008,
+        "rms": 0.33779,
+        "bytes": 27211,
+        "loopStart": 0.8260771,
+        "loopEnd": 1.8302041,
+        "loopBoundaryError": 0.000471
+      },
+      "93": {
+        "url": "assets/audio/recorder/93.mp3",
+        "duration": 3.3,
+        "peak": 0.57382,
+        "rms": 0.34476,
+        "bytes": 27211,
+        "loopStart": 0.8478005,
+        "loopEnd": 1.8533787,
+        "loopBoundaryError": 0.000621
+      },
+      "94": {
+        "url": "assets/audio/recorder/94.mp3",
+        "duration": 3.3,
+        "peak": 0.56814,
+        "rms": 0.3432,
+        "bytes": 27211,
+        "loopStart": 0.8305669,
+        "loopEnd": 1.8288435,
+        "loopBoundaryError": 0.000546
+      },
+      "95": {
+        "url": "assets/audio/recorder/95.mp3",
+        "duration": 3.3,
+        "peak": 0.5701,
+        "rms": 0.34092,
+        "bytes": 27211,
+        "loopStart": 0.8207256,
+        "loopEnd": 1.8220408,
+        "loopBoundaryError": 0.000554
+      },
+      "96": {
+        "url": "assets/audio/recorder/96.mp3",
+        "duration": 3.3,
+        "peak": 0.58474,
+        "rms": 0.33804,
+        "bytes": 27211,
+        "loopStart": 0.7912925,
+        "loopEnd": 1.7916553,
+        "loopBoundaryError": 0.000572
+      }
+    },
+    "drum": {
+      "31": {
+        "url": "assets/audio/drum/31.mp3",
+        "duration": 4.5,
+        "peak": 0.5765,
+        "rms": 0.01296,
+        "bytes": 36824
+      },
+      "41": {
+        "url": "assets/audio/drum/41.mp3",
+        "duration": 4.5,
+        "peak": 0.55663,
+        "rms": 0.04094,
+        "bytes": 36824
+      },
+      "43": {
+        "url": "assets/audio/drum/43.mp3",
+        "duration": 4.5,
+        "peak": 0.57349,
+        "rms": 0.03972,
+        "bytes": 36824
+      },
+      "45": {
+        "url": "assets/audio/drum/45.mp3",
+        "duration": 4.5,
+        "peak": 0.57264,
+        "rms": 0.04775,
+        "bytes": 36824
+      },
+      "47": {
+        "url": "assets/audio/drum/47.mp3",
+        "duration": 4.5,
+        "peak": 0.56336,
+        "rms": 0.0483,
+        "bytes": 36824
+      },
+      "48": {
+        "url": "assets/audio/drum/48.mp3",
+        "duration": 4.5,
+        "peak": 0.58262,
+        "rms": 0.05043,
+        "bytes": 36824
+      },
+      "49": {
+        "url": "assets/audio/drum/49.mp3",
+        "duration": 4.5,
+        "peak": 0.58375,
+        "rms": 0.03325,
+        "bytes": 36824
+      },
+      "50": {
+        "url": "assets/audio/drum/50.mp3",
+        "duration": 4.5,
+        "peak": 0.57594,
+        "rms": 0.03432,
+        "bytes": 36824
+      },
+      "51": {
+        "url": "assets/audio/drum/51.mp3",
+        "duration": 4.5,
+        "peak": 0.60395,
+        "rms": 0.0173,
+        "bytes": 36824
+      },
+      "52": {
+        "url": "assets/audio/drum/52.mp3",
+        "duration": 4.5,
+        "peak": 0.57864,
+        "rms": 0.04038,
+        "bytes": 36824
+      },
+      "53": {
+        "url": "assets/audio/drum/53.mp3",
+        "duration": 4.5,
+        "peak": 0.54314,
+        "rms": 0.02796,
+        "bytes": 36824
+      },
+      "54": {
+        "url": "assets/audio/drum/54.mp3",
+        "duration": 4.5,
+        "peak": 0.50653,
+        "rms": 0.0183,
+        "bytes": 36824
+      },
+      "55": {
+        "url": "assets/audio/drum/55.mp3",
+        "duration": 4.5,
+        "peak": 0.46796,
+        "rms": 0.02289,
+        "bytes": 36824
+      },
+      "56": {
+        "url": "assets/audio/drum/56.mp3",
+        "duration": 4.5,
+        "peak": 0.51786,
+        "rms": 0.01624,
+        "bytes": 36824
+      },
+      "57": {
+        "url": "assets/audio/drum/57.mp3",
+        "duration": 4.5,
+        "peak": 0.56845,
+        "rms": 0.03217,
+        "bytes": 36824
+      },
+      "60": {
+        "url": "assets/audio/drum/60.mp3",
+        "duration": 4.5,
+        "peak": 0.57183,
+        "rms": 0.01267,
+        "bytes": 36824
+      },
+      "61": {
+        "url": "assets/audio/drum/61.mp3",
+        "duration": 4.5,
+        "peak": 0.56667,
+        "rms": 0.01635,
+        "bytes": 36824
+      },
+      "62": {
+        "url": "assets/audio/drum/62.mp3",
+        "duration": 4.5,
+        "peak": 0.57964,
+        "rms": 0.01247,
+        "bytes": 36824
+      },
+      "63": {
+        "url": "assets/audio/drum/63.mp3",
+        "duration": 4.5,
+        "peak": 0.57215,
+        "rms": 0.02853,
+        "bytes": 36824
+      },
+      "64": {
+        "url": "assets/audio/drum/64.mp3",
+        "duration": 4.5,
+        "peak": 0.57144,
+        "rms": 0.02393,
+        "bytes": 36824
+      },
+      "69": {
+        "url": "assets/audio/drum/69.mp3",
+        "duration": 4.5,
+        "peak": 0.4346,
+        "rms": 0.00864,
+        "bytes": 36824
+      },
+      "70": {
+        "url": "assets/audio/drum/70.mp3",
+        "duration": 4.5,
+        "peak": 0.54631,
+        "rms": 0.01822,
+        "bytes": 36824
+      },
+      "73": {
+        "url": "assets/audio/drum/73.mp3",
+        "duration": 4.5,
+        "peak": 0.48918,
+        "rms": 0.00772,
+        "bytes": 36824
+      },
+      "74": {
+        "url": "assets/audio/drum/74.mp3",
+        "duration": 4.5,
+        "peak": 0.53588,
+        "rms": 0.01038,
+        "bytes": 36824
+      },
+      "75": {
+        "url": "assets/audio/drum/75.mp3",
+        "duration": 4.5,
+        "peak": 0.56323,
+        "rms": 0.01445,
+        "bytes": 36824
+      },
+      "76": {
+        "url": "assets/audio/drum/76.mp3",
+        "duration": 4.5,
+        "peak": 0.58107,
+        "rms": 0.01009,
+        "bytes": 36824
+      },
+      "77": {
+        "url": "assets/audio/drum/77.mp3",
+        "duration": 4.5,
+        "peak": 0.60315,
+        "rms": 0.01013,
+        "bytes": 36824
+      },
+      "80": {
+        "url": "assets/audio/drum/80.mp3",
+        "duration": 4.5,
+        "peak": 0.58498,
+        "rms": 0.01011,
+        "bytes": 36824
+      },
+      "81": {
+        "url": "assets/audio/drum/81.mp3",
+        "duration": 4.5,
+        "peak": 0.56677,
+        "rms": 0.04266,
+        "bytes": 36824
+      },
+      "82": {
+        "url": "assets/audio/drum/82.mp3",
+        "duration": 4.5,
+        "peak": 0.44721,
+        "rms": 0.01183,
+        "bytes": 36824
+      },
+      "83": {
+        "url": "assets/audio/drum/83.mp3",
+        "duration": 4.5,
+        "peak": 0.51033,
+        "rms": 0.01934,
+        "bytes": 36824
+      },
+      "84": {
+        "url": "assets/audio/drum/84.mp3",
+        "duration": 4.5,
+        "peak": 0.40599,
+        "rms": 0.06246,
+        "bytes": 36824
+      },
+      "85": {
+        "url": "assets/audio/drum/85.mp3",
+        "duration": 4.5,
+        "peak": 0.6271,
+        "rms": 0.0045,
+        "bytes": 36824
+      },
+      "86": {
+        "url": "assets/audio/drum/86.mp3",
+        "duration": 4.5,
+        "peak": 0.57294,
+        "rms": 0.01516,
+        "bytes": 36824
+      },
+      "87": {
+        "url": "assets/audio/drum/87.mp3",
+        "duration": 4.5,
+        "peak": 0.57573,
+        "rms": 0.04054,
+        "bytes": 36824
+      }
+    }
+  },
+  "approximations": {
+    "metallophones": "Vibraphone with LFO volume and pitch modulation disabled",
+    "contrabassBars": "Low marimba notes",
+    "recorders": "One recorder timbre across soprano, alto, tenor, bass ranges",
+    "frameDrums": "One recorded VCSL frame drum pitch-adjusted into five relative registers; not five separately recorded drum sizes.",
+    "templeBlocks": "Five separately struck composite temple blocks; one native-pitch recording per block.",
+    "windChimes": "Five recorded acoustic bar-chime sweeps: down brisk/slow and up brisk/medium/slow; original pitches, speed and decay."
+  },
+  "instrumentSamples": {
+    "finger-cymbals": {
+      "url": "assets/audio/recorded/finger-cymbals.mp3",
+      "gain": 1,
+      "duration": 6.971375,
+      "credit": "Finger Cymbals #1 \u2014 Joseph Sardin / BigSoundBank.com",
+      "license": "CC0-1.0",
+      "source": "https://bigsoundbank.com/finger-cymbals-1-s2274.html",
+      "download": "https://bigsoundbank.com/UPLOAD/bwf-en/2274.wav",
+      "licensePage": "https://bigsoundbank.com/licenses.html",
+      "original_sha256": "3bc31e8ea91e0651e073bc6ca6c61a91f425d416e9920041651cf522ddaf946e",
+      "sha256": "01be15be06cff0601dfa916e15232c52af1e7af6aa43d225808444e9619ef961",
+      "processing": {
+        "trimStartSeconds": 0.045,
+        "amplitudeGain": 0.72,
+        "format": "44.1kHz MP3 VBR quality 1",
+        "fullDecay": true,
+        "endFadeSeconds": 0.25
+      }
+    },
+    "gong": {
+      "url": "assets/audio/recorded/gong.mp3",
+      "gain": 1,
+      "duration": 30,
+      "credit": "Gong1, mf \u2014 Versilian Studios LLC / Versilian Community Sample Library",
+      "license": "CC0-1.0",
+      "source": "https://github.com/sgossner/VCSL/blob/master/Idiophones/Struck%20Idiophones/Gong%201/gong_mf.wav",
+      "download": "https://raw.githubusercontent.com/sgossner/VCSL/c1ea7bcc3c7309650ab0da9d15c9cd1fbc4a4c7e/Idiophones/Struck%20Idiophones/Gong%201/gong_mf.wav",
+      "licensePage": "https://versilian-studios.com/vcsl/",
+      "original_sha256": "7e520ad14acda55db7906984f7efc2430961419435d951f55c8cdd9cd7a71108",
+      "sha256": "7f5c87381d99339df2314196dca1b45602feb2cc21865ac29183a2045d6da1da",
+      "processing": {
+        "trimStartSeconds": 0.01,
+        "amplitudeGain": 3.85,
+        "format": "44.1kHz MP3 VBR quality 1",
+        "fullDecay": true,
+        "endFadeSeconds": 1.5,
+        "trimEndSeconds": 30
+      }
+    },
+    "tubanos": {
+      "notes": {
+        "62": {
+          "url": "assets/audio/recorded/tubano-high.mp3",
+          "gain": 0.7636032,
+          "register": "high",
+          "source": "User-provided Real Tubano Drums recordings embedded in Boomwhacker Creator Edition v1.65",
+          "sha256": "d3a73b335f7a1348349d05229476fffc252a25afd451e65931358a70cf521d55",
+          "processing": "Original embedded MP3 bytes, unchanged; original per-sample playback gain retained."
+        },
+        "63": {
+          "url": "assets/audio/recorded/tubano-medium.mp3",
+          "gain": 0.7476175,
+          "register": "medium",
+          "source": "User-provided Real Tubano Drums recordings embedded in Boomwhacker Creator Edition v1.65",
+          "sha256": "110fd44c1fd514d0d987e59d5dce3e435e44a0b0a93140edbf6fb692d2595f5d",
+          "processing": "Original embedded MP3 bytes, unchanged; original per-sample playback gain retained."
+        },
+        "64": {
+          "url": "assets/audio/recorded/tubano-low.mp3",
+          "gain": 0.7106283,
+          "register": "low",
+          "source": "User-provided Real Tubano Drums recordings embedded in Boomwhacker Creator Edition v1.65",
+          "sha256": "db5ebd640a1cf1d954c3f12b2e5ff1e85d717831aa59001744871fce11ca5f6c",
+          "processing": "Original embedded MP3 bytes, unchanged; original per-sample playback gain retained."
+        }
+      }
+    },
+    "hand-drums": {
+      "credit": "Frame Drum, small \u2014 Versilian Studios LLC / Versilian Community Sample Library",
+      "license": "CC0-1.0",
+      "licensePage": "https://versilian-studios.com/vcsl/",
+      "source": "https://github.com/sgossner/VCSL",
+      "sourceCommit": "c1ea7bcc3c7309650ab0da9d15c9cd1fbc4a4c7e",
+      "notes": {
+        "41": {
+          "url": "assets/audio/recorded/hand-drum-small-lowest.mp3",
+          "gain": 1,
+          "register": "lowest",
+          "sourceDrum": "small",
+          "sourceFile": "HDrumS_Hit_v3_rr1_Sum.wav",
+          "download": "https://raw.githubusercontent.com/sgossner/VCSL/c1ea7bcc3c7309650ab0da9d15c9cd1fbc4a4c7e/Membranophones/Struck%20Membranophones/Frame%20Drum/HDrumS_Hit_v3_rr1_Sum.wav",
+          "original_sha256": "09721cec12ab8d2336cddd60953a2505ea1c8c8324d0b4ed245b9c5ea4561c33",
+          "sha256": "279cd944f977baa4faed78afcca5a2251bd6907107aa6e2eab8791fdb3831061",
+          "processing": {
+            "pitchSemitones": -12,
+            "method": "Playback-rate resampling; natural decay scales with pitch",
+            "amplitudeGain": 6.177646108268246,
+            "format": "44.1kHz stereo MP3 VBR quality 1",
+            "fullDecay": true,
+            "endFadeSeconds": 0.08
+          },
+          "duration": 4.205079365079365,
+          "peak": 0.7024624943733215,
+          "rms": 0.030856844037771225,
+          "dominantResonanceHz": 113,
+          "bytes": 76365,
+          "tuningSemitones": 0
+        },
+        "43": {
+          "url": "assets/audio/recorded/hand-drum-small-low.mp3",
+          "gain": 1,
+          "register": "low",
+          "sourceDrum": "small",
+          "sourceFile": "HDrumS_Hit_v3_rr1_Sum.wav",
+          "download": "https://raw.githubusercontent.com/sgossner/VCSL/c1ea7bcc3c7309650ab0da9d15c9cd1fbc4a4c7e/Membranophones/Struck%20Membranophones/Frame%20Drum/HDrumS_Hit_v3_rr1_Sum.wav",
+          "original_sha256": "09721cec12ab8d2336cddd60953a2505ea1c8c8324d0b4ed245b9c5ea4561c33",
+          "sha256": "d00ad1e9afe9e02f10e0e480b2e5f6d0aac8edc23449b88d921926ca3467c6eb",
+          "processing": {
+            "pitchSemitones": -9,
+            "method": "Playback-rate resampling; natural decay scales with pitch",
+            "amplitudeGain": 6.177646108268246,
+            "format": "44.1kHz stereo MP3 VBR quality 1",
+            "fullDecay": true,
+            "endFadeSeconds": 0.08
+          },
+          "duration": 3.5360544217687075,
+          "peak": 0.7037772536277771,
+          "rms": 0.03085305541753769,
+          "dominantResonanceHz": 134,
+          "bytes": 71470,
+          "tuningSemitones": 1.5
+        },
+        "45": {
+          "url": "assets/audio/recorded/hand-drum-small-middle.mp3",
+          "gain": 1,
+          "register": "middle",
+          "sourceDrum": "small",
+          "sourceFile": "HDrumS_Hit_v3_rr1_Sum.wav",
+          "download": "https://raw.githubusercontent.com/sgossner/VCSL/c1ea7bcc3c7309650ab0da9d15c9cd1fbc4a4c7e/Membranophones/Struck%20Membranophones/Frame%20Drum/HDrumS_Hit_v3_rr1_Sum.wav",
+          "original_sha256": "09721cec12ab8d2336cddd60953a2505ea1c8c8324d0b4ed245b9c5ea4561c33",
+          "sha256": "c4e0c04ef7f940ac9328fe359c9c198a7abb900e19f1f9900a24bd51df1bce60",
+          "processing": {
+            "pitchSemitones": -6,
+            "method": "Playback-rate resampling; natural decay scales with pitch",
+            "amplitudeGain": 6.177646108268246,
+            "format": "44.1kHz stereo MP3 VBR quality 1",
+            "fullDecay": true,
+            "endFadeSeconds": 0.08
+          },
+          "duration": 2.9734920634920634,
+          "peak": 0.7013654112815857,
+          "rms": 0.030839158222079277,
+          "dominantResonanceHz": 159,
+          "bytes": 63900,
+          "tuningSemitones": 3
+        },
+        "47": {
+          "url": "assets/audio/recorded/hand-drum-small-high.mp3",
+          "gain": 1,
+          "register": "high",
+          "sourceDrum": "small",
+          "sourceFile": "HDrumS_Hit_v3_rr1_Sum.wav",
+          "download": "https://raw.githubusercontent.com/sgossner/VCSL/c1ea7bcc3c7309650ab0da9d15c9cd1fbc4a4c7e/Membranophones/Struck%20Membranophones/Frame%20Drum/HDrumS_Hit_v3_rr1_Sum.wav",
+          "original_sha256": "09721cec12ab8d2336cddd60953a2505ea1c8c8324d0b4ed245b9c5ea4561c33",
+          "sha256": "322d08aede64baa1ec5a1406ff97f5cb76151cf820649c1a580bfc85b0ce0616",
+          "processing": {
+            "pitchSemitones": -3,
+            "method": "Playback-rate resampling; natural decay scales with pitch",
+            "amplitudeGain": 6.177646108268246,
+            "format": "44.1kHz stereo MP3 VBR quality 1",
+            "fullDecay": true,
+            "endFadeSeconds": 0.08
+          },
+          "duration": 2.500340136054422,
+          "peak": 0.7085292935371399,
+          "rms": 0.030938638374209404,
+          "dominantResonanceHz": 185,
+          "bytes": 53621,
+          "tuningSemitones": 4.5
+        },
+        "50": {
+          "url": "assets/audio/recorded/hand-drum-small-highest.mp3",
+          "gain": 1,
+          "register": "highest",
+          "sourceDrum": "small",
+          "sourceFile": "HDrumS_Hit_v3_rr1_Sum.wav",
+          "download": "https://raw.githubusercontent.com/sgossner/VCSL/c1ea7bcc3c7309650ab0da9d15c9cd1fbc4a4c7e/Membranophones/Struck%20Membranophones/Frame%20Drum/HDrumS_Hit_v3_rr1_Sum.wav",
+          "original_sha256": "09721cec12ab8d2336cddd60953a2505ea1c8c8324d0b4ed245b9c5ea4561c33",
+          "sha256": "859263261e521a849a45e0dd94204d401e5d68d1448977db85c351ec4c0b0b18",
+          "processing": {
+            "pitchSemitones": 0,
+            "method": "Playback-rate resampling; natural decay scales with pitch",
+            "amplitudeGain": 6.177646108268246,
+            "format": "44.1kHz stereo MP3 VBR quality 1",
+            "fullDecay": true,
+            "endFadeSeconds": 0.08
+          },
+          "duration": 2.1025396825396827,
+          "peak": 0.6970462799072266,
+          "rms": 0.030784817412495613,
+          "dominantResonanceHz": 220,
+          "bytes": 44881,
+          "tuningSemitones": 6
+        }
+      },
+      "tuningDescription": "Lowest pitch retained; five drums spaced 4.5 semitones apart. Highest raised 6 semitones from the original set. Applied at playback and export."
+    },
+    "vibraslap": {
+      "url": "assets/audio/drum/58.mp3",
+      "gain": 1,
+      "duration": 4.5,
+      "credit": "GeneralUser GS 1.471, standard percussion note 58",
+      "processing": "Rendered with TinySoundFont; 22.05 kHz mono, 128 kbps MP3."
+    },
+    "soprano-recorder": {
+      "notes": {
+        "72": {
+          "url": "assets/audio/recorded/recorders/soprano-72.wav",
+          "gain": 1,
+          "tuningSemitones": -0.031121,
+          "loopStart": 0.6,
+          "loopEnd": 3.1372108843537414,
+          "duration": 3.2372108843537415,
+          "sourceRootMidi": 72
+        },
+        "73": {
+          "url": "assets/audio/recorded/recorders/soprano-72.wav",
+          "gain": 1,
+          "tuningSemitones": 0.968879,
+          "loopStart": 0.6,
+          "loopEnd": 3.1372108843537414,
+          "duration": 3.2372108843537415,
+          "sourceRootMidi": 72
+        },
+        "74": {
+          "url": "assets/audio/recorded/recorders/soprano-74.wav",
+          "gain": 1,
+          "tuningSemitones": -0.036854,
+          "loopStart": 1.65,
+          "loopEnd": 3.345215419501134,
+          "duration": 3.445215419501134,
+          "sourceRootMidi": 74
+        },
+        "75": {
+          "url": "assets/audio/recorded/recorders/soprano-74.wav",
+          "gain": 1,
+          "tuningSemitones": 0.963146,
+          "loopStart": 1.65,
+          "loopEnd": 3.345215419501134,
+          "duration": 3.445215419501134,
+          "sourceRootMidi": 74
+        },
+        "76": {
+          "url": "assets/audio/recorded/recorders/soprano-76.wav",
+          "gain": 1,
+          "tuningSemitones": -0.04054,
+          "loopStart": 1.65,
+          "loopEnd": 3.2008163265306124,
+          "duration": 3.300816326530612,
+          "sourceRootMidi": 76
+        },
+        "77": {
+          "url": "assets/audio/recorded/recorders/soprano-76.wav",
+          "gain": 1,
+          "tuningSemitones": 0.95946,
+          "loopStart": 1.65,
+          "loopEnd": 3.2008163265306124,
+          "duration": 3.300816326530612,
+          "sourceRootMidi": 76
+        },
+        "78": {
+          "url": "assets/audio/recorded/recorders/soprano-78.wav",
+          "gain": 1,
+          "tuningSemitones": -0.064542,
+          "loopStart": 1.5,
+          "loopEnd": 3.2453968253968255,
+          "duration": 3.3453968253968256,
+          "sourceRootMidi": 78
+        },
+        "79": {
+          "url": "assets/audio/recorded/recorders/soprano-78.wav",
+          "gain": 1,
+          "tuningSemitones": 0.935458,
+          "loopStart": 1.5,
+          "loopEnd": 3.2453968253968255,
+          "duration": 3.3453968253968256,
+          "sourceRootMidi": 78
+        },
+        "80": {
+          "url": "assets/audio/recorded/recorders/soprano-80.wav",
+          "gain": 1,
+          "tuningSemitones": 0.007223,
+          "loopStart": 1.5,
+          "loopEnd": 3.2714739229024943,
+          "duration": 3.3714739229024944,
+          "sourceRootMidi": 80
+        },
+        "81": {
+          "url": "assets/audio/recorded/recorders/soprano-80.wav",
+          "gain": 1,
+          "tuningSemitones": 1.007223,
+          "loopStart": 1.5,
+          "loopEnd": 3.2714739229024943,
+          "duration": 3.3714739229024944,
+          "sourceRootMidi": 80
+        },
+        "82": {
+          "url": "assets/audio/recorded/recorders/soprano-82.wav",
+          "gain": 1,
+          "tuningSemitones": 0.001464,
+          "loopStart": 1.35,
+          "loopEnd": 3.466190476190476,
+          "duration": 3.566190476190476,
+          "sourceRootMidi": 82
+        },
+        "83": {
+          "url": "assets/audio/recorded/recorders/soprano-82.wav",
+          "gain": 1,
+          "tuningSemitones": 1.001464,
+          "loopStart": 1.35,
+          "loopEnd": 3.466190476190476,
+          "duration": 3.566190476190476,
+          "sourceRootMidi": 82
+        },
+        "84": {
+          "url": "assets/audio/recorded/recorders/soprano-84.wav",
+          "gain": 1,
+          "tuningSemitones": -0.004451,
+          "loopStart": 1.35,
+          "loopEnd": 3.529886621315193,
+          "duration": 3.6298866213151926,
+          "sourceRootMidi": 84
+        },
+        "85": {
+          "url": "assets/audio/recorded/recorders/soprano-84.wav",
+          "gain": 1,
+          "tuningSemitones": 0.995549,
+          "loopStart": 1.35,
+          "loopEnd": 3.529886621315193,
+          "duration": 3.6298866213151926,
+          "sourceRootMidi": 84
+        },
+        "86": {
+          "url": "assets/audio/recorded/recorders/soprano-86.wav",
+          "gain": 1,
+          "tuningSemitones": -0.003243,
+          "loopStart": 1.65,
+          "loopEnd": 3.760294784580499,
+          "duration": 3.860294784580499,
+          "sourceRootMidi": 86
+        },
+        "87": {
+          "url": "assets/audio/recorded/recorders/soprano-86.wav",
+          "gain": 1,
+          "tuningSemitones": 0.996757,
+          "loopStart": 1.65,
+          "loopEnd": 3.760294784580499,
+          "duration": 3.860294784580499,
+          "sourceRootMidi": 86
+        },
+        "88": {
+          "url": "assets/audio/recorded/recorders/soprano-88.wav",
+          "gain": 1,
+          "tuningSemitones": -0.016686,
+          "loopStart": 1.65,
+          "loopEnd": 3.4790702947845804,
+          "duration": 3.5790702947845805,
+          "sourceRootMidi": 88
+        },
+        "89": {
+          "url": "assets/audio/recorded/recorders/soprano-88.wav",
+          "gain": 1,
+          "tuningSemitones": 0.983314,
+          "loopStart": 1.65,
+          "loopEnd": 3.4790702947845804,
+          "duration": 3.5790702947845805,
+          "sourceRootMidi": 88
+        },
+        "90": {
+          "url": "assets/audio/recorded/recorders/soprano-90.wav",
+          "gain": 1,
+          "tuningSemitones": -0.017347,
+          "loopStart": 1.35,
+          "loopEnd": 3.8130839002267574,
+          "duration": 3.9130839002267575,
+          "sourceRootMidi": 90
+        },
+        "91": {
+          "url": "assets/audio/recorded/recorders/soprano-91.wav",
+          "gain": 1,
+          "tuningSemitones": -0.013564,
+          "loopStart": 1.8,
+          "loopEnd": 3.397120181405896,
+          "duration": 3.497120181405896,
+          "sourceRootMidi": 91
+        },
+        "92": {
+          "url": "assets/audio/recorded/recorders/soprano-91.wav",
+          "gain": 1,
+          "tuningSemitones": 0.986436,
+          "loopStart": 1.8,
+          "loopEnd": 3.397120181405896,
+          "duration": 3.497120181405896,
+          "sourceRootMidi": 91
+        },
+        "93": {
+          "url": "assets/audio/recorded/recorders/soprano-94.wav",
+          "gain": 1,
+          "tuningSemitones": -1.029752,
+          "loopStart": 1.5,
+          "loopEnd": 3.9011791383219956,
+          "duration": 4.001179138321995,
+          "sourceRootMidi": 94
+        },
+        "94": {
+          "url": "assets/audio/recorded/recorders/soprano-94.wav",
+          "gain": 1,
+          "tuningSemitones": -0.029752,
+          "loopStart": 1.5,
+          "loopEnd": 3.9011791383219956,
+          "duration": 4.001179138321995,
+          "sourceRootMidi": 94
+        },
+        "95": {
+          "url": "assets/audio/recorded/recorders/soprano-94.wav",
+          "gain": 1,
+          "tuningSemitones": 0.970248,
+          "loopStart": 1.5,
+          "loopEnd": 3.9011791383219956,
+          "duration": 4.001179138321995,
+          "sourceRootMidi": 94
+        },
+        "96": {
+          "url": "assets/audio/recorded/recorders/soprano-96.wav",
+          "gain": 1,
+          "tuningSemitones": -0.021833,
+          "loopStart": 0.6,
+          "loopEnd": 3.473106575963719,
+          "duration": 3.5731065759637186,
+          "sourceRootMidi": 96
+        }
+      },
+      "sourceInstrument": "Baroque Soprano Recorder",
+      "source": "VCSL / Versilian Studios",
+      "sustain": true
+    },
+    "alto-recorder": {
+      "notes": {
+        "65": {
+          "url": "assets/audio/recorded/recorders/alto-65.wav",
+          "gain": 1,
+          "tuningSemitones": -0.034854,
+          "loopStart": 1.05,
+          "loopEnd": 3.554512471655329,
+          "duration": 3.654512471655329,
+          "sourceRootMidi": 65
+        },
+        "66": {
+          "url": "assets/audio/recorded/recorders/alto-65.wav",
+          "gain": 1,
+          "tuningSemitones": 0.965146,
+          "loopStart": 1.05,
+          "loopEnd": 3.554512471655329,
+          "duration": 3.654512471655329,
+          "sourceRootMidi": 65
+        },
+        "67": {
+          "url": "assets/audio/recorded/recorders/alto-68.wav",
+          "gain": 1,
+          "tuningSemitones": -1.012845,
+          "loopStart": 1.2,
+          "loopEnd": 3.172857142857143,
+          "duration": 3.2728571428571427,
+          "sourceRootMidi": 68
+        },
+        "68": {
+          "url": "assets/audio/recorded/recorders/alto-68.wav",
+          "gain": 1,
+          "tuningSemitones": -0.012845,
+          "loopStart": 1.2,
+          "loopEnd": 3.172857142857143,
+          "duration": 3.2728571428571427,
+          "sourceRootMidi": 68
+        },
+        "69": {
+          "url": "assets/audio/recorded/recorders/alto-68.wav",
+          "gain": 1,
+          "tuningSemitones": 0.987155,
+          "loopStart": 1.2,
+          "loopEnd": 3.172857142857143,
+          "duration": 3.2728571428571427,
+          "sourceRootMidi": 68
+        },
+        "70": {
+          "url": "assets/audio/recorded/recorders/alto-70.wav",
+          "gain": 1,
+          "tuningSemitones": -0.026696,
+          "loopStart": 0.6,
+          "loopEnd": 3.176530612244898,
+          "duration": 3.276530612244898,
+          "sourceRootMidi": 70
+        },
+        "71": {
+          "url": "assets/audio/recorded/recorders/alto-70.wav",
+          "gain": 1,
+          "tuningSemitones": 0.973304,
+          "loopStart": 0.6,
+          "loopEnd": 3.176530612244898,
+          "duration": 3.276530612244898,
+          "sourceRootMidi": 70
+        },
+        "72": {
+          "url": "assets/audio/recorded/recorders/alto-72.wav",
+          "gain": 1,
+          "tuningSemitones": -0.031088,
+          "loopStart": 1.65,
+          "loopEnd": 3.3414965986394556,
+          "duration": 3.4414965986394557,
+          "sourceRootMidi": 72
+        },
+        "73": {
+          "url": "assets/audio/recorded/recorders/alto-72.wav",
+          "gain": 1,
+          "tuningSemitones": 0.968912,
+          "loopStart": 1.65,
+          "loopEnd": 3.3414965986394556,
+          "duration": 3.4414965986394557,
+          "sourceRootMidi": 72
+        },
+        "74": {
+          "url": "assets/audio/recorded/recorders/alto-74.wav",
+          "gain": 1,
+          "tuningSemitones": -0.023776,
+          "loopStart": 1.8,
+          "loopEnd": 3.4495691609977324,
+          "duration": 3.5495691609977325,
+          "sourceRootMidi": 74
+        },
+        "75": {
+          "url": "assets/audio/recorded/recorders/alto-74.wav",
+          "gain": 1,
+          "tuningSemitones": 0.976224,
+          "loopStart": 1.8,
+          "loopEnd": 3.4495691609977324,
+          "duration": 3.5495691609977325,
+          "sourceRootMidi": 74
+        },
+        "76": {
+          "url": "assets/audio/recorded/recorders/alto-76.wav",
+          "gain": 1,
+          "tuningSemitones": -0.014202,
+          "loopStart": 1.65,
+          "loopEnd": 3.1866666666666665,
+          "duration": 3.2866666666666666,
+          "sourceRootMidi": 76
+        },
+        "77": {
+          "url": "assets/audio/recorded/recorders/alto-76.wav",
+          "gain": 1,
+          "tuningSemitones": 0.985798,
+          "loopStart": 1.65,
+          "loopEnd": 3.1866666666666665,
+          "duration": 3.2866666666666666,
+          "sourceRootMidi": 76
+        },
+        "78": {
+          "url": "assets/audio/recorded/recorders/alto-78.wav",
+          "gain": 1,
+          "tuningSemitones": -0.057107,
+          "loopStart": 1.2,
+          "loopEnd": 3.172857142857143,
+          "duration": 3.2728571428571427,
+          "sourceRootMidi": 78
+        },
+        "79": {
+          "url": "assets/audio/recorded/recorders/alto-78.wav",
+          "gain": 1,
+          "tuningSemitones": 0.942893,
+          "loopStart": 1.2,
+          "loopEnd": 3.172857142857143,
+          "duration": 3.2728571428571427,
+          "sourceRootMidi": 78
+        },
+        "80": {
+          "url": "assets/audio/recorded/recorders/alto-80.wav",
+          "gain": 1,
+          "tuningSemitones": -0.038529,
+          "loopStart": 1.05,
+          "loopEnd": 3.049092970521542,
+          "duration": 3.149092970521542,
+          "sourceRootMidi": 80
+        },
+        "81": {
+          "url": "assets/audio/recorded/recorders/alto-80.wav",
+          "gain": 1,
+          "tuningSemitones": 0.961471,
+          "loopStart": 1.05,
+          "loopEnd": 3.049092970521542,
+          "duration": 3.149092970521542,
+          "sourceRootMidi": 80
+        },
+        "82": {
+          "url": "assets/audio/recorded/recorders/alto-82.wav",
+          "gain": 1,
+          "tuningSemitones": 0.000417,
+          "loopStart": 0.75,
+          "loopEnd": 3.336485260770975,
+          "duration": 3.4364852607709753,
+          "sourceRootMidi": 82
+        },
+        "83": {
+          "url": "assets/audio/recorded/recorders/alto-82.wav",
+          "gain": 1,
+          "tuningSemitones": 1.000417,
+          "loopStart": 0.75,
+          "loopEnd": 3.336485260770975,
+          "duration": 3.4364852607709753,
+          "sourceRootMidi": 82
+        },
+        "84": {
+          "url": "assets/audio/recorded/recorders/alto-84.wav",
+          "gain": 1,
+          "tuningSemitones": -0.028597,
+          "loopStart": 1.5,
+          "loopEnd": 3.3171201814058957,
+          "duration": 3.417120181405896,
+          "sourceRootMidi": 84
+        },
+        "85": {
+          "url": "assets/audio/recorded/recorders/alto-84.wav",
+          "gain": 1,
+          "tuningSemitones": 0.971403,
+          "loopStart": 1.5,
+          "loopEnd": 3.3171201814058957,
+          "duration": 3.417120181405896,
+          "sourceRootMidi": 84
+        },
+        "86": {
+          "url": "assets/audio/recorded/recorders/alto-86.wav",
+          "gain": 1,
+          "tuningSemitones": -0.007373,
+          "loopStart": 1.65,
+          "loopEnd": 3.478049886621315,
+          "duration": 3.578049886621315,
+          "sourceRootMidi": 86
+        },
+        "87": {
+          "url": "assets/audio/recorded/recorders/alto-86.wav",
+          "gain": 1,
+          "tuningSemitones": 0.992627,
+          "loopStart": 1.65,
+          "loopEnd": 3.478049886621315,
+          "duration": 3.578049886621315,
+          "sourceRootMidi": 86
+        },
+        "88": {
+          "url": "assets/audio/recorded/recorders/alto-88.wav",
+          "gain": 1,
+          "tuningSemitones": -0.017158,
+          "loopStart": 1.65,
+          "loopEnd": 3.566575963718821,
+          "duration": 3.6665759637188207,
+          "sourceRootMidi": 88
+        },
+        "89": {
+          "url": "assets/audio/recorded/recorders/alto-88.wav",
+          "gain": 1,
+          "tuningSemitones": 0.982842,
+          "loopStart": 1.65,
+          "loopEnd": 3.566575963718821,
+          "duration": 3.6665759637188207,
+          "sourceRootMidi": 88
+        }
+      },
+      "sourceInstrument": "Baroque Alto Recorder",
+      "source": "VCSL / Versilian Studios",
+      "sustain": true
+    },
+    "tenor-recorder": {
+      "notes": {
+        "60": {
+          "url": "assets/audio/recorded/recorders/tenor-60.wav",
+          "gain": 1,
+          "tuningSemitones": 0.006872,
+          "loopStart": 1.8,
+          "loopEnd": 3.3685941043083902,
+          "duration": 3.46859410430839,
+          "sourceRootMidi": 60
+        },
+        "61": {
+          "url": "assets/audio/recorded/recorders/tenor-60.wav",
+          "gain": 1,
+          "tuningSemitones": 1.006872,
+          "loopStart": 1.8,
+          "loopEnd": 3.3685941043083902,
+          "duration": 3.46859410430839,
+          "sourceRootMidi": 60
+        },
+        "62": {
+          "url": "assets/audio/recorded/recorders/tenor-62.wav",
+          "gain": 1,
+          "tuningSemitones": -0.002373,
+          "loopStart": 1.65,
+          "loopEnd": 3.6916780045351474,
+          "duration": 3.7916780045351475,
+          "sourceRootMidi": 62
+        },
+        "63": {
+          "url": "assets/audio/recorded/recorders/tenor-62.wav",
+          "gain": 1,
+          "tuningSemitones": 0.997627,
+          "loopStart": 1.65,
+          "loopEnd": 3.6916780045351474,
+          "duration": 3.7916780045351475,
+          "sourceRootMidi": 62
+        },
+        "64": {
+          "url": "assets/audio/recorded/recorders/tenor-64.wav",
+          "gain": 1,
+          "tuningSemitones": 0.020068,
+          "loopStart": 1.8,
+          "loopEnd": 3.963514739229025,
+          "duration": 4.063514739229025,
+          "sourceRootMidi": 64
+        },
+        "65": {
+          "url": "assets/audio/recorded/recorders/tenor-64.wav",
+          "gain": 1,
+          "tuningSemitones": 1.020068,
+          "loopStart": 1.8,
+          "loopEnd": 3.963514739229025,
+          "duration": 4.063514739229025,
+          "sourceRootMidi": 64
+        },
+        "66": {
+          "url": "assets/audio/recorded/recorders/tenor-66.wav",
+          "gain": 1,
+          "tuningSemitones": 0.01769,
+          "loopStart": 1.65,
+          "loopEnd": 3.759501133786848,
+          "duration": 3.859501133786848,
+          "sourceRootMidi": 66
+        },
+        "67": {
+          "url": "assets/audio/recorded/recorders/tenor-66.wav",
+          "gain": 1,
+          "tuningSemitones": 1.01769,
+          "loopStart": 1.65,
+          "loopEnd": 3.759501133786848,
+          "duration": 3.859501133786848,
+          "sourceRootMidi": 66
+        },
+        "68": {
+          "url": "assets/audio/recorded/recorders/tenor-68.wav",
+          "gain": 1,
+          "tuningSemitones": -0.020874,
+          "loopStart": 0.6,
+          "loopEnd": 4.199795918367347,
+          "duration": 4.299795918367347,
+          "sourceRootMidi": 68
+        },
+        "69": {
+          "url": "assets/audio/recorded/recorders/tenor-68.wav",
+          "gain": 1,
+          "tuningSemitones": 0.979126,
+          "loopStart": 0.6,
+          "loopEnd": 4.199795918367347,
+          "duration": 4.299795918367347,
+          "sourceRootMidi": 68
+        },
+        "70": {
+          "url": "assets/audio/recorded/recorders/tenor-70.wav",
+          "gain": 1,
+          "tuningSemitones": -0.003863,
+          "loopStart": 0.9,
+          "loopEnd": 3.062222222222222,
+          "duration": 3.1622222222222223,
+          "sourceRootMidi": 70
+        },
+        "71": {
+          "url": "assets/audio/recorded/recorders/tenor-70.wav",
+          "gain": 1,
+          "tuningSemitones": 0.996137,
+          "loopStart": 0.9,
+          "loopEnd": 3.062222222222222,
+          "duration": 3.1622222222222223,
+          "sourceRootMidi": 70
+        },
+        "72": {
+          "url": "assets/audio/recorded/recorders/tenor-72.wav",
+          "gain": 1,
+          "tuningSemitones": -0.034102,
+          "loopStart": 1.05,
+          "loopEnd": 3.011541950113379,
+          "duration": 3.1115419501133785,
+          "sourceRootMidi": 72
+        },
+        "73": {
+          "url": "assets/audio/recorded/recorders/tenor-72.wav",
+          "gain": 1,
+          "tuningSemitones": 0.965898,
+          "loopStart": 1.05,
+          "loopEnd": 3.011541950113379,
+          "duration": 3.1115419501133785,
+          "sourceRootMidi": 72
+        },
+        "74": {
+          "url": "assets/audio/recorded/recorders/tenor-74.wav",
+          "gain": 1,
+          "tuningSemitones": -0.014993,
+          "loopStart": 0.6,
+          "loopEnd": 3.0157596371882085,
+          "duration": 3.1157596371882086,
+          "sourceRootMidi": 74
+        },
+        "75": {
+          "url": "assets/audio/recorded/recorders/tenor-74.wav",
+          "gain": 1,
+          "tuningSemitones": 0.985007,
+          "loopStart": 0.6,
+          "loopEnd": 3.0157596371882085,
+          "duration": 3.1157596371882086,
+          "sourceRootMidi": 74
+        },
+        "76": {
+          "url": "assets/audio/recorded/recorders/tenor-76.wav",
+          "gain": 1,
+          "tuningSemitones": -0.023049,
+          "loopStart": 0.75,
+          "loopEnd": 3.0237414965986393,
+          "duration": 3.1237414965986394,
+          "sourceRootMidi": 76
+        },
+        "77": {
+          "url": "assets/audio/recorded/recorders/tenor-76.wav",
+          "gain": 1,
+          "tuningSemitones": 0.976951,
+          "loopStart": 0.75,
+          "loopEnd": 3.0237414965986393,
+          "duration": 3.1237414965986394,
+          "sourceRootMidi": 76
+        },
+        "78": {
+          "url": "assets/audio/recorded/recorders/tenor-78.wav",
+          "gain": 1,
+          "tuningSemitones": -0.030302,
+          "loopStart": 1.8,
+          "loopEnd": 3.9772108843537417,
+          "duration": 4.077210884353741,
+          "sourceRootMidi": 78
+        },
+        "79": {
+          "url": "assets/audio/recorded/recorders/tenor-78.wav",
+          "gain": 1,
+          "tuningSemitones": 0.969698,
+          "loopStart": 1.8,
+          "loopEnd": 3.9772108843537417,
+          "duration": 4.077210884353741,
+          "sourceRootMidi": 78
+        },
+        "80": {
+          "url": "assets/audio/recorded/recorders/tenor-80.wav",
+          "gain": 1,
+          "tuningSemitones": -0.002163,
+          "loopStart": 1.65,
+          "loopEnd": 3.9668480725623585,
+          "duration": 4.066848072562358,
+          "sourceRootMidi": 80
+        },
+        "81": {
+          "url": "assets/audio/recorded/recorders/tenor-81.wav",
+          "gain": 1,
+          "tuningSemitones": -0.016781,
+          "loopStart": 0.6,
+          "loopEnd": 4.199546485260771,
+          "duration": 4.2995464852607705,
+          "sourceRootMidi": 81
+        },
+        "82": {
+          "url": "assets/audio/recorded/recorders/tenor-81.wav",
+          "gain": 1,
+          "tuningSemitones": 0.983219,
+          "loopStart": 0.6,
+          "loopEnd": 4.199546485260771,
+          "duration": 4.2995464852607705,
+          "sourceRootMidi": 81
+        },
+        "83": {
+          "url": "assets/audio/recorded/recorders/tenor-84.wav",
+          "gain": 1,
+          "tuningSemitones": -0.991013,
+          "loopStart": 1.5,
+          "loopEnd": 4.119886621315192,
+          "duration": 4.219886621315193,
+          "sourceRootMidi": 84
+        },
+        "84": {
+          "url": "assets/audio/recorded/recorders/tenor-84.wav",
+          "gain": 1,
+          "tuningSemitones": 0.008987,
+          "loopStart": 1.5,
+          "loopEnd": 4.119886621315192,
+          "duration": 4.219886621315193,
+          "sourceRootMidi": 84
+        }
+      },
+      "sourceInstrument": "Baroque Tenor Recorder",
+      "source": "VCSL / Versilian Studios",
+      "sustain": true
+    },
+    "bass-recorder": {
+      "notes": {
+        "53": {
+          "url": "assets/audio/recorded/recorders/bass-54.wav",
+          "gain": 1,
+          "tuningSemitones": -1.010884,
+          "loopStart": 1.05,
+          "loopEnd": 3.183469387755102,
+          "duration": 3.283469387755102,
+          "sourceRootMidi": 54
+        },
+        "54": {
+          "url": "assets/audio/recorded/recorders/bass-54.wav",
+          "gain": 1,
+          "tuningSemitones": -0.010884,
+          "loopStart": 1.05,
+          "loopEnd": 3.183469387755102,
+          "duration": 3.283469387755102,
+          "sourceRootMidi": 54
+        },
+        "55": {
+          "url": "assets/audio/recorded/recorders/bass-54.wav",
+          "gain": 1,
+          "tuningSemitones": 0.989116,
+          "loopStart": 1.05,
+          "loopEnd": 3.183469387755102,
+          "duration": 3.283469387755102,
+          "sourceRootMidi": 54
+        },
+        "56": {
+          "url": "assets/audio/recorded/recorders/bass-56.wav",
+          "gain": 1,
+          "tuningSemitones": -0.036836,
+          "loopStart": 1.2,
+          "loopEnd": 3.150385487528345,
+          "duration": 3.250385487528345,
+          "sourceRootMidi": 56
+        },
+        "57": {
+          "url": "assets/audio/recorded/recorders/bass-56.wav",
+          "gain": 1,
+          "tuningSemitones": 0.963164,
+          "loopStart": 1.2,
+          "loopEnd": 3.150385487528345,
+          "duration": 3.250385487528345,
+          "sourceRootMidi": 56
+        },
+        "58": {
+          "url": "assets/audio/recorded/recorders/bass-58.wav",
+          "gain": 1,
+          "tuningSemitones": 0.012962,
+          "loopStart": 1.5,
+          "loopEnd": 3.1524489795918367,
+          "duration": 3.2524489795918368,
+          "sourceRootMidi": 58
+        },
+        "59": {
+          "url": "assets/audio/recorded/recorders/bass-58.wav",
+          "gain": 1,
+          "tuningSemitones": 1.012962,
+          "loopStart": 1.5,
+          "loopEnd": 3.1524489795918367,
+          "duration": 3.2524489795918368,
+          "sourceRootMidi": 58
+        },
+        "60": {
+          "url": "assets/audio/recorded/recorders/bass-60.wav",
+          "gain": 1,
+          "tuningSemitones": -0.00709,
+          "loopStart": 1.2,
+          "loopEnd": 3.2214285714285715,
+          "duration": 3.3214285714285716,
+          "sourceRootMidi": 60
+        },
+        "61": {
+          "url": "assets/audio/recorded/recorders/bass-60.wav",
+          "gain": 1,
+          "tuningSemitones": 0.99291,
+          "loopStart": 1.2,
+          "loopEnd": 3.2214285714285715,
+          "duration": 3.3214285714285716,
+          "sourceRootMidi": 60
+        },
+        "62": {
+          "url": "assets/audio/recorded/recorders/bass-62.wav",
+          "gain": 1,
+          "tuningSemitones": -0.0281,
+          "loopStart": 1.8,
+          "loopEnd": 3.3617913832199546,
+          "duration": 3.4617913832199547,
+          "sourceRootMidi": 62
+        },
+        "63": {
+          "url": "assets/audio/recorded/recorders/bass-62.wav",
+          "gain": 1,
+          "tuningSemitones": 0.9719,
+          "loopStart": 1.8,
+          "loopEnd": 3.3617913832199546,
+          "duration": 3.4617913832199547,
+          "sourceRootMidi": 62
+        },
+        "64": {
+          "url": "assets/audio/recorded/recorders/bass-64.wav",
+          "gain": 1,
+          "tuningSemitones": -0.005332,
+          "loopStart": 0.6,
+          "loopEnd": 3.6236961451247165,
+          "duration": 3.7236961451247166,
+          "sourceRootMidi": 64
+        },
+        "65": {
+          "url": "assets/audio/recorded/recorders/bass-64.wav",
+          "gain": 1,
+          "tuningSemitones": 0.994668,
+          "loopStart": 0.6,
+          "loopEnd": 3.6236961451247165,
+          "duration": 3.7236961451247166,
+          "sourceRootMidi": 64
+        },
+        "66": {
+          "url": "assets/audio/recorded/recorders/bass-66.wav",
+          "gain": 1,
+          "tuningSemitones": 0.000189,
+          "loopStart": 1.8,
+          "loopEnd": 3.5939909297052153,
+          "duration": 3.6939909297052154,
+          "sourceRootMidi": 66
+        },
+        "67": {
+          "url": "assets/audio/recorded/recorders/bass-66.wav",
+          "gain": 1,
+          "tuningSemitones": 1.000189,
+          "loopStart": 1.8,
+          "loopEnd": 3.5939909297052153,
+          "duration": 3.6939909297052154,
+          "sourceRootMidi": 66
+        },
+        "68": {
+          "url": "assets/audio/recorded/recorders/bass-68.wav",
+          "gain": 1,
+          "tuningSemitones": 0.003501,
+          "loopStart": 1.5,
+          "loopEnd": 3.3583673469387754,
+          "duration": 3.4583673469387755,
+          "sourceRootMidi": 68
+        },
+        "69": {
+          "url": "assets/audio/recorded/recorders/bass-68.wav",
+          "gain": 1,
+          "tuningSemitones": 1.003501,
+          "loopStart": 1.5,
+          "loopEnd": 3.3583673469387754,
+          "duration": 3.4583673469387755,
+          "sourceRootMidi": 68
+        },
+        "70": {
+          "url": "assets/audio/recorded/recorders/bass-70.wav",
+          "gain": 1,
+          "tuningSemitones": 0.007499,
+          "loopStart": 1.65,
+          "loopEnd": 3.41,
+          "duration": 3.51,
+          "sourceRootMidi": 70
+        },
+        "71": {
+          "url": "assets/audio/recorded/recorders/bass-70.wav",
+          "gain": 1,
+          "tuningSemitones": 1.007499,
+          "loopStart": 1.65,
+          "loopEnd": 3.41,
+          "duration": 3.51,
+          "sourceRootMidi": 70
+        },
+        "72": {
+          "url": "assets/audio/recorded/recorders/bass-72.wav",
+          "gain": 1,
+          "tuningSemitones": -0.0035,
+          "loopStart": 1.8,
+          "loopEnd": 3.467233560090703,
+          "duration": 3.567233560090703,
+          "sourceRootMidi": 72
+        },
+        "73": {
+          "url": "assets/audio/recorded/recorders/bass-72.wav",
+          "gain": 1,
+          "tuningSemitones": 0.9965,
+          "loopStart": 1.8,
+          "loopEnd": 3.467233560090703,
+          "duration": 3.567233560090703,
+          "sourceRootMidi": 72
+        },
+        "74": {
+          "url": "assets/audio/recorded/recorders/bass-74.wav",
+          "gain": 1,
+          "tuningSemitones": 0.008486,
+          "loopStart": 1.2,
+          "loopEnd": 3.2010430839002266,
+          "duration": 3.3010430839002267,
+          "sourceRootMidi": 74
+        },
+        "75": {
+          "url": "assets/audio/recorded/recorders/bass-74.wav",
+          "gain": 1,
+          "tuningSemitones": 1.008486,
+          "loopStart": 1.2,
+          "loopEnd": 3.2010430839002266,
+          "duration": 3.3010430839002267,
+          "sourceRootMidi": 74
+        },
+        "76": {
+          "url": "assets/audio/recorded/recorders/bass-76.wav",
+          "gain": 1,
+          "tuningSemitones": -0.018603,
+          "loopStart": 1.65,
+          "loopEnd": 3.174739229024943,
+          "duration": 3.2747392290249433,
+          "sourceRootMidi": 76
+        },
+        "77": {
+          "url": "assets/audio/recorded/recorders/bass-76.wav",
+          "gain": 1,
+          "tuningSemitones": 0.981397,
+          "loopStart": 1.65,
+          "loopEnd": 3.174739229024943,
+          "duration": 3.2747392290249433,
+          "sourceRootMidi": 76
+        }
+      },
+      "sourceInstrument": "Baroque Bass Recorder",
+      "source": "VCSL / Versilian Studios",
+      "sustain": true
+    },
+    "bass-bars": {
+      "credit": "Versilian Studios LLC \u2014 Versilian Community Sample Library",
+      "license": "CC0-1.0",
+      "licensePage": "https://versilian-studios.com/vcsl/",
+      "source": "https://github.com/sgossner/VCSL",
+      "sourceCommit": "c1ea7bcc3c7309650ab0da9d15c9cd1fbc4a4c7e",
+      "sourceInstrument": "Acoustic marimba, softly played mallet strikes",
+      "approximation": "Adapted low-marimba recordings; these are not recordings of Sonor or Peripole contrabass bars. Lowest C2 uses measured F2 source transposed down 5 semitones.",
+      "notes": {
+        "36": {
+          "url": "assets/audio/recorded/ensemble-additions/bass-bars-soft-f2.wav",
+          "gain": 1,
+          "tuningSemitones": -4.995634,
+          "sourceRootMidi": 41,
+          "duration": 3.008321995464853
+        },
+        "38": {
+          "url": "assets/audio/recorded/ensemble-additions/bass-bars-soft-f2.wav",
+          "gain": 1,
+          "tuningSemitones": -2.995634,
+          "sourceRootMidi": 41,
+          "duration": 3.008321995464853
+        },
+        "40": {
+          "url": "assets/audio/recorded/ensemble-additions/bass-bars-soft-f2.wav",
+          "gain": 1,
+          "tuningSemitones": -0.995634,
+          "sourceRootMidi": 41,
+          "duration": 3.008321995464853
+        },
+        "41": {
+          "url": "assets/audio/recorded/ensemble-additions/bass-bars-soft-f2.wav",
+          "gain": 1,
+          "tuningSemitones": 0.004366,
+          "sourceRootMidi": 41,
+          "duration": 3.008321995464853
+        },
+        "42": {
+          "url": "assets/audio/recorded/ensemble-additions/bass-bars-soft-f2.wav",
+          "gain": 1,
+          "tuningSemitones": 1.004366,
+          "sourceRootMidi": 41,
+          "duration": 3.008321995464853
+        },
+        "43": {
+          "url": "assets/audio/recorded/ensemble-additions/bass-bars-soft-f2.wav",
+          "gain": 1,
+          "tuningSemitones": 2.004366,
+          "sourceRootMidi": 41,
+          "duration": 3.008321995464853
+        },
+        "45": {
+          "url": "assets/audio/recorded/ensemble-additions/bass-bars-soft-c3.wav",
+          "gain": 1,
+          "tuningSemitones": -3.025761,
+          "sourceRootMidi": 48,
+          "duration": 6.414807256235828
+        },
+        "46": {
+          "url": "assets/audio/recorded/ensemble-additions/bass-bars-soft-c3.wav",
+          "gain": 1,
+          "tuningSemitones": -2.025761,
+          "sourceRootMidi": 48,
+          "duration": 6.414807256235828
+        },
+        "47": {
+          "url": "assets/audio/recorded/ensemble-additions/bass-bars-soft-c3.wav",
+          "gain": 1,
+          "tuningSemitones": -1.025761,
+          "sourceRootMidi": 48,
+          "duration": 6.414807256235828
+        },
+        "48": {
+          "url": "assets/audio/recorded/ensemble-additions/bass-bars-soft-c3.wav",
+          "gain": 1,
+          "tuningSemitones": -0.025761,
+          "sourceRootMidi": 48,
+          "duration": 6.414807256235828
+        }
+      },
+      "articulation": "Separate soft-strike recordings; natural attack and decay; no upper-frequency EQ"
+    },
+    "tambourine": {
+      "credit": "Versilian Studios LLC \u2014 Versilian Community Sample Library",
+      "license": "CC0-1.0",
+      "licensePage": "https://versilian-studios.com/vcsl/",
+      "source": "https://github.com/sgossner/VCSL",
+      "sourceCommit": "c1ea7bcc3c7309650ab0da9d15c9cd1fbc4a4c7e",
+      "notes": {
+        "54": {
+          "url": "assets/audio/recorded/ensemble-additions/tambourine-hit.wav",
+          "gain": 1,
+          "tuningSemitones": 0,
+          "duration": 1.1027664399092971,
+          "articulation": "Hit"
+        },
+        "55": {
+          "url": "assets/audio/recorded/ensemble-additions/tambourine-shake.wav",
+          "gain": 1,
+          "tuningSemitones": 0,
+          "duration": 1.0878004535147392,
+          "articulation": "Shake"
+        }
+      }
+    },
+    "shakers": {
+      "credit": "Versilian Studios LLC \u2014 Versilian Community Sample Library",
+      "license": "CC0-1.0",
+      "licensePage": "https://versilian-studios.com/vcsl/",
+      "source": "https://github.com/sgossner/VCSL",
+      "sourceCommit": "c1ea7bcc3c7309650ab0da9d15c9cd1fbc4a4c7e",
+      "notes": {
+        "82": {
+          "url": "assets/audio/recorded/ensemble-additions/shaker-short.wav",
+          "gain": 1,
+          "tuningSemitones": 4,
+          "duration": 1.0528798185941044,
+          "articulation": "Short shake"
+        },
+        "83": {
+          "url": "assets/audio/recorded/ensemble-additions/shaker-long.wav",
+          "gain": 1,
+          "tuningSemitones": 4,
+          "duration": 1.3771428571428572,
+          "articulation": "Long shake"
+        }
+      }
+    },
+    "maracas": {
+      "credit": "Xavimart, Gonzalo and Roberto \u2014 FreePats World Percussion (2020-09-05)",
+      "license": "CC0-1.0",
+      "licensePage": "https://freepats.zenvoid.org/Percussion/world-and-rare-percussion.html",
+      "source": "https://github.com/freepats/world-percussion",
+      "sourceCommit": "e54eb2912a0d6d4444ab205d52f778e27da0fc96",
+      "notes": {
+        "70": {
+          "url": "assets/audio/recorded/ensemble-additions/maracas-short.wav",
+          "gain": 1,
+          "tuningSemitones": 0,
+          "duration": 0.22106575963718822,
+          "articulation": "Short shake (backward stroke)"
+        },
+        "71": {
+          "url": "assets/audio/recorded/ensemble-additions/maracas-long.wav",
+          "gain": 1,
+          "tuningSemitones": 0,
+          "duration": 0.382108843537415,
+          "articulation": "Long shake (forward stroke)"
+        }
+      }
+    },
+    "sleigh-bells": {
+      "credit": "Versilian Studios LLC \u2014 Versilian Community Sample Library",
+      "license": "CC0-1.0",
+      "licensePage": "https://versilian-studios.com/vcsl/",
+      "source": "https://github.com/sgossner/VCSL",
+      "sourceCommit": "c1ea7bcc3c7309650ab0da9d15c9cd1fbc4a4c7e",
+      "notes": {
+        "83": {
+          "url": "assets/audio/recorded/ensemble-additions/sleigh-bells-hit.wav",
+          "gain": 1,
+          "tuningSemitones": 0,
+          "duration": 1.885986394557823,
+          "articulation": "Hit"
+        },
+        "84": {
+          "url": "assets/audio/recorded/ensemble-additions/sleigh-bells-shake.wav",
+          "gain": 1,
+          "tuningSemitones": 0,
+          "duration": 1.938095238095238,
+          "articulation": "Shake"
+        }
+      }
+    },
+    "cabasa": {
+      "credit": "Versilian Studios LLC \u2014 Versilian Community Sample Library",
+      "license": "CC0-1.0",
+      "licensePage": "https://versilian-studios.com/vcsl/",
+      "source": "https://github.com/sgossner/VCSL",
+      "sourceCommit": "c1ea7bcc3c7309650ab0da9d15c9cd1fbc4a4c7e",
+      "notes": {
+        "69": {
+          "url": "assets/audio/recorded/ensemble-additions/cabasa-soft-rub.wav",
+          "gain": 1,
+          "tuningSemitones": 0,
+          "duration": 0.9231746031746032,
+          "articulation": "Soft rub"
+        },
+        "70": {
+          "url": "assets/audio/recorded/ensemble-additions/cabasa-strong-rub.wav",
+          "gain": 1,
+          "tuningSemitones": 0,
+          "duration": 0.7535600907029478,
+          "articulation": "Strong rub"
+        }
+      }
+    },
+    "temple-blocks": {
+      "credit": "Temple Blocks (5pcs) - Hard Wood Mallets \u2014 sazanami12 / Freesound",
+      "license": "CC0-1.0",
+      "source": "https://freesound.org/people/sazanami12/sounds/863784/",
+      "download": "https://cdn.freesound.org/previews/863/863784_17110092-hq.mp3",
+      "licensePage": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "sourceInstrument": "Five acoustic composite temple blocks, hard wood mallets",
+      "sourceFormat": "Public HQ MP3 preview, 48 kHz stereo; original WAV not used",
+      "articulations": {
+        "77:-4": {
+          "url": "assets/audio/recorded/temple-blocks/block-1.wav",
+          "gain": 1,
+          "tuningSemitones": 4,
+          "duration": 0.6
+        },
+        "77:0": {
+          "url": "assets/audio/recorded/temple-blocks/block-2.wav",
+          "gain": 1,
+          "tuningSemitones": 0,
+          "duration": 0.6
+        },
+        "76:-2": {
+          "url": "assets/audio/recorded/temple-blocks/block-3.wav",
+          "gain": 1,
+          "tuningSemitones": 2,
+          "duration": 0.6
+        },
+        "76:2": {
+          "url": "assets/audio/recorded/temple-blocks/block-4.wav",
+          "gain": 1,
+          "tuningSemitones": -2,
+          "duration": 0.7
+        },
+        "76:5": {
+          "url": "assets/audio/recorded/temple-blocks/block-5.wav",
+          "gain": 1,
+          "tuningSemitones": -5,
+          "duration": 0.65
+        }
+      },
+      "notes": {
+        "77": {
+          "url": "assets/audio/recorded/temple-blocks/block-2.wav",
+          "gain": 1,
+          "tuningSemitones": 0,
+          "duration": 0.6
+        },
+        "76": {
+          "url": "assets/audio/recorded/temple-blocks/block-3.wav",
+          "gain": 1,
+          "tuningSemitones": 0,
+          "duration": 0.6
+        }
+      }
+    },
+    "wind-chimes": {
+      "credit": "Five Bar Chimes Samples \u2014 tosha73 / Freesound",
+      "license": "CC0-1.0",
+      "source": "https://freesound.org/people/tosha73/sounds/495327/",
+      "licensePage": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "sourceInstrument": "Acoustic bar chimes, five studio-recorded sweep performances",
+      "sourceFormat": "User-supplied original 44.1 kHz, 16-bit stereo WAV",
+      "notes": {
+        "84": {
+          "url": "assets/audio/recorded/wind-chimes/down-brisk.wav",
+          "gain": 1,
+          "tuningSemitones": 0,
+          "duration": 16.0,
+          "articulation": "Down \u00b7 brisk"
+        },
+        "85": {
+          "url": "assets/audio/recorded/wind-chimes/down-slow.wav",
+          "gain": 1,
+          "tuningSemitones": 0,
+          "duration": 16.0,
+          "articulation": "Down \u00b7 slow"
+        },
+        "86": {
+          "url": "assets/audio/recorded/wind-chimes/up-brisk.wav",
+          "gain": 1,
+          "tuningSemitones": 0,
+          "duration": 16.0,
+          "articulation": "Up \u00b7 brisk"
+        },
+        "87": {
+          "url": "assets/audio/recorded/wind-chimes/up-medium.wav",
+          "gain": 1,
+          "tuningSemitones": 0,
+          "duration": 16.0,
+          "articulation": "Up \u00b7 medium"
+        },
+        "88": {
+          "url": "assets/audio/recorded/wind-chimes/up-slow.wav",
+          "gain": 1,
+          "tuningSemitones": 0,
+          "duration": 16.0,
+          "articulation": "Up \u00b7 slow"
+        }
+      }
+    },
+    "slapstick": {
+      "credit": "Versilian Community Sample Library \u2014 Versilian Studios LLC",
+      "license": "CC0-1.0",
+      "source": "https://versilian-studios.com/vcsl/",
+      "sourceCommit": "c1ea7bcc3c7309650ab0da9d15c9cd1fbc4a4c7e",
+      "notes": {
+        "28": {
+          "url": "assets/audio/recorded/bells-slapstick/slapstick.wav",
+          "gain": 1,
+          "tuningSemitones": 0,
+          "duration": 0.6,
+          "articulation": "Clap"
+        }
+      }
+    },
+    "agogo-bells": {
+      "credit": "Versilian Community Sample Library \u2014 Versilian Studios LLC",
+      "license": "CC0-1.0",
+      "source": "https://versilian-studios.com/vcsl/",
+      "sourceCommit": "c1ea7bcc3c7309650ab0da9d15c9cd1fbc4a4c7e",
+      "notes": {
+        "68": {
+          "url": "assets/audio/recorded/bells-slapstick/agogo-low.wav",
+          "gain": 1,
+          "tuningSemitones": 0,
+          "duration": 2.0950113378684807,
+          "articulation": "Low"
+        },
+        "67": {
+          "url": "assets/audio/recorded/bells-slapstick/agogo-high.wav",
+          "gain": 1,
+          "tuningSemitones": 0,
+          "duration": 0.9950113378684807,
+          "articulation": "High"
+        }
+      }
+    },
+    "cowbell": {
+      "credit": "Versilian Community Sample Library \u2014 Versilian Studios LLC",
+      "license": "CC0-1.0",
+      "source": "https://versilian-studios.com/vcsl/",
+      "sourceCommit": "c1ea7bcc3c7309650ab0da9d15c9cd1fbc4a4c7e",
+      "notes": {
+        "56": {
+          "url": "assets/audio/recorded/bells-slapstick/cowbell-open.wav",
+          "gain": 1,
+          "tuningSemitones": 0,
+          "duration": 1.5450113378684807,
+          "articulation": "Open"
+        },
+        "57": {
+          "url": "assets/audio/recorded/bells-slapstick/cowbell-muted.wav",
+          "gain": 1,
+          "tuningSemitones": 0,
+          "duration": 0.9450113378684807,
+          "articulation": "Muted"
+        }
+      }
+    },
+    "woodblock": {
+      "credit": "Versilian Studios LLC / VCSL (low); Joseph SARDIN / BigSoundBank (high)",
+      "license": "CC0-1.0",
+      "sourceInstrument": "Two independently recorded acoustic wooden blocks, native pitches",
+      "notes": {
+        "77": {
+          "url": "assets/audio/recorded/woodblock/low.wav",
+          "gain": 1,
+          "tuningSemitones": 0,
+          "duration": 0.55,
+          "articulation": "Low",
+          "source": "https://raw.githubusercontent.com/sgossner/VCSL/c1ea7bcc3c7309650ab0da9d15c9cd1fbc4a4c7e/Idiophones/Struck%20Idiophones/Woodblock/wood_click_f_rr1.wav"
+        },
+        "76": {
+          "url": "assets/audio/recorded/woodblock/high.wav",
+          "gain": 1,
+          "tuningSemitones": 0,
+          "duration": 0.45,
+          "articulation": "High",
+          "source": "https://bigsoundbank.com/UPLOAD/bwf-en/0466.wav"
+        }
+      }
+    },
+    "castanets": {
+      "credit": "Castanets (simple), Joseph SARDIN / BigSoundBank.com",
+      "license": "CC0-1.0",
+      "source": "https://bigsoundbank.com/castanets-simple-s0922.html",
+      "licensePage": "https://bigsoundbank.com/licenses.html",
+      "description": "Two separate acoustic single strikes; original pitches retained.",
+      "notes": {
+        "85": {
+          "url": "assets/audio/recorded/street-additions/castanets-1.wav",
+          "gain": 1,
+          "tuningSemitones": 0,
+          "duration": 0.17700680272108843,
+          "articulation": "Stroke 1"
+        },
+        "86": {
+          "url": "assets/audio/recorded/street-additions/castanets-2.wav",
+          "gain": 1,
+          "tuningSemitones": 0,
+          "duration": 0.19,
+          "articulation": "Stroke 2"
+        }
+      }
+    },
+    "side-drum": {
+      "credit": "Rope-tension snare drum, Versilian Studios LLC / VCSL",
+      "license": "CC0-1.0",
+      "source": "https://versilian-studios.com/vcsl/",
+      "sourceCommit": "c1ea7bcc3c7309650ab0da9d15c9cd1fbc4a4c7e",
+      "description": "Two native snare-on strokes of one rope-tension side drum.",
+      "notes": {
+        "38": {
+          "url": "assets/audio/recorded/street-additions/side-drum-1.wav",
+          "gain": 1,
+          "tuningSemitones": 0,
+          "duration": 2.4904308390022676,
+          "articulation": "Stroke 1"
+        },
+        "40": {
+          "url": "assets/audio/recorded/street-additions/side-drum-2.wav",
+          "gain": 1,
+          "tuningSemitones": 0,
+          "duration": 2.6147619047619046,
+          "articulation": "Stroke 2"
+        }
+      }
+    },
+    "sopranino-recorder": {
+      "sourceInstrument": "Baroque Soprano Recorder, transposed approximation",
+      "source": "https://github.com/sgossner/VCSL",
+      "sourceCommit": "c1ea7bcc3c7309650ab0da9d15c9cd1fbc4a4c7e",
+      "credit": "Versilian Studios LLC / VCSL",
+      "license": "CC0-1.0",
+      "sustain": true,
+      "description": "Sopranino in F range, F5\u2013F7. VCSL soprano recordings raised a perfect fourth; not separately recorded sopranino samples.",
+      "notes": {
+        "77": {
+          "url": "assets/audio/recorded/recorders/soprano-72.wav",
+          "gain": 1,
+          "tuningSemitones": 4.968879,
+          "loopStart": 0.6,
+          "loopEnd": 3.1372108843537414,
+          "duration": 3.2372108843537415,
+          "sourceRootMidi": 72
+        },
+        "78": {
+          "url": "assets/audio/recorded/recorders/soprano-72.wav",
+          "gain": 1,
+          "tuningSemitones": 5.968879,
+          "loopStart": 0.6,
+          "loopEnd": 3.1372108843537414,
+          "duration": 3.2372108843537415,
+          "sourceRootMidi": 72
+        },
+        "79": {
+          "url": "assets/audio/recorded/recorders/soprano-74.wav",
+          "gain": 1,
+          "tuningSemitones": 4.963146,
+          "loopStart": 1.65,
+          "loopEnd": 3.345215419501134,
+          "duration": 3.445215419501134,
+          "sourceRootMidi": 74
+        },
+        "80": {
+          "url": "assets/audio/recorded/recorders/soprano-74.wav",
+          "gain": 1,
+          "tuningSemitones": 5.963146,
+          "loopStart": 1.65,
+          "loopEnd": 3.345215419501134,
+          "duration": 3.445215419501134,
+          "sourceRootMidi": 74
+        },
+        "81": {
+          "url": "assets/audio/recorded/recorders/soprano-76.wav",
+          "gain": 1,
+          "tuningSemitones": 4.95946,
+          "loopStart": 1.65,
+          "loopEnd": 3.2008163265306124,
+          "duration": 3.300816326530612,
+          "sourceRootMidi": 76
+        },
+        "82": {
+          "url": "assets/audio/recorded/recorders/soprano-76.wav",
+          "gain": 1,
+          "tuningSemitones": 5.95946,
+          "loopStart": 1.65,
+          "loopEnd": 3.2008163265306124,
+          "duration": 3.300816326530612,
+          "sourceRootMidi": 76
+        },
+        "83": {
+          "url": "assets/audio/recorded/recorders/soprano-78.wav",
+          "gain": 1,
+          "tuningSemitones": 4.935458,
+          "loopStart": 1.5,
+          "loopEnd": 3.2453968253968255,
+          "duration": 3.3453968253968256,
+          "sourceRootMidi": 78
+        },
+        "84": {
+          "url": "assets/audio/recorded/recorders/soprano-78.wav",
+          "gain": 1,
+          "tuningSemitones": 5.935458,
+          "loopStart": 1.5,
+          "loopEnd": 3.2453968253968255,
+          "duration": 3.3453968253968256,
+          "sourceRootMidi": 78
+        },
+        "85": {
+          "url": "assets/audio/recorded/recorders/soprano-80.wav",
+          "gain": 1,
+          "tuningSemitones": 5.007223,
+          "loopStart": 1.5,
+          "loopEnd": 3.2714739229024943,
+          "duration": 3.3714739229024944,
+          "sourceRootMidi": 80
+        },
+        "86": {
+          "url": "assets/audio/recorded/recorders/soprano-80.wav",
+          "gain": 1,
+          "tuningSemitones": 6.007223,
+          "loopStart": 1.5,
+          "loopEnd": 3.2714739229024943,
+          "duration": 3.3714739229024944,
+          "sourceRootMidi": 80
+        },
+        "87": {
+          "url": "assets/audio/recorded/recorders/soprano-82.wav",
+          "gain": 1,
+          "tuningSemitones": 5.001464,
+          "loopStart": 1.35,
+          "loopEnd": 3.466190476190476,
+          "duration": 3.566190476190476,
+          "sourceRootMidi": 82
+        },
+        "88": {
+          "url": "assets/audio/recorded/recorders/soprano-82.wav",
+          "gain": 1,
+          "tuningSemitones": 6.001464,
+          "loopStart": 1.35,
+          "loopEnd": 3.466190476190476,
+          "duration": 3.566190476190476,
+          "sourceRootMidi": 82
+        },
+        "89": {
+          "url": "assets/audio/recorded/recorders/soprano-84.wav",
+          "gain": 1,
+          "tuningSemitones": 4.995549,
+          "loopStart": 1.35,
+          "loopEnd": 3.529886621315193,
+          "duration": 3.6298866213151926,
+          "sourceRootMidi": 84
+        },
+        "90": {
+          "url": "assets/audio/recorded/recorders/soprano-84.wav",
+          "gain": 1,
+          "tuningSemitones": 5.995549,
+          "loopStart": 1.35,
+          "loopEnd": 3.529886621315193,
+          "duration": 3.6298866213151926,
+          "sourceRootMidi": 84
+        },
+        "91": {
+          "url": "assets/audio/recorded/recorders/soprano-86.wav",
+          "gain": 1,
+          "tuningSemitones": 4.996757,
+          "loopStart": 1.65,
+          "loopEnd": 3.760294784580499,
+          "duration": 3.860294784580499,
+          "sourceRootMidi": 86
+        },
+        "92": {
+          "url": "assets/audio/recorded/recorders/soprano-86.wav",
+          "gain": 1,
+          "tuningSemitones": 5.996757,
+          "loopStart": 1.65,
+          "loopEnd": 3.760294784580499,
+          "duration": 3.860294784580499,
+          "sourceRootMidi": 86
+        },
+        "93": {
+          "url": "assets/audio/recorded/recorders/soprano-88.wav",
+          "gain": 1,
+          "tuningSemitones": 4.983314,
+          "loopStart": 1.65,
+          "loopEnd": 3.4790702947845804,
+          "duration": 3.5790702947845805,
+          "sourceRootMidi": 88
+        },
+        "94": {
+          "url": "assets/audio/recorded/recorders/soprano-88.wav",
+          "gain": 1,
+          "tuningSemitones": 5.983314,
+          "loopStart": 1.65,
+          "loopEnd": 3.4790702947845804,
+          "duration": 3.5790702947845805,
+          "sourceRootMidi": 88
+        },
+        "95": {
+          "url": "assets/audio/recorded/recorders/soprano-90.wav",
+          "gain": 1,
+          "tuningSemitones": 4.982653,
+          "loopStart": 1.35,
+          "loopEnd": 3.8130839002267574,
+          "duration": 3.9130839002267575,
+          "sourceRootMidi": 90
+        },
+        "96": {
+          "url": "assets/audio/recorded/recorders/soprano-91.wav",
+          "gain": 1,
+          "tuningSemitones": 4.986436,
+          "loopStart": 1.8,
+          "loopEnd": 3.397120181405896,
+          "duration": 3.497120181405896,
+          "sourceRootMidi": 91
+        },
+        "97": {
+          "url": "assets/audio/recorded/recorders/soprano-91.wav",
+          "gain": 1,
+          "tuningSemitones": 5.986436,
+          "loopStart": 1.8,
+          "loopEnd": 3.397120181405896,
+          "duration": 3.497120181405896,
+          "sourceRootMidi": 91
+        },
+        "98": {
+          "url": "assets/audio/recorded/recorders/soprano-94.wav",
+          "gain": 1,
+          "tuningSemitones": 3.970248,
+          "loopStart": 1.5,
+          "loopEnd": 3.9011791383219956,
+          "duration": 4.001179138321995,
+          "sourceRootMidi": 94
+        },
+        "99": {
+          "url": "assets/audio/recorded/recorders/soprano-94.wav",
+          "gain": 1,
+          "tuningSemitones": 4.970248,
+          "loopStart": 1.5,
+          "loopEnd": 3.9011791383219956,
+          "duration": 4.001179138321995,
+          "sourceRootMidi": 94
+        },
+        "100": {
+          "url": "assets/audio/recorded/recorders/soprano-94.wav",
+          "gain": 1,
+          "tuningSemitones": 5.970248,
+          "loopStart": 1.5,
+          "loopEnd": 3.9011791383219956,
+          "duration": 4.001179138321995,
+          "sourceRootMidi": 94
+        },
+        "101": {
+          "url": "assets/audio/recorded/recorders/soprano-96.wav",
+          "gain": 1,
+          "tuningSemitones": 4.978167,
+          "loopStart": 0.6,
+          "loopEnd": 3.473106575963719,
+          "duration": 3.5731065759637186,
+          "sourceRootMidi": 96
+        }
+      }
+    },
+    "timpani": {
+      "credit": "GeneralUser GS 1.471 \u2014 S. Christian Collins; TinySoundFont rendering",
+      "source": "https://schristiancollins.com/generaluser.php",
+      "license": "GeneralUser GS License v2.0; see assets/audio/CREDITS.txt",
+      "description": "Existing pitched timpani C2\u2013C4; audio bytes unchanged.",
+      "notes": {
+        "36": {
+          "url": "assets/audio/timpani/36.mp3",
+          "duration": 4.2,
+          "peak": 0.56821,
+          "rms": 0.05906,
+          "bytes": 34316,
+          "gain": 1,
+          "tuningSemitones": 0
+        },
+        "37": {
+          "url": "assets/audio/timpani/37.mp3",
+          "duration": 4.2,
+          "peak": 0.57426,
+          "rms": 0.05773,
+          "bytes": 34316,
+          "gain": 1,
+          "tuningSemitones": 0
+        },
+        "38": {
+          "url": "assets/audio/timpani/38.mp3",
+          "duration": 4.2,
+          "peak": 0.5669,
+          "rms": 0.05641,
+          "bytes": 34316,
+          "gain": 1,
+          "tuningSemitones": 0
+        },
+        "39": {
+          "url": "assets/audio/timpani/39.mp3",
+          "duration": 4.2,
+          "peak": 0.56589,
+          "rms": 0.05496,
+          "bytes": 34316,
+          "gain": 1,
+          "tuningSemitones": 0
+        },
+        "40": {
+          "url": "assets/audio/timpani/40.mp3",
+          "duration": 4.2,
+          "peak": 0.58179,
+          "rms": 0.05368,
+          "bytes": 34316,
+          "gain": 1,
+          "tuningSemitones": 0
+        },
+        "41": {
+          "url": "assets/audio/timpani/41.mp3",
+          "duration": 4.2,
+          "peak": 0.56224,
+          "rms": 0.05235,
+          "bytes": 34316,
+          "gain": 1,
+          "tuningSemitones": 0
+        },
+        "42": {
+          "url": "assets/audio/timpani/42.mp3",
+          "duration": 4.2,
+          "peak": 0.56836,
+          "rms": 0.05113,
+          "bytes": 34316,
+          "gain": 1,
+          "tuningSemitones": 0
+        },
+        "43": {
+          "url": "assets/audio/timpani/43.mp3",
+          "duration": 4.2,
+          "peak": 0.56925,
+          "rms": 0.0498,
+          "bytes": 34316,
+          "gain": 1,
+          "tuningSemitones": 0
+        },
+        "44": {
+          "url": "assets/audio/timpani/44.mp3",
+          "duration": 4.2,
+          "peak": 0.5715,
+          "rms": 0.04865,
+          "bytes": 34316,
+          "gain": 1,
+          "tuningSemitones": 0
+        },
+        "45": {
+          "url": "assets/audio/timpani/45.mp3",
+          "duration": 4.2,
+          "peak": 0.56838,
+          "rms": 0.04726,
+          "bytes": 34316,
+          "gain": 1,
+          "tuningSemitones": 0
+        },
+        "46": {
+          "url": "assets/audio/timpani/46.mp3",
+          "duration": 4.2,
+          "peak": 0.56687,
+          "rms": 0.04619,
+          "bytes": 34316,
+          "gain": 1,
+          "tuningSemitones": 0
+        },
+        "47": {
+          "url": "assets/audio/timpani/47.mp3",
+          "duration": 4.2,
+          "peak": 0.56972,
+          "rms": 0.04505,
+          "bytes": 34316,
+          "gain": 1,
+          "tuningSemitones": 0
+        },
+        "48": {
+          "url": "assets/audio/timpani/48.mp3",
+          "duration": 4.2,
+          "peak": 0.58038,
+          "rms": 0.04383,
+          "bytes": 34316,
+          "gain": 1,
+          "tuningSemitones": 0
+        },
+        "49": {
+          "url": "assets/audio/timpani/49.mp3",
+          "duration": 4.2,
+          "peak": 0.56377,
+          "rms": 0.0427,
+          "bytes": 34316,
+          "gain": 1,
+          "tuningSemitones": 0
+        },
+        "50": {
+          "url": "assets/audio/timpani/50.mp3",
+          "duration": 4.2,
+          "peak": 0.56736,
+          "rms": 0.04168,
+          "bytes": 34316,
+          "gain": 1,
+          "tuningSemitones": 0
+        },
+        "51": {
+          "url": "assets/audio/timpani/51.mp3",
+          "duration": 4.2,
+          "peak": 0.57447,
+          "rms": 0.04066,
+          "bytes": 34316,
+          "gain": 1,
+          "tuningSemitones": 0
+        },
+        "52": {
+          "url": "assets/audio/timpani/52.mp3",
+          "duration": 4.2,
+          "peak": 0.5637,
+          "rms": 0.03945,
+          "bytes": 34316,
+          "gain": 1,
+          "tuningSemitones": 0
+        },
+        "53": {
+          "url": "assets/audio/timpani/53.mp3",
+          "duration": 4.2,
+          "peak": 0.56363,
+          "rms": 0.03847,
+          "bytes": 34316,
+          "gain": 1,
+          "tuningSemitones": 0
+        },
+        "54": {
+          "url": "assets/audio/timpani/54.mp3",
+          "duration": 4.2,
+          "peak": 0.56567,
+          "rms": 0.03747,
+          "bytes": 34316,
+          "gain": 1,
+          "tuningSemitones": 0
+        },
+        "55": {
+          "url": "assets/audio/timpani/55.mp3",
+          "duration": 4.2,
+          "peak": 0.54906,
+          "rms": 0.0365,
+          "bytes": 34316,
+          "gain": 1,
+          "tuningSemitones": 0
+        },
+        "56": {
+          "url": "assets/audio/timpani/56.mp3",
+          "duration": 4.2,
+          "peak": 0.57661,
+          "rms": 0.03577,
+          "bytes": 34316,
+          "gain": 1,
+          "tuningSemitones": 0
+        },
+        "57": {
+          "url": "assets/audio/timpani/57.mp3",
+          "duration": 4.2,
+          "peak": 0.56636,
+          "rms": 0.03471,
+          "bytes": 34316,
+          "gain": 1,
+          "tuningSemitones": 0
+        },
+        "58": {
+          "url": "assets/audio/timpani/58.mp3",
+          "duration": 4.2,
+          "peak": 0.58125,
+          "rms": 0.03402,
+          "bytes": 34316,
+          "gain": 1,
+          "tuningSemitones": 0
+        },
+        "59": {
+          "url": "assets/audio/timpani/59.mp3",
+          "duration": 4.2,
+          "peak": 0.55554,
+          "rms": 0.03295,
+          "bytes": 34316,
+          "gain": 1,
+          "tuningSemitones": 0
+        },
+        "60": {
+          "url": "assets/audio/timpani/60.mp3",
+          "duration": 4.2,
+          "peak": 0.5673,
+          "rms": 0.03231,
+          "bytes": 34316,
+          "gain": 1,
+          "tuningSemitones": 0
+        }
+      }
+    }
+  }
+}

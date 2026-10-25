@@ -1,0 +1,3 @@
+import {identity,listProjects,getProject,saveProject,StoreError} from '../../../lib/store';
+export async function GET(req:Request){try{const owner=identity(req),id=new URL(req.url).searchParams.get('id');return Response.json(id?await getProject(owner,id):{projects:await listProjects(owner)});}catch(e){return Response.json({error:(e as Error).message},{status:e instanceof StoreError?e.status:400});}}
+export async function POST(req:Request){try{const owner=identity(req);if(Number(req.headers.get('content-length'))>4000000)throw Error('Project too large.');return Response.json(await saveProject(owner,await req.json()));}catch(e){return Response.json({error:(e as Error).message},{status:e instanceof StoreError?e.status:400});}}

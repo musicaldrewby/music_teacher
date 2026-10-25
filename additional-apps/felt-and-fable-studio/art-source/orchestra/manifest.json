@@ -1,0 +1,288 @@
+[
+  {
+    "id": "orchestra-viola",
+    "name": "Viola & bow",
+    "category": "instruments",
+    "themes": [
+      "orchestra"
+    ],
+    "tags": "strings bowed alto orchestra orchestral music felt",
+    "nativeAlpha": true,
+    "defaultWidth": 170,
+    "maxInitialHeight": 420,
+    "prepared": "assets/prepared/orchestra-viola.js",
+    "preparedSize": [
+      935,
+      1451
+    ],
+    "orchestraThumb": [
+      0,
+      0,
+      184,
+      120
+    ]
+  },
+  {
+    "id": "orchestra-double-bass",
+    "name": "Double bass & bow",
+    "category": "instruments",
+    "themes": [
+      "orchestra"
+    ],
+    "tags": "strings bowed upright contrabass bass fiddle orchestra orchestral music felt",
+    "nativeAlpha": true,
+    "defaultWidth": 220,
+    "maxInitialHeight": 420,
+    "prepared": "assets/prepared/orchestra-double-bass.js",
+    "preparedSize": [
+      963,
+      1544
+    ],
+    "orchestraThumb": [
+      192,
+      0,
+      184,
+      120
+    ]
+  },
+  {
+    "id": "orchestra-oboe",
+    "name": "Oboe",
+    "category": "instruments",
+    "themes": [
+      "orchestra",
+      "band"
+    ],
+    "tags": "woodwind double reed orchestra orchestral music felt",
+    "nativeAlpha": true,
+    "defaultWidth": 100,
+    "maxInitialHeight": 420,
+    "prepared": "assets/prepared/orchestra-oboe.js",
+    "preparedSize": [
+      716,
+      2103
+    ],
+    "orchestraThumb": [
+      384,
+      0,
+      184,
+      120
+    ]
+  },
+  {
+    "id": "orchestra-bassoon",
+    "name": "Bassoon",
+    "category": "instruments",
+    "themes": [
+      "orchestra",
+      "band"
+    ],
+    "tags": "woodwind double reed bocal orchestra orchestral music felt",
+    "nativeAlpha": true,
+    "defaultWidth": 130,
+    "maxInitialHeight": 420,
+    "prepared": "assets/prepared/orchestra-bassoon.js",
+    "preparedSize": [
+      965,
+      1544
+    ],
+    "orchestraThumb": [
+      576,
+      0,
+      184,
+      120
+    ]
+  },
+  {
+    "id": "orchestra-contrabassoon",
+    "name": "Contrabassoon",
+    "category": "instruments",
+    "themes": [
+      "orchestra",
+      "band"
+    ],
+    "tags": "woodwind double reed double bassoon orchestra orchestral music felt",
+    "nativeAlpha": true,
+    "defaultWidth": 200,
+    "maxInitialHeight": 420,
+    "prepared": "assets/prepared/orchestra-contrabassoon.js",
+    "preparedSize": [
+      1018,
+      1544
+    ],
+    "orchestraThumb": [
+      768,
+      0,
+      184,
+      120
+    ]
+  },
+  {
+    "id": "orchestra-piccolo",
+    "name": "Piccolo",
+    "category": "instruments",
+    "themes": [
+      "orchestra",
+      "band"
+    ],
+    "tags": "woodwind transverse small flute orchestra orchestral music felt",
+    "nativeAlpha": true,
+    "defaultWidth": 190,
+    "maxInitialHeight": 420,
+    "prepared": "assets/prepared/orchestra-piccolo.js",
+    "preparedSize": [
+      1433,
+      1060
+    ],
+    "orchestraThumb": [
+      960,
+      0,
+      184,
+      120
+    ]
+  },
+  {
+    "id": "orchestra-french-horn",
+    "name": "French horn",
+    "category": "instruments",
+    "themes": [
+      "orchestra",
+      "band"
+    ],
+    "tags": "brass horn rotary valves orchestra orchestral music felt",
+    "nativeAlpha": true,
+    "defaultWidth": 250,
+    "maxInitialHeight": 420,
+    "prepared": "assets/prepared/orchestra-french-horn.js",
+    "preparedSize": [
+      1466,
+      983
+    ],
+    "orchestraThumb": [
+      1152,
+      0,
+      184,
+      120
+    ]
+  },
+  {
+    "id": "orchestra-concert-bass-drum",
+    "name": "Concert bass drum",
+    "category": "instruments",
+    "themes": [
+      "orchestra",
+      "band"
+    ],
+    "tags": "percussion orchestral bass drum beater orchestra orchestral music felt",
+    "nativeAlpha": true,
+    "defaultWidth": 330,
+    "maxInitialHeight": 420,
+    "prepared": "assets/prepared/orchestra-concert-bass-drum.js",
+    "preparedSize": [
+      1227,
+      1298
+    ],
+    "orchestraThumb": [
+      1344,
+      0,
+      184,
+      120
+    ]
+  },
+  {
+    "id": "orchestra-snare-drum",
+    "name": "Snare drum",
+    "category": "instruments",
+    "themes": [
+      "orchestra",
+      "band"
+    ],
+    "tags": "percussion orchestral snare drum sticks orchestra orchestral music felt",
+    "nativeAlpha": true,
+    "defaultWidth": 220,
+    "maxInitialHeight": 420,
+    "prepared": "assets/prepared/orchestra-snare-drum.js",
+    "preparedSize": [
+      1197,
+      1289
+    ],
+    "orchestraThumb": [
+      0,
+      128,
+      184,
+      120
+    ]
+  },
+  {
+    "id": "orchestra-marimba",
+    "name": "Marimba",
+    "category": "instruments",
+    "themes": [
+      "orchestra",
+      "band"
+    ],
+    "tags": "percussion pitched wooden bars mallets resonators orchestra orchestral music felt",
+    "nativeAlpha": true,
+    "defaultWidth": 380,
+    "maxInitialHeight": 420,
+    "prepared": "assets/prepared/orchestra-marimba.js",
+    "preparedSize": [
+      1544,
+      942
+    ],
+    "orchestraThumb": [
+      192,
+      128,
+      184,
+      120
+    ]
+  },
+  {
+    "id": "orchestra-cymbals",
+    "name": "Orchestral cymbals",
+    "category": "instruments",
+    "themes": [
+      "orchestra",
+      "band"
+    ],
+    "tags": "percussion crash cymbals pair orchestra orchestral music felt",
+    "nativeAlpha": true,
+    "defaultWidth": 260,
+    "maxInitialHeight": 420,
+    "prepared": "assets/prepared/orchestra-cymbals.js",
+    "preparedSize": [
+      1398,
+      1140
+    ],
+    "orchestraThumb": [
+      384,
+      128,
+      184,
+      120
+    ]
+  },
+  {
+    "id": "orchestra-tambourine",
+    "name": "Tambourine",
+    "category": "instruments",
+    "themes": [
+      "orchestra",
+      "band"
+    ],
+    "tags": "percussion jingles frame drum orchestra orchestral music felt",
+    "nativeAlpha": true,
+    "defaultWidth": 180,
+    "maxInitialHeight": 420,
+    "prepared": "assets/prepared/orchestra-tambourine.js",
+    "preparedSize": [
+      1517,
+      997
+    ],
+    "orchestraThumb": [
+      576,
+      128,
+      184,
+      120
+    ]
+  }
+]

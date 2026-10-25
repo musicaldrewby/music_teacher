@@ -1,0 +1,3556 @@
+{
+  "format": "orff-atelier",
+  "version": 1,
+  "title": "My Orf Assignment",
+  "composer": "Drew Wichman",
+  "bpm": 108,
+  "meter": "6/8",
+  "bars": 8,
+  "key": "C",
+  "loop": false,
+  "master": 0.75,
+  "reverb": 0.12,
+  "delay": 0,
+  "tracks": [
+    {
+      "id": "assignment-4-recorder",
+      "instrument": "soprano-recorder",
+      "name": "Recorder",
+      "volume": 0.85,
+      "pan": 0,
+      "muted": false,
+      "solo": false,
+      "events": [
+        {
+          "id": "assignment-4-a-recorder-0",
+          "beat": 0,
+          "duration": 3,
+          "writtenDuration": 3,
+          "note": 79,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-recorder-1",
+          "beat": 3.5,
+          "duration": 0.5,
+          "writtenDuration": 0.5,
+          "note": 81,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-recorder-2",
+          "beat": 4,
+          "duration": 0.5,
+          "writtenDuration": 0.5,
+          "note": 84,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-recorder-3",
+          "beat": 4.5,
+          "duration": 0.5,
+          "writtenDuration": 0.5,
+          "note": 83,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-recorder-4",
+          "beat": 5,
+          "duration": 0.5,
+          "writtenDuration": 0.5,
+          "note": 81,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-recorder-5",
+          "beat": 5.5,
+          "duration": 0.5,
+          "writtenDuration": 0.5,
+          "note": 83,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-recorder-6",
+          "beat": 6,
+          "duration": 3,
+          "writtenDuration": 3,
+          "note": 79,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-recorder-7",
+          "beat": 9.5,
+          "duration": 0.5,
+          "writtenDuration": 0.5,
+          "note": 81,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-recorder-8",
+          "beat": 10,
+          "duration": 0.5,
+          "writtenDuration": 0.5,
+          "note": 84,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-recorder-9",
+          "beat": 10.5,
+          "duration": 0.5,
+          "writtenDuration": 0.5,
+          "note": 83,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-recorder-10",
+          "beat": 11,
+          "duration": 0.5,
+          "writtenDuration": 0.5,
+          "note": 81,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-recorder-11",
+          "beat": 11.5,
+          "duration": 0.5,
+          "writtenDuration": 0.5,
+          "note": 83,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-recorder-12",
+          "beat": 12,
+          "duration": 0.5,
+          "writtenDuration": 0.5,
+          "note": 79,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-recorder-13",
+          "beat": 12.5,
+          "duration": 0.5,
+          "writtenDuration": 0.5,
+          "note": 76,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-recorder-14",
+          "beat": 13,
+          "duration": 0.5,
+          "writtenDuration": 0.5,
+          "note": 77,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-recorder-15",
+          "beat": 13.5,
+          "duration": 3,
+          "writtenDuration": 3,
+          "note": 79,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-recorder-16",
+          "beat": 16.5,
+          "duration": 0.5,
+          "writtenDuration": 0.5,
+          "note": 74,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-recorder-17",
+          "beat": 17,
+          "duration": 0.5,
+          "writtenDuration": 0.5,
+          "note": 77,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-recorder-18",
+          "beat": 17.5,
+          "duration": 0.5,
+          "writtenDuration": 0.5,
+          "note": 76,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-recorder-19",
+          "beat": 18,
+          "duration": 4.5,
+          "writtenDuration": 4.5,
+          "note": 72,
+          "velocity": 0.75,
+          "shift": 0
+        }
+      ],
+      "removed": [],
+      "pentatonic": false
+    },
+    {
+      "id": "assignment-4-claves",
+      "instrument": "claves",
+      "name": "Claves",
+      "volume": 0.52,
+      "pan": -0.25,
+      "muted": false,
+      "solo": false,
+      "events": [
+        {
+          "id": "assignment-4-a-claves-0",
+          "beat": 0.5,
+          "duration": 0.5,
+          "writtenDuration": 0.5,
+          "note": 75,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-claves-1",
+          "beat": 1,
+          "duration": 0.5,
+          "writtenDuration": 0.5,
+          "note": 75,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-claves-2",
+          "beat": 1.5,
+          "duration": 1.5,
+          "writtenDuration": 1.5,
+          "note": 75,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-claves-3",
+          "beat": 5,
+          "duration": 0.5,
+          "writtenDuration": 0.5,
+          "note": 75,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-claves-4",
+          "beat": 5.5,
+          "duration": 0.5,
+          "writtenDuration": 0.5,
+          "note": 75,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-claves-5",
+          "beat": 6.5,
+          "duration": 0.5,
+          "writtenDuration": 0.5,
+          "note": 75,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-claves-6",
+          "beat": 7,
+          "duration": 0.5,
+          "writtenDuration": 0.5,
+          "note": 75,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-claves-7",
+          "beat": 7.5,
+          "duration": 1.5,
+          "writtenDuration": 1.5,
+          "note": 75,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-claves-8",
+          "beat": 11,
+          "duration": 0.5,
+          "writtenDuration": 0.5,
+          "note": 75,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-claves-9",
+          "beat": 11.5,
+          "duration": 0.5,
+          "writtenDuration": 0.5,
+          "note": 75,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-claves-10",
+          "beat": 12.5,
+          "duration": 0.5,
+          "writtenDuration": 0.5,
+          "note": 75,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-claves-11",
+          "beat": 13,
+          "duration": 0.5,
+          "writtenDuration": 0.5,
+          "note": 75,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-claves-12",
+          "beat": 13.5,
+          "duration": 1.5,
+          "writtenDuration": 1.5,
+          "note": 75,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-claves-13",
+          "beat": 17,
+          "duration": 0.5,
+          "writtenDuration": 0.5,
+          "note": 75,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-claves-14",
+          "beat": 17.5,
+          "duration": 0.5,
+          "writtenDuration": 0.5,
+          "note": 75,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-claves-15",
+          "beat": 18.5,
+          "duration": 0.5,
+          "writtenDuration": 0.5,
+          "note": 75,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-claves-16",
+          "beat": 19,
+          "duration": 0.5,
+          "writtenDuration": 0.5,
+          "note": 75,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-claves-17",
+          "beat": 19.5,
+          "duration": 1.5,
+          "writtenDuration": 1.5,
+          "note": 75,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-claves-18",
+          "beat": 23,
+          "duration": 0.5,
+          "writtenDuration": 0.5,
+          "note": 75,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-claves-19",
+          "beat": 23.5,
+          "duration": 0.5,
+          "writtenDuration": 0.5,
+          "note": 75,
+          "velocity": 0.75,
+          "shift": 0
+        }
+      ],
+      "removed": [],
+      "pentatonic": false
+    },
+    {
+      "id": "assignment-4-tambourine",
+      "instrument": "tambourine",
+      "name": "Tambourine",
+      "volume": 0.44,
+      "pan": 0.25,
+      "muted": false,
+      "solo": false,
+      "events": [],
+      "removed": [],
+      "pentatonic": false
+    },
+    {
+      "id": "assignment-4-alto",
+      "instrument": "alto-xylophone",
+      "name": "Orff Alto Xylophone",
+      "volume": 0.62,
+      "pan": -0.12,
+      "muted": false,
+      "solo": false,
+      "events": [
+        {
+          "id": "assignment-4-a-alto-0",
+          "beat": 0,
+          "duration": 1.5,
+          "writtenDuration": 1.5,
+          "note": 60,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-alto-1",
+          "beat": 0,
+          "duration": 1.5,
+          "writtenDuration": 1.5,
+          "note": 64,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-alto-2",
+          "beat": 0,
+          "duration": 1.5,
+          "writtenDuration": 1.5,
+          "note": 67,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-alto-3",
+          "beat": 1.5,
+          "duration": 1.5,
+          "writtenDuration": 1.5,
+          "note": 62,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-alto-4",
+          "beat": 1.5,
+          "duration": 1.5,
+          "writtenDuration": 1.5,
+          "note": 65,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-alto-5",
+          "beat": 1.5,
+          "duration": 1.5,
+          "writtenDuration": 1.5,
+          "note": 69,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-alto-6",
+          "beat": 3,
+          "duration": 1.5,
+          "writtenDuration": 1.5,
+          "note": 60,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-alto-7",
+          "beat": 3,
+          "duration": 1.5,
+          "writtenDuration": 1.5,
+          "note": 64,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-alto-8",
+          "beat": 3,
+          "duration": 1.5,
+          "writtenDuration": 1.5,
+          "note": 67,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-alto-9",
+          "beat": 4.5,
+          "duration": 1.5,
+          "writtenDuration": 1.5,
+          "note": 62,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-alto-10",
+          "beat": 4.5,
+          "duration": 1.5,
+          "writtenDuration": 1.5,
+          "note": 65,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-alto-11",
+          "beat": 4.5,
+          "duration": 1.5,
+          "writtenDuration": 1.5,
+          "note": 69,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-alto-12",
+          "beat": 6,
+          "duration": 1.5,
+          "writtenDuration": 1.5,
+          "note": 60,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-alto-13",
+          "beat": 6,
+          "duration": 1.5,
+          "writtenDuration": 1.5,
+          "note": 64,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-alto-14",
+          "beat": 6,
+          "duration": 1.5,
+          "writtenDuration": 1.5,
+          "note": 67,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-alto-15",
+          "beat": 7.5,
+          "duration": 1.5,
+          "writtenDuration": 1.5,
+          "note": 62,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-alto-16",
+          "beat": 7.5,
+          "duration": 1.5,
+          "writtenDuration": 1.5,
+          "note": 65,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-alto-17",
+          "beat": 7.5,
+          "duration": 1.5,
+          "writtenDuration": 1.5,
+          "note": 69,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-alto-18",
+          "beat": 9,
+          "duration": 1.5,
+          "writtenDuration": 1.5,
+          "note": 60,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-alto-19",
+          "beat": 9,
+          "duration": 1.5,
+          "writtenDuration": 1.5,
+          "note": 64,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-alto-20",
+          "beat": 9,
+          "duration": 1.5,
+          "writtenDuration": 1.5,
+          "note": 67,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-alto-21",
+          "beat": 10.5,
+          "duration": 1.5,
+          "writtenDuration": 1.5,
+          "note": 62,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-alto-22",
+          "beat": 10.5,
+          "duration": 1.5,
+          "writtenDuration": 1.5,
+          "note": 65,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-alto-23",
+          "beat": 10.5,
+          "duration": 1.5,
+          "writtenDuration": 1.5,
+          "note": 69,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-alto-24",
+          "beat": 12,
+          "duration": 1.5,
+          "writtenDuration": 1.5,
+          "note": 60,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-alto-25",
+          "beat": 12,
+          "duration": 1.5,
+          "writtenDuration": 1.5,
+          "note": 64,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-alto-26",
+          "beat": 12,
+          "duration": 1.5,
+          "writtenDuration": 1.5,
+          "note": 67,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-alto-27",
+          "beat": 13.5,
+          "duration": 1.5,
+          "writtenDuration": 1.5,
+          "note": 62,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-alto-28",
+          "beat": 13.5,
+          "duration": 1.5,
+          "writtenDuration": 1.5,
+          "note": 65,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-alto-29",
+          "beat": 13.5,
+          "duration": 1.5,
+          "writtenDuration": 1.5,
+          "note": 69,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-alto-30",
+          "beat": 15,
+          "duration": 1.5,
+          "writtenDuration": 1.5,
+          "note": 60,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-alto-31",
+          "beat": 15,
+          "duration": 1.5,
+          "writtenDuration": 1.5,
+          "note": 64,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-alto-32",
+          "beat": 15,
+          "duration": 1.5,
+          "writtenDuration": 1.5,
+          "note": 67,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-alto-33",
+          "beat": 16.5,
+          "duration": 1.5,
+          "writtenDuration": 1.5,
+          "note": 62,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-alto-34",
+          "beat": 16.5,
+          "duration": 1.5,
+          "writtenDuration": 1.5,
+          "note": 65,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-alto-35",
+          "beat": 16.5,
+          "duration": 1.5,
+          "writtenDuration": 1.5,
+          "note": 69,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-alto-36",
+          "beat": 18,
+          "duration": 1.5,
+          "writtenDuration": 1.5,
+          "note": 60,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-alto-37",
+          "beat": 18,
+          "duration": 1.5,
+          "writtenDuration": 1.5,
+          "note": 64,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-alto-38",
+          "beat": 18,
+          "duration": 1.5,
+          "writtenDuration": 1.5,
+          "note": 67,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-alto-39",
+          "beat": 19.5,
+          "duration": 1.5,
+          "writtenDuration": 1.5,
+          "note": 62,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-alto-40",
+          "beat": 19.5,
+          "duration": 1.5,
+          "writtenDuration": 1.5,
+          "note": 65,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-alto-41",
+          "beat": 19.5,
+          "duration": 1.5,
+          "writtenDuration": 1.5,
+          "note": 69,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-alto-42",
+          "beat": 21,
+          "duration": 1.5,
+          "writtenDuration": 1.5,
+          "note": 60,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-alto-43",
+          "beat": 21,
+          "duration": 1.5,
+          "writtenDuration": 1.5,
+          "note": 64,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-alto-44",
+          "beat": 21,
+          "duration": 1.5,
+          "writtenDuration": 1.5,
+          "note": 67,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-alto-45",
+          "beat": 22.5,
+          "duration": 1.5,
+          "writtenDuration": 1.5,
+          "note": 62,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-alto-46",
+          "beat": 22.5,
+          "duration": 1.5,
+          "writtenDuration": 1.5,
+          "note": 65,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-alto-47",
+          "beat": 22.5,
+          "duration": 1.5,
+          "writtenDuration": 1.5,
+          "note": 69,
+          "velocity": 0.75,
+          "shift": 0
+        }
+      ],
+      "removed": [],
+      "pentatonic": false
+    },
+    {
+      "id": "assignment-4-bass",
+      "instrument": "bass-xylophone",
+      "name": "Orff Bass Xylophone",
+      "volume": 0.7,
+      "pan": 0.12,
+      "muted": false,
+      "solo": false,
+      "events": [
+        {
+          "id": "assignment-4-a-bass-0",
+          "beat": 0,
+          "duration": 1.5,
+          "writtenDuration": 1.5,
+          "note": 48,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-bass-1",
+          "beat": 0,
+          "duration": 1.5,
+          "writtenDuration": 1.5,
+          "note": 55,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-bass-2",
+          "beat": 1.5,
+          "duration": 1.5,
+          "writtenDuration": 1.5,
+          "note": 50,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-bass-3",
+          "beat": 1.5,
+          "duration": 1.5,
+          "writtenDuration": 1.5,
+          "note": 57,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-bass-4",
+          "beat": 3,
+          "duration": 1.5,
+          "writtenDuration": 1.5,
+          "note": 48,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-bass-5",
+          "beat": 3,
+          "duration": 1.5,
+          "writtenDuration": 1.5,
+          "note": 55,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-bass-6",
+          "beat": 4.5,
+          "duration": 1.5,
+          "writtenDuration": 1.5,
+          "note": 50,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-bass-7",
+          "beat": 4.5,
+          "duration": 1.5,
+          "writtenDuration": 1.5,
+          "note": 57,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-bass-8",
+          "beat": 6,
+          "duration": 1.5,
+          "writtenDuration": 1.5,
+          "note": 48,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-bass-9",
+          "beat": 6,
+          "duration": 1.5,
+          "writtenDuration": 1.5,
+          "note": 55,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-bass-10",
+          "beat": 7.5,
+          "duration": 1.5,
+          "writtenDuration": 1.5,
+          "note": 50,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-bass-11",
+          "beat": 7.5,
+          "duration": 1.5,
+          "writtenDuration": 1.5,
+          "note": 57,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-bass-12",
+          "beat": 9,
+          "duration": 1.5,
+          "writtenDuration": 1.5,
+          "note": 48,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-bass-13",
+          "beat": 9,
+          "duration": 1.5,
+          "writtenDuration": 1.5,
+          "note": 55,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-bass-14",
+          "beat": 10.5,
+          "duration": 1.5,
+          "writtenDuration": 1.5,
+          "note": 50,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-bass-15",
+          "beat": 10.5,
+          "duration": 1.5,
+          "writtenDuration": 1.5,
+          "note": 57,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-bass-16",
+          "beat": 12,
+          "duration": 1.5,
+          "writtenDuration": 1.5,
+          "note": 48,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-bass-17",
+          "beat": 12,
+          "duration": 1.5,
+          "writtenDuration": 1.5,
+          "note": 55,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-bass-18",
+          "beat": 13.5,
+          "duration": 1.5,
+          "writtenDuration": 1.5,
+          "note": 50,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-bass-19",
+          "beat": 13.5,
+          "duration": 1.5,
+          "writtenDuration": 1.5,
+          "note": 57,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-bass-20",
+          "beat": 15,
+          "duration": 1.5,
+          "writtenDuration": 1.5,
+          "note": 48,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-bass-21",
+          "beat": 15,
+          "duration": 1.5,
+          "writtenDuration": 1.5,
+          "note": 55,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-bass-22",
+          "beat": 16.5,
+          "duration": 1.5,
+          "writtenDuration": 1.5,
+          "note": 50,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-bass-23",
+          "beat": 16.5,
+          "duration": 1.5,
+          "writtenDuration": 1.5,
+          "note": 57,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-bass-24",
+          "beat": 18,
+          "duration": 1.5,
+          "writtenDuration": 1.5,
+          "note": 48,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-bass-25",
+          "beat": 18,
+          "duration": 1.5,
+          "writtenDuration": 1.5,
+          "note": 55,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-bass-26",
+          "beat": 19.5,
+          "duration": 1.5,
+          "writtenDuration": 1.5,
+          "note": 50,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-bass-27",
+          "beat": 19.5,
+          "duration": 1.5,
+          "writtenDuration": 1.5,
+          "note": 57,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-bass-28",
+          "beat": 21,
+          "duration": 1.5,
+          "writtenDuration": 1.5,
+          "note": 48,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-bass-29",
+          "beat": 21,
+          "duration": 1.5,
+          "writtenDuration": 1.5,
+          "note": 55,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-bass-30",
+          "beat": 22.5,
+          "duration": 1.5,
+          "writtenDuration": 1.5,
+          "note": 50,
+          "velocity": 0.75,
+          "shift": 0
+        },
+        {
+          "id": "assignment-4-a-bass-31",
+          "beat": 22.5,
+          "duration": 1.5,
+          "writtenDuration": 1.5,
+          "note": 57,
+          "velocity": 0.75,
+          "shift": 0
+        }
+      ],
+      "removed": [],
+      "pentatonic": false
+    }
+  ],
+  "playbackScope": "song",
+  "notation": {
+    "simplifyMalletGaps": false,
+    "partOrder": [
+      "assignment-4-recorder",
+      "assignment-4-claves",
+      "assignment-4-tambourine",
+      "assignment-4-alto",
+      "assignment-4-bass"
+    ]
+  },
+  "demo": {
+    "id": "assignment-4",
+    "revision": 1,
+    "source": "demos/assignment-4-original.png",
+    "form": "A–B–A; D.C. al Fine returns to the beginning and stops after measure 8.",
+    "tempoNote": "The source has no tempo marking. Playback starts at dotted-quarter = 72 (quarter = 108).",
+    "transcription": "Original pitches, rhythms, ties and five parts; no added orchestration. Full-song notation writes out the return."
+  },
+  "sections": [
+    {
+      "id": "assignment-4-a",
+      "name": "A",
+      "bars": 8,
+      "events": {
+        "assignment-4-recorder": [
+          {
+            "id": "assignment-4-a-recorder-0",
+            "beat": 0,
+            "duration": 3,
+            "writtenDuration": 3,
+            "note": 79,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-recorder-1",
+            "beat": 3.5,
+            "duration": 0.5,
+            "writtenDuration": 0.5,
+            "note": 81,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-recorder-2",
+            "beat": 4,
+            "duration": 0.5,
+            "writtenDuration": 0.5,
+            "note": 84,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-recorder-3",
+            "beat": 4.5,
+            "duration": 0.5,
+            "writtenDuration": 0.5,
+            "note": 83,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-recorder-4",
+            "beat": 5,
+            "duration": 0.5,
+            "writtenDuration": 0.5,
+            "note": 81,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-recorder-5",
+            "beat": 5.5,
+            "duration": 0.5,
+            "writtenDuration": 0.5,
+            "note": 83,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-recorder-6",
+            "beat": 6,
+            "duration": 3,
+            "writtenDuration": 3,
+            "note": 79,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-recorder-7",
+            "beat": 9.5,
+            "duration": 0.5,
+            "writtenDuration": 0.5,
+            "note": 81,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-recorder-8",
+            "beat": 10,
+            "duration": 0.5,
+            "writtenDuration": 0.5,
+            "note": 84,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-recorder-9",
+            "beat": 10.5,
+            "duration": 0.5,
+            "writtenDuration": 0.5,
+            "note": 83,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-recorder-10",
+            "beat": 11,
+            "duration": 0.5,
+            "writtenDuration": 0.5,
+            "note": 81,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-recorder-11",
+            "beat": 11.5,
+            "duration": 0.5,
+            "writtenDuration": 0.5,
+            "note": 83,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-recorder-12",
+            "beat": 12,
+            "duration": 0.5,
+            "writtenDuration": 0.5,
+            "note": 79,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-recorder-13",
+            "beat": 12.5,
+            "duration": 0.5,
+            "writtenDuration": 0.5,
+            "note": 76,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-recorder-14",
+            "beat": 13,
+            "duration": 0.5,
+            "writtenDuration": 0.5,
+            "note": 77,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-recorder-15",
+            "beat": 13.5,
+            "duration": 3,
+            "writtenDuration": 3,
+            "note": 79,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-recorder-16",
+            "beat": 16.5,
+            "duration": 0.5,
+            "writtenDuration": 0.5,
+            "note": 74,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-recorder-17",
+            "beat": 17,
+            "duration": 0.5,
+            "writtenDuration": 0.5,
+            "note": 77,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-recorder-18",
+            "beat": 17.5,
+            "duration": 0.5,
+            "writtenDuration": 0.5,
+            "note": 76,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-recorder-19",
+            "beat": 18,
+            "duration": 4.5,
+            "writtenDuration": 4.5,
+            "note": 72,
+            "velocity": 0.75,
+            "shift": 0
+          }
+        ],
+        "assignment-4-claves": [
+          {
+            "id": "assignment-4-a-claves-0",
+            "beat": 0.5,
+            "duration": 0.5,
+            "writtenDuration": 0.5,
+            "note": 75,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-claves-1",
+            "beat": 1,
+            "duration": 0.5,
+            "writtenDuration": 0.5,
+            "note": 75,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-claves-2",
+            "beat": 1.5,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 75,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-claves-3",
+            "beat": 5,
+            "duration": 0.5,
+            "writtenDuration": 0.5,
+            "note": 75,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-claves-4",
+            "beat": 5.5,
+            "duration": 0.5,
+            "writtenDuration": 0.5,
+            "note": 75,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-claves-5",
+            "beat": 6.5,
+            "duration": 0.5,
+            "writtenDuration": 0.5,
+            "note": 75,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-claves-6",
+            "beat": 7,
+            "duration": 0.5,
+            "writtenDuration": 0.5,
+            "note": 75,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-claves-7",
+            "beat": 7.5,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 75,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-claves-8",
+            "beat": 11,
+            "duration": 0.5,
+            "writtenDuration": 0.5,
+            "note": 75,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-claves-9",
+            "beat": 11.5,
+            "duration": 0.5,
+            "writtenDuration": 0.5,
+            "note": 75,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-claves-10",
+            "beat": 12.5,
+            "duration": 0.5,
+            "writtenDuration": 0.5,
+            "note": 75,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-claves-11",
+            "beat": 13,
+            "duration": 0.5,
+            "writtenDuration": 0.5,
+            "note": 75,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-claves-12",
+            "beat": 13.5,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 75,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-claves-13",
+            "beat": 17,
+            "duration": 0.5,
+            "writtenDuration": 0.5,
+            "note": 75,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-claves-14",
+            "beat": 17.5,
+            "duration": 0.5,
+            "writtenDuration": 0.5,
+            "note": 75,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-claves-15",
+            "beat": 18.5,
+            "duration": 0.5,
+            "writtenDuration": 0.5,
+            "note": 75,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-claves-16",
+            "beat": 19,
+            "duration": 0.5,
+            "writtenDuration": 0.5,
+            "note": 75,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-claves-17",
+            "beat": 19.5,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 75,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-claves-18",
+            "beat": 23,
+            "duration": 0.5,
+            "writtenDuration": 0.5,
+            "note": 75,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-claves-19",
+            "beat": 23.5,
+            "duration": 0.5,
+            "writtenDuration": 0.5,
+            "note": 75,
+            "velocity": 0.75,
+            "shift": 0
+          }
+        ],
+        "assignment-4-tambourine": [],
+        "assignment-4-alto": [
+          {
+            "id": "assignment-4-a-alto-0",
+            "beat": 0,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 60,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-alto-1",
+            "beat": 0,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 64,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-alto-2",
+            "beat": 0,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 67,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-alto-3",
+            "beat": 1.5,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 62,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-alto-4",
+            "beat": 1.5,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 65,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-alto-5",
+            "beat": 1.5,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 69,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-alto-6",
+            "beat": 3,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 60,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-alto-7",
+            "beat": 3,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 64,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-alto-8",
+            "beat": 3,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 67,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-alto-9",
+            "beat": 4.5,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 62,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-alto-10",
+            "beat": 4.5,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 65,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-alto-11",
+            "beat": 4.5,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 69,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-alto-12",
+            "beat": 6,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 60,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-alto-13",
+            "beat": 6,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 64,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-alto-14",
+            "beat": 6,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 67,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-alto-15",
+            "beat": 7.5,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 62,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-alto-16",
+            "beat": 7.5,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 65,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-alto-17",
+            "beat": 7.5,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 69,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-alto-18",
+            "beat": 9,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 60,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-alto-19",
+            "beat": 9,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 64,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-alto-20",
+            "beat": 9,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 67,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-alto-21",
+            "beat": 10.5,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 62,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-alto-22",
+            "beat": 10.5,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 65,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-alto-23",
+            "beat": 10.5,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 69,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-alto-24",
+            "beat": 12,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 60,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-alto-25",
+            "beat": 12,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 64,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-alto-26",
+            "beat": 12,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 67,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-alto-27",
+            "beat": 13.5,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 62,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-alto-28",
+            "beat": 13.5,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 65,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-alto-29",
+            "beat": 13.5,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 69,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-alto-30",
+            "beat": 15,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 60,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-alto-31",
+            "beat": 15,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 64,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-alto-32",
+            "beat": 15,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 67,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-alto-33",
+            "beat": 16.5,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 62,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-alto-34",
+            "beat": 16.5,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 65,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-alto-35",
+            "beat": 16.5,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 69,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-alto-36",
+            "beat": 18,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 60,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-alto-37",
+            "beat": 18,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 64,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-alto-38",
+            "beat": 18,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 67,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-alto-39",
+            "beat": 19.5,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 62,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-alto-40",
+            "beat": 19.5,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 65,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-alto-41",
+            "beat": 19.5,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 69,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-alto-42",
+            "beat": 21,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 60,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-alto-43",
+            "beat": 21,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 64,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-alto-44",
+            "beat": 21,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 67,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-alto-45",
+            "beat": 22.5,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 62,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-alto-46",
+            "beat": 22.5,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 65,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-alto-47",
+            "beat": 22.5,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 69,
+            "velocity": 0.75,
+            "shift": 0
+          }
+        ],
+        "assignment-4-bass": [
+          {
+            "id": "assignment-4-a-bass-0",
+            "beat": 0,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 48,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-bass-1",
+            "beat": 0,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 55,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-bass-2",
+            "beat": 1.5,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 50,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-bass-3",
+            "beat": 1.5,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 57,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-bass-4",
+            "beat": 3,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 48,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-bass-5",
+            "beat": 3,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 55,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-bass-6",
+            "beat": 4.5,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 50,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-bass-7",
+            "beat": 4.5,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 57,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-bass-8",
+            "beat": 6,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 48,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-bass-9",
+            "beat": 6,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 55,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-bass-10",
+            "beat": 7.5,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 50,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-bass-11",
+            "beat": 7.5,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 57,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-bass-12",
+            "beat": 9,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 48,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-bass-13",
+            "beat": 9,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 55,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-bass-14",
+            "beat": 10.5,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 50,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-bass-15",
+            "beat": 10.5,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 57,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-bass-16",
+            "beat": 12,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 48,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-bass-17",
+            "beat": 12,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 55,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-bass-18",
+            "beat": 13.5,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 50,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-bass-19",
+            "beat": 13.5,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 57,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-bass-20",
+            "beat": 15,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 48,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-bass-21",
+            "beat": 15,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 55,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-bass-22",
+            "beat": 16.5,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 50,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-bass-23",
+            "beat": 16.5,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 57,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-bass-24",
+            "beat": 18,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 48,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-bass-25",
+            "beat": 18,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 55,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-bass-26",
+            "beat": 19.5,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 50,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-bass-27",
+            "beat": 19.5,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 57,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-bass-28",
+            "beat": 21,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 48,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-bass-29",
+            "beat": 21,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 55,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-bass-30",
+            "beat": 22.5,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 50,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-a-bass-31",
+            "beat": 22.5,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 57,
+            "velocity": 0.75,
+            "shift": 0
+          }
+        ]
+      }
+    },
+    {
+      "id": "assignment-4-b",
+      "name": "B",
+      "bars": 8,
+      "events": {
+        "assignment-4-recorder": [
+          {
+            "id": "assignment-4-b-recorder-0",
+            "beat": 0,
+            "duration": 0.5,
+            "writtenDuration": 0.5,
+            "note": 74,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-recorder-1",
+            "beat": 0.5,
+            "duration": 0.5,
+            "writtenDuration": 0.5,
+            "note": 74,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-recorder-2",
+            "beat": 1,
+            "duration": 0.5,
+            "writtenDuration": 0.5,
+            "note": 74,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-recorder-3",
+            "beat": 1.5,
+            "duration": 0.5,
+            "writtenDuration": 0.5,
+            "note": 74,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-recorder-4",
+            "beat": 2,
+            "duration": 0.5,
+            "writtenDuration": 0.5,
+            "note": 76,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-recorder-5",
+            "beat": 2.5,
+            "duration": 0.5,
+            "writtenDuration": 0.5,
+            "note": 77,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-recorder-6",
+            "beat": 3,
+            "duration": 0.5,
+            "writtenDuration": 0.5,
+            "note": 79,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-recorder-7",
+            "beat": 3.5,
+            "duration": 0.5,
+            "writtenDuration": 0.5,
+            "note": 76,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-recorder-8",
+            "beat": 4,
+            "duration": 2,
+            "writtenDuration": 2,
+            "note": 72,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-recorder-9",
+            "beat": 6,
+            "duration": 0.5,
+            "writtenDuration": 0.5,
+            "note": 74,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-recorder-10",
+            "beat": 6.5,
+            "duration": 0.5,
+            "writtenDuration": 0.5,
+            "note": 74,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-recorder-11",
+            "beat": 7,
+            "duration": 0.5,
+            "writtenDuration": 0.5,
+            "note": 74,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-recorder-12",
+            "beat": 7.5,
+            "duration": 0.5,
+            "writtenDuration": 0.5,
+            "note": 74,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-recorder-13",
+            "beat": 8,
+            "duration": 0.5,
+            "writtenDuration": 0.5,
+            "note": 76,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-recorder-14",
+            "beat": 8.5,
+            "duration": 0.5,
+            "writtenDuration": 0.5,
+            "note": 77,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-recorder-15",
+            "beat": 9,
+            "duration": 3,
+            "writtenDuration": 3,
+            "note": 79,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-recorder-16",
+            "beat": 12,
+            "duration": 0.5,
+            "writtenDuration": 0.5,
+            "note": 74,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-recorder-17",
+            "beat": 12.5,
+            "duration": 0.5,
+            "writtenDuration": 0.5,
+            "note": 74,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-recorder-18",
+            "beat": 13,
+            "duration": 0.5,
+            "writtenDuration": 0.5,
+            "note": 74,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-recorder-19",
+            "beat": 13.5,
+            "duration": 0.5,
+            "writtenDuration": 0.5,
+            "note": 74,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-recorder-20",
+            "beat": 14,
+            "duration": 0.5,
+            "writtenDuration": 0.5,
+            "note": 76,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-recorder-21",
+            "beat": 14.5,
+            "duration": 0.5,
+            "writtenDuration": 0.5,
+            "note": 77,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-recorder-22",
+            "beat": 15,
+            "duration": 0.5,
+            "writtenDuration": 0.5,
+            "note": 79,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-recorder-23",
+            "beat": 15.5,
+            "duration": 0.5,
+            "writtenDuration": 0.5,
+            "note": 76,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-recorder-24",
+            "beat": 16,
+            "duration": 0.5,
+            "writtenDuration": 0.5,
+            "note": 79,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-recorder-25",
+            "beat": 16.5,
+            "duration": 0.5,
+            "writtenDuration": 0.5,
+            "note": 81,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-recorder-26",
+            "beat": 17,
+            "duration": 0.5,
+            "writtenDuration": 0.5,
+            "note": 79,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-recorder-27",
+            "beat": 17.5,
+            "duration": 0.5,
+            "writtenDuration": 0.5,
+            "note": 77,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-recorder-28",
+            "beat": 18,
+            "duration": 1,
+            "writtenDuration": 1,
+            "note": 76,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-recorder-29",
+            "beat": 19,
+            "duration": 0.5,
+            "writtenDuration": 0.5,
+            "note": 79,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-recorder-30",
+            "beat": 19.5,
+            "duration": 0.5,
+            "writtenDuration": 0.5,
+            "note": 77,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-recorder-31",
+            "beat": 20,
+            "duration": 0.5,
+            "writtenDuration": 0.5,
+            "note": 76,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-recorder-32",
+            "beat": 20.5,
+            "duration": 0.5,
+            "writtenDuration": 0.5,
+            "note": 74,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-recorder-33",
+            "beat": 21,
+            "duration": 3,
+            "writtenDuration": 3,
+            "note": 72,
+            "velocity": 0.75,
+            "shift": 0
+          }
+        ],
+        "assignment-4-claves": [],
+        "assignment-4-tambourine": [
+          {
+            "id": "assignment-4-b-tambourine-0",
+            "beat": 0.5,
+            "duration": 0.5,
+            "writtenDuration": 0.5,
+            "note": 54,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-tambourine-1",
+            "beat": 1,
+            "duration": 0.5,
+            "writtenDuration": 0.5,
+            "note": 54,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-tambourine-2",
+            "beat": 2,
+            "duration": 0.5,
+            "writtenDuration": 0.5,
+            "note": 54,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-tambourine-3",
+            "beat": 2.5,
+            "duration": 0.5,
+            "writtenDuration": 0.5,
+            "note": 54,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-tambourine-4",
+            "beat": 3,
+            "duration": 1,
+            "writtenDuration": 1,
+            "note": 54,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-tambourine-5",
+            "beat": 4,
+            "duration": 0.5,
+            "writtenDuration": 0.5,
+            "note": 54,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-tambourine-6",
+            "beat": 6.5,
+            "duration": 0.5,
+            "writtenDuration": 0.5,
+            "note": 54,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-tambourine-7",
+            "beat": 7,
+            "duration": 0.5,
+            "writtenDuration": 0.5,
+            "note": 54,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-tambourine-8",
+            "beat": 8,
+            "duration": 0.5,
+            "writtenDuration": 0.5,
+            "note": 54,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-tambourine-9",
+            "beat": 8.5,
+            "duration": 0.5,
+            "writtenDuration": 0.5,
+            "note": 54,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-tambourine-10",
+            "beat": 9,
+            "duration": 1,
+            "writtenDuration": 1,
+            "note": 54,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-tambourine-11",
+            "beat": 10,
+            "duration": 0.5,
+            "writtenDuration": 0.5,
+            "note": 54,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-tambourine-12",
+            "beat": 12.5,
+            "duration": 0.5,
+            "writtenDuration": 0.5,
+            "note": 54,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-tambourine-13",
+            "beat": 13,
+            "duration": 0.5,
+            "writtenDuration": 0.5,
+            "note": 54,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-tambourine-14",
+            "beat": 14,
+            "duration": 0.5,
+            "writtenDuration": 0.5,
+            "note": 54,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-tambourine-15",
+            "beat": 14.5,
+            "duration": 0.5,
+            "writtenDuration": 0.5,
+            "note": 54,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-tambourine-16",
+            "beat": 15,
+            "duration": 1,
+            "writtenDuration": 1,
+            "note": 54,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-tambourine-17",
+            "beat": 16,
+            "duration": 0.5,
+            "writtenDuration": 0.5,
+            "note": 54,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-tambourine-18",
+            "beat": 18.5,
+            "duration": 0.5,
+            "writtenDuration": 0.5,
+            "note": 54,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-tambourine-19",
+            "beat": 19,
+            "duration": 0.5,
+            "writtenDuration": 0.5,
+            "note": 54,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-tambourine-20",
+            "beat": 20,
+            "duration": 0.5,
+            "writtenDuration": 0.5,
+            "note": 54,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-tambourine-21",
+            "beat": 20.5,
+            "duration": 0.5,
+            "writtenDuration": 0.5,
+            "note": 54,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-tambourine-22",
+            "beat": 21,
+            "duration": 1,
+            "writtenDuration": 1,
+            "note": 54,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-tambourine-23",
+            "beat": 22,
+            "duration": 0.5,
+            "writtenDuration": 0.5,
+            "note": 54,
+            "velocity": 0.75,
+            "shift": 0
+          }
+        ],
+        "assignment-4-alto": [
+          {
+            "id": "assignment-4-b-alto-0",
+            "beat": 0,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 62,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-alto-1",
+            "beat": 0,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 65,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-alto-2",
+            "beat": 0,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 69,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-alto-3",
+            "beat": 1.5,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 62,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-alto-4",
+            "beat": 1.5,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 65,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-alto-5",
+            "beat": 1.5,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 69,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-alto-6",
+            "beat": 3,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 60,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-alto-7",
+            "beat": 3,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 64,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-alto-8",
+            "beat": 3,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 67,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-alto-9",
+            "beat": 4.5,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 60,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-alto-10",
+            "beat": 4.5,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 64,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-alto-11",
+            "beat": 4.5,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 67,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-alto-12",
+            "beat": 6,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 62,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-alto-13",
+            "beat": 6,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 65,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-alto-14",
+            "beat": 6,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 69,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-alto-15",
+            "beat": 7.5,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 62,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-alto-16",
+            "beat": 7.5,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 65,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-alto-17",
+            "beat": 7.5,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 69,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-alto-18",
+            "beat": 9,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 60,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-alto-19",
+            "beat": 9,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 64,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-alto-20",
+            "beat": 9,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 67,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-alto-21",
+            "beat": 10.5,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 60,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-alto-22",
+            "beat": 10.5,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 64,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-alto-23",
+            "beat": 10.5,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 67,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-alto-24",
+            "beat": 12,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 62,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-alto-25",
+            "beat": 12,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 65,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-alto-26",
+            "beat": 12,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 69,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-alto-27",
+            "beat": 13.5,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 62,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-alto-28",
+            "beat": 13.5,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 65,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-alto-29",
+            "beat": 13.5,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 69,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-alto-30",
+            "beat": 15,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 60,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-alto-31",
+            "beat": 15,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 64,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-alto-32",
+            "beat": 15,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 67,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-alto-33",
+            "beat": 16.5,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 62,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-alto-34",
+            "beat": 16.5,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 65,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-alto-35",
+            "beat": 16.5,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 69,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-alto-36",
+            "beat": 18,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 60,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-alto-37",
+            "beat": 18,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 64,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-alto-38",
+            "beat": 18,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 67,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-alto-39",
+            "beat": 19.5,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 62,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-alto-40",
+            "beat": 19.5,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 65,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-alto-41",
+            "beat": 19.5,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 69,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-alto-42",
+            "beat": 21,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 60,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-alto-43",
+            "beat": 21,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 64,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-alto-44",
+            "beat": 21,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 67,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-alto-45",
+            "beat": 22.5,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 60,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-alto-46",
+            "beat": 22.5,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 64,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-alto-47",
+            "beat": 22.5,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 67,
+            "velocity": 0.75,
+            "shift": 0
+          }
+        ],
+        "assignment-4-bass": [
+          {
+            "id": "assignment-4-b-bass-0",
+            "beat": 0,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 50,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-bass-1",
+            "beat": 0,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 57,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-bass-2",
+            "beat": 1.5,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 50,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-bass-3",
+            "beat": 1.5,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 57,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-bass-4",
+            "beat": 3,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 48,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-bass-5",
+            "beat": 3,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 55,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-bass-6",
+            "beat": 4.5,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 48,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-bass-7",
+            "beat": 4.5,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 55,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-bass-8",
+            "beat": 6,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 50,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-bass-9",
+            "beat": 6,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 57,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-bass-10",
+            "beat": 7.5,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 50,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-bass-11",
+            "beat": 7.5,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 57,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-bass-12",
+            "beat": 9,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 48,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-bass-13",
+            "beat": 9,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 55,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-bass-14",
+            "beat": 10.5,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 48,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-bass-15",
+            "beat": 10.5,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 55,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-bass-16",
+            "beat": 12,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 50,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-bass-17",
+            "beat": 12,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 57,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-bass-18",
+            "beat": 13.5,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 50,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-bass-19",
+            "beat": 13.5,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 57,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-bass-20",
+            "beat": 15,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 48,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-bass-21",
+            "beat": 15,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 55,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-bass-22",
+            "beat": 16.5,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 50,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-bass-23",
+            "beat": 16.5,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 57,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-bass-24",
+            "beat": 18,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 48,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-bass-25",
+            "beat": 18,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 55,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-bass-26",
+            "beat": 19.5,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 50,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-bass-27",
+            "beat": 19.5,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 57,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-bass-28",
+            "beat": 21,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 48,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-bass-29",
+            "beat": 21,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 55,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-bass-30",
+            "beat": 22.5,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 48,
+            "velocity": 0.75,
+            "shift": 0
+          },
+          {
+            "id": "assignment-4-b-bass-31",
+            "beat": 22.5,
+            "duration": 1.5,
+            "writtenDuration": 1.5,
+            "note": 55,
+            "velocity": 0.75,
+            "shift": 0
+          }
+        ]
+      }
+    }
+  ],
+  "activeSection": "assignment-4-a",
+  "arrangement": [
+    {
+      "id": "assignment-4-entry-0",
+      "section": "assignment-4-a",
+      "repeats": 1,
+      "mutedTracks": []
+    },
+    {
+      "id": "assignment-4-entry-1",
+      "section": "assignment-4-b",
+      "repeats": 1,
+      "mutedTracks": []
+    },
+    {
+      "id": "assignment-4-entry-2",
+      "section": "assignment-4-a",
+      "repeats": 1,
+      "mutedTracks": []
+    }
+  ]
+}

@@ -1,0 +1,3 @@
+import { identity,listScenes,getScene,saveScene,StoreError } from '../../../lib/store';
+export async function GET(req:Request){try{const owner=identity(req),id=new URL(req.url).searchParams.get('id');return Response.json(id?await getScene(owner,id):{scenes:await listScenes(owner)});}catch(e){return Response.json({error:(e as Error).message},{status:e instanceof StoreError?e.status:500});}}
+export async function POST(req:Request){try{const owner=identity(req);if(Number(req.headers.get('content-length')||0)>8500000)throw new StoreError('Scene too large.',413);return Response.json(await saveScene(owner,await req.json()));}catch(e){return Response.json({error:(e as Error).message},{status:e instanceof StoreError?e.status:500});}}

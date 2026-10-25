@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#123451">
+  <meta name="description" content="Create a classroom game show with Mr. Drew’s Four Corners. Build picture, music and mystery rounds, then get your class moving.">
+  <title>Mr. Drew’s Four Corners Studio</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23123451'/%3E%3Crect x='11' y='11' width='18' height='18' rx='4' fill='%233a7cc2'/%3E%3Crect x='35' y='11' width='18' height='18' rx='4' fill='%23bc6254'/%3E%3Crect x='11' y='35' width='18' height='18' rx='4' fill='%239c7d29'/%3E%3Crect x='35' y='35' width='18' height='18' rx='4' fill='%23398875'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app"><div class="loading">Getting the stage ready…</div></div>
+  <dialog id="modal" aria-label="Game controls"></dialog>
+  <div id="toast" role="status" aria-live="polite"></div>
+  <input id="game-file" type="file" accept=".4cr,.json,application/json" hidden>
+  <input id="media-file" type="file" accept="image/*,audio/*,video/*" hidden>
+  <input id="cue-file" type="file" accept="audio/*" hidden>
+  <div id="print-area"></div>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,610 @@
+[
+  {
+    "id": "01",
+    "name": "Setting out",
+    "text": "Once upon a time, three little pigs set off to build homes of their own.",
+    "action": "journey",
+    "file": "voice/df3e494f9f64402e.mp3",
+    "duration": 5.064
+  },
+  {
+    "id": "02",
+    "name": "Meet Pip",
+    "text": "Pip liked to do things quickly.",
+    "action": "pip-intro",
+    "file": "voice/b0f192b04557e5fa.mp3",
+    "duration": 2.952
+  },
+  {
+    "id": "03",
+    "name": "Meet Poppy",
+    "text": "Poppy liked to make things beautiful.",
+    "action": "poppy-intro",
+    "file": "voice/8bef08f3a5c6f21f.mp3",
+    "duration": 3.12
+  },
+  {
+    "id": "04",
+    "name": "Meet Bruno",
+    "text": "And Bruno liked to think things through.",
+    "action": "bruno-intro",
+    "file": "voice/4131ce63b47dd6dc.mp3",
+    "duration": 3.144
+  },
+  {
+    "id": "05",
+    "name": "Three sunny spots",
+    "text": "They found three sunny spots beside a winding woodland path. Neighbors! said Poppy. Perfect, said Bruno.",
+    "action": "plots",
+    "file": "voice/17167837c008e345.mp3",
+    "duration": 10.032
+  },
+  {
+    "id": "06",
+    "name": "A race to finish",
+    "text": "Whoever finishes first gets a nap! said Pip. And off they went.",
+    "action": "race",
+    "file": "voice/10336cd99b58dfa3.mp3",
+    "duration": 6.624
+  },
+  {
+    "id": "07",
+    "name": "Armfuls of straw",
+    "text": "Pip gathered great armfuls of straw. He stacked it here. He tucked it there.",
+    "action": "straw-build",
+    "file": "voice/00229f2ffc5e6d73.mp3",
+    "duration": 7.248
+  },
+  {
+    "id": "08",
+    "name": "A door in the front",
+    "text": "He pushed a door into the front. By lunchtime, he had a house. Finished!",
+    "action": "straw-ready",
+    "file": "voice/661403e2c43c61fb.mp3",
+    "duration": 6.96
+  },
+  {
+    "id": "09",
+    "name": "Mostly finished",
+    "text": "A little piece of the roof drifted down onto his nose. Pip blew it away. Mostly finished.",
+    "action": "straw-fall",
+    "file": "voice/6929793713ec7d3a.mp3",
+    "duration": 8.304
+  },
+  {
+    "id": "10",
+    "name": "Time for a nap",
+    "text": "He went inside, put his feet up, and fell asleep.",
+    "action": "pip-sleep",
+    "file": "voice/d47e05ea9eb376a9.mp3",
+    "duration": 3.912
+  },
+  {
+    "id": "11",
+    "name": "Interesting sticks",
+    "text": "Poppy gathered sticks. Long sticks. Short sticks. Sticks with interesting little bends.",
+    "action": "sticks-gather",
+    "file": "voice/80bf985402684953.mp3",
+    "duration": 8.928
+  },
+  {
+    "id": "12",
+    "name": "A pretty house",
+    "text": "She tied them together, added a roof, and hung a flower beside the door.",
+    "action": "sticks-build",
+    "file": "voice/b1593514ca78edb2.mp3",
+    "duration": 4.896
+  },
+  {
+    "id": "13",
+    "name": "Lovely",
+    "text": "Then she stepped back to admire her work. Lovely!",
+    "action": "sticks-admire",
+    "file": "voice/5fc488fadc804aa0.mp3",
+    "duration": 4.56
+  },
+  {
+    "id": "14",
+    "name": "A little lean",
+    "text": "The house leaned a little to the left. Poppy straightened the flower. There. Much better.",
+    "action": "sticks-lean",
+    "file": "voice/6a9432cb413b7457.mp3",
+    "duration": 8.304
+  },
+  {
+    "id": "15",
+    "name": "Brick by brick",
+    "text": "Bruno built with bricks. He measured. He spread mortar. He laid each brick carefully.",
+    "action": "bricks-build",
+    "file": "voice/2a5e8dc7de0fd9b2.mp3",
+    "duration": 8.616
+  },
+  {
+    "id": "16",
+    "name": "Another row",
+    "text": "One row. Then another. Then another.",
+    "action": "bricks-rows",
+    "file": "voice/2a02aa8476fc18e1.mp3",
+    "duration": 4.416
+  },
+  {
+    "id": "17",
+    "name": "Still building",
+    "text": "Pip wandered over. Are you still building? Yes, said Bruno.",
+    "action": "pip-visits",
+    "file": "voice/4046c9f397bdf348.mp3",
+    "duration": 6.816
+  },
+  {
+    "id": "18",
+    "name": "An offer of a flower",
+    "text": "Poppy peeked around the wall. Would you like a flower? When I have somewhere to hang it.",
+    "action": "poppy-visits",
+    "file": "voice/d576ab0e373cb5d3.mp3",
+    "duration": 7.68
+  },
+  {
+    "id": "19",
+    "name": "A sturdy little house",
+    "text": "By sunset, Bruno had finished a sturdy little house with a strong door, a snug roof, and a tall brick chimney.",
+    "action": "brick-ready",
+    "file": "voice/445844267f90c55c.mp3",
+    "duration": 6.936
+  },
+  {
+    "id": "20",
+    "name": "Ready for a nap",
+    "text": "He hung Poppy's flower beside the door. Then he sat down. Now, he said, I'm ready for that nap.",
+    "action": "bruno-rest",
+    "file": "voice/14c6e9420e77fca3.mp3",
+    "duration": 8.592
+  },
+  {
+    "id": "21",
+    "name": "Someone wakes",
+    "text": "But someone else had just woken up. Someone with sharp ears. A long nose. And a very empty stomach.",
+    "action": "wolf-intro",
+    "file": "voice/5d5caf9bb41f8b31.mp3",
+    "duration": 10.128
+  },
+  {
+    "id": "22",
+    "name": "Following his nose",
+    "text": "The wolf came padding along the woodland path. He sniffed. He stopped. He smiled. Pig.",
+    "action": "wolf-sniff",
+    "file": "voice/e4524dc2e4991712.mp3",
+    "duration": 9.168
+  },
+  {
+    "id": "23",
+    "name": "The first knock",
+    "text": "He followed his nose to Pip's straw house and knocked three times.",
+    "action": "straw-knock",
+    "file": "voice/c3ae81dcba41789a.mp3",
+    "duration": 4.536
+  },
+  {
+    "id": "24",
+    "name": "Let me come in",
+    "text": "Little pig, little pig, let me come in!",
+    "action": "straw-demand",
+    "file": "voice/44b4c953653484cb.mp3",
+    "duration": 3.36
+  },
+  {
+    "id": "25",
+    "name": "Rather a lot of teeth",
+    "text": "Pip peered through a gap in the wall. He saw a nose. Then teeth. Rather a lot of teeth.",
+    "action": "pip-peek",
+    "file": "voice/c0ebd13ee37b6ffe.mp3",
+    "duration": 9.264
+  },
+  {
+    "id": "26",
+    "name": "Chinny chin chin",
+    "text": "Not by the hair on my chinny chin chin!",
+    "action": "pip-refuse",
+    "file": "voice/160de07e173ff879.mp3",
+    "duration": 3.456
+  },
+  {
+    "id": "27",
+    "name": "The first warning",
+    "text": "The wolf straightened his shoulders. Then I'll huff, and I'll puff, and I'll blow your house in!",
+    "action": "straw-threat",
+    "file": "voice/c5b192b5628478df.mp3",
+    "duration": 7.128
+  },
+  {
+    "id": "28",
+    "name": "Huff and puff",
+    "text": "He took a deep breath. He huffed. He puffed. And...",
+    "action": "straw-breath",
+    "file": "voice/53d1623e0fcb366a.mp3",
+    "duration": 6.144
+  },
+  {
+    "id": "29",
+    "name": "Straw everywhere",
+    "text": "Straw flew everywhere!",
+    "action": "straw-collapse",
+    "file": "voice/822537270450882c.mp3",
+    "duration": 2.376
+  },
+  {
+    "id": "30",
+    "name": "Run to Poppy",
+    "text": "Pip shot out the back and raced down the path. Poppy! Open the door!",
+    "action": "pip-run",
+    "file": "voice/988704f830becbc4.mp3",
+    "duration": 6.312
+  },
+  {
+    "id": "31",
+    "name": "Safe for a moment",
+    "text": "Poppy pulled him inside. What happened?",
+    "action": "sticks-rescue",
+    "file": "voice/6a84d62da48b0684.mp3",
+    "duration": 4.128
+  },
+  {
+    "id": "32",
+    "name": "A field",
+    "text": "My house, panted Pip, has become a field.",
+    "action": "field-joke",
+    "file": "voice/c5a8e12253cc5be2.mp3",
+    "duration": 3.744
+  },
+  {
+    "id": "33",
+    "name": "Another knock",
+    "text": "Soon, three knocks rattled Poppy's door.",
+    "action": "sticks-knock",
+    "file": "voice/e5ef1ac3781b40fa.mp3",
+    "duration": 3.552
+  },
+  {
+    "id": "34",
+    "name": "Two little pigs",
+    "text": "Little pigs, little pigs, let me come in!",
+    "action": "sticks-demand",
+    "file": "voice/fe985ea364c611c3.mp3",
+    "duration": 3.528
+  },
+  {
+    "id": "35",
+    "name": "Together behind the door",
+    "text": "The pigs squeezed together behind the door. Not by the hairs on our chinny chin chins!",
+    "action": "two-refuse",
+    "file": "voice/e3f5c11ea8c15410.mp3",
+    "duration": 6.984
+  },
+  {
+    "id": "36",
+    "name": "The second warning",
+    "text": "Then I'll huff, and I'll puff, and I'll blow your house in!",
+    "action": "sticks-threat",
+    "file": "voice/31ae458f55864034.mp3",
+    "duration": 4.152
+  },
+  {
+    "id": "37",
+    "name": "An even deeper breath",
+    "text": "The wolf took an even deeper breath. He huffed. He puffed.",
+    "action": "sticks-breath",
+    "file": "voice/b48e43c63d2afe54.mp3",
+    "duration": 5.784
+  },
+  {
+    "id": "38",
+    "name": "Rattle and crack",
+    "text": "The flower trembled. The walls rattled. And... down came the stick house!",
+    "action": "sticks-collapse",
+    "file": "voice/c592e089392c9dad.mp3",
+    "duration": 8.28
+  },
+  {
+    "id": "39",
+    "name": "Straight to Bruno",
+    "text": "Pip and Poppy scrambled out the back and ran straight to Bruno's. Open up!",
+    "action": "two-run",
+    "file": "voice/23c8d17e9f83b4ef.mp3",
+    "duration": 6.144
+  },
+  {
+    "id": "40",
+    "name": "The strong door",
+    "text": "Bruno opened the door. The pigs tumbled inside. Bruno shut it and slid the bolt.",
+    "action": "brick-rescue",
+    "file": "voice/2d6dc262b50cb308.mp3",
+    "duration": 8.328
+  },
+  {
+    "id": "41",
+    "name": "I saved this",
+    "text": "For a moment, nobody spoke. Then Poppy held up one slightly crumpled flower. I saved this.",
+    "action": "flower-joke",
+    "file": "voice/4ff9d18ac0694975.mp3",
+    "duration": 9.096
+  },
+  {
+    "id": "42",
+    "name": "The third house",
+    "text": "The wolf arrived at the brick house. He looked at the walls. He looked at the roof.",
+    "action": "brick-arrive",
+    "file": "voice/f1c577f0548334e5.mp3",
+    "duration": 7.68
+  },
+  {
+    "id": "43",
+    "name": "Three more knocks",
+    "text": "He knocked.",
+    "action": "brick-knock",
+    "file": "voice/ba736f2ec64ffad7.mp3",
+    "duration": 1.248
+  },
+  {
+    "id": "44",
+    "name": "Let me come in",
+    "text": "Little pigs, little pigs, let me come in!",
+    "action": "brick-demand",
+    "file": "voice/fe985ea364c611c3.mp3",
+    "duration": 3.528
+  },
+  {
+    "id": "45",
+    "name": "Three voices together",
+    "text": "All three pigs answered together. Not by the hairs on our chinny chin chins!",
+    "action": "three-refuse",
+    "file": "voice/d682055acdf356a4.mp3",
+    "duration": 6.648
+  },
+  {
+    "id": "46",
+    "name": "The third warning",
+    "text": "Then I'll huff, and I'll puff, and I'll blow your house in!",
+    "action": "brick-threat",
+    "file": "voice/31ae458f55864034.mp3",
+    "duration": 4.152
+  },
+  {
+    "id": "47",
+    "name": "His biggest breath",
+    "text": "He planted his feet. He filled his chest. He huffed. He puffed. And...",
+    "action": "brick-breath",
+    "file": "voice/f9d99a6a2c1a8ad4.mp3",
+    "duration": 8.496
+  },
+  {
+    "id": "48",
+    "name": "Nothing happened",
+    "text": "Nothing happened.",
+    "action": "brick-hold",
+    "file": "voice/6dc9d9e33c8f6852.mp3",
+    "duration": 1.896
+  },
+  {
+    "id": "49",
+    "name": "Still a house",
+    "text": "Inside, Pip opened one eye. Are we still a house? We're still a house, said Bruno.",
+    "action": "house-joke",
+    "file": "voice/0483e8293ae86d9c.mp3",
+    "duration": 8.208
+  },
+  {
+    "id": "50",
+    "name": "Try again",
+    "text": "The wolf tried again. His cheeks bulged. His ears quivered.",
+    "action": "wolf-retry",
+    "file": "voice/b6c202dfd18e9b97.mp3",
+    "duration": 6.816
+  },
+  {
+    "id": "51",
+    "name": "Out of puff",
+    "text": "He blew until he had to sit down. One small leaf landed on his head. The house stood firm.",
+    "action": "wolf-tired",
+    "file": "voice/77017e2976c4dbf5.mp3",
+    "duration": 8.808
+  },
+  {
+    "id": "52",
+    "name": "An idea",
+    "text": "Then the wolf looked up. The chimney.",
+    "action": "chimney-idea",
+    "file": "voice/3609c612cac47a2a.mp3",
+    "duration": 3.72
+  },
+  {
+    "id": "53",
+    "name": "Footsteps overhead",
+    "text": "Inside, the pigs heard footsteps on the roof. Pip pointed upward. Poppy looked toward the fireplace.",
+    "action": "roof-sound",
+    "file": "voice/b614395e36a777dd.mp3",
+    "duration": 9.096
+  },
+  {
+    "id": "54",
+    "name": "The washing tub",
+    "text": "Bruno looked at the big tub of cold water beside his washing.",
+    "action": "tub-idea",
+    "file": "voice/9f665c5c0efdd78c.mp3",
+    "duration": 4.44
+  },
+  {
+    "id": "55",
+    "name": "A plan together",
+    "text": "The three pigs looked at one another. Then they got to work.",
+    "action": "tub-plan",
+    "file": "voice/cefedf65587d3a5d.mp3",
+    "duration": 5.4
+  },
+  {
+    "id": "56",
+    "name": "Into the fireplace",
+    "text": "Together, they pushed the tub into the empty fireplace.",
+    "action": "tub-push",
+    "file": "voice/2c06a99a950aa9a5.mp3",
+    "duration": 3.96
+  },
+  {
+    "id": "57",
+    "name": "Into the chimney",
+    "text": "Above them, the wolf squeezed into the chimney. Just a little farther, he muttered.",
+    "action": "chimney-enter",
+    "file": "voice/049510c6696f679e.mp3",
+    "duration": 6.408
+  },
+  {
+    "id": "58",
+    "name": "A slippery surprise",
+    "text": "His feet slipped. His eyes widened. And down he came.",
+    "action": "chimney-fall",
+    "file": "voice/004f41ffe11be8b8.mp3",
+    "duration": 6.576
+  },
+  {
+    "id": "59",
+    "name": "Splash",
+    "text": "",
+    "action": "splash",
+    "file": null,
+    "duration": 0
+  },
+  {
+    "id": "60",
+    "name": "Only his ears",
+    "text": "For one quiet moment, only his ears showed above the tub.",
+    "action": "wolf-submerged",
+    "file": "voice/ccadc6cd35009ff9.mp3",
+    "duration": 4.536
+  },
+  {
+    "id": "61",
+    "name": "A very wet wolf",
+    "text": "Then up popped a very wet wolf. Cold!",
+    "action": "wolf-pop",
+    "file": "voice/4c23dfcae7345d2f.mp3",
+    "duration": 4.224
+  },
+  {
+    "id": "62",
+    "name": "Dripping wet",
+    "text": "He scrambled out, dripping from nose to tail.",
+    "action": "wolf-out",
+    "file": "voice/5d593669c01521bb.mp3",
+    "duration": 3.72
+  },
+  {
+    "id": "63",
+    "name": "Open the door",
+    "text": "The pigs stood safely behind the kitchen table while Bruno pulled the cord that lifted the door latch.",
+    "action": "door-cord",
+    "file": "voice/adfc55ad54d4f23a.mp3",
+    "duration": 6.312
+  },
+  {
+    "id": "64",
+    "name": "No invitation needed",
+    "text": "The door swung open. The wolf needed no invitation.",
+    "action": "door-open",
+    "file": "voice/cf4221a5d7a8cf64.mp3",
+    "duration": 5.568
+  },
+  {
+    "id": "65",
+    "name": "Away down the path",
+    "text": "He dashed outside and disappeared down the woodland path. This time, the huffing and puffing came from running.",
+    "action": "wolf-exit",
+    "file": "voice/b33c9741112435bd.mp3",
+    "duration": 8.064
+  },
+  {
+    "id": "66",
+    "name": "A new morning",
+    "text": "The next morning, the three pigs got to work again. They built two more sturdy brick houses.",
+    "action": "rebuild",
+    "file": "voice/8468af10c7e52f4d.mp3",
+    "duration": 6.888
+  },
+  {
+    "id": "67",
+    "name": "Everyone helps",
+    "text": "Pip carried bricks. Poppy measured walls. Bruno showed them how to spread the mortar.",
+    "action": "teamwork",
+    "file": "voice/de46029b1f51f3fe.mp3",
+    "duration": 8.112
+  },
+  {
+    "id": "68",
+    "name": "Flowers at every door",
+    "text": "And when the houses were finished, Poppy decorated every doorway.",
+    "action": "three-houses",
+    "file": "voice/b051232982ac2146.mp3",
+    "duration": 4.584
+  },
+  {
+    "id": "69",
+    "name": "Supper together",
+    "text": "That evening, the three pigs sat down together for supper.",
+    "action": "supper",
+    "file": "voice/35844a956aafc961.mp3",
+    "duration": 4.344
+  },
+  {
+    "id": "70",
+    "name": "One last knock",
+    "text": "There was a knock.",
+    "action": "rabbit-knock",
+    "file": "voice/f601024ee0777ebd.mp3",
+    "duration": 1.536
+  },
+  {
+    "id": "71",
+    "name": "Three spoons stop",
+    "text": "Three spoons stopped halfway to three mouths. Bruno peeked through the window.",
+    "action": "spoons-stop",
+    "file": "voice/883eb0c21182c2be.mp3",
+    "duration": 6.648
+  },
+  {
+    "id": "72",
+    "name": "Only Rabbit",
+    "text": "Then he smiled. It's only Rabbit.",
+    "action": "rabbit-reveal",
+    "file": "voice/86d5d4cf332cd09a.mp3",
+    "duration": 3.624
+  },
+  {
+    "id": "73",
+    "name": "A basket of buns",
+    "text": "Rabbit held up a basket. I brought buns.",
+    "action": "rabbit-buns",
+    "file": "voice/2e0bd01da88f8dcf.mp3",
+    "duration": 4.752
+  },
+  {
+    "id": "74",
+    "name": "Room for one more",
+    "text": "Pip opened the door. Poppy put out another plate. And Bruno made room at the table.",
+    "action": "welcome-rabbit",
+    "file": "voice/f3fa21f0655db467.mp3",
+    "duration": 8.112
+  },
+  {
+    "id": "75",
+    "name": "Warm and sturdy",
+    "text": "Outside, the wind rustled the trees. Inside, the houses stayed sturdy, the buns stayed warm...",
+    "action": "warm-ending",
+    "file": "voice/9f3cf2a4f5920c63.mp3",
+    "duration": 7.848
+  },
+  {
+    "id": "76",
+    "name": "The end",
+    "text": "And nobody had to run anywhere. The end.",
+    "action": "end",
+    "file": "voice/5340b3c8f010ee92.mp3",
+    "duration": 4.344
+  }
+]

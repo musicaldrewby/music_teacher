@@ -1,0 +1,15 @@
+Temple Blocks (5pcs) - Hard Wood Mallets
+Author: sazanami12 / Freesound
+Source: https://freesound.org/people/sazanami12/sounds/863784/
+Public HQ preview: https://cdn.freesound.org/previews/863/863784_17110092-hq.mp3
+License: CC0 1.0 Universal
+https://creativecommons.org/publicdomain/zero/1.0/
+Full legal text is included at ../CC0-1.0.txt.
+
+Five individual acoustic composite/carbon-fiber temple blocks, recorded with hard wood mallets. The author identifies an OPPO Reno8 phone as the recorder. Derived from the public stereo MP3 preview (48 kHz), not the login-only original 24-bit WAV.
+
+Five separately cropped strikes, native pitches, 100 Hz second-order high-pass for room rumble, 0.5 ms start and 70 ms end fades, first-150-ms RMS level balancing, polyphase resampling to 44.1 kHz, 16-bit stereo WAV with TPDF dither. Quiet tails are shortened before late background/handling noise. No pitch shifting, compression, denoising, added reverb or synthetic layers.
+
+The original saved event note+shift pairs identify the five blocks. Per-articulation tuning compensation cancels those legacy shifts so each recording plays at its native pitch. This preserves existing sequencer parts and printed staff positions. The separate Woodblock instrument still uses its previous samples.
+
+PROVENANCE.json records source and derivative hashes, crop windows, levels and measured resonances. Rebuild with scripts/prepare-temple-blocks.py.

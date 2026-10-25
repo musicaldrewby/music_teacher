@@ -1,0 +1,12 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {CATALOG,newProject,newTrack,validateProject} from '../dist/catalog.js';
+import {ORFF_SCORE_ORDER,scoreTracks} from '../dist/score-order.js';
+import {musicXML} from '../dist/musicxml.js';
+import {ensureSong,compileSong} from '../dist/song.js';
+const piece=()=>({...newProject(),tracks:['bass-bars','bass-metallophone','bass-xylophone','hand-drums','claves','triangle','alto-metallophone','alto-xylophone','soprano-metallophone','soprano-xylophone','alto-glockenspiel','soprano-glockenspiel','soprano-recorder'].map(newTrack)});
+test('all catalog instruments have exactly one score position',()=>{assert.equal(new Set(ORFF_SCORE_ORDER).size,ORFF_SCORE_ORDER.length);assert.deepEqual([...ORFF_SCORE_ORDER].sort(),CATALOG.map(i=>i.id).sort());});
+test('Orff order places percussion between altos and basses without mutating tracks',()=>{const p=piece(),before=JSON.stringify(p);assert.deepEqual(scoreTracks(p).map(t=>t.instrument),p.tracks.map(t=>t.instrument).reverse());assert.equal(JSON.stringify(p),before)});
+test('custom order survives validation and full song compilation, with new parts appended',()=>{const p=piece();p.notation={partOrder:[p.tracks[0].id,p.tracks.at(-1).id]};ensureSong(p);const validated=validateProject(JSON.parse(JSON.stringify(p)));assert.deepEqual(scoreTracks(compileSong(validated)).slice(0,2).map(t=>t.id),p.notation.partOrder);p.tracks.push(newTrack('timpani'));assert.equal(scoreTracks(p).at(-1).instrument,'timpani');});
+test('MusicXML part list and bodies share score order and custom override',()=>{const p=piece();for(const custom of [false,true]){if(custom)p.notation={partOrder:p.tracks.map(t=>t.id)};const xml=musicXML(p);const names=[...xml.matchAll(/<part-name>(.*?)<\/part-name>/g)].map(m=>m[1]);assert.deepEqual(names,scoreTracks(p).map(t=>t.name));assert.deepEqual([...xml.matchAll(/<part id="(P\d+)">/g)].map(m=>m[1]),names.map((_,i)=>'P'+(i+1)));}});
+test('deleted part references are removed and malformed order is rejected',()=>{const p=piece();p.notation={partOrder:['deleted',p.tracks[0].id]};assert.deepEqual(validateProject(p).notation.partOrder,[p.tracks[0].id]);p.notation.partOrder='bad';assert.throws(()=>validateProject(p),/score part order/);});

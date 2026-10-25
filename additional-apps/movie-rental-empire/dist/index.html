@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,interactive-widget=resizes-content"><meta name="theme-color" content="#16131e"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="description" content="Your own little video store. Your next big obsession. A nostalgic management game by Drew Wichman."><title>Movie Rental Empire — Rewind & Dandy</title><link rel="stylesheet" href="./style.css"><link rel="stylesheet" href="./tablet.css"><link rel="stylesheet" href="./immersive.css?v=cinema2"><link rel="stylesheet" href="./cinema.css"><link rel="stylesheet" href="./expansion.css"></head>
+<body>
+<div id="game">
+ <header class="topbar">
+  <a class="brand" href="#" aria-label="Movie Rental Empire home"><span class="tape-logo"><i></i><i></i></span><span>MOVIE RENTAL <b>EMPIRE</b><small>REWIND & DANDY VIDEO</small></span></a>
+  <div class="ledger"><div><small>CASH ON HAND</small><strong id="cash">$245.00</strong></div><div><small>NEIGHBORHOOD LOVE</small><strong id="rep">60 <span>/ 100</span></strong></div><div class="day-ledger"><small id="dayLabel">MONDAY · DAY 1</small><strong id="clock">Before opening</strong></div></div>
+  <div class="utility"><button id="soundBtn" aria-label="Enable game audio" title="Sound & music">Sound off</button><button id="helpBtn" aria-label="How to play">?</button><button id="settingsBtn" aria-label="Save and settings">☰</button></div>
+ </header>
+ <main class="layout">
+  <section class="floor-section" aria-label="Live video store">
+   <div class="floor-head"><div><span class="eyebrow">YOUR NEIGHBORHOOD MOVIE STORE</span><h1>Be kind. Rewind. <em>Build an empire.</em></h1></div><span id="openSign" class="open-sign">CLOSED</span></div>
+   <div class="scene-wrap"><canvas id="scene" width="1300" height="850" aria-label="Animated video store. Tap the labeled workstations to work." role="img"></canvas><div class="scene-top"><span id="weather">☂ Rain on the sidewalk. Movies on the mind.</span><button id="viewBtn" aria-label="Toggle closer store view">Closer view</button></div><div class="cinema-status" aria-label="Store status"><span id="roomCash">$245</span><span id="roomTime">Before opening</span><span id="roomGoal">0 / 5 rentals</span></div><div class="cinema-controls"><button id="roomPause" class="primary" aria-label="Open store">Open store</button><button id="roomFull" aria-label="Full screen" title="Full screen">⛶</button><button id="roomMenu" aria-label="Store menu" title="Store menu">☰</button></div><div id="sceneTargets" aria-label="Objects in your store"></div><div id="roomHint">Tap a customer or an object · Drag to look around · Pinch to zoom</div><div id="floating" aria-hidden="true"></div><div class="scene-bottom"><span id="sceneHint">Stock the shelves. Meet your regulars. Make movie night.</span><span class="copyright">CREATED BY DREW WICHMAN</span></div></div>
+   <div class="stations" aria-label="Store workstations">
+    <button data-station="counter" class="station active"><span class="station-icon">▤</span><span>Counter<small id="counterCount">0 waiting</small></span><kbd>1</kbd></button>
+    <button data-station="returns" class="station"><span class="station-icon">⏪</span><span>Returns<small id="returnCount">2 to rewind</small></span><kbd>2</kbd></button>
+    <button data-station="floor" class="station"><span class="station-icon">✦</span><span>Help a customer<small id="helpCount">All good</small></span><kbd>3</kbd></button>
+    <button data-station="phone" class="station"><span class="station-icon">☎</span><span>Overdue calls<small id="phoneCount">3 to call</small></span><kbd>4</kbd></button>
+   </div>
+   <div class="shiftbar"><div class="goal"><span id="goalLabel">TODAY’S GOAL · 0 / 6 rentals</span><div class="track"><i id="goalFill"></i></div></div><div class="streak" id="streak">✦ 0 / 5 happy streak</div><div class="time-controls"><button id="pauseBtn" disabled aria-label="Pause or resume">Ⅱ</button><button id="speedBtn" aria-label="Change simulation speed">1×</button><button id="openBtn" class="primary">Open the store →</button></div></div>
+  </section>
+  <aside class="work-panel" aria-label="Workstation"><button id="closeWork" class="drawer-close" aria-label="Close workstation">×</button><div class="panel-heading"><div><span class="eyebrow" id="panelEyebrow">LET’S MAKE MOVIE NIGHT</span><h2 id="panelTitle">The checkout counter</h2></div><span class="pill" id="panelBadge">YOUR SHIFT</span></div><div id="workContent"></div></aside>
+ </main>
+ <section class="business" aria-label="Store management"><button id="closeBusiness" class="drawer-close" aria-label="Return to store">×</button>
+  <div class="touch-manage-note">The shift pauses while you manage. Return to Store when you’re ready.</div>
+  <nav class="business-nav" aria-label="Business management"><button data-tab="catalog" class="active">Movie catalog</button><button data-tab="crew">Your crew <span id="crewCount">0</span></button><button data-tab="snacks">Snack bar & pricing</button><button data-tab="upgrades">Grow the store</button><button data-tab="decor">Make it yours</button><button data-tab="neighborhood">Neighborhood</button><button data-tab="ledger">The ledger</button></nav>
+  <div class="business-body" id="businessContent"></div>
+ </section>
+ <footer><span>REWIND & DANDY · INDEPENDENT VIDEO SINCE 1993</span><span id="saveStatus">Progress saves on this device</span><button id="saveBtn">Save now</button></footer>
+</div>
+<nav id="touchDock" aria-label="Touch game controls" hidden>
+ <button id="touchStore" aria-pressed="true">Store<small id="touchWaiting">All caught up</small></button>
+ <button id="touchManage" aria-pressed="false">Manage<small>Movies · crew</small></button>
+ <button id="touchPause" class="primary">Open store<small id="touchClock">Day 1</small></button>
+ <button id="touchSpeed">Speed<small id="touchSpeedValue">1×</small></button>
+ <button id="touchFull">Full screen<small>More room</small></button>
+</nav>
+<div id="toasts" class="toasts" role="status" aria-live="polite"></div>
+<dialog id="modal"><button id="closeModal" class="close-modal" aria-label="Close dialog">×</button><div id="modalContent"></div></dialog>
+<input id="importInput" type="file" accept="application/json,.json" hidden>
+<script type="module" src="./game.mjs"></script>
+</body></html>

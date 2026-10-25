@@ -1,0 +1,21 @@
+const fs=require('node:fs'),assert=require('node:assert/strict'),{createCanvas,GlobalFonts}=require('@napi-rs/canvas');const {c,run,el,advance}=require('./classroom.cjs');
+GlobalFonts.registerFromPath(__dirname+'/../dist/assets/fonts/DejaVuSans.ttf','UkePrint');c.Vex=require('../dist/vendor/vexflow.js');
+for(const name of ['melody-model.js','harmony-model.js','melody-renderer.js','melody-pdf.js','melody-studio.js','harmony-sync.js'])run(fs.readFileSync(__dirname+'/../dist/'+name,'utf8'));
+run('initMelodyStudio()');
+const node=el('melodyCanvas'),canvas=createCanvas(720,280);node.parentElement={parentElement:{clientWidth:850}};for(const d of ['width','height'])Object.defineProperty(node,d,{get:()=>canvas[d],set:v=>canvas[d]=v});node.getContext=(...a)=>canvas.getContext(...a);node.getBoundingClientRect=()=>({left:0,top:0,width:run('melodyGeometry?.width||720'),height:280});
+(async()=>{
+ run("setView('melody')");assert.equal(el('melodyView').hidden,false);assert.equal(el('createView').hidden,true);assert(run('song.notation.measures.length>0'));assert(run('melodyGeometry.positions.length>0'),el('melodyStatus').textContent);
+ run("addMelodyNote('c/4');addMelodyNote('d/4');addMelodyNote('e/4');addMelodyNote('f/4');addMelodyNote('g/4')");assert.equal(run('song.notation.measures[0].notes.length'),4);assert.equal(run('song.notation.measures[1].notes.length'),1);assert.equal(run('melodyBar'),1);
+ run('melodyHistory(false)');assert.equal(run('song.notation.measures[1].notes.length'),0);run('melodyHistory(true)');assert.equal(run('song.notation.measures[1].notes.length'),1);
+ const beforeFeel=run('JSON.stringify(song.notation.measures)');el('melodySwing').value='67';el('melodySwing').oninput({target:el('melodySwing')});assert.equal(el('melodySwingValue').textContent,'Swing');el('melodySwing').onchange({target:el('melodySwing')});assert.equal(run('song.notation.swing'),67);assert.equal(run('JSON.stringify(song.notation.measures)'),beforeFeel);
+ const backup=run('JSON.stringify(song)');assert.equal(run('JSON.stringify(normalizeSong(JSON.parse(JSON.stringify(song))).notation)'),run('JSON.stringify(song.notation)'));
+ run('melodyBar=0;melodySelected=0;renderMelody()');el('melodyLyric').value='Twin-';run('editMelodyNote()');assert.equal(run('song.notation.measures[0].notes[0].lyric'),'Twin-');assert(!el('melodyInspector').hidden);
+ el('melodyChord').value='G7';el('melodyChordAt').value='32';el('melodySetChord').onclick();assert(run('song.notation.measures[0].chords.some(c=>c.name==="G7"&&c.at===32)'));
+ run('melodyBar=0;renderMelody()');const size=run('song.notation.measures.length');el('melodyDuplicateMeasure').onclick();assert.equal(run('song.notation.measures.length'),size+1);assert.equal(run('song.notation.measures[1].notes[0].lyric'),'Twin-');el('melodyDeleteMeasure').onclick();assert.equal(run('song.notation.measures.length'),size);
+ el('melodyNumbers').checked=false;el('melodyNumbers').onchange({target:el('melodyNumbers')});assert.equal(run('song.notation.measureNumbers'),false);
+ await run('playMelody()');assert(run('!!melodyPlaying'));await advance(800);assert.equal(el('melodyListen').textContent,'■ Stop melody');run('stopMelody()');assert.equal(run('melodyPlaying'),null);
+ run("setView('play')");assert(el('melodyView').hidden);assert(!el('playView').hidden);run("setView('melody')");assert.equal(run('song.notation.measures[0].notes[0].lyric'),'Twin-');
+ run('window.roundTrip=clone(song);loadSong(roundTrip,false)');assert.equal(run('song.notation.swing'),67);assert.equal(el('melodySwing').value,67);assert.equal(run('song.notation.measures[0].notes[0].lyric'),'Twin-');
+ fs.mkdirSync('/tmp/uke-melody-checks',{recursive:true});fs.writeFileSync('/tmp/uke-melody-checks/editor-measure.png',canvas.toBuffer('image/png'));
+ console.log('PASS: melody navigation, canvas, note entry, automatic next measure, undo/redo, JSON restoration, lyrics, chords, measure tools, numbering, playback, stop and view switching');
+})().catch(e=>{console.error(e);process.exitCode=1;});

@@ -1,0 +1,27 @@
+ACOUSTIC WOODBLOCKS — LOW AND HIGH
+
+Both source recordings are CC0-1.0. Full license: ../CC0-1.0.txt.
+
+LOW
+Versilian Community Sample Library (VCSL), Versilian Studios LLC.
+Source: https://versilian-studios.com/vcsl/
+File: Idiophones/Struck Idiophones/Woodblock/wood_click_f_rr1.wav
+Pinned repository commit: c1ea7bcc3c7309650ab0da9d15c9cd1fbc4a4c7e
+Original 44.1 kHz, 24-bit stereo recording.
+
+HIGH
+Block "Meinl" in wood (#0466), Joseph SARDIN / BigSoundBank.
+Source: https://bigsoundbank.com/block-meinl-in-wood-s0466.html
+Original WAV: https://bigsoundbank.com/UPLOAD/bwf-en/0466.wav
+Original 48 kHz, 16-bit mono studio recording; one isolated hit extracted.
+The publisher permits commercial use, editing and redistribution in apps.
+
+Native pitches preserved. Quiet lead and tails trimmed; constant gain used
+to balance levels. High voice gently high-passed at 100 Hz to remove
+handling rumble and resampled to 44.1 kHz. Short endpoint fades, TPDF
+dither, and 16-bit PCM output. Source channel counts preserved.
+No synthetic layers, temple-block reuse, pitch shifting or compression.
+
+Exact source and output hashes, excerpts and processing: PROVENANCE.json.
+Reproducible preparation: scripts/prepare-woodblock.py; source selection:
+scripts/woodblock-sources.json.

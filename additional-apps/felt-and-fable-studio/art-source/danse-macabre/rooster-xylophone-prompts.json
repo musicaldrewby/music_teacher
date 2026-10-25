@@ -1,0 +1,16 @@
+{
+  "tool": "builtin image_gen.imagegen",
+  "generatedAssets": [
+    {
+      "file": "rooster.png",
+      "prompt": "Use case: illustration-story. Asset type: one native transparent PNG cutout for an educational felt-board movie. Primary request: a cheerful crowing rooster, full body in side view facing left, two feet on an invisible baseline. Cute flat layered hand-cut wool felt craft, crisply visible short felt fibers, simple stitched wing outline and bead-like black eye. Ochre golden body, rich red scalloped comb and wattle, cream neck feathers, curved overlapping dark teal and forest-green tail feathers. Upright neck, yellow beak slightly open in a call. Small simple friendly silhouette, physically flat fabric shapes with only shallow layer-edge shading, consistent children's felt-board aesthetic. Centered isolated subject with margin all around. Genuine transparent alpha background, no ground, no shadow outside the cutout, no rectangle, no glow, no white fringes. No text, no logo, no scenery, no 3D cartoon or Pixar appearance.",
+      "source": "generated_images/exec-21c717d2-8242-4774-9f51-0b730aca2f1d.png"
+    },
+    {
+      "file": "xylophone.png",
+      "prompt": "Use case: illustration-story. Asset type: one native transparent PNG cutout for an educational felt-board movie. Primary request: a recognizable full-size orchestral XYLOPHONE on a slim charcoal stand, shown slightly from above and in front so both chromatic rows of bars can be seen. This is a xylophone, NOT a marimba and NOT a rainbow toy: relatively narrow short dark rosewood bars in two offset keyboard rows, the raised accidental row grouped in twos and threes; bars graduate modestly from longer at left to shorter at right; short silver-gold resonator tubes underneath, modest depth, no huge long bass resonators. Low wheeled metal-style stand with two legs and crossbar, full object visible. Everything rendered as beautiful flat layered hand-cut wool felt, crisp felt fibers and shallow layered fabric edges, simple muted jewel-tone felt-board aesthetic. Centered isolated subject with clear generous transparent margin. Native transparent alpha background, no ground, no environment, no cast shadow beyond object, no glow, no white fringe. No players, no extra objects, no mallets, no letters, no text, no logos. Avoid thick glossy plastic and 3D Pixar rendering.",
+      "editPrompt": "Correct the top chromatic row to alternating groups 2,3,2,3,2 while preserving every other element and native alpha.",
+      "source": "generated_images/exec-ae4fab33-c1b4-4332-bbd4-b8fe5917349b.png"
+    }
+  ]
+}

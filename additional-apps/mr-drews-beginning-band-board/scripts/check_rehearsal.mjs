@@ -1,0 +1,28 @@
+import assert from 'node:assert/strict';
+import {readFile} from 'node:fs/promises';
+import {METERS,SOUNDS,normalizeSettings,finishTimestamp,reminderStatus,tapBpm,clickSamples} from '../dist/rehearsal-model.js';
+import {RehearsalAudio} from '../dist/rehearsal-audio.js';
+import {RehearsalTools} from '../dist/rehearsal.js';
+const at=(h,m=0,s=0)=>new Date(2026,9,15,h,m,s).getTime();
+const defaults=normalizeSettings({},new Date(at(16)));
+assert.equal(defaults.reminderEnabled,false);assert.equal(defaults.leadMinutes,10);assert.equal(defaults.sound,'marching');assert.equal(defaults.bpm,100);
+assert.equal(normalizeSettings({bpm:900,volume:-8,subdivision:19}).bpm,300);assert.equal(normalizeSettings({bpm:'NaN'}).bpm,100);assert.equal(normalizeSettings({volume:-8}).volume,0);
+assert.equal(finishTimestamp('2026-10-15','17:00'),at(17));assert.equal(finishTimestamp('2026-02-31','17:00'),null);assert.equal(finishTimestamp('2026-10-15','25:00'),null);assert.equal(finishTimestamp('','17:00'),null);
+const reminder=normalizeSettings({reminderEnabled:true,finishDate:'2026-10-15',finishTime:'17:00'});
+assert.equal(reminderStatus(reminder,at(16,49,59)).phase,'waiting');assert.equal(reminderStatus(reminder,at(16,50)).phase,'due');assert.equal(reminderStatus(reminder,at(16,57)).phase,'due');assert.equal(reminderStatus(reminder,at(17)).phase,'finished');assert.equal(reminderStatus({...reminder,reminderEnabled:false},at(16,55)).phase,'off');
+const fired={...reminder,reminderFiredFor:reminderStatus(reminder,at(16,50)).key};assert.equal(reminderStatus(JSON.parse(JSON.stringify(fired)),at(16,51)).phase,'acknowledged');assert.equal(reminderStatus({...fired,finishTime:'17:30'},at(17,20)).phase,'due');
+const midnight={...reminder,finishDate:'2026-10-16',finishTime:'00:05'};assert.equal(reminderStatus(midnight,new Date(2026,9,15,23,55).getTime()).phase,'due');
+assert.equal(tapBpm([0,500,1000,1500]),120);assert.equal(tapBpm([0,1000,2000]),60);assert.equal(tapBpm([100]),null);
+for(const sound of Object.keys(SOUNDS))for(const accented of [false,true])for(const rate of [44100,48000]){const samples=clickSamples(sound,accented,rate);assert.ok(samples.every(Number.isFinite));const peak=Math.max(...samples.map(Math.abs));assert.ok(peak>.79&&peak<=.801);assert.ok(samples.reduce((s,v)=>s+v*v,0)>1);assert.ok(Math.abs(samples[0])<.001&&Math.abs(samples.at(-1))<.001);}
+// Exercise the real ahead-of-time scheduler against an advancing audio clock.
+function scheduled(meter,subdivision,bpm,seconds){const settings=normalizeSettings({meter,subdivision,bpm}),audio=new RehearsalAudio(settings);audio.ctx={state:'running',currentTime:0};audio.running=true;audio.next=.06;audio.tick=0;const events=[];audio.click=(time,info)=>events.push({time,...info});for(let t=0;t<seconds;t+=.025){audio.ctx.currentTime=t;audio.schedule()}return {audio,events};}
+for(const [meter,subdivision,bpm]of [['4/4',1,120],['6/8',3,120],['3/4',2,90],['pulse',4,300]]){const {events}=scheduled(meter,subdivision,bpm,60);const expectedInterval=60/bpm/subdivision;for(let n=1;n<events.length;n++)assert.ok(Math.abs(events[n].time-events[n-1].time-expectedInterval)<1e-9);const measure=METERS[meter].beats*subdivision;assert.ok(events.every((e,n)=>e.accent===(meter!=='pulse'&&n%measure===0)));assert.equal(events[0].beat,0);assert.equal(events[0].sub,0);}
+const lag=scheduled('4/4',1,120,.5);const before=lag.events.length;lag.audio.ctx.currentTime=100;lag.audio.schedule();assert.ok(lag.events.length-before<3,'No burst of missed clicks after a stalled tab');assert.ok(lag.events.at(-1).time>=100);
+const changes=scheduled('4/4',1,100,.2);changes.audio.metroGain={gain:{setTargetAtTime(){}}};changes.audio.alertGain={gain:{setTargetAtTime(){}}};changes.audio.update(normalizeSettings({bpm:60}),true);const resetTime=changes.events.at(-1).time;changes.audio.ctx.currentTime=resetTime+1;changes.audio.schedule();assert.ok(changes.events.at(-1).time>=changes.audio.ctx.currentTime);
+// Stopping cancels pending clicks, even if they were already scheduled.
+let stopped=0;globalThis.cancelAnimationFrame=()=>{};changes.audio.nodes.add({stop(){stopped++},disconnect(){}});changes.audio.stop();assert.equal(stopped,1);assert.equal(changes.audio.running,false);assert.equal(changes.audio.queue.length,0);
+// Drive the real reminder controller twice, then restore it from saved state.
+const RealDate=globalThis.Date;globalThis.Date=class extends RealDate{constructor(...args){super(...(args.length?args:[at(16,50)]))}static now(){return at(16,50)}};
+try{const ui=Object.create(RehearsalTools.prototype),elements=new Map();ui.$=selector=>{if(!elements.has(selector))elements.set(selector,{textContent:'',classList:{toggle(){}}});return elements.get(selector)};Object.assign(ui,{settings:{...reminder},audio:{ready:true},root:{classList:{toggle(){}}},syncWakeLock(){},save(){this.persisted=JSON.stringify(this.settings)},showAlert(){this.alerts=(this.alerts||0)+1}});ui.updateClock();ui.updateClock();assert.equal(ui.alerts,1);ui.settings=JSON.parse(ui.persisted);ui.updateClock();assert.equal(ui.alerts,1);ui.settings.reminderEnabled=false;ui.updateClock();assert.equal(ui.alerts,1);}finally{globalThis.Date=RealDate;}
+const html=await readFile(new URL('../dist/index.html',import.meta.url),'utf8'),app=await readFile(new URL('../dist/app.js',import.meta.url),'utf8');assert.ok(html.includes('id="rehearsal-tools"'));assert.ok(html.includes('rehearsal.css'));assert.ok(app.includes('new RehearsalTools'));
+console.log('Passed: steady 60-second audio timelines; simple/compound accents; no backlog bursts; stop cancellation; four finite, normalized click sounds; tap tempo; reminder boundary/midnight/off/reload/one-shot behavior; app wiring.');

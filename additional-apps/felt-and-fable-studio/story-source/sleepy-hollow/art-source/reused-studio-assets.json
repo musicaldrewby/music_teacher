@@ -1,0 +1,18 @@
+{
+  "note": "Existing original Felt & Fable assets reused for small foreground props; all are embedded in the story file.",
+  "assets": [
+    {
+      "key": "table",
+      "source": "story-source/three-little-pigs/art/table.png"
+    },
+    {
+      "key": "basket",
+      "source": "asset-packs/assets/prepared/piece76.js"
+    },
+    {
+      "key": "bough",
+      "source": "asset-packs/assets/prepared/cinema-foreground-leafy-branches.js",
+      "processing": "Top-left 550 by 400 crop; rotated only by editable scene transform."
+    }
+  ]
+}

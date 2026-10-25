@@ -1,0 +1,11 @@
+{
+  "name": "circuit-16",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "spessasynth_lib": "^4.3.0"
+  },
+  "scripts": {
+    "test": "node tests.mjs && node tests-drums.mjs && node tests-entry.mjs && node tests-parts.mjs"
+  }
+}

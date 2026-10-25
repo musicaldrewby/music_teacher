@@ -1,0 +1,826 @@
+{
+  "schemaVersion": 1,
+  "kind": "felt-modular-wolf-rig-art",
+  "orientation": "three-quarter-facing-right",
+  "atlas": "source/wolf-parts-atlas.png",
+  "atlasSize": [
+    1161,
+    1355
+  ],
+  "anchorUnits": "normalized to full cropped canvas; pixel anchors also supplied",
+  "parts": {
+    "head-neutral": {
+      "filename": "head-neutral.png",
+      "width": 480,
+      "height": 432,
+      "sourceRect": [
+        21,
+        7,
+        438,
+        402
+      ],
+      "sourceWindows": [
+        [
+          21,
+          7,
+          438,
+          402
+        ]
+      ],
+      "sourceOffset": [
+        32,
+        34
+      ],
+      "visibleBox": [
+        44,
+        46,
+        437,
+        417
+      ],
+      "anchorsPx": {
+        "neck": [
+          256,
+          390
+        ],
+        "eye": [
+          265,
+          231
+        ],
+        "nose": [
+          400,
+          287
+        ]
+      },
+      "anchors": {
+        "neck": [
+          0.533333,
+          0.902778
+        ],
+        "eye": [
+          0.552083,
+          0.534722
+        ],
+        "nose": [
+          0.833333,
+          0.664352
+        ]
+      },
+      "suggestedScaleAt440pxWolf": 0.4
+    },
+    "head-listen": {
+      "filename": "head-listen.png",
+      "width": 480,
+      "height": 432,
+      "sourceRect": [
+        428,
+        18,
+        823,
+        403
+      ],
+      "sourceWindows": [
+        [
+          428,
+          18,
+          823,
+          403
+        ]
+      ],
+      "sourceOffset": [
+        43,
+        43
+      ],
+      "visibleBox": [
+        55,
+        55,
+        426,
+        416
+      ],
+      "anchorsPx": {
+        "neck": [
+          256,
+          390
+        ],
+        "eye": [
+          267,
+          230
+        ],
+        "nose": [
+          391,
+          285
+        ]
+      },
+      "anchors": {
+        "neck": [
+          0.533333,
+          0.902778
+        ],
+        "eye": [
+          0.55625,
+          0.532407
+        ],
+        "nose": [
+          0.814583,
+          0.659722
+        ]
+      },
+      "suggestedScaleAt440pxWolf": 0.4
+    },
+    "head-surprise": {
+      "filename": "head-surprise.png",
+      "width": 480,
+      "height": 432,
+      "sourceRect": [
+        815,
+        13,
+        1161,
+        403
+      ],
+      "sourceWindows": [
+        [
+          815,
+          13,
+          1161,
+          403
+        ]
+      ],
+      "sourceOffset": [
+        53,
+        37
+      ],
+      "visibleBox": [
+        65,
+        49,
+        390,
+        415
+      ],
+      "anchorsPx": {
+        "neck": [
+          256,
+          390
+        ],
+        "eye": [
+          280,
+          230
+        ],
+        "nose": [
+          358,
+          282
+        ]
+      },
+      "anchors": {
+        "neck": [
+          0.533333,
+          0.902778
+        ],
+        "eye": [
+          0.583333,
+          0.532407
+        ],
+        "nose": [
+          0.745833,
+          0.652778
+        ]
+      },
+      "suggestedScaleAt440pxWolf": 0.4
+    },
+    "torso": {
+      "filename": "torso.png",
+      "width": 331,
+      "height": 345,
+      "sourceRect": [
+        74,
+        413,
+        405,
+        758
+      ],
+      "sourceWindows": [
+        [
+          74,
+          413,
+          405,
+          758
+        ]
+      ],
+      "sourceOffset": [
+        0,
+        0
+      ],
+      "visibleBox": [
+        12,
+        12,
+        319,
+        333
+      ],
+      "anchorsPx": {
+        "neck": [
+          176,
+          37
+        ],
+        "shoulderNear": [
+          56,
+          92
+        ],
+        "shoulderFar": [
+          297,
+          83
+        ],
+        "hipNear": [
+          126,
+          292
+        ],
+        "hipFar": [
+          226,
+          292
+        ],
+        "pelvis": [
+          176,
+          296
+        ]
+      },
+      "anchors": {
+        "neck": [
+          0.531722,
+          0.107246
+        ],
+        "shoulderNear": [
+          0.169184,
+          0.266667
+        ],
+        "shoulderFar": [
+          0.897281,
+          0.24058
+        ],
+        "hipNear": [
+          0.380665,
+          0.846377
+        ],
+        "hipFar": [
+          0.682779,
+          0.846377
+        ],
+        "pelvis": [
+          0.531722,
+          0.857971
+        ]
+      },
+      "suggestedScaleAt440pxWolf": 0.44
+    },
+    "upper-arm": {
+      "filename": "upper-arm.png",
+      "width": 176,
+      "height": 316,
+      "sourceRect": [
+        558,
+        423,
+        734,
+        739
+      ],
+      "sourceWindows": [
+        [
+          558,
+          423,
+          734,
+          739
+        ]
+      ],
+      "sourceOffset": [
+        0,
+        0
+      ],
+      "visibleBox": [
+        12,
+        12,
+        164,
+        304
+      ],
+      "anchorsPx": {
+        "start": [
+          72,
+          47
+        ],
+        "end": [
+          92,
+          260
+        ],
+        "shoulder": [
+          72,
+          47
+        ],
+        "elbow": [
+          92,
+          260
+        ]
+      },
+      "anchors": {
+        "start": [
+          0.409091,
+          0.148734
+        ],
+        "end": [
+          0.522727,
+          0.822785
+        ],
+        "shoulder": [
+          0.409091,
+          0.148734
+        ],
+        "elbow": [
+          0.522727,
+          0.822785
+        ]
+      },
+      "suggestedScaleAt440pxWolf": 0.28,
+      "boneLengthPx": 213.937,
+      "boneAngleRadians": 1.477174
+    },
+    "forearm": {
+      "filename": "forearm.png",
+      "width": 138,
+      "height": 333,
+      "sourceRect": [
+        938,
+        425,
+        1076,
+        758
+      ],
+      "sourceWindows": [
+        [
+          938,
+          425,
+          1076,
+          758
+        ]
+      ],
+      "sourceOffset": [
+        0,
+        0
+      ],
+      "visibleBox": [
+        4,
+        12,
+        126,
+        321
+      ],
+      "anchorsPx": {
+        "start": [
+          65,
+          56
+        ],
+        "end": [
+          80,
+          279
+        ],
+        "elbow": [
+          65,
+          56
+        ],
+        "wrist": [
+          80,
+          279
+        ]
+      },
+      "anchors": {
+        "start": [
+          0.471014,
+          0.168168
+        ],
+        "end": [
+          0.57971,
+          0.837838
+        ],
+        "elbow": [
+          0.471014,
+          0.168168
+        ],
+        "wrist": [
+          0.57971,
+          0.837838
+        ]
+      },
+      "suggestedScaleAt440pxWolf": 0.26,
+      "boneLengthPx": 223.504,
+      "boneAngleRadians": 1.503633
+    },
+    "hand-relaxed": {
+      "filename": "hand-relaxed.png",
+      "width": 172,
+      "height": 254,
+      "sourceRect": [
+        154,
+        765,
+        326,
+        1019
+      ],
+      "sourceWindows": [
+        [
+          154,
+          765,
+          326,
+          1019
+        ]
+      ],
+      "sourceOffset": [
+        0,
+        0
+      ],
+      "visibleBox": [
+        12,
+        12,
+        160,
+        242
+      ],
+      "anchorsPx": {
+        "wrist": [
+          53,
+          54
+        ],
+        "palm": [
+          77,
+          152
+        ],
+        "fingertip": [
+          93,
+          222
+        ]
+      },
+      "anchors": {
+        "wrist": [
+          0.30814,
+          0.212598
+        ],
+        "palm": [
+          0.447674,
+          0.598425
+        ],
+        "fingertip": [
+          0.540698,
+          0.874016
+        ]
+      },
+      "suggestedScaleAt440pxWolf": 0.25
+    },
+    "hand-knock": {
+      "filename": "hand-knock.png",
+      "width": 237,
+      "height": 152,
+      "sourceRect": [
+        459,
+        833,
+        696,
+        985
+      ],
+      "sourceWindows": [
+        [
+          459,
+          833,
+          696,
+          985
+        ]
+      ],
+      "sourceOffset": [
+        0,
+        0
+      ],
+      "visibleBox": [
+        12,
+        12,
+        225,
+        140
+      ],
+      "anchorsPx": {
+        "wrist": [
+          31,
+          73
+        ],
+        "palm": [
+          136,
+          74
+        ],
+        "contact": [
+          217,
+          70
+        ]
+      },
+      "anchors": {
+        "wrist": [
+          0.130802,
+          0.480263
+        ],
+        "palm": [
+          0.57384,
+          0.486842
+        ],
+        "contact": [
+          0.915612,
+          0.460526
+        ]
+      },
+      "suggestedScaleAt440pxWolf": 0.25
+    },
+    "tail": {
+      "filename": "tail.png",
+      "width": 341,
+      "height": 325,
+      "sourceRect": [
+        798,
+        725,
+        1139,
+        1050
+      ],
+      "sourceWindows": [
+        [
+          798,
+          725,
+          960,
+          758
+        ],
+        [
+          798,
+          758,
+          1139,
+          1050
+        ]
+      ],
+      "sourceOffset": [
+        0,
+        0
+      ],
+      "visibleBox": [
+        12,
+        12,
+        329,
+        313
+      ],
+      "anchorsPx": {
+        "base": [
+          306,
+          191
+        ],
+        "tip": [
+          114,
+          42
+        ]
+      },
+      "anchors": {
+        "base": [
+          0.897361,
+          0.587692
+        ],
+        "tip": [
+          0.334311,
+          0.129231
+        ]
+      },
+      "suggestedScaleAt440pxWolf": 0.35
+    },
+    "thigh": {
+      "filename": "thigh.png",
+      "width": 184,
+      "height": 333,
+      "sourceRect": [
+        141,
+        1013,
+        325,
+        1346
+      ],
+      "sourceWindows": [
+        [
+          141,
+          1013,
+          325,
+          1346
+        ]
+      ],
+      "sourceOffset": [
+        0,
+        0
+      ],
+      "visibleBox": [
+        12,
+        12,
+        172,
+        321
+      ],
+      "anchorsPx": {
+        "start": [
+          103,
+          47
+        ],
+        "end": [
+          69,
+          277
+        ],
+        "hip": [
+          103,
+          47
+        ],
+        "knee": [
+          69,
+          277
+        ]
+      },
+      "anchors": {
+        "start": [
+          0.559783,
+          0.141141
+        ],
+        "end": [
+          0.375,
+          0.831832
+        ],
+        "hip": [
+          0.559783,
+          0.141141
+        ],
+        "knee": [
+          0.375,
+          0.831832
+        ]
+      },
+      "suggestedScaleAt440pxWolf": 0.31,
+      "boneLengthPx": 232.499,
+      "boneAngleRadians": 1.71756
+    },
+    "shin": {
+      "filename": "shin.png",
+      "width": 134,
+      "height": 307,
+      "sourceRect": [
+        534,
+        1031,
+        668,
+        1338
+      ],
+      "sourceWindows": [
+        [
+          534,
+          1031,
+          668,
+          1338
+        ]
+      ],
+      "sourceOffset": [
+        0,
+        0
+      ],
+      "visibleBox": [
+        12,
+        12,
+        122,
+        295
+      ],
+      "anchorsPx": {
+        "start": [
+          66,
+          52
+        ],
+        "end": [
+          66,
+          273
+        ],
+        "knee": [
+          66,
+          52
+        ],
+        "ankle": [
+          66,
+          273
+        ]
+      },
+      "anchors": {
+        "start": [
+          0.492537,
+          0.169381
+        ],
+        "end": [
+          0.492537,
+          0.889251
+        ],
+        "knee": [
+          0.492537,
+          0.169381
+        ],
+        "ankle": [
+          0.492537,
+          0.889251
+        ]
+      },
+      "suggestedScaleAt440pxWolf": 0.31,
+      "boneLengthPx": 221.0,
+      "boneAngleRadians": 1.570796
+    },
+    "foot": {
+      "filename": "foot.png",
+      "width": 269,
+      "height": 187,
+      "sourceRect": [
+        841,
+        1131,
+        1110,
+        1318
+      ],
+      "sourceWindows": [
+        [
+          841,
+          1131,
+          1110,
+          1318
+        ]
+      ],
+      "sourceOffset": [
+        0,
+        0
+      ],
+      "visibleBox": [
+        12,
+        12,
+        257,
+        175
+      ],
+      "anchorsPx": {
+        "ankle": [
+          61,
+          55
+        ],
+        "heel": [
+          50,
+          135
+        ],
+        "toe": [
+          234,
+          145
+        ],
+        "sole": [
+          152,
+          166
+        ]
+      },
+      "anchors": {
+        "ankle": [
+          0.226766,
+          0.294118
+        ],
+        "heel": [
+          0.185874,
+          0.721925
+        ],
+        "toe": [
+          0.869888,
+          0.775401
+        ],
+        "sole": [
+          0.565056,
+          0.887701
+        ]
+      },
+      "suggestedScaleAt440pxWolf": 0.3
+    }
+  },
+  "background": {
+    "filename": "door-set.png",
+    "nativeSize": [
+      1672,
+      941
+    ],
+    "doorWoodBounds": [
+      1138,
+      194,
+      1428,
+      674
+    ],
+    "stoneArchBounds": [
+      1054,
+      104,
+      1504,
+      717
+    ],
+    "thresholdY": 704,
+    "knockTarget": [
+      1215,
+      480
+    ],
+    "latchCenter": [
+      1176,
+      481
+    ],
+    "suggestedFootY": 790,
+    "clearPathBounds": [
+      200,
+      720,
+      1080,
+      925
+    ],
+    "note": "Door height is approximately480px, not requested570px. Use440px or slightly smaller wolf; select foot/arm target jointly for perspective."
+  },
+  "notes": [
+    "Parts are generated felt art, cropped and registered mechanically; no pixel repainting or reconstructed limbs.",
+    "All three heads share480x432canvas and neck pivot[256,390]. Slight expression-related silhouette variation remains.",
+    "Torso shoulder discs are intentional cream-shirt overlap surfaces. Place near upperarm over near disc and far arm behind torso.",
+    "Upperarm gray shoulder cap belongs under torso overlap; rolled sleeve cuff is elbow end.",
+    "Component axis is defined by start/end anchors, not the crop vertical. Rotate along that vector when fitting a bone.",
+    "Thigh includes stitched fabric hem near its lower end; hide it under shin overlap if knee seam is visually too strong.",
+    "Tail base is at its rounded right-hand end; cream tip points upperleft.",
+    "Scale hints are approximate visual starting points. Engine joint lengths and limits determine actual rig proportions.",
+    "Head expression variants preserve wool design and ear/fur orientation; no fullside or back view is included."
+  ]
+}

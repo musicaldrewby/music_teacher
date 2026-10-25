@@ -1,0 +1,17 @@
+.selection-toolbar{position:absolute;z-index:12;width:max-content;max-width:calc(100% - 16px);padding:7px;border:1px solid #b7c9ad;border-radius:11px;background:#fffef6f7;box-shadow:0 5px 18px #173a3430;overflow:auto;color:#28473b;user-select:none}
+.selection-toolbar[hidden]{display:none!important}
+.selection-toolbar .selection-label{display:block;font-size:10px;font-weight:600;line-height:1.3;margin:0 4px 5px;max-width:290px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#66765c}
+.selection-toolbar .selection-actions-row{display:flex;align-items:center;flex-wrap:wrap;gap:4px}
+.selection-toolbar button{display:inline-flex;align-items:center;justify-content:center;gap:5px;min-height:33px;padding:6px 8px;font-size:12px;font-weight:600;line-height:1.2;border-radius:6px;background:#f1f5e9;border:1px solid #d3dfc8;color:#315442;white-space:nowrap}
+.selection-toolbar button:hover{background:#e5efdb;border-color:#9cb88c}
+.selection-toolbar button:disabled{opacity:.4;cursor:default}
+.selection-toolbar button:focus-visible{outline:3px solid #d9a847;outline-offset:1px}
+.selection-toolbar button svg{width:15px;height:15px;flex:none;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;pointer-events:none}
+.selection-toolbar #selectionDelete{color:#944b3d;background:#fff1e6;border-color:#e7c6b3}.selection-toolbar #selectionDelete:hover{background:#ffe5d7}
+.selection-toolbar #selectionUndo{padding:6px 8px;background:transparent;border-color:transparent}
+.selection-toolbar #selectionMore[aria-expanded=true]{background:#dbead0;border-color:#9cb88c}
+.selection-more-menu{display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-top:7px;padding-top:7px;border-top:1px dashed #cbd8bc}
+.selection-more-menu button{white-space:normal;text-align:left;justify-content:flex-start;min-height:34px;font-size:11px;font-weight:500;background:transparent}
+.selection-more-menu #selectionLock,.selection-more-menu #selectionUngroup{grid-column:1/-1}
+.presentation .selection-toolbar{display:none!important}
+@media(max-width:650px){.selection-toolbar{padding:6px}.selection-toolbar button{min-height:35px;padding:6px 7px;font-size:11px}.selection-toolbar .selection-label{max-width:240px}.selection-toolbar .selection-actions-row{gap:3px}.selection-toolbar button svg{width:14px;height:14px}}

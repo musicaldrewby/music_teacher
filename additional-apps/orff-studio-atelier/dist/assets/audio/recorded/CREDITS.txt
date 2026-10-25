@@ -1,0 +1,37 @@
+RECORDED PERCUSSION — Mr. Drew’s Orff Studio
+
+Finger Cymbals #1 — Joseph SARDIN / BigSoundBank.com
+Source: https://bigsoundbank.com/finger-cymbals-1-s2274.html
+License: CC0-1.0, https://bigsoundbank.com/licenses.html
+Original: https://bigsoundbank.com/UPLOAD/bwf-en/2274.wav
+Trimmed 45ms leading silence, gain 0.72, gentle final 250ms fade,
+resampled to44.1kHz and encoded as high-quality VBR MP3. Natural tail retained.
+
+Gong1, mf — Versilian Studios LLC / Versilian Community Sample Library
+Source: https://versilian-studios.com/vcsl/
+Repository: https://github.com/sgossner/VCSL
+Commit: c1ea7bcc3c7309650ab0da9d15c9cd1fbc4a4c7e
+Original: Idiophones/Struck Idiophones/Gong 1/gong_mf.wav
+License: CC0-1.0 (included in CC0-1.0.txt)
+Trimmed10ms leading silence, gain3.85, gentle final394ms fade,
+encoded as high-quality44.1kHz stereo VBR MP3. Full34-second decay retained.
+
+No pitch shifting, looping, or synthesized replacements were applied to the finger cymbals or gong.
+Exact source/output hashes and metadata are in ../manifest.json.
+
+Tubanos: user-provided Real Tubano Drums recordings reused from Boomwhacker Creator Edition v1.65. High = sample 1 (ID 141), medium = sample 2 (ID 128), low = sample 3 (ID 142). Embedded MP3 bytes and individual playback gains preserved. No new license assertion.
+
+Hand drums — Versilian Studios LLC / Versilian Community Sample Library
+Source: https://versilian-studios.com/vcsl/
+Repository: https://github.com/sgossner/VCSL
+Commit: c1ea7bcc3c7309650ab0da9d15c9cd1fbc4a4c7e
+Original folder: Membranophones/Struck Membranophones/Frame Drum/
+Original file: HDrumS_Hit_v3_rr1_Sum.wav
+License: CC0-1.0 (included in CC0-1.0.txt)
+All five registers derive from the SAME small frame-drum hit by playback-rate resampling:
+Highest = original pitch; high = -3 semitones; middle = -6;
+low = -9; lowest = -12. Peak normalized to 0.70
+before high-quality stereo 44.1kHz VBR MP3 encoding. Full pitch-scaled
+decay retained, with a final 80ms fade. No loops or synthesized toms.
+Source/output SHA-256 hashes and decoded measurements: ../manifest.json.
+Rebuild: scripts/audio/build_hand_drums.py.

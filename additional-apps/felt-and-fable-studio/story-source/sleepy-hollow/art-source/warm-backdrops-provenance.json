@@ -1,0 +1,28 @@
+{
+  "generator": "Built-in image_gen.imagegen",
+  "createdAt": "2026-10-18",
+  "useCase": "illustration-story",
+  "copiedUnchanged": true,
+  "actualDimensions": {"width":1672,"height":941},
+  "dimensionNote": "The built-in tool returned a near-16:9 canvas at 1672 by 941 despite a 2048 by 1152 prompt preference. Originals were retained unchanged.",
+  "assets": [
+    {
+      "name": "valley-day.png",
+      "source": "/workspace/scratch/110acee071c2/generated_images/exec-e8c5b506-aae6-409b-a696-e7e8ad6ddf1b.png",
+      "prompt": "Use case: illustration-story. Asset type: original animation stage backdrop for a handcrafted felt adaptation of The Legend of Sleepy Hollow. Create ONE wide 16:9 image, 2048x1152 preferred. Scene: broad Hudson River valley in late eighteenth-century New York in golden autumn; distant small Dutch village with white plaster and wood farmhouses, a winding brook, gold and rust autumn trees. Far right in the middle distance a recognizable small white church and small simple wooden bridge by the brook. Foreground has a broad softly textured earth hill path spanning full width, with a continuous level acting surface across the lower third, unobstructed empty center. Architecture and trees mainly occupy the upper half and outer edges. Style: richly handcrafted needlefelt and layered wool storybook diorama, believable tiny wool fibers and hand-sewn details, charming but restrained cinematic quality, soft late afternoon light, ochre, rust, muted olive, cream, dusty sky blue palette. Low eye-level broad stage view, clear readable depth, gentle distant atmospheric softness but sharp usable foreground. This is a finished empty stage for separately animated puppets. NO people, NO animals, NO figures or silhouettes, NO text, letters, logos, watermarks, collage, borders, or panels. No objects blocking the broad empty foreground path. Output full-bleed landscape background.",
+      "review": "Clear path foreground, church and small bridge at right, no people or animals or text."
+    },
+    {
+      "name": "farmhouse.png",
+      "source": "/workspace/scratch/110acee071c2/generated_images/exec-095d7ab7-af05-46cb-96b4-667e48f9fb36.png",
+      "prompt": "Use case: illustration-story. Asset type: original animation stage backdrop for a handcrafted felt adaptation of The Legend of Sleepy Hollow. Create ONE wide 16:9 image, 2048x1152 preferred. Scene: the prosperous Van Tassel farm in late eighteenth-century Hudson Valley New York, a charming white plaster Dutch colonial farmhouse with broad steep gray roof and warm windows in background left of center, a modest red barn in the far background right, apple orchard with gold and rust autumn foliage, wooden split rail fence and open gate framing only the left and right edges. A broad continuous ochre earth path runs horizontally across the full width around 70 to 85 percent down the frame, expanding into a big clear empty foreground yard, no obstacles at center. Keep architecture and trees mostly in the upper half. Style: richly handcrafted needlefelt and layered wool storybook miniature diorama; believable fine wool fibers, small stitched construction, charming but restrained cinematic quality. Soft golden afternoon light, ochre, rust, muted olive, cream, dusty sky blue palette. Broad front facing low eye-level stage view, gentle distant atmosphere, sharp usable foreground. This is a finished empty stage for separately animated puppets. NO people, NO animals, NO figures or silhouettes, NO text, letters, logos, watermarks, collage, borders, or panels. No objects blocking the broad empty foreground path. Output full-bleed landscape background.",
+      "review": "Clear wide foreground yard, farmhouse left, barn right, no people or animals or text."
+    },
+    {
+      "name": "schoolroom.png",
+      "source": "/workspace/scratch/110acee071c2/generated_images/exec-948b8ec9-9fec-4e61-ae3f-c8660e6c18c9.png",
+      "prompt": "Use case: illustration-story. Asset type: original animation stage backdrop for a handcrafted felt adaptation of The Legend of Sleepy Hollow. Create ONE wide 16:9 image, 2048x1152 preferred. Scene: a simple late eighteenth-century rural Hudson Valley schoolroom interior, exposed dark timber beams and warm cream plaster walls, one modest small paned window on the left admitting soft golden autumn daylight with autumn foliage seen outside; blank dark slate board on rear wall WITHOUT WRITING; only a few small simple wooden school desks pushed along the rear and side walls. Composition is a broad symmetrical frontal low eye-level stage view with very large open wood plank floor extending unbroken across the lower half, totally clear center acting space for separately animated schoolmaster and children. Furniture occupies upper/rear wall area or far edges only, not the lower central floor. Style: richly handcrafted needlefelt and layered wool storybook miniature diorama, believable fine wool fibers on all surfaces, hand-sewn construction and felted faux wood-grain, charming but restrained cinematic quality. Warm restrained golden autumn palette, ochre wood, rust accent outside, muted olive, cream walls. Sharp readable usable foreground, soft room light, no hard spotlight. NO people, NO animals, NO figures or silhouettes, NO text, letters, numbers, writing, chalk marks, logos, watermarks, collage, borders, or panels. No contemporary classroom objects. Output full-bleed landscape background.",
+      "review": "Clear wide foreground wood floor, blank slate, desks at edges, no people or animals or writing."
+    }
+  ]
+}

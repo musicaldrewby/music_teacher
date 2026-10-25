@@ -1,0 +1,40 @@
+.math-builder {background:#f0faf6;border:1px solid #cae5d9;border-radius:14px;padding:18px;margin-bottom:25px;}
+.math-builder summary {font-weight:800;color:#29694f;cursor:pointer;font-size:17px;}
+.math-fields {display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:12px;margin:14px 0;}
+.math-fields label,.round-options label {font-size:12px;font-weight:700;text-align:left;color:#524963;}
+.math-fields .field,.round-options .field {margin-top:7px;background:white;}
+.round-options {display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:22px;}
+.draft-status {font-size:11px;color:#655875;padding:6px 25px;margin:0;text-align:right;}
+.recovery-banner {padding:14px 24px;display:flex;gap:16px;align-items:center;flex-wrap:wrap;background:#fff3c9;color:#5d4912;}
+.recording-banner {padding:12px;background:#fff0f2;color:#a22442;border-radius:9px;position:sticky;top:0;z-index:5;}
+.recording-tools {position:relative;font-size:11px;flex:0 0 80px;}
+.recording-tools summary {cursor:pointer;color:#6d5095;font-weight:700;}
+.recording-tools p {max-width:180px;line-height:1.4;margin-top:7px;}
+.recording-tools button,.recording-tools small {display:block;font-size:11px;margin-top:5px;}
+.pdf-cell {min-width:0;min-height:0;}
+.pdf-cell span {font-size:24px;line-height:1.15;overflow-wrap:anywhere;}
+.pdf-cell.number-cell span {font-size:52px;}
+.preview-paper .pdf-cell span {font-size:clamp(10px,1.5vw,18px);}
+.preview-paper .pdf-cell.number-cell span {font-size:clamp(22px,3.6vw,38px);font-variant-numeric:tabular-nums;}
+.preview-paper>p {font-size:13px;color:#39445a;}
+.verify-cell span {font-size:clamp(13px,2.5vw,25px);}
+.narrator-panel {padding:14px 30px;background:#29374e;color:#e9edf5;}
+.narrator-panel summary {cursor:pointer;font-weight:700;font-size:14px;}
+.narrator-fields {display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin-top:16px;}
+.narrator-fields label {font-size:12px;display:flex;gap:9px;align-items:center;}
+.narrator-fields select {max-width:260px;}
+.narrator-panel p {font-size:12px;color:#c0cbdc;margin-top:12px;}
+.round-strip {display:flex;align-items:center;justify-content:center;gap:18px;flex-wrap:wrap;color:#e6defa;}
+#thinking-status {font-weight:800;font-size:20px;min-width:95px;}
+#pattern-label {font-weight:700;color:#c5d4e8;}
+.classroom-view .app-header,.classroom-view .creator-support,.classroom-view .step-nav,.classroom-view .draft-status,.classroom-view .history-section,.classroom-view .narrator-panel,.classroom-view .recovery-banner {display:none!important;}
+.classroom-view #game-mode {margin:0;min-height:100dvh;}
+.classroom-view .caller-header {padding:12px 24px;}
+.classroom-view .caller-stage {justify-content:center;}
+.classroom-view #current-draw-card {min-height:42vh;}
+.classroom-view #current-draw-card h1 {font-size:clamp(38px,8vw,110px);}
+@media(max-width:740px){.math-fields{grid-template-columns:1fr 1fr}.math-fields label:first-child{grid-column:1/-1}.round-options{grid-template-columns:1fr}.narrator-panel{padding:14px}.recording-tools{flex-basis:55px}.preview-paper .pdf-cell.number-cell span{font-size:clamp(20px,6vw,38px)}.draft-status{text-align:left;padding:6px 16px}.round-strip{gap:10px}.item-card{flex-wrap:wrap}.item-fields{min-width:150px}}
+@media print{@page{size:letter portrait;margin:.5in}.pdf-cell.number-cell span{font-size:42pt}.pdf-cell span{font-size:18pt}.pdf-grid{aspect-ratio:1;height:auto!important}.recording-banner,.draft-status{display:none!important}}
+
+.pdf-cell.long-text-cell span{font-size:15px}.preview-paper .pdf-cell.long-text-cell span{font-size:clamp(8px,1.1vw,12px)}
+@media print{.pdf-cell.long-text-cell span{font-size:11pt}}

@@ -1,0 +1,3 @@
+import {identity,listScenes,getScene,createScene,saveScene} from '@/lib/server';
+export async function GET(req:Request){try{const u=identity(req),id=new URL(req.url).searchParams.get('id');return Response.json(id?await getScene(u,id):await listScenes(u));}catch(e){return Response.json({error:(e as Error).message},{status:400});}}
+export async function POST(req:Request){try{const u=identity(req),a:any=await req.json();return Response.json(a.id?await saveScene(u,a.id,a.expected_revision,a.scene):await createScene(u,a.scene));}catch(e){return Response.json({error:(e as Error).message},{status:400});}}

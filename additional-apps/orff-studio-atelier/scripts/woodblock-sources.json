@@ -1,0 +1,84 @@
+{
+  "assessment": "Numerical waveform/spectrum and primary-source description; no audible audition claimed.",
+  "selection": "Two independent genuine acoustic woodblock recordings with native, distinct resonances. VCSL wooden body as lower voice; documented Meinl wood block as upper voice. No temple-block or synthetic replacement.",
+  "license": "CC0-1.0",
+  "sources": [
+    {
+      "author": "Versilian Studios LLC",
+      "collection": "Versilian Community Sample Library",
+      "page": "https://versilian-studios.com/vcsl/",
+      "commit": "c1ea7bcc3c7309650ab0da9d15c9cd1fbc4a4c7e"
+    },
+    {
+      "author": "Joseph SARDIN",
+      "collection": "BigSoundBank",
+      "page": "https://bigsoundbank.com/block-meinl-in-wood-s0466.html",
+      "title": "Block \"Meinl\" in wood"
+    }
+  ],
+  "notes": "HP100Hz applied only to Meinl file to remove slow handling/air/DC movement before extraction. It is far below measured ~1627Hz block resonance. Source Mono preserved. Other processing is quiet trimming, gentle endpoint fades and level matching. No pitch shifting, compression, synthesized tones or temple-block reuse.",
+  "files": [
+    {
+      "url": "https://raw.githubusercontent.com/sgossner/VCSL/c1ea7bcc3c7309650ab0da9d15c9cd1fbc4a4c7e/Idiophones/Struck%20Idiophones/Woodblock/wood_click_f_rr1.wav",
+      "sourcePath": "Idiophones/Struck Idiophones/Woodblock/wood_click_f_rr1.wav",
+      "sha256": "86b690a393ad62d65dc6832948adb0cc164fe22f544a8065809f000c65d615fc",
+      "bytes": 497338,
+      "voice": "low",
+      "sourceRate": 44100,
+      "channels": 2,
+      "sourceDurationSeconds": 1.8794104308390023,
+      "cropSeconds": [
+        0.002,
+        0.552
+      ],
+      "gain": 0.96,
+      "highpassHz": null,
+      "highpassOrder": null,
+      "filterBeforeCrop": false,
+      "fadeInMs": 0.3,
+      "fadeOutMs": 40,
+      "outputRate": 44100,
+      "nativePitch": true,
+      "resultPeakBeforeFade": 0.37753910064697266,
+      "resultFirst100msRms": 0.0550963783106344,
+      "dominantFirst100msHz": 1353.2272338867188,
+      "attackSecondsFromCrop": 0.003038548752834467,
+      "time99PercentEnergySeconds": 0.12281179138321996,
+      "time999PercentEnergySeconds": 0.19421768707482992,
+      "last40msRmsBeforeFade": 4.3173261863670716e-05,
+      "filename": "wood_click_f_rr1.wav"
+    },
+    {
+      "url": "https://bigsoundbank.com/UPLOAD/bwf-en/0466.wav",
+      "page": "https://bigsoundbank.com/block-meinl-in-wood-s0466.html",
+      "author": "Joseph SARDIN",
+      "license": "CC0-1.0",
+      "sha256": "1157de27643ed05ccbf3376cf6f7cee5e60c732d7cf24889d98be5e8025ba6bf",
+      "bytes": 1635770,
+      "voice": "high",
+      "sourceRate": 48000,
+      "channels": 1,
+      "sourceDurationSeconds": 17.028416666666665,
+      "cropSeconds": [
+        9.869,
+        10.319
+      ],
+      "gain": 0.99,
+      "highpassHz": 100,
+      "highpassOrder": 2,
+      "filterBeforeCrop": true,
+      "fadeInMs": 0.3,
+      "fadeOutMs": 40,
+      "outputRate": 44100,
+      "nativePitch": true,
+      "resultPeakBeforeFade": 0.43027269738877083,
+      "resultFirst100msRms": 0.05518191141639169,
+      "dominantFirst100msHz": 1627.44140625,
+      "attackSecondsFromCrop": 0.0043125,
+      "time99PercentEnergySeconds": 0.0230625,
+      "time999PercentEnergySeconds": 0.0530625,
+      "last40msRmsBeforeFade": 2.9266574546233056e-05,
+      "filename": "meinl0466.wav"
+    }
+  ]
+}

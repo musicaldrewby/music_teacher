@@ -1,0 +1,19 @@
+FELT & FABLE v1.25 — ANIMATION BLOCKS
+
+New: 70 editable preset animations (30 new), five lanes, move/resize blocks,
+precise timing, easing, loops, replace/delete, copy/paste animation, selected-block
+preview, resting-pose editing, custom curve handles, and clearing whole lanes.
+Legacy manual keyframes remain editable under Advanced. Block conversion to
+sampled keyframes is optional. Existing artwork and fast startup are preserved.
+
+Validation: native-canvas/DOM-stub checks covered all 70 preset evaluators,
+entry/idle/exit timing, repeat paths, block addition and replacement, deletion and
+undo, saved-project validation, legacy interpolation, copy/paste at a new home,
+timeline drag/resize callbacks, path handle dragging, conversion to keyframes,
+rest-pose isolation from export, matching video frames at 30 and 60 fps, and
+freezing block motion in a new camera shot. Startup still loads seven originals.
+HTML IDs, script syntax/references, ZIP integrity and update merge checked.
+
+Limits of testing: no browser executable was available for a full interactive
+browser check or actual MP4 encoding run. Video frame rendering was verified
+through the same paintVideoFrame function used by both export modes.

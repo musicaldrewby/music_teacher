@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#13251f"><meta name="description" content="Drew’s private General MIDI music engine. Render compositions with GeneralUser GS, room or hall reverb, and WAV and MP3 downloads."><title>Drew’s Music Engine</title><link rel="icon" href="./icon.svg" type="image/svg+xml"><link rel="stylesheet" href="./style.css"></head>
+<body>
+<header class="topbar"><a class="wordmark" href="./"><span class="brand-icon" aria-hidden="true">d<span>♪</span></span><span>DREW’S<span class="wordmark-sub">MUSIC ENGINE</span></span></a><span class="private"><span class="dot"></span> Private studio</span></header>
+<main>
+  <div class="intro"><div><p class="eyebrow">THE SOUND BEHIND THE STORY</p><h1>A home for our music.</h1><p class="subtitle">A composition in. A finished soundtrack out.</p></div><div class="font-status" role="status"><span class="status-light" id="bankLight"></span><div><strong id="bankStatus">Loading sound collection…</strong><small id="bankDetail">GeneralUser GS · 1.471</small></div></div></div>
+  <div class="studio-grid">
+    <section class="main-panel card" aria-labelledby="compositionHeading">
+      <div class="section-top"><p class="eyebrow">01 / COMPOSITION</p><button class="quiet" id="loadButton">↥ Load composition</button><input id="fileInput" type="file" accept=".json,.mid,.midi" hidden></div>
+      <h2 id="compositionHeading">First Light in the Meadow</h2><p class="description" id="compositionDescription">An original marimba miniature with strings, bass, and soft percussion.</p>
+      <div class="meta-row"><span><strong id="durationLabel">0:30</strong> music</span><span><strong id="partCount">4</strong> parts</span><span><strong id="tempoLabel">96</strong> <span id="tempoUnit">BPM</span></span></div>
+      <div class="parts" id="parts" aria-label="Instrument parts"></div>
+      <div class="score-art" aria-label="Composition notes preview"><canvas id="scoreCanvas" width="960" height="150"></canvas><div class="score-caption"><span id="noteCount">Preparing composition</span><span>GENERAL MIDI</span></div></div>
+      <div class="composition-actions"><label class="select-label">Try a starting point<select id="exampleSelect" aria-label="Example composition"><option value="meadow">First Light in the Meadow</option><option value="piano">A Quiet Page · piano</option><option value="groove">Pocket Marimba · groove</option></select></label><button class="text-button" id="saveComposition">↓ Song file</button></div>
+      <details id="editorDetails"><summary>Composition instructions <span>JSON</span></summary><p class="help">Paste a complete song here, or load a JSON / MIDI file. <a href="./agent-guide.html" target="_blank" rel="noopener">Open format guide ↗</a></p><label class="sr-only" for="scoreInput">Composition JSON</label><textarea id="scoreInput" spellcheck="false"></textarea><button class="secondary" id="applyJSON">Use this composition</button><span id="editorStatus" role="status"></span></details>
+    </section>
+    <aside class="render-panel card" aria-labelledby="renderHeading">
+      <p class="eyebrow">02 / FINISHING TOUCHES</p><h2 id="renderHeading">Set the room.</h2><p class="description">A little space for the music to breathe.</p>
+      <fieldset class="reverb-options"><legend class="sr-only">Reverb setting</legend><label><input type="radio" name="reverb" value="dry"><span><b>Dry</b><small>Up close</small></span></label><label><input type="radio" name="reverb" value="room" checked><span><b>Room</b><small>Warm & intimate</small></span></label><label><input type="radio" name="reverb" value="hall"><span><b>Hall</b><small>Wide & flowing</small></span></label></fieldset>
+      <label class="range-label" for="reverbAmount">Reverb amount <output id="reverbValue">28%</output></label><input id="reverbAmount" type="range" min="0" max="70" value="28">
+      <div class="export-note"><span class="note-icon" aria-hidden="true">↗</span><p><strong>Made to keep.</strong><br>Stereo WAV + 192 kbps MP3.<br>A natural release tail is included.</p></div>
+      <details class="advanced"><summary>Audio settings</summary><label>Sample rate<select id="sampleRate"><option value="44100">44.1 kHz</option><option value="48000">48 kHz</option></select></label><label class="check-label"><input id="normalize" type="checkbox" checked> Balance output level</label></details>
+      <button class="primary" id="renderButton" disabled><span aria-hidden="true">✦</span> Render music</button><button class="secondary" id="cancelButton" hidden>Cancel render</button>
+      <div class="progress-wrap" id="progressWrap" hidden><progress id="renderProgress" max="100" value="0"></progress><span id="renderStage" role="status">Preparing…</span></div>
+      <p class="render-hint" id="renderHint">The sound collection loads once per visit.</p><p class="error" id="errorMessage" role="alert" hidden></p>
+    </aside>
+  </div>
+  <section class="output card" aria-labelledby="outputHeading"><div class="output-header"><div><p class="eyebrow">03 / YOUR SOUNDTRACK</p><h2 id="outputHeading">Ready when you are.</h2></div><span class="output-badge" id="outputBadge">AWAITING RENDER</span></div><canvas id="waveCanvas" width="1200" height="100" aria-label="Rendered audio waveform"></canvas><p class="empty-state" id="emptyState">Your finished audio will appear here. Listen, download, and bring it into your next story.</p><div id="outputControls" hidden><audio id="audioPlayer" controls preload="metadata" aria-label="Rendered composition"></audio><div class="download-row"><a class="download-button" id="wavDownload" download>↓ Download WAV <small id="wavSize"></small></a><a class="download-button secondary-download" id="mp3Download" download>↓ Download MP3 <small id="mp3Size"></small></a></div><p class="output-info" id="outputInfo"></p></div></section>
+  <footer><span>Created for Drew Wichman <span class="footer-dot">·</span> One small studio. Every kind of story.</span><a href="./agent-guide.html">Operating guide ↗</a><a href="./credits.html">Sound & credits</a></footer>
+</main><script type="module" src="./app.js"></script>
+</body></html>

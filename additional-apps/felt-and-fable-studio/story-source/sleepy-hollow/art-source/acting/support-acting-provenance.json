@@ -1,0 +1,70 @@
+{
+  "mode": "built-in image_gen",
+  "created": "2026-10-19",
+  "assets": [
+    {
+      "file": "brom-quiet-atlas.png",
+      "generatedSource": "/workspace/scratch/110acee071c2/generated_images/exec-bfc50848-fe11-431b-a982-5b1cafe6bd94.png",
+      "references": [
+        "../acting-references/brom-stand.png",
+        "../acting-references/brom-sit.png"
+      ],
+      "prompt": "Use case: illustration-story. Asset type: transparent production pose atlas for an existing felt stop-motion story character. Image 1 (standing Brom) and Image 2 (seated Brom) are identity, costume, material and style references. Create a square 2-by-2 atlas with FOUR equal square cells on a genuinely transparent alpha background, no visible grid or text. This is the SAME BROAD, BIG ADULT BROM puppet as the references, with identical curly dark-brown hair, broad friendly face, long forest-green wool coat, brown waistcoat, cream neckcloth, tan knee breeches, tall black boots with buckles. Do not redesign or make younger. Tactile wool/felt handmade stop-motion puppet texture, soft neutral studio lighting. Every cell contains one COMPLETE puppet, from hair to soles; the upper cells include the complete wooden chair, legs and feet. Generous fully transparent padding around every figure and between the four cells. Cells may be independently cropped. TOP LEFT: seated solidly in a simple wooden chair, angled toward viewer's left with face and torso three-quarter visible, both feet on the ground, arms folded, closed mouth, mild displeasure as he watches dancers elsewhere. TOP RIGHT: same wooden chair, body angled toward viewer's left, both feet on the ground, hands resting naturally on knees, reserved attentive closed-mouth expression as he listens to a tale. BOTTOM LEFT: standing complete figure, subtle one-hand conversational gesture below chest level, other arm resting, confident slight closed-mouth smile; no grand boasting. BOTTOM RIGHT: standing complete figure, restrained knowing grin with mouth closed, arms relaxed at sides. Match character proportions and costume exactly across all four. No hats, no singing, no books, no cropped legs, no other people, no floor or backdrop, no shadow panel, no labels or numbers. True transparency.",
+      "cells": [
+        "seated arms folded, displeased",
+        "seated listening with hands on knees",
+        "standing modest conversational gesture",
+        "standing knowing grin"
+      ],
+      "inspection": "All four full-body poses complete, consistent identity and costume; chair and boots intact. Seated poses face viewer's right despite request for left; mirror at scene staging if required. Modest gesture slightly higher than requested but below shoulder and not singing."
+    },
+    {
+      "file": "katrina-quiet-atlas.png",
+      "generatedSource": "/workspace/scratch/110acee071c2/generated_images/exec-3d4b8841-b3e4-4f28-b321-5356dd1ae65f.png",
+      "references": [
+        "../acting-references/katrina-stand.png"
+      ],
+      "prompt": "Use case: illustration-story. Asset type: transparent production pose atlas for an existing felt stop-motion story character. The provided Katrina puppet is the identity, costume, material and style reference. Create a square 2-by-2 atlas with FOUR equal square cells on a genuinely transparent alpha background, no visible grid or text. This is the SAME KATRINA puppet as the reference, with identical expressive large eyes, blonde side braid, cream bonnet, red long-sleeved dress, cream apron and collar and cuffs, and brown buckle shoes. Preserve her mature young-adult character and exact design, no redesign. Tactile wool/felt handmade stop-motion puppet texture, soft neutral studio lighting. Every cell contains one COMPLETE puppet, from bonnet to shoe soles; the seated cell includes complete wooden chair, legs and feet. Generous fully transparent padding around every figure and between the four cells so cells can be independently cropped. TOP LEFT: seated solidly in a simple wooden chair angled toward viewer's left, face and torso three-quarter visible, feet on ground, hands folded in lap, attentive listening expression and closed mouth. TOP RIGHT: standing with small welcoming gesture, one hand held low near waist, other relaxed, mild friendly closed-mouth smile. BOTTOM LEFT: standing listening with politely skeptical expression, eyebrows slightly lifted, hands clasped gently, mouth closed. BOTTOM RIGHT: standing quietly replying with one hand at upper chest, other at side, closed or very nearly closed mouth, gentle thoughtful expression. Keep costume, identity and proportions identical across all four. No singing, no books, no extra furniture outside seated cell, no cropped feet, no other people, no floor or backdrop, no shadow panel, no labels or numbers. True transparency.",
+      "cells": [
+        "seated attentive hands folded",
+        "standing small welcoming gesture",
+        "standing quietly skeptical listening",
+        "standing quietly replying hand at chest"
+      ],
+      "inspection": "All four full-body poses complete, consistent identity and costume; full chair, intact feet, all mouths closed. Seated pose faces viewer's right despite request for left; mirror at scene staging if required."
+    }
+  ],
+  "cropGuidance": {
+    "size": [
+      1254,
+      1254
+    ],
+    "boxes": [
+      [
+        0,
+        0,
+        627,
+        605
+      ],
+      [
+        627,
+        0,
+        1254,
+        605
+      ],
+      [
+        0,
+        605,
+        627,
+        1254
+      ],
+      [
+        627,
+        605,
+        1254,
+        1254
+      ]
+    ],
+    "note": "Rows were generated with a seam near y605, not midpoint627. Use these crop boxes to retain lower-pose hair. Meaningful alpha >96; extremely faint residual pixels extend to image edges. Preserve the original alpha within each selected crop."
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "tool": "built-in image_gen",
+  "created": "2026-10-18",
+  "specs": [
+    {
+      "file": "dining-feast.png",
+      "refs": [
+        "/workspace/scratch/110acee071c2/felt-studio/story-source/sleepy-hollow/art-source/ichabod-poses.png",
+        "/workspace/scratch/110acee071c2/felt-studio/story-source/sleepy-hollow/art-source/revision-supper.png"
+      ],
+      "prompt": "Use case: illustration-story. Asset type: complete cinematic film frame for The Legend of Sleepy Hollow. Create a NEW 16:9 landscape image, ideally 1920x1080. Warm handmade needle-felt stop-motion miniature aesthetic with wool fibers, rich wood and cloth, expressive friendly faces, colonial period costume, dimensional cinematic lighting. Reference images are character identity/style only, not a composition to copy. Image 1 is Ichabod Crane: preserve the same tall narrow long-nosed face, dark tied-back hair, slim body, teal long coat, rust waistcoat, ivory cravat, brown hat. He is a young adult man. All people should be fully and convincingly SEATED in real chairs with natural adult anatomy. Table extends continuously under every torso; its solid edge and long cloth cover seated laps and hips. No torso has a straight cutout edge or visible gap beneath it. Correct perspective, clear hand contact and plate support. No floating plates, detached limbs, doubled fingers, empty seats suggestive of missing people, huge food blocking bodies, text, labels, borders or watermarks. All characters, food and setting baked into ONE finished frame; no transparent areas, no sprite sheet.\nImage 2 supplies tactile felt miniature art style and period interior inspiration only. Primary scene: medium-wide convivial supper in a candlelit 1790s farmhouse dining room. Ichabod sits CENTER-LEFT, smiling with appetite, holding a fork naturally just above his OWN blue-and-white ceramic dinner plate directly in front of him. His plate is visibly full of roasted vegetables and a generous savory pastry slice. Exactly TWO friendly adult hosts sit beside him: a rosy middle-aged woman at left and a friendly older male host at right, each with their own visibly full dinner plate and believable arms at table. Three visible chair backs behind the three people. This is an intimate group at the FAR side of the table, not people inserted over an empty tabletop background. Camera slightly above table height, everyone waist-up with table and cloth naturally hiding lower bodies. Foreground has modest serving plates of small cakes and sliced pies, a low bowl of vegetables and bread; food stays below hands and chest. NO turkey or whole roasted bird. ALL three personal plates full. Warm affectionate emotional gathering, hosts engaged with Ichabod. Room composition new and distinct: stone hearth on back left, small curtained window at center-right, wooden beams. Don't replicate the reference's table or empty-plate composition.",
+      "generated_source": "/workspace/scratch/110acee071c2/generated_images/exec-30d432aa-4e1c-4e64-9658-10b4b5d09163.png",
+      "saved_path": "/workspace/scratch/110acee071c2/felt-studio/story-source/sleepy-hollow/art-source/dining-feast.png",
+      "dimensions": [
+        1672,
+        941
+      ],
+      "inspection": "Three seated diners with naturally supported forearms, chair backs, full personal plates and modest foreground dishes. No turkey or torso gap.",
+      "accepted": true
+    },
+    {
+      "file": "dining-empty.png",
+      "refs": [
+        "/workspace/scratch/110acee071c2/felt-studio/story-source/sleepy-hollow/art-source/ichabod-poses.png",
+        "/workspace/scratch/110acee071c2/felt-studio/story-source/sleepy-hollow/art-source/revision-supper.png"
+      ],
+      "prompt": "Use case: illustration-story. Asset type: complete cinematic film frame for The Legend of Sleepy Hollow. Create a NEW 16:9 landscape image, ideally 1920x1080. Warm handmade needle-felt stop-motion miniature aesthetic with wool fibers, rich wood and cloth, expressive friendly faces, colonial period costume, dimensional cinematic lighting. Reference images are character identity/style only, not a composition to copy. Image 1 is Ichabod Crane: preserve the same tall narrow long-nosed face, dark tied-back hair, slim body, teal long coat, rust waistcoat, ivory cravat, brown hat. He is a young adult man. All people should be fully and convincingly SEATED in real chairs with natural adult anatomy. Table extends continuously under every torso; its solid edge and long cloth cover seated laps and hips. No torso has a straight cutout edge or visible gap beneath it. Correct perspective, clear hand contact and plate support. No floating plates, detached limbs, doubled fingers, empty seats suggestive of missing people, huge food blocking bodies, text, labels, borders or watermarks. All characters, food and setting baked into ONE finished frame; no transparent areas, no sprite sheet.\nImage 2 supplies tactile art style only. Primary scene: a DIFFERENT simpler homely kitchen, after Ichabod has finished his meal. Camera is a medium three-quarter oblique side view down a small rectangular kitchen table, not the feast's frontal layout. Ichabod seated at LEFT-center, pleasantly satisfied, smiling sheepishly at his host, left hand resting naturally on table, right hand holding a fork that rests near his plate. Directly in front of him is ONE EMPTY ceramic plate with just a few crumbs. ONE friendly middle-aged female host is seated on right, smiling in amused disbelief at how thoroughly he enjoyed dinner. Exactly TWO people and two chair backs. The table is cleared: NO large serving dishes, NO full feast, NO turkey, NO pies or food bowls; only his crumb-covered empty plate, two plain mugs and a folded napkin. Ichabod\u2019s empty plate must sit safely in center of his place, well inside the tabletop edge. Uninterrupted solid wooden table edge and draping homespun cloth conceal both seated laps naturally with no gap or cutout body. Visible side chair legs if in frame, grounded on the wooden floor. Kitchen includes a modest stove/hearth, hanging copper pans, shelves of jars and a small window with blue evening light. Warm firelight, gentle humorous expression. Clearly not the same room or angle as the feast reference.",
+      "generated_source": "/workspace/scratch/110acee071c2/generated_images/exec-73928846-bc91-4785-bc5d-ec7efdd5b48d.png",
+      "saved_path": "/workspace/scratch/110acee071c2/felt-studio/story-source/sleepy-hollow/art-source/dining-empty.png",
+      "dimensions": [
+        1672,
+        941
+      ],
+      "inspection": "Two seated diners, cleared smaller kitchen table, one crumb-covered empty plate; table and chair occlusion intact.",
+      "accepted": true
+    },
+    {
+      "file": "dining-dream.png",
+      "refs": [
+        "/workspace/scratch/110acee071c2/felt-studio/story-source/sleepy-hollow/art-source/ichabod-poses.png",
+        "/workspace/scratch/110acee071c2/felt-studio/story-source/sleepy-hollow/art-source/katrina-poses.png",
+        "/workspace/scratch/110acee071c2/felt-studio/story-source/sleepy-hollow/art-source/revision-supper.png"
+      ],
+      "prompt": "Use case: illustration-story. Asset type: complete cinematic film frame for The Legend of Sleepy Hollow. Create a NEW 16:9 landscape image, ideally 1920x1080. Warm handmade needle-felt stop-motion miniature aesthetic with wool fibers, rich wood and cloth, expressive friendly faces, colonial period costume, dimensional cinematic lighting. Reference images are character identity/style only, not a composition to copy. Image 1 is Ichabod Crane: preserve the same tall narrow long-nosed face, dark tied-back hair, slim body, teal long coat, rust waistcoat, ivory cravat, brown hat. He is a young adult man. All people should be fully and convincingly SEATED in real chairs with natural adult anatomy. Table extends continuously under every torso; its solid edge and long cloth cover seated laps and hips. No torso has a straight cutout edge or visible gap beneath it. Correct perspective, clear hand contact and plate support. No floating plates, detached limbs, doubled fingers, empty seats suggestive of missing people, huge food blocking bodies, text, labels, borders or watermarks. All characters, food and setting baked into ONE finished frame; no transparent areas, no sprite sheet.\nImage 2 is Katrina Van Tassel: preserve her young adult face, bright gentle eyes, golden side braid, white gathered cap, red dress, white apron and collar. Image 3 supplies felt miniature art style only. Primary scene: Ichabod imagines a happy future. Ichabod and Katrina sit SIDE BY SIDE behind a generous Van Tassel farmhouse table, turned slightly toward each other, smiling warmly and making eye contact. Exactly TWO people, both convincingly seated in adjacent spindleback chairs. Ichabod at left, Katrina at right; his long narrow face and her blonde braid clearly visible. Their natural elbows/forearms rest on or above the tabletop, hands anatomically correct and relaxed. Each has their OWN small ceramic plate directly in front of them, each plate with a clearly visible PIE SLICE and fork. Foreground shows three abundant but reasonably sized PIES of different kinds on platters: apple lattice, pumpkin and berry, plus a little cake. All dishes are safely centered within table perimeter. Continuous solid table front and pale linen tablecloth conceal laps, with NO gap under torsos or flat cutoff bodies. Camera at warm intimate medium distance, slightly elevated so full tabletop is readable. New composition and room: elegant warm colonial dining alcove with honey-colored wooden panels, a mullioned window glowing softly in the back, a subtle cream-colored dream haze at far edges. Warm golden dreamlike light and affectionate emotion. NO turkey, empty plates, tall food stacks, other people, romantic hearts, text or symbols.",
+      "generated_source": "/workspace/scratch/110acee071c2/generated_images/exec-7730aa4a-bdf0-44d1-b27f-2e91e1ee91be.png",
+      "saved_path": "/workspace/scratch/110acee071c2/felt-studio/story-source/sleepy-hollow/art-source/dining-dream.png",
+      "dimensions": [
+        1672,
+        941
+      ],
+      "inspection": "Seated Ichabod and Katrina exchanging smiles with individual pie slices, three foreground pies and natural table occlusion.",
+      "accepted": true
+    }
+  ]
+}

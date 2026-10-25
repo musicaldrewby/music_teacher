@@ -1,0 +1,35 @@
+FELT & FABLE v1.24 — FAST START
+
+WHAT CHANGED
+- Full-quality artwork loads on demand in a queue of at most three loads.
+- Collection browsing uses a separate lightweight thumbnail sheet.
+- All 227 pieces and 65 backdrops remain available offline.
+- Cutout cleanup and trimming are performed ahead of time, preserving the
+  dimensions produced by v1.23 so existing saved stories keep their proportions.
+- Full-bleed backgrounds retain their original encoded artwork, without another
+  lossy compression pass. Prepared cutouts use lossless WebP.
+- Scene loading displays progress. Repeated asset requests share one load.
+- Story playback and both MP4 export modes prepare all story artwork first.
+- PNG export waits for the selected scene's full-quality artwork.
+
+MEASUREMENTS
+v1.23 startup JavaScript data: 136,512,486 bytes.
+v1.24 startup scripts plus opening-board artwork: 3,869,596 bytes.
+Reduction: 97.2%. This measures bytes read, not a guaranteed loading-time reduction.
+Initial full-size images: 7 instead of 292.
+
+VALIDATION
+All script syntax and references checked.
+Native-canvas/DOM-stub tests: boot, full catalog browsing without extra originals,
+School Day filters and search, lazy piece/backdrop selection, grouped saved-story
+opening, custom grouped pieces, recursive multi-scene artwork preparation,
+duplicate load suppression, missing-asset rejection, and a 1920x1080 scene render.
+Native-canvas startup measured about 0.3 seconds in this test environment.
+Browser startup depends on the device and browser; no real-browser timing or
+actual MP4 encoding benchmark was performed in this environment.
+Camera, audio, animation and encoding implementations remain in place.
+
+INSTALL
+Extract the complete v1.24 ZIP into a new folder, open index.html, and use
+File > Open story for your existing saved story JSON files.
+Keep the older app folder as a backup until you are happy with this version.

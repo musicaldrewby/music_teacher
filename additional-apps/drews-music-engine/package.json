@@ -1,0 +1,1 @@
+{"name":"drews-music-engine","version":"1.0.0","private":true,"type":"module","scripts":{"build":"node scripts/build.mjs","test":"node tests/render.test.mjs"},"dependencies":{"spessasynth_core":"latest","lamejs":"1.2.1"},"devDependencies":{"esbuild":"^0.25.0"}}

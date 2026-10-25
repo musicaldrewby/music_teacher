@@ -1,0 +1,600 @@
+{
+  "formatVersion": 1,
+  "created": "2026-10-16",
+  "license": "CC0-1.0",
+  "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "qualityNotes": [
+    "Percussion pairs are different recorded performances/articulations, not copies with different names.",
+    "No synthesized noise or artificial percussion layers.",
+    "Stereo image retained; original mono recordings duplicated to stereo.",
+    "Bass bar sound is an acoustic low-marimba adaptation, not manufacturer-specific contrabass-bar sampling.",
+    "Bass pitch roots measured from waveform; VCSL filenames use octave numbers one lower than scientific sounding pitch.",
+    "Sleigh bell shake is the final short gesture excerpt with the recording's natural release retained. Hit retains its full natural ringing decay.",
+    "Source sample rates converted to 44.1 kHz by ffmpeg; mild subsonic filtering, silent-end trimming, gain balancing and dither only.",
+    "No audible listening or in-browser audition is claimed by this automated signal review.",
+    "Bass bars now use separate soft acoustic strikes, level-matched to the previous medium layer. Their upper partials are quieter in the recording itself; no treble EQ or synthetic layers were added."
+  ],
+  "instrumentSamples": {
+    "bass-bars": {
+      "credit": "Versilian Studios LLC \u2014 Versilian Community Sample Library",
+      "license": "CC0-1.0",
+      "licensePage": "https://versilian-studios.com/vcsl/",
+      "source": "https://github.com/sgossner/VCSL",
+      "sourceCommit": "c1ea7bcc3c7309650ab0da9d15c9cd1fbc4a4c7e",
+      "sourceInstrument": "Acoustic marimba, softly played mallet strikes",
+      "approximation": "Adapted low-marimba recordings; these are not recordings of Sonor or Peripole contrabass bars. Lowest C2 uses measured F2 source transposed down 5 semitones.",
+      "notes": {
+        "36": {
+          "url": "assets/audio/recorded/ensemble-additions/bass-bars-soft-f2.wav",
+          "gain": 1,
+          "tuningSemitones": -4.995634,
+          "sourceRootMidi": 41,
+          "duration": 3.008321995464853
+        },
+        "38": {
+          "url": "assets/audio/recorded/ensemble-additions/bass-bars-soft-f2.wav",
+          "gain": 1,
+          "tuningSemitones": -2.995634,
+          "sourceRootMidi": 41,
+          "duration": 3.008321995464853
+        },
+        "40": {
+          "url": "assets/audio/recorded/ensemble-additions/bass-bars-soft-f2.wav",
+          "gain": 1,
+          "tuningSemitones": -0.995634,
+          "sourceRootMidi": 41,
+          "duration": 3.008321995464853
+        },
+        "41": {
+          "url": "assets/audio/recorded/ensemble-additions/bass-bars-soft-f2.wav",
+          "gain": 1,
+          "tuningSemitones": 0.004366,
+          "sourceRootMidi": 41,
+          "duration": 3.008321995464853
+        },
+        "42": {
+          "url": "assets/audio/recorded/ensemble-additions/bass-bars-soft-f2.wav",
+          "gain": 1,
+          "tuningSemitones": 1.004366,
+          "sourceRootMidi": 41,
+          "duration": 3.008321995464853
+        },
+        "43": {
+          "url": "assets/audio/recorded/ensemble-additions/bass-bars-soft-f2.wav",
+          "gain": 1,
+          "tuningSemitones": 2.004366,
+          "sourceRootMidi": 41,
+          "duration": 3.008321995464853
+        },
+        "45": {
+          "url": "assets/audio/recorded/ensemble-additions/bass-bars-soft-c3.wav",
+          "gain": 1,
+          "tuningSemitones": -3.025761,
+          "sourceRootMidi": 48,
+          "duration": 6.414807256235828
+        },
+        "46": {
+          "url": "assets/audio/recorded/ensemble-additions/bass-bars-soft-c3.wav",
+          "gain": 1,
+          "tuningSemitones": -2.025761,
+          "sourceRootMidi": 48,
+          "duration": 6.414807256235828
+        },
+        "47": {
+          "url": "assets/audio/recorded/ensemble-additions/bass-bars-soft-c3.wav",
+          "gain": 1,
+          "tuningSemitones": -1.025761,
+          "sourceRootMidi": 48,
+          "duration": 6.414807256235828
+        },
+        "48": {
+          "url": "assets/audio/recorded/ensemble-additions/bass-bars-soft-c3.wav",
+          "gain": 1,
+          "tuningSemitones": -0.025761,
+          "sourceRootMidi": 48,
+          "duration": 6.414807256235828
+        }
+      },
+      "articulation": "Separate soft-strike recordings; natural attack and decay; no upper-frequency EQ"
+    },
+    "tambourine": {
+      "credit": "Versilian Studios LLC \u2014 Versilian Community Sample Library",
+      "license": "CC0-1.0",
+      "licensePage": "https://versilian-studios.com/vcsl/",
+      "source": "https://github.com/sgossner/VCSL",
+      "sourceCommit": "c1ea7bcc3c7309650ab0da9d15c9cd1fbc4a4c7e",
+      "notes": {
+        "54": {
+          "url": "assets/audio/recorded/ensemble-additions/tambourine-hit.wav",
+          "gain": 1,
+          "tuningSemitones": 0,
+          "duration": 1.1027664399092971,
+          "articulation": "Hit"
+        },
+        "55": {
+          "url": "assets/audio/recorded/ensemble-additions/tambourine-shake.wav",
+          "gain": 1,
+          "tuningSemitones": 0,
+          "duration": 1.0878004535147392,
+          "articulation": "Shake"
+        }
+      }
+    },
+    "shakers": {
+      "credit": "Versilian Studios LLC \u2014 Versilian Community Sample Library",
+      "license": "CC0-1.0",
+      "licensePage": "https://versilian-studios.com/vcsl/",
+      "source": "https://github.com/sgossner/VCSL",
+      "sourceCommit": "c1ea7bcc3c7309650ab0da9d15c9cd1fbc4a4c7e",
+      "notes": {
+        "82": {
+          "url": "assets/audio/recorded/ensemble-additions/shaker-short.wav",
+          "gain": 1,
+          "tuningSemitones": 4,
+          "duration": 1.0528798185941044,
+          "articulation": "Short shake"
+        },
+        "83": {
+          "url": "assets/audio/recorded/ensemble-additions/shaker-long.wav",
+          "gain": 1,
+          "tuningSemitones": 4,
+          "duration": 1.3771428571428572,
+          "articulation": "Long shake"
+        }
+      }
+    },
+    "maracas": {
+      "credit": "Xavimart, Gonzalo and Roberto \u2014 FreePats World Percussion (2020-09-05)",
+      "license": "CC0-1.0",
+      "licensePage": "https://freepats.zenvoid.org/Percussion/world-and-rare-percussion.html",
+      "source": "https://github.com/freepats/world-percussion",
+      "sourceCommit": "e54eb2912a0d6d4444ab205d52f778e27da0fc96",
+      "notes": {
+        "70": {
+          "url": "assets/audio/recorded/ensemble-additions/maracas-short.wav",
+          "gain": 1,
+          "tuningSemitones": 0,
+          "duration": 0.22106575963718822,
+          "articulation": "Short shake (backward stroke)"
+        },
+        "71": {
+          "url": "assets/audio/recorded/ensemble-additions/maracas-long.wav",
+          "gain": 1,
+          "tuningSemitones": 0,
+          "duration": 0.382108843537415,
+          "articulation": "Long shake (forward stroke)"
+        }
+      }
+    },
+    "sleigh-bells": {
+      "credit": "Versilian Studios LLC \u2014 Versilian Community Sample Library",
+      "license": "CC0-1.0",
+      "licensePage": "https://versilian-studios.com/vcsl/",
+      "source": "https://github.com/sgossner/VCSL",
+      "sourceCommit": "c1ea7bcc3c7309650ab0da9d15c9cd1fbc4a4c7e",
+      "notes": {
+        "83": {
+          "url": "assets/audio/recorded/ensemble-additions/sleigh-bells-hit.wav",
+          "gain": 1,
+          "tuningSemitones": 0,
+          "duration": 1.885986394557823,
+          "articulation": "Hit"
+        },
+        "84": {
+          "url": "assets/audio/recorded/ensemble-additions/sleigh-bells-shake.wav",
+          "gain": 1,
+          "tuningSemitones": 0,
+          "duration": 1.938095238095238,
+          "articulation": "Shake"
+        }
+      }
+    },
+    "cabasa": {
+      "credit": "Versilian Studios LLC \u2014 Versilian Community Sample Library",
+      "license": "CC0-1.0",
+      "licensePage": "https://versilian-studios.com/vcsl/",
+      "source": "https://github.com/sgossner/VCSL",
+      "sourceCommit": "c1ea7bcc3c7309650ab0da9d15c9cd1fbc4a4c7e",
+      "notes": {
+        "69": {
+          "url": "assets/audio/recorded/ensemble-additions/cabasa-soft-rub.wav",
+          "gain": 1,
+          "tuningSemitones": 0,
+          "duration": 0.9231746031746032,
+          "articulation": "Soft rub"
+        },
+        "70": {
+          "url": "assets/audio/recorded/ensemble-additions/cabasa-strong-rub.wav",
+          "gain": 1,
+          "tuningSemitones": 0,
+          "duration": 0.7535600907029478,
+          "articulation": "Strong rub"
+        }
+      }
+    }
+  },
+  "assets": [
+    {
+      "file": "tambourine-hit.wav",
+      "url": "assets/audio/recorded/ensemble-additions/tambourine-hit.wav",
+      "sourceFile": "Tamb1_Hit_v2_rr1_Mid.wav",
+      "sourceUrl": "https://raw.githubusercontent.com/sgossner/VCSL/c1ea7bcc3c7309650ab0da9d15c9cd1fbc4a4c7e/Idiophones/Struck%20Idiophones/Tambourine%201/Tamb1_Hit_v2_rr1_Mid.wav",
+      "sourceSha256": "885ebf1d70f8e888f576682e4e4112b92b69649162f392c83b3379c91a09cf41",
+      "sha256": "349714c52a976eb7f8ca2777a60797d3baec9bb9223b068d95f76bd203969aff",
+      "sourceDuration": 1.661859410430839,
+      "duration": 1.1027664399092971,
+      "sampleRate": 44100,
+      "channels": 2,
+      "format": "PCM signed 16-bit WAV",
+      "bytes": 194572,
+      "peak": 0.5999755859375,
+      "rms": 0.039298283142762035,
+      "clippedSamples": 0,
+      "processing": {
+        "excerptSeconds": null,
+        "trimStartSeconds": 0.0,
+        "trimEndSeconds": 1.1027664399092971,
+        "highpassHz": 35,
+        "highpassOrder": 2,
+        "amplitudeGain": 3.9625789013222,
+        "fadeInSeconds": 0.0004988662131519275,
+        "endFadeSeconds": 0.04,
+        "dither": "TPDF at one 16-bit LSB",
+        "naturalDecayPreserved": true
+      },
+      "instrument": "tambourine",
+      "articulation": "Hit"
+    },
+    {
+      "file": "tambourine-shake.wav",
+      "url": "assets/audio/recorded/ensemble-additions/tambourine-shake.wav",
+      "sourceFile": "Tamb1_Shake_rr1_Mid.wav",
+      "sourceUrl": "https://raw.githubusercontent.com/sgossner/VCSL/c1ea7bcc3c7309650ab0da9d15c9cd1fbc4a4c7e/Idiophones/Struck%20Idiophones/Tambourine%201/Tamb1_Shake_rr1_Mid.wav",
+      "sourceSha256": "5876b66d1e8009b3ee884ff3bf52fbc420b44f9ddffffe830b4074d3dfc09924",
+      "sha256": "c764cd8e5f76bd53ac0f7e5673b8a1589b6d06766077d442709b16f7276c07bc",
+      "sourceDuration": 1.4673696145124717,
+      "duration": 1.0878004535147392,
+      "sampleRate": 44100,
+      "channels": 2,
+      "format": "PCM signed 16-bit WAV",
+      "bytes": 191932,
+      "peak": 0.5,
+      "rms": 0.03127102940836821,
+      "clippedSamples": 0,
+      "processing": {
+        "excerptSeconds": null,
+        "trimStartSeconds": 0.0,
+        "trimEndSeconds": 1.0878004535147392,
+        "highpassHz": 35,
+        "highpassOrder": 2,
+        "amplitudeGain": 8.595508964466053,
+        "fadeInSeconds": 0.0004988662131519275,
+        "endFadeSeconds": 0.04,
+        "dither": "TPDF at one 16-bit LSB",
+        "naturalDecayPreserved": true
+      },
+      "instrument": "tambourine",
+      "articulation": "Shake"
+    },
+    {
+      "file": "shaker-short.wav",
+      "url": "assets/audio/recorded/ensemble-additions/shaker-short.wav",
+      "sourceFile": "LShaker_Shake1D_rr3_Mid.wav",
+      "sourceUrl": "https://raw.githubusercontent.com/sgossner/VCSL/c1ea7bcc3c7309650ab0da9d15c9cd1fbc4a4c7e/Idiophones/Struck%20Idiophones/Shaker%2C%20Large/LShaker_Shake1D_rr3_Mid.wav",
+      "sourceSha256": "afd3562238b1ce31a39e07adc4eed0ca5b69e10d6275a7cb9c4be16b55d4f741",
+      "sha256": "ce72932f9d60cdc332eff18221a6749ef1c1752f15751e65de18f586e9d2376c",
+      "sourceDuration": 1.2814512471655328,
+      "duration": 1.0528798185941044,
+      "sampleRate": 44100,
+      "channels": 2,
+      "format": "PCM signed 16-bit WAV",
+      "bytes": 185772,
+      "peak": 0.5,
+      "rms": 0.031928251356869976,
+      "clippedSamples": 0,
+      "processing": {
+        "excerptSeconds": null,
+        "trimStartSeconds": 0.0,
+        "trimEndSeconds": 1.0528798185941044,
+        "highpassHz": 35,
+        "highpassOrder": 2,
+        "amplitudeGain": 5.758033082683808,
+        "fadeInSeconds": 0.0004988662131519275,
+        "endFadeSeconds": 0.04,
+        "dither": "TPDF at one 16-bit LSB",
+        "naturalDecayPreserved": true
+      },
+      "instrument": "shakers",
+      "articulation": "Short shake"
+    },
+    {
+      "file": "shaker-long.wav",
+      "url": "assets/audio/recorded/ensemble-additions/shaker-long.wav",
+      "sourceFile": "LShaker_Shake1U_rr1_Mid.wav",
+      "sourceUrl": "https://raw.githubusercontent.com/sgossner/VCSL/c1ea7bcc3c7309650ab0da9d15c9cd1fbc4a4c7e/Idiophones/Struck%20Idiophones/Shaker%2C%20Large/LShaker_Shake1U_rr1_Mid.wav",
+      "sourceSha256": "f6bbd4b897a18af5d567cf7925d402a8b854a8f31c1cf3c706f91bf96815b7c7",
+      "sha256": "c038684864b8a8c9a2dacb3e133b968b3bb4caca7a008dc68c99192201563faf",
+      "sourceDuration": 1.5339909297052154,
+      "duration": 1.3771428571428572,
+      "sampleRate": 44100,
+      "channels": 2,
+      "format": "PCM signed 16-bit WAV",
+      "bytes": 242972,
+      "peak": 0.499969482421875,
+      "rms": 0.030571821659412073,
+      "clippedSamples": 0,
+      "processing": {
+        "excerptSeconds": null,
+        "trimStartSeconds": 0.0,
+        "trimEndSeconds": 1.3771428571428572,
+        "highpassHz": 35,
+        "highpassOrder": 2,
+        "amplitudeGain": 13.409055184263075,
+        "fadeInSeconds": 0.0004988662131519275,
+        "endFadeSeconds": 0.04,
+        "dither": "TPDF at one 16-bit LSB",
+        "naturalDecayPreserved": true
+      },
+      "instrument": "shakers",
+      "articulation": "Long shake"
+    },
+    {
+      "file": "maracas-short.wav",
+      "url": "assets/audio/recorded/ensemble-additions/maracas-short.wav",
+      "sourceFile": "Freepats_02_02.flac",
+      "sourceUrl": "https://raw.githubusercontent.com/freepats/world-percussion/e54eb2912a0d6d4444ab205d52f778e27da0fc96/samples/Maracas/02_02.flac",
+      "sourceSha256": "84a942012beb1bdd28ab5451b63a73ec057953f5222f7710e204873b5df6b4f0",
+      "sha256": "3d938f0bf801f6d39b075a7794648302c76725697470d24031c706ea06201b5f",
+      "sourceDuration": 0.22106575963718822,
+      "duration": 0.22106575963718822,
+      "sampleRate": 44100,
+      "channels": 2,
+      "format": "PCM signed 16-bit WAV",
+      "bytes": 39040,
+      "peak": 0.499969482421875,
+      "rms": 0.048921983788372,
+      "clippedSamples": 0,
+      "processing": {
+        "excerptSeconds": null,
+        "trimStartSeconds": 0.0,
+        "trimEndSeconds": 0.22106575963718822,
+        "highpassHz": 35,
+        "highpassOrder": 2,
+        "amplitudeGain": 0.7527992829166723,
+        "fadeInSeconds": 0.0004988662131519275,
+        "endFadeSeconds": 0.04,
+        "dither": "TPDF at one 16-bit LSB",
+        "naturalDecayPreserved": true
+      },
+      "instrument": "maracas",
+      "articulation": "Short shake (backward stroke)"
+    },
+    {
+      "file": "maracas-long.wav",
+      "url": "assets/audio/recorded/ensemble-additions/maracas-long.wav",
+      "sourceFile": "Freepats_01_08.flac",
+      "sourceUrl": "https://raw.githubusercontent.com/freepats/world-percussion/e54eb2912a0d6d4444ab205d52f778e27da0fc96/samples/Maracas/01_08.flac",
+      "sourceSha256": "bae969304eaa78b2f92707eb191b7f233e5b35c861cc6eb2a7113a56a2bad03a",
+      "sha256": "b2f6a04bceef6c83705cf6d95f441290420c1451b5f02258b5ecda1a6210caaf",
+      "sourceDuration": 0.382108843537415,
+      "duration": 0.382108843537415,
+      "sampleRate": 44100,
+      "channels": 2,
+      "format": "PCM signed 16-bit WAV",
+      "bytes": 67448,
+      "peak": 0.54998779296875,
+      "rms": 0.05869890944322931,
+      "clippedSamples": 0,
+      "processing": {
+        "excerptSeconds": null,
+        "trimStartSeconds": 0.0,
+        "trimEndSeconds": 0.382108843537415,
+        "highpassHz": 35,
+        "highpassOrder": 2,
+        "amplitudeGain": 0.851885735186815,
+        "fadeInSeconds": 0.0004988662131519275,
+        "endFadeSeconds": 0.04,
+        "dither": "TPDF at one 16-bit LSB",
+        "naturalDecayPreserved": true
+      },
+      "instrument": "maracas",
+      "articulation": "Long shake (forward stroke)"
+    },
+    {
+      "file": "sleigh-bells-hit.wav",
+      "url": "assets/audio/recorded/ensemble-additions/sleigh-bells-hit.wav",
+      "sourceFile": "Sleighbells_Hit_rr1_Mid.wav",
+      "sourceUrl": "https://raw.githubusercontent.com/sgossner/VCSL/c1ea7bcc3c7309650ab0da9d15c9cd1fbc4a4c7e/Idiophones/Struck%20Idiophones/Sleigh%20Bells/Sleighbells_Hit_rr1_Mid.wav",
+      "sourceSha256": "cc424c298ac98a783ebf37ce6f2152a19b227ff89c5c20bc2462ddc8261fefc5",
+      "sha256": "e03c8997e5c76e9ac7d02a7678158f8934022fffffedb9f1c9102868edb79aab",
+      "sourceDuration": 2.5,
+      "duration": 1.885986394557823,
+      "sampleRate": 44100,
+      "channels": 2,
+      "format": "PCM signed 16-bit WAV",
+      "bytes": 332732,
+      "peak": 0.54998779296875,
+      "rms": 0.03096276088399726,
+      "clippedSamples": 0,
+      "processing": {
+        "excerptSeconds": null,
+        "trimStartSeconds": 0.0,
+        "trimEndSeconds": 1.885986394557823,
+        "highpassHz": 35,
+        "highpassOrder": 2,
+        "amplitudeGain": 7.2983417441161755,
+        "fadeInSeconds": 0.0004988662131519275,
+        "endFadeSeconds": 0.04,
+        "dither": "TPDF at one 16-bit LSB",
+        "naturalDecayPreserved": true
+      },
+      "instrument": "sleigh-bells",
+      "articulation": "Hit"
+    },
+    {
+      "file": "sleigh-bells-shake.wav",
+      "url": "assets/audio/recorded/ensemble-additions/sleigh-bells-shake.wav",
+      "sourceFile": "sleighbell2_shake1.wav",
+      "sourceUrl": "https://raw.githubusercontent.com/sgossner/VCSL/c1ea7bcc3c7309650ab0da9d15c9cd1fbc4a4c7e/Idiophones/Struck%20Idiophones/Sleigh%20Bells/sleighbell2_shake1.wav",
+      "sourceSha256": "e34644affa5dd56af5e2a93c8330b39f96c74b0671d69878815a5f14f6704b89",
+      "sha256": "37c1eb85f3813dfdca22517a5d1321581385ab9377b3a0675a90a87fc26141f7",
+      "sourceDuration": 6.298095238095238,
+      "duration": 1.938095238095238,
+      "sampleRate": 44100,
+      "channels": 2,
+      "format": "PCM signed 16-bit WAV",
+      "bytes": 341924,
+      "peak": 0.44000244140625,
+      "rms": 0.038124470016557936,
+      "clippedSamples": 0,
+      "processing": {
+        "excerptSeconds": [
+          4.36,
+          6.3
+        ],
+        "trimStartSeconds": 4.36,
+        "trimEndSeconds": 6.298095238095238,
+        "highpassHz": 35,
+        "highpassOrder": 2,
+        "amplitudeGain": 16.184134690796974,
+        "fadeInSeconds": 0.002993197278911565,
+        "endFadeSeconds": 0.04,
+        "dither": "TPDF at one 16-bit LSB",
+        "naturalDecayPreserved": true
+      },
+      "instrument": "sleigh-bells",
+      "articulation": "Shake"
+    },
+    {
+      "file": "cabasa-soft-rub.wav",
+      "url": "assets/audio/recorded/ensemble-additions/cabasa-soft-rub.wav",
+      "sourceFile": "Cabasa1_Rub_v1_rr2_Mid.wav",
+      "sourceUrl": "https://raw.githubusercontent.com/sgossner/VCSL/c1ea7bcc3c7309650ab0da9d15c9cd1fbc4a4c7e/Idiophones/Struck%20Idiophones/Cabasa/Cabasa1_Rub_v1_rr2_Mid.wav",
+      "sourceSha256": "b467a38841c117139f741e2d65f770e3ff48be7c5cd5696a2fa45774381fa237",
+      "sha256": "8adcf7b72221bfeb50fb5d25ce09999272248e4e70afa9b96649301442057374",
+      "sourceDuration": 1.0101814058956917,
+      "duration": 0.9231746031746032,
+      "sampleRate": 44100,
+      "channels": 2,
+      "format": "PCM signed 16-bit WAV",
+      "bytes": 162892,
+      "peak": 0.399993896484375,
+      "rms": 0.02260227443578204,
+      "clippedSamples": 0,
+      "processing": {
+        "excerptSeconds": null,
+        "trimStartSeconds": 0.0,
+        "trimEndSeconds": 0.9231746031746032,
+        "highpassHz": 35,
+        "highpassOrder": 2,
+        "amplitudeGain": 12.386656322694726,
+        "fadeInSeconds": 0.0004988662131519275,
+        "endFadeSeconds": 0.04,
+        "dither": "TPDF at one 16-bit LSB",
+        "naturalDecayPreserved": true
+      },
+      "instrument": "cabasa",
+      "articulation": "Soft rub"
+    },
+    {
+      "file": "cabasa-strong-rub.wav",
+      "url": "assets/audio/recorded/ensemble-additions/cabasa-strong-rub.wav",
+      "sourceFile": "Cabasa1_Rub_v2_rr1_Mid.wav",
+      "sourceUrl": "https://raw.githubusercontent.com/sgossner/VCSL/c1ea7bcc3c7309650ab0da9d15c9cd1fbc4a4c7e/Idiophones/Struck%20Idiophones/Cabasa/Cabasa1_Rub_v2_rr1_Mid.wav",
+      "sourceSha256": "f13cba113f7cc65b2f4949108b3aa3a6d4c64fa2cebb6cf83894bbd20f008f28",
+      "sha256": "e76c73e691271486ec56718f949ca791a647bd0803a73e943db71e128f5ef06b",
+      "sourceDuration": 0.9840816326530613,
+      "duration": 0.7535600907029478,
+      "sampleRate": 44100,
+      "channels": 2,
+      "format": "PCM signed 16-bit WAV",
+      "bytes": 132972,
+      "peak": 0.54998779296875,
+      "rms": 0.04337331117883075,
+      "clippedSamples": 0,
+      "processing": {
+        "excerptSeconds": null,
+        "trimStartSeconds": 0.0,
+        "trimEndSeconds": 0.7535600907029478,
+        "highpassHz": 35,
+        "highpassOrder": 2,
+        "amplitudeGain": 6.014311911564865,
+        "fadeInSeconds": 0.0004988662131519275,
+        "endFadeSeconds": 0.04,
+        "dither": "TPDF at one 16-bit LSB",
+        "naturalDecayPreserved": true
+      },
+      "instrument": "cabasa",
+      "articulation": "Strong rub"
+    },
+    {
+      "file": "bass-bars-soft-f2.wav",
+      "url": "assets/audio/recorded/ensemble-additions/bass-bars-soft-f2.wav",
+      "sourceFile": "Marimba_hit_Outrigger_F1_soft_01.wav",
+      "sourceUrl": "https://raw.githubusercontent.com/sgossner/VCSL/c1ea7bcc3c7309650ab0da9d15c9cd1fbc4a4c7e/Idiophones/Struck%20Idiophones/Marimba/Marimba_hit_Outrigger_F1_soft_01.wav",
+      "sourceSha256": "eadaeb8bd491b3161197478119be60771e0e1d8620d4848e39595976f9c9c998",
+      "sha256": "cd38f100ab46ced9c6f75599ddef81a04165a12088d44b53e6fd85fedbab61c0",
+      "sourceDuration": 3.008321995464853,
+      "duration": 3.008321995464853,
+      "sampleRate": 44100,
+      "channels": 2,
+      "format": "PCM signed 16-bit WAV",
+      "bytes": 530712,
+      "peak": 0.321197509765625,
+      "rms": 0.08438399774146499,
+      "clippedSamples": 0,
+      "processing": {
+        "excerptSeconds": null,
+        "trimStartSeconds": 0,
+        "trimEndSeconds": 3.008321995464853,
+        "highpassHz": 25,
+        "highpassOrder": 2,
+        "amplitudeGain": 100.13358573662958,
+        "fadeInSeconds": 0.0004988662131519275,
+        "endFadeSeconds": 0.04,
+        "dither": "TPDF at one 16-bit LSB",
+        "naturalDecayPreserved": true,
+        "levelMatching": "First 500 ms stereo RMS matched to the previous medium-strike root",
+        "upperFrequencyEQ": false
+      },
+      "measuredFundamentalHz": 87.28504397657115,
+      "measuredRootMidi": 40.99563426050575,
+      "first500msUpperToLowDb": -36.35977419927377
+    },
+    {
+      "file": "bass-bars-soft-c3.wav",
+      "url": "assets/audio/recorded/ensemble-additions/bass-bars-soft-c3.wav",
+      "sourceFile": "Marimba_hit_Outrigger_C2_soft_01.wav",
+      "sourceUrl": "https://raw.githubusercontent.com/sgossner/VCSL/c1ea7bcc3c7309650ab0da9d15c9cd1fbc4a4c7e/Idiophones/Struck%20Idiophones/Marimba/Marimba_hit_Outrigger_C2_soft_01.wav",
+      "sourceSha256": "5fd3c75ab7eafebc24a693793e2c4404922dfad37d8dd9bf80e8ca483500ed80",
+      "sha256": "e9980c66a2bac05427fdc923bd1eb1cc0e0f1c733065ccc665080e090124c4b7",
+      "sourceDuration": 6.414807256235828,
+      "duration": 6.414807256235828,
+      "sampleRate": 44100,
+      "channels": 2,
+      "format": "PCM signed 16-bit WAV",
+      "bytes": 1131616,
+      "peak": 0.349578857421875,
+      "rms": 0.05335171182800184,
+      "clippedSamples": 0,
+      "processing": {
+        "excerptSeconds": null,
+        "trimStartSeconds": 0,
+        "trimEndSeconds": 6.414807256235828,
+        "highpassHz": 25,
+        "highpassOrder": 2,
+        "amplitudeGain": 112.57540343192687,
+        "fadeInSeconds": 0.0004988662131519275,
+        "endFadeSeconds": 0.04,
+        "dither": "TPDF at one 16-bit LSB",
+        "naturalDecayPreserved": true,
+        "levelMatching": "First 500 ms stereo RMS matched to the previous medium-strike root",
+        "upperFrequencyEQ": false
+      },
+      "measuredFundamentalHz": 131.00758159881434,
+      "measuredRootMidi": 48.02576137540615,
+      "first500msUpperToLowDb": -30.31500704744536
+    }
+  ],
+  "updated": "2026-10-17"
+}

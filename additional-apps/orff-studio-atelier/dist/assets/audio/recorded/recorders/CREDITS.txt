@@ -1,0 +1,10 @@
+Baroque Soprano, Alto, Tenor and Bass Recorder recordings by Versilian Studios, from the Versilian Community Sample Library (VCSL).
+
+License: CC0 1.0 Universal
+https://creativecommons.org/publicdomain/zero/1.0/
+Source: https://github.com/sgossner/VCSL
+Pinned source commit: c1ea7bcc3c7309650ab0da9d15c9cd1fbc4a4c7e
+
+Distinct native SATB sustain recordings. Scientific MIDI roots spectrally verified (VCSL filename octaves are one below scientific notation). Leading silence trimmed, 25 Hz subsonic high-pass, resampled 48k to44.1k with polyphase filter, constant per-sample normalization to0.085 RMS subject to0.7 peak cap, 3ms de-click at start. Native tongued attacks and breath retained.40ms smoothstep crossfade to phase-matched pre-loop waveform creates seamless sustained loops; no added vibrato/tremolo.16-bit stereo WAV. Measured median pitch offsets corrected through tuningSemitones.
+
+The four instruments use their own original recordings; no recorder size is simulated solely by transposing another size. PROVENANCE.json records original source paths, SHA-256 hashes, transformations, loop points, and pitch measurements.

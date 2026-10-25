@@ -1,0 +1,12 @@
+'use client';
+import type {Scene} from '../lib/scene';
+import {stereoDimensions,stereoPlayback,type Stereo} from '../lib/stereo';
+import {Section,Select,Num,Button} from './studio-fields';
+
+export function StereoPanel({scene,change,height=1080}:{scene:Scene;change:(s:Scene)=>void;height?:number}){
+ const s=scene.stereo,patch=(p:Partial<Stereo>)=>change({...scene,stereo:{...s,...p}}),d=stereoDimensions(s.mode,s.quality,height),vr=s.mode==='vr180'||s.mode==='vr360';
+ return <Section title="3D & headset video"><Select label="Viewing format" value={s.mode} options={[{value:'mono',label:'2D · regular video'},{value:'cinema',label:'3D cinema · full side-by-side'},{value:'vr180',label:'VR180 · immersive stereo'},{value:'vr360',label:'VR360 · immersive stereo'}]} onChange={mode=>patch({mode:mode as Stereo['mode']})}/>
+ {s.mode!=='mono'&&<><div className="number-row"><Num label="Eye separation (scene units)" value={s.eyeSeparation} min={0} max={1} step={.005} onChange={eyeSeparation=>patch({eyeSeparation})}/>{!vr&&<Num label="Screen distance" value={s.convergence} min={.1} max={500} step={.5} onChange={convergence=>patch({convergence})}/>}</div><div className="split-actions"><Button onClick={()=>patch({eyeSeparation:.065})}>Natural depth</Button><Button onClick={()=>patch({eyeSeparation:.035})}>Gentle depth</Button><Button onClick={()=>patch({eyeSeparation:0})}>No depth</Button></div><p className="hint">Eye separation changes depth. Start small; large values make the world appear miniature. {vr?'Panoramas use parallel spherical stereo in Blender.':'Screen distance places the zero-parallax plane. Nearer objects appear in front of the virtual screen.'}</p></>}
+ {vr&&<Select label="Panorama quality" value={s.quality} options={[{value:'preview',label:'Preview · first headset test'},{value:'balanced',label:'Balanced · sharper detail'},{value:'high',label:'High · longer render'}]} onChange={quality=>patch({quality:quality as Stereo['quality']})}/>}
+ <div className="stereo-spec"><strong>{d.width.toLocaleString()} × {d.height.toLocaleString()} · {scene.fps} FPS</strong><span>{d.eyeWidth} × {d.eyeHeight} {s.mode==='mono'?'frame':'per eye'}{s.mode!=='mono'?` · ${d.layout} packed`:''}</span></div><p className="hint">{stereoPlayback(s.mode)} {vr?'The editor shows the forward view; the Blender package renders the full panorama.':'The editor shows the center camera; use a depth-check PNG to inspect both eyes.'}</p></Section>;
+}

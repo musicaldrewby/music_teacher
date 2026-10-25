@@ -1,0 +1,775 @@
+{
+  "generator": "Built-in image_gen",
+  "assets": [
+    {
+      "slug": "manor-gate",
+      "name": "Manor \u00b7 Front Gate",
+      "kind": "background",
+      "theme": "manor",
+      "prompt": "Use case: illustration-story. Production background for Felt & Fable, a felt cutout movie maker. Wide 16:9 full-bleed image 1536x864 or similar. Handcrafted layered wool-felt miniature scenery, tactile sharp felt fibers, stitched edges, cute simplified shapes, shallow theatrical set depth with straight-on eye level view. Crisp clear entire scene, no depth of field blur. Empty scene with generous open floor/ground for characters, no people, no lettering, no watermark. Not a Pixar render, not glossy, not plastic, not vector. Cohesive warm storybook miniature felt craft look. Scene: A mildly spooky friendly old Victorian manor seen beyond an open dark iron-look felt gate at dusk. Muted plum house, cream stone trim, dark teal roof, amber windows. Curving garden path with open foreground, stitched bushes at sides, crescent moon and lavender twilight sky. Manor has central peaked gable and two symmetrical wings.",
+      "path": "art-source/cinema/manor-home/manor-gate.webp",
+      "width": 1672,
+      "height": 941
+    },
+    {
+      "slug": "manor-entrance-hall",
+      "name": "Manor \u00b7 Entrance Hall",
+      "kind": "background",
+      "theme": "manor",
+      "prompt": "Use case: illustration-story. Production background for Felt & Fable, a felt cutout movie maker. Wide 16:9 full-bleed image 1536x864 or similar. Handcrafted layered wool-felt miniature scenery, tactile sharp felt fibers, stitched edges, cute simplified shapes, shallow theatrical set depth with straight-on eye level view. Crisp clear entire scene, no depth of field blur. Empty scene with generous open floor/ground for characters, no people, no lettering, no watermark. Not a Pixar render, not glossy, not plastic, not vector. Cohesive warm storybook miniature felt craft look. Scene: Inside the same old Victorian manor, grand entry hall with central staircase in back, cream trim, plum wallpaper, dark teal double door on left, amber wall sconces, walnut stair rail, floor a muted warm stone checker pattern. No people or portraits with figures. Open central foreground.",
+      "path": "art-source/cinema/manor-home/manor-entrance-hall.webp",
+      "width": 1672,
+      "height": 941
+    },
+    {
+      "slug": "manor-upstairs-corridor",
+      "name": "Manor \u00b7 Upstairs Corridor",
+      "kind": "background",
+      "theme": "manor",
+      "prompt": "Use case: illustration-story. Production background for Felt & Fable, a felt cutout movie maker. Wide 16:9 full-bleed image 1536x864 or similar. Handcrafted layered wool-felt miniature scenery, tactile sharp felt fibers, stitched edges, cute simplified shapes, shallow theatrical set depth with straight-on eye level view. Crisp clear entire scene, no depth of field blur. Empty scene with generous open floor/ground for characters, no people, no lettering, no watermark. Not a Pixar render, not glossy, not plastic, not vector. Cohesive warm storybook miniature felt craft look. Scene: Inside same Victorian manor, upstairs hallway, three dark teal doors with cream carved frames, plum wallpaper, walnut wainscot, amber wall sconces, long burgundy runner receding toward a window. Mostly front facing wide wall with modest perspective. Open foreground for characters.",
+      "path": "art-source/cinema/manor-home/manor-upstairs-corridor.webp",
+      "width": 1672,
+      "height": 941
+    },
+    {
+      "slug": "manor-library",
+      "name": "Manor \u00b7 Library",
+      "kind": "background",
+      "theme": "manor",
+      "prompt": "Use case: illustration-story. Production background for Felt & Fable, a felt cutout movie maker. Wide 16:9 full-bleed image 1536x864 or similar. Handcrafted layered wool-felt miniature scenery, tactile sharp felt fibers, stitched edges, cute simplified shapes, shallow theatrical set depth with straight-on eye level view. Crisp clear entire scene, no depth of field blur. Empty scene with generous open floor/ground for characters, no people, no lettering, no watermark. Not a Pixar render, not glossy, not plastic, not vector. Cohesive warm storybook miniature felt craft look. Scene: Inside same Victorian manor, warm library, plum wall accents with cream trims, tall walnut bookshelves with teal and wine colored books, amber lamps, small fireplace, dark teal upholstered armchair to one side, arched window. Generous empty center floor, no people, no legible book lettering.",
+      "path": "art-source/cinema/manor-home/manor-library.webp",
+      "width": 1672,
+      "height": 941
+    },
+    {
+      "slug": "manor-attic",
+      "name": "Manor \u00b7 Attic",
+      "kind": "background",
+      "theme": "manor",
+      "prompt": "Use case: illustration-story. Production background for Felt & Fable, a felt cutout movie maker. Wide 16:9 full-bleed image 1536x864 or similar. Handcrafted layered wool-felt miniature scenery, tactile sharp felt fibers, stitched edges, cute simplified shapes, shallow theatrical set depth with straight-on eye level view. Crisp clear entire scene, no depth of field blur. Empty scene with generous open floor/ground for characters, no people, no lettering, no watermark. Not a Pixar render, not glossy, not plastic, not vector. Cohesive warm storybook miniature felt craft look. Scene: Inside same Victorian manor, mysterious attic with triangular walnut rafters, cream felt insulation walls, round window showing lavender dusk, covered old furniture at sides, a closed wooden trunk with dark teal accents, amber lantern on beam. Empty open wood floor foreground, gently spooky and child friendly.",
+      "path": "art-source/cinema/manor-home/manor-attic.webp",
+      "width": 1672,
+      "height": 941
+    },
+    {
+      "slug": "manor-cellar",
+      "name": "Manor \u00b7 Cellar",
+      "kind": "background",
+      "theme": "manor",
+      "prompt": "Use case: illustration-story. Production background for Felt & Fable, a felt cutout movie maker. Wide 16:9 full-bleed image 1536x864 or similar. Handcrafted layered wool-felt miniature scenery, tactile sharp felt fibers, stitched edges, cute simplified shapes, shallow theatrical set depth with straight-on eye level view. Crisp clear entire scene, no depth of field blur. Empty scene with generous open floor/ground for characters, no people, no lettering, no watermark. Not a Pixar render, not glossy, not plastic, not vector. Cohesive warm storybook miniature felt craft look. Scene: Inside same Victorian manor, old stone cellar made from layered gray wool felt blocks, plum and dark teal storage crates at sides, wine-free wooden barrels, staircase ascending on right, one warm amber wall lamp, heavy dark teal back door. Empty central felt stone floor, child friendly mild mystery, no rats or people.",
+      "path": "art-source/cinema/manor-home/manor-cellar.webp",
+      "width": 1672,
+      "height": 941
+    },
+    {
+      "slug": "home-exterior",
+      "name": "Home \u00b7 Front Garden",
+      "kind": "background",
+      "theme": "home",
+      "prompt": "Use case: illustration-story. Production background for Felt & Fable, a felt cutout movie maker. Wide 16:9 full-bleed image 1536x864 or similar. Handcrafted layered wool-felt miniature scenery, tactile sharp felt fibers, stitched edges, cute simplified shapes, shallow theatrical set depth with straight-on eye level view. Crisp clear entire scene, no depth of field blur. Empty scene with generous open floor/ground for characters, no people, no lettering, no watermark. Not a Pixar render, not glossy, not plastic, not vector. Cohesive warm storybook miniature felt craft look. Scene: Friendly neighborhood family home exterior made from felt, one-story cream bungalow with sage green siding accents, terracotta roof, teal front door, mustard window shutters, small front porch, flower beds and tree to sides. Sunny blue felt sky. Clear open front garden and path for characters.",
+      "path": "art-source/cinema/manor-home/home-exterior.webp",
+      "width": 1672,
+      "height": 941
+    },
+    {
+      "slug": "home-living-room",
+      "name": "Home \u00b7 Living Room",
+      "kind": "background",
+      "theme": "home",
+      "prompt": "Use case: illustration-story. Production background for Felt & Fable, a felt cutout movie maker. Wide 16:9 full-bleed image 1536x864 or similar. Handcrafted layered wool-felt miniature scenery, tactile sharp felt fibers, stitched edges, cute simplified shapes, shallow theatrical set depth with straight-on eye level view. Crisp clear entire scene, no depth of field blur. Empty scene with generous open floor/ground for characters, no people, no lettering, no watermark. Not a Pixar render, not glossy, not plastic, not vector. Cohesive warm storybook miniature felt craft look. Scene: Inside a friendly family bungalow, cream walls, sage green sofa at left, mustard cushions, teal front door at right, terracotta accent rug, walnut coffee table off center, simple side window with greenery, felt house plants. Open clear central foreground floor, warm daylight.",
+      "path": "art-source/cinema/manor-home/home-living-room.webp",
+      "width": 1672,
+      "height": 940
+    },
+    {
+      "slug": "home-kitchen",
+      "name": "Home \u00b7 Kitchen",
+      "kind": "background",
+      "theme": "home",
+      "prompt": "Use case: illustration-story. Production background for Felt & Fable, a felt cutout movie maker. Wide 16:9 full-bleed image 1536x864 or similar. Handcrafted layered wool-felt miniature scenery, tactile sharp felt fibers, stitched edges, cute simplified shapes, shallow theatrical set depth with straight-on eye level view. Crisp clear entire scene, no depth of field blur. Empty scene with generous open floor/ground for characters, no people, no lettering, no watermark. Not a Pixar render, not glossy, not plastic, not vector. Cohesive warm storybook miniature felt craft look. Scene: Inside same family bungalow, cream walls, sage green kitchen cabinets along back, terracotta backsplash, mustard dish towels, teal kettle, walnut countertops, window overlooking garden. A small breakfast table far to side. Empty open center floor for characters, warm daylight.",
+      "path": "art-source/cinema/manor-home/home-kitchen.webp",
+      "width": 1672,
+      "height": 941
+    },
+    {
+      "slug": "home-bedroom",
+      "name": "Home \u00b7 Bedroom",
+      "kind": "background",
+      "theme": "home",
+      "prompt": "Use case: illustration-story. Production background for Felt & Fable, a felt cutout movie maker. Wide 16:9 full-bleed image 1536x864 or similar. Handcrafted layered wool-felt miniature scenery, tactile sharp felt fibers, stitched edges, cute simplified shapes, shallow theatrical set depth with straight-on eye level view. Crisp clear entire scene, no depth of field blur. Empty scene with generous open floor/ground for characters, no people, no lettering, no watermark. Not a Pixar render, not glossy, not plastic, not vector. Cohesive warm storybook miniature felt craft look. Scene: Inside same family bungalow, cheerful child's bedroom with cream walls, sage green bedspread, mustard pillows, walnut bedside furniture, terracotta rug and teal toy storage. Window at back, felt cloud wall decoration with no text. Empty center foreground floor, no people or dolls.",
+      "path": "art-source/cinema/manor-home/home-bedroom.webp",
+      "width": 1672,
+      "height": 940
+    },
+    {
+      "slug": "home-backyard",
+      "name": "Home \u00b7 Backyard",
+      "kind": "background",
+      "theme": "home",
+      "prompt": "Use case: illustration-story. Production background for Felt & Fable, a felt cutout movie maker. Wide 16:9 full-bleed image 1536x864 or similar. Handcrafted layered wool-felt miniature scenery, tactile sharp felt fibers, stitched edges, cute simplified shapes, shallow theatrical set depth with straight-on eye level view. Crisp clear entire scene, no depth of field blur. Empty scene with generous open floor/ground for characters, no people, no lettering, no watermark. Not a Pixar render, not glossy, not plastic, not vector. Cohesive warm storybook miniature felt craft look. Scene: Behind same family bungalow, fenced sunny backyard, sage green house rear with cream trim and terracotta roof at left, teal back door, picnic table off to right, garden beds and large tree at sides. Open central lawn made from green felt, blue sky and fluffy felt clouds, no people.",
+      "path": "art-source/cinema/manor-home/home-backyard.webp",
+      "width": 1672,
+      "height": 941
+    },
+    {
+      "slug": "manor-flashlight",
+      "name": "Mystery \u00b7 Flashlight",
+      "kind": "piece",
+      "theme": "manor",
+      "prompt": "Use case: illustration-story. Single game prop for Felt & Fable felt cutout movie maker. Genuine transparent background PNG with alpha, isolated object only, no floor, no cast shadow outside silhouette, no white matte, no checkerboard drawn. Flat layered wool felt cutout, visible fibers and tidy stitches, handmade tactile edges, front or shallow side profile suitable to attach to a flat felt puppet. Cute clear simplified shape, crisp quality, no plastic or glossy 3D. Entire single object centered with small safe margin. No text or watermark. Square canvas.  Scene: One horizontally oriented handheld flashlight, dark teal felt body and mustard rim, cream lens at right, small felt switch. Not lit, no emitted beam. Clear side profile, simple small hand grip.",
+      "path": "art-source/cinema/manor-home/manor-flashlight.webp",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "slug": "manor-antique-key",
+      "name": "Mystery \u00b7 Antique Key",
+      "kind": "piece",
+      "theme": "manor",
+      "prompt": "Use case: illustration-story. Single game prop for Felt & Fable felt cutout movie maker. Genuine transparent background PNG with alpha, isolated object only, no floor, no cast shadow outside silhouette, no white matte, no checkerboard drawn. Flat layered wool felt cutout, visible fibers and tidy stitches, handmade tactile edges, front or shallow side profile suitable to attach to a flat felt puppet. Cute clear simplified shape, crisp quality, no plastic or glossy 3D. Entire single object centered with small safe margin. No text or watermark. Square canvas.  Subject: One ornate antique key made of ochre gold felt, circular bow with true transparent hole, long stem ending in two simple teeth, oriented horizontally. Flat applique layering with golden stitched contours.",
+      "path": "art-source/cinema/manor-home/manor-antique-key.webp",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "slug": "manor-candle-holder",
+      "name": "Mystery \u00b7 Candle Holder",
+      "kind": "piece",
+      "theme": "manor",
+      "prompt": "Use case: illustration-story. Single game prop for Felt & Fable felt cutout movie maker. Genuine transparent background PNG with alpha, isolated object only, no floor, no cast shadow outside silhouette, no white matte, no checkerboard drawn. Flat layered wool felt cutout, visible fibers and tidy stitches, handmade tactile edges, front or shallow side profile suitable to attach to a flat felt puppet. Cute clear simplified shape, crisp quality, no plastic or glossy 3D. Entire single object centered with small safe margin. No text or watermark. Square canvas.  Subject: One small antique brass-look ochre felt candle holder with finger loop, supporting a single cream felt candle topped by a small golden felt flame. Entire shape in clear side profile, no glow outside object.",
+      "path": "art-source/cinema/manor-home/manor-candle-holder.webp",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "slug": "manor-sealed-letter",
+      "name": "Mystery \u00b7 Sealed Letter",
+      "kind": "piece",
+      "theme": "manor",
+      "prompt": "Use case: illustration-story. Single game prop for Felt & Fable felt cutout movie maker. Genuine transparent background PNG with alpha, isolated object only, no floor, no cast shadow outside silhouette, no white matte, no checkerboard drawn. Flat layered wool felt cutout, visible fibers and tidy stitches, handmade tactile edges, front or shallow side profile suitable to attach to a flat felt puppet. Cute clear simplified shape, crisp quality, no plastic or glossy 3D. Entire single object centered with small safe margin. No text or watermark. Square canvas.  Subject: One closed cream felt envelope in landscape orientation with triangular folded flap and burgundy circular wax seal made from felt, small stitched edges. No writing, no extra objects.",
+      "path": "art-source/cinema/manor-home/manor-sealed-letter.webp",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "slug": "home-backpack",
+      "name": "Home \u00b7 Backpack",
+      "kind": "piece",
+      "theme": "home",
+      "prompt": "Use case: illustration-story. Single game prop for Felt & Fable felt cutout movie maker. Genuine transparent background PNG with alpha, isolated object only, no floor, no cast shadow outside silhouette, no white matte, no checkerboard drawn. Flat layered wool felt cutout, visible fibers and tidy stitches, handmade tactile edges, front or shallow side profile suitable to attach to a flat felt puppet. Cute clear simplified shape, crisp quality, no plastic or glossy 3D. Entire single object centered with small safe margin. No text or watermark. Square canvas.  Subject: One small sage green felt school backpack, front view with mustard front pocket, cream stitching, teal straps barely visible behind. Flat layered felt cutout, no logos.",
+      "path": "art-source/cinema/manor-home/home-backpack.webp",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "slug": "home-umbrella",
+      "name": "Home \u00b7 Umbrella",
+      "kind": "piece",
+      "theme": "home",
+      "prompt": "Use case: illustration-story. Single game prop for Felt & Fable felt cutout movie maker. Genuine transparent background PNG with alpha, isolated object only, no floor, no cast shadow outside silhouette, no white matte, no checkerboard drawn. Flat layered wool felt cutout, visible fibers and tidy stitches, handmade tactile edges, front or shallow side profile suitable to attach to a flat felt puppet. Cute clear simplified shape, crisp quality, no plastic or glossy 3D. Entire single object centered with small safe margin. No text or watermark. Square canvas.  Subject: One opened umbrella in clear side view, alternating teal and mustard felt canopy panels, dark walnut felt curved handle. Flat felt cutout, canopy symmetric, entire handle visible.",
+      "path": "art-source/cinema/manor-home/home-umbrella.webp",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "slug": "home-parcel",
+      "name": "Home \u00b7 Parcel",
+      "kind": "piece",
+      "theme": "home",
+      "prompt": "Use case: illustration-story. Single game prop for Felt & Fable felt cutout movie maker. Genuine transparent background PNG with alpha, isolated object only, no floor, no cast shadow outside silhouette, no white matte, no checkerboard drawn. Flat layered wool felt cutout, visible fibers and tidy stitches, handmade tactile edges, front or shallow side profile suitable to attach to a flat felt puppet. Cute clear simplified shape, crisp quality, no plastic or glossy 3D. Entire single object centered with small safe margin. No text or watermark. Square canvas.  Subject: One small tan cardboard-look felt parcel tied with cream felt twine, simple shallow three-quarter view, no label or lettering. All surfaces have wool texture, tidy stitches.",
+      "path": "art-source/cinema/manor-home/home-parcel.webp",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "slug": "home-pet-bed",
+      "name": "Home \u00b7 Pet Bed",
+      "kind": "piece",
+      "theme": "home",
+      "prompt": "Use case: illustration-story. Single game prop for Felt & Fable felt cutout movie maker. Genuine transparent background PNG with alpha, isolated object only, no floor, no cast shadow outside silhouette, no white matte, no checkerboard drawn. Flat layered wool felt cutout, visible fibers and tidy stitches, handmade tactile edges, front or shallow side profile suitable to attach to a flat felt puppet. Cute clear simplified shape, crisp quality, no plastic or glossy 3D. Entire single object centered with small safe margin. No text or watermark. Square canvas.  Subject: One empty oval pet bed, terracotta felt outer rim with cream cushion and sage green small patch, shallow front view, flat layered felt construction. No animal, no text.",
+      "path": "art-source/cinema/manor-home/home-pet-bed.webp",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "slug": "train-station-platform",
+      "name": "Train Station Platform",
+      "kind": "background",
+      "theme": "train",
+      "path": "art-source/cinema/train-stage/train-station-platform.webp",
+      "width": 1672,
+      "height": 941,
+      "prompt": "Use case: illustration-story. Asset type: high-quality story app background, wide landscape 16:9. Create a cheerful empty vintage small-town TRAIN STATION PLATFORM as a handcrafted felt miniature set. Eye-level wide shot with plenty of open platform floor for placing characters. A teal-and-cream train stands along the platform, terracotta brick station building, cream canopy columns, golden trim, simple analog clock, luggage bench. Coordinated palette of deep teal, cream, warm walnut, golden ochre. Match tactile layered wool felt, tiny visible fibers, subtle sewn edges, clean cut shapes, softly dimensional architecture, crisp focus from foreground to back. Cozy cutout storybook aesthetic. No people, no text, no logos, no watermark, no blurred areas, no photographic materials, no plastic CGI. Composition must fill all edges and have a clear readable stage-like layout."
+    },
+    {
+      "slug": "train-passenger-carriage",
+      "name": "Train Passenger Carriage",
+      "kind": "background",
+      "theme": "train",
+      "path": "art-source/cinema/train-stage/train-passenger-carriage.webp",
+      "width": 1672,
+      "height": 941,
+      "prompt": "Use case: illustration-story. Asset type: story app background, landscape 16:9 full bleed, no border. Tactile handcrafted felt miniature set, clear high quality with tiny wool fibers, stitched edges, softly dimensional architecture, clean cut shapes and crisp focus everywhere. Same cozy family-friendly storybook train, deep teal, cream, warm walnut, golden ochre palette. No people or characters, no text or letters, no watermark, no logos, no blur, no plastic CGI. Interior of vintage train passenger carriage, wide eye-level view down central aisle toward closed teal end door. Pairs of deep-teal upholstered felt bench seats along both sides, cream wall panels with warm walnut trim, broad windows showing green rolling countryside, golden reading lamps and overhead luggage racks. Large clear foreground aisle for adding cutout characters. Straight believable symmetrical architecture."
+    },
+    {
+      "slug": "train-sleeper-compartment",
+      "name": "Train Sleeper Compartment",
+      "kind": "background",
+      "theme": "train",
+      "path": "art-source/cinema/train-stage/train-sleeper-compartment.webp",
+      "width": 1672,
+      "height": 941,
+      "prompt": "Use case: illustration-story. Asset type: story app background, landscape 16:9 full bleed, no border. Tactile handcrafted felt miniature set, clear high quality with tiny wool fibers, stitched edges, softly dimensional architecture, clean cut shapes and crisp focus everywhere. Same cozy family-friendly storybook train, deep teal, cream, warm walnut, golden ochre palette. No people or characters, no text or letters, no watermark, no logos, no blur, no plastic CGI. Interior of a cozy vintage train sleeper compartment, wide eye-level view. Two teal felt upholstered bunks at left, tidy cream wool blankets and golden pillows, walnut ladder, broad countryside-view window at right with ochre curtains, small reading lamps, compact walnut table under window, cream walls and teal doorway. Open foreground floor for characters. Room feels connected to a teal-and-cream vintage train."
+    },
+    {
+      "slug": "train-countryside-railway",
+      "name": "Countryside Railway",
+      "kind": "background",
+      "theme": "train",
+      "path": "art-source/cinema/train-stage/train-countryside-railway.webp",
+      "width": 1672,
+      "height": 941,
+      "prompt": "Use case: illustration-story. Asset type: story app background, landscape 16:9 full bleed, no border. Tactile handcrafted felt miniature set, clear high quality with tiny wool fibers, stitched edges, softly dimensional architecture, clean cut shapes and crisp focus everywhere. Same cozy family-friendly storybook train, deep teal, cream, warm walnut, golden ochre palette. No people or characters, no text or letters, no watermark, no logos, no blur, no plastic CGI. Wide eye-level countryside railway scene, clear continuous tracks curve gently from lower-left foreground into middle distance, rolling patchwork green felt fields and clustered trees, a small cream cottage with terracotta roof, low grey felt stone viaduct in distance, pale blue sky and little cut white felt clouds. No train so objects can be added. Gentle sunny day. Readable horizon and spacious foreground."
+    },
+    {
+      "slug": "backstage-dressing-room",
+      "name": "Theater Dressing Room",
+      "kind": "background",
+      "theme": "backstage",
+      "path": "art-source/cinema/train-stage/backstage-dressing-room.webp",
+      "width": 1672,
+      "height": 941,
+      "prompt": "Use case: illustration-story. Asset type: premium story app background, landscape 16:9 full bleed with no frame. Tactile handcrafted felt miniature theatrical set, tiny wool fibers and sewn edges, clean cut shapes, softly dimensional architectural depth, everything crisply focused. Coordinated theatre interior palette: burgundy red curtains, warm walnut floor, creamy walls, muted teal accents and ochre lights. Cozy handmade storybook style. No people, no characters, no text or signage, no logos or watermark, no blur, no plastic CGI. Wide eye-level view inside the theater dressing room. Two dressing-table mirrors ringed by warm round bulbs across rear wall, velvet-red stools tucked under counters, small makeup accessories neatly grouped, costume rail with colorful felt costumes at left, closed burgundy door right, large clean open wooden floor foreground where characters can stand. Soft cozy illumination. Reflections show empty room, no people."
+    },
+    {
+      "slug": "backstage-wings",
+      "name": "Theater Wings",
+      "kind": "background",
+      "theme": "backstage",
+      "path": "art-source/cinema/train-stage/backstage-wings.webp",
+      "width": 1672,
+      "height": 941,
+      "prompt": "Use case: illustration-story. Asset type: premium story app background, landscape 16:9 full bleed with no frame. Tactile handcrafted felt miniature theatrical set, tiny wool fibers and sewn edges, clean cut shapes, softly dimensional architectural depth, everything crisply focused. Coordinated theatre interior palette: burgundy red curtains, warm walnut floor, creamy walls, muted teal accents and ochre lights. Cozy handmade storybook style. No people, no characters, no text or signage, no logos or watermark, no blur, no plastic CGI. Wide eye-level view from inside the backstage wings looking across open stage floor. Tall burgundy curtains hang at both sides with dark ropes and pulleys neatly tucked to edges. Warm empty stage at middle-right, black felt masking curtains in background, coiled rope and one wooden scenery crate at far-left, stage light rig above. Broad open dark walnut floor foreground, clear space for performers, enough gentle light to see all details."
+    },
+    {
+      "slug": "backstage-rehearsal-room",
+      "name": "Theater Rehearsal Room",
+      "kind": "background",
+      "theme": "backstage",
+      "path": "art-source/cinema/train-stage/backstage-rehearsal-room.webp",
+      "width": 1672,
+      "height": 941,
+      "prompt": "Use case: illustration-story. Asset type: premium story app background, landscape 16:9 full bleed with no frame. Tactile handcrafted felt miniature theatrical set, tiny wool fibers and sewn edges, clean cut shapes, softly dimensional architectural depth, everything crisply focused. Coordinated theatre interior palette: burgundy red curtains, warm walnut floor, creamy walls, muted teal accents and ochre lights. Cozy handmade storybook style. No people, no characters, no text or signage, no logos or watermark, no blur, no plastic CGI. Wide eye-level view of an empty rehearsal room in the same cozy theatre. Warm walnut sprung floor, cream felt walls, a long mirrored back wall with a waist-height wooden rehearsal barre, burgundy curtains beside tall windows, muted teal upright piano on the far left, a few neatly stacked plain chairs at right. Large open central floor for performers; mirror reflects an empty room. No musical notation or text."
+    },
+    {
+      "slug": "backstage-stage-reverse",
+      "name": "Stage View of the Audience",
+      "kind": "background",
+      "theme": "backstage",
+      "path": "art-source/cinema/train-stage/backstage-stage-reverse.webp",
+      "width": 1672,
+      "height": 941,
+      "prompt": "Use case: illustration-story. Asset type: premium story app background, landscape 16:9 full bleed with no frame. Tactile handcrafted felt miniature theatrical set, tiny wool fibers and sewn edges, clean cut shapes, softly dimensional architectural depth, everything crisply focused. Coordinated theatre interior palette: burgundy red curtains, warm walnut floor, creamy walls, muted teal accents and ochre lights. Cozy handmade storybook style. No people, no characters, no text or signage, no logos or watermark, no blur, no plastic CGI. Wide eye-level reverse shot from the middle of an empty theater stage looking out into empty auditorium seats. Broad warm walnut stage foreground for characters, symmetrical tiers of burgundy felt seats beyond stage edge, cream-and-gold balcony and warm glowing wall lamps, burgundy proscenium curtains framing left and right and top. Center aisle, readable intimate auditorium scale, no audience. This is a view FROM the stage toward the seating."
+    },
+    {
+      "slug": "train-ticket",
+      "name": "Train Ticket",
+      "kind": "piece",
+      "theme": "train",
+      "path": "art-source/cinema/train-stage/train-ticket.webp",
+      "width": 1536,
+      "height": 1024,
+      "prompt": "Use case: illustration-story. Asset type: SINGLE transparent-background prop sprite for a felt board storytelling app. Genuine transparent alpha background; every area outside subject fully transparent. Cute FLAT layered wool felt cutout, straight-on front elevation like a handmade applique, only thin material thickness, tiny visible fibers, clean scissor-cut contours and delicate stitching, no dimensional plush toy or 3D rendering. Whole object visible and centered with generous transparent margin. Crisp high quality edges, NO drop shadow, no floor, no white backdrop, no checkerboard pattern, no border, no logo, no text. Coordinated deep teal, cream, warm brown and ochre colors. One landscape cream felt train ticket with notched corners and ochre stitched border. Teal simplified steam-train silhouette at left, three small teal horizontal decorative lines at right and a small circular punched hole. NO readable words or numbers. It should feel like a flat two-layer felt ticket, not a printed paper card."
+    },
+    {
+      "slug": "train-suitcase",
+      "name": "Travel Suitcase",
+      "kind": "piece",
+      "theme": "train",
+      "path": "art-source/cinema/train-stage/train-suitcase.webp",
+      "width": 1536,
+      "height": 1024,
+      "prompt": "Use case: illustration-story. Asset type: SINGLE transparent-background prop sprite for a felt board storytelling app. Genuine transparent alpha background; every area outside subject fully transparent. Cute FLAT layered wool felt cutout, straight-on front elevation like a handmade applique, only thin material thickness, tiny visible fibers, clean scissor-cut contours and delicate stitching, no dimensional plush toy or 3D rendering. Whole object visible and centered with generous transparent margin. Crisp high quality edges, NO drop shadow, no floor, no white backdrop, no checkerboard pattern, no border, no logo, no text. Coordinated deep teal, cream, warm brown and ochre colors. One classic rectangular warm brown felt suitcase with rounded corners, top handle, two cream straps and ochre buckles, small teal luggage tag attached near handle. Front view, closed suitcase, flat layered felt applique."
+    },
+    {
+      "slug": "train-conductor-hat",
+      "name": "Train Conductor Hat",
+      "kind": "piece",
+      "theme": "train",
+      "path": "art-source/cinema/train-stage/train-conductor-hat.webp",
+      "width": 1536,
+      "height": 1024,
+      "prompt": "Use case: illustration-story. Asset type: SINGLE transparent-background prop sprite for a felt board storytelling app. Genuine transparent alpha background; every area outside subject fully transparent. Cute FLAT layered wool felt cutout, straight-on front elevation like a handmade applique, only thin material thickness, tiny visible fibers, clean scissor-cut contours and delicate stitching, no dimensional plush toy or 3D rendering. Whole object visible and centered with generous transparent margin. Crisp high quality edges, NO drop shadow, no floor, no white backdrop, no checkerboard pattern, no border, no logo, no text. Coordinated deep teal, cream, warm brown and ochre colors. One train conductor's cap seen directly from the front. Deep teal flat felt crown, simple curved dark brim, ochre band and tiny ochre oval emblem with no writing. Designed to place on a flat character's head, neat symmetrical hat silhouette with no wearer."
+    },
+    {
+      "slug": "train-snack-trolley",
+      "name": "Train Snack Trolley",
+      "kind": "piece",
+      "theme": "train",
+      "path": "art-source/cinema/train-stage/train-snack-trolley.webp",
+      "width": 1312,
+      "height": 1199,
+      "prompt": "Use case: illustration-story. Asset type: SINGLE transparent-background prop sprite for a felt board storytelling app. Genuine transparent alpha background; every area outside subject fully transparent. Cute FLAT layered wool felt cutout, straight-on front elevation like a handmade applique, only thin material thickness, tiny visible fibers, clean scissor-cut contours and delicate stitching, no dimensional plush toy or 3D rendering. Whole object visible and centered with generous transparent margin. Crisp high quality edges, NO drop shadow, no floor, no white backdrop, no checkerboard pattern, no border, no logo, no text. Coordinated deep teal, cream, warm brown and ochre colors. One side-view snack trolley, simple flat felt silhouette. Teal cart body with ochre trim, two black felt wheels, a horizontal push handle, small cream teapot and two cups on top, three simple wrapped sandwiches visible on lower shelf. No brands or letters. Entire cart visible, broad simplified shapes useful at small size."
+    },
+    {
+      "slug": "backstage-costume-rack",
+      "name": "Theater Costume Rack",
+      "kind": "piece",
+      "theme": "backstage",
+      "path": "art-source/cinema/train-stage/backstage-costume-rack.webp",
+      "width": 1361,
+      "height": 1156,
+      "prompt": "Use case: illustration-story. Asset type: SINGLE transparent-background prop sprite for a felt board storytelling app. Genuine transparent alpha background; every area outside subject fully transparent. Cute FLAT layered wool felt cutout, straight-on front elevation like a handmade applique, only thin material thickness, tiny visible fibers, clean scissor-cut contours and delicate stitching, no dimensional plush toy or 3D rendering. Whole object visible and centered with generous transparent margin. Crisp high quality edges, NO drop shadow, no floor, no white backdrop, no checkerboard pattern, no border, no logo, no text. Coordinated burgundy, cream, warm brown, teal and ochre theatre colors. One simple side-to-side costume clothing rack seen front-on, ochre felt frame on two wheels, three hangers holding a burgundy coat with gold trim, teal tunic, and pale cream/pink dress. Flat clear silhouettes and tidy small details, whole rail and clothes fully visible. No people."
+    },
+    {
+      "slug": "backstage-makeup-mirror",
+      "name": "Lighted Makeup Mirror",
+      "kind": "piece",
+      "theme": "backstage",
+      "path": "art-source/cinema/train-stage/backstage-makeup-mirror.webp",
+      "width": 1024,
+      "height": 1536,
+      "prompt": "Use case: illustration-story. Asset type: SINGLE transparent-background prop sprite for a felt board storytelling app. Genuine transparent alpha background; every area outside subject fully transparent. Cute FLAT layered wool felt cutout, straight-on front elevation like a handmade applique, only thin material thickness, tiny visible fibers, clean scissor-cut contours and delicate stitching, no dimensional plush toy or 3D rendering. Whole object visible and centered with generous transparent margin. Crisp high quality edges, NO drop shadow, no floor, no white backdrop, no checkerboard pattern, no border, no logo, no text. Coordinated burgundy, cream, warm brown, teal and ochre theatre colors. One standing rectangular dressing-room makeup mirror with a warm brown frame and twelve evenly spaced cream round felt bulbs around frame, small broad support base. Mirror center made from flat light blue-gray felt with two subtle angled pale highlight strips, NOT a view of another room. Broad clean simplified shapes."
+    },
+    {
+      "slug": "backstage-stage-microphone",
+      "name": "Stage Microphone on Stand",
+      "kind": "piece",
+      "theme": "backstage",
+      "path": "art-source/cinema/train-stage/backstage-stage-microphone.webp",
+      "width": 1024,
+      "height": 1536,
+      "prompt": "Use case: illustration-story. Asset type: SINGLE transparent-background prop sprite for a felt board storytelling app. Genuine transparent alpha background; every area outside subject fully transparent. Cute FLAT layered wool felt cutout, straight-on front elevation like a handmade applique, only thin material thickness, tiny visible fibers, clean scissor-cut contours and delicate stitching, no dimensional plush toy or 3D rendering. Whole object visible and centered with generous transparent margin. Crisp high quality edges, NO drop shadow, no floor, no white backdrop, no checkerboard pattern, no border, no logo, no text. Coordinated burgundy, cream, warm brown, teal and ochre theatre colors. One classic stage microphone mounted on a slim upright stand, straight-on full-height view. Charcoal and gray felt microphone with simple striped felt grille at top, black thin felt stem, small round weighted base. Microphone angled slightly to left. Crisp continuous shape, no performer, no cord, no other objects."
+    },
+    {
+      "slug": "backstage-coiled-cable",
+      "name": "Coiled Stage Cable",
+      "kind": "piece",
+      "theme": "backstage",
+      "path": "art-source/cinema/train-stage/backstage-coiled-cable.webp",
+      "width": 1312,
+      "height": 1199,
+      "prompt": "Use case: illustration-story. Asset type: SINGLE transparent-background prop sprite for a felt board storytelling app. Genuine transparent alpha background; every area outside subject fully transparent. Cute FLAT layered wool felt cutout, straight-on front elevation like a handmade applique, only thin material thickness, tiny visible fibers, clean scissor-cut contours and delicate stitching, no dimensional plush toy or 3D rendering. Whole object visible and centered with generous transparent margin. Crisp high quality edges, NO drop shadow, no floor, no white backdrop, no checkerboard pattern, no border, no logo, no text. Coordinated burgundy, cream, warm brown, teal and ochre theatre colors. One neatly coiled black stage audio cable with five visible loops and two chunky dark gray jack plugs resting beside the coil. Front slightly overhead view, clearly readable flat felt applique black cable on genuine transparent background. Pale gray tiny stitching highlights around loops. The centers of loops are transparent cutout holes, not filled shapes. Whole cable and both plugs visible."
+    },
+    {
+      "slug": "ship-cockpit",
+      "name": "Space Expedition \u00b7 Ship Cockpit",
+      "kind": "background",
+      "theme": "spaceexpedition",
+      "prompt": "Use case: illustration-story. Asset type: wide 16:9 background for Felt & Fable Studio, 1792x1024 or wider, no border. Primary request: A friendly exploration spaceship cockpit viewed from the rear toward a broad forward window showing dark starry space and a distant moon. Teal side consoles with simple stitched light dots, two modest seats toward the sides, open center floor for separate characters. Style: beautifully handcrafted realistic wool-felt textures, crisply visible tiny fibers, carefully cut edges and restrained stitch seams, warm polished children's felt-board aesthetic. Camera at standing eye level, practical theater-like scene composition with clear broad floor occupying lower third. All surfaces have wool felt texture, shallow miniature-set depth, crisp across image, gentle shadows, no depth-of-field blur. No people, no text, no labels, no watermark.",
+      "path": "art-source/cinema/space-seaside/ship-cockpit.webp",
+      "width": 1659,
+      "height": 948
+    },
+    {
+      "slug": "crew-quarters",
+      "name": "Space Expedition \u00b7 Crew Quarters",
+      "kind": "background",
+      "theme": "spaceexpedition",
+      "prompt": "Use case: illustration-story. Asset type: wide 16:9 background for Felt & Fable Studio, 1792x1024 or wider, no border. Primary request: Cozy crew quarters aboard the same friendly exploration spaceship. Cream felt walls with teal framing and mustard trim, two tidy bunk alcoves along sides, small round porthole showing stars, built-in locker cupboards, open central floor. Style: beautifully handcrafted realistic wool-felt textures, crisply visible tiny fibers, carefully cut edges and restrained stitch seams, warm polished children's felt-board aesthetic. Camera at standing eye level, practical theater-like scene composition with clear broad floor occupying lower third. All surfaces have wool felt texture, shallow miniature-set depth, crisp across image, gentle shadows, no depth-of-field blur. No people, no text, no labels, no watermark.",
+      "path": "art-source/cinema/space-seaside/crew-quarters.webp",
+      "width": 1659,
+      "height": 948
+    },
+    {
+      "slug": "cargo-bay",
+      "name": "Space Expedition \u00b7 Cargo Bay",
+      "kind": "background",
+      "theme": "spaceexpedition",
+      "prompt": "Use case: illustration-story. Asset type: wide 16:9 background for Felt & Fable Studio, 1792x1024 or wider, no border. Primary request: Cargo bay aboard the same friendly exploration spaceship. Cream felt hull walls, teal structural ribs, mustard safety trim, storage containers neatly stacked at the left and right, large sealed teal cargo hatch on back wall, very open central deck. Style: beautifully handcrafted realistic wool-felt textures, crisply visible tiny fibers, carefully cut edges and restrained stitch seams, warm polished children's felt-board aesthetic. Camera at standing eye level, practical theater-like scene composition with clear broad floor occupying lower third. All surfaces have wool felt texture, shallow miniature-set depth, crisp across image, gentle shadows, no depth-of-field blur. No people, no text, no labels, no watermark.",
+      "path": "art-source/cinema/space-seaside/cargo-bay.webp",
+      "width": 1660,
+      "height": 948
+    },
+    {
+      "slug": "airlock",
+      "name": "Space Expedition \u00b7 Airlock",
+      "kind": "background",
+      "theme": "spaceexpedition",
+      "prompt": "Use case: illustration-story. Asset type: wide 16:9 background for Felt & Fable Studio, 1792x1008 landscape, no border. Primary request: Airlock chamber aboard the same friendly exploration spaceship. Cream felt wall panels, teal framing and mustard trim, large round sealed outer hatch centered at back with a small window onto the gray lunar landscape, simple safety lights, shallow empty floor. Style: beautifully handcrafted realistic wool-felt textures, crisply visible tiny fibers, carefully cut edges and restrained stitch seams, warm polished children's felt-board aesthetic. Camera at standing eye level, practical theater-like scene composition with clear broad floor occupying lower third. All surfaces have wool felt texture, shallow miniature-set depth, crisp across image, gentle shadows, no depth-of-field blur. No people, no text, no labels, no watermark.",
+      "path": "art-source/cinema/space-seaside/airlock.webp",
+      "width": 1672,
+      "height": 941
+    },
+    {
+      "slug": "moon-base-interior",
+      "name": "Space Expedition \u00b7 Moon Base Interior",
+      "kind": "background",
+      "theme": "spaceexpedition",
+      "prompt": "Use case: illustration-story. Asset type: wide 16:9 background for Felt & Fable Studio, 1792x1008 landscape, no border. Primary request: Interior of a friendly lunar exploration base matching the spaceship. Cream felt curved walls, teal framing and mustard trim, broad window onto gray cratered moon surface with distant blue Earth, small side workbenches, open central floor. Style: beautifully handcrafted realistic wool-felt textures, crisply visible tiny fibers, carefully cut edges and restrained stitch seams, warm polished children's felt-board aesthetic. Camera at standing eye level, practical theater-like scene composition with clear broad floor occupying lower third. All surfaces have wool felt texture, shallow miniature-set depth, crisp across image, gentle shadows, no depth-of-field blur. No people, no text, no labels, no watermark.",
+      "path": "art-source/cinema/space-seaside/moon-base-interior.webp",
+      "width": 1672,
+      "height": 941
+    },
+    {
+      "slug": "harbor",
+      "name": "Seaside Adventure \u00b7 Harbor",
+      "kind": "background",
+      "theme": "seaside",
+      "prompt": "Use case: illustration-story. Asset type: wide 16:9 background for Felt & Fable Studio, 1792x1008 landscape, no border. Primary request: A charming quiet seaside harbor with an open tan felt wooden dock across foreground, calm turquoise felt water in the middle distance, a small cream-sailed brown wooden ship moored along the left, small coastal buildings behind, clear warm daytime sky. Space for separate story characters on the dock. Style: beautifully handcrafted realistic wool-felt textures, crisply visible tiny fibers, carefully cut edges and restrained stitch seams, warm polished children's felt-board aesthetic. Camera at standing eye level, practical theater-like scene composition with clear broad floor occupying lower third. All surfaces have wool felt texture, shallow miniature-set depth, crisp across image, gentle shadows, no depth-of-field blur. No people, no text, no labels, no watermark.",
+      "path": "art-source/cinema/space-seaside/harbor.webp",
+      "width": 1672,
+      "height": 940
+    },
+    {
+      "slug": "ship-deck",
+      "name": "Seaside Adventure \u00b7 Ship Deck",
+      "kind": "background",
+      "theme": "seaside",
+      "prompt": "Use case: illustration-story. Asset type: wide 16:9 background for Felt & Fable Studio, 1792x1008 landscape, no border. Primary request: On the open deck of the same charming small brown sailing ship in a turquoise sea. Honey brown felt wooden planks, low railings along sides, mast and cream sail above, ship wheel toward the back and horizon beyond, plenty of clear central deck for characters. Style: beautifully handcrafted realistic wool-felt textures, crisply visible tiny fibers, carefully cut edges and restrained stitch seams, warm polished children's felt-board aesthetic. Camera at standing eye level, practical theater-like scene composition with clear broad floor occupying lower third. All surfaces have wool felt texture, shallow miniature-set depth, crisp across image, gentle shadows, no depth-of-field blur. No people, no text, no labels, no watermark.",
+      "path": "art-source/cinema/space-seaside/ship-deck.webp",
+      "width": 1672,
+      "height": 941
+    },
+    {
+      "slug": "captains-cabin",
+      "name": "Seaside Adventure \u00b7 Captain's Cabin",
+      "kind": "background",
+      "theme": "seaside",
+      "prompt": "Use case: illustration-story. Asset type: wide 16:9 background for Felt & Fable Studio, 1792x1008 landscape, no border. Primary request: Inside the captain's cabin of the same small charming sailing ship. Honey brown felt timber walls and plank floor, curved rear windows looking out at turquoise sea, modest desk and navigation chart at left, shelves and sea chest at right, cream fabric curtains, open central floor. Style: beautifully handcrafted realistic wool-felt textures, crisply visible tiny fibers, carefully cut edges and restrained stitch seams, warm polished children's felt-board aesthetic. Camera at standing eye level, practical theater-like scene composition with clear broad floor occupying lower third. All surfaces have wool felt texture, shallow miniature-set depth, crisp across image, gentle shadows, no depth-of-field blur. No people, no text, no labels, no watermark.",
+      "path": "art-source/cinema/space-seaside/captains-cabin.webp",
+      "width": 1672,
+      "height": 941
+    },
+    {
+      "slug": "secluded-beach",
+      "name": "Seaside Adventure \u00b7 Secluded Beach",
+      "kind": "background",
+      "theme": "seaside",
+      "prompt": "Use case: illustration-story. Asset type: wide 16:9 background for Felt & Fable Studio, 1792x1008 landscape, no border. Primary request: A secluded friendly island beach in the same turquoise sea. Sweeping pale tan felt sandy beach foreground, calm turquoise waves, layered felt rocky headland at left and a few palms at right, distant horizon, clear warm daytime light, open center for characters. Style: beautifully handcrafted realistic wool-felt textures, crisply visible tiny fibers, carefully cut edges and restrained stitch seams, warm polished children's felt-board aesthetic. Camera at standing eye level, practical theater-like scene composition with clear broad floor occupying lower third. All surfaces have wool felt texture, shallow miniature-set depth, crisp across image, gentle shadows, no depth-of-field blur. No people, no text, no labels, no watermark.",
+      "path": "art-source/cinema/space-seaside/secluded-beach.webp",
+      "width": 1672,
+      "height": 941
+    },
+    {
+      "slug": "underwater-ruins",
+      "name": "Seaside Adventure \u00b7 Underwater Ruins",
+      "kind": "background",
+      "theme": "seaside",
+      "prompt": "Use case: illustration-story. Asset type: wide 16:9 background for Felt & Fable Studio, 1792x1008 landscape, no border. Primary request: Gentle underwater ruins in the same turquoise sea. Pale tan felt seafloor, low broken sandstone columns at left and right, a small ruined arch in the middle distance, felt seaweed and coral along edges, blue-green layered felt water with subtle shafts of light, clear open central floor. Style: beautifully handcrafted realistic wool-felt textures, crisply visible tiny fibers, carefully cut edges and restrained stitch seams, warm polished children's felt-board aesthetic. Camera at standing eye level, practical theater-like scene composition with clear broad floor occupying lower third. All surfaces have wool felt texture, shallow miniature-set depth, crisp across image, gentle shadows, no depth-of-field blur. No people, no text, no labels, no watermark.",
+      "path": "art-source/cinema/space-seaside/underwater-ruins.webp",
+      "width": 1672,
+      "height": 941
+    },
+    {
+      "slug": "astronaut-helmet",
+      "name": "Astronaut Helmet",
+      "kind": "piece",
+      "theme": "spaceexpedition",
+      "prompt": "Use case: illustration-story. Asset type: single transparent PNG story prop for Felt & Fable Studio. Primary request: One flat cute astronaut helmet accessory, cream felt rim with teal collar and mustard detail, large dark blue felt visor with a single simple stitched highlight, front three-quarter view. Empty helmet, no human head. Style: beautifully handcrafted realistic wool-felt textures, crisply visible tiny fibers, carefully cut edges and restrained stitch seams, warm polished children's felt-board aesthetic. Flat two-dimensional applique cutout, a few shallow felt layers only, no volumetric plush or Pixar/3D styling. Isolated centered object fully visible with generous empty margin. Genuine transparent alpha around silhouette, no background, no floor or cast shadow, no checkerboard, no border, no lettering, no watermark.",
+      "path": "art-source/cinema/space-seaside/astronaut-helmet.webp",
+      "width": 1312,
+      "height": 1199
+    },
+    {
+      "slug": "space-toolkit",
+      "name": "Space Toolkit",
+      "kind": "piece",
+      "theme": "spaceexpedition",
+      "prompt": "Use case: illustration-story. Asset type: single transparent PNG story prop for Felt & Fable Studio. Primary request: One flat cute open space explorer toolkit prop, teal rectangular felt tool case with mustard clasps, a few clearly arranged cream and charcoal felt wrench shapes inside, slight front view. Single coherent prop. Style: beautifully handcrafted realistic wool-felt textures, crisply visible tiny fibers, carefully cut edges and restrained stitch seams, warm polished children's felt-board aesthetic. Flat two-dimensional applique cutout, a few shallow felt layers only, no volumetric plush or Pixar/3D styling. Isolated centered object fully visible with generous empty margin. Genuine transparent alpha around silhouette, no background, no floor or cast shadow, no checkerboard, no border, no lettering, no watermark.",
+      "path": "art-source/cinema/space-seaside/space-toolkit.webp",
+      "width": 1536,
+      "height": 1024
+    },
+    {
+      "slug": "sample-jar",
+      "name": "Lunar Sample Jar",
+      "kind": "piece",
+      "theme": "spaceexpedition",
+      "prompt": "Use case: illustration-story. Asset type: single transparent PNG story prop for Felt & Fable Studio. Primary request: One flat cute lunar sample jar prop with a teal screw lid, cream felt jar outline and pale blue felt front, one small gray moon rock visible through a simple felt window, a tiny mustard blank tag. No writing. Style: beautifully handcrafted realistic wool-felt textures, crisply visible tiny fibers, carefully cut edges and restrained stitch seams, warm polished children's felt-board aesthetic. Flat two-dimensional applique cutout, a few shallow felt layers only, no volumetric plush or Pixar/3D styling. Isolated centered object fully visible with generous empty margin. Genuine transparent alpha around silhouette, no background, no floor or cast shadow, no checkerboard, no border, no lettering, no watermark.",
+      "path": "art-source/cinema/space-seaside/sample-jar.webp",
+      "width": 1312,
+      "height": 1199
+    },
+    {
+      "slug": "friendly-robot",
+      "name": "Friendly Felt Robot",
+      "kind": "piece",
+      "theme": "spaceexpedition",
+      "prompt": "Use case: illustration-story. Asset type: single transparent PNG story prop for Felt & Fable Studio. Primary request: One adorable flat cut-felt friendly robot character, simple cream rectangular body with teal limbs and mustard chest button, rounded square head with two black stitched dot eyes and a tiny stitched smile, small mitten hands and block feet, front view standing. Must look like a flat felt-board cutout rather than a sculpted toy. Style: beautifully handcrafted realistic wool-felt textures, crisply visible tiny fibers, carefully cut edges and restrained stitch seams, warm polished children's felt-board aesthetic. Flat two-dimensional applique cutout, a few shallow felt layers only, no volumetric plush or Pixar/3D styling. Isolated centered object fully visible with generous empty margin. Genuine transparent alpha around silhouette, no background, no floor or cast shadow, no checkerboard, no border, no lettering, no watermark.",
+      "path": "art-source/cinema/space-seaside/friendly-robot.webp",
+      "width": 1024,
+      "height": 1536
+    },
+    {
+      "slug": "rope-coil",
+      "name": "Sailor's Rope Coil",
+      "kind": "piece",
+      "theme": "seaside",
+      "prompt": "Use case: illustration-story. Asset type: single transparent PNG story prop for Felt & Fable Studio. Primary request: One coiled sailor's rope prop made from narrow tan felt strips with subtle twisted stitch detail, flat spiral coil with one short loose end. Top-front view, clean recognizable simple shape. Style: beautifully handcrafted realistic wool-felt textures, crisply visible tiny fibers, carefully cut edges and restrained stitch seams, warm polished children's felt-board aesthetic. Flat two-dimensional applique cutout, a few shallow felt layers only, no volumetric plush or Pixar/3D styling. Isolated centered object fully visible with generous empty margin. Genuine transparent alpha around silhouette, no background, no floor or cast shadow, no checkerboard, no border, no lettering, no watermark.",
+      "path": "art-source/cinema/space-seaside/rope-coil.webp",
+      "width": 1536,
+      "height": 1024
+    },
+    {
+      "slug": "pirate-lantern",
+      "name": "Ship Lantern",
+      "kind": "piece",
+      "theme": "seaside",
+      "prompt": "Use case: illustration-story. Asset type: single transparent PNG story prop for Felt & Fable Studio. Primary request: One charming old ship lantern prop, dark charcoal felt frame, mustard and pale cream felt glowing panes, small curved top handle. Front three-quarter view. Glow stays contained within lantern silhouette, no surrounding halo. Style: beautifully handcrafted realistic wool-felt textures, crisply visible tiny fibers, carefully cut edges and restrained stitch seams, warm polished children's felt-board aesthetic. Flat two-dimensional applique cutout, a few shallow felt layers only, no volumetric plush or Pixar/3D styling. Isolated centered object fully visible with generous empty margin. Genuine transparent alpha around silhouette, no background, no floor or cast shadow, no checkerboard, no border, no lettering, no watermark.",
+      "path": "art-source/cinema/space-seaside/pirate-lantern.webp",
+      "width": 1024,
+      "height": 1536
+    },
+    {
+      "slug": "treasure-map",
+      "name": "Treasure Map",
+      "kind": "piece",
+      "theme": "seaside",
+      "prompt": "Use case: illustration-story. Asset type: single transparent PNG story prop for Felt & Fable Studio. Primary request: One unfolded treasure map prop made of cream felt with softly irregular edges, simplified teal island shapes and a dashed dark stitch route ending in a small red X, rolled corners in shallow layered felt. Front view slightly tilted. No lettering. Style: beautifully handcrafted realistic wool-felt textures, crisply visible tiny fibers, carefully cut edges and restrained stitch seams, warm polished children's felt-board aesthetic. Flat two-dimensional applique cutout, a few shallow felt layers only, no volumetric plush or Pixar/3D styling. Isolated centered object fully visible with generous empty margin. Genuine transparent alpha around silhouette, no background, no floor or cast shadow, no checkerboard, no border, no lettering, no watermark.",
+      "path": "art-source/cinema/space-seaside/treasure-map.webp",
+      "width": 1536,
+      "height": 1024
+    },
+    {
+      "slug": "wooden-crate",
+      "name": "Ship Cargo Crate",
+      "kind": "piece",
+      "theme": "seaside",
+      "prompt": "Use case: illustration-story. Asset type: single transparent PNG story prop for Felt & Fable Studio. Primary request: One honey-brown wooden cargo crate prop built entirely from flat felt plank cutouts with sewn seams, a clear diagonal brace, modest shallow side panel in slightly darker felt, front three-quarter view. No writing or symbols. Style: beautifully handcrafted realistic wool-felt textures, crisply visible tiny fibers, carefully cut edges and restrained stitch seams, warm polished children's felt-board aesthetic. Flat two-dimensional applique cutout, a few shallow felt layers only, no volumetric plush or Pixar/3D styling. Isolated centered object fully visible with generous empty margin. Genuine transparent alpha around silhouette, no background, no floor or cast shadow, no checkerboard, no border, no lettering, no watermark.",
+      "path": "art-source/cinema/space-seaside/wooden-crate.webp",
+      "width": 1374,
+      "height": 1145
+    },
+    {
+      "slug": "foreground-leafy-branches",
+      "name": "Leafy Branches Frame",
+      "kind": "piece",
+      "theme": "foreground",
+      "path": "art-source/cinema/foreground/foreground-leafy-branches.webp",
+      "width": 1672,
+      "height": 941,
+      "prompt": "Use case: illustration-story. Asset type: FULL-STAGE FOREGROUND OVERLAY for Felt & Fable story animation, wide landscape 16:9 canvas. Genuine transparent alpha background. Only specified framing elements at the outer edges; central opening truly empty transparent alpha, no background scene, no backdrop, no black/white fill, no checkerboard. Crisp tactile layered wool felt miniature craftsmanship, tiny felt fibers, softly sewn edges, clean cut silhouettes, cute handmade storybook aesthetic. Flat cutout layers with shallow material thickness, no plastic CGI or photoreal non-felt materials. No characters, no writing, no logos, no floor, no shadow cast into the transparent opening. Leafy branches frame upper LEFT and upper RIGHT corners only, dark warm-brown felt twigs with clustered emerald, moss-green and sage cut felt leaves. Branches extend inward only at top corners and outermost sides. The middle 80 percent of the width must stay clear, and all of lower two-thirds must be empty transparency. Do not add a bottom edge. Cozy sunny woodland felt storybook style."
+    },
+    {
+      "slug": "foreground-theater-curtains",
+      "name": "Parted Theater Curtains",
+      "kind": "piece",
+      "theme": "foreground",
+      "path": "art-source/cinema/foreground/foreground-theater-curtains.webp",
+      "width": 1672,
+      "height": 941,
+      "prompt": "Use case: illustration-story. Asset type: FULL-STAGE FOREGROUND OVERLAY for Felt & Fable story animation, wide landscape 16:9 canvas. Genuine transparent alpha background. Only specified framing elements at the outer edges; central opening truly empty transparent alpha, no background scene, no backdrop, no black/white fill, no checkerboard. Crisp tactile layered wool felt miniature craftsmanship, tiny felt fibers, softly sewn edges, clean cut silhouettes, cute handmade storybook aesthetic. Flat cutout layers with shallow material thickness, no plastic CGI or photoreal non-felt materials. No characters, no writing, no logos, no floor, no shadow cast into the transparent opening. Two richly textured burgundy felt theater curtains on LEFT and RIGHT outermost edges, each tied back with tiny ochre cord near mid-height. A narrow scalloped burgundy valance across very top edge only. Curtains occupy no more than 15 percent of width at each side, middle 70 percent completely transparent from valance to bottom. No stage, no floor, no backdrop, no hardware crossing the opening. Coordinated cream-and-gold theater felt storypack style."
+    },
+    {
+      "slug": "foreground-stone-arch",
+      "name": "Stone Arch Doorway Frame",
+      "kind": "piece",
+      "theme": "foreground",
+      "path": "art-source/cinema/foreground/foreground-stone-arch.webp",
+      "width": 1672,
+      "height": 941,
+      "prompt": "Use case: illustration-story. Asset type: FULL-STAGE FOREGROUND OVERLAY for Felt & Fable story animation, wide landscape 16:9 canvas. Genuine transparent alpha background. Only specified framing elements at the outer edges; central opening truly empty transparent alpha, no background scene, no backdrop, no black/white fill, no checkerboard. Crisp tactile layered wool felt miniature craftsmanship, tiny felt fibers, softly sewn edges, clean cut silhouettes, cute handmade storybook aesthetic. Flat cutout layers with shallow material thickness, no plastic CGI or photoreal non-felt materials. No characters, no writing, no logos, no floor, no shadow cast into the transparent opening. A weathered pale-gray felt stone arch doorway framing the TOP and outer LEFT/RIGHT edges. Large individually cut felt stone blocks form two narrow side pillars and an arch just under the top border, tiny moss-green felt tufts along outer corners only. Huge unobstructed transparent opening occupying central 70 percent width and extending down through the entire bottom edge. No door, no stone wall across center, no ground or paving. Cozy mysterious manor felt storypack style."
+    },
+    {
+      "slug": "foreground-harbor-railing",
+      "name": "Harbor Rope Railing",
+      "kind": "piece",
+      "theme": "foreground",
+      "path": "art-source/cinema/foreground/foreground-harbor-railing.webp",
+      "width": 1672,
+      "height": 941,
+      "prompt": "Use case: illustration-story. Asset type: FULL-STAGE FOREGROUND OVERLAY for Felt & Fable story animation, wide landscape 16:9 canvas. Genuine transparent alpha background. Only specified framing elements at the outer edges; central opening truly empty transparent alpha, no background scene, no backdrop, no black/white fill, no checkerboard. Crisp tactile layered wool felt miniature craftsmanship, tiny felt fibers, softly sewn edges, clean cut silhouettes, cute handmade storybook aesthetic. Flat cutout layers with shallow material thickness, no plastic CGI or photoreal non-felt materials. No characters, no writing, no logos, no floor, no shadow cast into the transparent opening. Weathered warm-brown felt wooden pier railing pieces only in LOWER LEFT and LOWER RIGHT corners, two short corner posts with thick cream felt rope wrapped around them. Small rail pieces angle outward to image edges; do not join across center. All of upper 80 percent completely transparent and central 70 percent width fully transparent. No sea, no harbor backdrop, no floor or deck. Tactile nautical handmade felt storybook style."
+    },
+    {
+      "slug": "maya",
+      "name": "Maya",
+      "kind": "puppet-atlas",
+      "path": "art-source/cinema/puppets/maya-atlas.png",
+      "width": 1254,
+      "height": 1254,
+      "parts": {
+        "head": [
+          49,
+          180,
+          337,
+          318
+        ],
+        "torso": [
+          493,
+          216,
+          276,
+          284
+        ],
+        "leftArm": [
+          993,
+          160,
+          164,
+          388
+        ],
+        "rightArm": [
+          117,
+          709,
+          188,
+          425
+        ],
+        "leftLeg": [
+          477,
+          703,
+          229,
+          439
+        ],
+        "rightLeg": [
+          965,
+          702,
+          225,
+          441
+        ]
+      },
+      "skin": "#be6e39",
+      "theme": "cast",
+      "prompt": "Use case: illustration-story.\nAsset type: a SINGLE reusable character puppet texture atlas for a felt-board animation app. A clean square sprite atlas containing EXACTLY SIX separate construction parts, on genuine transparent alpha.\nPrimary request: Maya, a cute child cut out of flat craft felt: medium warm brown skin, dark brown curly hair, coral-red long-sleeve shirt, navy trousers, dark brown shoes.\nComposition is mandatory: invisible 3 COLUMN by 2 ROW equal rectangular cell layout on a 1536x1536 square. No visible grid or labels. EACH part isolated, centered within its own cell with at least 12% empty padding on all four sides. Do not assemble a person. Top row left: large rounded child head with curly dark hair and both ears, entirely BLANK FACE no eyes no eyebrows no mouth no nose. Top row center: coral shirt TORSO ONLY from neck opening to waist, narrow rounded shoulders, no arms no limbs no head. Top row right: single LEFT ARM detached long coral sleeve from rounded shoulder to medium-brown mitten hand, pointing straight down, hand attached at bottom. Bottom row left: single RIGHT ARM detached matching coral sleeve and mitten hand pointing straight down. Bottom row center: single LEFT LEG detached navy trouser leg from hip to dark brown shoe, pointing straight down. Bottom row right: single RIGHT LEG matching detached navy trouser leg and shoe pointing straight down.\nArt style: real densely matted wool felt fiber texture, crisp hand-cut rounded edges, flat layered appliqu\u00e9 thickness only, orthographic straight-on. Cheerful oversized child head and short friendly body proportions. Soft neutral illumination, minimal contact shading within each part only. Subtle realistic fiber detail, not fuzzy blurred edges. The head is a flat felt disk, not a spherical face. Flat one-color felt hair silhouette shaped in rounded curls. Each part looks cut from felt sheets. Plain shirt with small rounded collar at top, no buttons required.\nConstraints: actual transparency between all parts and behind the image. Exactly six parts, exactly one per cell, visible separation. No complete character. No facial features; these will be drawn by the application. No text, no watermark, no background, no drop shadow, no ground, no vignette. No stuffed plush, no sculpted 3D, no Pixar, no realistic human anatomy, no gradients or glossy surface.",
+      "layoutCorrectionPrompt": "Use case: precise-object-edit. Edit this single felt puppet atlas. KEEP exactly its six isolated flat felt parts, beautiful wool fibers, blank face, all colors and shapes. CHANGE ONLY their layout and size to a precise invisible 3-column 2-row grid. Canvas square 1536x1536 transparent. Each column has exactly one third of canvas width, each row exactly half of height. Absolutely no part crosses any cell boundary. SIX parts centered at normalized positions: head (.1667,.25), torso (.5,.25), left arm (.8333,.25), right arm (.1667,.75), left leg (.5,.75), right leg (.8333,.75). Each part must fit into the central 70% width and 75% height of its cell. Reduce head and torso until they fit, keep each original aspect ratio. This means head maximum width 23% of the whole canvas and torso maximum width 23% of whole canvas. Give obvious empty transparent gutters between columns. For arms and legs keep them pointing straight downward. Maintain EXACTLY the same parts and appearance, no added pieces or facial features, no letters or grid lines or background."
+    },
+    {
+      "slug": "leo",
+      "name": "Leo",
+      "kind": "puppet-atlas",
+      "path": "art-source/cinema/puppets/leo-atlas.png",
+      "width": 1254,
+      "height": 1254,
+      "parts": {
+        "head": [
+          59,
+          189,
+          324,
+          309
+        ],
+        "torso": [
+          489,
+          226,
+          295,
+          298
+        ],
+        "leftArm": [
+          985,
+          163,
+          148,
+          407
+        ],
+        "rightArm": [
+          144,
+          706,
+          161,
+          446
+        ],
+        "leftLeg": [
+          487,
+          699,
+          235,
+          469
+        ],
+        "rightLeg": [
+          950,
+          700,
+          233,
+          467
+        ]
+      },
+      "skin": "#f8ba90",
+      "theme": "cast",
+      "prompt": "Use case: illustration-story. Asset type: ONE character puppet texture atlas, square 1536x1536, true transparent alpha, EXACTLY six separate felt construction parts. Character Leo: fair warm peach skin, medium-brown side-part hair, teal long-sleeve shirt, navy trousers, brown shoes. Cute rounded child.\nStyle: flat craft-felt cutouts with real dense wool fiber texture and crisp rounded hand-cut edges. Orthographic front view. Flat layers of felt only, no stuffed volume, no 3D. Felt hair with gently rounded simple edges. Soft neutral illumination and minimal contact shading confined inside each part.\nCRITICAL ATLAS LAYOUT: invisible 3-column by 2-row equalcell grid. Each column exactly one third the canvaswidth; each row exactly half the height. Allparts centered within their owncell and fit strictly inside central70% cellwidth and75%cellheight. NOpart can cross acellboundary. Entirehead maximum23%totalcanvaswidth; entiretorso maximum23%totalcanvaswidth. Transparentgutters must be obvious.\nTOP LEFT cell, center at16.7%width,25%height: ONE large round child head with its hair andears, completely blankface with NOeyes, NOmouth, NOnose, NOeyebrows. A flat skincoloredfeltcircle with separatehairapplique. TOP MIDDLE, center at50%width25%height: ONE shirt TORSO ONLY fromneckopening towaist, smallroundcollar, roundedshoulders, NOarms NOhead NOlimbs. TOP RIGHT, center at83.3%width25%height: ONE detached LEFT ARM, shirt sleeve fromroundedshoulder toskincolored mittenhand, straightdown, handatbottom. BOTTOM LEFT, center at16.7%width75%height: ONE detached RIGHT ARM matchingsleeve andmittenhand, straightdown. BOTTOM MIDDLE, center at50%width75%height: ONE detached LEFT LEG trouser fromhip toshoe pointingstraightdown. BOTTOM RIGHT, centerat83.3%width75%height: ONE detached RIGHT LEG matchingtrouser andshoe straightdown.\nThe upper shoulder starts round for a rotationjoint; trouserlegstartsflat. The twosleeves must be EXACTsameclothcolor astorso. Legs match eachother.\nAllsixparts distinctclearlyseparated andcontainedintheircells. Preserve aspectratio ofeachcutout: headround, torsosquarish, limbsnarrowvertical. NOassembledperson, NOlabels, NOgrid, NOtext, NOwatermark, NObackground, NOshadowsoutsidecutouts. No facialfeatures becauseappwilldrawthem. Realtransparency, crispfeltfiberdetail. NotPixar, notplush, notrealistichumananatomy.",
+      "layoutCorrectionPrompt": "Use case: precise-object-edit. Edit this single felt puppet atlas. KEEP exactly its six isolated flat felt parts, beautiful wool fibers, blank face, all colors and shapes. CHANGE ONLY their layout and size to a precise invisible 3-column 2-row grid. Canvas square 1536x1536 transparent. Each column has exactly one third of canvas width, each row exactly half of height. Absolutely no part crosses any cell boundary. SIX parts centered at normalized positions: head (.1667,.25), torso (.5,.25), left arm (.8333,.25), right arm (.1667,.75), left leg (.5,.75), right leg (.8333,.75). Each part must fit into the central 70% width and 75% height of its cell. Reduce head and torso until they fit, keep each original aspect ratio. This means head maximum width 23% of the whole canvas and torso maximum width 23% of whole canvas. Give obvious empty transparent gutters between columns. For arms and legs keep them pointing straight downward. Maintain EXACTLY the same parts and appearance, no added pieces or facial features, no letters or grid lines or background."
+    },
+    {
+      "slug": "asha",
+      "name": "Asha",
+      "kind": "puppet-atlas",
+      "path": "art-source/cinema/puppets/asha-atlas.png",
+      "width": 1254,
+      "height": 1254,
+      "parts": {
+        "head": [
+          46,
+          189,
+          347,
+          308
+        ],
+        "torso": [
+          505,
+          246,
+          270,
+          254
+        ],
+        "leftArm": [
+          1021,
+          154,
+          139,
+          426
+        ],
+        "rightArm": [
+          150,
+          741,
+          141,
+          427
+        ],
+        "leftLeg": [
+          549,
+          733,
+          166,
+          431
+        ],
+        "rightLeg": [
+          960,
+          732,
+          168,
+          433
+        ]
+      },
+      "skin": "#8e4e30",
+      "theme": "cast",
+      "prompt": "Use case: illustration-story. Asset type: ONE character puppet texture atlas, square 1536x1536, true transparent alpha, EXACTLY six separate felt construction parts. Character Asha: deep rich brown skin, dark black hair with two round puffs, mustard yellow long-sleeve shirt, teal trousers, brown shoes. Cute rounded child.\nStyle: flat craft-felt cutouts with real dense wool fiber texture and crisp rounded hand-cut edges. Orthographic front view. Flat layers of felt only, no stuffed volume, no 3D. Felt hair with gently rounded simple edges. Soft neutral illumination and minimal contact shading confined inside each part.\nCRITICAL ATLAS LAYOUT: invisible 3-column by 2-row equalcell grid. Each column exactly one third the canvaswidth; each row exactly half the height. Allparts centered within their owncell and fit strictly inside central70% cellwidth and75%cellheight. NOpart can cross acellboundary. Entirehead maximum23%totalcanvaswidth; entiretorso maximum23%totalcanvaswidth. Transparentgutters must be obvious.\nTOP LEFT cell, center at16.7%width,25%height: ONE large round child head with its hair andears, completely blankface with NOeyes, NOmouth, NOnose, NOeyebrows. A flat skincoloredfeltcircle with separatehairapplique. TOP MIDDLE, center at50%width25%height: ONE shirt TORSO ONLY fromneckopening towaist, smallroundcollar, roundedshoulders, NOarms NOhead NOlimbs. TOP RIGHT, center at83.3%width25%height: ONE detached LEFT ARM, shirt sleeve fromroundedshoulder toskincolored mittenhand, straightdown, handatbottom. BOTTOM LEFT, center at16.7%width75%height: ONE detached RIGHT ARM matchingsleeve andmittenhand, straightdown. BOTTOM MIDDLE, center at50%width75%height: ONE detached LEFT LEG trouser fromhip toshoe pointingstraightdown. BOTTOM RIGHT, centerat83.3%width75%height: ONE detached RIGHT LEG matchingtrouser andshoe straightdown.\nThe upper shoulder starts round for a rotationjoint; trouserlegstartsflat. The twosleeves must be EXACTsameclothcolor astorso. Legs match eachother.\nAllsixparts distinctclearlyseparated andcontainedintheircells. Preserve aspectratio ofeachcutout: headround, torsosquarish, limbsnarrowvertical. NOassembledperson, NOlabels, NOgrid, NOtext, NOwatermark, NObackground, NOshadowsoutsidecutouts. No facialfeatures becauseappwilldrawthem. Realtransparency, crispfeltfiberdetail. NotPixar, notplush, notrealistichumananatomy.",
+      "layoutCorrectionPrompt": "Use case: precise-object-edit. Edit this single felt puppet atlas. KEEP exactly its six isolated flat felt parts, beautiful wool fibers, blank face, all colors and shapes. CHANGE ONLY their layout and size to a precise invisible 3-column 2-row grid. Canvas square 1536x1536 transparent. Each column has exactly one third of canvas width, each row exactly half of height. Absolutely no part crosses any cell boundary. SIX parts centered at normalized positions: head (.1667,.25), torso (.5,.25), left arm (.8333,.25), right arm (.1667,.75), left leg (.5,.75), right leg (.8333,.75). Each part must fit into the central 70% width and 75% height of its cell. Reduce head and torso until they fit, keep each original aspect ratio. This means head maximum width 23% of the whole canvas and torso maximum width 23% of whole canvas. Give obvious empty transparent gutters between columns. For arms and legs keep them pointing straight downward. Maintain EXACTLY the same parts and appearance, no added pieces or facial features, no letters or grid lines or background."
+    },
+    {
+      "slug": "jun",
+      "name": "Jun",
+      "kind": "puppet-atlas",
+      "path": "art-source/cinema/puppets/jun-atlas.png",
+      "width": 1254,
+      "height": 1254,
+      "parts": {
+        "head": [
+          53,
+          207,
+          344,
+          297
+        ],
+        "torso": [
+          499,
+          245,
+          290,
+          277
+        ],
+        "leftArm": [
+          990,
+          161,
+          141,
+          424
+        ],
+        "rightArm": [
+          140,
+          717,
+          151,
+          431
+        ],
+        "leftLeg": [
+          515,
+          718,
+          196,
+          441
+        ],
+        "rightLeg": [
+          965,
+          717,
+          200,
+          442
+        ]
+      },
+      "skin": "#f0ba87",
+      "theme": "cast",
+      "prompt": "Use case: illustration-story. Asset type: ONE character puppet texture atlas, square 1536x1536, true transparent alpha, EXACTLY six separate felt construction parts. Character Jun: light tan skin, straight black bob hairstyle, muted plum long-sleeve shirt, navy trousers, brown shoes. Cute rounded child.\nStyle: flat craft-felt cutouts with real dense wool fiber texture and crisp rounded hand-cut edges. Orthographic front view. Flat layers of felt only, no stuffed volume, no 3D. Felt hair with gently rounded simple edges. Soft neutral illumination and minimal contact shading confined inside each part.\nCRITICAL ATLAS LAYOUT: invisible 3-column by 2-row equalcell grid. Each column exactly one third the canvaswidth; each row exactly half the height. Allparts centered within their owncell and fit strictly inside central70% cellwidth and75%cellheight. NOpart can cross acellboundary. Entirehead maximum23%totalcanvaswidth; entiretorso maximum23%totalcanvaswidth. Transparentgutters must be obvious.\nTOP LEFT cell, center at16.7%width,25%height: ONE large round child head with its hair andears, completely blankface with NOeyes, NOmouth, NOnose, NOeyebrows. A flat skincoloredfeltcircle with separatehairapplique. TOP MIDDLE, center at50%width25%height: ONE shirt TORSO ONLY fromneckopening towaist, smallroundcollar, roundedshoulders, NOarms NOhead NOlimbs. TOP RIGHT, center at83.3%width25%height: ONE detached LEFT ARM, shirt sleeve fromroundedshoulder toskincolored mittenhand, straightdown, handatbottom. BOTTOM LEFT, center at16.7%width75%height: ONE detached RIGHT ARM matchingsleeve andmittenhand, straightdown. BOTTOM MIDDLE, center at50%width75%height: ONE detached LEFT LEG trouser fromhip toshoe pointingstraightdown. BOTTOM RIGHT, centerat83.3%width75%height: ONE detached RIGHT LEG matchingtrouser andshoe straightdown.\nThe upper shoulder starts round for a rotationjoint; trouserlegstartsflat. The twosleeves must be EXACTsameclothcolor astorso. Legs match eachother.\nAllsixparts distinctclearlyseparated andcontainedintheircells. Preserve aspectratio ofeachcutout: headround, torsosquarish, limbsnarrowvertical. NOassembledperson, NOlabels, NOgrid, NOtext, NOwatermark, NObackground, NOshadowsoutsidecutouts. No facialfeatures becauseappwilldrawthem. Realtransparency, crispfeltfiberdetail. NotPixar, notplush, notrealistichumananatomy.",
+      "layoutCorrectionPrompt": "Use case: precise-object-edit. Edit this single felt puppet atlas. KEEP exactly its six isolated flat felt parts, beautiful wool fibers, blank face, all colors and shapes. CHANGE ONLY their layout and size to a precise invisible 3-column 2-row grid. Canvas square 1536x1536 transparent. Each column has exactly one third of canvas width, each row exactly half of height. Absolutely no part crosses any cell boundary. SIX parts centered at normalized positions: head (.1667,.25), torso (.5,.25), left arm (.8333,.25), right arm (.1667,.75), left leg (.5,.75), right leg (.8333,.75). Each part must fit into the central 70% width and 75% height of its cell. Reduce head and torso until they fit, keep each original aspect ratio. This means head maximum width 23% of the whole canvas and torso maximum width 23% of whole canvas. Give obvious empty transparent gutters between columns. For arms and legs keep them pointing straight downward. Maintain EXACTLY the same parts and appearance, no added pieces or facial features, no letters or grid lines or background."
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+/* Felt & Fable's front cover. No fonts or support widgets must load to enter. */
+#welcomeScreen{--welcome-ink:#24443b;box-sizing:border-box;position:fixed;inset:0;width:100%;height:100dvh;max-width:none;max-height:none;margin:0;padding:clamp(18px,4vw,64px);border:0;border-radius:0;color:var(--welcome-ink);overflow:auto;background-color:#eeeadd;background-image:repeating-linear-gradient(0deg,#ffffff15 0 1px,transparent 1px 4px),repeating-linear-gradient(90deg,#76624807 0 1px,transparent 1px 4px),radial-gradient(ellipse at 85% 0%,#d3e1cd,transparent 60%);box-shadow:none}
+#welcomeScreen::backdrop{background:#eeeadd}
+#welcomeScreen:not([open]){display:none}
+.welcome-wrap{width:min(1100px,100%);min-height:calc(100dvh - clamp(36px,8vw,128px));margin:auto;display:flex;flex-direction:column;justify-content:center;gap:22px}
+
+
+.welcome-card{display:grid;grid-template-columns:1fr 1fr;background:#fcfaf3;border:1px solid #dad9c9;border-radius:24px;box-shadow:0 22px 65px #29443715,0 3px 10px #2944370b;overflow:hidden;min-height:480px}
+.welcome-copy{padding:clamp(28px,4vw,58px);display:flex;flex-direction:column;align-items:flex-start;justify-content:center;position:relative}
+
+#welcomeTitle{font:700 clamp(46px,5.8vw,76px)/.96 Georgia,'Times New Roman',serif;letter-spacing:-.045em;color:#234f43;margin:0;text-shadow:1px 2px 0 #cfddc3}
+#welcomeTitle .welcome-title-line{display:block;white-space:nowrap}
+#welcomeTitle .welcome-amp{font-style:italic;color:#b78043}
+#welcomeTitle .welcome-studio{display:block;font:600 12px/1.5 system-ui,sans-serif;text-transform:uppercase;letter-spacing:.4em;margin-top:17px;margin-left:3px;color:#6c7d67;text-shadow:none}
+
+#welcomeScreen .welcome-credit{font-size:15px;line-height:1.5;margin:26px 0 28px;color:#607362}
+#welcomeScreen .welcome-credit strong{color:#365545;font-weight:650}
+#welcomeStart{display:flex;align-items:center;justify-content:center;gap:28px;border:1px solid #215b49;border-radius:11px;background:#215b49;color:#fffaf0;font:650 15px system-ui;padding:15px 21px;min-width:205px;min-height:52px;box-shadow:0 3px 0 #174335}
+#welcomeStart:hover{background:#194c3c;transform:translateY(-1px)}
+#welcomeStart:disabled{opacity:.65;transform:none;cursor:wait}
+#welcomeScreen .welcome-status{font-size:11px;line-height:1.5;min-height:17px;margin:11px 0 0;color:#6b7e6e}
+#welcomeReload{margin-top:8px;font-size:12px;padding:7px 12px}#welcomeReload[hidden]{display:none}
+.welcome-art{position:relative;display:flex;align-items:center;justify-content:center;padding:clamp(22px,3.2vw,42px);background:#dce6d3;background-image:repeating-linear-gradient(45deg,#48654404 0 2px,transparent 2px 5px);border-left:1px dashed #aebe9e}
+.welcome-art::before{content:'';position:absolute;inset:17px;border:1px dashed #819b7377;border-radius:14px;pointer-events:none}
+.welcome-picture{position:relative;width:100%;aspect-ratio:1.08;background:linear-gradient(#a8c5b0 60%,#91ad75 60%);border:9px solid #fcfaf0;border-bottom-width:39px;border-radius:8px;box-shadow:0 12px 22px #38482c30;transform:rotate(2deg);overflow:hidden}
+#welcomePreview{display:block;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .3s}
+#welcomePreview.is-ready{opacity:1}
+
+.welcome-support{grid-column:1/-1;display:flex;justify-content:center;align-items:center;gap:24px;padding:22px 30px;border-top:1px solid #e2e1d4;background:#fcfaf3}
+#welcomeScreen .welcome-support p{margin:0;font-size:13px;line-height:1.6;color:#697669}
+.welcome-support strong{display:block;color:#375546;font-weight:600}
+.welcome-coffee{flex-shrink:0;display:inline-flex;align-items:center;justify-content:center;gap:11px;padding:12px 19px;min-height:48px;text-decoration:none;background:#FFDD00;color:#000;border:1px solid #d9bc00;border-radius:10px;font:700 18px/1.2 Georgia,serif;box-shadow:0 2px 0 #b9a31a;transition:transform .15s,box-shadow .15s}
+.welcome-coffee:hover{color:#000;background:#ffe432;transform:translateY(-2px);box-shadow:0 4px 0 #b9a31a}
+.welcome-coffee .coffee-icon{font:24px/1 system-ui}
+#welcomeScreen a:focus-visible,#welcomeScreen button:focus-visible{outline:3px solid #a66528;outline-offset:4px}
+@media(max-width:760px){#welcomeScreen{padding:20px}.welcome-wrap{min-height:calc(100dvh - 40px);gap:18px}.welcome-card{grid-template-columns:1fr;min-height:0}.welcome-copy{padding:30px;align-items:center;text-align:center}#welcomeTitle{font-size:clamp(34px,10vw,52px)}#welcomeScreen .welcome-credit{margin-bottom:20px}.welcome-art{border-left:0;border-top:1px dashed #aebe9e;padding:23px 45px}.welcome-picture{aspect-ratio:2.3;max-width:480px;border-width:6px;border-bottom-width:15px;transform:rotate(1deg)}.welcome-support{flex-direction:column;text-align:center;gap:14px;padding:22px 24px}}
+@media(max-height:700px) and (min-width:761px){#welcomeScreen{padding:22px}.welcome-wrap{min-height:calc(100dvh - 44px);gap:14px}.welcome-card{min-height:390px}.welcome-copy{padding:25px 36px}#welcomeTitle{font-size:57px}#welcomeScreen .welcome-credit{margin-bottom:18px}.welcome-picture{max-height:335px}}
+@media(prefers-reduced-motion:reduce){#welcomeScreen *,#welcomeScreen *::before{transition:none!important;animation:none!important}.welcome-coffee:hover,#welcomeStart:hover{transform:none}}

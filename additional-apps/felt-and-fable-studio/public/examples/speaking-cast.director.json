@@ -1,0 +1,129 @@
+{
+  "format": "felt-director-plan",
+  "version": 1,
+  "title": "Meet the Speaking Cast",
+  "canvas": {
+    "width": 1600,
+    "height": 900,
+    "fps": 60
+  },
+  "scenes": [
+    {
+      "id": "speaking-cast",
+      "name": "Meet the speaking cast",
+      "backdrop": "bg82",
+      "duration": 16,
+      "pieces": [
+        {
+          "id": "maya",
+          "asset": "cinema-maya",
+          "x": 320,
+          "y": 620,
+          "w": 330,
+          "acting": {
+            "expression": "happy",
+            "pose": "waving",
+            "talk": false,
+            "blink": true,
+            "cues": []
+          }
+        },
+        {
+          "id": "leo",
+          "asset": "cinema-leo",
+          "x": 640,
+          "y": 620,
+          "w": 330,
+          "acting": {
+            "expression": "happy",
+            "pose": "pointing",
+            "talk": false,
+            "blink": true,
+            "cues": []
+          }
+        },
+        {
+          "id": "asha",
+          "asset": "cinema-asha",
+          "x": 960,
+          "y": 620,
+          "w": 330,
+          "acting": {
+            "expression": "happy",
+            "pose": "carrying",
+            "talk": false,
+            "blink": true,
+            "cues": []
+          }
+        },
+        {
+          "id": "jun",
+          "asset": "cinema-jun",
+          "x": 1280,
+          "y": 620,
+          "w": 330,
+          "acting": {
+            "expression": "happy",
+            "pose": "standing",
+            "talk": false,
+            "blink": true,
+            "cues": []
+          }
+        }
+      ],
+      "cinema": {
+        "transition": {
+          "kind": "curtains",
+          "duration": 0.8
+        },
+        "shots": [
+          {
+            "id": "cast-wide",
+            "name": "Meet the cast",
+            "duration": 16,
+            "from": {
+              "x": 800,
+              "y": 450,
+              "zoom": 1
+            },
+            "move": false
+          }
+        ]
+      },
+      "script": [
+        {
+          "actorId": "maya",
+          "text": "Hello Drew! I am ready for an adventure.",
+          "voice": {
+            "delivery": "cheerful"
+          },
+          "bubble": true
+        },
+        {
+          "actorId": "leo",
+          "text": "Wait a minute. Did you hear that?",
+          "voice": {
+            "delivery": "worried"
+          },
+          "bubble": true
+        },
+        {
+          "actorId": "asha",
+          "text": "A talking felt story! This is going to be fun.",
+          "voice": {
+            "delivery": "cheerful"
+          },
+          "bubble": true
+        },
+        {
+          "actorId": "jun",
+          "text": "I will tell the next story. After a little nap.",
+          "voice": {
+            "delivery": "sleepy"
+          },
+          "bubble": true
+        }
+      ]
+    }
+  ]
+}

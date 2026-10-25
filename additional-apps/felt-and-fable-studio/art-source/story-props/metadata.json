@@ -1,0 +1,196 @@
+{
+  "schemaVersion": 1,
+  "canvas": [
+    512,
+    512
+  ],
+  "preserveFullCanvas": true,
+  "description": "Stateful handmade felt sprites. Switch source without trimming or changing object dimensions. State changes are discrete cutout swaps, not skeletal opening animations.",
+  "props": {
+    "storybook": {
+      "anchor": [
+        0.5,
+        0.77
+      ],
+      "anchorDescription": "Spine base; opens toward left.",
+      "states": [
+        "storybook-closed",
+        "storybook-open"
+      ]
+    },
+    "gift": {
+      "anchor": [
+        0.355,
+        0.865
+      ],
+      "anchorDescription": "Bottom center of main box body, not total opened silhouette.",
+      "states": [
+        "gift-closed",
+        "gift-open"
+      ]
+    },
+    "door": {
+      "anchor": [
+        0.5,
+        0.9
+      ],
+      "anchorDescription": "Center of fixed doorway threshold; panel opens toward left.",
+      "states": [
+        "door-closed",
+        "door-open"
+      ]
+    }
+  },
+  "states": {
+    "storybook-closed": {
+      "file": "assets/story-props/storybook-closed.webp",
+      "width": 512,
+      "height": 512,
+      "bounds": [
+        256,
+        102,
+        500,
+        423
+      ],
+      "normalizedBounds": [
+        0.5,
+        0.19921875,
+        0.9765625,
+        0.826171875
+      ],
+      "bytes": 36374,
+      "transparentPixels": 190224,
+      "antialiasedPixels": 71343,
+      "sourceDimensions": [
+        1254,
+        1254
+      ]
+    },
+    "storybook-open": {
+      "file": "assets/story-props/storybook-open.webp",
+      "width": 512,
+      "height": 512,
+      "bounds": [
+        24,
+        99,
+        498,
+        424
+      ],
+      "normalizedBounds": [
+        0.046875,
+        0.193359375,
+        0.97265625,
+        0.828125
+      ],
+      "bytes": 47978,
+      "transparentPixels": 122975,
+      "antialiasedPixels": 138018,
+      "sourceDimensions": [
+        1254,
+        1254
+      ]
+    },
+    "gift-closed": {
+      "file": "assets/story-props/gift-closed.webp",
+      "width": 512,
+      "height": 512,
+      "bounds": [
+        6,
+        107,
+        351,
+        445
+      ],
+      "normalizedBounds": [
+        0.01171875,
+        0.208984375,
+        0.685546875,
+        0.869140625
+      ],
+      "bytes": 42760,
+      "transparentPixels": 164225,
+      "antialiasedPixels": 97022,
+      "sourceDimensions": [
+        1254,
+        1254
+      ]
+    },
+    "gift-open": {
+      "file": "assets/story-props/gift-open.webp",
+      "width": 512,
+      "height": 512,
+      "bounds": [
+        24,
+        179,
+        507,
+        450
+      ],
+      "normalizedBounds": [
+        0.046875,
+        0.349609375,
+        0.990234375,
+        0.87890625
+      ],
+      "bytes": 43262,
+      "transparentPixels": 160471,
+      "antialiasedPixels": 100413,
+      "sourceDimensions": [
+        1254,
+        1254
+      ]
+    },
+    "door-closed": {
+      "file": "assets/story-props/door-closed.webp",
+      "width": 512,
+      "height": 512,
+      "bounds": [
+        107,
+        52,
+        405,
+        462
+      ],
+      "normalizedBounds": [
+        0.208984375,
+        0.1015625,
+        0.791015625,
+        0.90234375
+      ],
+      "bytes": 45454,
+      "transparentPixels": 152215,
+      "antialiasedPixels": 109070,
+      "sourceDimensions": [
+        1254,
+        1254
+      ]
+    },
+    "door-open": {
+      "file": "assets/story-props/door-open.webp",
+      "width": 512,
+      "height": 512,
+      "bounds": [
+        20,
+        50,
+        407,
+        463
+      ],
+      "normalizedBounds": [
+        0.0390625,
+        0.09765625,
+        0.794921875,
+        0.904296875
+      ],
+      "bytes": 57756,
+      "transparentPixels": 118347,
+      "antialiasedPixels": 142958,
+      "sourceDimensions": [
+        1254,
+        1254
+      ]
+    }
+  },
+  "notes": [
+    "All generated source images share a 1254×1254 native canvas, scaled uniformly to 512×512 without trimming or background processing.",
+    "Use these as discrete state changes. They are independently generated artwork variants, not registered animation frames; minor stitching and silhouette variation is intentional/expected.",
+    "Gift front panel was refined to keep height consistent when removing lid. Box base and doorway threshold move by only a few runtime pixels between states.",
+    "Book spine remains at horizontal midpoint; opening extends left. Doorway frame stays fixed while open door panel extends left."
+  ]
+}

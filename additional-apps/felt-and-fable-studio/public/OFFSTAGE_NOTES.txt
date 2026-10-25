@@ -1,0 +1,22 @@
+FELT & FABLE v1.27 — OFFSTAGE WORKSPACE
+
+A separate editor view shows and edits objects outside the camera frame.
+Gold outline identifies the video shot; backdrop keeps its original world bounds.
+Find selected, Fit all, an offscreen-piece list, workspace zoom and pan, and
+automatic recovery after an offscreen drag keep pieces accessible.
+Custom path drawing uses the same editor/world coordinate conversion and can
+cross from one side of the shot to the other. Layers can locate remote pieces.
+Only the editing canvas uses this view; scene cameras and saved story data are
+unaffected by workspace navigation. Hidden/transparent selection ghosts, labels,
+the frame outline and margins are not included in PNG, MP4 or presentation.
+
+Validation used native canvas plus DOM stubs and actual registered pointer
+callbacks: offscreen dragging and return, hit testing, recovery through Layers,
+Fit all bounds, zoom around cursor, pan without changing story/camera, path
+creation from offstage across the shot, and clipping parked pieces from output.
+Output frames match the normal renderer at 30 and 60 fps with Offstage enabled.
+All prior animation/path tests pass. Script syntax, HTML IDs/references, ZIP
+integrity, update merge and unchanged artwork are also checked.
+
+No browser executable was available for full interactive layout testing or an
+actual MP4 encoding run. Native canvas checks are not browser usability tests.

@@ -1,0 +1,552 @@
+{
+  "assets": {
+    "meadow": {
+      "filename": "meadow.png",
+      "width": 1672,
+      "height": 941
+    },
+    "interior": {
+      "filename": "interior.png",
+      "width": 1672,
+      "height": 941
+    },
+    "straw-house": {
+      "filename": "straw-house.png",
+      "width": 434,
+      "height": 417,
+      "source": "props-atlas",
+      "sourceBox": [
+        8,
+        15,
+        442,
+        432
+      ]
+    },
+    "stick-house": {
+      "filename": "stick-house.png",
+      "width": 437,
+      "height": 415,
+      "source": "props-atlas",
+      "sourceBox": [
+        447,
+        17,
+        884,
+        432
+      ]
+    },
+    "brick-house": {
+      "filename": "brick-house.png",
+      "width": 458,
+      "height": 423,
+      "source": "props-atlas",
+      "sourceBox": [
+        885,
+        9,
+        1343,
+        432
+      ]
+    },
+    "tub": {
+      "filename": "tub.png",
+      "width": 405,
+      "height": 287,
+      "source": "props-atlas",
+      "sourceBox": [
+        1365,
+        152,
+        1770,
+        439
+      ]
+    },
+    "rabbit": {
+      "filename": "rabbit.png",
+      "width": 199,
+      "height": 436,
+      "source": "props-atlas",
+      "sourceBox": [
+        130,
+        436,
+        329,
+        872
+      ]
+    },
+    "table": {
+      "filename": "table.png",
+      "width": 531,
+      "height": 296,
+      "source": "props-atlas",
+      "sourceBox": [
+        410,
+        550,
+        941,
+        846
+      ]
+    },
+    "flower": {
+      "filename": "flower.png",
+      "width": 246,
+      "height": 425,
+      "source": "props-atlas",
+      "sourceBox": [
+        1008,
+        442,
+        1254,
+        867
+      ]
+    },
+    "buns": {
+      "filename": "buns.png",
+      "width": 376,
+      "height": 352,
+      "source": "props-atlas",
+      "sourceBox": [
+        1369,
+        505,
+        1745,
+        857
+      ]
+    },
+    "pip-stand": {
+      "filename": "pip-stand.png",
+      "width": 384,
+      "height": 448,
+      "source": "cast-atlas",
+      "sourceBox": [
+        25,
+        0,
+        360,
+        338
+      ],
+      "sourceScale": 1,
+      "footAnchor": [
+        192,
+        432
+      ],
+      "registrationOffset": [
+        27,
+        104
+      ],
+      "character": "pip"
+    },
+    "pip-walk-a": {
+      "filename": "pip-walk-a.png",
+      "width": 384,
+      "height": 448,
+      "source": "cast-atlas",
+      "sourceBox": [
+        375,
+        0,
+        725,
+        338
+      ],
+      "sourceScale": 1,
+      "footAnchor": [
+        192,
+        432
+      ],
+      "registrationOffset": [
+        14,
+        102
+      ],
+      "character": "pip"
+    },
+    "poppy-stand": {
+      "filename": "poppy-stand.png",
+      "width": 384,
+      "height": 448,
+      "source": "cast-atlas",
+      "sourceBox": [
+        25,
+        339,
+        360,
+        695
+      ],
+      "sourceScale": 1,
+      "footAnchor": [
+        192,
+        432
+      ],
+      "registrationOffset": [
+        30,
+        84
+      ],
+      "character": "poppy"
+    },
+    "poppy-walk-a": {
+      "filename": "poppy-walk-a.png",
+      "width": 384,
+      "height": 448,
+      "source": "cast-atlas",
+      "sourceBox": [
+        375,
+        339,
+        725,
+        695
+      ],
+      "sourceScale": 1,
+      "footAnchor": [
+        192,
+        432
+      ],
+      "registrationOffset": [
+        16,
+        83
+      ],
+      "character": "poppy"
+    },
+    "bruno-stand": {
+      "filename": "bruno-stand.png",
+      "width": 384,
+      "height": 448,
+      "source": "cast-atlas",
+      "sourceBox": [
+        25,
+        695,
+        360,
+        1039
+      ],
+      "sourceScale": 1,
+      "footAnchor": [
+        192,
+        432
+      ],
+      "registrationOffset": [
+        30,
+        92
+      ],
+      "character": "bruno"
+    },
+    "bruno-walk-a": {
+      "filename": "bruno-walk-a.png",
+      "width": 384,
+      "height": 448,
+      "source": "cast-atlas",
+      "sourceBox": [
+        375,
+        695,
+        725,
+        1039
+      ],
+      "sourceScale": 1,
+      "footAnchor": [
+        192,
+        432
+      ],
+      "registrationOffset": [
+        19,
+        92
+      ],
+      "character": "bruno"
+    },
+    "wolf-stand": {
+      "filename": "wolf-stand.png",
+      "width": 384,
+      "height": 448,
+      "source": "cast-atlas",
+      "sourceBox": [
+        25,
+        1039,
+        360,
+        1448
+      ],
+      "sourceScale": 1,
+      "footAnchor": [
+        192,
+        432
+      ],
+      "registrationOffset": [
+        32,
+        40
+      ],
+      "character": "wolf"
+    },
+    "wolf-walk-a": {
+      "filename": "wolf-walk-a.png",
+      "width": 384,
+      "height": 448,
+      "source": "cast-atlas",
+      "sourceBox": [
+        375,
+        1039,
+        725,
+        1448
+      ],
+      "sourceScale": 1,
+      "footAnchor": [
+        192,
+        432
+      ],
+      "registrationOffset": [
+        21,
+        44
+      ],
+      "character": "wolf"
+    },
+    "pip-sleep": {
+      "filename": "pip-sleep.png",
+      "width": 384,
+      "height": 448,
+      "source": "actions-atlas",
+      "sourceBox": [
+        30,
+        100,
+        590,
+        483
+      ],
+      "sourceScale": 0.56,
+      "footAnchor": [
+        192,
+        432
+      ],
+      "registrationOffset": [
+        52,
+        219
+      ],
+      "character": "pip"
+    },
+    "poppy-flower": {
+      "filename": "poppy-flower.png",
+      "width": 384,
+      "height": 448,
+      "source": "actions-atlas",
+      "sourceBox": [
+        640,
+        8,
+        915,
+        500
+      ],
+      "sourceScale": 0.69,
+      "footAnchor": [
+        192,
+        432
+      ],
+      "registrationOffset": [
+        95,
+        97
+      ],
+      "character": "poppy"
+    },
+    "bruno-build": {
+      "filename": "bruno-build.png",
+      "width": 384,
+      "height": 448,
+      "source": "actions-atlas",
+      "sourceBox": [
+        1066,
+        41,
+        1518,
+        479
+      ],
+      "sourceScale": 0.7,
+      "footAnchor": [
+        192,
+        432
+      ],
+      "registrationOffset": [
+        39,
+        127
+      ],
+      "character": "bruno"
+    },
+    "wolf-puff": {
+      "filename": "wolf-puff.png",
+      "width": 384,
+      "height": 448,
+      "source": "actions-atlas",
+      "sourceBox": [
+        31,
+        480,
+        500,
+        1015
+      ],
+      "sourceScale": 0.66,
+      "footAnchor": [
+        192,
+        432
+      ],
+      "registrationOffset": [
+        31,
+        84
+      ],
+      "character": "wolf"
+    },
+    "wolf-sit": {
+      "filename": "wolf-sit.png",
+      "width": 384,
+      "height": 448,
+      "source": "actions-atlas",
+      "sourceBox": [
+        543,
+        546,
+        1055,
+        1012
+      ],
+      "sourceScale": 0.64,
+      "footAnchor": [
+        192,
+        432
+      ],
+      "registrationOffset": [
+        29,
+        139
+      ],
+      "character": "wolf"
+    },
+    "wolf-wet": {
+      "filename": "wolf-wet.png",
+      "width": 384,
+      "height": 448,
+      "source": "actions-atlas",
+      "sourceBox": [
+        1068,
+        478,
+        1498,
+        1011
+      ],
+      "sourceScale": 0.64,
+      "footAnchor": [
+        192,
+        432
+      ],
+      "registrationOffset": [
+        56,
+        96
+      ],
+      "character": "wolf"
+    },
+    "pig-tub-push": {
+      "filename": "pig-tub-push.png",
+      "width": 950,
+      "height": 562,
+      "source": "groups-atlas",
+      "sourceBox": [
+        230,
+        40,
+        1180,
+        602
+      ],
+      "sourceScale": 1,
+      "visibleBox": [
+        11,
+        9,
+        937,
+        559
+      ],
+      "footAnchor": [
+        475,
+        559
+      ],
+      "groupAsset": true,
+      "referenceHeadHeight": 190,
+      "contactNotes": "All six hands meet tub rim. Far-side legs naturally occluded by tub."
+    },
+    "pigs-spoons": {
+      "filename": "pigs-spoons.png",
+      "width": 1154,
+      "height": 541,
+      "source": "groups-atlas",
+      "sourceBox": [
+        114,
+        603,
+        1268,
+        1144
+      ],
+      "sourceScale": 1,
+      "visibleBox": [
+        10,
+        2,
+        1143,
+        531
+      ],
+      "footAnchor": [
+        577,
+        531
+      ],
+      "groupAsset": true,
+      "referenceHeadHeight": 190,
+      "contactNotes": "Each spoon is held by a visible bent forearm/hand; other hands rest on table."
+    }
+  },
+  "stageGuides": {
+    "interior": {
+      "size": [
+        1672,
+        941
+      ],
+      "closedDoor": [
+        52,
+        167,
+        287,
+        613
+      ],
+      "doorThreshold": [
+        177,
+        612
+      ],
+      "fireplaceOpening": [
+        1100,
+        342,
+        1585,
+        588
+      ],
+      "hearthFrontY": 649,
+      "window": [
+        447,
+        191,
+        693,
+        448
+      ]
+    },
+    "meadow": {
+      "size": [
+        1672,
+        941
+      ],
+      "openStage": [
+        180,
+        500,
+        1490,
+        840
+      ],
+      "pathTopY": 647,
+      "pathBottomY": 866
+    },
+    "brick-house": {
+      "doorOpening": [
+        233,
+        256,
+        299,
+        398
+      ],
+      "chimneyOpeningCenter": [
+        354,
+        20
+      ],
+      "chimneyTopWidth": 84
+    },
+    "straw-house": {
+      "doorOpening": [
+        242,
+        257,
+        330,
+        392
+      ]
+    },
+    "stick-house": {
+      "doorOpening": [
+        245,
+        257,
+        328,
+        397
+      ]
+    }
+  },
+  "limitations": [
+    "Only stand and walk-a are approved. Original generated walking columns repeat the same leading leg; corrected third column still leads with the same leg and moves same-side arm, so it is retained only as rejected source. Do not use it as an anatomically correct alternating walk.",
+    "A separate opposite-step generation failed due to an image tool output moderation rejection; no true walk-b is delivered.",
+    "Action poses are complete authored illustrations with contacts baked into the artwork. They are not skeletal IK poses.",
+    "Backgrounds are 1672x941; modest zoom recommended.",
+    "Poppy action flower is slightly smaller than separate flower prop; preserve action artwork scale when swapping.",
+    "All cast crops are registered at native scale on 384x448 transparent canvases; action scale matches approximate head size rather than full pose height."
+  ]
+}

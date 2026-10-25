@@ -1,0 +1,19 @@
+{
+  "method": "Native Canvas layout rendering plus deterministic DOM, audio-clock, and MediaRecorder doubles. Real browser encoding and sound-device output not tested.",
+  "passed": 13,
+  "checks": [
+    "All fourteen songs repeat 1/2/3/4 times, with one count-in and one final ending",
+    "Custom songs gain a single final chord, including one-play-through exports",
+    "MP4 negotiation falls back honestly to WebM and rejects unavailable requested formats",
+    "Premium dialogs mount and the composer settings survive JSON normalization",
+    "Eight saved transitions render both boundaries without a transparent frame",
+    "Video titles, music, and endings contain no app watermark or promotional slogans",
+    "Recording starts with both canvas video and the shared band audio track",
+    "Four play-throughs schedule all band steps and exactly one ending, then restore the original song",
+    "Autosave retains user settings rather than the temporary recording mix",
+    "Cancellation releases the tracks, discards partial output, and restores editability",
+    "Encoder initialization errors leave the song and UI recoverable",
+    "Backgrounding the recorder cancels rather than delivering a frozen video",
+    "Take-home sheets include every chord change, lyrics, beat labels, diagrams, and escaped credits"
+  ]
+}

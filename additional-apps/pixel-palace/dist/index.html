@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+ <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+ <meta name="theme-color" content="#111020">
+ <meta name="description" content="Step into Pixel Palace: a retro casino with virtual nickel slots, 20 paylines, free spins, treasure picks and wild takeovers.">
+ <title>Pixel Palace · The Arcade Casino</title>
+ <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+ <div class="casino-environment" aria-hidden="true"></div>
+ <header class="topbar">
+  <a class="brand" href="#lobby" aria-label="Pixel Palace casino floor"><span class="brand-mark">P<span>P</span></span><span>PIXEL PALACE<small>THE ARCADE CASINO</small></span></a>
+  <div class="top-actions"><div class="bank"><span>YOUR CREDITS</span><strong id="headerBalance">2,000</strong><small id="headerDollars">$100.00 virtual</small></div><button class="icon-button" id="soundButton" aria-label="Mute sound" title="Sound on">♫</button><button class="icon-button" id="fullscreenButton" aria-label="Enter fullscreen" title="Fullscreen">⛶</button><button class="icon-button" id="settingsButton" aria-label="Open settings" title="Settings">⚙</button></div>
+ </header>
+ <main>
+  <section id="lobby" class="lobby">
+   <div class="lobby-intro"><span class="eyebrow"><i></i> THE FLOOR IS OPEN</span><h1>A little nostalgia.<br>A lot of <em>jackpot.</em></h1><p>Pick your machine. Find your lucky line.</p></div>
+   <div class="cabinet-row">
+    <button class="lobby-cabinet active-cabinet" id="enterMachine" aria-label="Play 8-Bit Jackpot">
+     <div class="cabinet-beacon"><span></span><span></span></div>
+     <div class="cabinet-top"><small>ARCADE LEGENDS</small><strong>8-BIT<br><b>JACKPOT</b></strong><span class="mini-stars">✦ ★ ✦</span></div>
+     <div class="mini-screen"><div class="mini-screen-label">20 LINES <span>5¢</span></div><div class="mini-reels" id="lobbyReels"></div><div class="mini-prize">FREE SPINS · WILD TAKEOVERS</div></div>
+     <div class="mini-console"><span></span><span></span><i>SPIN</i></div><div class="cabinet-base"><span>PLAY NOW <b>↗</b></span><small>8-Bit Jackpot</small></div>
+    </button>
+    <div class="lobby-cabinet locked-cabinet" aria-label="Cabinet 02, coming soon"><div class="cabinet-beacon"><span></span></div><div class="cabinet-top"><small>PIXEL PALACE</small><strong>02</strong></div><div class="sleep-screen"><span>◇</span><strong>THE NEXT<br>BIG THING</strong><small>COMING SOON</small></div><div class="mini-console"><span></span><span></span><i>—</i></div><div class="cabinet-base"><small>Cabinet 02 · Not yet available</small></div></div>
+    <div class="lobby-cabinet locked-cabinet" aria-label="Cabinet 03, coming soon"><div class="cabinet-beacon"><span></span></div><div class="cabinet-top"><small>PIXEL PALACE</small><strong>03</strong></div><div class="sleep-screen"><span>✧</span><strong>ANOTHER<br>KIND OF LUCK</strong><small>COMING SOON</small></div><div class="mini-console"><span></span><span></span><i>—</i></div><div class="cabinet-base"><small>Cabinet 03 · Not yet available</small></div></div>
+    <div class="lobby-cabinet locked-cabinet" aria-label="Cabinet 04, coming soon"><div class="cabinet-beacon"><span></span></div><div class="cabinet-top"><small>PIXEL PALACE</small><strong>04</strong></div><div class="sleep-screen"><span>♧</span><strong>GOOD THINGS<br>ARE COMING</strong><small>COMING SOON</small></div><div class="mini-console"><span></span><span></span><i>—</i></div><div class="cabinet-base"><small>Cabinet 04 · Not yet available</small></div></div>
+   </div>
+   <div class="floor-note"><span class="nickel">5¢</span><span><strong>Nickel play. Arcade soul.</strong><small>2,000 starting credits · Virtual play only · No purchases or cash prizes</small></span><button class="text-button" id="lobbyHow">How to play ↗</button></div>
+  </section>
+  <section id="game" class="game" hidden>
+   <div class="game-nav"><button class="text-button" id="backLobby">← Casino floor</button><div class="game-nav-right"><button id="linesButton" class="text-button">View lines</button><button id="paytableButton" class="text-button">Paytable & rules</button></div></div>
+   <div class="machine" id="machine">
+    <div class="marquee"><div class="marquee-side">ARCADE<br><b>LEGENDS</b><span>EST. 1985-ish</span></div><div class="marquee-title"><span>★ &nbsp; ★ &nbsp; ★</span><h1>8-BIT <b>JACKPOT</b></h1><p>BIG ADVENTURES. LITTLE NICKELS.</p></div><div class="denomination"><b>5¢</b><span>PER CREDIT</span></div></div>
+    <div class="prize-bank" id="prizeBank" aria-label="Fixed feature prizes"></div>
+    <div class="feature-strip"><span><b>CHOOSE</b> FREE GAMES</span><span><b>MATCH 3</b> PRIZE PICK</span><span><b>WILD</b> TAKEOVERS</span></div>
+    <div class="free-bar" id="freeBar" hidden><span>✦ <span id="freeModeName">FREE GAMES</span> <b id="freeCount"></b></span><span>FEATURE WIN <strong id="featureWin"></strong></span><button id="pauseFree">Pause</button></div>
+    <div class="reel-housing"><div class="line-rail" id="leftRail"></div><div class="reel-stage" id="reelStage"><div class="reels" id="reels"></div><svg id="paylines" class="paylines" viewBox="0 0 1000 600" preserveAspectRatio="none" aria-hidden="true"></svg><div id="takeover" class="takeover" hidden><span>✦</span><b>WILD THROWOUT</b></div><div id="bigWin" class="big-win" hidden><span>8-BIT JACKPOT</span><h2 id="bigWinTitle">BIG WIN!</h2><strong id="bigWinAmount">0</strong><small>CREDITS</small><button id="skipWin">COLLECT</button></div></div><div class="line-rail" id="rightRail"></div></div>
+    <div class="message-bar" role="status" aria-live="polite"><span class="message-dot"></span><span id="gameMessage">Choose your bet. Press SPIN to play.</span><small id="winDetail">20 ACTIVE LINES</small></div>
+    <div class="dashboard">
+     <div class="meter credits-meter"><label>CREDITS</label><strong id="balance">2,000</strong><small id="balanceMoney">$100.00 virtual</small></div>
+     <div class="bet-panel"><div class="stepper"><label>LINES</label><div><button id="lessLines" aria-label="Fewer paylines">−</button><strong id="lineCount">20</strong><button id="moreLines" aria-label="More paylines">+</button></div></div><div class="stepper"><label>BET / LINE</label><div><button id="lessCoins" aria-label="Decrease credits per line">−</button><strong id="coinCount">1</strong><button id="moreCoins" aria-label="Increase credits per line">+</button></div></div></div>
+     <div class="meter bet-meter"><label>TOTAL BET</label><strong id="totalBet">20</strong><small id="betMoney">$1.00 virtual</small></div>
+     <div class="meter win-meter"><label>WIN</label><strong id="lastWin">0</strong><small id="winMoney">$0.00 virtual</small></div>
+     <div class="spin-controls"><button id="maxBet" class="max-bet">MAX BET</button><button id="spin" class="spin-button"><span>SPIN</span><small>PRESS SPACE</small></button></div>
+    </div>
+    <div class="machine-foot"><span>✦ 1 CREDIT = 5¢</span><span id="sessionNote">Virtual credits · Just for fun</span><button class="text-button" id="fastButton" aria-pressed="false">Quick spin: off</button></div>
+   </div>
+   <p class="game-tip">Match 3 or more from left to right on an active line. Controllers and treasure chests trigger anywhere on 3 or more reels.</p>
+  </section>
+ </main>
+ <footer>Created by <strong>Drew Wichman</strong><span>PIXEL PALACE · VIRTUAL PLAY ONLY</span></footer>
+ <dialog id="infoDialog"><div class="dialog-heading"><div><span class="eyebrow">8-BIT JACKPOT</span><h2 id="infoTitle">Paytable & rules</h2></div><button class="close-button" data-close="infoDialog" aria-label="Close">×</button></div><div id="infoContent" class="info-content"></div></dialog>
+ <dialog id="settingsDialog"><div class="dialog-heading"><div><span class="eyebrow">MAKE YOURSELF AT HOME</span><h2>Casino settings</h2></div><button class="close-button" data-close="settingsDialog" aria-label="Close">×</button></div><div class="settings-body"><label class="setting-row"><span>Slot sound volume<small>Original synthesized reel and win sounds</small></span><input type="range" id="volume" min="0" max="100" value="55" aria-label="Sound volume"></label><label class="setting-row"><span>Reduced motion<small>Short reel transitions and fewer effects</small></span><input type="checkbox" id="reduceMotion"></label><div class="setting-row"><span>Complimentary credits<small>Add 2,000 virtual credits whenever you like.</small></span><button class="gold-button small" id="refill">Add 2,000</button></div><p class="quiet">Your balance and unfinished bonuses are saved on this device. All amounts are pretend; credits have no cash value.</p><p class="quiet" id="storageNotice" hidden>Device storage is unavailable. Progress will last only for this visit.</p></div></dialog>
+ <dialog id="featureDialog" class="feature-dialog"><span class="eyebrow" id="featureEyebrow">POWER-UP BONUS</span><div id="featureArt" class="feature-art"></div><h2 id="featureTitle">FREE GAMES</h2><p id="featureText"></p><button id="featureContinue" class="gold-button">LET'S PLAY</button></dialog>
+ <dialog id="freeChoiceDialog" class="free-choice-dialog"><span class="eyebrow">POWER-UP FREE GAMES</span><h2>Choose your adventure.</h2><p>More spins, or bigger wins? Your line bet stays the same.</p><div class="free-options" id="freeOptions"></div><p class="quiet">All line wins receive your chosen multiplier. More controllers award extra games.</p></dialog>
+ <dialog id="bonusDialog" class="bonus-dialog"><span class="eyebrow">THE TREASURE ROOM</span><h2 id="bonusTitle">Match three. Reveal your prize.</h2><p id="pickStatus">Keep picking until you reveal 3 matching prize symbols.</p><div class="match-meters" id="matchMeters"></div><div id="treasureGrid" class="treasure-grid"></div><div class="bonus-total"><span>BONUS WIN</span><strong id="bonusTotal">0</strong><small>CREDITS</small></div><button id="collectBonus" class="gold-button" hidden>COLLECT & CONTINUE</button></dialog>
+ <div id="toast" class="toast" role="status" hidden></div>
+ <div id="particles" class="particles" aria-hidden="true"></div>
+ <script type="module" src="app.js"></script>
+</body>
+</html>

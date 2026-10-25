@@ -1,0 +1,68 @@
+/* Teaching views use viewport height. Only the pitch canvas scrolls. */
+.app-container{height:100dvh;min-height:0;overflow:hidden}
+.app-container .app-header{flex-shrink:0;flex-wrap:wrap;gap:8px 14px;padding:10px 14px;min-height:68px}
+.app-container .brand strong{font-size:clamp(1.3rem,1.9vw,1.9rem)}
+.app-container .mode-tabs{width:auto;order:0;flex-shrink:0;margin:0}.mode-tabs button{white-space:nowrap}
+.app-container .header-actions{flex-wrap:wrap;margin-left:auto}.header-actions #present-btn{min-width:105px}
+.app-container .workspace{flex:1;min-height:0;overflow:hidden;grid-template-columns:230px minmax(0,1fr)}
+.app-container.presenting .workspace{grid-template-columns:minmax(0,1fr)}
+.app-container .teacher-rail{position:relative;top:auto;max-height:none;min-height:0;height:100%;overflow:auto;display:flex;flex-direction:column}
+.close-tools{align-self:stretch;flex-shrink:0;margin:10px 10px 0;font-size:.66rem;box-shadow:none;background:transparent}
+.app-container .teacher-rail .song-list{overflow:visible;flex:none;min-height:0}.app-container .jukebox-container{min-height:0;max-height:none;overflow:visible;flex:none;padding-bottom:10px}
+.app-container .teacher-rail .note-grid{grid-template-columns:repeat(4,1fr)}
+.app-container .teaching-area{min-width:0;min-height:0;padding:0 1px 2px;overflow:hidden;gap:9px;display:flex;flex-direction:column}
+.app-container .lesson-heading{min-height:40px;flex-shrink:0;flex-wrap:wrap;margin:0 4px;gap:8px}
+.app-container .lesson-heading h1{font-size:clamp(1rem,1.6vw,1.5rem);line-height:1.25;overflow-wrap:anywhere}
+.app-container .visibility-controls{display:flex;flex-direction:row;gap:5px;flex-wrap:wrap}
+.visibility-controls button{min-height:33px;padding:6px 11px;font-size:.65rem}
+.lesson-title-group{display:flex;align-items:center;gap:12px;flex-wrap:wrap}.lesson-transport{display:flex;gap:5px}.lesson-transport button{border-radius:20px;min-height:33px;font-size:.65rem;padding:6px 12px}
+.app-container .board-area{display:flex;flex-direction:row;flex:1 1 0;min-width:0;min-height:0;height:auto;gap:12px;justify-content:center;align-items:stretch}
+.app-container .recorder-card,.app-container .staff-card,.app-container .stack-card{min-height:0;height:auto;max-height:100%;min-width:0;flex:1 1 0;overflow:hidden;display:flex;flex-direction:column}
+.app-container .recorder-card{flex:0 1 240px;min-width:160px;max-width:300px}
+.app-container .staff-card{flex:1.2 1 260px;max-width:820px}
+.app-container .stack-card{flex:1 1 290px;min-width:230px;max-width:620px}
+.app-container.stack-only .stack-card{flex:1 1 580px;max-width:680px}
+.app-container.recorder-only .recorder-card{flex:1 1 300px;max-width:360px}
+.staff-card{border:1px solid var(--edge);border-radius:18px;background-color:var(--surface);background-image:var(--panel-light),url('assets/grain.svg');box-shadow:inset 0 1px 1px var(--light-shadow),var(--shadow)}
+.app-container .card-header{flex:0 0 auto;min-height:40px;padding:6px 10px;gap:7px}.card-header h2{white-space:nowrap;font-size:.79rem}
+.panel-close{font-family:Arial,sans-serif;font-size:1.1rem;line-height:1;flex-shrink:0;min-height:30px;min-width:30px;padding:3px;border-radius:50%;box-shadow:none;background:transparent;border:1px solid transparent;color:inherit}
+.panel-close:hover{background:#ffffff24;border-color:currentColor}.card-header>.panel-close{margin-left:auto}
+.app-container .recorder-body{flex:1 1 0;position:relative;display:block;min-height:0;height:0;padding:4px 13px;width:100%}
+.app-container #recorder-svg{width:100%;height:100%;min-height:0;max-height:none;max-width:240px;display:block;margin:auto}
+#recorder-note-name{position:absolute;top:10px;left:15px;font:clamp(1.6rem,3vw,2.8rem) Georgia,serif;color:var(--text);pointer-events:none}
+.recorder-play{align-self:center;flex-shrink:0;margin:4px 0 8px;padding:7px 14px;min-height:35px;border-radius:20px;font-size:.63rem;touch-action:none}.recorder-play.held{background:var(--accent);color:var(--accent-text)}
+.app-container .fingering-legend{flex:0 0 auto;padding:7px;gap:6px;font-size:.5rem}.fingering-legend small{font-size:.48rem}
+.app-container .staff-card .note-readout{display:flex;flex:1 1 0;min-height:0;justify-content:center;gap:12px;padding:15px;overflow:hidden}
+.app-container .staff-card .note-display #note-name{font-size:clamp(3.2rem,5vw,5.5rem)}
+.app-container #staff-canvas{width:100%;max-width:510px;height:auto;max-height:55%;min-height:0;object-fit:contain;aspect-ratio:1.3;flex:0 1 auto}
+.app-container #staff-caption{display:block;font-size:.63rem;max-width:380px;line-height:1.4}
+.app-container #play-btn{min-height:38px;flex-shrink:0;font-size:.69rem;padding:9px 16px}
+.app-container .size-control{font-size:.62rem;margin-left:auto;flex-shrink:1}.app-container .size-control input{width:70px;min-width:40px}
+.app-container #stack-toolbar{position:relative;inset:auto;flex:0 0 auto;padding:5px 10px 9px;gap:6px;align-items:center;pointer-events:auto;z-index:10}
+.app-container #stack-toolbar button{font-size:.6rem;padding:6px 9px;min-height:31px}.app-container .stack-mode-toggle{border-radius:22px;padding:2px;flex-shrink:0}.app-container #stack-toolbar .stack-mode-toggle button{padding:6px 10px}
+.app-container .recorder-ui-group{order:0;margin-left:auto;flex-shrink:0}#record-status{max-width:65px;font-size:.5rem}
+#pitch-stack-viewport{position:relative;flex:1 1 0;min-height:0;overflow-x:hidden;overflow-y:auto;overscroll-behavior:contain;scrollbar-gutter:stable both-edges;scrollbar-width:thin;scrollbar-color:var(--accent-light) transparent;touch-action:pan-y;outline-offset:-4px}
+.app-container #pitch-stack-container{position:relative;flex:none;width:100%;min-height:0;overflow:visible}
+.app-container .stack-footer{flex:0 0 auto;display:flex;align-items:center;justify-content:center;gap:7px 14px;padding:7px 10px;background:#0000000c;border-top:1px solid #fff1;flex-wrap:wrap;color:var(--felt-text)}
+#stack-range-hint{font-size:.6rem;white-space:nowrap;opacity:.9}
+.app-container .stack-tip{padding:0;border:0;background:none;font-size:.57rem;line-height:1.3}.app-container .stack-note small{bottom:9%;font-size:.52rem}
+.app-container #ladder-editor{position:absolute;top:85px;bottom:45px;height:max-content;max-height:calc(100% - 130px);z-index:30;overflow:auto}
+#empty-board{display:flex;align-items:center;justify-content:center;flex:1;flex-direction:column;gap:16px;color:var(--header-text);font-size:.95rem}
+.app-container .score-panel{flex:0 0 auto;max-height:40%;overflow:auto;min-height:0}
+.app-container .score-heading{min-height:38px;padding:6px 12px;flex-wrap:wrap;gap:6px}.music-label{font-family:Georgia,serif;font-size:1rem}.score-heading strong{font-family:inherit;font-size:.65rem}.score-heading>div{gap:8px}.score-options{flex-wrap:wrap}.score-options .music-toggle{font-size:.62rem;padding:5px 9px;min-height:30px}
+.app-container #score-content{min-height:100px;padding:0 10px}.app-container #score-content svg{max-height:140px;min-width:550px}
+.app-container .transport{padding:7px 12px;gap:8px;justify-content:flex-start}.app-container .playback-buttons button{min-height:33px;padding:6px 12px;font-size:.64rem}.app-container .transport select{min-height:33px}.app-container .play-status{padding:4px 12px;font-size:.52rem}
+.app-container .music-collapsed{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;max-height:none}
+.music-collapsed #score-content,.music-collapsed #free-timing-message,.music-collapsed .play-status,.music-collapsed #score-page-label,.music-collapsed #meter-label,.music-collapsed #prev-page,.music-collapsed #next-page,.music-collapsed #notation-select,.music-collapsed .tempo-control,.music-collapsed .transport>.check-label,.music-collapsed .transport>select{display:none!important}
+.music-collapsed .score-heading{border:0}.music-collapsed .transport{border:0;padding-block:5px}.music-collapsed .score-options{margin-left:0}
+.app-container.music-full .score-panel{flex:1 1 0;max-height:none;display:flex;flex-direction:column}
+.app-container.music-full #score-content{flex:1 1 0;display:flex;align-items:center;overflow:auto}.app-container.music-full #score-content svg{max-height:none;max-width:1600px;margin:auto}
+.music-full .score-heading,.music-full .transport,.music-full .play-status{flex-shrink:0}
+.app-container #teach-empty{flex:0 0 auto;font-size:.8rem;padding:13px}
+@media(min-width:1500px){.app-container .recorder-card{flex-basis:280px}.app-container .stack-card{max-width:720px}.app-container.stack-only .stack-card{max-width:780px}.app-container #score-content svg{max-height:165px}}
+@media(max-width:1180px){.app-container .workspace{grid-template-columns:200px minmax(0,1fr)}.app-container .header-actions button{font-size:.62rem;padding:7px 9px}.app-container .mode-tabs button{padding:8px 12px;font-size:.69rem}.app-container .brand small{display:none}.app-container .board-area{gap:8px}.app-container .recorder-card{min-width:145px;flex-basis:185px}.app-container .stack-card{min-width:205px;flex-basis:245px}.app-container .staff-card{flex-basis:220px}.app-container .visibility-controls button{font-size:.6rem;padding:6px 9px}.stack-footer .stack-tip{display:none}}
+@media(max-width:1000px){.app-container .workspace{grid-template-columns:minmax(0,1fr)}.app-container .teacher-rail{position:fixed;z-index:45;top:120px;bottom:15px;left:12px;height:auto;width:min(290px,calc(100vw - 24px));border:1px solid var(--edge);box-shadow:12px 5px 50px #0007;display:flex;overflow:auto}.app-container .teaching-area{padding:0}.app-container .app-header{padding:9px 10px}.app-container .brand{flex:initial}.app-container .brand strong{font-size:1.45rem}.app-container .mode-tabs{margin-left:auto}.app-container .header-actions{justify-content:flex-end;flex:1}.app-container .header-actions button{font-size:.61rem}.app-container .lesson-heading h1{font-size:1.15rem}.app-container .score-panel{max-height:42%}.app-container #score-content svg{max-height:125px}}
+@media(max-width:660px){.app-container{padding:0 6px 7px;gap:7px}.app-container .app-header{padding:8px;gap:8px;border-radius:0 0 12px 12px}.app-container .brand{flex:1;text-align:left}.app-container .brand strong{font-size:1.32rem}.app-container .brand small{display:none}.app-container .mode-tabs{order:3;flex-basis:100%;margin:0}.app-container .mode-tabs button{flex:1;font-size:.7rem}.app-container .header-actions{flex:0 1 auto;gap:4px}.app-container .header-actions button{min-height:32px;font-size:.58rem;padding:6px 7px}.header-actions #lessons-btn,.header-actions #save-lesson-btn{display:none}.app-container .teacher-rail{top:119px}.app-container .lesson-heading{gap:5px}.app-container .visibility-controls{gap:4px}.app-container .visibility-controls button{min-height:30px;font-size:.56rem;padding:5px 8px}.app-container .lesson-heading h1{font-size:1.05rem}.app-container .board-area{overflow:auto;justify-content:flex-start;scrollbar-width:thin;gap:8px}.app-container .recorder-card{flex:1 0 155px;max-width:none}.app-container .staff-card{flex:1 0 240px}.app-container .stack-card{flex:1 0 235px;max-width:none}.app-container.stack-only .stack-card{flex:1 1 0;min-width:0;max-width:none}.app-container.recorder-only .recorder-card{flex:1 1 0;max-width:none}.app-container .staff-card:only-child{flex-basis:0;min-width:0}.app-container .score-panel{max-height:44%}.app-container .score-heading{padding:5px 8px}.score-heading .music-label{font-size:.85rem}.app-container .score-options{gap:4px;margin-left:0}.app-container .score-options button{font-size:.57rem;padding:5px 7px}.app-container .transport{padding:5px 8px}.app-container #score-content svg{max-height:110px}.app-container .score-heading strong,.score-heading .meter-badge{display:none}.app-container #record-status{max-width:70px}.app-container .teacher-rail .note-grid{grid-template-columns:repeat(4,1fr)}.app-container .music-collapsed{max-height:none}.app-container.music-full .score-panel{max-height:none}.app-container.music-full #score-content svg{max-height:none}.app-container .staff-card .note-display #note-name{font-size:2.8rem}.app-container .staff-card .note-readout{gap:8px;padding:12px}.app-container #staff-caption{font-size:.57rem}.app-container #play-btn{font-size:.61rem}.app-container .card-header h2{font-size:.72rem}}
+@media(prefers-reduced-motion:reduce){#pitch-stack-viewport{scroll-behavior:auto}}
+.rail-lesson-actions{display:flex;gap:7px;margin:10px;flex-shrink:0}.rail-lesson-actions button{flex:1;min-width:0;font-size:.66rem;padding:8px}
+.app-container.staff-only .staff-card{flex:1 1 0;min-width:0;max-width:900px;margin-inline:auto}

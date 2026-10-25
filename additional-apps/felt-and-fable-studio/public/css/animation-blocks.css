@@ -1,0 +1,48 @@
+#animationPanel{max-height:min(470px,48dvh)}
+#timelineSurface{height:186px}#timelineSurface.has-manual-keys{height:229px}
+#blockLanes{position:absolute;top:30px;left:0;right:0;height:150px;display:grid;grid-template-rows:repeat(5,30px)}
+.block-lane{position:relative;border-bottom:1px solid #c8d8c1;background:#edf3e8}.block-lane:nth-child(even){background:#e3eddf}
+.block-lane-label{position:sticky;left:5px;top:4px;font:10px/20px system-ui;color:#536a4a;pointer-events:none;padding:1px 4px;background:#f6f8f0d9;border-radius:3px;z-index:1}
+.motion-block{position:absolute;top:2px;height:26px;min-width:14px;padding:2px 11px;border:1px solid #558b7c;border-radius:5px;background:#b7ddd0;color:#163b31;font:600 11px/18px system-ui;white-space:nowrap;overflow:hidden;touch-action:none;cursor:grab;z-index:2;user-select:none}
+.block-lane[data-lane=enter] .motion-block{background:#bfdba8;border-color:#78945c}.block-lane[data-lane=idle] .motion-block{background:#b5ddd3}.block-lane[data-lane=emphasis] .motion-block{background:#f0d295;border-color:#b49a59}.block-lane[data-lane=path] .motion-block{background:#c2d2ef;border-color:#8096b9}.block-lane[data-lane=exit] .motion-block{background:#e5bbaa;border-color:#b8866e}
+.motion-block.selected{outline:2px solid #244d43;outline-offset:-2px;z-index:3}.motion-block:focus-visible{outline:3px solid #172f27}.block-label{pointer-events:none}.block-handle{position:absolute;top:0;bottom:0;width:10px;background:#ffffff55;cursor:ew-resize}.block-handle.start{left:0;border-right:1px solid #54776b77}.block-handle.end{right:0;border-left:1px solid #54776b77}
+#timelineSurface .anim-track{top:186px;bottom:2px;background:#f1ead6}#timelineSurface .anim-key{top:0;height:36px}#timelineSurface:not(.has-manual-keys) .anim-track{display:none}.timeline-playhead::after{height:155px}.has-manual-keys .timeline-playhead::after{height:195px}
+.block-actions,.block-settings-heading{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:7px 0}.block-actions button,.block-settings-heading button{font-size:12px;padding:5px 8px;min-height:30px}.block-actions label{font-size:12px;margin:0}.block-actions input[type=checkbox]{width:auto}#blockSelectionHelp{font-size:11px;color:#52684c;margin-right:auto}#blockClearAll,#blockDelete{color:#813e30}#blockTitle{font-size:13px;margin-right:auto}
+#blockSettings{border:1px solid #bfd0b4;border-radius:7px;background:#fffefa;padding:7px 10px;margin-top:7px}#blockSettings[hidden]{display:none}.block-settings-heading{margin-top:0}.block-fields{display:flex;gap:8px;flex-wrap:wrap;align-items:end}.block-fields label{font-size:11px;margin:0;display:flex;flex-direction:column;gap:3px}.block-fields input{width:76px}.block-fields input,.block-fields select{border:1px solid #b6c8ac;border-radius:5px;padding:5px;color:#244237;background:white;font-size:12px}.block-fields select{max-width:190px}#blockPathOptions{display:flex;gap:8px}#blockPathOptions[hidden],#blockLoopRow[hidden],#blockCyclesRow[hidden]{display:none}.block-clear-menu>summary{font-size:11px;color:#516a48;padding:6px 0;cursor:pointer}#blockPreviewCanvas{width:100%;max-width:640px;display:block;border-radius:8px}#blockPreviewDialog{width:min(690px,92vw)}#advancedAnimation .block-actions{margin:6px 0}
+@media(max-width:650px){#animationPanel{max-height:46dvh}.block-fields{gap:6px}.block-actions button{font-size:11px}.block-fields select{max-width:155px}.block-settings-heading strong{flex-basis:100%}}
+.presentation #animationPanel{display:none}
+/* v1.26: reserve space for the stage; scroll controls inside a bounded dock. */
+#animationPanel{height:min(250px,30dvh);max-height:30dvh;min-height:0;padding:0;display:flex;flex-direction:column;overflow:hidden;flex:0 0 auto}
+#animationPanel[hidden]{display:none}
+#animationPanel[data-size=expanded]{height:min(430px,48dvh);max-height:48dvh}
+#animationPanel[data-size=minimized]{height:auto;max-height:none}
+#animationPanel .anim-top{flex:0 0 auto;margin:0;padding:5px 9px;gap:5px;flex-wrap:nowrap;border-bottom:1px solid #cbd9c3;background:#f4f6ee;min-height:37px}
+#animationPanel .anim-top strong{font:600 14px system-ui;white-space:nowrap}
+#animationPanel .anim-top button{font-size:11px;padding:5px 7px;min-height:28px;white-space:nowrap}
+#animSelection{min-width:0}
+.animation-tabs{display:flex;gap:2px}
+.animation-tabs [aria-pressed=true],#pathWorkspace [aria-pressed=true]{background:#d8e9dc;border-color:#729b81}
+#animationContent{overflow:auto;min-height:0;flex:1;padding:3px 10px 8px;overscroll-behavior:contain}
+#animationContent[hidden],#animationTimelineView[hidden],#animationSettingsView[hidden],#pathWorkspace[hidden]{display:none}
+#animationPanel .anim-toolbar{flex-wrap:wrap;margin:3px 0;gap:4px}
+#animationPanel .anim-toolbar button{font-size:12px;padding:4px 7px;min-height:28px}
+#animationPanel .timeline-navigation{margin:4px 0;gap:4px}
+#animationPanel .timeline-navigation button,#animationPanel .timeline-navigation select{font-size:11px;padding:3px 6px;min-height:26px}
+#animationPanel .timeline-instructions{font-size:10px}
+#timelineSurface{--lane-count:1;height:calc(34px + var(--lane-count)*30px)}
+#timelineSurface.has-manual-keys{height:calc(77px + var(--lane-count)*30px)}
+#blockLanes{height:calc(var(--lane-count,1)*30px);grid-template-rows:repeat(var(--lane-count,1),30px)}
+#timelineSurface .anim-track{top:calc(34px + var(--lane-count)*30px)}
+.timeline-playhead::after,.has-manual-keys .timeline-playhead::after{height:calc(var(--lane-count,1)*30px + 8px)}
+.has-manual-keys .timeline-playhead::after{height:calc(var(--lane-count,1)*30px + 48px)}
+#blockSettings{margin:4px 0}#animationPanel .block-actions{margin:4px 0}
+#pathWorkspace{flex:0 0 auto;padding:6px 12px;background:#fff5da;border-bottom:1px solid #d9c391;z-index:1}
+.path-workspace-actions{display:flex;align-items:center;gap:6px;flex-wrap:wrap}.path-workspace-actions strong{margin-right:auto;font-size:13px}
+#pathWorkspace button{font-size:12px;padding:4px 9px;min-height:29px}
+#pathInstructions{margin:4px 0 0;font-size:12px;color:#4b594d;line-height:1.35}
+#board.drawing-motion-path{cursor:crosshair}
+.animation-open .workspace{min-height:0;padding:17px}
+@media(max-width:1100px){#animationPanel .anim-top #animSelection{display:none}.animation-tabs{margin-left:auto}}
+@media(max-width:650px){#animationPanel .timeline-instructions{display:none}#animationPanel .anim-top{gap:3px;padding:4px}#animationPanel .anim-top button{padding:4px;font-size:10px}#animationPanel .anim-top strong{font-size:12px}#pathWorkspace{padding:5px 8px}.path-workspace-actions{gap:4px}#pathInstructions{font-size:11px}}
+@media(max-height:650px){#animationPanel{height:190px;max-height:29dvh}.animation-open .status{display:none}.animation-open .story{padding-top:3px;padding-bottom:3px}.animation-open .caption-details{display:none}}
+.presentation #animationPanel,.presentation #pathWorkspace{display:none}

@@ -1,0 +1,430 @@
+{
+  "format": "felt-director-plan",
+  "version": 1,
+  "title": "A Little Exchange — Character Performance",
+  "canvas": {
+    "width": 1600,
+    "height": 900,
+    "fps": 60
+  },
+  "scenes": [
+    {
+      "id": "letter",
+      "name": "A letter for you",
+      "bg": -1,
+      "bgColor": "#e8ddc6",
+      "duration": 12,
+      "caption": "",
+      "pieces": [
+        {
+          "id": "letter-label",
+          "type": "text",
+          "text": "A letter for you",
+          "name": "A letter for you",
+          "x": 800,
+          "y": 90,
+          "w": 1200,
+          "h": 90,
+          "bw": 1200,
+          "bh": 90,
+          "rotation": 0,
+          "color": "#285b54",
+          "fiber": 0.6
+        },
+        {
+          "id": "letter-stand1",
+          "type": "shape",
+          "shape": "Rounded rectangle",
+          "name": "Felt display ledge",
+          "x": 715,
+          "y": 602,
+          "w": 100,
+          "h": 26,
+          "bw": 100,
+          "bh": 26,
+          "rotation": 0,
+          "color": "#9d7053",
+          "fiber": 0.8
+        },
+        {
+          "id": "letter-stand2",
+          "type": "shape",
+          "shape": "Rounded rectangle",
+          "name": "Felt display ledge",
+          "x": 805,
+          "y": 602,
+          "w": 100,
+          "h": 26,
+          "bw": 100,
+          "bh": 26,
+          "rotation": 0,
+          "color": "#9d7053",
+          "fiber": 0.8
+        },
+        {
+          "id": "letter-left",
+          "asset": "cinema-maya",
+          "name": "Maya",
+          "x": 630,
+          "y": 495,
+          "w": 437,
+          "h": 475,
+          "acting": {
+            "expression": "happy",
+            "pose": "standing",
+            "talk": false,
+            "blink": true,
+            "cues": []
+          },
+          "performance": {
+            "gaze": {
+              "targetId": "letter-right",
+              "amount": 0.8
+            },
+            "hands": {
+              "left": "relaxed",
+              "right": "relaxed"
+            },
+            "clips": [
+              {
+                "id": "letter-nod",
+                "kind": "react",
+                "start": 2.8,
+                "duration": 1,
+                "reaction": "nod",
+                "amount": 0.75
+              },
+              {
+                "id": "letter-laugh",
+                "kind": "react",
+                "start": 9.8,
+                "duration": 1.5,
+                "reaction": "laugh",
+                "amount": 0.75
+              },
+              {
+                "id": "letter-hands",
+                "kind": "hands",
+                "start": 0,
+                "duration": 0.6,
+                "left": "open",
+                "right": "open"
+              }
+            ]
+          }
+        },
+        {
+          "id": "letter-right",
+          "asset": "cinema-leo",
+          "name": "Leo",
+          "x": 890,
+          "y": 495,
+          "w": 437,
+          "h": 475,
+          "acting": {
+            "expression": "happy",
+            "pose": "standing",
+            "talk": false,
+            "blink": true,
+            "cues": []
+          },
+          "performance": {
+            "gaze": {
+              "targetId": "letter-left",
+              "amount": 0.8
+            },
+            "hands": {
+              "left": "relaxed",
+              "right": "relaxed"
+            },
+            "clips": [
+              {
+                "id": "letter-listen",
+                "kind": "react",
+                "start": 0.5,
+                "duration": 2.7,
+                "reaction": "listen",
+                "amount": 0.75
+              },
+              {
+                "id": "letter-surprise",
+                "kind": "react",
+                "start": 3.3,
+                "duration": 1.1,
+                "reaction": "surprised",
+                "amount": 0.75
+              },
+              {
+                "id": "letter-thanks",
+                "kind": "react",
+                "start": 7,
+                "duration": 1,
+                "reaction": "nod",
+                "amount": 0.75
+              }
+            ]
+          }
+        },
+        {
+          "id": "letter-prop",
+          "asset": "cinema-manor-sealed-letter",
+          "name": "A letter for you",
+          "x": 715,
+          "y": 578,
+          "w": 68,
+          "h": 68,
+          "propActions": [
+            {
+              "id": "letter-pick",
+              "kind": "pickup",
+              "actorId": "letter-left",
+              "hand": "rightHand",
+              "start": 0.7,
+              "duration": 2
+            },
+            {
+              "id": "letter-give",
+              "kind": "give",
+              "actorId": "letter-right",
+              "hand": "leftHand",
+              "start": 4,
+              "duration": 2.5
+            },
+            {
+              "id": "letter-put",
+              "kind": "putdown",
+              "x": 805,
+              "y": 578,
+              "start": 8,
+              "duration": 2
+            }
+          ]
+        },
+        {
+          "id": "letter-hint",
+          "type": "text",
+          "text": "Pick up · Give to · Put down",
+          "name": "Actions",
+          "x": 800,
+          "y": 810,
+          "w": 1100,
+          "h": 60,
+          "bw": 1100,
+          "bh": 60,
+          "rotation": 0,
+          "color": "#54736b",
+          "fiber": 0.5
+        }
+      ]
+    },
+    {
+      "id": "key",
+      "name": "The secret key",
+      "bg": -1,
+      "bgColor": "#e8ddc6",
+      "duration": 12,
+      "caption": "",
+      "pieces": [
+        {
+          "id": "key-label",
+          "type": "text",
+          "text": "The secret key",
+          "name": "The secret key",
+          "x": 800,
+          "y": 90,
+          "w": 1200,
+          "h": 90,
+          "bw": 1200,
+          "bh": 90,
+          "rotation": 0,
+          "color": "#285b54",
+          "fiber": 0.6
+        },
+        {
+          "id": "key-stand1",
+          "type": "shape",
+          "shape": "Rounded rectangle",
+          "name": "Felt display ledge",
+          "x": 715,
+          "y": 602,
+          "w": 100,
+          "h": 26,
+          "bw": 100,
+          "bh": 26,
+          "rotation": 0,
+          "color": "#9d7053",
+          "fiber": 0.8
+        },
+        {
+          "id": "key-stand2",
+          "type": "shape",
+          "shape": "Rounded rectangle",
+          "name": "Felt display ledge",
+          "x": 805,
+          "y": 602,
+          "w": 100,
+          "h": 26,
+          "bw": 100,
+          "bh": 26,
+          "rotation": 0,
+          "color": "#9d7053",
+          "fiber": 0.8
+        },
+        {
+          "id": "key-left",
+          "asset": "cinema-asha",
+          "name": "Asha",
+          "x": 630,
+          "y": 495,
+          "w": 437,
+          "h": 475,
+          "acting": {
+            "expression": "happy",
+            "pose": "standing",
+            "talk": false,
+            "blink": true,
+            "cues": []
+          },
+          "performance": {
+            "gaze": {
+              "targetId": "key-right",
+              "amount": 0.8
+            },
+            "hands": {
+              "left": "relaxed",
+              "right": "relaxed"
+            },
+            "clips": [
+              {
+                "id": "key-nod",
+                "kind": "react",
+                "start": 2.8,
+                "duration": 1,
+                "reaction": "nod",
+                "amount": 0.75
+              },
+              {
+                "id": "key-laugh",
+                "kind": "react",
+                "start": 9.8,
+                "duration": 1.5,
+                "reaction": "laugh",
+                "amount": 0.75
+              },
+              {
+                "id": "key-hands",
+                "kind": "hands",
+                "start": 0,
+                "duration": 0.6,
+                "left": "open",
+                "right": "open"
+              }
+            ]
+          }
+        },
+        {
+          "id": "key-right",
+          "asset": "cinema-jun",
+          "name": "Jun",
+          "x": 890,
+          "y": 495,
+          "w": 437,
+          "h": 475,
+          "acting": {
+            "expression": "happy",
+            "pose": "standing",
+            "talk": false,
+            "blink": true,
+            "cues": []
+          },
+          "performance": {
+            "gaze": {
+              "targetId": "key-left",
+              "amount": 0.8
+            },
+            "hands": {
+              "left": "relaxed",
+              "right": "relaxed"
+            },
+            "clips": [
+              {
+                "id": "key-listen",
+                "kind": "react",
+                "start": 0.5,
+                "duration": 2.7,
+                "reaction": "listen",
+                "amount": 0.75
+              },
+              {
+                "id": "key-surprise",
+                "kind": "react",
+                "start": 3.3,
+                "duration": 1.1,
+                "reaction": "surprised",
+                "amount": 0.75
+              },
+              {
+                "id": "key-thanks",
+                "kind": "react",
+                "start": 7,
+                "duration": 1,
+                "reaction": "nod",
+                "amount": 0.75
+              }
+            ]
+          }
+        },
+        {
+          "id": "key-prop",
+          "asset": "cinema-manor-antique-key",
+          "name": "The secret key",
+          "x": 715,
+          "y": 578,
+          "w": 68,
+          "h": 68,
+          "propActions": [
+            {
+              "id": "key-pick",
+              "kind": "pickup",
+              "actorId": "key-left",
+              "hand": "rightHand",
+              "start": 0.7,
+              "duration": 2
+            },
+            {
+              "id": "key-give",
+              "kind": "give",
+              "actorId": "key-right",
+              "hand": "leftHand",
+              "start": 4,
+              "duration": 2.5
+            },
+            {
+              "id": "key-put",
+              "kind": "putdown",
+              "x": 805,
+              "y": 578,
+              "start": 8,
+              "duration": 2
+            }
+          ]
+        },
+        {
+          "id": "key-hint",
+          "type": "text",
+          "text": "Pick up · Give to · Put down",
+          "name": "Actions",
+          "x": 800,
+          "y": 810,
+          "w": 1100,
+          "h": 60,
+          "bw": 1100,
+          "bh": 60,
+          "rotation": 0,
+          "color": "#54736b",
+          "fiber": 0.5
+        }
+      ]
+    }
+  ]
+}

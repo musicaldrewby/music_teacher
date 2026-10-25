@@ -1,0 +1,236 @@
+[
+  {
+    "title": "Circuit 16 \u2014 Sequencing Studio by Drew Wichman",
+    "slug": "drew-circuit-16",
+    "folder": "additional-apps/drew-circuit-16",
+    "source_commit": "9b6e96bc7a0fcf34176d48cb90933ceecc93fa43",
+    "file_count": 27,
+    "size_bytes": 32709699,
+    "project_type": "static"
+  },
+  {
+    "title": "Drew\u2019s 8-Bit Lounge \u2014 NES Emulator",
+    "slug": "drews-8bit-lounge",
+    "folder": "additional-apps/drews-8bit-lounge",
+    "source_commit": "a5b7be3cb47f4a873fc5568f18fcd2ae1832310a",
+    "file_count": 10,
+    "size_bytes": 220471,
+    "project_type": "static"
+  },
+  {
+    "title": "Rewind Room \u00b7 1989",
+    "slug": "drew-rewind-room-1989",
+    "folder": "additional-apps/drew-rewind-room-1989",
+    "source_commit": "6ae555ab85fe514a38fa737f57784d2d98c52cae",
+    "file_count": 409,
+    "size_bytes": 40236929,
+    "project_type": "static"
+  },
+  {
+    "title": "Movie Rental Empire",
+    "slug": "movie-rental-empire",
+    "folder": "additional-apps/movie-rental-empire",
+    "source_commit": "a8654050f2ff3adf5a011a7df32b72c376f9f53e",
+    "file_count": 24,
+    "size_bytes": 6068686,
+    "project_type": "static"
+  },
+  {
+    "title": "Chroma Orchestra",
+    "slug": "chroma-orchestra",
+    "folder": "additional-apps/chroma-orchestra",
+    "source_commit": "0f600aa7982c4827e0fa172f34551d2aa5982840",
+    "file_count": 157,
+    "size_bytes": 33942065,
+    "project_type": "framework"
+  },
+  {
+    "title": "Prism Motion Studio",
+    "slug": "prism-motion-studio",
+    "folder": "additional-apps/prism-motion-studio",
+    "source_commit": "01ffd80187d0ceafbf783795c1121a26f900e1af",
+    "file_count": 304,
+    "size_bytes": 5208887,
+    "project_type": "framework"
+  },
+  {
+    "title": "Mallet & Measure \u2014 The Orff Ensemble Studio by Drew Wichman",
+    "slug": "orff-studio-atelier",
+    "folder": "additional-apps/orff-studio-atelier",
+    "source_commit": "0e41f5c024b3cbfcad51c6fe2ff189874d63f39d",
+    "file_count": 581,
+    "size_bytes": 132803502,
+    "project_type": "static"
+  },
+  {
+    "title": "Morning Pledges",
+    "slug": "morning-pledges",
+    "folder": "additional-apps/morning-pledges",
+    "source_commit": "e3338d477f2186d6279f824adf30d06f2a9dadf8",
+    "file_count": 5,
+    "size_bytes": 39476,
+    "project_type": "static"
+  },
+  {
+    "title": "Mr. Drew\u2019s Beginning Band Board",
+    "slug": "mr-drews-beginning-band-board",
+    "folder": "additional-apps/mr-drews-beginning-band-board",
+    "source_commit": "27897259df1eb7b8e03c61949b7ac3e0b48fb098",
+    "file_count": 181,
+    "size_bytes": 9022496,
+    "project_type": "static"
+  },
+  {
+    "title": "Living Background Engine",
+    "slug": "living-background-engine",
+    "folder": "additional-apps/living-background-engine",
+    "source_commit": "2f9edf1222b6caa684df029cd17969dfae26372a",
+    "file_count": 157,
+    "size_bytes": 8086119,
+    "project_type": "framework"
+  },
+  {
+    "title": "Mr. Drew\u2019s Play-Along Studio",
+    "slug": "mr-drews-play-along-studio",
+    "folder": "additional-apps/mr-drews-play-along-studio",
+    "source_commit": "33f88a701aad29eae647563791c055200af5d47d",
+    "file_count": 66,
+    "size_bytes": 66403471,
+    "project_type": "static"
+  },
+  {
+    "title": "Drew\u2019s Music Engine",
+    "slug": "drews-music-engine",
+    "folder": "additional-apps/drews-music-engine",
+    "source_commit": "93586347faf16b0df13e83dabe1c61c917ea302f",
+    "file_count": 47,
+    "size_bytes": 64760644,
+    "project_type": "static"
+  },
+  {
+    "title": "Mr. Drew\u2019s Four Corners Studio",
+    "slug": "mr-drews-four-corners-studio",
+    "folder": "additional-apps/mr-drews-four-corners-studio",
+    "source_commit": "726d2e8dfb0fe0f3febc3323b98b26030d5cb25a",
+    "file_count": 18,
+    "size_bytes": 243120,
+    "project_type": "static"
+  },
+  {
+    "title": "Mr. Drew's Uke Strum \u2014 Teacher Studio",
+    "slug": "drew-uke-strum-teacher-studio",
+    "folder": "additional-apps/drew-uke-strum-teacher-studio",
+    "source_commit": "48e32fe5ab91adee5e9d90edb412f51b761db78c",
+    "file_count": 96,
+    "size_bytes": 22988687,
+    "project_type": "static"
+  },
+  {
+    "title": "Boomwhacker Play-Along \u2014 Creator Edition",
+    "slug": "drews-boomwhacker-creator-private",
+    "folder": "additional-apps/drews-boomwhacker-creator-private",
+    "source_commit": "46e093b08f78978881fd7e86bed57e21dc8272d5",
+    "file_count": 90,
+    "size_bytes": 48779433,
+    "project_type": "static"
+  },
+  {
+    "title": "Pixel Palace Casino",
+    "slug": "pixel-palace",
+    "folder": "additional-apps/pixel-palace",
+    "source_commit": "2f67e9a10ad430b9c9977f0fae6fa238909775ef",
+    "file_count": 18,
+    "size_bytes": 2958169,
+    "project_type": "static"
+  },
+  {
+    "title": "Music Sketchbook",
+    "slug": "drews-music-sketchbook",
+    "folder": "additional-apps/drews-music-sketchbook",
+    "source_commit": "8a902257e5bd4020cf650eb3710e490a0515e779",
+    "file_count": 11,
+    "size_bytes": 1071432,
+    "project_type": "static"
+  },
+  {
+    "title": "Radical Recorder",
+    "slug": "radical-recorder",
+    "folder": "additional-apps/radical-recorder",
+    "source_commit": "9a69ac2b5030633f11813cef287fa6af55a64e9f",
+    "file_count": 20,
+    "size_bytes": 2937469,
+    "project_type": "static"
+  },
+  {
+    "title": "Mr. Drew's Bingo Maker",
+    "slug": "mr-drews-bingo-maker",
+    "folder": "additional-apps/mr-drews-bingo-maker",
+    "source_commit": "646a4e1aa8bfb8ade9eeb6016ab34946ad84ea1a",
+    "file_count": 23,
+    "size_bytes": 3407367,
+    "project_type": "static"
+  },
+  {
+    "title": "Train Window Studio",
+    "slug": "train-window-studio",
+    "folder": "additional-apps/train-window-studio",
+    "source_commit": "55d99c8823ec9c667c61f2c7ed8e6a62b4d19591",
+    "file_count": 52,
+    "size_bytes": 34596655,
+    "project_type": "static"
+  },
+  {
+    "title": "Motion Layer Studio",
+    "slug": "motion-layer-studio",
+    "folder": "additional-apps/motion-layer-studio",
+    "source_commit": "8684fe21769e682b67691ac2c76d2227bf463f6e",
+    "file_count": 142,
+    "size_bytes": 33522329,
+    "project_type": "framework"
+  },
+  {
+    "title": "FLUID SPACE",
+    "slug": "fluid-space",
+    "folder": "additional-apps/fluid-space",
+    "source_commit": "03ae547ec334d4535ff0ecebde6d12effcbbf9a7",
+    "file_count": 34,
+    "size_bytes": 149364271,
+    "project_type": "static"
+  },
+  {
+    "title": "Felt & Fable Studio",
+    "slug": "felt-and-fable-studio",
+    "folder": "additional-apps/felt-and-fable-studio",
+    "source_commit": "5082ac35d40ef84ef34a4c5da4715f293dfd5d2e",
+    "file_count": 1249,
+    "size_bytes": 868746263,
+    "project_type": "framework"
+  },
+  {
+    "title": "Music Whiteboard",
+    "slug": "music-whiteboard",
+    "folder": "additional-apps/music-whiteboard",
+    "source_commit": "f7d4c9a4f5de6b296f6b207f8783dd9e3a496b38",
+    "file_count": 7,
+    "size_bytes": 249128,
+    "project_type": "static"
+  },
+  {
+    "title": "Sound Garden",
+    "slug": "sound-garden-playground",
+    "folder": "additional-apps/sound-garden-playground",
+    "source_commit": "751589466c38f33ee450083a760d28651c12e237",
+    "file_count": 6,
+    "size_bytes": 1813556,
+    "project_type": "static"
+  },
+  {
+    "title": "Mr. Drew\u2019s Music Classroom",
+    "slug": "drews-music-classroom",
+    "folder": "additional-apps/drews-music-classroom",
+    "source_commit": "8858cbe7653bfc008cea2f62eb7fa4ec2ada1e6b",
+    "file_count": 12,
+    "size_bytes": 1541996,
+    "project_type": "static"
+  }
+]

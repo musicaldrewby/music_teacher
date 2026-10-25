@@ -1,0 +1,1803 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Mr. Drew’s Bingo Maker: build, print, and play classroom bingo games with text, images, and audio.">
+    <title>Mr. Drew's BINGO MAKER</title>
+    <script src="./assets/vendor/tailwind.min.js"></script>
+    <script src="./assets/vendor/jspdf.umd.min.js"></script>
+    <script src="./assets/vendor/jszip.min.js"></script>
+    <script src="./assets/vendor/pptxgen.min.js"></script>
+    <link href="./assets/fonts/fonts.css" rel="stylesheet">
+    
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f4f5f7; overflow: hidden; height: 100vh; }
+        h1, h2, .brand-font { font-family: 'Fredoka One', cursive; }
+        
+        /* Edit Mode Layout */
+        #edit-mode { display: flex; height: 100vh; width: 100vw; }
+        #left-col { width: 400px; min-width: 400px; height: 100%; overflow-y: auto; border-right: 2px solid #e2e8f0; background: #fafafa; }
+        #right-col { flex-grow: 1; height: 100%; display: flex; flex-direction: column; background: #f4f5f7; padding: 2rem; }
+        #item-list-container { flex-grow: 1; overflow-y: auto; padding-right: 1rem; }
+        
+        /* Game Mode Layout */
+        #game-mode { display: none; height: 100vh; width: 100vw; background-color: #1e293b; flex-direction: column; }
+        
+        .item-card { animation: slideIn 0.3s ease-out; }
+        @keyframes slideIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Print Settings */
+        @media screen {
+            #print-area { display: none !important; }
+        }
+        @media print {
+            body { background-color: white; height: auto; overflow: visible; }
+            #edit-mode, #game-mode, #modal-overlay, #verify-modal-overlay { display: none !important; }
+            #print-area { display: block !important; }
+        }
+        
+        /* PDF Generation Styles */
+        .pdf-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            grid-template-rows: repeat(5, minmax(0, 1fr)); /* Fixes image blowout bug */
+            gap: 0;
+            width: 100%;
+            height: 100%;
+            border: 4px solid #1e293b;
+        }
+        .pdf-cell {
+            border: 2px solid #1e293b;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 8px;
+            overflow: hidden;
+            box-sizing: border-box;
+        }
+        .pdf-cell img { max-width: 90%; max-height: 80%; object-fit: contain; }
+        .pdf-cell span { font-weight: bold; font-size: 14px; color: #1e293b; word-wrap: break-word; }
+
+        /* Modal Styles */
+        #modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 50; align-items: center; justify-content: center; backdrop-filter: blur(4px); }
+        .modal-content { background: white; padding: 2rem; border-radius: 1rem; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1); max-width: 400px; width: 90%; text-align: center; }
+
+        /* Verify Bingo Styles */
+        #verify-modal-overlay { display: none; position: fixed; inset: 0; background: rgba(15, 23, 42, 0.9); z-index: 100; align-items: center; justify-content: center; }
+        .verify-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            grid-template-rows: repeat(5, minmax(0, 1fr));
+            gap: 4px;
+            background: white;
+            padding: 8px;
+            border-radius: 8px;
+            width: 90vw;
+            max-width: 600px;
+            aspect-ratio: 1 / 1;
+        }
+        .verify-cell {
+            border: 2px solid #cbd5e1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding: 4px;
+            text-align: center;
+            position: relative;
+        }
+        .verify-cell img { max-width: 80%; max-height: 80%; object-fit: contain; }
+        .verify-cell span { font-size: 10px; font-weight: bold; }
+        .verify-cell.called::after {
+            content: '';
+            position: absolute;
+            width: 80%;
+            height: 80%;
+            background: rgba(34, 197, 94, 0.6);
+            border-radius: 50%;
+            border: 3px solid #16a34a;
+        }
+        .verify-cell.winning-line { background-color: #fef08a; animation: pulseWin 1.5s infinite; }
+        @keyframes pulseWin { 0% { box-shadow: inset 0 0 0 0px #eab308; } 50% { box-shadow: inset 0 0 0 6px #eab308; } 100% { box-shadow: inset 0 0 0 0px #eab308; } }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+    </style>
+    <link href="./assets/workflow.css" rel="stylesheet">
+    <link href="./assets/classroom.css" rel="stylesheet">
+</head>
+<body>
+
+    <div id="app-shell">
+        <header class="app-header">
+            <div class="app-brand">
+                <div class="brand-mark" aria-hidden="true"><span>B</span><span>I</span><span>N</span><span>G</span></div>
+                <div><h1>Mr. Drew's <span>Bingo Maker</span></h1><div class="creator-credit">Created by <strong>Drew Wichman</strong></div></div>
+            </div>
+            <div class="file-actions">
+                <span id="save-status" class="save-status" aria-live="polite">New game</span>
+                <button class="button button-soft" onclick="document.getElementById('load-file').click()"><span aria-hidden="true">📂</span> Open Game</button>
+                <button class="button button-purple" onclick="saveProject()"><span aria-hidden="true">💾</span> Save Game</button>
+                <button class="button button-soft" onclick="saveProject(true)">Download copy</button>
+                <input type="file" id="load-file" class="hidden" accept=".json" onchange="loadProject(event)">
+            </div>
+        </header>
+
+        <aside class="creator-support" aria-label="Support the creator">
+            <div class="creator-support-content">
+                <p><strong>Enjoying the Bingo Maker?</strong> Consider buying me a coffee to support more classroom tools.</p>
+                <a class="button button-coffee" href="https://www.buymeacoffee.com/musicaldrewby" target="_blank" rel="noopener noreferrer" aria-label="Buy Drew Wichman a coffee (opens in a new tab)"><span aria-hidden="true">☕</span> Buy me a coffee <span class="external-link-mark" aria-hidden="true">↗</span></a>
+            </div>
+        </aside>
+
+        <aside id="recovery-banner" class="recovery-banner hidden" aria-live="polite"><span id="recovery-message"></span><button class="button button-soft" onclick="restoreDraft()">Restore draft</button><button class="text-button" onclick="dismissDraft()">Keep current game</button></aside><p id="draft-status" class="draft-status" aria-live="polite">Draft recovery is stored on this device.</p>
+        <nav class="step-nav" aria-label="Game steps">
+            <button id="step-create" class="step-button" aria-current="step" onclick="goToStep('create')"><span class="step-number">1</span><span><strong>Create</strong><small>Add your words, pictures, or sounds</small></span></button>
+            <button id="step-print" class="step-button" onclick="goToStep('print')"><span class="step-number">2</span><span><strong>Print Cards</strong><small>Preview your class set</small></span></button>
+            <button id="step-play" class="step-button" onclick="goToStep('play')"><span class="step-number">3</span><span><strong>Play</strong><small>Call items and check a bingo</small></span></button>
+        </nav>
+
+        <main id="edit-mode">
+            <section id="panel-create" class="workflow-panel" aria-labelledby="create-heading">
+                <div class="section-heading"><div><span class="eyebrow">LET'S MAKE A GAME</span><h2 id="create-heading" tabindex="-1">What will your class play?</h2><p>Choose a kind of bingo, then fill it with your own ideas.</p></div></div>
+                <div class="create-layout">
+                    <aside class="settings-card">
+                        <label class="field-label" for="game-title">Game name</label>
+                        <input type="text" id="game-title" class="field" value="My Awesome Review Game" placeholder="Give your game a name">
+                        <fieldset class="setting-group"><legend class="field-label">What are you adding?</legend>
+                            <div class="type-choices">
+                                <button id="type-text" class="type-choice" aria-pressed="true" onclick="setContentType('text')"><span class="type-icon words-icon" aria-hidden="true">Aa</span><strong>Words</strong><small>Answers & clues</small></button>
+                                <button id="type-image" class="type-choice" aria-pressed="false" onclick="setContentType('image')"><span class="type-icon pictures-icon" aria-hidden="true">🖼️</span><strong>Pictures</strong><small>Photos & clipart</small></button>
+                                <button id="type-audio" class="type-choice" aria-pressed="false" onclick="setContentType('audio')"><span class="type-icon audio-icon" aria-hidden="true">♪</span><strong>Audio</strong><small>Music & sounds</small></button>
+                            </div>
+                            <select id="content-type" class="hidden" aria-label="Content type" tabindex="-1"><option value="text">Words</option><option value="image">Pictures</option><option value="audio">Audio</option></select>
+                        </fieldset>
+                        <label class="field-label setting-group" for="grid-size">Card size</label><select id="grid-size" class="field" onchange="changeGridSize()"><option value="3">3 × 3 — quick games</option><option value="4">4 × 4 — medium games</option><option value="5" selected>5 × 5 — classic bingo</option></select><p class="help-text">4 × 4 cards use no free space or a random free space.</p>
+                        <fieldset class="setting-group"><legend class="field-label">Free space</legend>
+                            <div class="segmented">
+                                <button id="free-center" aria-pressed="true" onclick="setFreeSpace('center')">Center</button>
+                                <button id="free-random" aria-pressed="false" onclick="setFreeSpace('random')">Random</button>
+                                <button id="free-none" aria-pressed="false" onclick="setFreeSpace('none')">None</button>
+                            </div>
+                            <select id="free-space-mode" class="hidden" aria-label="Free space" tabindex="-1"><option value="center">Center</option><option value="random">Random</option><option value="none">None</option></select>
+                        </fieldset>
+                        <div class="matching-section">
+                            <h3>How will students match?</h3>
+                            <p id="matching-hint" class="help-text">Add an optional clue to show on screen. The answer goes on students' cards.</p>
+                            <div id="image-rules" class="rule-options hidden">
+                                <label>Teacher's screen<select id="rule-teacher" class="field"><option value="image">Picture</option><option value="text">Words</option><option value="both">Picture + words</option></select></label>
+                                <label>Students' cards<select id="rule-student" class="field"><option value="text">Words</option><option value="image">Picture</option><option value="both">Picture + words</option></select></label>
+                            </div>
+                            <div id="audio-rules" class="rule-options hidden">
+                                <label>Teacher's screen<select id="audio-rule-teacher" class="field"><option value="audio">Sound only</option><option value="both">Sound + words</option></select></label>
+                                <label>Students' cards<select id="audio-rule-student" class="field"><option value="text">Words</option><option value="image">Attached picture</option><option value="both">Picture + words</option></select></label>
+                            </div>
+                            <div class="matching-item-picker">
+                                <label for="matching-item" class="field-label">Preview an item</label>
+                                <select id="matching-item" class="field" aria-describedby="matching-caption" onchange="selectMatchingItem(this.value)"><option value="">Example item</option></select>
+                            </div>
+                            <div class="matching-previews">
+                                <div class="match-example"><span class="example-label">Teacher shows</span><div id="teacher-example" class="example-content"></div></div>
+                                <div class="match-example student-example"><span class="example-label">Students see</span><div id="student-example" class="example-content"></div></div>
+                            </div>
+                            <p id="matching-caption" class="example-caption">Example only — add an item to preview your game.</p>
+                        </div>
+                    </aside>
+
+                    <div class="items-card">
+                        <details class="math-builder" open><summary>✦ Make a math facts game</summary><p class="help-text">Generate answers and matching clues. Equivalent facts share one answer square; a fresh clue is chosen each round.</p><div class="math-fields"><label>Operation<select id="math-operation" class="field"><option value="multiply">Multiplication</option><option value="add">Addition</option><option value="subtract">Subtraction</option><option value="divide">Division</option><option value="mixed">Mixed operations</option></select></label><label>Smallest number<input id="math-min" class="field" type="number" min="0" max="20" value="1"></label><label>Largest number<input id="math-max" class="field" type="number" min="0" max="20" value="12"></label></div><p class="help-text">Use numbers from 0–20. Subtraction stays nonnegative. Division uses these factors to make whole-number answers (e.g. 6 × 8 becomes 48 ÷ 8).</p><button class="button button-purple" onclick="generateMathGame()">Generate math game</button><p id="math-result" class="help-text" aria-live="polite"></p></details>
+                        <div class="items-heading"><div><h3>Your game items</h3><p id="items-help">Add the answers students will find on their cards.</p></div><span id="item-count-badge" class="count-badge">0 items</span></div>
+                        <form id="text-add-bar" class="text-add-form" onsubmit="event.preventDefault(); addSingleTextItem()">
+                            <label for="single-answer">Answer / card words<input type="text" id="single-answer" class="field" placeholder="e.g. Quarter note" required></label>
+                            <label for="single-prompt">Teacher's clue <span>(optional)</span><input type="text" id="single-prompt" class="field" placeholder="e.g. This note gets one beat"></label>
+                            <button type="submit" class="button button-purple">+ Add</button>
+                        </form>
+                        <div class="import-actions">
+                            <input type="file" id="bulk-media-upload" class="hidden" multiple accept="image/*,audio/*" onchange="processMediaFiles(event)">
+                            <button id="btn-add-media" class="button button-pink hidden" onclick="document.getElementById('bulk-media-upload').click()">+ Add files</button>
+                            <p id="media-helper" class="help-text hidden">Choose several files at once.</p>
+                            <details id="csv-import" class="csv-import"><summary>Have a list already?</summary><p class="help-text">Import a CSV with one answer per row, or two columns: clue, answer. Put quotes around text containing commas.</p><button id="btn-add-csv" class="button button-soft" onclick="document.getElementById('csv-upload').click()">Import CSV list</button><input type="file" id="csv-upload" class="hidden" accept=".csv" onchange="processCSV(event)"></details>
+                        </div>
+                        <div id="recording-banner" class="recording-banner hidden" role="status">● Recording your clue (up to 60 seconds) <button class="button button-soft" onclick="stopRecording()">Stop recording</button></div><div id="create-readiness" class="readiness"><div id="validation-banner" aria-live="polite">Add 24 items to get started.</div><div id="item-progress" class="progress-track" role="progressbar" aria-label="Items needed to play" aria-valuemin="0" aria-valuemax="24" aria-valuenow="0"><span id="item-progress-fill"></span></div></div>
+                        <div id="item-list-container"><div id="item-list"></div></div>
+                        <div class="panel-footer"><span>You can save your game at any time.</span><button class="button button-purple" onclick="goToStep('print')">Next: Print Cards <span aria-hidden="true">→</span></button></div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="panel-print" class="workflow-panel hidden" aria-labelledby="print-heading">
+                <div class="section-heading"><div><span class="eyebrow">A CARD FOR EVERY PLAYER</span><h2 id="print-heading" tabindex="-1">Take a look, then print.</h2><p>These are the exact cards your students will receive.</p></div><button class="button button-soft" onclick="goToStep('create')">← Edit game</button></div>
+                <div class="print-layout">
+                    <aside class="settings-card print-settings">
+                        <h3>Your class set</h3>
+                        <label class="field-label" for="card-count">How many cards?</label><input type="number" id="card-count" class="field quantity-field" value="30" min="1" max="100" step="1" onchange="syncPrintPreview()">
+                        <p class="help-text">1–100 cards. Each has its own shuffled layout.</p>
+                        <fieldset class="setting-group"><legend class="field-label">Print style</legend><div class="segmented"><button id="color-color" aria-pressed="true" onclick="setPrintColor('color')">Color</button><button id="color-bw" aria-pressed="false" onclick="setPrintColor('bw')">Ink saver</button></div><select id="print-color" class="hidden" aria-label="Print style" tabindex="-1"><option value="color">Color</option><option value="bw">Black & white</option></select></fieldset>
+                        <button id="btn-print-cards" class="button button-purple button-wide" onclick="printCards()">🖨️ Print Cards</button>
+                        <p class="help-text">To make a PDF, choose <strong>Save as PDF</strong> in your browser's print window.</p>
+                        <div class="set-note"><p id="card-set-status" aria-live="polite">Add your items to preview a card set.</p><button id="btn-new-card-set" onclick="syncPrintPreview(true)" class="text-button hidden">Shuffle a new card set</button></div>
+                        <details class="more-exports"><summary>More export options</summary><p id="pptx-help" class="help-text">Download a PowerPoint caller with 10 randomized games and a clickable menu.</p><button id="btn-pptx" onclick="exportPPTX()" class="button button-pink button-wide">Download PowerPoint</button></details>
+                        <button class="button button-soft button-wide print-next" onclick="goToStep('play')">Next: Play →</button>
+                    </aside>
+                    <div class="preview-workspace">
+                        <div class="preview-toolbar"><strong>Card preview</strong><div class="preview-pagination"><button id="btn-preview-prev" class="button button-icon" aria-label="Previous card" onclick="changePreviewCard(-1)" disabled>←</button><span id="preview-counter" aria-live="polite">No cards yet</span><button id="btn-preview-next" class="button button-icon" aria-label="Next card" onclick="changePreviewCard(1)" disabled>→</button></div></div>
+                        <div id="preview-empty" class="preview-empty"><span aria-hidden="true">▦</span><h3>Your cards will appear here</h3><p id="preview-empty-message">Add at least 24 items to create your class set.</p><button class="button button-purple" onclick="goToStep('create')">Add game items</button></div>
+                        <div id="preview-paper" class="preview-paper hidden"><h3 id="preview-title"></h3><p id="preview-card-label"></p><div id="preview-grid-container"></div></div>
+                        <p class="preview-footnote">Reprinting keeps the same cards. Save Game to keep this set for later.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="panel-play" class="workflow-panel hidden" aria-labelledby="play-heading">
+                <div class="play-ready-card"><div class="ready-balls" aria-hidden="true"><span>B</span><span>I</span><span>N</span><span>G</span><span>O</span></div><span class="eyebrow">GATHER YOUR PLAYERS</span><h2 id="play-heading" tabindex="-1">Ready for some bingo?</h2><p id="play-game-name" class="play-game-name">My Awesome Review Game</p><div class="play-summary"><span id="play-item-count">0 items</span><span id="play-card-count">No card set yet</span></div><p id="play-readiness" class="play-readiness">Add 24 items to start your game.</p><div class="round-options"><label>Winning pattern<select id="win-pattern" class="field" onchange="markDirty()"><option value="line">Any complete line</option><option value="corners">Four corners</option><option value="x">Both diagonals (X)</option><option value="blackout">Blackout — every square</option></select></label><label>Thinking time<select id="thinking-seconds" class="field" onchange="markDirty()"><option value="0">Off — teacher paced</option><option value="5">5 seconds</option><option value="10" selected>10 seconds</option><option value="15">15 seconds</option><option value="20">20 seconds</option><option value="30">30 seconds</option></select></label></div><p class="help-text">The timer is a cue only. You choose when to reveal and move on.</p>
+                <button id="btn-start-game" class="button button-purple start-game-button" onclick="startGameMode()" disabled>▶ Start Game</button><p class="help-text">Students already have cards? You can start here.</p><div class="ready-links"><button class="text-button" onclick="goToStep('create')">Edit game</button><button class="text-button" onclick="goToStep('print')">Preview & print cards</button></div></div>
+            </section>
+        </main>
+
+        <section id="game-mode" aria-label="Bingo caller">
+            <div class="caller-header"><div><span class="eyebrow">LET'S PLAY</span><h2 id="game-display-title">Bingo Game</h2></div><div class="caller-actions"><button id="btn-present" onclick="togglePresentation()" class="button button-dark">Classroom view</button><span id="game-counter">Draw 0 of 0</span><button id="btn-check-bingo" onclick="openVerifyModal()" class="button button-green">✓ Check a Bingo</button><button onclick="endGameMode()" class="button button-dark">End Game</button></div></div>
+            <details class="narrator-panel"><summary>Narrator & pacing</summary><div class="narrator-fields"><label><input id="narrator-enabled" type="checkbox" onchange="changeNarration()"> Read each clue aloud</label><label>Voice<select id="narrator-voice" class="field" onchange="changeNarration()"><option value="">Device default</option></select></label><label>Speed<input id="narrator-rate" type="range" min="0.6" max="1.4" step="0.1" value="0.9" aria-label="Narrator speed" onchange="changeNarration()"></label><label>Volume<input id="narrator-volume" type="range" min="0" max="1" step="0.1" value="1" aria-label="Narrator volume" onchange="changeNarration()"></label><button class="button button-dark" onclick="testVoice()">Test voice</button><button class="button button-dark" onclick="stopNarration()">Stop voice</button></div><p id="narrator-status" aria-live="polite">Uses your device’s voices. Recorded clues take priority. Narration is live; PowerPoint exports are silent.</p></details>
+            <div class="caller-stage"><div class="round-strip"><span id="pattern-label"></span><span id="thinking-status" role="timer"></span><button class="button button-dark" onclick="repeatClue()">↻ Repeat clue</button><button id="pause-thinking" class="button button-dark" onclick="pauseThinking()">Pause timer</button></div><div id="current-draw-card" aria-live="polite"><h1>Ready to Play?</h1><p>Give everyone a card, then draw your first item.</p></div><div class="caller-control-row"><div id="answer-controls" class="answer-controls hidden"><button id="btn-reveal-answer" onclick="toggleCurrentAnswer()" class="button button-amber" aria-expanded="false" aria-controls="current-answer">Show Answer</button><p id="current-answer" class="hidden" aria-live="polite"></p></div><button id="btn-draw" onclick="drawNextItem()" class="button draw-button">🎲 Draw Next</button></div><p id="round-finished" class="round-finished hidden">Every item has been called. Check any final bingos, or end this game.</p></div>
+            <div class="history-section"><div class="history-heading"><h3>Already called</h3><p>Tap Show Answer to reveal a clue's answer.</p></div><div id="history-tray"></div></div>
+        </section>
+    </div>
+
+    <!-- Custom Alert Modal -->
+    <div id="modal-overlay">
+        <div class="modal-content relative">
+            <div id="modal-icon" class="text-4xl mb-4">🔔</div>
+            <h3 id="modal-title" class="text-xl font-bold brand-font text-slate-800 mb-2">Notice</h3>
+            <p id="modal-message" class="text-slate-600 mb-6">Message goes here.</p>
+            <button onclick="closeModal()" class="w-full bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-3 rounded-xl transition-colors">Got it</button>
+        </div>
+    </div>
+
+    <!-- Verify BINGO Modal -->
+    <div id="verify-modal-overlay">
+        <div class="bg-white rounded-xl p-6 max-w-3xl w-full m-4 shadow-2xl flex flex-col items-center relative">
+            <button onclick="closeVerifyModal()" class="absolute top-4 right-4 text-slate-400 hover:text-red-500 text-2xl font-bold">&times;</button>
+            <p id="verify-pattern" class="help-text"></p><h2 id="verify-heading" class="text-2xl brand-font text-slate-800 mb-4">Verify a Win</h2>
+            <div class="flex gap-4 mb-6 w-full max-w-sm">
+                <input type="number" id="verify-card-num" placeholder="Enter Card # (e.g. 5)" class="flex-grow p-3 border border-slate-300 rounded-lg outline-none text-center text-lg font-bold">
+                <button onclick="checkBingo()" class="bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-3 px-6 rounded-lg transition-colors">Check</button>
+            </div>
+            
+            <div id="verify-result-msg" class="text-lg font-bold mb-4 h-8 text-center w-full"></div>
+            
+            <div class="verify-grid" id="verify-grid-container">
+                <!-- 5x5 Grid renders here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Hidden div to hold printable content -->
+    <div id="print-area" class="hidden"></div>
+
+    <script>
+        let items = []; // Master pool of items
+        let generatedCards = []; // Stores mathematical memory of printed cards for verification
+        
+        // Game State
+        let gamePool = [];
+        let drawnItems = [];
+        let currentAudio = null;
+        let cardSetId = '';
+        let dirty = false;
+        let revision = 0;
+        let pendingImports = 0;
+        let printBusy = false;
+        let loadSequence = 0;
+        let audioAttempt = 0;
+        let idCounter = 0;
+        let currentStep = 'create';
+        let previewIndex = 0;
+        let matchingItemId = '';
+        let gameActive = false;
+        let revealedAnswers = new Set();
+        let gridSize = 5;
+        let thinkingTimer = null, thinkingRemaining = 0, thinkingPaused = false;
+        let narrationSerial = 0;
+        let draftTimer = null, draftQueue = Promise.resolve(), pendingDraft = null, draftDbPromise = null;
+        let recordingItemId = '', recorder = null, recordingStream = null, recordingTimeout = null, recordingCancelled = false;
+
+
+        const typeSelect = document.getElementById('content-type');
+        const listContainer = document.getElementById('item-list');
+
+        typeSelect.addEventListener('change', updateUI);
+        for (const id of ['content-type', 'free-space-mode', 'rule-student', 'audio-rule-student']) {
+            document.getElementById(id).addEventListener('change', () => {
+                invalidateCards();
+                markDirty();
+                syncChoiceControls(); renderMatchingExamples(); validatePool();
+            });
+        }
+        for (const id of ['game-title', 'rule-teacher', 'audio-rule-teacher', 'card-count', 'print-color']) {
+            document.getElementById(id).addEventListener('input', () => { markDirty(); renderMatchingExamples(); renderPlaySummary(); renderCardPreview(); validatePool(); });
+        }
+        window.addEventListener('beforeunload', event => {
+            if (!dirty && pendingImports === 0) return;
+            event.preventDefault();
+            event.returnValue = '';
+        });
+
+        for (const id of ['rule-teacher', 'audio-rule-teacher']) {
+            document.getElementById(id).addEventListener('change', () => {
+                revealedAnswers.clear(); renderList();
+                if (gameActive) { renderCurrentDraw(); updateHistoryTray(); }
+            });
+        }
+
+        function goToStep(step) {
+            if (!['create', 'print', 'play'].includes(step)) return;
+            if (recordingItemId && step !== 'create') { stopRecording(); showModal('Finishing Your Recording', 'Finish the microphone prompt or wait for your recording to finish, then choose the next step.', '🎤'); return; }
+            if (step !== 'play') { stopCurrentAudio(); stopNarration(); stopThinking(); setPresentation(false); }
+            currentStep = step;
+            for (const name of ['create', 'print', 'play']) {
+                const button = document.getElementById('step-' + name);
+                if (step === name) button.setAttribute('aria-current', 'step');
+                else button.removeAttribute('aria-current');
+                document.getElementById('panel-' + name).classList.toggle('hidden', step !== name);
+            }
+            const calling = step === 'play' && gameActive;
+            document.getElementById('app-shell').classList.toggle('is-calling', calling);
+            document.getElementById('edit-mode').style.display = calling ? 'none' : 'block';
+            document.getElementById('game-mode').style.display = calling ? 'flex' : 'none';
+            if (step === 'print') {
+                ensureCardSet(false, false);
+                renderCardPreview();
+            }
+            if (calling) { renderCurrentDraw(); updateHistoryTray(); updateCounter(); }
+            renderPlaySummary();
+        }
+
+        function resetGameState() {
+            stopCurrentAudio(); stopNarration(); stopThinking(); setPresentation(false);
+            gameActive = false;
+            gamePool = [];
+            drawnItems = [];
+            revealedAnswers.clear();
+            if (currentStep === 'play') goToStep('play');
+        }
+
+        function updateSaveStatus() {
+            document.getElementById('save-status').textContent = dirty ? 'Unsaved changes' : 'No unsaved changes';
+        }
+
+        function setContentType(type) {
+            if (!['text', 'image', 'audio'].includes(type) || type === typeSelect.value) return;
+            typeSelect.value = type;
+            invalidateCards(); markDirty(); updateUI();
+        }
+
+        function setFreeSpace(mode) {
+            const input = document.getElementById('free-space-mode');
+            if (!['center', 'random', 'none'].includes(mode) || input.value === mode) return;
+            if (gridSize === 4 && mode === 'center') { showModal('Even-sized Cards', 'Choose Random or None for a 4 × 4 card.', '▦'); return; }
+            input.value = mode;
+            invalidateCards(); markDirty(); updateUI();
+        }
+
+        function setPrintColor(color) {
+            const input = document.getElementById('print-color');
+            if (!['color', 'bw'].includes(color) || input.value === color) return;
+            input.value = color;
+            markDirty(); syncChoiceControls(); renderCardPreview();
+        }
+
+        function syncChoiceControls() {
+            for (const type of ['text', 'image', 'audio']) document.getElementById('type-' + type).setAttribute('aria-pressed', String(type === typeSelect.value));
+            for (const mode of ['center', 'random', 'none']) document.getElementById('free-' + mode).setAttribute('aria-pressed', String(mode === document.getElementById('free-space-mode').value));
+            for (const color of ['color', 'bw']) document.getElementById('color-' + color).setAttribute('aria-pressed', String(color === document.getElementById('print-color').value));
+        }
+
+        function requiredItemCount() {
+            return gridSize * gridSize - (document.getElementById('free-space-mode').value === 'none' ? 0 : 1);
+        }
+
+        function activeItems() {
+            return items.filter(item => item.type === typeSelect.value);
+        }
+
+        function validCardQuantity() {
+            const count = Number(document.getElementById('card-count').value);
+            return Number.isInteger(count) && count >= 1 && count <= 100 ? count : 0;
+        }
+
+        function studentCellHTML(item, example = false) {
+            let showImage = false, showText = true, image = '';
+            if (item.type === 'image') {
+                const rule = document.getElementById('rule-student').value;
+                showImage = rule === 'image' || rule === 'both';
+                showText = rule === 'text' || rule === 'both';
+                image = item.data;
+            } else if (item.type === 'audio') {
+                const rule = document.getElementById('audio-rule-student').value;
+                image = item.attachedImage;
+                showImage = !!image && (rule === 'image' || rule === 'both');
+                showText = rule === 'text' || rule === 'both' || !image;
+            }
+            let content = '';
+            if (showImage && image) content += `<img src="${escapeHTML(image)}" alt="" style="margin-bottom:${showText ? '4px' : '0'}">`;
+            else if (showImage && example) content += '<span class="example-icon" aria-hidden="true">🖼️</span>';
+            if (showText) content += `<span>${escapeHTML(item.text)}</span>`;
+            return content;
+        }
+
+        function teacherUsesWords() {
+            if (typeSelect.value === 'image') return document.getElementById('rule-teacher').value !== 'image';
+            if (typeSelect.value === 'audio') return document.getElementById('audio-rule-teacher').value === 'both';
+            return true;
+        }
+
+        function selectMatchingItem(id) {
+            if (!activeItems().some(item => item.id === id)) return;
+            matchingItemId = id;
+            renderMatchingExamples();
+        }
+
+        function renderMatchingExamples() {
+            const type = typeSelect.value;
+            const pool = activeItems();
+            const selectedIndex = Math.max(0, pool.findIndex(item => item.id === matchingItemId));
+            const sample = pool[selectedIndex] || {type, text:type === 'text' ? 'Quarter note' : 'Drum', prompt:type === 'text' ? 'This note gets one beat' : '', data:null, attachedImage:null};
+            matchingItemId = sample.id || '';
+            const selector = document.getElementById('matching-item');
+            selector.innerHTML = pool.length ? pool.map((item, index) => `<option value="${escapeHTML(item.id)}">${index + 1}. ${escapeHTML(item.text.trim() || 'Untitled item')}</option>`).join('') : '<option value="">Example item</option>';
+            selector.value = matchingItemId;
+            selector.disabled = pool.length === 0;
+            document.getElementById('matching-caption').textContent = pool.length
+                ? `Item ${selectedIndex + 1} of ${pool.length}. Editing an item previews it here.`
+                : 'Example only — add an item to preview your game.';
+            document.getElementById('matching-hint').textContent = teacherUsesWords()
+                ? 'Cards use Answer / card words. A teacher’s clue replaces those words on the teacher’s screen only.'
+                : `Cards use Answer / card words when words are selected. Teacher’s clues are hidden in ${type === 'image' ? 'picture-only' : 'sound-only'} mode.`;
+            let teacher = '';
+            if (type === 'text') teacher = `<span>${escapeHTML(sample.prompt || sample.text)}</span>`;
+            else if (type === 'image') {
+                const rule = document.getElementById('rule-teacher').value;
+                if (rule !== 'text') teacher += sample.data ? `<img src="${escapeHTML(sample.data)}" alt="">` : '<span class="example-icon" aria-hidden="true">🖼️</span>';
+                if (rule !== 'image') teacher += `<span>${escapeHTML(sample.prompt || sample.text)}</span>`;
+            } else {
+                teacher = '<span class="example-icon" aria-hidden="true">🔊</span><span>Sound plays</span>';
+                if (document.getElementById('audio-rule-teacher').value === 'both') teacher += `<span>${escapeHTML(sample.prompt || sample.text)}</span>`;
+            }
+            document.getElementById('teacher-example').innerHTML = teacher;
+            document.getElementById('student-example').innerHTML = studentCellHTML(sample, true);
+        }
+
+        function renderPlaySummary() {
+            const count = activeItems().length;
+            const missing = Math.max(0, requiredItemCount() - count);
+            document.getElementById('play-game-name').textContent = document.getElementById('game-title').value || 'Your bingo game';
+            document.getElementById('play-item-count').textContent = `${count} ${count === 1 ? 'item' : 'items'}`;
+            document.getElementById('play-card-count').textContent = generatedCards.length ? `${generatedCards.length} card layouts ready` : 'No card set yet';
+            document.getElementById('play-readiness').textContent = missing
+                ? `Add ${missing} more ${missing === 1 ? 'item' : 'items'} in Create to start your game.`
+                : generatedCards.length ? 'Give everyone a card. Draw items on screen, then check a bingo by card number.'
+                : 'Ready to play with cards you already have. To check a bingo by card number, preview or open your saved card set first.';
+            document.getElementById('btn-start-game').disabled = missing > 0 || pendingImports > 0;
+        }
+
+        function ensureCardSet(forceNew = false, notify = false) {
+            if (pendingImports || printBusy) { if (notify && pendingImports) importsInProgress(); return false; }
+            const quantity = validCardQuantity();
+            if (!quantity) { if (notify) showModal('Choose a Card Quantity', 'Enter a whole number from 1 to 100.', '⚠️'); return false; }
+            if (activeItems().length < requiredItemCount()) {
+                if (notify) showModal('Add a Few More Items', `Add at least ${requiredItemCount()} items in Create to make your cards.`, '⚠️');
+                return false;
+            }
+            if (forceNew && generatedCards.length && !window.confirm('Shuffle a new card set? Verification will switch to these new cards. Save Game first if you need to keep your current set.')) return false;
+            if (forceNew) { generatedCards = []; cardSetId = ''; previewIndex = 0; }
+            if (!cardSetId) cardSetId = makeId().slice(5).replace(/-/g, '').slice(-8).toUpperCase();
+            let changed = false;
+            while (generatedCards.length < quantity) { generatedCards.push(generateCardData()); changed = true; }
+            if (changed) markDirty();
+            updateCardStatus();
+            return true;
+        }
+
+        function syncPrintPreview(forceNew = false) {
+            ensureCardSet(forceNew, true);
+            renderCardPreview(); validatePool();
+        }
+
+        function createCardGrid(card) {
+            const grid = document.createElement('div');
+            grid.className = 'pdf-grid';
+            grid.style.gridTemplateColumns = `repeat(${gridSize}, 1fr)`;
+            grid.style.gridTemplateRows = `repeat(${gridSize}, minmax(0, 1fr))`;
+            grid.style.width = '100%';
+            grid.style.aspectRatio = '1 / 1';
+            const monochrome = document.getElementById('print-color').value === 'bw';
+            const byId = new Map(items.map(item => [item.id, item]));
+            for (const id of card) {
+                const cell = document.createElement('div');
+                cell.className = 'pdf-cell';
+                if (id !== 'FREE' && /^-?\d+(\.\d+)?$/.test(byId.get(id)?.text || '')) cell.classList.add('number-cell');
+                else if ((byId.get(id)?.text || '').length > 40) cell.classList.add('long-text-cell');
+                if (monochrome) cell.style.filter = 'grayscale(100%)';
+                cell.innerHTML = id === 'FREE' ? '<span>FREE SPACE</span>' : studentCellHTML(byId.get(id));
+                grid.appendChild(cell);
+            }
+            return grid;
+        }
+
+        function renderCardPreview() {
+            const quantity = validCardQuantity();
+            const count = Math.min(quantity, generatedCards.length);
+            const empty = document.getElementById('preview-empty');
+            const paper = document.getElementById('preview-paper');
+            empty.classList.toggle('hidden', count > 0);
+            paper.classList.toggle('hidden', count === 0);
+            const grid = document.getElementById('preview-grid-container');
+            grid.innerHTML = '';
+            if (!count) {
+                previewIndex = 0;
+                document.getElementById('preview-counter').textContent = 'No cards yet';
+                document.getElementById('preview-empty-message').textContent = !quantity
+                    ? 'Choose a whole number from 1 to 100 for your card quantity.'
+                    : `Add at least ${requiredItemCount()} items in Create to preview your class set.`;
+            } else {
+                previewIndex = Math.max(0, Math.min(previewIndex, count - 1));
+                document.getElementById('preview-counter').textContent = `Card ${previewIndex + 1} of ${count}`;
+                document.getElementById('preview-title').textContent = document.getElementById('game-title').value;
+                document.getElementById('preview-card-label').textContent = `Card #${previewIndex + 1} · Set ${cardSetId}`;
+                grid.appendChild(createCardGrid(generatedCards[previewIndex]));
+            }
+            document.getElementById('btn-preview-prev').disabled = count === 0 || previewIndex === 0;
+            document.getElementById('btn-preview-next').disabled = count === 0 || previewIndex === count - 1;
+        }
+
+        function changePreviewCard(offset) {
+            previewIndex += offset;
+            renderCardPreview();
+        }
+
+        function answerIsHidden(item) {
+            if (!item?.text) return false;
+            if (item.type === 'text') return !!item.prompt;
+            if (item.type === 'image') return document.getElementById('rule-teacher').value === 'image' || !!item.prompt;
+            return document.getElementById('audio-rule-teacher').value === 'audio' || !!item.prompt;
+        }
+
+        function updateAnswerDisplay() {
+            const item = drawnItems[0];
+            const available = !!item && answerIsHidden(item);
+            const shown = available && revealedAnswers.has(item.id);
+            document.getElementById('answer-controls').classList.toggle('hidden', !available);
+            document.getElementById('btn-reveal-answer').textContent = shown ? 'Hide Answer' : 'Show Answer';
+            document.getElementById('btn-reveal-answer').setAttribute('aria-expanded', String(shown));
+            document.getElementById('current-answer').textContent = shown ? item.text : '';
+            document.getElementById('current-answer').classList.toggle('hidden', !shown);
+        }
+
+        function toggleCurrentAnswer() {
+            if (drawnItems[0]) { stopThinking(); toggleHistoryAnswer(drawnItems[0].id); }
+        }
+
+        function toggleHistoryAnswer(id) {
+            const item = drawnItems.find(item => item.id === id);
+            if (!item || !answerIsHidden(item)) return;
+            if (revealedAnswers.has(id)) revealedAnswers.delete(id); else revealedAnswers.add(id);
+            updateAnswerDisplay(); updateHistoryTray();
+        }
+
+        function renderCurrentDraw() {
+            const item = drawnItems[0];
+            const card = document.getElementById('current-draw-card');
+            document.getElementById('game-display-title').innerText = document.getElementById('game-title').value;
+            if (!item) {
+                card.innerHTML = '<h1>Ready to Play?</h1><p>Give everyone a card, then draw your first item.</p>';
+                updateAnswerDisplay();
+                return;
+            }
+            let content = '';
+            if (item.type === 'text') {
+                if (item.prompt) content += '<h2>Your clue</h2>';
+                content += `<h1>${escapeHTML(item.prompt || item.text)}</h1>`;
+            } else if (item.type === 'image') {
+                const rule = document.getElementById('rule-teacher').value;
+                if (rule !== 'text') content += `<img src="${escapeHTML(item.data)}" alt="Bingo picture">`;
+                if (rule !== 'image') content += `<h1>${escapeHTML(item.prompt || item.text)}</h1>`;
+            } else {
+                content = '<div id="audio-icon" aria-hidden="true">🔊</div><h2>Listen and match</h2><div class="audio-controls"><button onclick="replayAudio()" class="button button-amber">▶ Play again</button><button onclick="pauseAudio()" class="button button-soft">⏯ Pause / resume</button><button onclick="stopAudio()" class="button button-soft">⏹ Stop</button></div>';
+                if (document.getElementById('audio-rule-teacher').value === 'both') content += `<h1>${escapeHTML(item.prompt || item.text)}</h1>`;
+            }
+            card.innerHTML = content;
+            updateAnswerDisplay();
+            setAudioMotion(!!currentAudio && !currentAudio.paused);
+        }
+
+
+        function makeId() {
+            return 'item_' + (globalThis.crypto?.randomUUID?.() || Date.now().toString(36) + '_' + (++idCounter));
+        }
+
+        function escapeHTML(value) {
+            return String(value ?? '').replace(/[&<>"']/g, char => ({'&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'}[char]));
+        }
+
+        function shuffle(source) {
+            const result = [...source];
+            for (let i = result.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [result[i], result[j]] = [result[j], result[i]];
+            }
+            return result;
+        }
+
+        function markDirty() {
+            dirty = true;
+            revision++;
+            updateSaveStatus(); scheduleDraft();
+        }
+
+        function updateCardStatus(message) {
+            document.getElementById('card-set-status').textContent = message || (generatedCards.length
+                ? `Set ${cardSetId} · ${generatedCards.length} card layouts. Save Game to keep this set.`
+                : 'Your card set will be ready after you add enough items.');
+            document.getElementById('btn-new-card-set').classList.toggle('hidden', generatedCards.length === 0);
+            renderCardPreview(); renderPlaySummary();
+        }
+
+        function invalidateCards() {
+            const hadCards = generatedCards.length > 0;
+            generatedCards = [];
+            cardSetId = '';
+            previewIndex = 0;
+            resetGameState();
+            closeVerifyModal();
+            updateCardStatus(hadCards ? 'Game changed. Generate a new card set before verifying printed cards.' : undefined);
+        }
+
+        function changedItems(type) {
+            if (type === typeSelect.value) invalidateCards();
+            markDirty();
+            renderList();
+            validatePool();
+        }
+
+        function importsInProgress() {
+            if (!pendingImports) return false;
+            showModal('Import in Progress', 'Please let the current import finish, then try again.', '⏳');
+            return true;
+        }
+
+        function readFile(file, mode = 'text') {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                const timer = setTimeout(() => { reader.abort(); reject(new Error('Reading the file took too long.')); }, 120000);
+                const finish = (fn, value) => { clearTimeout(timer); fn(value); };
+                reader.onload = () => finish(resolve, reader.result);
+                reader.onerror = () => finish(reject, new Error('The file could not be read.'));
+                reader.onabort = () => finish(reject, new Error('File reading was interrupted.'));
+                try {
+                    if (mode === 'data') reader.readAsDataURL(file);
+                    else reader.readAsText(file);
+                } catch (error) { finish(reject, error); }
+            });
+        }
+
+        function loadImage(source) {
+            return new Promise((resolve, reject) => {
+                const img = new Image();
+                const timer = setTimeout(() => finish(new Error('The image took too long to open.')), 15000);
+                function finish(error) {
+                    clearTimeout(timer);
+                    img.onload = img.onerror = null;
+                    if (error) reject(error); else resolve(img);
+                }
+                img.onload = () => finish(img.naturalWidth || img.width ? null : new Error('The image is empty.'));
+                img.onerror = () => finish(new Error('The image is damaged or uses an unsupported format.'));
+                img.src = source;
+            });
+        }
+
+        function updateUI() {
+            const type = typeSelect.value;
+            for (const id of ['image-rules', 'audio-rules', 'text-add-bar', 'btn-add-media', 'btn-add-csv', 'media-helper', 'csv-import']) document.getElementById(id).classList.add('hidden');
+            const pptxBtn = document.getElementById('btn-pptx');
+            pptxBtn.disabled = type === 'audio';
+            pptxBtn.textContent = type === 'audio' ? 'Use Play for audio games' : 'Download PowerPoint';
+            document.getElementById('pptx-help').textContent = type === 'audio'
+                ? 'Audio games play here in Bingo Maker. PowerPoint export is available for Words and Pictures.'
+                : 'Download a PowerPoint caller with 10 randomized games and a clickable menu.';
+            if (type === 'text') {
+                for (const id of ['text-add-bar', 'btn-add-csv', 'csv-import']) document.getElementById(id).classList.remove('hidden');
+                document.getElementById('items-help').textContent = 'Add the answers students will find on their cards.';
+            } else {
+                for (const id of [type === 'image' ? 'image-rules' : 'audio-rules', 'btn-add-media', 'media-helper']) document.getElementById(id).classList.remove('hidden');
+                document.getElementById('btn-add-media').textContent = type === 'image' ? '+ Add Pictures' : '+ Add Audio';
+                document.getElementById('bulk-media-upload').accept = type === 'image' ? 'image/*' : 'audio/*,application/ogg';
+                document.getElementById('items-help').textContent = type === 'image' ? 'Edit Answer / card words to change the words used on students’ cards.' : 'Choose recordings, then name the answers students should match.';
+                document.getElementById('media-helper').textContent = type === 'image' ? 'Picture names start with the filename. Replace them with the answers you want.' : 'Choose several sounds at once. Attach pictures below if you want picture cards.';
+            }
+            syncChoiceControls(); renderList(); validatePool(); renderCardPreview();
+        }
+
+        function showModal(title, message, emoji = '🔔') {
+            document.getElementById('modal-icon').innerText = emoji;
+            document.getElementById('modal-title').innerText = title;
+            document.getElementById('modal-message').innerText = message;
+            document.getElementById('modal-overlay').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('modal-overlay').style.display = 'none';
+        }
+
+        async function processMediaFiles(event) {
+            const files = Array.from(event.target.files || []);
+            event.target.value = '';
+            if (!files.length) return;
+            const type = typeSelect.value;
+            const imported = [];
+            const failed = [];
+            pendingImports++;
+            validatePool();
+            try {
+                for (const file of files) {
+                    try {
+                        if (type === 'image' && file.type.startsWith('image/')) {
+                            imported.push({ id: makeId(), type, prompt: '', text: file.name.replace(/\.[^.]+$/, '').replace(/[-_]/g, ' '), data: await compressImage(file) });
+                        } else if (type === 'audio' && (file.type.startsWith('audio/') || file.type === 'application/ogg')) {
+                            imported.push({ id: makeId(), type, prompt: '', text: file.name.replace(/\.[^.]+$/, '').replace(/[-_]/g, ' '), data: await readFile(file, 'data'), attachedImage: null });
+                        } else throw new Error('Choose files that match the selected content type.');
+                    } catch (error) { failed.push(`${file.name}: ${error.message}`); }
+                }
+                if (imported.length) { items.push(...imported); changedItems(type); }
+                if (failed.length) showModal('Import Finished', `Added ${imported.length} files. Could not add ${failed.length}: ${failed.slice(0, 3).join('; ')}`, '⚠️');
+            } finally { pendingImports--; validatePool(); }
+        }
+
+        async function compressImage(file) {
+            const img = await loadImage(await readFile(file, 'data'));
+            const scale = Math.min(1, 600 / Math.max(img.width, img.height));
+            const canvas = document.createElement('canvas');
+            canvas.width = Math.max(1, Math.round(img.width * scale));
+            canvas.height = Math.max(1, Math.round(img.height * scale));
+            const ctx = canvas.getContext('2d');
+            if (!ctx) throw new Error('Image processing is unavailable in this browser.');
+            ctx.fillStyle = '#FFFFFF';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+            return canvas.toDataURL('image/jpeg', 0.8);
+        }
+
+        async function getImageDimensions(dataUrl) {
+            const img = await loadImage(dataUrl);
+            return { w: img.width, h: img.height };
+        }
+
+        async function attachImageToAudio(itemId, file) {
+            if (!file) return;
+            if (!file.type.startsWith('image/')) { showModal('Choose an Image', 'Please select an image file.', '⚠️'); return; }
+            pendingImports++;
+            validatePool();
+            try {
+                const compressed = await compressImage(file);
+                const item = items.find(i => i.id === itemId);
+                if (item) { item.attachedImage = compressed; changedItems(item.type); }
+            } catch (error) { showModal('Image Not Added', error.message, '⚠️'); }
+            finally { pendingImports--; validatePool(); }
+        }
+
+        function removeAttachedImage(itemId) {
+            const item = items.find(i => i.id === itemId);
+            if (item) {
+                item.attachedImage = null;
+                changedItems(item.type);
+            }
+        }
+
+        function addSingleTextItem() {
+            const answerInput = document.getElementById('single-answer');
+            const promptInput = document.getElementById('single-prompt');
+            
+            if (!answerInput.value.trim()) {
+                showModal("Missing Answer", "You must provide an answer/text to display on the card.", "❌");
+                return;
+            }
+
+            items.push({
+                id: makeId(),
+                type: 'text',
+                prompt: promptInput.value.trim(),
+                text: answerInput.value.trim(),
+                data: null
+            });
+
+            answerInput.value = '';
+            promptInput.value = '';
+            answerInput.focus();
+            changedItems('text');
+        }
+
+        function parseCSV(text) {
+            const rows = [];
+            let row = [], field = '', quoted = false, closedQuote = false;
+            text = text.replace(/^\uFEFF/, '');
+            for (let i = 0; i < text.length; i++) {
+                const char = text[i];
+                if (quoted) {
+                    if (char === '"') {
+                        if (text[i + 1] === '"') { field += '"'; i++; }
+                        else { quoted = false; closedQuote = true; }
+                    } else field += char;
+                } else if (char === ',') {
+                    row.push(field); field = ''; closedQuote = false;
+                } else if (char === '\n' || char === '\r') {
+                    if (char === '\r' && text[i + 1] === '\n') i++;
+                    row.push(field); rows.push(row); row = []; field = ''; closedQuote = false;
+                } else if (char === '"') {
+                    if (field.trim() || closedQuote) throw new Error('A CSV quotation mark is misplaced.');
+                    field = ''; quoted = true;
+                } else if (closedQuote) {
+                    if (!/\s/.test(char)) throw new Error('Unexpected text after a quoted CSV value.');
+                } else field += char;
+            }
+            if (quoted) throw new Error('A quoted CSV value is missing its closing quotation mark.');
+            if (field || row.length || closedQuote) { row.push(field); rows.push(row); }
+            return rows;
+        }
+
+        async function processCSV(event) {
+            const file = event.target.files[0];
+            event.target.value = '';
+            if (!file) return;
+            pendingImports++;
+            validatePool();
+            try {
+                const rows = parseCSV(await readFile(file));
+                const imported = [];
+                for (const row of rows) {
+                    if (row.every(value => !value.trim())) continue;
+                    if (row.length > 2) throw new Error('Use one Answer column, or two columns: Prompt and Answer. Put quotation marks around values containing commas.');
+                    const prompt = row.length === 2 ? row[0].trim() : '';
+                    const text = row[row.length - 1].trim();
+                    if (text) imported.push({ id: makeId(), type: 'text', prompt, text, data: null });
+                }
+                if (imported.length) { items.push(...imported); changedItems('text'); }
+                showModal('Import Complete', `Successfully imported ${imported.length} items from CSV.`, '✅');
+            } catch (error) { showModal('CSV Not Imported', error.message, '⚠️'); }
+            finally { pendingImports--; validatePool(); }
+        }
+
+        function removeItem(id) {
+            const item = items.find(i => i.id === id);
+            if (!item) return;
+            items = items.filter(i => i.id !== id);
+            changedItems(item.type);
+        }
+
+        function renderList() {
+            listContainer.innerHTML = '';
+            const type = typeSelect.value;
+            const filtered = activeItems();
+            if (!filtered.length) {
+                const name = type === 'text' ? 'answer' : type === 'image' ? 'picture' : 'recording';
+                listContainer.innerHTML = `<div class="items-empty"><span class="empty-circle" aria-hidden="true">${type === 'text' ? 'Aa' : type === 'image' ? '🖼️' : '♪'}</span><strong>Add your first ${name}</strong><span>Your items will appear here, ready to edit.</span></div>`;
+            }
+            filtered.forEach((item, index) => {
+                const el = document.createElement('div');
+                el.className = 'item-card';
+                let thumbnail = String(index + 1);
+                if (type === 'image') thumbnail = `<img src="${escapeHTML(item.data)}" alt="">`;
+                if (type === 'audio') thumbnail = item.attachedImage ? `<img src="${escapeHTML(item.attachedImage)}" alt="">` : '♪';
+                const attachment = type !== 'audio' ? '' : item.attachedImage
+                    ? `<div class="item-attachment"><button class="text-button" onclick="removeAttachedImage('${item.id}')">Remove picture</button></div>`
+                    : `<div class="item-attachment"><button class="text-button" onclick="document.getElementById('attach_${item.id}').click()">+ Add picture</button><input id="attach_${item.id}" type="file" class="hidden" accept="image/*" onchange="attachImageToAudio('${item.id}', this.files[0])"></div>`;
+                const clueField = teacherUsesWords() ? `<label>Teacher's clue (optional)<input type="text" aria-label="Teacher's clue for item ${index + 1}" placeholder="Teacher screen only" value="${escapeHTML(item.prompt)}" onfocus="selectMatchingItem('${item.id}')" oninput="updateItemData('${item.id}', 'prompt', this.value)"></label>` : '';
+                el.innerHTML = `<div class="item-thumb">${thumbnail}</div><div class="item-fields${clueField ? '' : ' answer-only'}"><label>Answer / card words<input type="text" aria-label="Answer / card words for item ${index + 1}" value="${escapeHTML(item.text)}" onfocus="selectMatchingItem('${item.id}')" oninput="updateItemData('${item.id}', 'text', this.value)"></label>${clueField}</div>${attachment}${recordingControls(item, index)}<button class="item-remove" aria-label="Remove item ${index + 1}" onclick="removeItem('${item.id}')">×</button>`;
+                listContainer.appendChild(el);
+            });
+            renderMatchingExamples();
+        }
+
+        function updateItemData(id, field, val) {
+            const item = items.find(i => i.id === id);
+            if (!item || !['text', 'prompt'].includes(field) || item[field] === val) return;
+            item[field] = val;
+            delete item.clues; delete item.narration; // An edited clue must never retain a stale spoken answer.
+            if (item.type === typeSelect.value) matchingItemId = item.id;
+            if (item.type === typeSelect.value) invalidateCards();
+            markDirty();
+            renderMatchingExamples();
+        }
+
+        function validatePool() {
+            const count = activeItems().length;
+            const required = requiredItemCount();
+            const ready = count >= required;
+            document.getElementById('validation-banner').textContent = ready
+                ? `${count} items added — you're ready to print and play!`
+                : `${count} ${count === 1 ? 'item' : 'items'} added — add ${required - count} more to play.`;
+            document.getElementById('item-count-badge').textContent = `${count} ${count === 1 ? 'item' : 'items'}`;
+            document.getElementById('create-readiness').classList.toggle('ready', ready);
+            const progress = document.getElementById('item-progress');
+            progress.setAttribute('aria-valuemax', String(required));
+            progress.setAttribute('aria-valuenow', String(Math.min(count, required)));
+            document.getElementById('item-progress-fill').style.width = Math.min(100, count / required * 100) + '%';
+            document.getElementById('btn-print-cards').disabled = !ready || !validCardQuantity() || pendingImports > 0 || printBusy;
+            renderPlaySummary();
+        }
+
+        function generateCardData() {
+            const type = typeSelect.value;
+            const filteredItems = items.filter(i => i.type === type);
+            const freeSpaceMode = document.getElementById('free-space-mode').value;
+            const requiredCount = requiredItemCount();
+
+            const count = filteredItems.length;
+            if (count < requiredCount) return null;
+
+            // Shuffle pool and pick exactly required count
+            let shuffled = shuffle(filteredItems.map(roundItem));
+            let selected = shuffled.slice(0, requiredCount);
+
+            // Map down to simple IDs for memory
+            let simpleSelected = selected.map(item => item.id);
+
+            // Insert FREE SPACE based on mode
+            if (freeSpaceMode === 'center') {
+                simpleSelected.splice(Math.floor(gridSize * gridSize / 2), 0, 'FREE');
+            } else if (freeSpaceMode === 'random') {
+                const randomIndex = Math.floor(Math.random() * gridSize * gridSize);
+                simpleSelected.splice(randomIndex, 0, 'FREE');
+            }
+
+            return simpleSelected; // Array of 25 IDs (including 'FREE' if applicable)
+        }
+
+        async function printCards(forceNew = false) {
+            if (!ensureCardSet(forceNew, true)) return;
+            const numCards = validCardQuantity();
+            const title = document.getElementById('game-title').value;
+            const printArea = document.getElementById('print-area');
+            printArea.innerHTML = '';
+            printArea.classList.remove('hidden');
+            printBusy = true;
+            validatePool();
+            document.getElementById('btn-print-cards').textContent = 'Preparing cards…';
+            const printRevision = revision;
+            try {
+                for (let i = 0; i < numCards; i++) {
+                    const page = document.createElement('div');
+                    page.style.width = '7.5in';
+                    page.style.margin = '0 auto';
+                    page.style.pageBreakAfter = i < numCards - 1 ? 'always' : 'auto';
+                    page.style.pageBreakInside = 'avoid';
+                    const header = document.createElement('div');
+                    header.style.textAlign = 'center';
+                    header.style.marginBottom = '15px';
+                    header.innerHTML = `<h1 style="font-family:'Fredoka One',cursive;font-size:32px;color:#1e293b;margin:0">${escapeHTML(title)}</h1><p style="font-family:sans-serif;font-size:12px;color:#64748b;margin-top:4px">Card #${i + 1} · Set ${escapeHTML(cardSetId)}</p>`;
+                    page.appendChild(header);
+                    page.appendChild(createCardGrid(generatedCards[i]));
+                    printArea.appendChild(page);
+                }
+                const sources = [...printArea.querySelectorAll('img')].map(img => img.src);
+                await Promise.all([...new Set(sources)].map(loadImage));
+                if (document.fonts?.ready) await document.fonts.ready;
+                if (printRevision !== revision) throw new Error('The game changed while preparing the cards. Please print again.');
+                window.onafterprint = () => printArea.classList.add('hidden');
+                window.print();
+            } catch (error) {
+                showModal('Cards Not Printed', error.message || 'Please try printing again.', '⚠️');
+            } finally {
+                printBusy = false;
+                printArea.classList.add('hidden');
+                document.getElementById('btn-print-cards').textContent = '🖨️ Print Cards';
+                validatePool();
+            }
+        }
+
+        async function exportPPTX() {
+            if (importsInProgress()) return;
+            const type = typeSelect.value;
+            if (type === 'audio') {
+                showModal("Not Available", "PPTX export is disabled for Audio games to prevent browser crashes. Please use the built-in Presentation Mode instead.", "🚫");
+                return;
+            }
+
+            const pptx = new PptxGenJS();
+            const title = document.getElementById('game-title').value;
+            const teacherRule = document.getElementById('rule-teacher').value;
+            
+            const filteredItems = items.filter(i => i.type === type);
+            const freeSpaceMode = document.getElementById('free-space-mode').value;
+            const requiredCount = requiredItemCount();
+
+            if (filteredItems.length < requiredCount) {
+                 showModal("Not Enough Items", `You need at least ${requiredCount} items to generate a game.`, "⚠️");
+                 return;
+            }
+
+            const pptxBtn = document.getElementById('btn-pptx');
+            const origText = pptxBtn.innerHTML;
+            pptxBtn.innerHTML = '⏳ Generating Massive Presentation...';
+            pptxBtn.disabled = true;
+
+            try {
+                // 1. MAIN MENU SLIDE
+                let menuSlide = pptx.addSlide();
+                menuSlide.addText(title, { x: 0.5, y: 0.8, w: 9, h: 1, fontSize: 44, bold: true, color: '4F46E5', align: 'center' });
+                menuSlide.addText("Main Menu - Select a Game", { x: 0.5, y: 1.8, w: 9, h: 0.5, fontSize: 24, color: '64748B', align: 'center' });
+
+                const totalItems = filteredItems.length;
+                const slidesPerGame = totalItems + 1; // 1 title slide + N item slides
+
+                // Add 10 Game Buttons to Main Menu
+                for (let g = 1; g <= 10; g++) {
+                    let col = (g - 1) % 5;
+                    let row = Math.floor((g - 1) / 5);
+                    let btnX = 0.5 + (col * 1.8);
+                    let btnY = 2.8 + (row * 1.5);
+                    
+                    let targetSlideNum = 2 + ((g - 1) * slidesPerGame);
+
+                    menuSlide.addShape(pptx.ShapeType.rect, {
+                        x: btnX, y: btnY, w: 1.6, h: 1.0,
+                        fill: { color: '4F46E5' },
+                        line: { color: '3730A3', width: 2 },
+                        rectRadius: 0.15
+                    });
+                    menuSlide.addText(`Game ${g}`, {
+                        x: btnX, y: btnY, w: 1.6, h: 1.0,
+                        fontSize: 20, bold: true, color: 'FFFFFF', align: 'center',
+                        hyperlink: { slide: targetSlideNum.toString() }
+                    });
+                }
+
+                // 2. GENERATE 10 FULL GAMES
+                for(let g = 1; g <= 10; g++) {
+                    let shuffled = shuffle(filteredItems.map(roundItem));
+                    
+                    // Game Title Slide
+                    let titleSlide = pptx.addSlide();
+                    titleSlide.addText(`Game ${g}`, { x: 0.5, y: 1.5, w: 9, h: 1.5, fontSize: 72, bold: true, color: '4F46E5', align: 'center' });
+                    titleSlide.addText(title, { x: 0.5, y: 3.2, w: 9, h: 1, fontSize: 32, color: '333333', align: 'center' });
+                    
+                    // Back to Menu Button (Title Slide)
+                    titleSlide.addShape(pptx.ShapeType.rect, { x: 0.5, y: 0.5, w: 1.5, h: 0.5, fill: { color: 'E2E8F0' }, rectRadius: 0.1 });
+                    titleSlide.addText("🏠 Menu", { x: 0.5, y: 0.5, w: 1.5, h: 0.5, fontSize: 14, color: '475569', align: 'center', hyperlink: { slide: '1' } });
+
+                    // Game Item Slides
+                    for(let i = 0; i < shuffled.length; i++) {
+                        const item = shuffled[i];
+                        let itemSlide = pptx.addSlide();
+                        
+                        // Counter text
+                        itemSlide.addText(`Game ${g} - Draw ${i+1} of ${totalItems}`, { x: 0.5, y: 0.2, w: 4, h: 0.3, fontSize: 12, color: '94A3B8' });
+                        
+                        // Back to Menu Button (Every Slide)
+                        itemSlide.addShape(pptx.ShapeType.rect, { x: 8.0, y: 0.15, w: 1.5, h: 0.4, fill: { color: 'E2E8F0' }, rectRadius: 0.1 });
+                        itemSlide.addText("🏠 Menu", { x: 8.0, y: 0.15, w: 1.5, h: 0.4, fontSize: 14, color: '475569', align: 'center', hyperlink: { slide: '1' } });
+
+                        if (type === 'text' || (type === 'image' && teacherRule === 'text')) {
+                            // Text Mode Logic
+                            if (item.prompt) {
+                                itemSlide.addText("Question / Prompt", { x: 0.5, y: 1.0, w: 9, h: 0.5, fontSize: 24, color: '6366F1', align: 'center', bold: true });
+                                itemSlide.addText(item.prompt, { x: 0.5, y: 1.6, w: 9, h: 2.5, fontSize: 48, color: '1E293B', align: 'center', bold: true });
+                                itemSlide.addText(`(Answer: ${item.text})`, { x: 0.5, y: 4.5, w: 9, h: 0.5, fontSize: 18, color: '94A3B8', align: 'center' });
+                            } else {
+                                itemSlide.addText(item.text, { x: 0.5, y: 1.5, w: 9, h: 2.5, fontSize: 64, color: '1E293B', align: 'center', bold: true });
+                            }
+                        } else if (type === 'image') {
+                            // Image Mode Logic
+                            let showTxt = (teacherRule === 'both');
+                            
+                            let dims = await getImageDimensions(item.data);
+                            let maxW = 9.0;
+                            let maxH = showTxt ? 3.6 : 4.8;
+                            
+                            // Calculate strict proportional scaling
+                            let scale = Math.min(maxW / dims.w, maxH / dims.h);
+                            let finalW = dims.w * scale;
+                            let finalH = dims.h * scale;
+                            
+                            // Perfectly center the scaled image on the slide
+                            let finalX = 0.5 + (maxW - finalW) / 2;
+                            let finalY = 0.6 + (maxH - finalH) / 2;
+                            
+                            itemSlide.addImage({ 
+                                data: item.data, 
+                                x: finalX, y: finalY, w: finalW, h: finalH 
+                            });
+                            
+                            if (showTxt) {
+                                let disp = item.prompt ? item.prompt : item.text;
+                                itemSlide.addText(disp, { x: 0.5, y: 4.3, w: 9.0, h: 1.0, fontSize: 40, color: '1E293B', align: 'center', bold: true });
+                            }
+                        }
+                    }
+                }
+
+                await pptx.writeFile({ fileName: `${title.replace(/ /g, '_')}_Presentation.pptx` });
+                showModal("Success!", "Your interactive PowerPoint is ready! It features a Main Menu and 10 completely randomized games.", "✅");
+            } catch (error) {
+                console.error(error);
+                showModal("Error", "An error occurred while generating the PowerPoint.", "❌");
+            } finally {
+                pptxBtn.innerHTML = origText;
+                pptxBtn.disabled = false;
+            }
+        }
+
+        function startGameMode() {
+            if (importsInProgress()) return;
+            if (activeItems().length < requiredItemCount()) {
+                showModal('Add a Few More Items', `Add at least ${requiredItemCount()} items in Create to start.`, '⚠️');
+                return;
+            }
+            stopCurrentAudio();
+            gamePool = shuffle(activeItems().map(roundItem));
+            document.getElementById('pattern-label').textContent = patternName();
+            drawnItems = [];
+            revealedAnswers.clear();
+            gameActive = true;
+            goToStep('play');
+        }
+
+        function endGameMode() {
+            if (gameActive && gamePool.length && drawnItems.length && !window.confirm('End this game? You can start a fresh round with the same cards.')) return;
+            resetGameState();
+            goToStep('play');
+        }
+
+        function drawNextItem() {
+            stopCurrentAudio(); stopNarration(); stopThinking();
+            if (!gamePool.length) { showModal('All Items Called', 'Check any final bingos, or end this game to start a new round.', '🏁'); return; }
+            const item = gamePool.pop();
+            drawnItems.unshift(item);
+            renderCurrentDraw();
+            if (item.type === 'audio') { currentAudio = makeAudio(item.data); playAudio(currentAudio); }
+            updateHistoryTray(); updateCounter();
+            if (item.type !== 'audio' && document.getElementById('narrator-enabled').checked) speakClue(item, startThinking);
+            else startThinking();
+        }
+
+        function setAudioMotion(playing) {
+            document.getElementById('audio-icon')?.classList.toggle('animate-bounce', playing);
+        }
+
+        function stopCurrentAudio() {
+            audioAttempt++;
+            if (currentAudio) { currentAudio.pause(); currentAudio = null; }
+            setAudioMotion(false);
+        }
+
+        function audioFailure(audio) {
+            if (audio !== currentAudio || audio.failureReported) return;
+            audio.failureReported = true;
+            setAudioMotion(false);
+            showModal('Audio Could Not Play', 'Try Play again. If it still fails, replace this recording with a supported audio file such as MP3 or WAV.', '⚠️');
+        }
+
+        function makeAudio(data) {
+            const audio = new Audio(data);
+            audio.onended = () => { if (audio === currentAudio) setAudioMotion(false); };
+            audio.onerror = () => audioFailure(audio);
+            return audio;
+        }
+
+        async function playAudio(audio) {
+            if (!audio) return;
+            const attempt = ++audioAttempt;
+            audio.failureReported = false;
+            try {
+                await audio.play();
+                if (audio === currentAudio && attempt === audioAttempt) setAudioMotion(!audio.paused);
+            } catch (error) {
+                if (audio === currentAudio && attempt === audioAttempt) audioFailure(audio);
+            }
+        }
+
+        function replayAudio() {
+            if (!drawnItems.length || typeSelect.value !== 'audio') return;
+            stopCurrentAudio();
+            currentAudio = makeAudio(drawnItems[0].data);
+            playAudio(currentAudio);
+        }
+
+        function pauseAudio() {
+            if (!currentAudio) return;
+            if (currentAudio.paused) playAudio(currentAudio);
+            else { audioAttempt++; currentAudio.pause(); setAudioMotion(false); }
+        }
+
+        function stopAudio() {
+            if (!currentAudio) return;
+            audioAttempt++;
+            currentAudio.pause();
+            currentAudio.currentTime = 0;
+            setAudioMotion(false);
+        }
+
+        function updateHistoryTray() {
+            const tray = document.getElementById('history-tray');
+            tray.innerHTML = '';
+            if (!drawnItems.length) { tray.innerHTML = '<p class="history-empty">Called items will appear here.</p>'; return; }
+            drawnItems.forEach(item => {
+                const el = document.createElement('div');
+                el.className = 'history-card';
+                let content = '';
+                if (item.type === 'image' && document.getElementById('rule-teacher').value !== 'text') content = `<img src="${escapeHTML(item.data)}" alt="Called picture">`;
+                else if (item.type === 'audio') content = '<span class="text-2xl" aria-hidden="true">🔊</span>';
+                else content = `<span>${escapeHTML(item.prompt || item.text)}</span>`;
+                if (answerIsHidden(item)) {
+                    const revealed = revealedAnswers.has(item.id);
+                    if (revealed) content += `<span class="history-answer">${escapeHTML(item.text)}</span>`;
+                    content += `<button class="history-reveal" aria-expanded="${revealed}" onclick="toggleHistoryAnswer('${item.id}')">${revealed ? 'Hide answer' : 'Show answer'}</button>`;
+                } else if (item.type !== 'text' && (item.type !== 'image' || document.getElementById('rule-teacher').value !== 'text')) content += `<span>${escapeHTML(item.text)}</span>`;
+                el.innerHTML = content;
+                tray.appendChild(el);
+            });
+        }
+
+        function updateCounter() {
+            document.getElementById('game-counter').innerText = `Draw ${drawnItems.length} of ${activeItems().length}`;
+            const finished = gameActive && drawnItems.length > 0 && gamePool.length === 0;
+            document.getElementById('btn-draw').disabled = finished;
+            document.getElementById('round-finished').classList.toggle('hidden', !finished);
+        }
+
+        function openVerifyModal() {
+            if (generatedCards.length === 0) {
+                showModal("No Print History", "Open the game saved with your printed cards, or go to Print Cards to create a set. Then you can check a bingo by card number.", "❌");
+                return;
+            }
+            stopNarration(); stopCurrentAudio(); stopThinking();
+            document.getElementById('verify-pattern').textContent = patternName();
+            document.getElementById('verify-card-num').value = '';
+            document.getElementById('verify-heading').textContent = `Check a Bingo · Set ${cardSetId}`;
+            document.getElementById('verify-grid-container').innerHTML = '';
+            document.getElementById('verify-result-msg').innerText = '';
+            document.getElementById('verify-modal-overlay').style.display = 'flex';
+        }
+
+        function closeVerifyModal() {
+            document.getElementById('verify-modal-overlay').style.display = 'none';
+        }
+
+        function checkBingo() {
+            const cardNum = Number(document.getElementById('verify-card-num').value);
+            const msgEl = document.getElementById('verify-result-msg');
+            
+            if (!Number.isInteger(cardNum) || cardNum < 1 || cardNum > generatedCards.length) {
+                msgEl.className = 'text-lg font-bold mb-4 h-8 text-center w-full text-red-500';
+                msgEl.innerText = `Invalid Card #. Please enter a number between 1 and ${generatedCards.length}.`;
+                return;
+            }
+
+            const memory = generatedCards[cardNum - 1]; // Array of 25 IDs
+            const drawnIds = drawnItems.map(i => i.id);
+            const gridEl = document.getElementById('verify-grid-container');
+            gridEl.innerHTML = '';
+
+            gridEl.style.gridTemplateColumns = `repeat(${gridSize},1fr)`;
+            gridEl.style.gridTemplateRows = `repeat(${gridSize},minmax(0,1fr))`;
+            let calledMap = new Array(memory.length).fill(false);
+
+            // Render memory to grid and check if called
+            for (let i = 0; i < memory.length; i++) {
+                const itemId = memory[i];
+                const cell = document.createElement('div');
+                cell.className = 'verify-cell';
+                cell.id = `vcell-${i}`;
+
+                let isCalled = false;
+
+                if (itemId === 'FREE') {
+                    cell.innerHTML = `<span>FREE SPACE</span>`;
+                    isCalled = true; // Free space is always called
+                } else {
+                    const itemData = items.find(itm => itm.id === itemId);
+                    if (itemData) {
+                        if (itemData.type === 'image' || (itemData.type === 'audio' && itemData.attachedImage)) {
+                            let src = itemData.type === 'image' ? itemData.data : itemData.attachedImage;
+                            cell.innerHTML = `<img src="${escapeHTML(src)}"><span>${escapeHTML(itemData.text)}</span>`;
+                        } else {
+                            cell.innerHTML = `<span>${escapeHTML(itemData.text)}</span>`;
+                        }
+                    }
+                    if (drawnIds.includes(itemId)) isCalled = true;
+                }
+
+                if (isCalled) {
+                    cell.classList.add('called');
+                    calledMap[i] = true;
+                }
+                
+                gridEl.appendChild(cell);
+            }
+
+            const winningLines = winningPatterns(gridSize, document.getElementById('win-pattern').value || 'line');
+
+            let isWinner = false;
+            let winPath = [];
+
+            for (let line of winningLines) {
+                if (line.every(idx => calledMap[idx])) {
+                    isWinner = true;
+                    winPath = line;
+                    break;
+                }
+            }
+
+            if (isWinner) {
+                msgEl.className = 'text-2xl font-bold mb-4 h-8 text-center w-full text-emerald-600 brand-font animate-bounce';
+                msgEl.innerText = "🎉 BINGO! We have a winner! 🎉";
+                // Highlight winning line
+                winPath.forEach(idx => {
+                    document.getElementById(`vcell-${idx}`).classList.add('winning-line');
+                });
+            } else {
+                msgEl.className = 'text-lg font-bold mb-4 h-8 text-center w-full text-slate-500';
+                msgEl.innerText = "No BINGO on this card yet.";
+            }
+        }
+
+        function collectProject() {
+            return {
+                format: 'mr-drew-bingo', version: 3, gridSize,
+                classroom: classroomSettings(),
+                title: document.getElementById('game-title').value,
+                type: typeSelect.value,
+                freeSpaceMode: document.getElementById('free-space-mode').value,
+                cardCount: Number(document.getElementById('card-count').value),
+                printColor: document.getElementById('print-color').value,
+                rules: {
+                    imageTeacher: document.getElementById('rule-teacher').value,
+                    imageStudent: document.getElementById('rule-student').value,
+                    audioTeacher: document.getElementById('audio-rule-teacher').value,
+                    audioStudent: document.getElementById('audio-rule-student').value
+                },
+                items,
+                generatedCards,
+                cardSetId
+            };
+        }
+
+        function validateProject(data) {
+            const object = value => value !== null && typeof value === 'object' && !Array.isArray(value);
+            if (!object(data) || !Array.isArray(data.items)) throw new Error('This file is not a Bingo Maker project. Your current game has not been changed.');
+            if (data.format !== undefined && data.format !== 'mr-drew-bingo') throw new Error('This file belongs to a different app.');
+            if (data.version !== undefined && ![2, 3].includes(data.version)) throw new Error('This project version is not supported.');
+            const choose = (value, choices, fallback, label) => {
+                if (value === undefined) return fallback;
+                if (!choices.includes(value)) throw new Error(`The project has an invalid ${label}.`);
+                return value;
+            };
+            const text = (value, fallback, label) => {
+                if (value === undefined || value === null) return fallback;
+                if (typeof value !== 'string') throw new Error(`The project has invalid ${label}.`);
+                return value;
+            };
+            const media = (value, type) => {
+                if (typeof value !== 'string' || !/^data:[a-z0-9.+/-]+;base64,[a-z0-9+/=\r\n]+$/i.test(value)) throw new Error(`An ${type} item has invalid file data.`);
+                const expected = type === 'image' ? /^data:image\//i : /^data:(audio\/|application\/ogg;)/i;
+                if (!expected.test(value)) throw new Error(`An ${type} item contains the wrong kind of file.`);
+                return value;
+            };
+            const rules = data.rules === undefined ? {} : data.rules;
+            if (!object(rules)) throw new Error('The project has invalid matching rules.');
+            const size = data.gridSize ?? 5;
+            if (![3,4,5].includes(size)) throw new Error('The card size must be 3, 4, or 5.');
+            const project = {
+                gridSize: size, classroom: validateClassroom(data.classroom),
+                title: text(data.title, 'My Awesome Review Game', 'title'),
+                type: choose(data.type, ['text', 'image', 'audio'], 'text', 'content type'),
+                freeSpaceMode: choose(data.freeSpaceMode, ['center', 'random', 'none'], 'center', 'free space setting'),
+                rules: {
+                    imageTeacher: choose(rules.imageTeacher, ['image', 'text', 'both'], 'image', 'teacher image rule'),
+                    imageStudent: choose(rules.imageStudent, ['image', 'text', 'both'], 'text', 'student image rule'),
+                    audioTeacher: choose(rules.audioTeacher, ['audio', 'both'], 'audio', 'teacher audio rule'),
+                    audioStudent: choose(rules.audioStudent, ['image', 'text', 'both'], 'text', 'student audio rule')
+                },
+                cardCount: data.cardCount ?? 30,
+                printColor: choose(data.printColor, ['color', 'bw'], 'color', 'print color'),
+                items: [], generatedCards: [], cardSetId: ''
+            };
+            if (!Number.isInteger(project.cardCount) || project.cardCount < 1 || project.cardCount > 100) throw new Error('The project card quantity must be a whole number from 1 to 100.');
+            if (size === 4 && project.freeSpaceMode === 'center') throw new Error('4 × 4 cards need random or no free space.');
+            const ids = new Set();
+            for (const item of data.items) {
+                if (!object(item) || typeof item.id !== 'string' || !/^[a-z0-9_-]{1,100}$/i.test(item.id) || item.id === 'FREE' || ids.has(item.id)) throw new Error('The project contains missing or duplicate item IDs.');
+                ids.add(item.id);
+                const type = choose(item.type, ['text', 'image', 'audio'], project.type, 'item type');
+                if (typeof item.text !== 'string') throw new Error('A project item is missing its answer text.');
+                if (item.clues !== undefined && (!Array.isArray(item.clues) || item.clues.length > 1000 || item.clues.some(c => typeof c !== 'string' || !c.trim()))) throw new Error('A math item has invalid clues.');
+                project.items.push({
+                    id: item.id, type, text: item.text,
+                    prompt: text(item.prompt, '', 'prompt text'),
+                    ...(item.clues?.length ? {clues: [...new Set(item.clues)]} : {}),
+                    ...(item.narration ? {narration: media(item.narration, 'audio')} : {}),
+                    data: type === 'text' ? null : media(item.data, type),
+                    ...(type === 'audio' ? {attachedImage: item.attachedImage == null ? null : media(item.attachedImage, 'image')} : {})
+                });
+            }
+            if (data.generatedCards !== undefined) {
+                if (!Array.isArray(data.generatedCards) || data.generatedCards.length > 100) throw new Error('The saved card set is invalid.');
+                const activeIds = new Set(project.items.filter(item => item.type === project.type).map(item => item.id));
+                for (const card of data.generatedCards) {
+                    if (!Array.isArray(card) || card.length !== size * size || new Set(card).size !== size * size || card.some(id => id !== 'FREE' && !activeIds.has(id))) throw new Error('A saved card does not match the items in this project.');
+                    const freeCount = card.filter(id => id === 'FREE').length;
+                    if (freeCount !== (project.freeSpaceMode === 'none' ? 0 : 1) || (project.freeSpaceMode === 'center' && card[Math.floor(size * size / 2)] !== 'FREE')) throw new Error('A saved card has the wrong free space setting.');
+                    project.generatedCards.push([...card]);
+                }
+            }
+            if (project.generatedCards.length) {
+                if (typeof data.cardSetId !== 'string' || !/^[a-z0-9_-]{1,80}$/i.test(data.cardSetId)) throw new Error('The saved card set is missing its set number.');
+                project.cardSetId = data.cardSetId;
+            }
+            return project;
+        }
+
+        async function saveProject(directDownload = false) {
+            if (importsInProgress()) return;
+            const saveRevision = revision;
+            let jsonStr;
+            try {
+                const project = collectProject();
+                validateProject(project);
+                jsonStr = JSON.stringify(project);
+            } catch (error) { showModal('Project Not Saved', error.message, '⚠️'); return; }
+            const title = document.getElementById('game-title').value.trim();
+            const defaultFileName = (title.replace(/[<>:"/\\|?*\x00-\x1F]/g, '_').replace(/\s+/g, '_').slice(0, 100) || 'Bingo_Project') + '.json';
+            function downloadProject() {
+                const url = URL.createObjectURL(new Blob([jsonStr], {type:'application/json'}));
+                const anchor = document.createElement('a');
+                anchor.href = url; anchor.download = defaultFileName;
+                document.body.appendChild(anchor); anchor.click(); anchor.remove();
+                setTimeout(() => URL.revokeObjectURL(url), 1000);
+            }
+            try {
+                if (window.showSaveFilePicker && !directDownload) {
+                    let handle;
+                    try {
+                        handle = await window.showSaveFilePicker({suggestedName: defaultFileName, types:[{description:'Bingo Project', accept:{'application/json':['.json']}}]});
+                    } catch (error) {
+                        if (error.name === 'AbortError') throw error;
+                        downloadProject();
+                    }
+                    if (handle) {
+                        try {
+                            const writable = await handle.createWritable();
+                            await writable.write(jsonStr);
+                            await writable.close();
+                        } catch (error) { if (error.name === 'AbortError') throw error; downloadProject(); }
+                    }
+                } else downloadProject();
+                if (revision === saveRevision) dirty = false;
+                updateSaveStatus();
+            } catch (error) {
+                if (error.name !== 'AbortError') showModal('Save Error', 'The project could not be saved. Your work is still open; please try again.', '⚠️');
+            }
+        }
+
+        async function loadProject(event) {
+            const file = event.target.files[0];
+            event.target.value = '';
+            if (!file || importsInProgress()) return;
+            const request = ++loadSequence;
+            const loadRevision = revision;
+            try {
+                const project = validateProject(JSON.parse(await readFile(file)));
+                if (request !== loadSequence || importsInProgress()) return;
+                if ((dirty || revision !== loadRevision) && !window.confirm('Load this project and replace the work currently open? Unsaved changes will be lost.')) return;
+                stopCurrentAudio(); stopNarration(); stopThinking(); setPresentation(false);
+                pendingDraft=null; document.getElementById('recovery-banner').classList.add('hidden');
+                gridSize = project.gridSize; document.getElementById('grid-size').value = String(gridSize);
+                applyClassroom(project.classroom);
+                gameActive = false; gamePool = []; drawnItems = [];
+                revealedAnswers.clear(); previewIndex = 0; matchingItemId = '';
+                closeVerifyModal(); closeModal();
+                document.getElementById('game-mode').style.display = 'none';
+                document.getElementById('edit-mode').style.display = 'block';
+                document.getElementById('print-area').innerHTML = '';
+                document.getElementById('game-title').value = project.title;
+                typeSelect.value = project.type;
+                document.getElementById('free-space-mode').value = project.freeSpaceMode;
+                document.getElementById('card-count').value = project.cardCount;
+                document.getElementById('print-color').value = project.printColor;
+                document.getElementById('rule-teacher').value = project.rules.imageTeacher;
+                document.getElementById('rule-student').value = project.rules.imageStudent;
+                document.getElementById('audio-rule-teacher').value = project.rules.audioTeacher;
+                document.getElementById('audio-rule-student').value = project.rules.audioStudent;
+                items = project.items;
+                generatedCards = project.generatedCards;
+                cardSetId = project.cardSetId;
+                revision++;
+                dirty = false;
+                updateUI(); updateCardStatus(); updateHistoryTray(); updateCounter(); updateSaveStatus();
+                goToStep('create'); scheduleDraft();
+                showModal('Project Loaded!', generatedCards.length
+                    ? `Your game and ${generatedCards.length} card layouts are ready. Reprinting keeps the same cards.`
+                    : 'Your game is ready. Preview your cards, then Save Game to keep the set for future bingo verification.', '✅');
+            } catch (error) {
+                if (request === loadSequence) showModal('Project Not Loaded', error instanceof SyntaxError ? 'This is not a valid project JSON file. Your current game has not been changed.' : error.message, '⚠️');
+            }
+        }
+
+
+        function changeGridSize() {
+            if (importsInProgress()) { document.getElementById('grid-size').value = String(gridSize); return; }
+            const next = Number(document.getElementById('grid-size').value);
+            if (![3,4,5].includes(next) || next === gridSize) return;
+            if (generatedCards.length && !confirm('Change card size and create a new card set? Save your current game first if you need those printed cards.')) {
+                document.getElementById('grid-size').value = String(gridSize); return;
+            }
+            gridSize = next;
+            if (next === 4 && document.getElementById('free-space-mode').value === 'center') document.getElementById('free-space-mode').value = 'none';
+            invalidateCards(); markDirty(); updateUI();
+        }
+
+        function buildMathItems(operation, min, max) {
+            if (!['add','subtract','multiply','divide','mixed'].includes(operation) || !Number.isInteger(min) || !Number.isInteger(max) || min < 0 || max > 20 || min > max) throw new Error('Choose whole numbers from 0 to 20, with the smallest number first.');
+            const groups = new Map();
+            const operations = operation === 'mixed' ? ['add','subtract','multiply','divide'] : [operation];
+            function add(answer, clue) {
+                if (!groups.has(answer)) groups.set(answer, new Set());
+                groups.get(answer).add(clue + ' = ?');
+            }
+            for (let a = min; a <= max; a++) for (let b = min; b <= max; b++) for (const op of operations) {
+                if (op === 'add') add(a+b, `${a} + ${b}`);
+                if (op === 'subtract' && a >= b) add(a-b, `${a} − ${b}`);
+                if (op === 'multiply') add(a*b, `${a} × ${b}`);
+                if (op === 'divide' && b !== 0) add(a, `${a*b} ÷ ${b}`);
+            }
+            return [...groups].sort((a,b)=>a[0]-b[0]).map(([answer, clues])=>({id:makeId(),type:'text',text:String(answer),prompt:[...clues][0],clues:[...clues],data:null}));
+        }
+        function generateMathGame() {
+            if (importsInProgress()) return;
+            try {
+                const op = document.getElementById('math-operation').value;
+                const min = Number(document.getElementById('math-min').value), max = Number(document.getElementById('math-max').value);
+                if (document.getElementById('math-min').value === '' || document.getElementById('math-max').value === '') throw new Error('Enter both number limits.');
+                const next = buildMathItems(op,min,max);
+                if (!next.length) throw new Error('There are no valid facts in this range. Increase the largest number.');
+                if ((items.length || generatedCards.length) && !confirm('Replace the current game with these math facts? Save Game first if you want to keep your current work.')) return;
+                items = next; typeSelect.value = 'text';
+                pendingDraft=null; document.getElementById('recovery-banner').classList.add('hidden');
+                const name = {add:'Addition',subtract:'Subtraction',multiply:'Multiplication',divide:'Division',mixed:'Mixed Math'}[op];
+                document.getElementById('game-title').value = `${name} Facts Bingo · ${min}–${max}`;
+                // Short answer pools (such as division through 12) need a smaller board.
+                if (next.length < requiredItemCount() && next.length >= 8) {
+                    gridSize = 3; document.getElementById('grid-size').value = '3'; document.getElementById('free-space-mode').value = 'center';
+                }
+                invalidateCards(); markDirty(); updateUI();
+                const total = next.reduce((sum,item)=>sum+item.clues.length,0);
+                document.getElementById('math-result').textContent = `${total} facts grouped into ${next.length} unique answers. ${gridSize} × ${gridSize} cards selected.`;
+            } catch (error) { showModal('Check Your Math Settings', error.message, '⚠️'); }
+        }
+        function roundItem(item) {
+            // A personal recording belongs to the displayed primary clue.
+            return {...item, prompt: !item.narration && item.clues?.length ? item.clues[Math.floor(Math.random()*item.clues.length)] : item.prompt};
+        }
+        function winningPatterns(size, pattern) {
+            const rows = Array.from({length:size},(_,r)=>Array.from({length:size},(_,c)=>r*size+c));
+            const columns = Array.from({length:size},(_,c)=>Array.from({length:size},(_,r)=>r*size+c));
+            const diagonals = [Array.from({length:size},(_,i)=>i*size+i),Array.from({length:size},(_,i)=>i*size+size-1-i)];
+            if (pattern === 'corners') return [[0,size-1,size*(size-1),size*size-1]];
+            if (pattern === 'x') return [[...new Set(diagonals.flat())]];
+            if (pattern === 'blackout') return [rows.flat()];
+            return [...rows,...columns,...diagonals];
+        }
+        function patternName() {
+            return ({line:`${gridSize} in a row`,corners:'Four corners',x:'Both diagonals (X)',blackout:'Blackout — every square'})[document.getElementById('win-pattern').value] || `${gridSize} in a row`;
+        }
+        function setPresentation(on) {
+            document.getElementById('app-shell').classList.toggle('classroom-view',on);
+            document.getElementById('btn-present').textContent = on ? 'Exit classroom view' : 'Classroom view';
+            document.getElementById('btn-present').setAttribute('aria-pressed',String(on));
+        }
+        function togglePresentation() {
+            setPresentation(!document.getElementById('app-shell').classList.contains('classroom-view'));
+        }
+        function stopThinking() {
+            clearInterval(thinkingTimer); thinkingTimer = null; thinkingRemaining = 0; thinkingPaused = false;
+            document.getElementById('thinking-status').textContent = '';
+            document.getElementById('pause-thinking').disabled = true;
+            document.getElementById('pause-thinking').textContent = 'Pause timer';
+        }
+        function renderThinking() {
+            document.getElementById('thinking-status').textContent = thinkingRemaining > 0 ? `${thinkingPaused ? 'Paused' : 'Think'} · ${thinkingRemaining}s` : 'Ready to discuss?';
+        }
+        function startThinking() {
+            stopThinking();
+            if (!gameActive || currentStep !== 'play' || (drawnItems[0] && revealedAnswers.has(drawnItems[0].id))) return;
+            thinkingRemaining = Number(document.getElementById('thinking-seconds').value) || 0;
+            if (!thinkingRemaining) return;
+            document.getElementById('pause-thinking').disabled = false;
+            renderThinking();
+            thinkingTimer = setInterval(()=>{
+                if (thinkingPaused) return;
+                thinkingRemaining--; renderThinking();
+                if (thinkingRemaining <= 0) { clearInterval(thinkingTimer); thinkingTimer = null; document.getElementById('pause-thinking').disabled = true; }
+            },1000);
+        }
+        function pauseThinking() {
+            if (!thinkingTimer) return;
+            thinkingPaused = !thinkingPaused;
+            document.getElementById('pause-thinking').textContent = thinkingPaused ? 'Resume timer' : 'Pause timer'; renderThinking();
+        }
+        function spokenText(text) {
+            return String(text).replace(/\s*=\s*\?/g,'').replace(/×/g,' times ').replace(/÷/g,' divided by ').replace(/\+/g,' plus ').replace(/[−–]/g,' minus ').replace(/(\d)\s*-\s*(\d)/g,'$1 minus $2').replace(/=/g,' equals ').replace(/\s+/g,' ').trim();
+        }
+        function stopNarration() {
+            narrationSerial++;
+            if (window.speechSynthesis) window.speechSynthesis.cancel();
+            if (currentAudio && currentAudio.isNarration) stopCurrentAudio();
+        }
+        function speakText(text, done = ()=>{}) {
+            stopNarration();
+            const serial = narrationSerial;
+            document.getElementById('narrator-status').textContent = 'Reading the clue. Answers stay hidden until you reveal them.';
+            if (!window.speechSynthesis || !window.SpeechSynthesisUtterance) { document.getElementById('narrator-status').textContent = 'Speech is unavailable in this browser. You can still read the clues or attach recordings.'; done(); return; }
+            const utterance = new SpeechSynthesisUtterance(spokenText(text));
+            const voiceURI = document.getElementById('narrator-voice').value;
+            const voice = speechSynthesis.getVoices().find(v=>v.voiceURI === voiceURI);
+            if (voice) { utterance.voice = voice; utterance.lang = voice.lang; }
+            utterance.rate = Number(document.getElementById('narrator-rate').value) || 0.9;
+            utterance.volume = Number(document.getElementById('narrator-volume').value);
+            let finished = false;
+            const finish = ()=>{ if (serial !== narrationSerial || finished) return; finished = true; done(); };
+            utterance.onend = finish;
+            utterance.onerror = e=>{ if (serial === narrationSerial && e.error !== 'canceled' && e.error !== 'interrupted') document.getElementById('narrator-status').textContent = 'That voice could not play. Try another voice or use a recording.'; finish(); };
+            try { speechSynthesis.speak(utterance); } catch(error) { document.getElementById('narrator-status').textContent = 'Speech could not start. Try Repeat clue or choose another voice.'; finish(); }
+        }
+        function speakClue(item, done = ()=>{}) {
+            stopCurrentAudio(); stopNarration();
+            if (item.narration) {
+                const serial = narrationSerial;
+                currentAudio = makeAudio(item.narration); const audio = currentAudio; audio.isNarration = true;
+                audio.volume = Number(document.getElementById('narrator-volume').value);
+                let finished = false;
+                const finish = ()=>{ if (!finished && serial === narrationSerial) { finished = true; done(); } };
+                audio.onended = finish; audio.onerror = ()=>{ audioFailure(audio); finish(); };
+                playAudio(audio).then(()=>{if(audio.failureReported)finish();});
+            } else if (item.type === 'text' || (item.type === 'image' && document.getElementById('rule-teacher').value !== 'image')) speakText(item.prompt || item.text,done);
+            else done(); // Never narrate a hidden picture's answer.
+        }
+        function repeatClue() {
+            if (!drawnItems.length) return;
+            stopThinking();
+            if (drawnItems[0].type === 'audio') { replayAudio(); startThinking(); }
+            else speakClue(drawnItems[0],startThinking);
+        }
+        function changeNarration() { stopNarration(); markDirty(); }
+        function testVoice() { stopCurrentAudio(); speakText('Welcome to math bingo. Six times seven.'); }
+        function populateVoices() {
+            const select = document.getElementById('narrator-voice'); const selected = select.value;
+            select.innerHTML = '<option value="">Device default</option>';
+            if (!window.speechSynthesis) return;
+            for (const voice of speechSynthesis.getVoices()) {
+                const option = document.createElement('option'); option.value = voice.voiceURI; option.textContent = `${voice.name} (${voice.lang})`; select.appendChild(option);
+            }
+            select.value = selected;
+        }
+        function classroomSettings() {
+            return {pattern:document.getElementById('win-pattern').value || 'line',thinking:Number(document.getElementById('thinking-seconds').value)||0,
+                narrator:!!document.getElementById('narrator-enabled').checked,voice:document.getElementById('narrator-voice').value || '',
+                rate:Number(document.getElementById('narrator-rate').value)||0.9,volume:document.getElementById('narrator-volume').value === '' ? 1 : Number(document.getElementById('narrator-volume').value)};
+        }
+        function validateClassroom(value) {
+            const c = value ?? {};
+            if (!c || typeof c !== 'object' || Array.isArray(c)) throw new Error('Invalid classroom settings.');
+            const out = {pattern:c.pattern ?? 'line',thinking:c.thinking ?? 10,narrator:c.narrator ?? false,voice:c.voice ?? '',rate:c.rate ?? 0.9,volume:c.volume ?? 1};
+            if (!['line','corners','x','blackout'].includes(out.pattern) || ![0,5,10,15,20,30].includes(out.thinking) || typeof out.narrator !== 'boolean' || typeof out.voice !== 'string' || !Number.isFinite(out.rate) || out.rate < 0.6 || out.rate > 1.4 || !Number.isFinite(out.volume) || out.volume < 0 || out.volume > 1) throw new Error('Invalid narrator or game settings.');
+            return out;
+        }
+        function applyClassroom(c) {
+            document.getElementById('win-pattern').value = c.pattern;
+            document.getElementById('thinking-seconds').value = String(c.thinking);
+            document.getElementById('narrator-enabled').checked = c.narrator;
+            document.getElementById('narrator-voice').value = c.voice;
+            document.getElementById('narrator-rate').value = String(c.rate);
+            document.getElementById('narrator-volume').value = String(c.volume);
+        }
+        function recordingControls(item,index) {
+            if (item.type !== 'text') return '';
+            return `<details class="recording-tools"><summary aria-label="Recorded clue for item ${index+1}">${item.narration ? '✓ Recorded clue' : 'Voice'}</summary><p>Record or upload the displayed clue, without its answer. A recording uses this clue every round.</p><button class="text-button" onclick="toggleRecording('${item.id}')">${recordingItemId === item.id ? 'Stop recording' : 'Record clue'}</button><button class="text-button" onclick="document.getElementById('voice_${item.id}').click()">Upload MP3 / WAV</button><input id="voice_${item.id}" type="file" class="hidden" accept="audio/*" onchange="attachNarration('${item.id}',this.files[0])">${item.narration ? `<button class="text-button" onclick="previewRecording('${item.id}')">Listen</button><button class="text-button" onclick="removeNarration('${item.id}')">Remove recording</button>` : ''}${item.clues?.length ? `<small>${item.clues.length} equivalent clues</small>` : ''}</details>`;
+        }
+        async function attachNarration(id,file) {
+            if (!file) return;
+            if (!file.type.startsWith('audio/') || file.size > 10*1024*1024) { showModal('Choose a Short Recording','Use an audio file smaller than 10 MB.','⚠️'); return; }
+            pendingImports++; validatePool();
+            try {
+                const data = await readFile(file,'data'); const item = items.find(i=>i.id===id);
+                if (item) { item.narration = data; resetGameState(); markDirty(); renderList(); }
+            } catch(error) { showModal('Recording Not Added',error.message,'⚠️'); }
+            finally { pendingImports--; validatePool(); scheduleDraft(); }
+        }
+        function removeNarration(id) { const item=items.find(i=>i.id===id); if(item) {delete item.narration; stopNarration(); markDirty(); renderList();} }
+        function previewRecording(id) { const item=items.find(i=>i.id===id); if(item?.narration) speakClue(item); }
+        async function toggleRecording(id) {
+            if (recorder || recordingItemId) { if(recorder?.state === 'recording') recorder.stop(); return; }
+            if (!navigator.mediaDevices?.getUserMedia || !window.MediaRecorder) { showModal('Recording Unavailable','This browser cannot record a microphone. Upload an MP3 or WAV instead.','🎤'); return; }
+            recordingItemId = id; recordingCancelled = false; pendingImports++; validatePool();
+            const recordingRevision = revision;
+            try {
+                stopNarration(); stopCurrentAudio();
+                recordingStream = await navigator.mediaDevices.getUserMedia({audio:true});
+                if (recordingCancelled || recordingRevision !== revision) { recordingStream.getTracks().forEach(t=>t.stop()); recordingStream=null; recordingItemId='';pendingImports--;validatePool();return; }
+                const chunks=[]; recorder = new MediaRecorder(recordingStream); const active=recorder;
+                active.ondataavailable=e=>{if(e.data.size)chunks.push(e.data);};
+                active.onstop=async()=>{
+                    clearTimeout(recordingTimeout); recordingStream?.getTracks().forEach(t=>t.stop()); recordingStream=null; recorder=null; recordingItemId=''; pendingImports--; validatePool();
+                    const blob = new Blob(chunks,{type:active.mimeType || 'audio/webm'});
+                    if(!recordingCancelled && recordingRevision === revision && blob.size) await attachNarration(id,blob);
+                    else if(!recordingCancelled && blob.size) showModal('Clue Changed', 'Your game changed while recording. Please record the current clue again.', '🎤');
+                    renderList(); document.getElementById('recording-banner').classList.add('hidden');
+                };
+                active.onerror=()=>{recordingCancelled=true;stopRecording();showModal('Recording Stopped','The microphone could not finish recording. You can upload a recording instead.','⚠️');};
+                active.start(); recordingTimeout=setTimeout(stopRecording,60000); renderList();
+                document.getElementById('recording-banner').classList.remove('hidden');
+            } catch(error) {
+                recordingStream?.getTracks().forEach(t=>t.stop()); recordingStream=null;recorder=null;recordingItemId='';pendingImports--;validatePool();renderList();
+                showModal('Microphone Unavailable','Microphone access was not available. You can try again or upload a recording.','🎤');
+            }
+        }
+        function stopRecording() { if(recorder?.state==='recording')recorder.stop(); }
+        function draftDB() {
+            if (!draftDbPromise) draftDbPromise = new Promise((resolve,reject)=>{
+                if (!window.indexedDB) {reject(new Error('Draft storage unavailable'));return;}
+                const request = indexedDB.open('mr-drew-bingo-drafts',1);
+                request.onupgradeneeded=()=>request.result.createObjectStore('drafts');
+                request.onsuccess=()=>resolve(request.result); request.onerror=()=>reject(request.error);
+            });
+            return draftDbPromise;
+        }
+        function scheduleDraft() { clearTimeout(draftTimer); draftTimer=setTimeout(saveDraft,650); }
+        function saveDraft() {
+            if (pendingImports || pendingDraft) return;
+            let value;
+            try { const project=collectProject(); validateProject(project); value={project,at:Date.now()}; } catch(error) { return; }
+            draftQueue=draftQueue.catch(()=>{}).then(async()=>{
+                const db=await draftDB();
+                await new Promise((resolve,reject)=>{const tx=db.transaction('drafts','readwrite');tx.objectStore('drafts').put(value,'latest');tx.oncomplete=resolve;tx.onerror=()=>reject(tx.error);tx.onabort=()=>reject(tx.error);});
+                document.getElementById('draft-status').textContent='Draft saved on this device · Download a game file to keep or share it.';
+            }).catch(()=>{document.getElementById('draft-status').textContent='Draft recovery unavailable or storage full. Use Save Game or Download copy.';});
+            return draftQueue;
+        }
+        async function findDraft() {
+            const initialRevision=revision;
+            try {
+                const db=await draftDB(); const value=await new Promise((resolve,reject)=>{const req=db.transaction('drafts').objectStore('drafts').get('latest');req.onsuccess=()=>resolve(req.result);req.onerror=()=>reject(req.error);});
+                if(!value?.project || !value.project.items?.length || revision!==initialRevision)return;
+                validateProject(value.project);pendingDraft=value;
+                document.getElementById('recovery-message').textContent=`Recover “${value.project.title}” from ${new Date(value.at).toLocaleString()}?`;
+                document.getElementById('recovery-banner').classList.remove('hidden');
+            }catch(error){document.getElementById('draft-status').textContent='Draft recovery unavailable. Download your game to keep it.';}
+        }
+        async function restoreDraft() {
+            if(!pendingDraft || importsInProgress())return;
+            const value=pendingDraft;pendingDraft=null;
+            await loadProject({target:{files:[new File([JSON.stringify(value.project)],'Recovered-Bingo.json',{type:'application/json'})],value:''}});
+            document.getElementById('recovery-banner').classList.add('hidden');
+        }
+        function dismissDraft() {pendingDraft=null;document.getElementById('recovery-banner').classList.add('hidden');scheduleDraft();}
+        function initClassroom() {
+            populateVoices();
+            if(window.speechSynthesis) speechSynthesis.addEventListener('voiceschanged',populateVoices);
+            window.addEventListener('pagehide',()=>{stopNarration();stopCurrentAudio();stopThinking();recordingCancelled=true;stopRecording();recordingStream?.getTracks().forEach(t=>t.stop());saveDraft();});
+            window.addEventListener('keydown',e=>{if(e.key==='Escape')setPresentation(false);});
+            findDraft();
+        }
+
+        // Init
+        initClassroom();
+        updateUI();
+        updateCardStatus();
+        goToStep('create');
+
+    </script>
+</body>
+</html>

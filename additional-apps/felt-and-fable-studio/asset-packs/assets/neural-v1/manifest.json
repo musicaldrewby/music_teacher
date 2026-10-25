@@ -1,0 +1,109 @@
+{
+  "model": "Kokoro-82M-v1.0",
+  "revision": "1939ad2a8e416c0acfeecc08a694d14ef25f2231",
+  "sampleRate": 24000,
+  "license": "Apache-2.0",
+  "parts": [
+    {
+      "file": "model-01.gz.bin",
+      "bytes": 7673216,
+      "sha256": "46216e033a5262088486fec29e996639f22dcffeef64d4c76f178db0d6220a95",
+      "rawBytes": 10485760,
+      "encoding": "gzip"
+    },
+    {
+      "file": "model-02.gz.bin",
+      "bytes": 7901153,
+      "sha256": "17607700577f23bfcf8d1999a238391abf33be45f074c0f7139e09fd78e3c07e",
+      "rawBytes": 10485760,
+      "encoding": "gzip"
+    },
+    {
+      "file": "model-03.gz.bin",
+      "bytes": 7071392,
+      "sha256": "d7a075e182cda96757c6d307496f72d36608556ecbe6615615afaa2e9562bba9",
+      "rawBytes": 10485760,
+      "encoding": "gzip"
+    },
+    {
+      "file": "model-04.gz.bin",
+      "bytes": 6223117,
+      "sha256": "833856701b6d116b9624a07d74a1a0e4b4f1b2a46af9cb60a809e640d6c9d610",
+      "rawBytes": 10485760,
+      "encoding": "gzip"
+    },
+    {
+      "file": "model-05.gz.bin",
+      "bytes": 6396775,
+      "sha256": "fd56e4ec54218949a14d2d4a0ab274046b360fc33cd0f976cd999ad7dd470062",
+      "rawBytes": 10485760,
+      "encoding": "gzip"
+    },
+    {
+      "file": "model-06.gz.bin",
+      "bytes": 6485518,
+      "sha256": "ea95381bbafb87c7b9fc88fd43cc77bb23a35b9b60c51eb8b2f70cd95ec23ec4",
+      "rawBytes": 10485760,
+      "encoding": "gzip"
+    },
+    {
+      "file": "model-07.gz.bin",
+      "bytes": 7379936,
+      "sha256": "02c492f167c4fb9a59b9aeb936882c4edf0a4f47033c6d6bef66f150d980f159",
+      "rawBytes": 10485760,
+      "encoding": "gzip"
+    },
+    {
+      "file": "model-08.gz.bin",
+      "bytes": 8591934,
+      "sha256": "f43ccecc7d7bebd61711e2f32eb36d33cdd1cb0ccc0667fa53392f3a08e2fb34",
+      "rawBytes": 10485760,
+      "encoding": "gzip"
+    },
+    {
+      "file": "model-09.gz.bin",
+      "bytes": 5306426,
+      "sha256": "a2bd142bb286787998f929dc625dfaa64cf45fa807e62b3d019e7b5e8b931182",
+      "rawBytes": 8475036,
+      "encoding": "gzip"
+    }
+  ],
+  "files": {
+    "config.json": {
+      "bytes": 44,
+      "sha256": "df34b4f930b23447cd4dc410fabfb42eb3f24e803e6c3f97d618fb359380a36f"
+    },
+    "tokenizer.json": {
+      "bytes": 3497,
+      "sha256": "77a02c8e164413299b4b4c403b14f8e0e1c1b727db4d46a09d6327b861060a34"
+    },
+    "tokenizer_config.json": {
+      "bytes": 113,
+      "sha256": "be1cb066d6ef6b074b3f15e6a6dd21ac88ff3cdaedf325f0aaed686c70f75d20"
+    },
+    "voices/af_heart.bin": {
+      "bytes": 522240,
+      "sha256": "d583ccff3cdca2f7fae535cb998ac07e9fcb90f09737b9a41fa2734ec44a8f0b"
+    },
+    "voices/af_bella.bin": {
+      "bytes": 522240,
+      "sha256": "f69d836209b78eb8c66e75e3cda491e26ea838a3674257e9d4e5703cbaf55c8b"
+    },
+    "voices/af_sky.bin": {
+      "bytes": 522240,
+      "sha256": "4435255c9744f3f31659e0d714ab7689bf65d9e77ec1cce060f083912614f0b9"
+    },
+    "voices/am_michael.bin": {
+      "bytes": 522240,
+      "sha256": "1d1f21dd8da39c30705cd4c75d039d265e9bc4a2a93ed09bc9e1b1225eb95ba1"
+    },
+    "voices/am_puck.bin": {
+      "bytes": 522240,
+      "sha256": "fcf73c989033e9233e0b98713eca600c8c74dcc1614b37009d5450ff4a2274a0"
+    },
+    "voices/bm_fable.bin": {
+      "bytes": 522240,
+      "sha256": "f889083196807b4adb15e9204252165f503b8d33d3982e681c52443c49d798f1"
+    }
+  }
+}

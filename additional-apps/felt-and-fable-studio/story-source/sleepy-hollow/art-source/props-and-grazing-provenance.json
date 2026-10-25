@@ -1,0 +1,29 @@
+{
+  "generator": "Built-in image_gen.imagegen",
+  "createdAt": "2026-10-18",
+  "copiedUnchanged": true,
+  "transparentBackgroundRequested": true,
+  "assets": [
+    {
+      "name": "props.png",
+      "source": "/workspace/scratch/110acee071c2/generated_images/exec-41d0e7a4-8cee-4d89-812d-25bb99c9d018.png",
+      "prompt": "Use case: illustration-story. Asset type: transparent isolated prop atlas for original handcrafted felt animation of The Legend of Sleepy Hollow. Create ONE landscape 1536x1024 image with six cleanly separated equal cells in a 3 column by 2 row grid, on a genuinely transparent background, generous fully transparent gutters between objects. Do not draw grid lines. Every object complete inside its own cell and not touching other cells. Needlefelt wool miniature storybook craft style, rich small wool fibers, warm ochre, orange, cream, dark brown palette matching autumn Hudson Valley felt dioramas. Top left: one brown broad brim old schoolteacher hat lying flat, simple unadorned colonial hat. Top middle: a plain orange pumpkin shattered into four or five large recognizable rind pieces clustered neatly; NO face, NO jack o lantern carving. Top right: one simple old brown leather horse saddle lying on its side with one hanging stirrup, realistic felt craft proportions. Bottom left: one cream folded letter closed with a round red wax seal, absolutely no writing. Bottom middle: one golden lattice pie on a simple cream plate. Bottom right: one small friendly green felt frog, three quarter view. Six objects exactly; no labels, text, shadows outside objects, scenery, people, other animals, border, floor or extra props. Transparency visible in all spaces around and between objects.",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "layout": "3 columns and 2 rows. Top: hat, broken pumpkin, saddle. Bottom: sealed letter, lattice pie, frog."
+    },
+    {
+      "name": "gunpowder-grazing.png",
+      "source": "/workspace/scratch/110acee071c2/generated_images/exec-dbc156fb-7d92-4011-8903-2fd332fe9ca4.png",
+      "reference": "ichabod-mounted.png",
+      "prompt": "Use case: illustration-story. Reference image supplies the exact visual design of the old charcoal brown horse Gunpowder. Generate ONE independent transparent isolated horse asset, NOT a sprite sheet or collage. Same original needlefelt wool handcraft style and same old thin charcoal-brown horse as the reference: long ears, untidy dark mane and tail, gray muzzle, very narrow light face blaze, expressive large gentle eye, dark hooves. Pose: head and long neck bent down grazing near hoof level, standing relaxed with all four legs and hooves visible, three-quarter side view facing RIGHT, complete tail and ears within frame. NO rider, NO saddle, NO saddle blanket, NO saddle straps. Retain only simple brown bridle and loose slack reins hanging naturally, not held by anybody. No grass, no patch of ground, no shadow backdrop, no setting, no floor. One entire horse with generous transparent margin around all sides on genuinely transparent background. Rich visible wool fibers, warm restrained cinematic light matching the reference. No text, logos, borders or extra objects. Prefer 1536x1024 landscape.",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "review": "Whole body facing right, four visible hooves, no rider or saddle; lowered head, simple loose reins."
+    }
+  ]
+}

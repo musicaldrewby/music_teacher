@@ -1,0 +1,38 @@
+{
+  "tool": "Built-in image_gen.imagegen",
+  "created": "2026-10-19",
+  "format": "PNG opaque 1672x941 (16:9)",
+  "records": [
+    {
+      "file": "lodging-stable-dusk.png",
+      "prompt": "Use case: illustration-story.\nAsset type: 16:9 full-screen background for a felt puppet film of The Legend of Sleepy Hollow.\nCreate a new distinct location: the modest borrowed-horse farm where Ichabod lodges. A small low weathered dark-brown timber cottage at the FAR LEFT, just one floor with a simple steep gray-brown roof and short stone chimney. Beside it toward left-center is a rustic open stable bay with hay, same simple worn timber. An irregular split-rail fence and visibly open gate identify this modest yard. The gate opening and unobstructed earth yard occupy the center and right where a mounted horse character will later be composited. The stable has a believable adult-sized door. Cottage and stable are clearly in the midground, with natural normal-scale dirt ground and sparse small fallen autumn leaves. Eye-level broad stage camera, NOT ground-level and NOT macro dirt texture. Shallow foreground, with horizon around 53 percent of image height. Keep usable calm flat ground along the lower 25 percent.\nStyle: lovingly crafted cinematic felt miniature/stop-motion illustration, soft wool fibers, tactile autumn trees, old Dutch New York 1790s. Warm muted golden late-afternoon light just before dusk, pale peach and soft lavender sky, no stars, no moon. Gentle hill landscape, sparse autumn bushes, cozy little window glow.\nThe accompanying farmhouse reference is STYLE reference only and is the rich Van Tassel destination: DO NOT duplicate that architecture. Our new location must be conspicuously poorer, lower, smaller and all brown timber, no white walls, no large multi-story house, no red barn. No people, no animals, no lettering, no watermark. Output a single complete landscape background, 16:9.",
+      "generatedSource": "/workspace/scratch/110acee071c2/generated_images/exec-1b9cb7db-fd7b-46fa-8b60-5f9950b27daf.png",
+      "inputReferences": [
+        "../acting-references/farmhouse.png"
+      ],
+      "use": "Borrowed horse at modest lodging/stable, warm late afternoon before party.",
+      "inspected": "No people or animals. Modest timber cottage and open stable clearly differ from white Van Tassel farmhouse. Open center/right yard provides compositing area. Keep horse within gate opening and scale to foreground gate posts."
+    },
+    {
+      "file": "orchard-lane-dusk.png",
+      "prompt": "Use case: illustration-story.\nAsset type: 16:9 full-screen felt miniature movie background.\nPrimary request: the short orchard lane toward the Van Tassel party in early dusk. Empty broad country lane runs gently from the LEFT edge across the midground toward the RIGHT, toward a large white Dutch farmhouse visible in the far-right background. This is a brief local journey, not a wilderness trek. The distant house MUST retain the architecture of the supplied farmhouse reference: cream-white stone, green shutters, gray steep roof with two small dormers and two brick end chimneys, two-storey main facade, small white triangular front porch, red barn further right. Show it smaller and more distant at the right end of the lane, softly glowing amber windows. The house image is an architectural identity reference; do not build a different house.\nAutumn apple orchard, ocher and rust foliage, gentle low hills. Keep the lane wide with open unoccluded space across center/lower-middle for a horse and rider traveling left to right. Eye-level film camera looking across terrain, no looming foreground closeup trees, no huge apples or leaves on the ground, normal ground perspective and subtle ground textures. Low splitrail fences behind the lane, trees behind the fences, not across the horse path.\nStyle: tactile hand-crafted felt miniature stop-motion look matching both references. Lighting is the very same warm muted early dusk of the lodging-stable reference: peach-lavender sunset sky, golden last light, amber window glow, no moon and no stars, enough daylight to see where he is going.\nInputs: first image is canonical Van Tassel architecture and style; second image is exact dusk lighting and rural-material style only.\nNo people, no animals, no text or watermarks. Complete single landscape background, 16:9.",
+      "generatedSource": "/workspace/scratch/110acee071c2/generated_images/exec-3e415d17-c999-49dd-b81d-f9252c29d952.png",
+      "inputReferences": [
+        "../acting-references/farmhouse.png",
+        "lodging-stable-dusk.png"
+      ],
+      "use": "Brief local ride toward Van Tassel party before nightfall.",
+      "inspected": "Empty left-to-right lane; recognizable white two-story Dutch farmhouse and red barn at right destination, warm early-dusk light matches departure. Foreground right gate occupies edge only; rider should travel in open center-lower lane."
+    },
+    {
+      "file": "lodging-stable-morning.png",
+      "prompt": "Use case: lighting-weather.\nEdit target: the attached 16:9 modest timber cottage and stable yard image.\nChange ONLY time of day from late-afternoon sunset to the following morning. Preserve exactly the same composition, camera angle, cottage architecture and position, open stable, hay, split-rail fences, opened gate, ground, every tree and all recognizable landmarks. This is the exact same poor local farm the following morning and must be instantly recognizable.\nMorning lighting: soft fresh pale blue sky with small white clouds, gentle warm early-morning light, slightly cool shadows, clear bright atmosphere. Cottage window glow faint/off in the daylight. No pink or orange sunset sky. Keep the autumn foliage and same season. Maintain cinematic tactile hand-crafted felt miniature style.\nEmpty yard and stable, no people and no animals; a horse will be placed into the foreground center-right separately. Natural perspective, keep full image framing unchanged. No text or watermark. Single complete image, 16:9.",
+      "generatedSource": "/workspace/scratch/110acee071c2/generated_images/exec-acf4df05-8a0f-4a2e-979a-fdb7722a2db8.png",
+      "inputReferences": [
+        "lodging-stable-dusk.png"
+      ],
+      "use": "Borrowed horse found back at owner's same gate next morning.",
+      "inspected": "Same architecture, camera, stable and gate geometry preserved. Morning blue sky and daylight replace sunset and window glow. No people or animals."
+    }
+  ]
+}

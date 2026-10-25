@@ -1,0 +1,31 @@
+// Native engraving and clock-derived layout checks; no browser rendering implied.
+const fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict');
+const {createCanvas,GlobalFonts}=require('@napi-rs/canvas');
+GlobalFonts.registerFromPath(path.join(__dirname,'../dist/assets/fonts/DejaVuSans.ttf'),'UkePrint');
+GlobalFonts.registerFromPath('/usr/share/fonts/opentype/urw-base35/NimbusSans-Regular.otf','Arial');
+global.Vex=require('../dist/vendor/vexflow.js');
+const M=require('../dist/melody-model.js');require('../dist/melody-renderer.js');
+const S=require('../dist/score-playback-model.js'),R=require('../dist/score-playback-renderer.js');
+const words=[['Sing','and','strum','now'],['Keep','a','stead-','y'],['Let','the','mu-','sic'],['Flow','a-','long','here'],['Sing','the','last','line']];
+const song={meter:'4/4',tempo:120,showLyrics:true,measures:words.map((_,i)=>({chords:[{step:0,chord:['C','G7','F','C','G7'][i]}]})),notation:M.normalize({meter:'4/4',tempo:120,measures:words.map((w,i)=>({notes:w.map((lyric,j)=>({pitch:['c/4','d/4','e/4','g/4'][(j+i)%4],duration:'q',lyric})),chords:[]}))})};
+song.measures.push({ending:true,chords:[{step:0,chord:'G7'}]});
+const prepared=S.prepare(song),plan={start:0,bodyEnd:40,length:40,repeatEnd:80,scoreEnd:48,loop:false},state=t=>S.state(prepared,t,plan),renderer=R.create({createCanvas:()=>createCanvas(1,1)});
+const rect={x:0,y:0,w:1259,h:560},opt={layout:'stack',font:26},canvas=createCanvas(rect.w,rect.h),ctx=canvas.getContext('2d');
+const checks=[],check=(name,f)=>{f();checks.push(name);};
+const bars=t=>renderer.layout(prepared,state(t),rect,opt).slots.map(s=>s.bar);
+check('The first two measures are both visible before playback starts',()=>{assert.deepEqual(bars(-1),[0,1]);assert(!renderer.layout(prepared,state(-1),rect,opt).changing);assert.equal(renderer.draw(ctx,prepared,state(-1),rect,opt).length,2);});
+check('Measure two stays anchored while only the first slot fades into measure three',()=>{const before=renderer.draw(ctx,prepared,state(7.9),rect,opt),start=renderer.draw(ctx,prepared,state(8),rect,opt),after=renderer.draw(ctx,prepared,state(9.5),rect,opt);assert.equal(before.find(m=>m.bar===1).y,280);assert.equal(start.find(m=>m.active).y,280);assert.equal(start.find(m=>m.active).opacity,1);assert.deepEqual(after.map(m=>[m.bar,m.y]),[[2,0],[1,280]]);assert.equal(renderer.layout(prepared,state(8),rect,opt).slots[0].previous,0);});
+check('Every upcoming measure is readable in its eventual playing position',()=>{for(let n=1;n<10;n++){const preview=renderer.draw(ctx,prepared,state(n*8-.2),rect,opt).find(m=>!m.active),playing=renderer.draw(ctx,prepared,state(n*8),rect,opt).find(m=>m.active);assert(preview);assert.equal(preview.bar,playing.bar);assert.equal(preview.y,playing.y);assert.equal(preview.opacity,1);assert.equal(playing.opacity,1);}});
+check('Fade timing comes only from the score clock, including pause and seeking',()=>{renderer.draw(ctx,prepared,state(8.8),rect,opt);const a=canvas.toBuffer('image/png');renderer.draw(ctx,prepared,state(33),rect,opt);renderer.draw(ctx,prepared,state(8.8),rect,opt);assert(a.equals(canvas.toBuffer('image/png')));const page=renderer.layout(prepared,state(8.8),rect,opt);assert(page.changing&&page.progress>0&&page.progress<1);});
+check('Odd-length repeats preserve the previewed slot across the repeat boundary',()=>{assert.deepEqual(bars(39),[4,0]);assert.deepEqual(bars(41.5),[1,0]);assert.equal(renderer.layout(prepared,state(40),rect,opt).activeSlot,1);assert.equal(renderer.layout(prepared,state(48),rect,opt).activeSlot,0);});
+check('The last pass previews the final chord, never an extra repeat',()=>{assert.deepEqual(bars(73.5),[null,4]);assert.equal(state(73.5).nextBar,null);assert(state(80.2).ending);assert(!renderer.layout(prepared,state(80.2),rect,opt).changing);});
+check('Selected passages alternate only the measures inside the passage',()=>{const p={...plan,start:8,length:24,bodyEnd:32,repeatEnd:Infinity,loop:true};for(let n=0;n<7;n++){const st=S.state(prepared,8+n*8+.1,p,8),page=renderer.layout(prepared,st,rect,opt);assert.equal(page.activeSlot,n%2);assert.equal(st.bar,1+n%3);assert.equal(st.nextBar,1+(n+1)%3);}});
+check('Two-bar loops retain an already-correct upcoming measure without fading it',()=>{const p={...plan,start:8,length:16,bodyEnd:24,repeatEnd:Infinity,loop:true};assert(!renderer.layout(prepared,S.state(prepared,16.1,p,8),rect,opt).changing);});
+check('Reduced motion replaces only the inactive line immediately',()=>{const a=renderer.draw(ctx,prepared,state(8.1),rect,{...opt,motion:false});assert.deepEqual(a.map(m=>[m.bar,m.y,m.opacity]),[[2,0,1],[1,280,1]]);});
+check('Wide and narrow presentations keep two stacked slots; dense measures pan smoothly',()=>{const wide={x:0,y:0,w:1400,h:520},a=renderer.draw(ctx,prepared,state(2),wide);assert.deepEqual(a.map(m=>[m.x,m.y]),[[0,0],[0,260]]);const narrow={x:0,y:0,w:320,h:560},b=renderer.draw(ctx,prepared,state(3),narrow),d=renderer.draw(ctx,prepared,state(3.1),narrow);assert.equal(b.length,2);assert(d[0].pan>b[0].pan);assert(d[0].pan-b[0].pan<20);assert.equal(d[1].pan,0);});
+check('One-bar loops still have exactly one active slot',()=>{const p={...plan,start:0,length:8,bodyEnd:8,repeatEnd:Infinity,loop:true};for(const t of [1,9,17]){const a=renderer.draw(ctx,prepared,S.state(prepared,t,p),rect,opt);assert.equal(a.filter(m=>m.active).length,1);assert.equal(a.find(m=>m.active).slot,Math.floor(t/8)%2);}});
+const out='/tmp/uke-score-transitions';fs.mkdirSync(out,{recursive:true});
+const contact=createCanvas(1260,1020),g=contact.getContext('2d');g.fillStyle='#e7efe9';g.fillRect(0,0,1260,1020);
+for(const [i,t]of [7.8,8.8,9.5,15.9,16.8,17.5].entries()){renderer.draw(ctx,prepared,state(t),rect,opt);const x=i%2*630,y=Math.floor(i/2)*340;g.font='bold 20px Arial';g.fillStyle='#17424b';g.fillText(['1 playing · 2 ready below','2 playing · top line changing','2 playing · 3 ready above','3 already visible before its turn','3 playing · bottom line changing','3 playing · 4 ready below'][i],x+12,y+27);g.drawImage(canvas,x+8,y+40,614,273);fs.writeFileSync(path.join(out,'frame-'+i+'.png'),canvas.toBuffer('image/png'));}
+fs.writeFileSync(path.join(out,'transition-review.png'),contact.toBuffer('image/png'));
+console.log(JSON.stringify({passed:checks.length,checks,images:out},null,2));

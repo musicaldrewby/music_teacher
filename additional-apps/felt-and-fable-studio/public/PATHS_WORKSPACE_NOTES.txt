@@ -1,0 +1,21 @@
+FELT & FABLE v1.26 — PATHS & WORKSPACE
+
+Custom curves open their handles automatically after adding the preset.
+Draw path is a direct button in Animate: drag from Start and release to finish.
+Draw route redraws an existing path; Simple curve provides Start/Bend/End handles.
+A drawn route remains one editable block and follows distance along the route,
+independent of how quickly the route was drawn. Path data is bounded to 256 points.
+Cancelled strokes and cancelled handle drags retain the previous route.
+The animation dock defaults to a compact height with internal scrolling, separate
+Timeline/Block settings views, and Minimize/Restore/Expand controls. Empty animation
+lanes are omitted. Path editing minimizes the dock and restores it when finished.
+Existing artwork, lazy loading, camera continuity and video settings are preserved.
+
+Validation: native canvas plus DOM-stub checks cover all 70 presets, previous
+block editing, freehand stroke and handle callbacks, cancellation, one undo step
+per stroke, save/load validation, distance-based path progress, camera-coordinate
+conversion, automatic curve editing, panel state, editing-only start pose, and
+matching 30/60 fps output frames. Asset bytes, syntax, HTML structure and update
+merge are checked. These are not measurements of browser layout or usability.
+No browser executable is available here for an interactive layout check or actual
+MP4 encoding. Please report your screen size if the dock still feels too tall.

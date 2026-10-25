@@ -1,0 +1,58 @@
+[
+  {
+    "file": "poster-tron.jpg",
+    "url": "https://lumiere-a.akamaihd.net/v1/images/p_tron_19881_4c3086c9.jpeg?region=0%2C0%2C540%2C810",
+    "source": "https://movies.disney.com/tron",
+    "credit": "TRON artwork, Walt Disney Studios"
+  },
+  {
+    "file": "poster-dreamtime.jpg",
+    "url": "https://f4.bcbits.com/img/a0380412927_10.jpg",
+    "source": "https://steveroach.bandcamp.com/album/dreamtime-return-high-definition-edition",
+    "credit": "Dreamtime Return artwork, Steve Roach / Projekt"
+  },
+  {
+    "file": "poster-gnr.jpg",
+    "url": "https://pbs.twimg.com/media/FpfcOoVWIAEF8Kt.jpg",
+    "source": "https://twitter.com/paradisecityfan/status/1628011937773547520",
+    "credit": "Guns N Roses, 1988 Funky Enterprises poster reproduction"
+  },
+  {
+    "file": "reference-ikegami-front.jpg",
+    "url": "https://sg.ikegami.co.jp/files/co/broadcast_img/htm-1990r_en/htm-1990r_main1.jpg",
+    "source": "https://sg.ikegami.co.jp/product/detail/996/",
+    "credit": "Ikegami HTM-1990R manufacturer reference"
+  },
+  {
+    "file": "reference-ikegami-rear.jpg",
+    "url": "https://sg.ikegami.co.jp/files/co/broadcast_img/htm-1990r_en/htm-1990r_main2.jpg",
+    "source": "https://sg.ikegami.co.jp/product/detail/996/",
+    "credit": "Ikegami HTM-1990R manufacturer reference"
+  },
+  {
+    "files": [
+      "wood-color.jpg",
+      "wood-normalgl.jpg",
+      "wood-roughness.jpg"
+    ],
+    "source": "https://ambientcg.com/view?id=Wood049",
+    "credit": "ambientCG",
+    "license": "CC0"
+  },
+  {
+    "files": [
+      "fabric-color.jpg",
+      "fabric-normalgl.jpg",
+      "fabric-roughness.jpg"
+    ],
+    "source": "https://ambientcg.com/view?id=Fabric008",
+    "credit": "ambientCG",
+    "license": "CC0"
+  },
+  {
+    "file": "poster-tron-original.jpg",
+    "url": "https://www.originalfilmart.com/cdn/shop/products/tron_1982_original_film_art.jpg?v=1551810378",
+    "source": "https://www.originalfilmart.com/products/tron-1982",
+    "credit": "TRON 1982 original theatrical poster, Walt Disney Productions; reference image Original Film Art"
+  }
+]

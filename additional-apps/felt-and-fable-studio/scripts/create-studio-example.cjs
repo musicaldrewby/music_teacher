@@ -1,0 +1,15 @@
+const fs=require('fs'),path=require('path');const h=require('./app-harness.cjs');
+(async()=>{await h.ready;const previous=JSON.parse(fs.readFileSync(path.join(h.root,'examples/cinematic-workshop.js'),'utf8').replace(/^window\.FELT_STUDIO_EXAMPLE=/,'').replace(/;\s*$/,''));h.context.scarfData=previous.imports['import-dance-scarf-purple'];const p=h.run(`(()=>{
+ const piece=(asset,id,x,y,w)=>directorPlanPiece({asset,id,x,y,w});
+ const left=piece('danse-skeleton-dancer','skeleton-left',600,655,190),right=piece('danse-skeleton-dancer','skeleton-right',1110,655,190),ghost=piece('piece97','ghost',770,595,190);
+ left.choreography=[studioNewMotion('freeze',0,[])];left.choreography[0].duration=16;right.choreography=copy(left.choreography);right.choreography[0].id='freeze-right';
+ const travel=studioNewMotion('visit',2,[left.id,right.id]);Object.assign(travel,{duration:12,radiusX:175,radiusY:48,turns:2});ghost.choreography=[travel];
+ const scarf={id:'purple-scarf',name:'Purple dance scarf',type:'asset',asset:'import-dance-scarf-purple',x:0,y:0,w:175,h:160,bw:1312,bh:1199,rotation:0,opacity:1,attachment:{parentId:ghost.id,anchor:'rightHand',dx:.08*190,dy:-.35*216,rotation:0,parentScaleX:1,parentScaleY:1,release:null},choreography:[{...studioNewMotion('scarf',2,[left.id,right.id]),duration:12,turns:2,radiusX:85,radiusY:28}]};
+ const cam=(x,y,zoom)=>({x,y,zoom});const shot=(id,name,duration,from,to,connection)=>({id,name,duration,from,to,move:true,easing:'cinematic',connection});
+ const s={id:'dance',name:'Partners in the moonlight',bg:94,bgColor:'#324860',caption:'',duration:16,items:[left,right,ghost,scarf],cinema:{shots:[shot('establish','Establish the space',4,cam(800,450,1),cam(850,540,1.5),'cut'),shot('close','Move closer',4,cam(800,450,1),cam(650,570,2.1),'continue'),shot('partner','Meet the next partner',4,cam(1030,570,2),cam(1030,570,2),'dissolve'),shot('reveal','Pull back',4,cam(800,450,1),cam(800,450,1),'continue')]}};
+ const p=audioDefaults({format:'felt-and-fable',version:1,title:'Cinematic workshop · Moonlight partners',active:0,exportFps:60,custom:[],imports:{'import-dance-scarf-purple':scarfData},scenes:[s],director:{lighting:[{id:'moonlight',start:0,duration:14,from:'moonlight',to:'moonlight',strength:.65},{id:'dawn',start:14,duration:6,from:'moonlight',to:'daylight',strength:.65}],musicCues:[{id:'accent',label:'A little magic',time:5,duration:1.2,effect:'sparkle',strength:.5},{id:'morning',label:'Sunrise begins',time:14,duration:1,effect:'none',strength:.5}]}});
+ const next=storyContinueScene(p,s.id,'end');next.name='A gentle sunrise';next.duration=6;next.bg=95;next.cinema.transition={kind:'dissolve',duration:3,moving:true};next.cinema.shots=[shot('dawn-hold','Let the morning settle',6,cam(800,450,1),cam(850,470,1.2),'continue')];p.active=0;return validateProject(p);
+})()`);
+ fs.writeFileSync(path.join(h.root,'examples/cinematic-workshop.js'),'window.FELT_STUDIO_EXAMPLE='+JSON.stringify(p)+';\n');
+ console.log('Saved editable 22-second cinematic workshop example.');
+})().catch(e=>{console.error(e);process.exitCode=1});

@@ -1,0 +1,97 @@
+{
+  "format": "felt-director-plan",
+  "version": 1,
+  "title": "A little discovery",
+  "canvas": {
+    "width": 1600,
+    "height": 900,
+    "fps": 60
+  },
+  "director": {
+    "snap": true,
+    "beat": {
+      "enabled": true,
+      "bpm": 100,
+      "offset": 0
+    },
+    "range": {
+      "mode": "whole",
+      "start": 0,
+      "end": 8
+    },
+    "resolution": 1080
+  },
+  "scenes": [
+    {
+      "id": "discovery",
+      "name": "The discovery",
+      "backdrop": "bg65",
+      "duration": 8,
+      "director": {
+        "notes": "Let the character notice the clue before the camera moves.",
+        "markers": [
+          {
+            "id": "reveal",
+            "label": "The reveal",
+            "time": 4
+          }
+        ]
+      },
+      "pieces": [
+        {
+          "id": "maya",
+          "asset": "cinema-maya",
+          "x": 800,
+          "y": 600,
+          "w": 338.56
+        },
+        {
+          "id": "line",
+          "text": "What is that?",
+          "x": 800,
+          "y": 270,
+          "dialogue": {
+            "start": 2,
+            "duration": 3,
+            "reveal": "words",
+            "wordsPerSecond": 3
+          }
+        }
+      ],
+      "cinema": {
+        "shots": [
+          {
+            "id": "wide",
+            "name": "Establish the room",
+            "duration": 4,
+            "from": {
+              "x": 800,
+              "y": 450,
+              "zoom": 1
+            },
+            "move": false,
+            "actionNote": "Maya notices something.",
+            "dialogueNote": "What is that?"
+          },
+          {
+            "id": "closer",
+            "name": "Move closer",
+            "duration": 4,
+            "from": {
+              "x": 800,
+              "y": 500,
+              "zoom": 1.4
+            },
+            "to": {
+              "x": 800,
+              "y": 540,
+              "zoom": 2
+            },
+            "move": true,
+            "easing": "cinematic"
+          }
+        ]
+      }
+    }
+  ]
+}

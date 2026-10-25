@@ -1,0 +1,31 @@
+import * as T from 'three';
+import type {CameraPose,Scene,Vec} from './scene';
+import type {ExplorerSettings} from './world-schema';
+function solid(o:T.Object3D){let p:T.Object3D|null=o;while(p){if(!p.visible||p.userData.editorHelper||p.userData.fractureShard||p.userData.globeSnow||p.userData.effectId)p=null;else{if(p===o&&!(p instanceof T.Mesh))return false;p=p.parent;continue;}return false;}return o instanceof T.Mesh&&(Array.isArray(o.material)?o.material:[o.material]).some(m=>m.visible&&m.opacity>.9&&!(m as T.MeshPhysicalMaterial).transmission);}
+/** Conservative body probes with wall sliding and step-height floor following. */
+export function moveWalker(position:T.Vector3,delta:T.Vector3,height:number,world:T.Scene,ground:number,collisions=true){const next=position.clone(),radius=Math.max(.025,Math.min(.25,height*.2)),step=Math.max(.025,height*.22),ray=new T.Raycaster();world.updateMatrixWorld(true);
+ const hit=(origin:T.Vector3,direction:T.Vector3,far:number)=>{ray.set(origin,direction);ray.far=far;return ray.intersectObjects(world.children,true).find(h=>solid(h.object));};
+ for(const axis of ['x','z'] as const){const distance=Math.abs(delta[axis]);if(distance<1e-8)continue;const direction=new T.Vector3();direction[axis]=Math.sign(delta[axis]);let allowed=distance;
+  if(collisions)for(const y of [height*.18,height*.55,height*.92])for(const side of [-radius*.7,0,radius*.7]){const origin=next.clone();origin.y=next.y-height+y;origin[axis==='x'?'z':'x']+=side;const h=hit(origin,direction,distance+radius);if(h)allowed=Math.min(allowed,Math.max(0,h.distance-radius));}
+  const candidate=next.clone();candidate[axis]+=Math.sign(delta[axis])*allowed;const feet=next.y-height,origin=candidate.clone();origin.y=feet+step+.02;ray.set(origin,new T.Vector3(0,-1,0));ray.far=Math.max(.2,height+step+2);const floor=ray.intersectObjects(world.children,true).find(h=>solid(h.object)&&h.face&&h.face.normal.clone().transformDirection(h.object.matrixWorld).y>.55);const floorY=floor?.point.y??ground;
+  if(!collisions||floorY>=feet-Math.max(.15,height*.5)){candidate.y=Math.max(ground,floorY)+height;next.copy(candidate);}
+ }
+ return next;
+}
+export function settleWalker(position:T.Vector3,height:number,world:T.Scene,ground:number){world.updateMatrixWorld(true);const ray=new T.Raycaster(position.clone().add(new T.Vector3(0,.02,0)),new T.Vector3(0,-1,0),0,1000);const floor=ray.intersectObjects(world.children,true).find(h=>solid(h.object)&&h.face&&h.face.normal.clone().transformDirection(h.object.matrixWorld).y>.55);position.y=Math.max(ground,floor?.point.y??ground)+height;return position;}
+export class ExplorerController{
+ position=new T.Vector3();yaw=0;pitch=0;fov=65;keys=new Set<string>();settings:ExplorerSettings;private pointer?:{id:number;x:number;y:number;distance:number};onInteract?:()=>void;onExit?:()=>void;
+ constructor(public canvas:HTMLCanvasElement,pose:CameraPose,settings:ExplorerSettings){this.settings={...settings};this.setPose(pose);canvas.style.touchAction='none';canvas.addEventListener('pointerdown',this.down);canvas.addEventListener('pointermove',this.move);canvas.addEventListener('pointerup',this.up);canvas.addEventListener('pointercancel',this.cancel);window.addEventListener('keydown',this.keyDown);window.addEventListener('keyup',this.keyUp);window.addEventListener('blur',this.blur);document.addEventListener('visibilitychange',this.blur);}
+ setPose(p:CameraPose){this.position.fromArray(p.position);const d=new T.Vector3(...p.target).sub(this.position).normalize();this.yaw=Math.atan2(-d.x,-d.z);this.pitch=Math.asin(Math.max(-.99,Math.min(.99,d.y)));this.fov=p.fov;}
+ pose():CameraPose{const d=new T.Vector3(-Math.sin(this.yaw)*Math.cos(this.pitch),Math.sin(this.pitch),-Math.cos(this.yaw)*Math.cos(this.pitch));return {position:this.position.toArray(),target:this.position.clone().addScaledVector(d,5).toArray(),fov:this.fov};}
+ private down=(e:PointerEvent)=>{if(e.button!==0)return;this.pointer={id:e.pointerId,x:e.clientX,y:e.clientY,distance:0};this.canvas.setPointerCapture(e.pointerId);};
+ private move=(e:PointerEvent)=>{const p=this.pointer;if(!p||p.id!==e.pointerId)return;const dx=e.clientX-p.x,dy=e.clientY-p.y;p.distance+=Math.abs(dx)+Math.abs(dy);p.x=e.clientX;p.y=e.clientY;this.yaw-=dx*.004;this.pitch=Math.max(-1.45,Math.min(1.45,this.pitch-dy*.004));};
+ private up=(e:PointerEvent)=>{if(this.pointer?.id===e.pointerId){if(this.pointer.distance<4)this.onInteract?.();this.pointer=undefined;}};
+ private cancel=()=>{this.pointer=undefined;};
+ private keyDown=(e:KeyboardEvent)=>{if((e.target as HTMLElement).matches('input,textarea,select'))return;if(['KeyW','KeyA','KeyS','KeyD','ArrowUp','ArrowDown','ArrowLeft','ArrowRight','KeyQ','KeyE','Space'].includes(e.code)){e.preventDefault();this.keys.add(e.code);}if(e.code==='KeyF'&&!e.repeat){e.preventDefault();this.onInteract?.();}if(e.code==='Escape')this.onExit?.();};
+ private keyUp=(e:KeyboardEvent)=>this.keys.delete(e.code);
+ private blur=()=>{this.keys.clear();this.pointer=undefined;};
+ touch(key:string,on:boolean){on?this.keys.add(key):this.keys.delete(key);}
+ step(dt:number,world:T.Scene,scene:Scene){dt=Math.min(.05,Math.max(0,dt));const key=(...codes:string[])=>codes.some(c=>this.keys.has(c))?1:0,x=key('KeyD','ArrowRight')-key('KeyA','ArrowLeft'),z=key('KeyW','ArrowUp')-key('KeyS','ArrowDown'),up=key('KeyE','Space')-key('KeyQ'),direction=new T.Vector3(Math.cos(this.yaw)*x-Math.sin(this.yaw)*z,0,-Math.sin(this.yaw)*x-Math.cos(this.yaw)*z);if(this.settings.mode==='fly')direction.y=up;if(direction.lengthSq()>1)direction.normalize();direction.multiplyScalar(this.settings.speed*dt);if(this.settings.mode==='walk')this.position.copy(moveWalker(this.position,direction,this.settings.eyeHeight,world,scene.ground.height,this.settings.collisions));else this.position.add(direction);return this.pose();}
+ dispose(){this.canvas.style.touchAction='';this.canvas.removeEventListener('pointerdown',this.down);this.canvas.removeEventListener('pointermove',this.move);this.canvas.removeEventListener('pointerup',this.up);this.canvas.removeEventListener('pointercancel',this.cancel);window.removeEventListener('keydown',this.keyDown);window.removeEventListener('keyup',this.keyUp);window.removeEventListener('blur',this.blur);document.removeEventListener('visibilitychange',this.blur);this.keys.clear();}
+}

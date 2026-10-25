@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#162b39">
+  <meta name="description" content="A teacher’s classroom band board: instant fingerings, full-screen music whiteboards, a drag-and-drop rhythm writer, sound help, instrument troubleshooting, a marching-style metronome, and a clock with pack-up reminders.">
+  <title>Beginning Band Board</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="rehearsal.css">
+</head>
+<body>
+ <div id="teaching-workspace">
+ <header class="app-header">
+  <a href="#" id="brand" aria-label="Go to fingerings"><span class="brand-mark" aria-hidden="true">♪</span><span><small>TEACHER’S MUSIC ROOM</small><strong>Beginning Band Board</strong></span></a>
+  <nav aria-label="Main views"><button data-mode="fingerings" class="active">Fingerings</button><button data-mode="whiteboard">Whiteboard</button><button data-mode="rhythm">Rhythm Writer</button><button data-mode="help">Sound Help</button><button data-mode="repairs">Troubleshooting</button></nav>
+  <button id="fullscreen" class="icon-button" title="Full screen" aria-label="Full screen">⛶</button>
+ </header>
+ <div id="instrument-row" class="instrument-row" aria-label="Choose instrument"></div>
+ <main>
+  <section id="fingerings" class="view">
+   <div class="stage-heading"><div><span class="eyebrow">LET’S PLAY TOGETHER</span><h1 id="instrument-title">Clarinet</h1></div><div class="stage-actions"><button id="whole-band" aria-pressed="false">Whole band</button><button id="annotate" aria-pressed="false">✎ Draw on chart</button><button id="hear" class="hear-button">▶ Hear it</button></div></div>
+   <div id="chart-surface" class="chart-surface"><div id="chart-content"></div><canvas id="chart-ink" aria-label="Draw over the fingering chart"></canvas></div>
+   <div id="annotation-tools" class="ink-tools hidden" aria-label="Chart drawing tools"></div>
+   <div id="note-row" class="note-row" aria-label="Choose solfège note"></div>
+   <div class="bottom-line"><span id="status-hint">Choose an instrument and a syllable.</span><span>Created by Drew Wichman <button id="about-button" class="text-button">About & sources</button></span></div>
+  </section>
+  <section id="help" class="view hidden">
+   <div class="stage-heading"><div><span class="eyebrow">ONE SMALL CHANGE AT A TIME</span><h1 id="help-title">Let’s find your clarinet sound.</h1></div><button id="help-fingering">Back to fingerings →</button></div>
+   <p class="help-intro">Choose what you hear. Try one change, play again, and listen with your teacher. These tips are starting points; your teacher can help find what works for you.</p>
+   <div id="help-grid" class="help-grid"></div>
+   <div class="help-footer"><strong>Still stuck?</strong> Ask your teacher to check your setup and instrument. Sometimes the instrument needs a little help, too. <button data-mode="repairs">Check the instrument →</button></div>
+  </section>
+  <section id="repairs" class="view hidden" aria-label="Instrument troubleshooting">
+   <div class="stage-heading"><div><span class="eyebrow">LET’S GET IT WORKING</span><h1 id="repair-title">Instrument troubleshooting</h1></div><button data-mode="help">Sound Help →</button></div>
+   <p class="help-intro">Choose your instrument above, then find what is happening. The label shows where to start.</p>
+   <div class="repair-legend" aria-label="Who can help"><div><span class="repair-badge student">Student check</span><p>A simple routine your teacher has already shown you.</p></div><div><span class="repair-badge teacher">Teacher first</span><p>Ask your teacher to inspect it and decide what to do.</p></div><div><span class="repair-badge shop">Repair assessment</span><p>Have your teacher arrange a qualified instrument technician.</p></div></div>
+   <div class="repair-start"><strong>If something will not move, do not force it.</strong> Student checks are only for familiar routines. If you are unsure, ask your teacher first.</div>
+   <div class="repair-controls"><label class="repair-search-label" for="repair-search">Find a problem<input id="repair-search" type="search" placeholder="Try “stuck” or “loose”…" autocomplete="off"></label><label for="repair-filter">Start with<select id="repair-filter"><option value="all">All problems</option><option value="student">Student checks</option><option value="teacher">Teacher help</option><option value="shop">Repair assessment</option></select></label><button id="repair-reset">Reset filters</button><span id="repair-count" role="status" aria-live="polite"></span></div>
+   <div id="repair-grid" class="repair-grid"></div>
+   <div class="repair-bottom"><h2>Before it goes to the shop</h2><p>Tell your teacher when the problem started, which notes or parts are affected, and whether it followed a fall, cleaning, or assembly. Keep any loose pieces. A teacher can handle routine care they are trained to do and help decide whether repair is needed.</p><p>For school-owned or rented instruments, let your teacher or family contact the school or rental provider first. Follow the care instructions for your actual model.</p></div>
+  </section>
+  <section id="rhythm" class="view hidden" aria-label="Rhythm writer"></section>
+  <section id="whiteboard" class="view hidden" aria-label="Whiteboard">
+   <div id="board-surface"><canvas id="staff-canvas" aria-hidden="true"></canvas><canvas id="board-ink" aria-label="Write or draw with your pen, touch, or mouse"></canvas></div>
+   <div id="board-toolbar" class="board-toolbar"><button id="exit-board" title="Back to fingerings">← Band board</button><div class="board-types" aria-label="Whiteboard type"><button data-board="blank">Blank</button><button data-board="treble" class="active">Treble</button><button data-board="bass">Bass</button><button data-board="double">Two blank staffs</button></div><button id="board-fullscreen" title="Full screen">⛶</button><button id="hide-toolbar" title="Hide toolbar">Hide tools</button><div id="board-tools" class="ink-tools"></div></div>
+   <button id="show-toolbar" class="show-toolbar hidden">✎ Show tools</button>
+  </section>
+ </main>
+ </div>
+ <dialog id="about"><button id="close-about" class="dialog-close" aria-label="Close">×</button><span class="eyebrow">THE TEACHER’S MUSIC ROOM</span><h2>Beginning Band Board</h2><p>Seven instruments. Seven notes. One shared musical language.</p><p><strong>Do = concert B♭.</strong> Written notes and registers follow the supplied beginning-band chart. Euphonium uses bass clef. Low Ti is the leading tone immediately below Do.</p><p>Original fingerings and shapes come directly from your supplied PDF. The added low Ti and La figures reuse its artwork and match its style. Bell-kit bars follow the reference layout; the selected bar is outlined in gold.</p><p><strong>Hear it</strong> plays a reference tone at the sounding pitch. It is a pitch guide, not a recorded example of instrument tone. Bell-kit audio sounds two octaves above its written notes.</p><p>Pen, touch, and mouse drawing are supported. Use <strong>Pen only</strong> if your display identifies its stylus separately from touch; otherwise leave it off. Drawings are saved in this browser on this device.</p><p><a href="assets/original-chart.pdf" target="_blank" rel="noopener">Open the original five-note charts ↗</a></p><p>Rhythm Writer has a reusable shelf of notes, rests, and measure lines. Drag out any number of copies, or tap a symbol to add it. Select a copy to move, duplicate, or delete it. Undo also restores a cleared rhythm.</p><p>Clefs and rhythm symbols use Bravura notation by Steinberg Media Technologies, under the <a href="assets/notation/OFL-Bravura.txt" target="_blank" rel="noopener">SIL Open Font License</a>.</p><h3>Fingering references</h3><ul id="fingering-sources"></ul><p>Sound Help offers practical starting points. Troubleshooting separates familiar student checks, teacher assistance, and professional repair. Sources appear with the relevant guidance; use the care instructions for your own instrument model.</p><h3>Sound-help references</h3><ul id="sound-sources"></ul><p class="credit">Created by Drew Wichman</p></dialog>
+ <footer id="rehearsal-tools" aria-label="Rehearsal controls"></footer>
+ <div id="toast" role="status" aria-live="polite"></div>
+ <script type="module" src="app.js"></script>
+</body></html>

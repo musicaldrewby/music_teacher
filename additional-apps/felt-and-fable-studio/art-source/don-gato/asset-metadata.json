@@ -1,0 +1,792 @@
+[
+  {
+    "id": "don-gato-sit",
+    "name": "Don Gato \u00b7 Seated",
+    "category": "animals",
+    "themes": [
+      "dongato"
+    ],
+    "tags": "Don Gato cat song felt musical story",
+    "donGatoSheet": "don-gato",
+    "donGatoCrop": [
+      46,
+      26,
+      323,
+      398
+    ],
+    "preparedSize": [
+      323,
+      398
+    ],
+    "defaultWidth": 250,
+    "nativeAlpha": true
+  },
+  {
+    "id": "don-gato-read",
+    "name": "Don Gato \u00b7 Reading his letter",
+    "category": "animals",
+    "themes": [
+      "dongato"
+    ],
+    "tags": "Don Gato cat song felt musical story",
+    "donGatoSheet": "don-gato",
+    "donGatoCrop": [
+      476,
+      34,
+      350,
+      395
+    ],
+    "preparedSize": [
+      350,
+      395
+    ],
+    "defaultWidth": 250,
+    "nativeAlpha": true
+  },
+  {
+    "id": "don-gato-joy",
+    "name": "Don Gato \u00b7 Overjoyed",
+    "category": "animals",
+    "themes": [
+      "dongato"
+    ],
+    "tags": "Don Gato cat song felt musical story",
+    "donGatoSheet": "don-gato",
+    "donGatoCrop": [
+      927,
+      7,
+      349,
+      425
+    ],
+    "preparedSize": [
+      349,
+      425
+    ],
+    "defaultWidth": 250,
+    "nativeAlpha": true
+  },
+  {
+    "id": "don-gato-jump",
+    "name": "Don Gato \u00b7 Surprised jump",
+    "category": "animals",
+    "themes": [
+      "dongato"
+    ],
+    "tags": "Don Gato cat song felt musical story",
+    "donGatoSheet": "don-gato",
+    "donGatoCrop": [
+      1386,
+      12,
+      360,
+      360
+    ],
+    "preparedSize": [
+      360,
+      360
+    ],
+    "defaultWidth": 250,
+    "nativeAlpha": true
+  },
+  {
+    "id": "don-gato-rest",
+    "name": "Don Gato \u00b7 Resting with bandage",
+    "category": "animals",
+    "themes": [
+      "dongato"
+    ],
+    "tags": "Don Gato cat song felt musical story",
+    "donGatoSheet": "don-gato",
+    "donGatoCrop": [
+      10,
+      586,
+      507,
+      233
+    ],
+    "preparedSize": [
+      507,
+      233
+    ],
+    "defaultWidth": 250,
+    "nativeAlpha": true
+  },
+  {
+    "id": "don-gato-awake",
+    "name": "Don Gato \u00b7 Wide awake",
+    "category": "animals",
+    "themes": [
+      "dongato"
+    ],
+    "tags": "Don Gato cat song felt musical story",
+    "donGatoSheet": "don-gato",
+    "donGatoCrop": [
+      547,
+      460,
+      323,
+      386
+    ],
+    "preparedSize": [
+      323,
+      386
+    ],
+    "defaultWidth": 250,
+    "nativeAlpha": true
+  },
+  {
+    "id": "don-gato-walk-a",
+    "name": "Don Gato \u00b7 Walking \u00b7 step 1",
+    "category": "animals",
+    "themes": [
+      "dongato"
+    ],
+    "tags": "Don Gato cat song felt musical story",
+    "donGatoSheet": "don-gato",
+    "donGatoCrop": [
+      932,
+      452,
+      348,
+      391
+    ],
+    "preparedSize": [
+      348,
+      391
+    ],
+    "defaultWidth": 250,
+    "nativeAlpha": true
+  },
+  {
+    "id": "don-gato-walk-b",
+    "name": "Don Gato \u00b7 Walking \u00b7 step 2",
+    "category": "animals",
+    "themes": [
+      "dongato"
+    ],
+    "tags": "Don Gato cat song felt musical story",
+    "donGatoSheet": "don-gato",
+    "donGatoCrop": [
+      1360,
+      452,
+      381,
+      391
+    ],
+    "preparedSize": [
+      381,
+      391
+    ],
+    "defaultWidth": 250,
+    "nativeAlpha": true
+  },
+  {
+    "id": "don-gato-lady-happy",
+    "name": "Lady cat \u00b7 happy",
+    "category": "animals",
+    "themes": [
+      "dongato"
+    ],
+    "tags": "Don Gato cat song felt musical story",
+    "donGatoSheet": "supporting-cats",
+    "donGatoCrop": [
+      95,
+      24,
+      367,
+      481
+    ],
+    "preparedSize": [
+      367,
+      481
+    ],
+    "defaultWidth": 250,
+    "nativeAlpha": true
+  },
+  {
+    "id": "don-gato-lady-sad",
+    "name": "Lady cat \u00b7 handkerchief",
+    "category": "animals",
+    "themes": [
+      "dongato"
+    ],
+    "tags": "Don Gato cat song felt musical story",
+    "donGatoSheet": "supporting-cats",
+    "donGatoCrop": [
+      564,
+      24,
+      347,
+      481
+    ],
+    "preparedSize": [
+      347,
+      481
+    ],
+    "defaultWidth": 250,
+    "nativeAlpha": true
+  },
+  {
+    "id": "don-gato-doctor-brown",
+    "name": "Cat doctor \u00b7 medical bag",
+    "category": "animals",
+    "themes": [
+      "dongato"
+    ],
+    "tags": "Don Gato cat song felt musical story",
+    "donGatoSheet": "supporting-cats",
+    "donGatoCrop": [
+      1072,
+      4,
+      392,
+      501
+    ],
+    "preparedSize": [
+      392,
+      501
+    ],
+    "defaultWidth": 250,
+    "nativeAlpha": true
+  },
+  {
+    "id": "don-gato-doctor-gray",
+    "name": "Cat doctor \u00b7 consultation",
+    "category": "animals",
+    "themes": [
+      "dongato"
+    ],
+    "tags": "Don Gato cat song felt musical story",
+    "donGatoSheet": "supporting-cats",
+    "donGatoCrop": [
+      103,
+      505,
+      321,
+      490
+    ],
+    "preparedSize": [
+      321,
+      490
+    ],
+    "defaultWidth": 250,
+    "nativeAlpha": true
+  },
+  {
+    "id": "don-gato-attendant-a",
+    "name": "Attendant \u00b7 step 1",
+    "category": "animals",
+    "themes": [
+      "dongato"
+    ],
+    "tags": "Don Gato cat song felt musical story",
+    "donGatoSheet": "supporting-cats",
+    "donGatoCrop": [
+      558,
+      505,
+      415,
+      482
+    ],
+    "preparedSize": [
+      415,
+      482
+    ],
+    "defaultWidth": 250,
+    "nativeAlpha": true
+  },
+  {
+    "id": "don-gato-attendant-b",
+    "name": "Attendant \u00b7 step 2",
+    "category": "animals",
+    "themes": [
+      "dongato"
+    ],
+    "tags": "Don Gato cat song felt musical story",
+    "donGatoSheet": "supporting-cats",
+    "donGatoCrop": [
+      1032,
+      505,
+      391,
+      483
+    ],
+    "preparedSize": [
+      391,
+      483
+    ],
+    "defaultWidth": 250,
+    "nativeAlpha": true
+  },
+  {
+    "id": "don-gato-brown-step-a",
+    "name": "Doctor Brown \u00b7 step 1",
+    "category": "animals",
+    "themes": [
+      "dongato"
+    ],
+    "tags": "Don Gato cat song felt musical story",
+    "donGatoSheet": "doctor-walk",
+    "donGatoCrop": [
+      82,
+      13,
+      515,
+      569
+    ],
+    "preparedSize": [
+      515,
+      569
+    ],
+    "defaultWidth": 250,
+    "nativeAlpha": true
+  },
+  {
+    "id": "don-gato-brown-step-b",
+    "name": "Doctor Brown \u00b7 step 2",
+    "category": "animals",
+    "themes": [
+      "dongato"
+    ],
+    "tags": "Don Gato cat song felt musical story",
+    "donGatoSheet": "doctor-walk",
+    "donGatoCrop": [
+      761,
+      12,
+      494,
+      574
+    ],
+    "preparedSize": [
+      494,
+      574
+    ],
+    "defaultWidth": 250,
+    "nativeAlpha": true
+  },
+  {
+    "id": "don-gato-gray-step-a",
+    "name": "Doctor Gray \u00b7 step 1",
+    "category": "animals",
+    "themes": [
+      "dongato"
+    ],
+    "tags": "Don Gato cat song felt musical story",
+    "donGatoSheet": "doctor-walk",
+    "donGatoCrop": [
+      162,
+      599,
+      458,
+      566
+    ],
+    "preparedSize": [
+      458,
+      566
+    ],
+    "defaultWidth": 250,
+    "nativeAlpha": true
+  },
+  {
+    "id": "don-gato-gray-step-b",
+    "name": "Doctor Gray \u00b7 step 2",
+    "category": "animals",
+    "themes": [
+      "dongato"
+    ],
+    "tags": "Don Gato cat song felt musical story",
+    "donGatoSheet": "doctor-walk",
+    "donGatoCrop": [
+      813,
+      604,
+      465,
+      560
+    ],
+    "preparedSize": [
+      465,
+      560
+    ],
+    "defaultWidth": 250,
+    "nativeAlpha": true
+  },
+  {
+    "id": "don-gato-mouse-wave",
+    "name": "Tiny mouse \u00b7 wave",
+    "category": "animals",
+    "themes": [
+      "dongato"
+    ],
+    "tags": "Don Gato cat song felt musical story",
+    "donGatoSheet": "comedy-props",
+    "donGatoCrop": [
+      69,
+      56,
+      356,
+      448
+    ],
+    "preparedSize": [
+      356,
+      448
+    ],
+    "defaultWidth": 250,
+    "nativeAlpha": true
+  },
+  {
+    "id": "don-gato-mouse-flower",
+    "name": "Tiny mouse \u00b7 oversized flower",
+    "category": "animals",
+    "themes": [
+      "dongato"
+    ],
+    "tags": "Don Gato cat song felt musical story",
+    "donGatoSheet": "comedy-props",
+    "donGatoCrop": [
+      576,
+      8,
+      444,
+      500
+    ],
+    "preparedSize": [
+      444,
+      500
+    ],
+    "defaultWidth": 250,
+    "nativeAlpha": true
+  },
+  {
+    "id": "don-gato-fan",
+    "name": "Lady cat\u2019s lace fan",
+    "category": "animals",
+    "themes": [
+      "dongato"
+    ],
+    "tags": "Don Gato cat song felt musical story",
+    "donGatoSheet": "comedy-props",
+    "donGatoCrop": [
+      1020,
+      118,
+      512,
+      379
+    ],
+    "preparedSize": [
+      512,
+      379
+    ],
+    "defaultWidth": 250,
+    "nativeAlpha": true
+  },
+  {
+    "id": "don-gato-handkerchief",
+    "name": "Falling handkerchief",
+    "category": "animals",
+    "themes": [
+      "dongato"
+    ],
+    "tags": "Don Gato cat song felt musical story",
+    "donGatoSheet": "comedy-props",
+    "donGatoCrop": [
+      51,
+      557,
+      410,
+      435
+    ],
+    "preparedSize": [
+      410,
+      435
+    ],
+    "defaultWidth": 250,
+    "nativeAlpha": true
+  },
+  {
+    "id": "don-gato-fish",
+    "name": "Don Gato\u2019s secret sardine",
+    "category": "animals",
+    "themes": [
+      "dongato"
+    ],
+    "tags": "Don Gato cat song felt musical story",
+    "donGatoSheet": "comedy-props",
+    "donGatoCrop": [
+      512,
+      651,
+      534,
+      230
+    ],
+    "preparedSize": [
+      534,
+      230
+    ],
+    "defaultWidth": 250,
+    "nativeAlpha": true
+  },
+  {
+    "id": "don-gato-clipboard",
+    "name": "Doctor\u2019s illustrated clipboard",
+    "category": "animals",
+    "themes": [
+      "dongato"
+    ],
+    "tags": "Don Gato cat song felt musical story",
+    "donGatoSheet": "comedy-props",
+    "donGatoCrop": [
+      1149,
+      533,
+      307,
+      448
+    ],
+    "preparedSize": [
+      307,
+      448
+    ],
+    "defaultWidth": 250,
+    "nativeAlpha": true
+  },
+  {
+    "id": "don-gato-sniff",
+    "name": "Don Gato \u00b7 sniffing",
+    "category": "animals",
+    "themes": [
+      "dongato"
+    ],
+    "tags": "Don Gato cat song felt musical story",
+    "donGatoSheet": "reactions",
+    "donGatoCrop": [
+      16,
+      176,
+      529,
+      257
+    ],
+    "preparedSize": [
+      529,
+      257
+    ],
+    "defaultWidth": 250,
+    "nativeAlpha": true
+  },
+  {
+    "id": "don-gato-one-eye",
+    "name": "Don Gato \u00b7 one eye open",
+    "category": "animals",
+    "themes": [
+      "dongato"
+    ],
+    "tags": "Don Gato cat song felt musical story",
+    "donGatoSheet": "reactions",
+    "donGatoCrop": [
+      545,
+      169,
+      531,
+      264
+    ],
+    "preparedSize": [
+      531,
+      264
+    ],
+    "defaultWidth": 250,
+    "nativeAlpha": true
+  },
+  {
+    "id": "don-gato-bow",
+    "name": "Don Gato \u00b7 theatrical bow",
+    "category": "animals",
+    "themes": [
+      "dongato"
+    ],
+    "tags": "Don Gato cat song felt musical story",
+    "donGatoSheet": "reactions",
+    "donGatoCrop": [
+      1080,
+      6,
+      438,
+      454
+    ],
+    "preparedSize": [
+      438,
+      454
+    ],
+    "defaultWidth": 250,
+    "nativeAlpha": true
+  },
+  {
+    "id": "don-gato-lady-wave",
+    "name": "Lady cat \u00b7 shy wave",
+    "category": "animals",
+    "themes": [
+      "dongato"
+    ],
+    "tags": "Don Gato cat song felt musical story",
+    "donGatoSheet": "reactions",
+    "donGatoCrop": [
+      39,
+      461,
+      421,
+      523
+    ],
+    "preparedSize": [
+      421,
+      523
+    ],
+    "defaultWidth": 250,
+    "nativeAlpha": true
+  },
+  {
+    "id": "don-gato-lady-fan-hide",
+    "name": "Lady cat \u00b7 hiding behind fan",
+    "category": "animals",
+    "themes": [
+      "dongato"
+    ],
+    "tags": "Don Gato cat song felt musical story",
+    "donGatoSheet": "reactions",
+    "donGatoCrop": [
+      543,
+      475,
+      405,
+      509
+    ],
+    "preparedSize": [
+      405,
+      509
+    ],
+    "defaultWidth": 250,
+    "nativeAlpha": true
+  },
+  {
+    "id": "don-gato-lady-fan-peek",
+    "name": "Lady cat \u00b7 peeking over fan",
+    "category": "animals",
+    "themes": [
+      "dongato"
+    ],
+    "tags": "Don Gato cat song felt musical story",
+    "donGatoSheet": "reactions",
+    "donGatoCrop": [
+      1052,
+      476,
+      403,
+      508
+    ],
+    "preparedSize": [
+      403,
+      508
+    ],
+    "defaultWidth": 250,
+    "nativeAlpha": true
+  },
+  {
+    "id": "don-gato-doctor-listen",
+    "name": "Doctor Brown \u00b7 listening",
+    "category": "animals",
+    "themes": [
+      "dongato"
+    ],
+    "tags": "Don Gato cat song felt musical story",
+    "donGatoSheet": "comedy-cast",
+    "donGatoCrop": [
+      107,
+      15,
+      632,
+      687
+    ],
+    "preparedSize": [
+      632,
+      687
+    ],
+    "defaultWidth": 250,
+    "nativeAlpha": true
+  },
+  {
+    "id": "don-gato-doctor-clipboard",
+    "name": "Doctor Gray \u00b7 reading clipboard",
+    "category": "animals",
+    "themes": [
+      "dongato"
+    ],
+    "tags": "Don Gato cat song felt musical story",
+    "donGatoSheet": "comedy-cast",
+    "donGatoCrop": [
+      852,
+      18,
+      472,
+      682
+    ],
+    "preparedSize": [
+      472,
+      682
+    ],
+    "defaultWidth": 250,
+    "nativeAlpha": true
+  },
+  {
+    "id": "don-gato-lady-surprise",
+    "name": "Lady cat \u00b7 delighted surprise",
+    "category": "animals",
+    "themes": [
+      "dongato"
+    ],
+    "tags": "Don Gato cat song felt musical story",
+    "donGatoSheet": "comedy-cast",
+    "donGatoCrop": [
+      1529,
+      72,
+      536,
+      605
+    ],
+    "preparedSize": [
+      536,
+      605
+    ],
+    "defaultWidth": 250,
+    "nativeAlpha": true
+  },
+  {
+    "id": "bg96",
+    "name": "Don Gato \u00b7 red rooftop",
+    "category": "places",
+    "themes": [
+      "dongato"
+    ],
+    "tags": "Don Gato town roof street fish market cemetery funeral procession",
+    "donGatoSheet": "rooftop",
+    "preparedSize": [
+      1672,
+      941
+    ],
+    "defaultWidth": 1600,
+    "nativeAlpha": false
+  },
+  {
+    "id": "bg97",
+    "name": "Don Gato \u00b7 town street",
+    "category": "places",
+    "themes": [
+      "dongato"
+    ],
+    "tags": "Don Gato town roof street fish market cemetery funeral procession",
+    "donGatoSheet": "street",
+    "preparedSize": [
+      1672,
+      941
+    ],
+    "defaultWidth": 1600,
+    "nativeAlpha": false
+  },
+  {
+    "id": "bg98",
+    "name": "Don Gato \u00b7 fish market",
+    "category": "places",
+    "themes": [
+      "dongato"
+    ],
+    "tags": "Don Gato town roof street fish market cemetery funeral procession",
+    "donGatoSheet": "market",
+    "preparedSize": [
+      1672,
+      941
+    ],
+    "defaultWidth": 1600,
+    "nativeAlpha": false
+  },
+  {
+    "id": "bg99",
+    "name": "Don Gato \u00b7 cemetery gate",
+    "category": "places",
+    "themes": [
+      "dongato"
+    ],
+    "tags": "Don Gato town roof street fish market cemetery funeral procession",
+    "donGatoSheet": "cemetery",
+    "preparedSize": [
+      1672,
+      941
+    ],
+    "defaultWidth": 1600,
+    "nativeAlpha": false
+  }
+]

@@ -1,0 +1,19 @@
+{
+  "generator": "built-in image_gen.imagegen",
+  "mode": "reference-guided generation",
+  "identityReference": "identity-reference.png",
+  "prompts": [
+    "prompt-modular-atlas.txt",
+    "prompt-door-set.txt"
+  ],
+  "originalOutputs": {
+    "atlas": "/workspace/scratch/8a74088dcbfa/generated_images/exec-a591fdc6-1352-4d9b-a9f0-cc6b39272b01.png",
+    "door": "/workspace/scratch/8a74088dcbfa/generated_images/exec-eb877f40-2f76-46e6-88ba-bd76229eb263.png"
+  },
+  "transformations": [
+    "rectangular crops",
+    "transparent padding",
+    "pixel translation for head registration"
+  ],
+  "inspection": "inspection-parts.jpg annotates anchors on a separate QA sheet; delivered parts contain no annotation"
+}

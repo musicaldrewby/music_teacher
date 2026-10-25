@@ -1,0 +1,51 @@
+{
+  "updated": "2026-10-17",
+  "method": "Built-in image_gen; transparent product artwork.",
+  "purpose": "Replace bass xylophone with a deep bass resonator cabinet and remove soprano/alto metallophone end levers.",
+  "manufacturerReference": {
+    "page": "https://www.sonor.com/orff-percussion/instruments/products/gbx-gb",
+    "image": "https://www.sonor.com/import/_processed_/9/d/csm_GBX_GB_aae01888e6.jpg",
+    "use": "Geometry reference only; the reference photograph is not included in the published app. Artwork is illustrative, not dimension-certified or branded."
+  },
+  "assets": [
+    {
+      "file": "dist/assets/instruments/bass-xylophone-v2.png",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "prompts": [
+        "Use case: product-mockup. Asset: replacement bass xylophone cutout for a premium Orff music app.\nInput image 1 is a REAL SONOR BASS XYLOPHONE REFERENCE for instrument construction and proportions. Input image 2 is the old app illustration, ONLY a reference for the soft lighting and clean isolated photographic aesthetic; its shallow box proportions are WRONG and must not be copied.\nCreate a photorealistic DIATONIC ORFF BASS XYLOPHONE with a substantially TALL, DEEP birch plywood resonator cabinet, very clearly a bass instrument as in reference 1. Tall front cabinet wall, realistic veneer and edge joinery, deep sides, a shallow arched clearance along the bottom and low wooden feet integrated into the cabinet. The cabinet front height below the bars should be roughly 45 percent of the instrument's overall left-to-right width, as in the real reference. Exactly THIRTEEN separate long, thick dark reddish-brown hardwood playing bars arranged side-by-side in ONE diatonic row, low on left high on right, lengths descending smoothly. Exactly 13 bars, no extra row, no spare bars. The bars must have realistic long narrow bass proportions and small unobtrusive mounting pins.\nCamera: centered in front of the instrument, raised enough to see every bar's full top surface and the tall front body, only slight view of right side. Low-pitched longest bar on LEFT. Full instrument centered with modest margin on transparent background. Natural warm birch cabinet, rich solid wood bars, subtly varied grain, beautiful soft studio lighting and crisp clean product detail. Matching premium photographic collection finish. True alpha transparency with pristine edges.\nRemove all branding, labels, lettering, mallets, accessories and spare bars from the reference. No hardware lever, no damper, no switches, no tubular resonators, no concert marimba stand, no wheels. The substantial cabinet must be the obvious distinguishing feature; this cannot look like a small tabletop alto xylophone. Do not paste or stretch the old illustration. Render as one coherent new real instrument.",
+        "Use case: background-extraction. EDIT TARGET: the provided bass xylophone product image. Remove the entire brown/tan studio background and floor around and beneath the instrument, including inside the arched clearance under its bottom edge. Return a pristine transparent alpha cutout. Preserve the entire bass xylophone pixel-for-pixel as closely as possible: exactly thirteen dark wooden bars, tall birch cabinet, small feet, lighting, camera, wood grain, colors, proportions, location and full canvas size. Only remove the background. No replacement background, no shadows outside the object, no glow, no haze, no color fringing. Actual fully transparent empty pixels around the instrument; this is a web-app asset."
+      ]
+    },
+    {
+      "file": "dist/assets/instruments/soprano-metallophone-v2.png",
+      "dimensions": [
+        2050,
+        767
+      ],
+      "prompts": [
+        "Use case: precise-object-edit. Asset type: realistic transparent product cutout for a premium playable Orff studio. Input image is the EDIT TARGET: soprano metallophone. Remove the small upright damper lever / switch assembly completely from the RIGHT end, including its metal mounting plate, screws, black knob, and its shadow. Reconstruct the warm birch wooden end rail in a clean continuous natural finish where the fitting was, matching grain, geometry and soft studio lighting. Keep precisely ALL 13 silver metal bars, their shapes, placement, black bar-support pins, the resonator box, camera perspective, light, and photo-realistic finish. Do not remove bar-support pins. Preserve the instrument's layout and proportions, full instrument visible with modest transparent padding. Clean up colored edge halos into pristine alpha edges. No text, no logos, no mallets, no new accessories. True transparent background. This should look like one coherent beautifully photographed instrument, with no pasted patch or leftover hardware."
+      ]
+    },
+    {
+      "file": "dist/assets/instruments/alto-metallophone-v2.png",
+      "dimensions": [
+        1918,
+        820
+      ],
+      "prompts": [
+        "Use case: precise-object-edit. Asset type: realistic transparent product cutout for a premium playable Orff studio. Input image is the EDIT TARGET: alto metallophone. Remove the small upright damper lever / switch assembly completely from the RIGHT end, including its metal mounting plate, screws, black knob, and its shadow. Reconstruct the warm birch wooden end rail in a clean continuous natural finish where the fitting was, matching grain, geometry and soft studio lighting. Keep precisely ALL 13 silver metal bars, their shapes, placement, black bar-support pins, the resonator box, camera perspective, light, and photo-realistic finish. Do not remove bar-support pins. Preserve the instrument's layout and proportions, full instrument visible with modest transparent padding. Clean up colored edge halos into pristine alpha edges. No text, no logos, no mallets, no new accessories. True transparent background. This should look like one coherent beautifully photographed instrument, with no pasted patch or leftover hardware."
+      ]
+    }
+  ],
+  "verification": [
+    "Thirteen visible bars on each instrument.",
+    "Bass hit polygons rebuilt and inspected over the new photograph.",
+    "Metallophone hit polygons inspected over replacement images.",
+    "Artwork rendered over the studio background; bass also checked at gallery size.",
+    "Same ART entry provides gallery and player artwork.",
+    "Live browser and touchscreen QA unavailable in this environment."
+  ]
+}

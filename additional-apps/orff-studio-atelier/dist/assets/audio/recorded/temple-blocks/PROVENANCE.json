@@ -1,0 +1,226 @@
+{
+  "prepared": "2026-10-17",
+  "source": "https://freesound.org/people/sazanami12/sounds/863784/",
+  "download": "https://cdn.freesound.org/previews/863/863784_17110092-hq.mp3",
+  "sourceSha256": "02ab8c6917e5618c68881b919a2d3040d6c49f5d3810ec5085e37fc82e8030fc",
+  "author": "sazanami12",
+  "license": "CC0-1.0",
+  "sourceFormat": "Public HQ MP3 preview, 48 kHz stereo; original WAV not used",
+  "qualityNotes": [
+    "Five different physical blocks, one recorded strike per block, low to high.",
+    "Public HQ MP3 preview decoded to WAV; this is not lossless-source audio.",
+    "The author describes composite/carbon-fiber temple blocks recorded on an OPPO Reno8 phone.",
+    "Room decay is present. Quiet tails are shortened and faded before late handling noise.",
+    "All five native pitches are retained. Tuning compensation cancels legacy event shifts.",
+    "No compression, denoising, synthetic layers or added reverb."
+  ],
+  "instrumentSamples": {
+    "temple-blocks": {
+      "credit": "Temple Blocks (5pcs) - Hard Wood Mallets \u2014 sazanami12 / Freesound",
+      "license": "CC0-1.0",
+      "source": "https://freesound.org/people/sazanami12/sounds/863784/",
+      "download": "https://cdn.freesound.org/previews/863/863784_17110092-hq.mp3",
+      "licensePage": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "sourceInstrument": "Five acoustic composite temple blocks, hard wood mallets",
+      "sourceFormat": "Public HQ MP3 preview, 48 kHz stereo; original WAV not used",
+      "articulations": {
+        "77:-4": {
+          "url": "assets/audio/recorded/temple-blocks/block-1.wav",
+          "gain": 1,
+          "tuningSemitones": 4,
+          "duration": 0.6
+        },
+        "77:0": {
+          "url": "assets/audio/recorded/temple-blocks/block-2.wav",
+          "gain": 1,
+          "tuningSemitones": 0,
+          "duration": 0.6
+        },
+        "76:-2": {
+          "url": "assets/audio/recorded/temple-blocks/block-3.wav",
+          "gain": 1,
+          "tuningSemitones": 2,
+          "duration": 0.6
+        },
+        "76:2": {
+          "url": "assets/audio/recorded/temple-blocks/block-4.wav",
+          "gain": 1,
+          "tuningSemitones": -2,
+          "duration": 0.7
+        },
+        "76:5": {
+          "url": "assets/audio/recorded/temple-blocks/block-5.wav",
+          "gain": 1,
+          "tuningSemitones": -5,
+          "duration": 0.65
+        }
+      },
+      "notes": {
+        "77": {
+          "url": "assets/audio/recorded/temple-blocks/block-2.wav",
+          "gain": 1,
+          "tuningSemitones": 0,
+          "duration": 0.6
+        },
+        "76": {
+          "url": "assets/audio/recorded/temple-blocks/block-3.wav",
+          "gain": 1,
+          "tuningSemitones": 0,
+          "duration": 0.6
+        }
+      }
+    }
+  },
+  "assets": [
+    {
+      "block": 1,
+      "file": "block-1.wav",
+      "sha256": "4f6fe848ebf581d92739f5648309cc8f3a80c73ac6586c217d1f9a5b9f5ef451",
+      "eventIdentity": {
+        "note": 77,
+        "shift": -4
+      },
+      "dominantResonanceHz": 817.9252624511719,
+      "sampleRate": 44100,
+      "channels": 2,
+      "format": "PCM signed 16-bit WAV",
+      "duration": 0.6,
+      "peak": 0.25537109375,
+      "first150msRms": 0.0555000641986044,
+      "clippedSamples": 0,
+      "processing": {
+        "cropStartSeconds": 0.2519166666666667,
+        "cropDurationSeconds": 0.6,
+        "preAttackSeconds": 0.003,
+        "highpassHz": 100,
+        "highpassOrder": 2,
+        "gain": 0.2962098854416502,
+        "fadeInSeconds": 0.0004988662131519275,
+        "fadeOutSeconds": 0.07,
+        "resampling": "48 kHz to 44.1 kHz polyphase",
+        "dither": "TPDF at one 16-bit LSB",
+        "pitchShift": 0
+      }
+    },
+    {
+      "block": 2,
+      "file": "block-2.wav",
+      "sha256": "3f21b5f53f0235b9fe0310ea77c7ecf617b6508e479872cd6b74b070e2107c91",
+      "eventIdentity": {
+        "note": 77,
+        "shift": 0
+      },
+      "dominantResonanceHz": 1120.7359313964844,
+      "sampleRate": 44100,
+      "channels": 2,
+      "format": "PCM signed 16-bit WAV",
+      "duration": 0.6,
+      "peak": 0.193756103515625,
+      "first150msRms": 0.055500056195173654,
+      "clippedSamples": 0,
+      "processing": {
+        "cropStartSeconds": 1.4226666666666667,
+        "cropDurationSeconds": 0.6,
+        "preAttackSeconds": 0.003,
+        "highpassHz": 100,
+        "highpassOrder": 2,
+        "gain": 0.221567045478292,
+        "fadeInSeconds": 0.0004988662131519275,
+        "fadeOutSeconds": 0.07,
+        "resampling": "48 kHz to 44.1 kHz polyphase",
+        "dither": "TPDF at one 16-bit LSB",
+        "pitchShift": 0
+      }
+    },
+    {
+      "block": 3,
+      "file": "block-3.wav",
+      "sha256": "4d2561bb0752f7f857fc69fe37f3a17eafaeeb856d16a33757fc619f12a1465d",
+      "eventIdentity": {
+        "note": 76,
+        "shift": -2
+      },
+      "dominantResonanceHz": 1223.0186462402344,
+      "sampleRate": 44100,
+      "channels": 2,
+      "format": "PCM signed 16-bit WAV",
+      "duration": 0.6,
+      "peak": 0.210540771484375,
+      "first150msRms": 0.05550018350539397,
+      "clippedSamples": 0,
+      "processing": {
+        "cropStartSeconds": 2.590625,
+        "cropDurationSeconds": 0.6,
+        "preAttackSeconds": 0.003,
+        "highpassHz": 100,
+        "highpassOrder": 2,
+        "gain": 0.22822661063316751,
+        "fadeInSeconds": 0.0004988662131519275,
+        "fadeOutSeconds": 0.07,
+        "resampling": "48 kHz to 44.1 kHz polyphase",
+        "dither": "TPDF at one 16-bit LSB",
+        "pitchShift": 0
+      }
+    },
+    {
+      "block": 4,
+      "file": "block-4.wav",
+      "sha256": "b6cf6408582adcb70c8d7fb334359d0641531fbaff5d7ecf84464638e8b726f5",
+      "eventIdentity": {
+        "note": 76,
+        "shift": 2
+      },
+      "dominantResonanceHz": 1653.3462524414062,
+      "sampleRate": 44100,
+      "channels": 2,
+      "format": "PCM signed 16-bit WAV",
+      "duration": 0.7,
+      "peak": 0.1807861328125,
+      "first150msRms": 0.05550004552181692,
+      "clippedSamples": 0,
+      "processing": {
+        "cropStartSeconds": 3.769458333333333,
+        "cropDurationSeconds": 0.7,
+        "preAttackSeconds": 0.003,
+        "highpassHz": 100,
+        "highpassOrder": 2,
+        "gain": 0.2136982071320706,
+        "fadeInSeconds": 0.0004988662131519275,
+        "fadeOutSeconds": 0.07,
+        "resampling": "48 kHz to 44.1 kHz polyphase",
+        "dither": "TPDF at one 16-bit LSB",
+        "pitchShift": 0
+      }
+    },
+    {
+      "block": 5,
+      "file": "block-5.wav",
+      "sha256": "7f14a3c985b16d1ecb3bdad9c5675c68c2bc37f1c6a9828c1da86443d377e442",
+      "eventIdentity": {
+        "note": 76,
+        "shift": 5
+      },
+      "dominantResonanceHz": 2278.1455993652344,
+      "sampleRate": 44100,
+      "channels": 2,
+      "format": "PCM signed 16-bit WAV",
+      "duration": 0.65,
+      "peak": 0.192779541015625,
+      "first150msRms": 0.05550018965952353,
+      "clippedSamples": 0,
+      "processing": {
+        "cropStartSeconds": 4.993354166666666,
+        "cropDurationSeconds": 0.65,
+        "preAttackSeconds": 0.003,
+        "highpassHz": 100,
+        "highpassOrder": 2,
+        "gain": 0.21885336612588088,
+        "fadeInSeconds": 0.0004988662131519275,
+        "fadeOutSeconds": 0.07,
+        "resampling": "48 kHz to 44.1 kHz polyphase",
+        "dither": "TPDF at one 16-bit LSB",
+        "pitchShift": 0
+      }
+    }
+  ]
+}

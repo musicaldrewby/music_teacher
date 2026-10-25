@@ -1,0 +1,182 @@
+[
+  {
+    "slug": "ship-cockpit",
+    "name": "Space Expedition \u00b7 Ship Cockpit",
+    "kind": "background",
+    "theme": "spaceexpedition",
+    "prompt": "Use case: illustration-story. Asset type: wide 16:9 background for Felt & Fable Studio, 1792x1024 or wider, no border. Primary request: A friendly exploration spaceship cockpit viewed from the rear toward a broad forward window showing dark starry space and a distant moon. Teal side consoles with simple stitched light dots, two modest seats toward the sides, open center floor for separate characters. Style: beautifully handcrafted realistic wool-felt textures, crisply visible tiny fibers, carefully cut edges and restrained stitch seams, warm polished children's felt-board aesthetic. Camera at standing eye level, practical theater-like scene composition with clear broad floor occupying lower third. All surfaces have wool felt texture, shallow miniature-set depth, crisp across image, gentle shadows, no depth-of-field blur. No people, no text, no labels, no watermark.",
+    "path": "art-source/cinema/space-seaside/ship-cockpit.webp",
+    "width": 1659,
+    "height": 948
+  },
+  {
+    "slug": "crew-quarters",
+    "name": "Space Expedition \u00b7 Crew Quarters",
+    "kind": "background",
+    "theme": "spaceexpedition",
+    "prompt": "Use case: illustration-story. Asset type: wide 16:9 background for Felt & Fable Studio, 1792x1024 or wider, no border. Primary request: Cozy crew quarters aboard the same friendly exploration spaceship. Cream felt walls with teal framing and mustard trim, two tidy bunk alcoves along sides, small round porthole showing stars, built-in locker cupboards, open central floor. Style: beautifully handcrafted realistic wool-felt textures, crisply visible tiny fibers, carefully cut edges and restrained stitch seams, warm polished children's felt-board aesthetic. Camera at standing eye level, practical theater-like scene composition with clear broad floor occupying lower third. All surfaces have wool felt texture, shallow miniature-set depth, crisp across image, gentle shadows, no depth-of-field blur. No people, no text, no labels, no watermark.",
+    "path": "art-source/cinema/space-seaside/crew-quarters.webp",
+    "width": 1659,
+    "height": 948
+  },
+  {
+    "slug": "cargo-bay",
+    "name": "Space Expedition \u00b7 Cargo Bay",
+    "kind": "background",
+    "theme": "spaceexpedition",
+    "prompt": "Use case: illustration-story. Asset type: wide 16:9 background for Felt & Fable Studio, 1792x1024 or wider, no border. Primary request: Cargo bay aboard the same friendly exploration spaceship. Cream felt hull walls, teal structural ribs, mustard safety trim, storage containers neatly stacked at the left and right, large sealed teal cargo hatch on back wall, very open central deck. Style: beautifully handcrafted realistic wool-felt textures, crisply visible tiny fibers, carefully cut edges and restrained stitch seams, warm polished children's felt-board aesthetic. Camera at standing eye level, practical theater-like scene composition with clear broad floor occupying lower third. All surfaces have wool felt texture, shallow miniature-set depth, crisp across image, gentle shadows, no depth-of-field blur. No people, no text, no labels, no watermark.",
+    "path": "art-source/cinema/space-seaside/cargo-bay.webp",
+    "width": 1660,
+    "height": 948
+  },
+  {
+    "slug": "airlock",
+    "name": "Space Expedition \u00b7 Airlock",
+    "kind": "background",
+    "theme": "spaceexpedition",
+    "prompt": "Use case: illustration-story. Asset type: wide 16:9 background for Felt & Fable Studio, 1792x1008 landscape, no border. Primary request: Airlock chamber aboard the same friendly exploration spaceship. Cream felt wall panels, teal framing and mustard trim, large round sealed outer hatch centered at back with a small window onto the gray lunar landscape, simple safety lights, shallow empty floor. Style: beautifully handcrafted realistic wool-felt textures, crisply visible tiny fibers, carefully cut edges and restrained stitch seams, warm polished children's felt-board aesthetic. Camera at standing eye level, practical theater-like scene composition with clear broad floor occupying lower third. All surfaces have wool felt texture, shallow miniature-set depth, crisp across image, gentle shadows, no depth-of-field blur. No people, no text, no labels, no watermark.",
+    "path": "art-source/cinema/space-seaside/airlock.webp",
+    "width": 1672,
+    "height": 941
+  },
+  {
+    "slug": "moon-base-interior",
+    "name": "Space Expedition \u00b7 Moon Base Interior",
+    "kind": "background",
+    "theme": "spaceexpedition",
+    "prompt": "Use case: illustration-story. Asset type: wide 16:9 background for Felt & Fable Studio, 1792x1008 landscape, no border. Primary request: Interior of a friendly lunar exploration base matching the spaceship. Cream felt curved walls, teal framing and mustard trim, broad window onto gray cratered moon surface with distant blue Earth, small side workbenches, open central floor. Style: beautifully handcrafted realistic wool-felt textures, crisply visible tiny fibers, carefully cut edges and restrained stitch seams, warm polished children's felt-board aesthetic. Camera at standing eye level, practical theater-like scene composition with clear broad floor occupying lower third. All surfaces have wool felt texture, shallow miniature-set depth, crisp across image, gentle shadows, no depth-of-field blur. No people, no text, no labels, no watermark.",
+    "path": "art-source/cinema/space-seaside/moon-base-interior.webp",
+    "width": 1672,
+    "height": 941
+  },
+  {
+    "slug": "harbor",
+    "name": "Seaside Adventure \u00b7 Harbor",
+    "kind": "background",
+    "theme": "seaside",
+    "prompt": "Use case: illustration-story. Asset type: wide 16:9 background for Felt & Fable Studio, 1792x1008 landscape, no border. Primary request: A charming quiet seaside harbor with an open tan felt wooden dock across foreground, calm turquoise felt water in the middle distance, a small cream-sailed brown wooden ship moored along the left, small coastal buildings behind, clear warm daytime sky. Space for separate story characters on the dock. Style: beautifully handcrafted realistic wool-felt textures, crisply visible tiny fibers, carefully cut edges and restrained stitch seams, warm polished children's felt-board aesthetic. Camera at standing eye level, practical theater-like scene composition with clear broad floor occupying lower third. All surfaces have wool felt texture, shallow miniature-set depth, crisp across image, gentle shadows, no depth-of-field blur. No people, no text, no labels, no watermark.",
+    "path": "art-source/cinema/space-seaside/harbor.webp",
+    "width": 1672,
+    "height": 940
+  },
+  {
+    "slug": "ship-deck",
+    "name": "Seaside Adventure \u00b7 Ship Deck",
+    "kind": "background",
+    "theme": "seaside",
+    "prompt": "Use case: illustration-story. Asset type: wide 16:9 background for Felt & Fable Studio, 1792x1008 landscape, no border. Primary request: On the open deck of the same charming small brown sailing ship in a turquoise sea. Honey brown felt wooden planks, low railings along sides, mast and cream sail above, ship wheel toward the back and horizon beyond, plenty of clear central deck for characters. Style: beautifully handcrafted realistic wool-felt textures, crisply visible tiny fibers, carefully cut edges and restrained stitch seams, warm polished children's felt-board aesthetic. Camera at standing eye level, practical theater-like scene composition with clear broad floor occupying lower third. All surfaces have wool felt texture, shallow miniature-set depth, crisp across image, gentle shadows, no depth-of-field blur. No people, no text, no labels, no watermark.",
+    "path": "art-source/cinema/space-seaside/ship-deck.webp",
+    "width": 1672,
+    "height": 941
+  },
+  {
+    "slug": "captains-cabin",
+    "name": "Seaside Adventure \u00b7 Captain's Cabin",
+    "kind": "background",
+    "theme": "seaside",
+    "prompt": "Use case: illustration-story. Asset type: wide 16:9 background for Felt & Fable Studio, 1792x1008 landscape, no border. Primary request: Inside the captain's cabin of the same small charming sailing ship. Honey brown felt timber walls and plank floor, curved rear windows looking out at turquoise sea, modest desk and navigation chart at left, shelves and sea chest at right, cream fabric curtains, open central floor. Style: beautifully handcrafted realistic wool-felt textures, crisply visible tiny fibers, carefully cut edges and restrained stitch seams, warm polished children's felt-board aesthetic. Camera at standing eye level, practical theater-like scene composition with clear broad floor occupying lower third. All surfaces have wool felt texture, shallow miniature-set depth, crisp across image, gentle shadows, no depth-of-field blur. No people, no text, no labels, no watermark.",
+    "path": "art-source/cinema/space-seaside/captains-cabin.webp",
+    "width": 1672,
+    "height": 941
+  },
+  {
+    "slug": "secluded-beach",
+    "name": "Seaside Adventure \u00b7 Secluded Beach",
+    "kind": "background",
+    "theme": "seaside",
+    "prompt": "Use case: illustration-story. Asset type: wide 16:9 background for Felt & Fable Studio, 1792x1008 landscape, no border. Primary request: A secluded friendly island beach in the same turquoise sea. Sweeping pale tan felt sandy beach foreground, calm turquoise waves, layered felt rocky headland at left and a few palms at right, distant horizon, clear warm daytime light, open center for characters. Style: beautifully handcrafted realistic wool-felt textures, crisply visible tiny fibers, carefully cut edges and restrained stitch seams, warm polished children's felt-board aesthetic. Camera at standing eye level, practical theater-like scene composition with clear broad floor occupying lower third. All surfaces have wool felt texture, shallow miniature-set depth, crisp across image, gentle shadows, no depth-of-field blur. No people, no text, no labels, no watermark.",
+    "path": "art-source/cinema/space-seaside/secluded-beach.webp",
+    "width": 1672,
+    "height": 941
+  },
+  {
+    "slug": "underwater-ruins",
+    "name": "Seaside Adventure \u00b7 Underwater Ruins",
+    "kind": "background",
+    "theme": "seaside",
+    "prompt": "Use case: illustration-story. Asset type: wide 16:9 background for Felt & Fable Studio, 1792x1008 landscape, no border. Primary request: Gentle underwater ruins in the same turquoise sea. Pale tan felt seafloor, low broken sandstone columns at left and right, a small ruined arch in the middle distance, felt seaweed and coral along edges, blue-green layered felt water with subtle shafts of light, clear open central floor. Style: beautifully handcrafted realistic wool-felt textures, crisply visible tiny fibers, carefully cut edges and restrained stitch seams, warm polished children's felt-board aesthetic. Camera at standing eye level, practical theater-like scene composition with clear broad floor occupying lower third. All surfaces have wool felt texture, shallow miniature-set depth, crisp across image, gentle shadows, no depth-of-field blur. No people, no text, no labels, no watermark.",
+    "path": "art-source/cinema/space-seaside/underwater-ruins.webp",
+    "width": 1672,
+    "height": 941
+  },
+  {
+    "slug": "astronaut-helmet",
+    "name": "Astronaut Helmet",
+    "kind": "piece",
+    "theme": "spaceexpedition",
+    "prompt": "Use case: illustration-story. Asset type: single transparent PNG story prop for Felt & Fable Studio. Primary request: One flat cute astronaut helmet accessory, cream felt rim with teal collar and mustard detail, large dark blue felt visor with a single simple stitched highlight, front three-quarter view. Empty helmet, no human head. Style: beautifully handcrafted realistic wool-felt textures, crisply visible tiny fibers, carefully cut edges and restrained stitch seams, warm polished children's felt-board aesthetic. Flat two-dimensional applique cutout, a few shallow felt layers only, no volumetric plush or Pixar/3D styling. Isolated centered object fully visible with generous empty margin. Genuine transparent alpha around silhouette, no background, no floor or cast shadow, no checkerboard, no border, no lettering, no watermark.",
+    "path": "art-source/cinema/space-seaside/astronaut-helmet.webp",
+    "width": 1312,
+    "height": 1199
+  },
+  {
+    "slug": "space-toolkit",
+    "name": "Space Toolkit",
+    "kind": "piece",
+    "theme": "spaceexpedition",
+    "prompt": "Use case: illustration-story. Asset type: single transparent PNG story prop for Felt & Fable Studio. Primary request: One flat cute open space explorer toolkit prop, teal rectangular felt tool case with mustard clasps, a few clearly arranged cream and charcoal felt wrench shapes inside, slight front view. Single coherent prop. Style: beautifully handcrafted realistic wool-felt textures, crisply visible tiny fibers, carefully cut edges and restrained stitch seams, warm polished children's felt-board aesthetic. Flat two-dimensional applique cutout, a few shallow felt layers only, no volumetric plush or Pixar/3D styling. Isolated centered object fully visible with generous empty margin. Genuine transparent alpha around silhouette, no background, no floor or cast shadow, no checkerboard, no border, no lettering, no watermark.",
+    "path": "art-source/cinema/space-seaside/space-toolkit.webp",
+    "width": 1536,
+    "height": 1024
+  },
+  {
+    "slug": "sample-jar",
+    "name": "Lunar Sample Jar",
+    "kind": "piece",
+    "theme": "spaceexpedition",
+    "prompt": "Use case: illustration-story. Asset type: single transparent PNG story prop for Felt & Fable Studio. Primary request: One flat cute lunar sample jar prop with a teal screw lid, cream felt jar outline and pale blue felt front, one small gray moon rock visible through a simple felt window, a tiny mustard blank tag. No writing. Style: beautifully handcrafted realistic wool-felt textures, crisply visible tiny fibers, carefully cut edges and restrained stitch seams, warm polished children's felt-board aesthetic. Flat two-dimensional applique cutout, a few shallow felt layers only, no volumetric plush or Pixar/3D styling. Isolated centered object fully visible with generous empty margin. Genuine transparent alpha around silhouette, no background, no floor or cast shadow, no checkerboard, no border, no lettering, no watermark.",
+    "path": "art-source/cinema/space-seaside/sample-jar.webp",
+    "width": 1312,
+    "height": 1199
+  },
+  {
+    "slug": "friendly-robot",
+    "name": "Friendly Felt Robot",
+    "kind": "piece",
+    "theme": "spaceexpedition",
+    "prompt": "Use case: illustration-story. Asset type: single transparent PNG story prop for Felt & Fable Studio. Primary request: One adorable flat cut-felt friendly robot character, simple cream rectangular body with teal limbs and mustard chest button, rounded square head with two black stitched dot eyes and a tiny stitched smile, small mitten hands and block feet, front view standing. Must look like a flat felt-board cutout rather than a sculpted toy. Style: beautifully handcrafted realistic wool-felt textures, crisply visible tiny fibers, carefully cut edges and restrained stitch seams, warm polished children's felt-board aesthetic. Flat two-dimensional applique cutout, a few shallow felt layers only, no volumetric plush or Pixar/3D styling. Isolated centered object fully visible with generous empty margin. Genuine transparent alpha around silhouette, no background, no floor or cast shadow, no checkerboard, no border, no lettering, no watermark.",
+    "path": "art-source/cinema/space-seaside/friendly-robot.webp",
+    "width": 1024,
+    "height": 1536
+  },
+  {
+    "slug": "rope-coil",
+    "name": "Sailor's Rope Coil",
+    "kind": "piece",
+    "theme": "seaside",
+    "prompt": "Use case: illustration-story. Asset type: single transparent PNG story prop for Felt & Fable Studio. Primary request: One coiled sailor's rope prop made from narrow tan felt strips with subtle twisted stitch detail, flat spiral coil with one short loose end. Top-front view, clean recognizable simple shape. Style: beautifully handcrafted realistic wool-felt textures, crisply visible tiny fibers, carefully cut edges and restrained stitch seams, warm polished children's felt-board aesthetic. Flat two-dimensional applique cutout, a few shallow felt layers only, no volumetric plush or Pixar/3D styling. Isolated centered object fully visible with generous empty margin. Genuine transparent alpha around silhouette, no background, no floor or cast shadow, no checkerboard, no border, no lettering, no watermark.",
+    "path": "art-source/cinema/space-seaside/rope-coil.webp",
+    "width": 1536,
+    "height": 1024
+  },
+  {
+    "slug": "pirate-lantern",
+    "name": "Ship Lantern",
+    "kind": "piece",
+    "theme": "seaside",
+    "prompt": "Use case: illustration-story. Asset type: single transparent PNG story prop for Felt & Fable Studio. Primary request: One charming old ship lantern prop, dark charcoal felt frame, mustard and pale cream felt glowing panes, small curved top handle. Front three-quarter view. Glow stays contained within lantern silhouette, no surrounding halo. Style: beautifully handcrafted realistic wool-felt textures, crisply visible tiny fibers, carefully cut edges and restrained stitch seams, warm polished children's felt-board aesthetic. Flat two-dimensional applique cutout, a few shallow felt layers only, no volumetric plush or Pixar/3D styling. Isolated centered object fully visible with generous empty margin. Genuine transparent alpha around silhouette, no background, no floor or cast shadow, no checkerboard, no border, no lettering, no watermark.",
+    "path": "art-source/cinema/space-seaside/pirate-lantern.webp",
+    "width": 1024,
+    "height": 1536
+  },
+  {
+    "slug": "treasure-map",
+    "name": "Treasure Map",
+    "kind": "piece",
+    "theme": "seaside",
+    "prompt": "Use case: illustration-story. Asset type: single transparent PNG story prop for Felt & Fable Studio. Primary request: One unfolded treasure map prop made of cream felt with softly irregular edges, simplified teal island shapes and a dashed dark stitch route ending in a small red X, rolled corners in shallow layered felt. Front view slightly tilted. No lettering. Style: beautifully handcrafted realistic wool-felt textures, crisply visible tiny fibers, carefully cut edges and restrained stitch seams, warm polished children's felt-board aesthetic. Flat two-dimensional applique cutout, a few shallow felt layers only, no volumetric plush or Pixar/3D styling. Isolated centered object fully visible with generous empty margin. Genuine transparent alpha around silhouette, no background, no floor or cast shadow, no checkerboard, no border, no lettering, no watermark.",
+    "path": "art-source/cinema/space-seaside/treasure-map.webp",
+    "width": 1536,
+    "height": 1024
+  },
+  {
+    "slug": "wooden-crate",
+    "name": "Ship Cargo Crate",
+    "kind": "piece",
+    "theme": "seaside",
+    "prompt": "Use case: illustration-story. Asset type: single transparent PNG story prop for Felt & Fable Studio. Primary request: One honey-brown wooden cargo crate prop built entirely from flat felt plank cutouts with sewn seams, a clear diagonal brace, modest shallow side panel in slightly darker felt, front three-quarter view. No writing or symbols. Style: beautifully handcrafted realistic wool-felt textures, crisply visible tiny fibers, carefully cut edges and restrained stitch seams, warm polished children's felt-board aesthetic. Flat two-dimensional applique cutout, a few shallow felt layers only, no volumetric plush or Pixar/3D styling. Isolated centered object fully visible with generous empty margin. Genuine transparent alpha around silhouette, no background, no floor or cast shadow, no checkerboard, no border, no lettering, no watermark.",
+    "path": "art-source/cinema/space-seaside/wooden-crate.webp",
+    "width": 1374,
+    "height": 1145
+  }
+]

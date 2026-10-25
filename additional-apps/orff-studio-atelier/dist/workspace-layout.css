@@ -1,0 +1,80 @@
+/* Steady editing surfaces: controls may change state, not the position of the music. */
+@media screen {
+ #main,.sidebar{scrollbar-gutter:stable;overflow-anchor:none}
+ .workspace-tools button,.workspace-tools button.active{font-weight:600}
+ .ensemble-item span{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+ .ensemble-item small{flex:0 0 24px;text-align:right;font-variant-numeric:tabular-nums}
+ .family-list button,.family-list button.selected{font-weight:600}
+ .musical-context{display:grid;grid-template-columns:minmax(130px,1.1fr) minmax(80px,.7fr) minmax(140px,1.4fr) 90px auto;gap:12px}
+ .musical-context span{min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+ .sequence-view #main{position:relative;display:flex;flex-direction:column;overflow:hidden;scrollbar-gutter:auto}
+ .sequence-view .workspace-ribbon{flex:0 0 auto;margin:0;position:relative;top:auto}
+ .sequence-view .musical-context{display:none}
+ .sequence-view #rehearsal-dock{display:none}
+ .sequence-view #content{display:flex;flex-direction:column;gap:7px;padding:10px 16px 12px;min-height:0;flex:1;width:100%;max-width:none;overflow:hidden}
+ .sequence-heading{display:flex;align-items:center;gap:12px;min-height:37px;flex:0 0 auto}
+ .sequence-heading h1{font:600 20px/1.2 var(--display);letter-spacing:-.6px;margin:0;flex:0 0 auto}
+ .sequence-heading .section-context{padding:0;margin:0;border:0;background:none;flex:1;min-width:0}
+ .sequence-heading .section-context>span,.sequence-heading .section-context>button{display:none}
+ .sequence-heading .section-context label{font-size:8px;gap:8px;min-width:0}
+ .sequence-heading .section-context select{height:34px;min-height:34px;width:160px;max-width:100%;font-size:12px}
+ .sequence-heading>button,.sequence-options summary{font-size:11px;min-height:34px;padding:7px 11px;white-space:nowrap}
+ .sequence-options{position:relative;flex:0 0 auto}
+ .sequence-options summary{cursor:pointer;list-style:none;border:1px solid #c9bea7;border-radius:5px;background:linear-gradient(#fcf9f0,#e9e3d5);box-shadow:var(--key-shadow);color:#303e32}
+ .sequence-options summary:after{content:' ▾';color:#897145}.sequence-options summary::-webkit-details-marker{display:none}
+ .sequence-options-panel{position:absolute;top:calc(100% + 6px);right:0;z-index:20;display:grid;gap:8px;min-width:215px;padding:12px;border:1px solid #b9ab8d;border-radius:7px;background:#f6f2e7;box-shadow:0 8px 24px #24302633}
+ .sequence-options-panel button{text-align:left;white-space:nowrap;font-size:12px}
+ .sequence-view .track-tabs{flex:0 0 41px;min-height:0;height:41px;padding:0 0 4px;overflow-x:auto;overflow-y:hidden;scrollbar-width:thin;gap:6px}
+ .sequence-view .track-tab{min-height:34px;height:34px;flex:0 0 auto;padding:6px 12px}
+ #sequence-workspace{position:relative;display:flex;flex-direction:column;gap:5px;min-height:0;flex:1}
+ .sequence-toolbar{margin:0;gap:10px;flex:0 0 42px;min-height:42px;flex-wrap:nowrap}
+ .sequence-tools{padding:2px;flex:0 0 auto}.sequence-tool{min-width:69px;min-height:34px;padding:5px 8px;font-size:12px}
+ .sequence-toolbar label{white-space:nowrap;font-size:10px;gap:6px}.sequence-toolbar label select{height:33px;padding:5px;width:94px;min-width:0;font-size:11px}.sequence-toolbar #duration{width:126px}
+ .sequence-toolbar #sequence-note-toggle{white-space:nowrap;font-size:11px;padding:7px 10px;min-height:34px}
+ .sequence-tool-hint{flex:0 0 19px;height:19px;min-height:19px;line-height:19px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin:0;font-size:10px}
+ #phrase-tools{flex:0 0 45px;min-height:0;overflow:hidden}
+ .phrase-toolbar{height:45px;min-height:45px;flex-wrap:nowrap;overflow-x:auto;overflow-y:hidden;white-space:nowrap;scrollbar-width:thin;padding:4px 8px;gap:6px;margin:0}
+ .phrase-toolbar>*{flex-shrink:0}.phrase-toolbar strong{width:75px;min-width:75px;font-variant-numeric:tabular-nums}.phrase-toolbar button{min-height:30px;padding:5px 8px;font-size:10px}
+ .sequence-shell{display:flex;flex-direction:column;min-height:105px;flex:1;overflow:hidden}
+ .sequence-scroll{flex:1;min-height:60px;max-height:none;overflow:auto;overscroll-behavior:contain;overflow-anchor:none;scrollbar-gutter:stable;background:#edf1e5}
+ .piano-roll .ruler{position:sticky;top:0;z-index:4}.piano-roll .pitch-label.ruler{z-index:5}
+ .sequence-view .track-mixer{flex:0 0 43px;min-height:43px;height:43px;padding:5px 10px;gap:12px;flex-wrap:nowrap}
+ .sequence-view .track-mixer button{padding:5px 10px;min-height:30px}.sequence-view .track-mixer label{white-space:nowrap}.track-mixer .spacer{flex:1}
+ #sequence-workspace>.bar-options{height:18px;min-height:18px;flex:0 0 18px;line-height:18px;flex-wrap:nowrap;gap:12px;margin:0;font-size:9px;white-space:nowrap;overflow:hidden}
+ #sequence-workspace>.bar-options>span:first-child{overflow:hidden;text-overflow:ellipsis}#sequence-note-count{flex-shrink:0;font-variant-numeric:tabular-nums;min-width:110px;text-align:right}
+ #sequence-note-details{display:none;position:absolute;right:0;top:48px;z-index:12;width:min(680px,100%);min-height:0;max-height:240px;overflow:auto;margin:0;border:1px solid #acb79d;border-radius:7px;box-shadow:0 8px 28px #233b3038;background:#e5eadb}
+ .sequence-details-open #sequence-note-details{display:block}
+ #sequence-note-details .note-editor{min-height:0;margin:0;padding:14px}
+ #sequence-note-details .sequence-note-placeholder{min-height:95px}
+ .sequence-playback-open.sequence-view #rehearsal-dock{display:block;position:absolute;top:99px;left:16px;right:16px;max-height:calc(100% - 115px);overflow:auto;z-index:18;border:1px solid #b6c2a8;border-radius:8px;box-shadow:0 10px 30px #20352140;padding:15px}
+ .sequence-view #rehearsal-dock details[open]{padding-bottom:10px}
+ @media(max-width:1100px){.sequence-view #content{padding-left:10px;padding-right:10px}.sequence-heading{gap:8px}.sequence-heading h1{font-size:18px}.sequence-heading .section-context label{font-size:0;gap:0}.sequence-heading .section-context select{width:145px}.sequence-toolbar{gap:6px}.sequence-tool{min-width:59px;gap:4px;padding:5px 6px}.sequence-tool svg{width:15px}.sequence-toolbar label select{width:80px}.sequence-toolbar #duration{width:100px}.sequence-toolbar #sequence-note-toggle{padding:7px}.musical-context{grid-template-columns:minmax(100px,1fr) minmax(70px,.7fr) minmax(120px,1.2fr) 75px}.musical-context #context-tempo{display:none}}
+ @media(max-width:850px){.sequence-view .workspace{grid-template-columns:minmax(0,1fr)}.sequence-view .sidebar{display:none}.sequence-toolbar{overflow:visible;gap:5px}.sequence-heading .section-context select{width:120px}.sequence-heading>button,.sequence-options summary{font-size:10px;padding:7px 8px}.sequence-toolbar .spacer{min-width:0}.sequence-toolbar #duration{width:91px}}
+ @media(max-width:600px){.sequence-view #app{height:100dvh;min-height:0}.sequence-view #content{gap:5px;padding:7px}.sequence-heading{flex-wrap:wrap;min-height:36px}.sequence-heading h1{font-size:16px}.sequence-heading .section-context{min-width:80px}.sequence-heading .section-context select{width:100px}.sequence-toolbar{flex-wrap:wrap;flex-basis:auto;min-height:40px;gap:5px}.sequence-toolbar .spacer{display:none}.sequence-toolbar label{font-size:9px}.sequence-tool{min-width:57px}.sequence-view .track-mixer{gap:5px}.sequence-view .track-mixer input{width:48px}.sequence-view .track-mixer label{font-size:9px}.sequence-view .track-mixer button{padding:5px}.musical-context{grid-template-columns:1fr 1fr}.sequence-playback-open.sequence-view #rehearsal-dock{left:7px;right:7px}.sequence-view #sequence-workspace>.bar-options>span:first-child{display:none}}
+}
+@media screen {
+ /* Open auxiliary controls over the workspace instead of shrinking the music. */
+ .console-drawer{position:absolute;left:0;right:0;bottom:100%;background:var(--console-surface);border:1px solid #8b794a;border-radius:8px 8px 0 0;box-shadow:0 -5px 20px #17281f33;max-height:45vh;overflow:auto}
+ #rehearsal-dock{position:relative;z-index:9}
+ #rehearsal-dock details{position:relative}
+ .practice-options-panel{position:absolute;top:100%;left:-12px;right:-12px;z-index:12;padding:14px;background:#e5eadb;border:1px solid #b5c2a7;border-radius:7px;box-shadow:0 8px 24px #233b3030;max-height:50vh;overflow:auto}
+ .sequence-view .practice-options-panel{position:static;max-height:none;border:0;box-shadow:none;padding:10px 0 0}
+ .score-writing-view #score-composition-controls{height:240px;overflow:auto;scrollbar-gutter:stable;overflow-anchor:none;margin:0 0 10px;background:#f1f1e8;border:1px solid #d1d7c7;border-radius:0 0 8px 8px}
+ .score-writing-view #score-composition-controls .score-compose-panel{margin-bottom:0;border:0}
+ .score-writing-view #score-composition-controls .score-note-details{margin:0 12px 12px;padding:8px 10px;border:1px solid #bcc8af;border-radius:5px;background:#e9ede1}
+ .score-writing-view .score-entry-position #score-place{min-width:104px}
+ .score-mode-indicator{flex:0 0 200px;min-width:200px;flex-wrap:nowrap;gap:6px}
+ .score-mode-indicator strong{width:103px;flex:0 0 103px;white-space:nowrap;font-size:11px}
+ .score-position-cue{min-width:70px;margin-left:0;font-size:9px;font-variant-numeric:tabular-nums}
+ .score-workspace-dock #score-focus{width:80px}.score-workspace-dock #score-next-chord{width:116px}
+ .score-mode-hint{height:40px;min-height:40px;overflow:auto;align-items:center;line-height:15px}
+ .score-workspace-feedback{position:absolute;left:0;right:0;top:100%;z-index:12;max-height:100px;overflow:auto;border:1px solid #decba5;border-radius:0 0 6px 6px;box-shadow:0 5px 14px #46361b22}
+ .score-appearance{position:relative;z-index:8}
+ .score-appearance>.toolbar{position:absolute;top:100%;left:0;right:0;z-index:12;margin:0;padding:16px;background:#f4f2e7;border:1px solid #c7cdbb;border-radius:7px;box-shadow:0 8px 24px #233b3030;max-height:45vh;overflow:auto}
+ @media(max-width:900px){.score-mode-indicator{flex-basis:122px;min-width:122px}.score-position-cue{display:none}}
+ @media(max-width:700px){.score-mode-indicator{flex:0 0 122px}.score-writing-view #score-composition-controls{height:240px}}
+}
+@media screen {
+ body.score-focus #score-composition-controls{position:absolute;top:100%;left:0;right:0;z-index:11;height:260px;max-height:48vh;margin:0;box-shadow:0 10px 26px #24302633;background:#f3f1e6}
+ .score-workspace-feedback{z-index:30}
+}

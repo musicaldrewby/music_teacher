@@ -1,0 +1,9 @@
+import * as THREE from 'three';
+export type Finish='wood'|'brass'|'copper'|'enamel'|'glass'|'leather'|'stone'|'velvet'|'ivory';
+export const finishes:Record<Finish,{color:string;metal:number;rough:number}>={wood:{color:'#82350f',metal:0,rough:.32},brass:{color:'#dca548',metal:.85,rough:.23},copper:{color:'#b96730',metal:.82,rough:.26},enamel:{color:'#1027a5',metal:.35,rough:.2},glass:{color:'#17bde8',metal:.15,rough:.1},leather:{color:'#371d32',metal:0,rough:.63},stone:{color:'#363449',metal:.05,rough:.48},velvet:{color:'#720d23',metal:0,rough:.86},ivory:{color:'#e9d8ad',metal:0,rough:.32}};
+// Deterministic, locally generated grain. No network textures are needed in an export.
+export function craftedMaterial(finish:Finish,tint?:string){const f=finishes[finish],color=tint||f.color,m=new THREE.MeshPhysicalMaterial({color,metalness:f.metal,roughness:f.rough,clearcoat:['wood','enamel','glass'].includes(finish)?.8:.15,clearcoatRoughness:.16});m.name=finish+':'+color;m.userData={finish,color};
+ if(finish==='glass'){m.ior=1.46;m.transmission=.28;m.thickness=.35;m.emissive.set(color);m.emissiveIntensity=.13;}
+ if(['wood','leather','stone','velvet','brass','copper'].includes(finish)){const size=128,data=new Uint8Array(size*size*4);for(let y=0;y<size;y++)for(let x=0;x<size;x++){const noise=(Math.sin(x*12.9898+y*78.233)*43758.5453)%1;const grain=finish==='wood'?.5+.25*Math.sin(x*.42+Math.sin(y*.035)*2.7)+.1*Math.sin(x*2.4+y*.06):.7+noise*.12;const v=Math.round(255*Math.max(.2,Math.min(1,grain)));const i=(y*size+x)*4;data[i]=data[i+1]=data[i+2]=v;data[i+3]=255;}const tex=new THREE.DataTexture(data,size,size,THREE.RGBAFormat);tex.wrapS=tex.wrapT=THREE.RepeatWrapping;tex.needsUpdate=true;tex.colorSpace=THREE.SRGBColorSpace;m.map=tex;m.bumpMap=tex;m.bumpScale=finish==='wood'?.018:finish==='stone'?.035:.004;}
+ return m;
+}

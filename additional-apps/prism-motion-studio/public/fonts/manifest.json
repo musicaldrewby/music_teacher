@@ -1,0 +1,146 @@
+[
+  {
+    "id": "bangers",
+    "name": "Bangers",
+    "style": "Comic",
+    "file": "/fonts/Bangers-Regular.ttf",
+    "license": "SIL Open Font License 1.1",
+    "licenseFile": "/fonts/bangers-OFL.txt",
+    "source": "https://github.com/google/fonts/tree/main/ofl/bangers"
+  },
+  {
+    "id": "bungee",
+    "name": "Bungee",
+    "style": "Bold signage",
+    "file": "/fonts/Bungee-Regular.ttf",
+    "license": "SIL Open Font License 1.1",
+    "licenseFile": "/fonts/bungee-OFL.txt",
+    "source": "https://github.com/google/fonts/tree/main/ofl/bungee"
+  },
+  {
+    "id": "lilitaone",
+    "name": "Lilita One",
+    "style": "Rounded bold",
+    "file": "/fonts/LilitaOne-Regular.ttf",
+    "license": "SIL Open Font License 1.1",
+    "licenseFile": "/fonts/lilitaone-OFL.txt",
+    "source": "https://github.com/google/fonts/tree/main/ofl/lilitaone"
+  },
+  {
+    "id": "pacifico",
+    "name": "Pacifico",
+    "style": "Brush script",
+    "file": "/fonts/Pacifico-Regular.ttf",
+    "license": "SIL Open Font License 1.1",
+    "licenseFile": "/fonts/pacifico-OFL.txt",
+    "source": "https://github.com/google/fonts/tree/main/ofl/pacifico"
+  },
+  {
+    "id": "lobster",
+    "name": "Lobster",
+    "style": "Retro script",
+    "file": "/fonts/Lobster-Regular.ttf",
+    "license": "SIL Open Font License 1.1",
+    "licenseFile": "/fonts/lobster-OFL.txt",
+    "source": "https://github.com/google/fonts/tree/main/ofl/lobster"
+  },
+  {
+    "id": "kalam",
+    "name": "Kalam",
+    "style": "Handwritten bold",
+    "file": "/fonts/Kalam-Bold.ttf",
+    "license": "SIL Open Font License 1.1",
+    "licenseFile": "/fonts/kalam-OFL.txt",
+    "source": "https://github.com/google/fonts/tree/main/ofl/kalam"
+  },
+  {
+    "id": "bebasneue",
+    "name": "Bebas Neue",
+    "style": "Condensed",
+    "file": "/fonts/BebasNeue-Regular.ttf",
+    "license": "SIL Open Font License 1.1",
+    "licenseFile": "/fonts/bebasneue-OFL.txt",
+    "source": "https://github.com/google/fonts/tree/main/ofl/bebasneue"
+  },
+  {
+    "id": "audiowide",
+    "name": "Audiowide",
+    "style": "Futuristic",
+    "file": "/fonts/Audiowide-Regular.ttf",
+    "license": "SIL Open Font License 1.1",
+    "licenseFile": "/fonts/audiowide-OFL.txt",
+    "source": "https://github.com/google/fonts/tree/main/ofl/audiowide"
+  },
+  {
+    "id": "blackopsone",
+    "name": "Black Ops One",
+    "style": "Stencil",
+    "file": "/fonts/BlackOpsOne-Regular.ttf",
+    "license": "SIL Open Font License 1.1",
+    "licenseFile": "/fonts/blackopsone-OFL.txt",
+    "source": "https://github.com/google/fonts/tree/main/ofl/blackopsone"
+  },
+  {
+    "id": "pressstart2p",
+    "name": "Press Start 2P",
+    "style": "Pixel",
+    "file": "/fonts/PressStart2P-Regular.ttf",
+    "license": "SIL Open Font License 1.1",
+    "licenseFile": "/fonts/pressstart2p-OFL.txt",
+    "source": "https://github.com/google/fonts/tree/main/ofl/pressstart2p"
+  },
+  {
+    "id": "abrilfatface",
+    "name": "Abril Fatface",
+    "style": "Editorial serif",
+    "file": "/fonts/AbrilFatface-Regular.ttf",
+    "license": "SIL Open Font License 1.1",
+    "licenseFile": "/fonts/abrilfatface-OFL.txt",
+    "source": "https://github.com/google/fonts/tree/main/ofl/abrilfatface"
+  },
+  {
+    "id": "dmserifdisplay",
+    "name": "DM Serif Display",
+    "style": "Elegant serif",
+    "file": "/fonts/DMSerifDisplay-Regular.ttf",
+    "license": "SIL Open Font License 1.1",
+    "licenseFile": "/fonts/dmserifdisplay-OFL.txt",
+    "source": "https://github.com/google/fonts/tree/main/ofl/dmserifdisplay"
+  },
+  {
+    "id": "spacemono",
+    "name": "Space Mono",
+    "style": "Monospace",
+    "file": "/fonts/SpaceMono-Regular.ttf",
+    "license": "SIL Open Font License 1.1",
+    "licenseFile": "/fonts/spacemono-OFL.txt",
+    "source": "https://github.com/google/fonts/tree/main/ofl/spacemono"
+  },
+  {
+    "id": "anton",
+    "name": "Anton",
+    "style": "Bold condensed sans",
+    "file": "/fonts/Anton-Regular.ttf",
+    "license": "SIL Open Font License 1.1",
+    "licenseFile": "/fonts/anton-OFL.txt",
+    "source": "https://github.com/google/fonts/tree/main/ofl/anton"
+  },
+  {
+    "id": "coiny",
+    "name": "Coiny",
+    "style": "Playful rounded",
+    "file": "/fonts/Coiny-Regular.ttf",
+    "license": "SIL Open Font License 1.1",
+    "licenseFile": "/fonts/coiny-OFL.txt",
+    "source": "https://github.com/google/fonts/tree/main/ofl/coiny"
+  },
+  {
+    "id": "titanone",
+    "name": "Titan One",
+    "style": "Heavy cartoon",
+    "file": "/fonts/TitanOne-Regular.ttf",
+    "license": "SIL Open Font License 1.1",
+    "licenseFile": "/fonts/titanone-OFL.txt",
+    "source": "https://github.com/google/fonts/tree/main/ofl/titanone"
+  }
+]

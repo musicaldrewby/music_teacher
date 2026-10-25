@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Music Whiteboard</title>
+<meta name="description" content="Build rhythms, draw on treble and bass staves, and lead your ensemble with an interactive solfège pitch stack.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='10' fill='%231a4ed8'/%3E%3Cpath d='M25 8v21' stroke='white' stroke-width='3'/%3E%3Cellipse cx='19' cy='29' rx='7' ry='5' transform='rotate(-20 19 29)' fill='white'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="styles.css">
+<script defer src="glyphs.js"></script><script defer src="app.js"></script>
+</head>
+<body>
+<div class="app">
+ <header class="app-header">
+  <div class="brand"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 40 40"><path d="M26 8v23"/><ellipse cx="19" cy="30" rx="8" ry="5" transform="rotate(-20 19 30)"/></svg></span><div><h1>Music Whiteboard</h1><span class="brand-sub">A little space to make music.</span></div></div>
+  <nav aria-label="Whiteboard pages" class="page-tabs">
+   <button class="page-tab active" data-page="rhythm" aria-pressed="true"><span class="tab-symbol" id="rhythm-icon"></span>Rhythm</button>
+   <button class="page-tab" data-page="treble" aria-pressed="false"><span class="tab-symbol" id="treble-icon"></span>Treble clef</button>
+   <button class="page-tab" data-page="bass" aria-pressed="false"><span class="tab-symbol" id="bass-icon"></span>Bass clef</button>
+   <button class="page-tab" data-page="pitch" aria-pressed="false"><span class="tab-symbol stack-icon" aria-hidden="true"><svg viewBox="0 0 24 30"><path d="M6 5h12M6 12h12M6 19h12M6 26h12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg></span>Pitch stack</button>
+  </nav>
+  <button id="fullscreen" class="icon-button full-btn" title="Enter fullscreen" aria-label="Enter fullscreen"><svg viewBox="0 0 24 24"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5"/></svg><span>Fullscreen</span></button>
+ </header>
+ <main class="workspace">
+  <aside class="palette-panel" id="symbols-panel" aria-label="Music symbols">
+   <div class="palette-heading"><h2>Music symbols</h2><span>Drag or tap to place</span></div>
+   <div id="palette" class="palette"></div>
+   <div class="palette-tip"><span class="tip-mark" aria-hidden="true">i</span><p id="palette-tip">Half notes and half rests fill two beats.</p></div>
+  </aside>
+  <aside class="pitch-settings" id="pitch-settings" aria-label="Pitch stack settings" hidden>
+   <div class="palette-heading"><h2>Your pitch stack</h2><span>One language for the band</span></div>
+   <label class="pitch-field" for="pitch-key">Concert do<select id="pitch-key"><option value="C">C</option><option value="Db">D♭</option><option value="D">D</option><option value="Eb">E♭</option><option value="E">E</option><option value="F">F</option><option value="Gb">G♭</option><option value="G">G</option><option value="Ab">A♭</option><option value="A">A</option><option value="Bb" selected>B♭</option><option value="B">B</option></select></label>
+   <label class="pitch-check"><input id="pitch-note-names" type="checkbox">Show concert note names</label>
+   <div class="pitch-field"><span id="pitch-visible-label">Visible pitches</span><div class="pitch-chips" id="pitch-chips" role="group" aria-labelledby="pitch-visible-label"></div></div>
+   <div class="pitch-presets" aria-label="Pitch sets"><button data-pitch-set="full">Full scale</button><button data-pitch-set="five">Do–so</button><button data-pitch-set="pentatonic">Pentatonic</button></div>
+   <p class="pitch-help">Hide pitches you aren’t using. Their spaces stay in the stack.</p>
+   <div class="pitch-explanation"><strong>Movable do</strong><p>Everyone follows the same solfège. Optional note names are concert pitches; transposing instruments use their own written notes.</p></div>
+  </aside>
+  <section class="board-section" aria-label="Music whiteboard">
+   <div class="board-heading">
+    <div><div class="eyebrow" id="page-eyebrow">RHYTHM LAB</div><h2 id="board-title">Build a rhythm</h2></div>
+    <div id="beat-options" class="rhythm-options"><label class="meter-label" for="rhythm-meter">Time signature<select id="rhythm-meter"><option value="2/4">2/4 · Duple</option><option value="3/4">3/4 · Triple</option><option value="4/4" selected>4/4 · Quadruple</option><option value="6/8">6/8 · Compound duple</option></select></label><div class="segmented" aria-label="Rhythm length"><button data-measures="1" aria-pressed="true" class="active">1 measure</button><button data-measures="2" aria-pressed="false">2 measures</button></div></div>
+    <span class="page-badge" id="staff-badge" hidden>5-line staff</span>
+   </div>
+   <div class="board-shell">
+    <div class="toolbar" aria-label="Whiteboard tools">
+     <div class="tool-group">
+      <button class="tool active" id="pointer-tool" data-tool="notes" aria-pressed="true" title="Place or move notes (V)"><svg viewBox="0 0 24 24"><path d="m5 3 13 9-7 1-3 7Z"/></svg><span id="pointer-label">Notes</span></button>
+      <button class="tool" data-tool="pen" aria-pressed="false" title="Draw (P)"><svg viewBox="0 0 24 24"><path d="m4 16-1 5 5-1L21 7l-4-4Z M14 6l4 4"/></svg><span>Pen</span></button>
+      <button class="tool" data-tool="eraser" aria-pressed="false" title="Erase notes and whole strokes (E)"><svg viewBox="0 0 24 24"><path d="m4 13 10-10 7 7-10 10H8ZM8 9l7 7M12 20h9"/></svg><span>Eraser</span></button>
+     </div>
+     <span class="divider"></span>
+     <div class="colors" aria-label="Pen color">
+      <button class="color active" data-color="#19283f" style="--swatch:#19283f" aria-label="Ink: navy" aria-pressed="true"></button>
+      <button class="color" data-color="#245add" style="--swatch:#245add" aria-label="Ink: blue" aria-pressed="false"></button>
+      <button class="color" data-color="#c73d57" style="--swatch:#c73d57" aria-label="Ink: red" aria-pressed="false"></button>
+      <button class="color" data-color="#087c64" style="--swatch:#087c64" aria-label="Ink: green" aria-pressed="false"></button>
+     </div>
+     <label class="size-label"><span>Size</span><select id="pen-size" aria-label="Pen thickness"><option value="3">Fine</option><option value="6" selected>Medium</option><option value="11">Bold</option></select></label>
+     <div class="history-controls"><button id="undo" class="icon-button" aria-label="Undo" title="Undo (Ctrl+Z)"><svg viewBox="0 0 24 24"><path d="m9 5-6 6 6 6M3 11h11a6 6 0 0 1 0 12" transform="translate(0 -2)"/></svg></button><button id="redo" class="icon-button" aria-label="Redo" title="Redo (Ctrl+Shift+Z)"><svg viewBox="0 0 24 24"><path d="m15 5 6 6-6 6m6-6H10a6 6 0 0 0 0 12" transform="translate(0 -2)"/></svg></button><button id="clear" class="clear-button">Clear page</button></div>
+    </div>
+    <div class="drawing-area" id="drawing-area">
+     <svg id="board" viewBox="0 0 1200 700" preserveAspectRatio="xMidYMid meet" role="group" aria-label="One-line rhythm staff. Select a symbol and tap a beat, or use the pen to draw."><g id="grid-layer"></g><g id="note-layer"></g><g id="ink-layer"></g><g id="preview-layer" pointer-events="none"></g></svg>
+    </div>
+    <div class="board-footer"><span id="mode-hint">Select a symbol, then tap a beat. Or drag it onto the line.</span><span class="beat-progress" id="beat-progress">0 / 4 beats</span></div>
+   </div>
+   <div class="under-board"><span id="page-hint">One line. Four beats. Endless possibilities.</span><span>Each page keeps its own work while open.</span></div>
+  </section>
+ </main>
+</div>
+<div id="drag-ghost" aria-hidden="true"></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<dialog id="confirm-dialog"><form method="dialog"><div class="dialog-icon" aria-hidden="true">↺</div><h2 id="dialog-title">Clear this page?</h2><p id="dialog-description">The notes and drawings on this page will be removed. You can undo this.</p><div class="dialog-actions"><button value="cancel" class="dialog-cancel">Keep working</button><button value="confirm" class="dialog-confirm">Clear page</button></div></form></dialog>
+</body>
+</html>

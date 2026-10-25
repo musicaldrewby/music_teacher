@@ -1,0 +1,642 @@
+{
+  "halloweenBayou": {
+    "method": "Built-in ImageGen; static repeat textures compiled with whole-pixel minimum-error cuts and guard columns. No scenery crossfades.",
+    "assets": [
+      {
+        "name": "halloweensky",
+        "transparent_background": false,
+        "prompt": "Use case: photorealistic-natural. Asset type: production parallax scenery for a realistic train-window animation. Single very wide 3:1 panorama, 3072x1024 composition, natural location photography with crisp material detail, no painterly illustration, no vector art, no miniature. No train, window frame, people, lettering, logos, borders or watermark. Broadside lateral view, no road or tracks receding to a vanishing point. Consistent illumination across the full width, no vignette. Farthest opaque backdrop: expansive muted violet and mauve dusk sky, soft streaks of clouds, a faint warm apricot glow at the horizon. Low rolling wooded hills of autumn New England, tiny faraway village roofs and a handful of warm amber lights, atmospheric distance. Sky occupies upper 65 percent. Quiet late October evening, softly eerie but welcoming. No close trees, no foreground objects, no enormous moon. Entire image opaque. This is the stationary distant horizon."
+      },
+      {
+        "name": "halloweenmid",
+        "transparent_background": true,
+        "prompt": "Use case: photorealistic-natural. Asset type: production parallax scenery for a realistic train-window animation. Single very wide 3:1 panorama, 3072x1024 composition, natural location photography with crisp material detail, no painterly illustration, no vector art, no miniature. No train, window frame, people, lettering, logos, borders or watermark. Broadside lateral view, no road or tracks receding to a vanishing point. Consistent illumination across the full width, no vignette. Genuine alpha-transparent sky/background, never a checkerboard. Solid surfaces MUST remain fully opaque, no accidental holes, semitransparent buildings, washed-out edges, fades or ghosting. Continuous ground strip to bottom edge. TRUE HORIZONTALLY SEAMLESS TEXTURE: left and right edges match in height, material and illumination to repeat directly side by side. Avoid dominant objects near extreme edges, use natural vegetation gaps. No dissolving, mirroring or repeating the same houses within this image. Middle-distance Halloween village at dusk: varied intact Victorian clapboard houses, a small weathered brick shop, one modest church steeple, tall bare-branched autumn trees, burgundy and orange leaves. Warm windows and tiny porch jack-o-lanterns, tasteful seasonal garlands. Desaturated violet dusk ambient light with warm golden practical lights. Village silhouette occupies lower 65 percent, transparent above and between tree branches. Opaque grassy autumn ground below. Architecture realistic and modest rather than fantasy castles. No snow, no Christmas decorations, no witches or ghosts."
+      },
+      {
+        "name": "halloweennear",
+        "transparent_background": true,
+        "prompt": "Use case: photorealistic-natural. Asset type: production parallax scenery for a realistic train-window animation. Single very wide 3:1 panorama, 3072x1024 composition, natural location photography with crisp material detail, no painterly illustration, no vector art, no miniature. No train, window frame, people, lettering, logos, borders or watermark. Broadside lateral view, no road or tracks receding to a vanishing point. Consistent illumination across the full width, no vignette. Genuine alpha-transparent sky/background, never a checkerboard. Solid surfaces MUST remain fully opaque, no accidental holes, semitransparent buildings, washed-out edges, fades or ghosting. Continuous ground strip to bottom edge. TRUE HORIZONTALLY SEAMLESS TEXTURE: left and right edges match in height, material and illumination to repeat directly side by side. Avoid dominant objects near extreme edges, use natural vegetation gaps. No dissolving, mirroring or repeating the same houses within this image. Closer Halloween neighborhood at dusk, parallel side view of four or five varied believable Victorian wood houses and porches, weathered siding, warm lit windows with curtains. Several realistically sized glowing carved pumpkins on porch steps and near garden paths, dried cornstalk bundles, copper-orange shrubs and a few bare autumn trees. Muted violet twilight ambient illumination with natural warm amber window and pumpkin lights. Houses occupy lower 75 percent. Roofs completely intact with transparent sky above, all windows and walls fully opaque. Continuous solid leaf-covered lawns at bottom. Cozy gently spooky mood. No snow, no Christmas bulbs, no monsters or cartoon Halloween symbols."
+      },
+      {
+        "name": "halloweenfront",
+        "transparent_background": true,
+        "prompt": "Use case: photorealistic-natural. Asset type: production parallax scenery for a realistic train-window animation. Single very wide 3:1 panorama, 3072x1024 composition, natural location photography with crisp material detail, no painterly illustration, no vector art, no miniature. No train, window frame, people, lettering, logos, borders or watermark. Broadside lateral view, no road or tracks receding to a vanishing point. Consistent illumination across the full width, no vignette. Genuine alpha-transparent sky/background, never a checkerboard. Solid surfaces MUST remain fully opaque, no accidental holes, semitransparent buildings, washed-out edges, fades or ghosting. Continuous ground strip to bottom edge. TRUE HORIZONTALLY SEAMLESS TEXTURE: left and right edges match in height, material and illumination to repeat directly side by side. Avoid dominant objects near extreme edges, use natural vegetation gaps. No dissolving, mirroring or repeating the same houses within this image. Low close railway-side autumn verge at violet dusk. Weathered low wooden picket fence sections, tangled dark shrubs with copper and burgundy leaves, dry grasses and scattered orange leaves, a few modest glowing jack-o-lantern pumpkins resting on the ground. Fence and shrub tops form an irregular silhouette in lower half with upper half transparent, solid earthy ground fills bottom quarter. Natural realistic weathered materials, small pumpkins not giant props, low restrained amber glow. Match violet October dusk and muted warm porch light. Fence rails meet continuously at left and right edge. No buildings or far landscape, no tall trees, no snow."
+      },
+      {
+        "name": "bayousky",
+        "transparent_background": false,
+        "prompt": "Use case: photorealistic-natural. Asset type: production parallax scenery for a realistic train-window animation. Single very wide 3:1 panorama, 3072x1024 composition, natural location photography with crisp material detail, no painterly illustration, no vector art, no miniature. No train, window frame, people, lettering, logos, borders or watermark. Broadside lateral view, no road or tracks receding to a vanishing point. Consistent illumination across the full width, no vignette. Farthest opaque backdrop: Louisiana bayou at misty blue-hour dusk. Wide still slate-teal water fills lower half; remote dark cypress tree line stretches gently across the horizon at 48 percent height. Muted lavender-grey sky, pale warm last light low on horizon, soft humid atmospheric haze, subtle natural reflections. Flat wetland terrain, no mountains. A few very tiny far-off cabin lights in the woods, no close trees. Open expansive water with fine horizontal surface texture, calm not ocean waves. All opaque. Stationary far-distance backdrop."
+      },
+      {
+        "name": "bayoumid",
+        "transparent_background": true,
+        "prompt": "Use case: photorealistic-natural. Asset type: production parallax scenery for a realistic train-window animation. Single very wide 3:1 panorama, 3072x1024 composition, natural location photography with crisp material detail, no painterly illustration, no vector art, no miniature. No train, window frame, people, lettering, logos, borders or watermark. Broadside lateral view, no road or tracks receding to a vanishing point. Consistent illumination across the full width, no vignette. Genuine alpha-transparent background; ONLY the actual cypress trees, small far-bank cabins, narrow muddy bank and their dark reflections on water are opaque. Open gaps between tree groups remain transparent so a water/sky backdrop shows through. Mid-distance Louisiana bayou at muted blue-hour dusk, several clumps of mature bald cypress trees draped in delicate Spanish moss, low dense wetland foliage, one or two tiny weathered fishing shacks with faint warm windows on the far bank. Flat side-on bank runs low across image. Trees reach roughly upper 20 percent, roots meet water around 73 percent height; bank and reflection strip lower part. Photographic moss and branches naturally edged, no white fringes. All tree trunks, buildings and foliage surfaces solid, no fade or ghosting. Horizontal seamless repeat: compatible foliage and water level at both edges. No mountains, palms, snow, pumpkins, alligators or boats. Cool grey-green palette."
+      },
+      {
+        "name": "bayounear",
+        "transparent_background": true,
+        "prompt": "Use case: photorealistic-natural. Asset type: production parallax scenery for a realistic train-window animation. Single very wide 3:1 panorama, 3072x1024 composition, natural location photography with crisp material detail, no painterly illustration, no vector art, no miniature. No train, window frame, people, lettering, logos, borders or watermark. Broadside lateral view, no road or tracks receding to a vanishing point. Consistent illumination across the full width, no vignette. Genuine alpha-transparent background with generous open gaps revealing scenery behind. A sparse closer Louisiana bayou cypress grove at blue-hour dusk, three or four gnarled cypress trunks in separated groups, delicate hanging Spanish moss, natural buttress roots, a few cypress knees breaking the water. One small weathered wooden fishing shack on low stilts with a warm amber window and short dock beside a tree group. Trees occupy left third and right third, open views between and underneath moss. Fine restrained roots and dark reflected tree bases along bottom quarter, subtle water reflection localized only underneath objects. NO solid land spanning the bottom: this layer floats over water. Photographic cool muted teal-green dusk, rough bark and moss textures, warm cabin light subtle. Every actual trunk, cabin wall and leaf opaque; surrounding empty space truly transparent. No fading at edges. Horizontally seamless repeat with sparse reeds and open water gaps at both edges. No mountains, tropical palms, people, vehicles or text."
+      },
+      {
+        "name": "bayoufront",
+        "transparent_background": true,
+        "prompt": "Use case: photorealistic-natural. Asset type: production parallax scenery for a realistic train-window animation. Single very wide 3:1 panorama, 3072x1024 composition, natural location photography with crisp material detail, no painterly illustration, no vector art, no miniature. No train, window frame, people, lettering, logos, borders or watermark. Broadside lateral view, no road or tracks receding to a vanishing point. Consistent illumination across the full width, no vignette. Genuine alpha-transparent sky/background, never a checkerboard. Solid surfaces MUST remain fully opaque, no accidental holes, semitransparent buildings, washed-out edges, fades or ghosting. Continuous ground strip to bottom edge. TRUE HORIZONTALLY SEAMLESS TEXTURE: left and right edges match in height, material and illumination to repeat directly side by side. Avoid dominant objects near extreme edges, use natural vegetation gaps. No dissolving, mirroring or repeating the same houses within this image. Close low Louisiana bayou railway embankment at muted blue-hour dusk: irregular clumps of wet reeds, sedges, low marsh grasses, a few small cypress knees and weathered broken wood, dark muddy bank. Foreground plants entirely within lower half, upper half transparent. Continuous dark bank fills bottom fifth. Delicate natural leaf blades, cool deep olive and blue-green, subtle damp highlights, realistic photographs. No huge trunks, no buildings, no fences, no flowers, no mountain scenery. Matching ground height and reed coverage at left and right for perfect horizontal repeat."
+      }
+    ],
+    "sceneCycleSeconds": 300,
+    "validation": {
+      "sceneCarriageControlBindings": 48,
+      "newSceneCarriageLoopChecks": 16,
+      "exactLoopPixelDifference": 0,
+      "browserRuntimeExportTested": false
+    },
+    "behavior": {
+      "halloween": "Four photographic depth layers, intact houses, close autumn fence and pumpkins, warm passing carriage light.",
+      "bayou": "Four photographic depth layers, open water and cypress groups, gentle water-only ripple distortion, cooler shaded carriage lighting.",
+      "defaultScene": "halloween",
+      "weather": "Independent rain and snow amounts remembered for each preset; both new scenes begin dry."
+    }
+  },
+  "halloweenBayouTileBuild": [
+    {
+      "name": "halloweensky",
+      "mode": "fixed distant horizon",
+      "source": "/workspace/scratch/e05c4f5b8152/generated_images/exec-cee77eff-cd51-48a1-96c5-b584ab21360a.png"
+    },
+    {
+      "name": "halloweenmid",
+      "mode": "static repeat, no blending",
+      "source": "/workspace/scratch/e05c4f5b8152/generated_images/exec-b950bbb5-303b-4012-a627-761cd9482c58.png",
+      "width": 2104,
+      "height": 724,
+      "guardWidth": 2106,
+      "cutCost": 663,
+      "periodFraction": 0.9686924493554327
+    },
+    {
+      "name": "halloweennear",
+      "mode": "static repeat, no blending",
+      "source": "/workspace/scratch/e05c4f5b8152/generated_images/exec-e8e77b07-3d0b-44c5-af85-62e35fb36dfd.png",
+      "width": 1576,
+      "height": 724,
+      "guardWidth": 1578,
+      "cutCost": 272,
+      "periodFraction": 0.7255985267034991
+    },
+    {
+      "name": "halloweenfront",
+      "mode": "static repeat, no blending",
+      "source": "/workspace/scratch/e05c4f5b8152/generated_images/exec-4dfee4ea-66cf-42c0-9ed2-ec2d66029d17.png",
+      "width": 1772,
+      "height": 724,
+      "guardWidth": 1774,
+      "cutCost": 217,
+      "periodFraction": 0.8158379373848987
+    },
+    {
+      "name": "bayousky",
+      "mode": "fixed distant horizon",
+      "source": "/workspace/scratch/e05c4f5b8152/generated_images/exec-e76c166b-2da1-4824-ad3a-b498de127d02.png"
+    },
+    {
+      "name": "bayoumid",
+      "mode": "static repeat, no blending",
+      "source": "/workspace/scratch/e05c4f5b8152/generated_images/exec-b9810ef4-0694-4a97-b3ce-f11ed86ebfef.png",
+      "width": 1816,
+      "height": 724,
+      "guardWidth": 1818,
+      "cutCost": 195,
+      "periodFraction": 0.8360957642725598
+    },
+    {
+      "name": "bayounear",
+      "mode": "static repeat, no blending",
+      "source": "/workspace/scratch/e05c4f5b8152/generated_images/exec-59aced64-2c80-4d64-939b-b67f5895bc14.png",
+      "width": 2080,
+      "height": 724,
+      "guardWidth": 2082,
+      "cutCost": 248,
+      "periodFraction": 0.9576427255985267
+    },
+    {
+      "name": "bayoufront",
+      "mode": "static repeat, no blending",
+      "source": "/workspace/scratch/e05c4f5b8152/generated_images/exec-dbb88c8b-8f16-4e8d-a1fa-2ba9940beda2.png",
+      "width": 1588,
+      "height": 724,
+      "guardWidth": 1590,
+      "cutCost": 205,
+      "periodFraction": 0.7311233885819521
+    }
+  ],
+  "christmas": {
+    "method": "Built-in ImageGen; static repeat texture assembly using whole-pixel minimum-error cuts and guard columns. No scenery crossfades.",
+    "assets": [
+      {
+        "name": "christmassky",
+        "prompt": "Use case: photorealistic-natural. Asset type: wide photographic distant backdrop for a train-window parallax animation. Create a 3:1 panorama, 3072x1024 composition, of a snowy small town's distant surroundings on Christmas Eve at night. Deep indigo-blue cloudy winter sky fills upper 55 percent. Layered softly rounded snowy wooded hills, dark evergreen forest silhouettes, sparse distant warm amber cottage lights across the bottom half. Midnight blue and cool silver snow, quiet gentle atmospheric haze. Natural nighttime photographic exposure with visible detail; no sunrise/sunset, no pink sky, no daytime. Cinematic realistic location photography, not painterly illustration or miniature village. A few faraway roofs are tiny, no dominant landmark, no foreground trees or close objects, no train, no frame, no people, no vehicles, no text, no logos. Full opaque rectangle, consistent illumination left-to-right, no vignette. Do not paint falling snow; snow particles will be animated separately. This is the stationary farthest distance layer; concentrate on depth and an expansive winter night sky.",
+        "transparent_background": false
+      },
+      {
+        "name": "christmasmid",
+        "prompt": "Use case: photorealistic-natural. Asset type: truly horizontally seamless parallax town silhouette texture with genuine transparent sky. A wide 3:1 photographic panorama (3072x1024 composition) of a small New England Christmas town at NIGHT, seen broadside at middle distance from an elevated passing train. Many varied modest Victorian wood houses, clapboard cottages, a few brick shops, one modest church steeple, mature fir trees, snowy roofs. Warm amber windows and tasteful small warm Christmas bulbs, occasional muted red and green bulbs, wreaths and porch garlands. Deep midnight blue ambient light, snow cool blue silver, match a dark indigo winter sky but SKY MUST BE FULLY TRANSPARENT. Everything below the roof/tree silhouette is fully opaque, including windows, facades, all snow and continuous lower snow-covered ground. No accidental holes inside buildings, no fading or semi-transparent surfaces. Architecture occupies the lower 65 percent with clear transparent space above; entire buildings remain intact. Natural realistic photographs, no toy village, no illustration. Ground band runs all the way through the bottom edge. HORIZONTAL SEAMLESS REPEAT: left and right ends have matching snow height and similar dark pine/roof silhouettes; join cleanly side by side with no fades, opacity blending, mirroring or duplicate ghost buildings. Avoid placing unique structures at the extreme edges. Consistent lighting, no side vignette. No people, vehicles, roads leading toward a vanishing point, train, window frame, text, labels, checkerboard, or falling snow particles. This is one production texture, not an image of tiled copies.",
+        "transparent_background": true
+      },
+      {
+        "name": "christmasnear",
+        "prompt": "Use case: photorealistic-natural. Asset type: horizontal seamless photographic parallax foreground neighborhood with genuine transparent sky. Single ultra-wide 3:1 panorama, 3072x1024 composition, at NIGHT. Eye-level broadside view from a train passing parallel to a snowy residential street in an American small town on Christmas Eve. A varied row of four to six complete believable clapboard and brick houses, modest porches, warm amber windows with subtle curtains, realistic small wreaths and restrained red-green Christmas lights under snowy eaves; one small neighborhood brick shop with a warm lit display window and NO lettering. Snow-coated fir trees between houses, continuous uneven snow-covered yards across bottom. Architecture natural and photographic, not cartoon, not a miniature or glossy toy model. Midnight deep indigo/cool blue lighting, amber window glow and restrained colored Christmas bulbs. Structures fill lower 75 percent, genuine alpha-transparent sky ABOVE and BETWEEN silhouette; windows, facades, snow and ground FULLY OPAQUE, no accidental holes, no transparent building surfaces. HORIZONTAL SEAMLESS REPEAT: left and right edges matching snow height, evergreen shrub coverage and illumination, use gaps of snowy yards and trees near ends for coherent joins, no opacity fade, no dissolve, no mirroring, no overlapping ghost buildings. Complete structures, do not cut away pieces. Ground extends solidly all the way to bottom edge. No people, vehicles, moving traffic, train, window frame, visible skyline background, text, labels, logos, border, checkerboard, or falling snow particles. No road vanishing toward the viewer. This is a single production texture, not a montage of repeated copies.",
+        "transparent_background": true
+      },
+      {
+        "name": "christmasfront",
+        "prompt": "Use case: photorealistic-natural. Asset type: horizontally seamless foreground strip with a genuinely transparent background for a Christmas-night train ride. Very wide 3:1 panorama, 3072x1024 composition. Close snow-covered railway embankment, irregular low fir saplings and evergreen shrubs dusted heavily with snow, bare winter twigs, sections of an old dark wood rail fence with thick snow on top, soft deep blue night shadows. A few restrained warm white Christmas bulbs on occasional fence sections, believable tiny points of light. Continuous opaque snow-covered ground fills the lower quarter and continues through the bottom edge. Irregular shrub and fence silhouette reaches up to the middle of the image, upper half genuine fully transparent alpha. All actual wood, plants and snow fully opaque with no ghosting, no fading in the sides, no transparent holes inside solid surfaces. Photorealistic crisp natural material textures, subdued midnight blue silver palette, not vector or toy-like, no giant trees. PERFECT HORIZONTAL REPEAT, left and right edges join directly with matching ground height, shrub coverage and tone, coherent fence section continuity, no feathering, no dissolve, no mirroring. No sky, background landscape, buildings, people, vehicles, train, window frame, text, logos, checkerboard, or falling snow particles. Single production texture, not tiled copies.",
+        "transparent_background": true
+      }
+    ],
+    "rainReference": {
+      "library_file_id": "libfile_16551bc909b08191b9be83d73d7031cd",
+      "notes": "Dense irregular pinhead beads, varied cap size, wind-driven rivulets, sharp refracted menisci against a softened landscape. Reference is not embedded as scenery."
+    },
+    "rainRevision": "Asymmetric cap height maps, denser size-distributed stationary beads, moving drops and water-film ridges along physical paths, environment-dependent refraction/Fresnel response.",
+    "snow": "Four deterministic particle-depth planes with wind, fall, parallax, shutter blur and occlusion by scene layers; 300 scene-second closed cycle."
+  },
+  "christmasTileBuild": [
+    {
+      "name": "christmassky",
+      "mode": "fixed distant horizon",
+      "source": "generated_images/exec-ab7d789a-207e-4e7b-8f98-b70bd6a5ebbe.png"
+    },
+    {
+      "name": "christmasmid",
+      "mode": "static repeat, no blending",
+      "source": "generated_images/exec-d01fb6be-102b-4322-a61d-ae24112bdfa5.png",
+      "width": 1672,
+      "height": 724,
+      "guardWidth": 1674,
+      "cutCost": 311,
+      "periodFraction": 0.7697974217311234
+    },
+    {
+      "name": "christmasnear",
+      "mode": "static repeat, no blending",
+      "source": "generated_images/exec-2474dcd8-9bb0-4894-b9df-4c69edfdd813.png",
+      "width": 1872,
+      "height": 724,
+      "guardWidth": 1874,
+      "cutCost": 1103,
+      "periodFraction": 0.861878453038674
+    },
+    {
+      "name": "christmasfront",
+      "mode": "static repeat, no blending",
+      "source": "generated_images/exec-8c52d8a8-7299-4789-8ad7-cab732a66682.png",
+      "width": 1988,
+      "height": 724,
+      "guardWidth": 1990,
+      "cutCost": 463,
+      "periodFraction": 0.9152854511970534
+    }
+  ],
+  "videoExport": {
+    "version": 2,
+    "frameRates": [
+      30,
+      60
+    ],
+    "fixedDurationSeconds": [
+      20,
+      600,
+      720,
+      900,
+      1200
+    ],
+    "completeLoop": true,
+    "sceneCycleSeconds": 300,
+    "optimization": "Encode one complete scenic cycle, reuse compressed video packets with exact frame timestamps, and keep audio continuous for the full duration. Blob-backed WebM clusters avoid copying repeated compressed payloads."
+  },
+  "previous": {
+    "city": {
+      "method": "Built-in ImageGen",
+      "assets": [
+        {
+          "name": "citysky",
+          "transparent_background": false,
+          "prompt": "Use case: photorealistic-natural. Asset type: ultra-wide 3:1 night city photographic panorama for an animated train-window ride. Sideways view from an elevated railway across an expansive believable Japanese city at night, inspired by Tokyo residential and commercial districts but not a specific recognizable skyline. Distant modern midrise and highrise towers with many little warm white illuminated windows, a few soft cyan and muted pink light accents. Deep indigo night sky fills upper 36%, city skyline varied moderate heights around 35%-55%, many distant overlapping buildings extend through bottom. Realistic night photography, very slight blue atmospheric haze for distance, rich black shadows with retained architectural detail, restrained neon and natural color. Parallel to city, broad panorama not a street disappearing to a single vanishing point. No train no window no foreground rails no people no cars no readable text no logos no water no mountain no iconic landmark. Match broad lighting and scale at both horizontal edges, no unique focal point, no giant tower, no illustration or vector style."
+        },
+        {
+          "name": "citymid",
+          "transparent_background": true,
+          "prompt": "Use case: photorealistic-natural. Asset type: wide 3:1 transparent photographic parallax strip for a Japanese city at night. A continuous irregular row of authentic Japanese urban midrise apartments and narrow commercial buildings, seen side-on from an elevated railway. Full architectural structures from rooftop to base. Realistic concrete walls, balcony rails, rooftop equipment, exterior stairs, many warm illuminated windows, small cyan shop lighting and occasional subdued rose sign panel with no lettering. Cool indigo ambient night light, believable photography with realistic materials and perspective. Building rooftops occupy varying heights between 18% and 50% of the image, lowest 40% entirely solid buildings and street architecture to all edges. Entire sky above the roof outlines is truly transparent alpha, including gaps between rooftops, no background city no sky no clouds. Flush left right and bottom edges, a varied continuous urban strip. No train no window no people no cars no logos no text no vector drawing no synthetic cyberpunk look."
+        },
+        {
+          "name": "citynear",
+          "transparent_background": true,
+          "prompt": "Use case: photorealistic-natural. Asset type: wide 3:1 transparent photographic foreground layer for a Japanese city train ride at night. Close railway-side rooftops and low-rise Japanese buildings, seen from first-storey elevated train height, buildings parallel to camera with subtle natural perspective. Detailed dark tiled pitched roofs mixed with flat concrete roofs, external air conditioners, conduits, rooftop water tanks, fire escape stairs, small illuminated windows, a few warm amber or soft teal storefront lights. Dense photographic material texture. Cool dark blue night lighting with realistic subdued light spill. Irregular top profile between 30% and 55% image height, lower 45% solid buildings to bottom and side edges. The whole area above the roof line is completely transparent alpha, no background city no sky. No wires floating above roof no people no train no window no readable lettering no logo no neon overload. Wide continuous photographic cutout strip, not a collage and not illustration."
+        },
+        {
+          "name": "cityrail",
+          "transparent_background": true,
+          "prompt": "Use case: photorealistic-natural. Asset type: wide 3:1 transparent close railway foreground layer, viewed sideways through a passing train window at night. A weathered dark concrete railway parapet topped with a modest dark metal safety railing spanning the entire image width, slight horizontal perspective. Parapet and railing confined to lowest 20% of image, textured with subtle cool blue and amber city light. One slender realistic gray railway utility mast rising from the bottom at 68% across the image up to 5% from top, slightly weathered concrete with a small metal equipment box near its lower portion. Everything else above the parapet is fully transparent alpha, actual empty cutout. No overhead gantry no train no window no background no sky no city no text no numbers no people. Fine realistic photographic material detail, dark night exposure, not a flat vector silhouette. Full transparent background."
+        }
+      ]
+    },
+    "desertAndWindows": {
+      "method": "Built-in ImageGen",
+      "assets": [
+        {
+          "name": "desertsky",
+          "transparent_background": false,
+          "prompt": "Use case: photorealistic-natural. Asset type: very wide 3:1 photographic background panorama for a train ride through the American Southwest at sunset. Sideways view across a broad high desert basin, softly layered red sandstone mesas and buttes far in the distance, hazy purple mountains at the horizon, thin desert clouds glowing peach, coral and amber, blue lavender upper sky. Sky fills upper 48%; distant low mesas and varied rock formations rise around 45%-60%; sagebrush flats and ochre desert earth occupy the bottom. Warm raking sunset light, detailed realistic geology, rich natural colors, cinematic but believable landscape photography. Gentle variation and similar lighting at both horizontal edges for an endless panorama. No enormous focal landmark, no nearby cactus, no saguaro cactus, no people, no trains, no roads, no windows, no text. New Mexico / Colorado Plateau visual character, not tropical or sand dunes."
+        },
+        {
+          "name": "desertmesa",
+          "transparent_background": true,
+          "prompt": "Use case: photorealistic-natural. Asset type: wide 3:1 transparent photographic terrain layer for a Southwestern desert sunset train video. Irregular continuous ridge of weathered red sandstone foothills, low flat-topped mesas and eroded ochre cliffs, occasional sparse juniper and sagebrush at the base. Sideways broad landscape view from a train. Amber sunset side lighting on rusty sandstone, deep plum shadows, natural photographic rock strata and textures. Ridge tops vary from 28% to 58% image height, bottom 40% filled with rocky earth and low scrub flush to left right and bottom. Entire sky above the land silhouette must be truly transparent alpha, no sky no distant mountain backdrop. No white or checkerboard baked in, no saguaro, no train no people no text no iconic landmark. Photographic raster, not illustration."
+        },
+        {
+          "name": "desertnear",
+          "transparent_background": true,
+          "prompt": "Use case: photorealistic-natural. Asset type: wide 3:1 transparent near-ground parallax photograph layer for a Southwestern desert train ride at sunset. Low sandstone outcrops and rolling rust-red rocky earth, dry golden bunchgrass, pale sagebrush, scattered small yucca rosettes, a few sparse low juniper bushes. Broad sideways view, no near objects taller than a small bush. Warm amber low evening light, purple-brown shadows, finely detailed natural dry textures. Terrain fills bottom 48% and rises irregularly to 32%-60% image height. Everything above the terrain and plant outline is genuinely transparent alpha. Continuous ground goes flush off left right and bottom edges. No saguaro cactus no train no window no people no text no background mountains no sky. Natural photographic materials, not vector or painting."
+        },
+        {
+          "name": "desertgrass",
+          "transparent_background": true,
+          "prompt": "Use case: photorealistic-natural. Asset type: wide 3:1 transparent closest parallax strip for a high-desert train ride. Close dry golden grasses, delicate seed heads, scattered sagebrush, red gravel and small desert stones, in warm orange sunset light with dark cool shadows. The plants are seen side-on from a train window, natural detailed photographic cutout, continuous uneven vegetation profile concentrated in lowest 45% of image, some stems rise to 40% height, ground fills lower edge. Top area is fully transparent alpha with genuine spaces between grass stems. Left right and bottom continue naturally off the image. No tall cacti, no saguaro, no sky, no mountains, no buildings, no train, no text. Subtle backlit grass edges, realistic dry Southwestern countryside."
+        },
+        {
+          "name": "window_commuter",
+          "transparent_background": true,
+          "prompt": "Use case: photorealistic-natural. Asset type: transparent 16:9 train window and partial carriage interior overlay for an animated landscape app. Photorealistic close-up from a passenger's window seat, facing one enormous train window almost straight-on. Most of the picture is the view through the window; show only narrow portions of the carriage around the margins and a small partial seat corner. EVERYTHING in the window opening must be fully transparent alpha; no exterior scenery, no black or white filled hole, no glass tint. Window opening approximately x=5%-96%, y=5%-86%, broad rounded rectangle, allowing lots of landscape. No people, text, numbers, logos, HUD or central objects. Realistic high-end photography with material depth and subtle imperfections, not an illustration. No fake checkerboard. Style: Japanese commuter train. Slim brushed silver aluminum window surround, black rubber seals, cool neutral white interior light. Smooth very pale gray carriage wall in narrow outer edges, small deep blue woven seat corner lower right, slim utilitarian sill along bottom. Authentic understated contemporary Japanese commuter carriage, no wood and no brass. Image is mostly a truly transparent window aperture."
+        },
+        {
+          "name": "window_sleeper",
+          "transparent_background": true,
+          "prompt": "Use case: photorealistic-natural. Asset type: transparent 16:9 train window and partial carriage interior overlay for an animated landscape app. Photorealistic close-up from a passenger's window seat, facing one enormous train window almost straight-on. Most of the picture is the view through the window; show only narrow portions of the carriage around the margins and a small partial seat corner. EVERYTHING in the window opening must be fully transparent alpha; no exterior scenery, no black or white filled hole, no glass tint. Window opening approximately x=5%-96%, y=5%-86%, broad rounded rectangle, allowing lots of landscape. No people, text, numbers, logos, HUD or central objects. Realistic high-end photography with material depth and subtle imperfections, not an illustration. No fake checkerboard. Style: cozy private sleeper compartment. Warm honey oak veneer, cream padded wall sliver, soft taupe fabric curtains neatly gathered against the far left and right edges, a narrow padded seat or berth corner lower right in muted olive upholstery, warm amber reading-light glow from offscreen. Small realistic lamp fixture at the extreme left margin only, never over the central glass. Window remains huge and unobstructed. Cozy tactile materials, soft shadows. No table across the foreground."
+        },
+        {
+          "name": "window_panorama",
+          "transparent_background": true,
+          "prompt": "Use case: photorealistic-natural. Asset type: transparent 16:9 train window and partial carriage interior overlay for an animated landscape app. Photorealistic close-up from a passenger's window seat, facing one enormous train window almost straight-on. Most of the picture is the view through the window; show only narrow portions of the carriage around the margins and a small partial seat corner. EVERYTHING in the window opening must be fully transparent alpha; no exterior scenery, no black or white filled hole, no glass tint. Window opening approximately x=5%-96%, y=5%-86%, broad rounded rectangle, allowing lots of landscape. No people, text, numbers, logos, HUD or central objects. Realistic high-end photography with material depth and subtle imperfections, not an illustration. No fake checkerboard. Style: modern panoramic premium carriage. Extra-large single window occupies 94% of frame: expand aperture to x=2%-98%, y=2%-93%. Exceptionally slim matte graphite frame with subtle rounded corners and black rubber seal, small sliver of pale warm gray wall at edges, tiny cream seat corner at bottom right and very shallow narrow dark sill. Minimal interior, almost all scenery. Soft neutral illumination, architectural photography, no curtains or wood or chrome."
+        },
+        {
+          "name": "window_vintage",
+          "transparent_background": true,
+          "prompt": "Use case: photorealistic-natural. Asset type: transparent 16:9 train window and partial carriage interior overlay for an animated landscape app. Photorealistic close-up from a passenger's window seat, facing one enormous train window almost straight-on. Most of the picture is the view through the window; show only narrow portions of the carriage around the margins and a small partial seat corner. EVERYTHING in the window opening must be fully transparent alpha; no exterior scenery, no black or white filled hole, no glass tint. Window opening approximately x=5%-96%, y=5%-86%, broad rounded rectangle, allowing lots of landscape. No people, text, numbers, logos, HUD or central objects. Realistic high-end photography with material depth and subtle imperfections, not an illustration. No fake checkerboard. Style: vintage heritage railway carriage. Thick dark reddish varnished wood surround, gracefully arched top corners, small realistic aged brass sash fittings at lower edges, narrow strip of deep forest-green velvet seat at bottom right. Slightly smaller aperture x=8%-94%, y=7%-84%, but still one large broad window with no central mullion. Handcrafted wood grain, warm soft natural illumination, authentically aged and elegant, no ornate fantasy elements."
+        },
+        {
+          "name": "window_luxury",
+          "transparent_background": true,
+          "prompt": "Use case: photorealistic-natural. Asset type: transparent 16:9 train window and partial carriage interior overlay for an animated landscape app. Photorealistic close-up from a passenger's window seat, facing one enormous train window almost straight-on. Most of the picture is the view through the window; show only narrow portions of the carriage around the margins and a small partial seat corner. EVERYTHING in the window opening must be fully transparent alpha; no exterior scenery, no black or white filled hole, no glass tint. Window opening approximately x=5%-96%, y=5%-86%, broad rounded rectangle, allowing lots of landscape. No people, text, numbers, logos, HUD or central objects. Realistic high-end photography with material depth and subtle imperfections, not an illustration. No fake checkerboard. Style: luxurious night train compartment. Deep chocolate walnut veneer, slim brushed bronze window trim, cream quilted leather upholstery visible as a small corner at lower right, discreet amber cove lighting at top margin, shallow polished walnut sill. Sophisticated calm private-carriage atmosphere. Large clear transparent aperture with slightly rounded corners. No curtains blocking the view, no bottles, no drinks, no table, no central lamp."
+        },
+        {
+          "name": "window_alpine",
+          "transparent_background": true,
+          "prompt": "Use case: photorealistic-natural. Asset type: transparent 16:9 train window and partial carriage interior overlay for an animated landscape app. Photorealistic close-up from a passenger's window seat, facing one enormous train window almost straight-on. Most of the picture is the view through the window; show only narrow portions of the carriage around the margins and a small partial seat corner. EVERYTHING in the window opening must be fully transparent alpha; no exterior scenery, no black or white filled hole, no glass tint. Window opening approximately x=5%-96%, y=5%-86%, broad rounded rectangle, allowing lots of landscape. No people, text, numbers, logos, HUD or central objects. Realistic high-end photography with material depth and subtle imperfections, not an illustration. No fake checkerboard. Style: Alpine observation carriage. Taller panoramic glazing curving upward into the roof. The single huge transparent window opening follows a sweeping top curve toward the ceiling, matte ivory roof trim visible in a narrow crescent at the top and right edge, brushed silver structural surround, pale oak narrow bottom sill and tiny warm gray upholstered seat edge. Aperture x=3%-97%, y=3%-89%. Distinct modern European observation-car architecture, with one slender diagonal metal brace at extreme top right only, no central divider. Soft neutral daylight in the carriage, broad uninterrupted view."
+        },
+        {
+          "name": "window_retro",
+          "transparent_background": true,
+          "prompt": "Use case: photorealistic-natural. Asset type: transparent 16:9 train window and partial carriage interior overlay for an animated landscape app. Photorealistic close-up from a passenger's window seat, facing one enormous train window almost straight-on. Most of the picture is the view through the window; show only narrow portions of the carriage around the margins and a small partial seat corner. EVERYTHING in the window opening must be fully transparent alpha; no exterior scenery, no black or white filled hole, no glass tint. Window opening approximately x=5%-96%, y=5%-86%, broad rounded rectangle, allowing lots of landscape. No people, text, numbers, logos, HUD or central objects. Realistic high-end photography with material depth and subtle imperfections, not an illustration. No fake checkerboard. Style: mid-century stainless steel railway carriage. Rounded polished chrome window surround, satin stainless steel wall edging, a strip of pale mint laminate under the sill, small curved corner of deep red ribbed vinyl seating at lower right. Large wide rounded-corner window, shallow chrome-edged sill. Authentic restored 1950s passenger coach, restrained nostalgic design, fine brushed metal grain and natural reflections, not an illustration, no writing."
+        }
+      ]
+    }
+  },
+  "realism": {
+    "version": 1,
+    "reflectionAtlas": {
+      "path": "assets/reflection_atlas.webp",
+      "source": "generated_images/exec-83900e56-ea4e-4515-b522-f8b770ea2a0b.png",
+      "tool": "built-in image_gen",
+      "prompt": "Use case: photorealistic-natural. Asset type: texture atlas of dim railway carriage interiors, to become extremely faint reflections in a scenic train-window animation. Generate ONE photographically realistic atlas arranged exactly TWO COLUMNS by FOUR ROWS, eight equal rectangular panels, each panel 16:9, flush tiled no borders or gutters. Overall aspect ratio 8:9, target 2048 by 2304 pixels. Each panel shows a very dim empty opposite train cabin wall from a seated passenger eye level facing directly across carriage. Camera almost perpendicular to wall, cropped ceiling light along top edge and seat back corners on bottom third. Central area mostly dark plain wall. NO visible windows, no landscape, no people, no text, no labels. These are interior light and seat reflections, not views outside. Order left to right then top to bottom: 1 warm walnut classic carriage with muted burgundy fabric seat backs and warm horizontal ceiling light; 2 modern Japanese commuter brushed metal wall with narrow cool white fluorescent strip and dark blue bench bottom; 3 cozy sleeper with dark wood paneling and tiny amber bedside reading lamp upper left and upholstered bunk edge below; 4 modern panoramic carriage dark gray wall and slim cool white ceiling strip with charcoal seats; 5 vintage railway dark lacquered wood, worn bottle green velvet seating, small warm brass reading lamp upper right; 6 luxury night train dark walnut wall, restrained brass, dim amber table lamp low left, plush caramel leather seats; 7 alpine observation cabin dark cream wall, matte wood trim, dim neutral reading lights and blue gray seating; 8 retro stainless steel carriage with brushed metal, thin warm ceiling light and dark teal vinyl seats. Natural photographic texture, soft shallow focus, low contrast, deep near-black midtones, lights luminous but not clipped, no black divider lines. Precisely 2 columns and 4 rows with consistent matching panel boundaries; no collage overlays. Do not depict a foreground window frame. The rendered shader supplies the glass and reflection transparency.",
+      "layout": "Two columns \u00d7 four rows: walnut, commuter, sleeper, panoramic, vintage, luxury, alpine, retro"
+    },
+    "motionBlur": "Eleven shutter samples per moving texture plane; premultiplied alpha integration, actual texture velocity \u00d7 selected train speed; stationary horizon remains sharp. No scenery edge dissolves.",
+    "windowDepth": "Eight-step extrusion of photographed aperture alpha with recessed rubber gasket and material reveal; separate near frame, pane, virtual reflection, and distant scene movement; periodic integer frequencies.",
+    "controls": [
+      "motionBlur",
+      "windowDepth"
+    ],
+    "seamlessCycleSeconds": 300
+  },
+  "atmosphere": {
+    "version": 4,
+    "wetGlass": {
+      "model": "Reduced droplet dynamics: gravity, contact-line pinning, air shear, viscous drag, water accretion, and local coalescence; height-derived refraction and recovering clearance trails.",
+      "paneMillimeters": [
+        1200,
+        675
+      ],
+      "integrationStepSeconds": 0.016666666666666666,
+      "controls": [
+        "condensation",
+        "rainFocus",
+        "wind",
+        "gust"
+      ]
+    },
+    "rainSource": "User-provided wind.mp3 (rain recording)",
+    "rainSourceLibraryId": "libfile_066ba434fcd8819186c6316fd079175b",
+    "trainAudio": "Deterministic procedural carriage rumble and wheel rhythm",
+    "music": "Imported locally at runtime; never uploaded",
+    "features": [
+      "Deterministic droplet dynamics, water-surface refraction, and condensation trails",
+      "Scene-specific carriage lighting",
+      "Independent stereo mixer",
+      "Opus audio muxed with deterministic video export"
+    ]
+  },
+  "revision": {
+    "method": "Built-in ImageGen followed by static texture assembly",
+    "assets": [
+      {
+        "name": "landscape",
+        "transparent_background": false,
+        "prompt": "Edit target: the attached photographic parallax strip. Rebuild it as a genuinely seamless horizontal repeat texture. Scene: Twilight countryside, hazy blue hills, meadow, peach and lavender cloudy sky. Keep its photographic quality, palette, broad arrangement and 3:1 panoramic aspect. It must join directly when identical copies are placed side by side, with no fades, dissolves, ghosting, overlapping duplicate objects or feathering at the sides. Left and right borders must meet with matching horizon/roof/vegetation heights and compatible colors and textures; complete structures continue coherently across the wrap. Use consistent horizontal illumination and no side vignette. Solid terrain and buildings must be fully opaque and complete, never translucent or cut away. The whole panorama must be fully opaque. Do not add a train, window, labels, text, border, sky divider or checkerboard. Production game background texture, not an image of tiled copies."
+      },
+      {
+        "name": "woodland",
+        "transparent_background": true,
+        "prompt": "Edit target: the attached photographic parallax strip. Rebuild it as a genuinely seamless horizontal repeat texture. Scene: Continuous twilight woodland ridge, detailed dark green deciduous trees and conifers above meadow. Keep its photographic quality, palette, broad arrangement and 3:1 panoramic aspect. It must join directly when identical copies are placed side by side, with no fades, dissolves, ghosting, overlapping duplicate objects or feathering at the sides. Left and right borders must meet with matching horizon/roof/vegetation heights and compatible colors and textures; complete structures continue coherently across the wrap. Use consistent horizontal illumination and no side vignette. Solid terrain and buildings must be fully opaque and complete, never translucent or cut away. Preserve genuine transparent sky above the silhouette, but keep all physical surfaces fully opaque. Leave no accidental transparent holes inside solid buildings, rocks or ground. Do not add a train, window, labels, text, border, sky divider or checkerboard. Production game background texture, not an image of tiled copies."
+      },
+      {
+        "name": "foreground",
+        "transparent_background": true,
+        "prompt": "Edit target: the attached photographic parallax strip. Rebuild it as a genuinely seamless horizontal repeat texture. Scene: Twilight trackside grasses and shrubs, continuous lower ground with detailed plant tops. Keep its photographic quality, palette, broad arrangement and 3:1 panoramic aspect. It must join directly when identical copies are placed side by side, with no fades, dissolves, ghosting, overlapping duplicate objects or feathering at the sides. Left and right borders must meet with matching horizon/roof/vegetation heights and compatible colors and textures; complete structures continue coherently across the wrap. Use consistent horizontal illumination and no side vignette. Solid terrain and buildings must be fully opaque and complete, never translucent or cut away. Preserve genuine transparent sky above the silhouette, but keep all physical surfaces fully opaque. Leave no accidental transparent holes inside solid buildings, rocks or ground. Do not add a train, window, labels, text, border, sky divider or checkerboard. Production game background texture, not an image of tiled copies."
+      },
+      {
+        "name": "citysky",
+        "transparent_background": false,
+        "prompt": "Edit target: the attached photographic parallax strip. Rebuild it as a genuinely seamless horizontal repeat texture. Scene: Expansive Japanese night city skyline, tiny warm windows, indigo sky, no single dominant landmark. Keep its photographic quality, palette, broad arrangement and 3:1 panoramic aspect. It must join directly when identical copies are placed side by side, with no fades, dissolves, ghosting, overlapping duplicate objects or feathering at the sides. Left and right borders must meet with matching horizon/roof/vegetation heights and compatible colors and textures; complete structures continue coherently across the wrap. Use consistent horizontal illumination and no side vignette. Solid terrain and buildings must be fully opaque and complete, never translucent or cut away. The whole panorama must be fully opaque. Do not add a train, window, labels, text, border, sky divider or checkerboard. Production game background texture, not an image of tiled copies."
+      },
+      {
+        "name": "citymid",
+        "transparent_background": true,
+        "prompt": "Edit target: the attached photographic parallax strip. Rebuild it as a genuinely seamless horizontal repeat texture. Scene: Japanese night apartment and shop buildings. Complete solid buildings with straight facades and intact rooftops. Keep its photographic quality, palette, broad arrangement and 3:1 panoramic aspect. It must join directly when identical copies are placed side by side, with no fades, dissolves, ghosting, overlapping duplicate objects or feathering at the sides. Left and right borders must meet with matching horizon/roof/vegetation heights and compatible colors and textures; complete structures continue coherently across the wrap. Use consistent horizontal illumination and no side vignette. Solid terrain and buildings must be fully opaque and complete, never translucent or cut away. Preserve genuine transparent sky above the silhouette, but keep all physical surfaces fully opaque. Leave no accidental transparent holes inside solid buildings, rocks or ground. Do not add a train, window, labels, text, border, sky divider or checkerboard. Production game background texture, not an image of tiled copies."
+      },
+      {
+        "name": "citynear",
+        "transparent_background": true,
+        "prompt": "Edit target: the attached photographic parallax strip. Rebuild it as a genuinely seamless horizontal repeat texture. Scene: Japanese railway-side night lowrise buildings, tiled rooftops, air conditioning units, warm windows. Keep its photographic quality, palette, broad arrangement and 3:1 panoramic aspect. It must join directly when identical copies are placed side by side, with no fades, dissolves, ghosting, overlapping duplicate objects or feathering at the sides. Left and right borders must meet with matching horizon/roof/vegetation heights and compatible colors and textures; complete structures continue coherently across the wrap. Use consistent horizontal illumination and no side vignette. Solid terrain and buildings must be fully opaque and complete, never translucent or cut away. Preserve genuine transparent sky above the silhouette, but keep all physical surfaces fully opaque. Leave no accidental transparent holes inside solid buildings, rocks or ground. Do not add a train, window, labels, text, border, sky divider or checkerboard. Production game background texture, not an image of tiled copies."
+      },
+      {
+        "name": "cityrail",
+        "transparent_background": true,
+        "prompt": "Edit target: the attached photographic parallax strip. Rebuild it as a genuinely seamless horizontal repeat texture. Scene: Dark railway parapet with railing across the bottom, one solid utility pole above it. Pole well away from edges. Keep its photographic quality, palette, broad arrangement and 3:1 panoramic aspect. It must join directly when identical copies are placed side by side, with no fades, dissolves, ghosting, overlapping duplicate objects or feathering at the sides. Left and right borders must meet with matching horizon/roof/vegetation heights and compatible colors and textures; complete structures continue coherently across the wrap. Use consistent horizontal illumination and no side vignette. Solid terrain and buildings must be fully opaque and complete, never translucent or cut away. Preserve genuine transparent sky above the silhouette, but keep all physical surfaces fully opaque. Leave no accidental transparent holes inside solid buildings, rocks or ground. Do not add a train, window, labels, text, border, sky divider or checkerboard. Production game background texture, not an image of tiled copies."
+      },
+      {
+        "name": "desertsky",
+        "transparent_background": false,
+        "prompt": "Edit target: the attached photographic parallax strip. Rebuild it as a genuinely seamless horizontal repeat texture. Scene: Southwestern sunset basin, distant purple mountains and red mesas, warm peach and lavender sky, no saguaro. Keep its photographic quality, palette, broad arrangement and 3:1 panoramic aspect. It must join directly when identical copies are placed side by side, with no fades, dissolves, ghosting, overlapping duplicate objects or feathering at the sides. Left and right borders must meet with matching horizon/roof/vegetation heights and compatible colors and textures; complete structures continue coherently across the wrap. Use consistent horizontal illumination and no side vignette. Solid terrain and buildings must be fully opaque and complete, never translucent or cut away. The whole panorama must be fully opaque. Do not add a train, window, labels, text, border, sky divider or checkerboard. Production game background texture, not an image of tiled copies."
+      },
+      {
+        "name": "desertmesa",
+        "transparent_background": true,
+        "prompt": "Edit target: the attached photographic parallax strip. Rebuild it as a genuinely seamless horizontal repeat texture. Scene: Sunset red-rock foothills and low mesas with sparse scrub. Continuous ground. Keep its photographic quality, palette, broad arrangement and 3:1 panoramic aspect. It must join directly when identical copies are placed side by side, with no fades, dissolves, ghosting, overlapping duplicate objects or feathering at the sides. Left and right borders must meet with matching horizon/roof/vegetation heights and compatible colors and textures; complete structures continue coherently across the wrap. Use consistent horizontal illumination and no side vignette. Solid terrain and buildings must be fully opaque and complete, never translucent or cut away. Preserve genuine transparent sky above the silhouette, but keep all physical surfaces fully opaque. Leave no accidental transparent holes inside solid buildings, rocks or ground. Do not add a train, window, labels, text, border, sky divider or checkerboard. Production game background texture, not an image of tiled copies."
+      },
+      {
+        "name": "desertnear",
+        "transparent_background": true,
+        "prompt": "Edit target: the attached photographic parallax strip. Rebuild it as a genuinely seamless horizontal repeat texture. Scene: Southwestern rocky terrain and scrub at sunset, low yucca and sage, dry grasses, no saguaro. Keep its photographic quality, palette, broad arrangement and 3:1 panoramic aspect. It must join directly when identical copies are placed side by side, with no fades, dissolves, ghosting, overlapping duplicate objects or feathering at the sides. Left and right borders must meet with matching horizon/roof/vegetation heights and compatible colors and textures; complete structures continue coherently across the wrap. Use consistent horizontal illumination and no side vignette. Solid terrain and buildings must be fully opaque and complete, never translucent or cut away. Preserve genuine transparent sky above the silhouette, but keep all physical surfaces fully opaque. Leave no accidental transparent holes inside solid buildings, rocks or ground. Do not add a train, window, labels, text, border, sky divider or checkerboard. Production game background texture, not an image of tiled copies."
+      },
+      {
+        "name": "desertgrass",
+        "transparent_background": true,
+        "prompt": "Edit target: the attached photographic parallax strip. Rebuild it as a genuinely seamless horizontal repeat texture. Scene: Golden desert grasses with sagebrush at sunset, realistic fine stems and gravel ground. Keep its photographic quality, palette, broad arrangement and 3:1 panoramic aspect. It must join directly when identical copies are placed side by side, with no fades, dissolves, ghosting, overlapping duplicate objects or feathering at the sides. Left and right borders must meet with matching horizon/roof/vegetation heights and compatible colors and textures; complete structures continue coherently across the wrap. Use consistent horizontal illumination and no side vignette. Solid terrain and buildings must be fully opaque and complete, never translucent or cut away. Preserve genuine transparent sky above the silhouette, but keep all physical surfaces fully opaque. Leave no accidental transparent holes inside solid buildings, rocks or ground. Do not add a train, window, labels, text, border, sky divider or checkerboard. Production game background texture, not an image of tiled copies."
+      }
+    ],
+    "implementation": "Eight moving layers use static minimum-error-cut repeat tiles: whole source pixels, no opacity blending. One guard column at each edge preserves native bilinear sampling. Near-opaque source alpha is normalized to solid. Three distant panoramas remain stationary and never tile. No mirrored repeats. Spatial repeats were inspected side by side; all 24 scene/carriage combinations rendered at the master-cycle boundary."
+  },
+  "tileBuild": [
+    {
+      "name": "landscape",
+      "mode": "fixed distant horizon",
+      "source": "generated_images/exec-79fc81d0-b435-4c3d-8d3f-ae4b930a908f.png"
+    },
+    {
+      "name": "woodland",
+      "mode": "static repeat, no blending",
+      "source": "generated_images/exec-71312f04-0852-4499-9f06-03501dd89abe.png",
+      "width": 1708,
+      "height": 724,
+      "guardWidth": 1710,
+      "cutCost": 188,
+      "periodFraction": 0.7863720073664825
+    },
+    {
+      "name": "foreground",
+      "mode": "static repeat, no blending",
+      "source": "generated_images/exec-4dec000f-6754-4549-b494-7ccd95894bad.png",
+      "width": 2032,
+      "height": 724,
+      "guardWidth": 2034,
+      "cutCost": 357,
+      "periodFraction": 0.9355432780847146
+    },
+    {
+      "name": "citysky",
+      "mode": "fixed distant horizon",
+      "source": "generated_images/exec-c5c0304a-c484-44b4-a4d9-1c178fe8b85d.png"
+    },
+    {
+      "name": "citymid",
+      "mode": "static repeat, no blending",
+      "source": "generated_images/exec-41b340c9-e43a-4764-9fdf-32e0203a2ee7.png",
+      "width": 2076,
+      "height": 724,
+      "guardWidth": 2078,
+      "cutCost": 20,
+      "periodFraction": 0.9558011049723757
+    },
+    {
+      "name": "citynear",
+      "mode": "static repeat, no blending",
+      "source": "generated_images/exec-2e9e940c-3e4a-499c-aa11-d3cabc7331b6.png",
+      "width": 1712,
+      "height": 724,
+      "guardWidth": 1714,
+      "cutCost": 11,
+      "periodFraction": 0.7882136279926335
+    },
+    {
+      "name": "cityrail",
+      "mode": "static repeat, no blending",
+      "source": "generated_images/exec-b91aa746-df5c-4276-b667-72aeee0e3b4a.png",
+      "width": 1660,
+      "height": 724,
+      "guardWidth": 1662,
+      "cutCost": 35,
+      "periodFraction": 0.7642725598526704
+    },
+    {
+      "name": "desertsky",
+      "mode": "fixed distant horizon",
+      "source": "generated_images/exec-3d2d2517-9b15-40b6-b9aa-6417b45d0412.png"
+    },
+    {
+      "name": "desertmesa",
+      "mode": "static repeat, no blending",
+      "source": "generated_images/exec-41f5f3ff-9044-4b11-af2b-dc2194a00383.png",
+      "width": 1860,
+      "height": 724,
+      "guardWidth": 1862,
+      "cutCost": 570,
+      "periodFraction": 0.856353591160221
+    },
+    {
+      "name": "desertnear",
+      "mode": "static repeat, no blending",
+      "source": "generated_images/exec-774ea984-c2d2-46cb-a7fc-da66e96b7ad8.png",
+      "width": 1776,
+      "height": 724,
+      "guardWidth": 1778,
+      "cutCost": 1068,
+      "periodFraction": 0.8176795580110497
+    },
+    {
+      "name": "desertgrass",
+      "mode": "static repeat, no blending",
+      "source": "generated_images/exec-bb703ec6-cc4e-43ba-a1a0-fbdb827c9e07.png",
+      "width": 1604,
+      "height": 724,
+      "guardWidth": 1606,
+      "cutCost": 408,
+      "periodFraction": 0.7384898710865562
+    }
+  ],
+  "riverEdition": {
+    "version": 1,
+    "bridge": {
+      "method": "Built-in ImageGen; original bridge image edited to remove all water and background",
+      "prompt": "Edit this exact photographic riveted steel railway bridge panorama into a bridge-only transparent cutout for a layered animation. Preserve the bridge's exact framing, dimensions (wide 3:1 panorama), straight girders, diagonal braces, vertical supports, horizontal rails, rivets, authentic rusty dark metal, photographic detail and illumination. REMOVE ALL WATER, ALL SKY, ALL BACKGROUND between the structural steel members, including every small gap between the two horizontal rails and between braces below them. Every non-steel pixel should be fully transparent alpha. There must be no blue river, no water texture, no horizon line, no landscape and no solid dark background, ONLY the isolated bridge steelwork on true transparency. Do not add or move any structural members. Steel stays solid and opaque, no fades.",
+      "transparent_background": true,
+      "asset": "journey_atlas bridge row (1536 x 512)",
+      "repeat": "Whole-pixel minimum-error seam cut with guard columns; opaque steel and transparent openings"
+    },
+    "water": {
+      "method": "Continuous perspective-projected horizontal river plane with four overlapping wave scales and twelve directional wave components",
+      "depth": "World-space camera translation; ripple size and screen velocity decrease with distance",
+      "reflection": "Scene-specific photographic sky/bank reflected through the animated normal field; Fresnel response and roughness filtering",
+      "loop": "128-m periodic field, 384-m camera travel, integer temporal frequencies on the 300-second master cycle",
+      "sampling": "Distance filtering for unresolved waves; separate seven-sample shutter blur on the bridge",
+      "scenes": "All six presets; constant visible river-bank height with proportional photographic backdrop scaling"
+    },
+    "validation": {
+      "rendering": "Actual GLES2 shader frames in all six presets; eight-second native-shader motion preview",
+      "loop": "Forced river-visible frame at 0 and 300 seconds compared pixel-for-pixel",
+      "limits": "Browser playback and WebCodecs export not newly tested end to end in this revision"
+    }
+  },
+  "transitionEdition": {
+    "version": 1,
+    "station": {
+      "method": "Built-in ImageGen; complete station platform with natural end ramps and approach lamps",
+      "prompt": "Use case: precise-object-edit. Edit this station panorama for a realistic train-window animation. Preserve the same photographic small wooden station, chimney, warm amber windows and lamps, canopy, benches, luggage, muted blue-hour light and realistic materials. Recompose it as a COMPLETE FREESTANDING STATION PLATFORM isolated on true transparent alpha, in a very wide 3:1 image. Keep the main building centered and intact in the middle 55% of the width. Extend the platform and low fence naturally to the left and right with open approach sections, a few widely spaced warm lamps, bushes and a short ramp at EACH end. Critically: show both physical ends of the raised stone platform, with perspective thickness, weathered masonry side faces and gently sloping end ramps down to the trackside ground. Nothing is cut off by the left/right image boundaries: leave clear transparent margin on both sides. The entire station, platform, lamps and building must fit inside the image, with transparent sky above, transparent gaps, and transparent background around BOTH fully visible platform ends. Bottom-most ground can reach the bottom edge centrally, but the station has a natural shaped silhouette at each side, NOT a hard rectangular boundary. Opaque solid architecture, crisp real edges, no fades, no ghosting, no text, no people, no rails, no train, no window frame. Eye level side-on platform seen from a passing train, close realistic photography, not a miniature or illustration.",
+      "transparent_background": true
+    },
+    "transitions": {
+      "bridge": "World-space river boundaries, multiple scenery depths and finite bridge structure with masonry abutments and steel end posts; one continuous sky camera",
+      "terrain": "Eighteen lossless object-anchor maps; low-alpha seams preserve stable scenic groups, with perspective terrain banks below the objects",
+      "bayou": "Continuous projected water; only photographic reflection tails blend into the moving surface",
+      "tunnel": "Ray-intersected cylindrical tunnel and stone portal faces, distance-based daylight and shutter blur; nearby portal passage instead of timed screen wipe",
+      "sceneChanges": "Connected scene changes occur while the window is fully occluded by the tunnel",
+      "station": "Finite photographic platform with intact ends passes the existing view; speed follows arrival, station stop and departure",
+      "previews": "Approach buttons resume playback before each feature in the current journey leg"
+    },
+    "validation": {
+      "functional": "Journey/stop/loop, export planning and queue orchestration checked with Node mocks",
+      "visual": "Actual GLES2 frames plus native-shader motion clips of bridge approach, tunnel entry, station arrival and connected-scene exit",
+      "loop": "Full 900-second journey is pixel-identical at the wrap; scene switch occurs behind an opaque tunnel",
+      "limitations": "Browser WebCodecs export was not tested end-to-end during this change"
+    }
+  },
+  "groundingEdition": {
+    "version": 1,
+    "changes": [
+      "Station placement anchored to its actual opaque platform base instead of the transparent image canvas",
+      "Photographic proportions preserved; platform foundation lowered to trackside ground level",
+      "Perspective ground bed and ramp-following contact shadow share the station's track position",
+      "Scene-matched gravel, desert soil, snowy ground and bayou embankment colors",
+      "Nearby foliage and railway poles now pass in front of the station; fog and snow use the correct depth order",
+      "Station shutter blur follows its own velocity and stops when the train stops"
+    ],
+    "validation": {
+      "nativeFrames": 200,
+      "scenes": 6,
+      "windowStyles": 8,
+      "orderedScenePairs": 36,
+      "completeJourneyLoopMaxPixelError": 0,
+      "maxScenePairMeanPixelDifference": 0.30476128472222225,
+      "coverage": "Station arrivals, stops and departures; bridge entries, crossings and exits; tunnel entries and exits; every ordered scene pair; all scene/window combinations",
+      "additional": "Unframed ground-support, rain and snow checks, plus station approach/departure motion sequences",
+      "functional": "Existing timing, stops, export planning, 20-minute/60-FPS mocked encoding, queue and cancellation checks passed",
+      "limitations": "Native GLES2 rendering and mocked codec orchestration; browser export not tested end to end"
+    }
+  },
+  "journeyEdition": {
+    "version": 1,
+    "artwork": {
+      "method": "Built-in ImageGen",
+      "assets": [
+        {
+          "name": "event_station",
+          "transparent_background": true,
+          "prompt": "Photorealistic-natural production parallax asset. A single extra-wide 3:1 panorama, side-on view from a train window of a quiet small railway platform at blue-hour dusk. Weathered wooden waiting room with warm amber windows in center, broad platform paving along entire bottom quarter, a modest shelter canopy, old benches, several simple slender amber lamps, luggage cart, realistic steel and wood textures. Platform eye level parallel to train, no perspective converging toward viewer. Structures across lower 70 percent. True alpha transparent sky above and between buildings, fully opaque actual building walls, paving and lamp posts. Warmly lit inviting station, no people, no trains, no readable signs or text, no seasonal decorations, no branding. Left and right edges end naturally with platform paving and simple low fence, no buildings chopped off. Continuous bottom paving opaque. Cinematic photography, no vector/cartoon/miniature. Not a montage."
+        },
+        {
+          "name": "event_bridge",
+          "transparent_background": true,
+          "prompt": "Photorealistic-natural production parallax scenery. Single ultra-wide 3:1 panorama of the side view from inside a train crossing an old steel railway bridge over a broad river at dusk. Eye level slightly above a waist-high weathered steel railing across bottom, occasional thin riveted vertical supports and diagonal truss beams, clear views BETWEEN steel beams of distant background which must be genuine alpha transparent. Lower 40 percent is a wide calm dark blue-grey river seen from bridge height with subdued sky reflections, fully opaque water reaching bottom edge; no shore directly beneath. Upper river horizon a flat horizontal line about 60 percent image height; transparent above horizon except actual steel girders. Muted neutral blue dusk, iron dark charcoal, warm subtle highlights. Truly horizontally seamless repeat left-right matching railing alignment and river level, no fades or feathering at edges. All solid objects opaque, no missing metal, no people, trains, text, watermark, frame, mountains or buildings. Realistic materials, not illustration. One production texture."
+        },
+        {
+          "name": "event_tunnel",
+          "transparent_background": false,
+          "prompt": "Photorealistic-natural production repeating texture, extra-wide 3:1 panorama. Sideways view very close to the interior side wall of an old railway tunnel seen from a passing train, damp charcoal masonry and dark concrete, subtle horizontal cable conduits, occasional small amber utility light evenly spaced. Full opaque rectangle with same wall scale and exposure everywhere. NO vanishing point or view down tunnel, no tracks in foreground, no train or window, no text. Flat broadside wall panorama; dark but enough detail to see rough stone and moisture. True seamless horizontal left-right repeat, matching brick courses, no faded edges, no mirror symmetry. Cinematic location photography, no vector art."
+        },
+        {
+          "name": "cabin_curtain",
+          "transparent_background": true,
+          "prompt": "Photorealistic-natural isolated asset for a train compartment. One narrow long dark burgundy woven fabric curtain hanging vertically, softly gathered folds, brushed cloth with fine realistic texture, warm amber light on the right-facing folds, dark shadows. Curtain tied loosely near bottom third so fabric bows gently to right, entire curtain intact top to hem; no rod or hooks. Transparent background with actual alpha, no wall or window or border. Portrait 1:3 shape centered with transparent margins. Fine realistic edges, natural cloth, no cartoon. This is a reusable cutout to hang at the left edge of a train window."
+        },
+        {
+          "name": "cabin_mug",
+          "transparent_background": true,
+          "prompt": "Photorealistic-natural isolated still life cutout for a train window sill. Small simple off-white ceramic mug filled with dark coffee, handle on right, resting on a small round cork coaster. Camera at seated eye height looking down gently at the coffee surface, front-side three-quarter view. Warm amber carriage light from upper left, subtle cool window fill. Natural ceramic glaze, no text or decoration, no brand. Genuine transparent background, no tabletop, no scene, no hands. Mug and coaster fully opaque, soft close contact shadow beneath coaster only. Entire object intact. Do NOT add steam, it will be animated separately."
+        }
+      ]
+    },
+    "features": [
+      "Selectable three-scene journeys with tunnel-covered scene transitions",
+      "River bridges and station arrivals / 16-second pauses / departures",
+      "Rain and mist cycles; edge-weighted condensation",
+      "Photographic swaying curtain and steaming mug, reading-light glow, glass marks, window-seat distance",
+      "Named favorites, local browser persistence, JSON backup/import",
+      "Snapshot export queue with sequential folder saves or download handoffs",
+      "Train audio follows station stops, tunnel echo and changing rain"
+    ],
+    "timing": {
+      "legSeconds": 300,
+      "journeySeconds": 900,
+      "stationDeceleration": [
+        92,
+        112
+      ],
+      "stationWait": [
+        112,
+        128
+      ],
+      "stationDeparture": [
+        128,
+        148
+      ]
+    },
+    "validation": "JavaScript orchestration and mocked WebCodecs tests; actual GLES2 shader rendering and 2D compositor; deterministic physical-rain loop and sample-mixer tests. Browser WebCodecs export was not exercised end to end."
+  },
+  "riverbankEdition": {
+    "method": "Built-in image_gen tool",
+    "prompt": "Use case: photorealistic-natural. Asset type: seamless photographic ground material texture for a real-time train-window scene, one single square texture. Orthographic straight-down view of a 3 metre by 3 metre patch of natural riverbank ground. Small weathered river pebbles, tiny flat stones, gritty damp sandy soil, scattered fine moss and a few very short sparse grass blades. Muted neutral gray-brown and olive tones. Uniform overcast diffuse light, no directional cast shadows, no perspective, no horizon, no water, no buildings, no fence, no railway tracks, no objects with recognizable silhouette, no large rocks, no lettering. Detail resembles high-resolution photogrammetry albedo for a natural riverbank. Flat evenly distributed fine detail, no dominant recognizable arrangement. All four edges must tile seamlessly with each other, matching color, scale and detail. Entire image is one opaque continuous ground patch, not an atlas or a collage. Square 1024 x 1024.",
+    "asset": "dist/assets/riverbank_ground.webp",
+    "atlas": "dist/assets/journey_atlas_river.webp",
+    "packing": "Photographic ground resized into a wrapped 512-pixel tile beside the original atlas; all original RGBA pixels retained exactly in a lossless 2048\u00d74032 atlas.",
+    "geometry": "Shared ray intersection with sloped river banks, world-anchored material, shallow-water shelf and wet shoreline, applied consistently at bridge entry and exit."
+  }
+}

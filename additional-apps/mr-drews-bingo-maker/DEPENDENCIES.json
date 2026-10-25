@@ -1,0 +1,70 @@
+{
+  "source_url": "https://musicaldrewby.github.io/music_teacher/bingo_maker.html",
+  "retrieved": "2026-10-08",
+  "original_sha256": "23bc6d504b768cfe94fdf8b8f5a9d4f7210c02ca70548c5941c6cadd2f47c204",
+  "assets": [
+    {
+      "url": "https://cdn.tailwindcss.com",
+      "resolved_url": "https://cdn.tailwindcss.com/3.4.17",
+      "path": "assets/vendor/tailwind.min.js",
+      "bytes": 407279,
+      "sha256": "176e894661aa9cdc9a5cba6c720044cbbf7b8bd80d1c9a142a7c24b1b6c50d15"
+    },
+    {
+      "url": "https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js",
+      "resolved_url": "https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js",
+      "path": "assets/vendor/jspdf.umd.min.js",
+      "bytes": 364463,
+      "sha256": "98ccf17aa10c20bb1301762618fcc9b6ab3a4e7f26b6071d64d0b41154df3875"
+    },
+    {
+      "url": "https://cdn.jsdelivr.net/gh/gitbrent/pptxgenjs@3.12.0/libs/jszip.min.js",
+      "resolved_url": "https://cdn.jsdelivr.net/gh/gitbrent/pptxgenjs@3.12.0/libs/jszip.min.js",
+      "path": "assets/vendor/jszip.min.js",
+      "bytes": 99112,
+      "sha256": "301f962999873267b605154aa43b886dfb3a56549d508018d55ae852613ea7c8"
+    },
+    {
+      "url": "https://cdn.jsdelivr.net/gh/gitbrent/pptxgenjs@3.12.0/dist/pptxgen.min.js",
+      "resolved_url": "https://cdn.jsdelivr.net/gh/gitbrent/pptxgenjs@3.12.0/dist/pptxgen.min.js",
+      "path": "assets/vendor/pptxgen.min.js",
+      "bytes": 283930,
+      "sha256": "101f9ba0d1948e93854aea391dfe4370235604e63239f0055267bb5c8f02ba3b"
+    },
+    {
+      "url": "https://fonts.googleapis.com/css2?family=Fredoka+One&family=Inter:wght@400;600;800&display=swap",
+      "resolved_url": "https://fonts.googleapis.com/css2?family=Fredoka+One&family=Inter:wght@400;600;800&display=swap",
+      "path": "assets/fonts/fonts.css",
+      "bytes": 900,
+      "sha256": "9db764bbd8c97a836879348958756ad79420ff316dec1ecc15badce1590b873f"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/fredokaone/v15/k3kUo8kEI-tA1RRcTZGmTmHB.ttf",
+      "resolved_url": "https://fonts.gstatic.com/s/fredokaone/v15/k3kUo8kEI-tA1RRcTZGmTmHB.ttf",
+      "path": "assets/fonts/font-1.ttf",
+      "bytes": 42068,
+      "sha256": "44c72ebd0a8dd0586295b81c790624a976d353f7f751dbc98bff19e4ffd65721"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/inter/v20/UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuLyfMZg.ttf",
+      "resolved_url": "https://fonts.gstatic.com/s/inter/v20/UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuLyfMZg.ttf",
+      "path": "assets/fonts/font-2.ttf",
+      "bytes": 324820,
+      "sha256": "1b08e7fc267a5c7e1d614100f604b83e7e8a0be241f0f288faa2b3ac93a683ba"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/inter/v20/UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuGKYMZg.ttf",
+      "resolved_url": "https://fonts.gstatic.com/s/inter/v20/UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuGKYMZg.ttf",
+      "path": "assets/fonts/font-3.ttf",
+      "bytes": 326048,
+      "sha256": "e7a1aaf7eda9f2fad4131725fa556265ec75ca7b2d756260173a040363e8d4f7"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/inter/v20/UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuDyYMZg.ttf",
+      "resolved_url": "https://fonts.gstatic.com/s/inter/v20/UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuDyYMZg.ttf",
+      "path": "assets/fonts/font-4.ttf",
+      "bytes": 327324,
+      "sha256": "eec66af7f2337bd34fe6e801cf92ededcb57a20c0d7bc40a61d4eefcbe3dd40c"
+    }
+  ]
+}

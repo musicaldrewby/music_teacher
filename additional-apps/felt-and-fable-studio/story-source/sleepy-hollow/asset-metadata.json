@@ -1,0 +1,342 @@
+{
+  "table": [
+    531,
+    296
+  ],
+  "basket": [
+    225,
+    213
+  ],
+  "bough": [
+    550,
+    400
+  ],
+  "valley-day": [
+    1600,
+    900
+  ],
+  "farmhouse": [
+    1600,
+    900
+  ],
+  "schoolroom": [
+    1600,
+    900
+  ],
+  "farmhouse-interior": [
+    1600,
+    900
+  ],
+  "woods-night": [
+    1600,
+    900
+  ],
+  "church-bridge-night": [
+    1600,
+    900
+  ],
+  "ichabod-stand": [
+    512,
+    520
+  ],
+  "ichabod-sing": [
+    512,
+    520
+  ],
+  "ichabod-startled": [
+    512,
+    520
+  ],
+  "ichabod-dance": [
+    512,
+    520
+  ],
+  "ichabod-sad": [
+    512,
+    520
+  ],
+  "ichabod-worry": [
+    512,
+    520
+  ],
+  "katrina-stand": [
+    512,
+    520
+  ],
+  "katrina-book": [
+    512,
+    520
+  ],
+  "katrina-amused": [
+    512,
+    520
+  ],
+  "katrina-dance": [
+    512,
+    520
+  ],
+  "katrina-listen": [
+    512,
+    520
+  ],
+  "katrina-think": [
+    512,
+    520
+  ],
+  "brom-stand": [
+    512,
+    520
+  ],
+  "brom-tell": [
+    512,
+    520
+  ],
+  "brom-laugh": [
+    512,
+    520
+  ],
+  "brom-sit": [
+    512,
+    520
+  ],
+  "brom-hand": [
+    512,
+    520
+  ],
+  "brom-think": [
+    512,
+    520
+  ],
+  "ichabod-startled-bust": [
+    512,
+    310
+  ],
+  "ichabod-worry-bust": [
+    512,
+    310
+  ],
+  "mounted-stand": [
+    900,
+    600
+  ],
+  "mounted-step": [
+    900,
+    600
+  ],
+  "mounted-gather": [
+    900,
+    600
+  ],
+  "mounted-extend": [
+    900,
+    600
+  ],
+  "bareback-stand": [
+    900,
+    600
+  ],
+  "bareback-step": [
+    900,
+    600
+  ],
+  "bareback-gather": [
+    900,
+    600
+  ],
+  "bareback-extend": [
+    900,
+    600
+  ],
+  "horseman-stand": [
+    900,
+    600
+  ],
+  "horseman-extend": [
+    900,
+    600
+  ],
+  "horseman-gather": [
+    900,
+    600
+  ],
+  "horseman-raise": [
+    900,
+    600
+  ],
+  "hat": [
+    527,
+    326
+  ],
+  "pumpkin": [
+    450,
+    416
+  ],
+  "saddle": [
+    461,
+    481
+  ],
+  "invitation": [
+    478,
+    331
+  ],
+  "pie": [
+    496,
+    352
+  ],
+  "frog": [
+    455,
+    332
+  ],
+  "grazing": [
+    1372,
+    788
+  ],
+  "stranger-lower": [
+    900,
+    350
+  ],
+  "mounted-lower": [
+    900,
+    350
+  ],
+  "revision-hearth": [
+    1600,
+    900
+  ],
+  "revision-supper": [
+    1600,
+    900
+  ],
+  "revision-dance": [
+    1600,
+    900
+  ],
+  "revision-school": [
+    1600,
+    900
+  ],
+  "revision-orchard": [
+    1600,
+    900
+  ],
+  "revision-tree": [
+    1600,
+    900
+  ],
+  "revision-stream": [
+    1600,
+    900
+  ],
+  "revision-ridge": [
+    1600,
+    900
+  ],
+  "revision-farmhouse-night": [
+    1600,
+    900
+  ],
+  "revision-supper-front": [
+    1600,
+    360
+  ],
+  "dining-feast": [
+    1600,
+    900
+  ],
+  "dining-empty": [
+    1600,
+    900
+  ],
+  "dining-dream": [
+    1600,
+    900
+  ],
+  "ichabod-attentive": [
+    512,
+    520
+  ],
+  "ichabod-teach": [
+    512,
+    520
+  ],
+  "ichabod-invitation": [
+    512,
+    520
+  ],
+  "ichabod-greet": [
+    512,
+    520
+  ],
+  "ichabod-seated-listen": [
+    512,
+    520
+  ],
+  "ichabod-seated-uneasy": [
+    512,
+    520
+  ],
+  "ichabod-chores": [
+    512,
+    520
+  ],
+  "ichabod-disappointed": [
+    512,
+    520
+  ],
+  "brom-watch": [
+    512,
+    520
+  ],
+  "brom-seated-listen": [
+    512,
+    520
+  ],
+  "brom-converse": [
+    512,
+    520
+  ],
+  "brom-knowing": [
+    512,
+    520
+  ],
+  "katrina-seated-listen": [
+    512,
+    520
+  ],
+  "katrina-welcome": [
+    512,
+    520
+  ],
+  "katrina-skeptical": [
+    512,
+    520
+  ],
+  "katrina-reply": [
+    512,
+    520
+  ],
+  "lodging-stable-dusk": [
+    1600,
+    900
+  ],
+  "orchard-lane-dusk": [
+    1600,
+    900
+  ],
+  "lodging-stable-morning": [
+    1600,
+    900
+  ],
+  "ichabod-ready-gunpowder": [
+    900,
+    600
+  ],
+  "mounted-sad": [
+    900,
+    600
+  ],
+  "mounted-uneasy": [
+    900,
+    600
+  ]
+}

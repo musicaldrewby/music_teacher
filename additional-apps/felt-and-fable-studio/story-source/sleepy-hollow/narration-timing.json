@@ -1,0 +1,505 @@
+{
+  "version": 1,
+  "narrator": "Drew Wichman",
+  "duration": 699.9468958333332,
+  "cues": [
+    {
+      "id": "01A",
+      "start": 0,
+      "sourceStart": 8.080000000000002,
+      "firstWords": "Long ago beside New York's Hudson River, there was a",
+      "matchOffset": 0
+    },
+    {
+      "id": "01B",
+      "start": 15.4,
+      "sourceStart": 23.32,
+      "firstWords": "But after sunset, the neighbors had stories to tell. And",
+      "matchOffset": 0
+    },
+    {
+      "id": "02A",
+      "start": 27.122,
+      "sourceStart": 38.71,
+      "firstWords": "Their most famous story was about the headless horseman. people",
+      "matchOffset": 0
+    },
+    {
+      "id": "02B",
+      "start": 42.482,
+      "sourceStart": 54.07,
+      "firstWords": "Before daylight he had to return to the old churchyard.",
+      "matchOffset": 0
+    },
+    {
+      "id": "03A",
+      "start": 52.577,
+      "sourceStart": 67.77,
+      "firstWords": "Now the village school teacher was a man named Ichabod",
+      "matchOffset": 0
+    },
+    {
+      "id": "03B",
+      "start": 66.416,
+      "sourceStart": 81.61,
+      "firstWords": "he also taught singing, and was very pleased with his",
+      "matchOffset": 0
+    },
+    {
+      "id": "04A",
+      "start": 76.556,
+      "sourceStart": 97.12,
+      "firstWords": "The families of the village took turns giving him a",
+      "matchOffset": 0
+    },
+    {
+      "id": "04B",
+      "start": 90.576,
+      "sourceStart": 111.14,
+      "firstWords": "Looking at that narrow school teacher you might wonder where",
+      "matchOffset": 0
+    },
+    {
+      "id": "05A",
+      "start": 101.163,
+      "sourceStart": 130.76,
+      "firstWords": "After supper, Ichabod loved to sit by the fire and",
+      "matchOffset": 0
+    },
+    {
+      "id": "05B",
+      "start": 112.003,
+      "sourceStart": 141.6,
+      "firstWords": "Walking home alone was another matter. A frog croaked, a",
+      "matchOffset": 0
+    },
+    {
+      "id": "06A",
+      "start": 127.301,
+      "sourceStart": 161.0,
+      "firstWords": "One of Ichabod singing pupils was Katrina Vantassel, a young",
+      "matchOffset": 0
+    },
+    {
+      "id": "06B",
+      "start": 144.741,
+      "sourceStart": 178.44,
+      "firstWords": "Soon he was imagining himself married to Katrina, sitting comfortably",
+      "matchOffset": 0
+    },
+    {
+      "id": "07A",
+      "start": 156.991,
+      "sourceStart": 210.34,
+      "firstWords": "Unfortunately for Ichabod, another man hoped to marry Katrina, his",
+      "matchOffset": 0
+    },
+    {
+      "id": "07B",
+      "start": 179.911,
+      "sourceStart": 233.26,
+      "firstWords": "Ichabod had no wish to challenge him. He simply kept",
+      "matchOffset": 0
+    },
+    {
+      "id": "08A",
+      "start": 188.204,
+      "sourceStart": 245.83,
+      "firstWords": "One autumn day, an invitation arrived. The van tassels were",
+      "matchOffset": 0
+    },
+    {
+      "id": "08B",
+      "start": 197.834,
+      "sourceStart": 255.46,
+      "firstWords": "He borrowed an old horse named Gunpowder. It was a",
+      "matchOffset": 0
+    },
+    {
+      "id": "09A",
+      "start": 217.214,
+      "sourceStart": 313.14,
+      "firstWords": "The farmhouse windows shown with warm light. Inside the tables",
+      "matchOffset": 0
+    },
+    {
+      "id": "09B",
+      "start": 228.274,
+      "sourceStart": 324.2,
+      "firstWords": "He tasted this. He tried that. He discovered room for",
+      "matchOffset": 0
+    },
+    {
+      "id": "10A",
+      "start": 245.147,
+      "sourceStart": 346.82,
+      "firstWords": "Then the fiddle began and Ichabod danced with Katrina. His",
+      "matchOffset": 0
+    },
+    {
+      "id": "10B",
+      "start": 259.507,
+      "sourceStart": 361.18,
+      "firstWords": "Across the room, Grombones Jones watched from his chair. He",
+      "matchOffset": 0
+    },
+    {
+      "id": "11A",
+      "start": 272.094,
+      "sourceStart": 378.97,
+      "firstWords": "Later, the guests settled down to tell stories. Before long,",
+      "matchOffset": 0
+    },
+    {
+      "id": "11B",
+      "start": 292.054,
+      "sourceStart": 398.93,
+      "firstWords": "Ichabod listened closely. The bridge, he would remember that. Outside",
+      "matchOffset": 0
+    },
+    {
+      "id": "12A",
+      "start": 303.266,
+      "sourceStart": 414.74,
+      "firstWords": "And last the guests went home. Ichabod stayed behind for",
+      "matchOffset": 1
+    },
+    {
+      "id": "12B",
+      "start": 309.946,
+      "sourceStart": 421.42,
+      "firstWords": "What did they say? We do not know, but when",
+      "matchOffset": 0
+    },
+    {
+      "id": "13A",
+      "start": 332.936,
+      "sourceStart": 474.56,
+      "firstWords": "Clip -clop, clip -clop, gunpowder's hooves sounded very loud in",
+      "matchOffset": 0
+    },
+    {
+      "id": "13B",
+      "start": 351.316,
+      "sourceStart": 492.94,
+      "firstWords": "He tried a little tune. It sounded much smaller out",
+      "matchOffset": 0
+    },
+    {
+      "id": "14A",
+      "start": 359.04,
+      "sourceStart": 505.72,
+      "firstWords": "An enormous old tree leaned over the road, something white",
+      "matchOffset": 0
+    },
+    {
+      "id": "14B",
+      "start": 374.44,
+      "sourceStart": 521.12,
+      "firstWords": "A groan came from above. Ichabod's knees not together. Only",
+      "matchOffset": 0
+    },
+    {
+      "id": "15A",
+      "start": 391.91,
+      "sourceStart": 587.84,
+      "firstWords": "Near a little stream gunpowder stopped. Ichabod urged him forward,",
+      "matchOffset": 0
+    },
+    {
+      "id": "15B",
+      "start": 416.51,
+      "sourceStart": 612.44,
+      "firstWords": "The shape moved out from beneath the trees. It was",
+      "matchOffset": 0
+    },
+    {
+      "id": "16A",
+      "start": 427.46,
+      "sourceStart": 647.54,
+      "firstWords": "Ichabod went a little faster. The stranger went faster too.",
+      "matchOffset": 0
+    },
+    {
+      "id": "16B",
+      "start": 447.18,
+      "sourceStart": 667.26,
+      "firstWords": "The road rose gently ahead as they climbed. The strangers",
+      "matchOffset": 0
+    },
+    {
+      "id": "17P",
+      "start": 458.44,
+      "sourceStart": 688.42,
+      "firstWords": "Ichabon looked at the great horse, the heavy cloak, the",
+      "matchOffset": 1
+    },
+    {
+      "id": "17A",
+      "start": 465.4,
+      "sourceStart": 695.38,
+      "firstWords": "There was no head. Something round rested in front of",
+      "matchOffset": 0
+    },
+    {
+      "id": "17B",
+      "start": 468.6,
+      "sourceStart": 698.58,
+      "firstWords": "Something round rested in front of the rider against the",
+      "matchOffset": 0
+    },
+    {
+      "id": "18A",
+      "start": 487.875,
+      "sourceStart": 722.42,
+      "firstWords": "Down the row they raced. Ichabod bent low over the",
+      "matchOffset": 0
+    },
+    {
+      "id": "18B",
+      "start": 499.275,
+      "sourceStart": 733.8199999999999,
+      "firstWords": "Gunpowder took a turn and plunged downhill, branches rushed past,",
+      "matchOffset": 0
+    },
+    {
+      "id": "19A",
+      "start": 513.685,
+      "sourceStart": 779.83,
+      "firstWords": "Then the saddle began to slip. Ichabod grabbed at it",
+      "matchOffset": 0
+    },
+    {
+      "id": "19B",
+      "start": 532.885,
+      "sourceStart": 799.03,
+      "firstWords": "But that worry could wait. Ahead through the trees, he",
+      "matchOffset": 0
+    },
+    {
+      "id": "20A",
+      "start": 542.627,
+      "sourceStart": 812.95,
+      "firstWords": "The bridge! That was where Brahms said the horsemen had",
+      "matchOffset": 0
+    },
+    {
+      "id": "20B",
+      "start": 560.967,
+      "sourceStart": 831.29,
+      "firstWords": "Ichabod turned to look. He expected a flash, a burst",
+      "matchOffset": 0
+    },
+    {
+      "id": "21A",
+      "start": 570.447,
+      "sourceStart": 1063.42,
+      "firstWords": "The Horseman rose in his stirrups. He lifted the round",
+      "matchOffset": 0
+    },
+    {
+      "id": "21B",
+      "start": 575.767,
+      "sourceStart": 1068.74,
+      "firstWords": "Ichabod ducked. Something hurtled through the night. There was a",
+      "matchOffset": 0
+    },
+    {
+      "id": "22A",
+      "start": 595.937,
+      "sourceStart": 1088.91,
+      "firstWords": "In the morning, gunpowder was found at his owner's gate.",
+      "matchOffset": 0
+    },
+    {
+      "id": "22B",
+      "start": 609.597,
+      "sourceStart": 1102.57,
+      "firstWords": "The neighbors searched the road. They found the fallen saddle",
+      "matchOffset": 0
+    },
+    {
+      "id": "23A",
+      "start": 632.077,
+      "sourceStart": 1125.05,
+      "firstWords": "Some people People said the horseman had carried him away.",
+      "matchOffset": 0
+    },
+    {
+      "id": "23B",
+      "start": 638.137,
+      "sourceStart": 1131.1100000000001,
+      "firstWords": "Years later a farmer brought back news that Ichabod was",
+      "matchOffset": 0
+    },
+    {
+      "id": "24A",
+      "start": 660.017,
+      "sourceStart": 1152.99,
+      "firstWords": "Brom bones married Katrina, and whenever someone told the story",
+      "matchOffset": 0
+    },
+    {
+      "id": "24B",
+      "start": 674.337,
+      "sourceStart": 1167.31,
+      "firstWords": "Did Brom know something he wasn't telling? Was there really",
+      "matchOffset": 0
+    }
+  ],
+  "editMap": {
+    "source": "Sleepy Hollow Audio.m4a",
+    "sourceDuration": 1201.472,
+    "duration": 699.9468958333332,
+    "policy": "Last complete take; original order; no synthesized speech; long setup gaps shortened, dramatic pauses retained.",
+    "clips": [
+      {
+        "sourceStart": 7.8,
+        "sourceEnd": 34.406000000000006,
+        "gapBefore": 0,
+        "outputStart": 0,
+        "outputEnd": 26.606
+      },
+      {
+        "sourceStart": 38.0736,
+        "sourceEnd": 63.594100000000005,
+        "gapBefore": 0,
+        "outputStart": 26.606,
+        "outputEnd": 52.1265
+      },
+      {
+        "sourceStart": 67.2,
+        "sourceEnd": 91.1979,
+        "gapBefore": 0,
+        "outputStart": 52.1265,
+        "outputEnd": 76.124396
+      },
+      {
+        "sourceStart": 96.5685,
+        "sourceEnd": 121.277,
+        "gapBefore": 0,
+        "outputStart": 76.124396,
+        "outputEnd": 100.832896
+      },
+      {
+        "sourceStart": 130.31,
+        "sourceEnd": 156.439,
+        "gapBefore": 0,
+        "outputStart": 100.832896,
+        "outputEnd": 126.961896
+      },
+      {
+        "sourceStart": 160.54100000000003,
+        "sourceEnd": 189.8,
+        "gapBefore": 0,
+        "outputStart": 126.961896,
+        "outputEnd": 156.220896
+      },
+      {
+        "sourceStart": 210.1,
+        "sourceEnd": 241.25,
+        "gapBefore": 0.65,
+        "outputStart": 156.870896,
+        "outputEnd": 188.020896
+      },
+      {
+        "sourceStart": 245.52700000000002,
+        "sourceEnd": 273.75,
+        "gapBefore": 0,
+        "outputStart": 188.020896,
+        "outputEnd": 216.243896
+      },
+      {
+        "sourceStart": 312.7,
+        "sourceEnd": 340.60499999999996,
+        "gapBefore": 0.65,
+        "outputStart": 216.893896,
+        "outputEnd": 244.798896
+      },
+      {
+        "sourceStart": 346.35200000000003,
+        "sourceEnd": 373.199,
+        "gapBefore": 0,
+        "outputStart": 244.798896,
+        "outputEnd": 271.645896
+      },
+      {
+        "sourceStart": 378.402,
+        "sourceEnd": 409.397,
+        "gapBefore": 0,
+        "outputStart": 271.645896,
+        "outputEnd": 302.640896
+      },
+      {
+        "sourceStart": 413.995,
+        "sourceEnd": 443.5,
+        "gapBefore": 0,
+        "outputStart": 302.640896,
+        "outputEnd": 332.145896
+      },
+      {
+        "sourceStart": 474.3,
+        "sourceEnd": 499.947,
+        "gapBefore": 0.65,
+        "outputStart": 332.795896,
+        "outputEnd": 358.442896
+      },
+      {
+        "sourceStart": 505.003,
+        "sourceEnd": 537.7,
+        "gapBefore": 0,
+        "outputStart": 358.442896,
+        "outputEnd": 391.139896
+      },
+      {
+        "sourceStart": 587.6,
+        "sourceEnd": 622.5,
+        "gapBefore": 0.65,
+        "outputStart": 391.789896,
+        "outputEnd": 426.689896
+      },
+      {
+        "sourceStart": 647.3,
+        "sourceEnd": 677.8,
+        "gapBefore": 0.65,
+        "outputStart": 427.339896,
+        "outputEnd": 457.839896
+      },
+      {
+        "sourceStart": 687.7,
+        "sourceEnd": 717.4780000000001,
+        "gapBefore": 0,
+        "outputStart": 457.839896,
+        "outputEnd": 487.617896
+      },
+      {
+        "sourceStart": 722.043,
+        "sourceEnd": 747.3,
+        "gapBefore": 0,
+        "outputStart": 487.617896,
+        "outputEnd": 512.874896
+      },
+      {
+        "sourceStart": 779.55,
+        "sourceEnd": 808.5400000000001,
+        "gapBefore": 0.65,
+        "outputStart": 513.524896,
+        "outputEnd": 542.514896
+      },
+      {
+        "sourceStart": 812.718,
+        "sourceEnd": 839.45,
+        "gapBefore": 0,
+        "outputStart": 542.514896,
+        "outputEnd": 569.246896
+      },
+      {
+        "sourceStart": 1062.75,
+        "sourceEnd": 1192.8,
+        "gapBefore": 0.65,
+        "outputStart": 569.896896,
+        "outputEnd": 699.946896
+      }
+    ]
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "name": "Katrina Van Tassel",
+  "status": "generated_from_reference",
+  "path": "katrina-poses.png",
+  "source_path": "/workspace/scratch/110acee071c2/generated_images/exec-dbd79356-2549-4b93-b32f-c9ba26f15a99.png",
+  "edit_reference_path": "/workspace/scratch/110acee071c2/generated_images/exec-69a65bc9-0c1d-45a2-be93-2da9c44f5057.png",
+  "prompt": "Edit the supplied original felt puppet image into a 3 by 2 pose atlas of this EXACT SAME character. Preserve her face, blond braid, cream cap, burgundy long dress, cream apron and collar, cream stockings and brown buckle shoes, wool texture and lighting. She is the adult Katrina in our original storybook production. Change only pose and composition; keep identity and costume exact. Landscape 1536x1024 with genuine transparent background, six full-body figures, generous empty gutters and no overlap, one character in each equal cell. Top row: neutral with hands gently together; holding a small closed brown book at waist; amused smile with relaxed hands. Bottom row: modest small dance step with one support foot planted; attentive with slight head turn; thoughtful with hands relaxed. All costumes remain fully intact with full dress and both shoes visible; same three-quarter forward orientation, size and camera perspective. Consistent foot baseline within each row. No labels or grid lines, no lettering, no scenery, no added background, no cast floor shadows, no glow. Six clear isolated animation sprites.",
+  "transparent_background": true,
+  "processing": "Unchanged byte-for-byte copy. Metadata inspection only.",
+  "visual_review": "All six poses complete and separate. Identity and costume preserved. Closed book, smile, dance step, attentive and thoughtful variants present. Consistent row baseline and visible shoes.",
+  "width": 1536,
+  "height": 1024,
+  "mode": "RGBA",
+  "alpha_extrema": [
+    0,
+    254
+  ]
+}

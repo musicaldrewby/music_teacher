@@ -1,0 +1,13 @@
+{
+  "name": "rewind-room-1989",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "three": "0.180.0"
+  },
+  "devDependencies": {
+    "@napi-rs/canvas": "0.1.80",
+    "linkedom": "0.18.12"
+  }
+}

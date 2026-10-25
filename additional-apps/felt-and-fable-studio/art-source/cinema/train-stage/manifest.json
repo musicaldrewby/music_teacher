@@ -1,0 +1,162 @@
+[
+  {
+    "slug": "train-station-platform",
+    "name": "Train Station Platform",
+    "kind": "background",
+    "theme": "train",
+    "path": "art-source/cinema/train-stage/train-station-platform.webp",
+    "width": 1672,
+    "height": 941,
+    "prompt": "Use case: illustration-story. Asset type: high-quality story app background, wide landscape 16:9. Create a cheerful empty vintage small-town TRAIN STATION PLATFORM as a handcrafted felt miniature set. Eye-level wide shot with plenty of open platform floor for placing characters. A teal-and-cream train stands along the platform, terracotta brick station building, cream canopy columns, golden trim, simple analog clock, luggage bench. Coordinated palette of deep teal, cream, warm walnut, golden ochre. Match tactile layered wool felt, tiny visible fibers, subtle sewn edges, clean cut shapes, softly dimensional architecture, crisp focus from foreground to back. Cozy cutout storybook aesthetic. No people, no text, no logos, no watermark, no blurred areas, no photographic materials, no plastic CGI. Composition must fill all edges and have a clear readable stage-like layout."
+  },
+  {
+    "slug": "train-passenger-carriage",
+    "name": "Train Passenger Carriage",
+    "kind": "background",
+    "theme": "train",
+    "path": "art-source/cinema/train-stage/train-passenger-carriage.webp",
+    "width": 1672,
+    "height": 941,
+    "prompt": "Use case: illustration-story. Asset type: story app background, landscape 16:9 full bleed, no border. Tactile handcrafted felt miniature set, clear high quality with tiny wool fibers, stitched edges, softly dimensional architecture, clean cut shapes and crisp focus everywhere. Same cozy family-friendly storybook train, deep teal, cream, warm walnut, golden ochre palette. No people or characters, no text or letters, no watermark, no logos, no blur, no plastic CGI. Interior of vintage train passenger carriage, wide eye-level view down central aisle toward closed teal end door. Pairs of deep-teal upholstered felt bench seats along both sides, cream wall panels with warm walnut trim, broad windows showing green rolling countryside, golden reading lamps and overhead luggage racks. Large clear foreground aisle for adding cutout characters. Straight believable symmetrical architecture."
+  },
+  {
+    "slug": "train-sleeper-compartment",
+    "name": "Train Sleeper Compartment",
+    "kind": "background",
+    "theme": "train",
+    "path": "art-source/cinema/train-stage/train-sleeper-compartment.webp",
+    "width": 1672,
+    "height": 941,
+    "prompt": "Use case: illustration-story. Asset type: story app background, landscape 16:9 full bleed, no border. Tactile handcrafted felt miniature set, clear high quality with tiny wool fibers, stitched edges, softly dimensional architecture, clean cut shapes and crisp focus everywhere. Same cozy family-friendly storybook train, deep teal, cream, warm walnut, golden ochre palette. No people or characters, no text or letters, no watermark, no logos, no blur, no plastic CGI. Interior of a cozy vintage train sleeper compartment, wide eye-level view. Two teal felt upholstered bunks at left, tidy cream wool blankets and golden pillows, walnut ladder, broad countryside-view window at right with ochre curtains, small reading lamps, compact walnut table under window, cream walls and teal doorway. Open foreground floor for characters. Room feels connected to a teal-and-cream vintage train."
+  },
+  {
+    "slug": "train-countryside-railway",
+    "name": "Countryside Railway",
+    "kind": "background",
+    "theme": "train",
+    "path": "art-source/cinema/train-stage/train-countryside-railway.webp",
+    "width": 1672,
+    "height": 941,
+    "prompt": "Use case: illustration-story. Asset type: story app background, landscape 16:9 full bleed, no border. Tactile handcrafted felt miniature set, clear high quality with tiny wool fibers, stitched edges, softly dimensional architecture, clean cut shapes and crisp focus everywhere. Same cozy family-friendly storybook train, deep teal, cream, warm walnut, golden ochre palette. No people or characters, no text or letters, no watermark, no logos, no blur, no plastic CGI. Wide eye-level countryside railway scene, clear continuous tracks curve gently from lower-left foreground into middle distance, rolling patchwork green felt fields and clustered trees, a small cream cottage with terracotta roof, low grey felt stone viaduct in distance, pale blue sky and little cut white felt clouds. No train so objects can be added. Gentle sunny day. Readable horizon and spacious foreground."
+  },
+  {
+    "slug": "backstage-dressing-room",
+    "name": "Theater Dressing Room",
+    "kind": "background",
+    "theme": "backstage",
+    "path": "art-source/cinema/train-stage/backstage-dressing-room.webp",
+    "width": 1672,
+    "height": 941,
+    "prompt": "Use case: illustration-story. Asset type: premium story app background, landscape 16:9 full bleed with no frame. Tactile handcrafted felt miniature theatrical set, tiny wool fibers and sewn edges, clean cut shapes, softly dimensional architectural depth, everything crisply focused. Coordinated theatre interior palette: burgundy red curtains, warm walnut floor, creamy walls, muted teal accents and ochre lights. Cozy handmade storybook style. No people, no characters, no text or signage, no logos or watermark, no blur, no plastic CGI. Wide eye-level view inside the theater dressing room. Two dressing-table mirrors ringed by warm round bulbs across rear wall, velvet-red stools tucked under counters, small makeup accessories neatly grouped, costume rail with colorful felt costumes at left, closed burgundy door right, large clean open wooden floor foreground where characters can stand. Soft cozy illumination. Reflections show empty room, no people."
+  },
+  {
+    "slug": "backstage-wings",
+    "name": "Theater Wings",
+    "kind": "background",
+    "theme": "backstage",
+    "path": "art-source/cinema/train-stage/backstage-wings.webp",
+    "width": 1672,
+    "height": 941,
+    "prompt": "Use case: illustration-story. Asset type: premium story app background, landscape 16:9 full bleed with no frame. Tactile handcrafted felt miniature theatrical set, tiny wool fibers and sewn edges, clean cut shapes, softly dimensional architectural depth, everything crisply focused. Coordinated theatre interior palette: burgundy red curtains, warm walnut floor, creamy walls, muted teal accents and ochre lights. Cozy handmade storybook style. No people, no characters, no text or signage, no logos or watermark, no blur, no plastic CGI. Wide eye-level view from inside the backstage wings looking across open stage floor. Tall burgundy curtains hang at both sides with dark ropes and pulleys neatly tucked to edges. Warm empty stage at middle-right, black felt masking curtains in background, coiled rope and one wooden scenery crate at far-left, stage light rig above. Broad open dark walnut floor foreground, clear space for performers, enough gentle light to see all details."
+  },
+  {
+    "slug": "backstage-rehearsal-room",
+    "name": "Theater Rehearsal Room",
+    "kind": "background",
+    "theme": "backstage",
+    "path": "art-source/cinema/train-stage/backstage-rehearsal-room.webp",
+    "width": 1672,
+    "height": 941,
+    "prompt": "Use case: illustration-story. Asset type: premium story app background, landscape 16:9 full bleed with no frame. Tactile handcrafted felt miniature theatrical set, tiny wool fibers and sewn edges, clean cut shapes, softly dimensional architectural depth, everything crisply focused. Coordinated theatre interior palette: burgundy red curtains, warm walnut floor, creamy walls, muted teal accents and ochre lights. Cozy handmade storybook style. No people, no characters, no text or signage, no logos or watermark, no blur, no plastic CGI. Wide eye-level view of an empty rehearsal room in the same cozy theatre. Warm walnut sprung floor, cream felt walls, a long mirrored back wall with a waist-height wooden rehearsal barre, burgundy curtains beside tall windows, muted teal upright piano on the far left, a few neatly stacked plain chairs at right. Large open central floor for performers; mirror reflects an empty room. No musical notation or text."
+  },
+  {
+    "slug": "backstage-stage-reverse",
+    "name": "Stage View of the Audience",
+    "kind": "background",
+    "theme": "backstage",
+    "path": "art-source/cinema/train-stage/backstage-stage-reverse.webp",
+    "width": 1672,
+    "height": 941,
+    "prompt": "Use case: illustration-story. Asset type: premium story app background, landscape 16:9 full bleed with no frame. Tactile handcrafted felt miniature theatrical set, tiny wool fibers and sewn edges, clean cut shapes, softly dimensional architectural depth, everything crisply focused. Coordinated theatre interior palette: burgundy red curtains, warm walnut floor, creamy walls, muted teal accents and ochre lights. Cozy handmade storybook style. No people, no characters, no text or signage, no logos or watermark, no blur, no plastic CGI. Wide eye-level reverse shot from the middle of an empty theater stage looking out into empty auditorium seats. Broad warm walnut stage foreground for characters, symmetrical tiers of burgundy felt seats beyond stage edge, cream-and-gold balcony and warm glowing wall lamps, burgundy proscenium curtains framing left and right and top. Center aisle, readable intimate auditorium scale, no audience. This is a view FROM the stage toward the seating."
+  },
+  {
+    "slug": "train-ticket",
+    "name": "Train Ticket",
+    "kind": "piece",
+    "theme": "train",
+    "path": "art-source/cinema/train-stage/train-ticket.webp",
+    "width": 1536,
+    "height": 1024,
+    "prompt": "Use case: illustration-story. Asset type: SINGLE transparent-background prop sprite for a felt board storytelling app. Genuine transparent alpha background; every area outside subject fully transparent. Cute FLAT layered wool felt cutout, straight-on front elevation like a handmade applique, only thin material thickness, tiny visible fibers, clean scissor-cut contours and delicate stitching, no dimensional plush toy or 3D rendering. Whole object visible and centered with generous transparent margin. Crisp high quality edges, NO drop shadow, no floor, no white backdrop, no checkerboard pattern, no border, no logo, no text. Coordinated deep teal, cream, warm brown and ochre colors. One landscape cream felt train ticket with notched corners and ochre stitched border. Teal simplified steam-train silhouette at left, three small teal horizontal decorative lines at right and a small circular punched hole. NO readable words or numbers. It should feel like a flat two-layer felt ticket, not a printed paper card."
+  },
+  {
+    "slug": "train-suitcase",
+    "name": "Travel Suitcase",
+    "kind": "piece",
+    "theme": "train",
+    "path": "art-source/cinema/train-stage/train-suitcase.webp",
+    "width": 1536,
+    "height": 1024,
+    "prompt": "Use case: illustration-story. Asset type: SINGLE transparent-background prop sprite for a felt board storytelling app. Genuine transparent alpha background; every area outside subject fully transparent. Cute FLAT layered wool felt cutout, straight-on front elevation like a handmade applique, only thin material thickness, tiny visible fibers, clean scissor-cut contours and delicate stitching, no dimensional plush toy or 3D rendering. Whole object visible and centered with generous transparent margin. Crisp high quality edges, NO drop shadow, no floor, no white backdrop, no checkerboard pattern, no border, no logo, no text. Coordinated deep teal, cream, warm brown and ochre colors. One classic rectangular warm brown felt suitcase with rounded corners, top handle, two cream straps and ochre buckles, small teal luggage tag attached near handle. Front view, closed suitcase, flat layered felt applique."
+  },
+  {
+    "slug": "train-conductor-hat",
+    "name": "Train Conductor Hat",
+    "kind": "piece",
+    "theme": "train",
+    "path": "art-source/cinema/train-stage/train-conductor-hat.webp",
+    "width": 1536,
+    "height": 1024,
+    "prompt": "Use case: illustration-story. Asset type: SINGLE transparent-background prop sprite for a felt board storytelling app. Genuine transparent alpha background; every area outside subject fully transparent. Cute FLAT layered wool felt cutout, straight-on front elevation like a handmade applique, only thin material thickness, tiny visible fibers, clean scissor-cut contours and delicate stitching, no dimensional plush toy or 3D rendering. Whole object visible and centered with generous transparent margin. Crisp high quality edges, NO drop shadow, no floor, no white backdrop, no checkerboard pattern, no border, no logo, no text. Coordinated deep teal, cream, warm brown and ochre colors. One train conductor's cap seen directly from the front. Deep teal flat felt crown, simple curved dark brim, ochre band and tiny ochre oval emblem with no writing. Designed to place on a flat character's head, neat symmetrical hat silhouette with no wearer."
+  },
+  {
+    "slug": "train-snack-trolley",
+    "name": "Train Snack Trolley",
+    "kind": "piece",
+    "theme": "train",
+    "path": "art-source/cinema/train-stage/train-snack-trolley.webp",
+    "width": 1312,
+    "height": 1199,
+    "prompt": "Use case: illustration-story. Asset type: SINGLE transparent-background prop sprite for a felt board storytelling app. Genuine transparent alpha background; every area outside subject fully transparent. Cute FLAT layered wool felt cutout, straight-on front elevation like a handmade applique, only thin material thickness, tiny visible fibers, clean scissor-cut contours and delicate stitching, no dimensional plush toy or 3D rendering. Whole object visible and centered with generous transparent margin. Crisp high quality edges, NO drop shadow, no floor, no white backdrop, no checkerboard pattern, no border, no logo, no text. Coordinated deep teal, cream, warm brown and ochre colors. One side-view snack trolley, simple flat felt silhouette. Teal cart body with ochre trim, two black felt wheels, a horizontal push handle, small cream teapot and two cups on top, three simple wrapped sandwiches visible on lower shelf. No brands or letters. Entire cart visible, broad simplified shapes useful at small size."
+  },
+  {
+    "slug": "backstage-costume-rack",
+    "name": "Theater Costume Rack",
+    "kind": "piece",
+    "theme": "backstage",
+    "path": "art-source/cinema/train-stage/backstage-costume-rack.webp",
+    "width": 1361,
+    "height": 1156,
+    "prompt": "Use case: illustration-story. Asset type: SINGLE transparent-background prop sprite for a felt board storytelling app. Genuine transparent alpha background; every area outside subject fully transparent. Cute FLAT layered wool felt cutout, straight-on front elevation like a handmade applique, only thin material thickness, tiny visible fibers, clean scissor-cut contours and delicate stitching, no dimensional plush toy or 3D rendering. Whole object visible and centered with generous transparent margin. Crisp high quality edges, NO drop shadow, no floor, no white backdrop, no checkerboard pattern, no border, no logo, no text. Coordinated burgundy, cream, warm brown, teal and ochre theatre colors. One simple side-to-side costume clothing rack seen front-on, ochre felt frame on two wheels, three hangers holding a burgundy coat with gold trim, teal tunic, and pale cream/pink dress. Flat clear silhouettes and tidy small details, whole rail and clothes fully visible. No people."
+  },
+  {
+    "slug": "backstage-makeup-mirror",
+    "name": "Lighted Makeup Mirror",
+    "kind": "piece",
+    "theme": "backstage",
+    "path": "art-source/cinema/train-stage/backstage-makeup-mirror.webp",
+    "width": 1024,
+    "height": 1536,
+    "prompt": "Use case: illustration-story. Asset type: SINGLE transparent-background prop sprite for a felt board storytelling app. Genuine transparent alpha background; every area outside subject fully transparent. Cute FLAT layered wool felt cutout, straight-on front elevation like a handmade applique, only thin material thickness, tiny visible fibers, clean scissor-cut contours and delicate stitching, no dimensional plush toy or 3D rendering. Whole object visible and centered with generous transparent margin. Crisp high quality edges, NO drop shadow, no floor, no white backdrop, no checkerboard pattern, no border, no logo, no text. Coordinated burgundy, cream, warm brown, teal and ochre theatre colors. One standing rectangular dressing-room makeup mirror with a warm brown frame and twelve evenly spaced cream round felt bulbs around frame, small broad support base. Mirror center made from flat light blue-gray felt with two subtle angled pale highlight strips, NOT a view of another room. Broad clean simplified shapes."
+  },
+  {
+    "slug": "backstage-stage-microphone",
+    "name": "Stage Microphone on Stand",
+    "kind": "piece",
+    "theme": "backstage",
+    "path": "art-source/cinema/train-stage/backstage-stage-microphone.webp",
+    "width": 1024,
+    "height": 1536,
+    "prompt": "Use case: illustration-story. Asset type: SINGLE transparent-background prop sprite for a felt board storytelling app. Genuine transparent alpha background; every area outside subject fully transparent. Cute FLAT layered wool felt cutout, straight-on front elevation like a handmade applique, only thin material thickness, tiny visible fibers, clean scissor-cut contours and delicate stitching, no dimensional plush toy or 3D rendering. Whole object visible and centered with generous transparent margin. Crisp high quality edges, NO drop shadow, no floor, no white backdrop, no checkerboard pattern, no border, no logo, no text. Coordinated burgundy, cream, warm brown, teal and ochre theatre colors. One classic stage microphone mounted on a slim upright stand, straight-on full-height view. Charcoal and gray felt microphone with simple striped felt grille at top, black thin felt stem, small round weighted base. Microphone angled slightly to left. Crisp continuous shape, no performer, no cord, no other objects."
+  },
+  {
+    "slug": "backstage-coiled-cable",
+    "name": "Coiled Stage Cable",
+    "kind": "piece",
+    "theme": "backstage",
+    "path": "art-source/cinema/train-stage/backstage-coiled-cable.webp",
+    "width": 1312,
+    "height": 1199,
+    "prompt": "Use case: illustration-story. Asset type: SINGLE transparent-background prop sprite for a felt board storytelling app. Genuine transparent alpha background; every area outside subject fully transparent. Cute FLAT layered wool felt cutout, straight-on front elevation like a handmade applique, only thin material thickness, tiny visible fibers, clean scissor-cut contours and delicate stitching, no dimensional plush toy or 3D rendering. Whole object visible and centered with generous transparent margin. Crisp high quality edges, NO drop shadow, no floor, no white backdrop, no checkerboard pattern, no border, no logo, no text. Coordinated burgundy, cream, warm brown, teal and ochre theatre colors. One neatly coiled black stage audio cable with five visible loops and two chunky dark gray jack plugs resting beside the coil. Front slightly overhead view, clearly readable flat felt applique black cable on genuine transparent background. Pale gray tiny stitching highlights around loops. The centers of loops are transparent cutout holes, not filled shapes. Whole cable and both plugs visible."
+  }
+]

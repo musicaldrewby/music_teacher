@@ -1,0 +1,71 @@
+{
+  "created": "2026-10-17",
+  "files": [
+    {
+      "file": "castanets-simple-0922.wav",
+      "url": "https://bigsoundbank.com/UPLOAD/bwf-en/0922.wav",
+      "bytes": 3456106,
+      "sha256": "208f9edb5090163d45c07a940cf4b2b59418a1a9b59b203d1839feebeeec7272",
+      "instrument": "castanets",
+      "note": 85,
+      "outputFile": "castanets-1.wav",
+      "cropSeconds": [
+        0.243,
+        0.42
+      ],
+      "gain": 0.8,
+      "fadeInSeconds": 0.0002,
+      "fadeOutSeconds": 0.035
+    },
+    {
+      "file": "castanets-simple-0922.wav",
+      "url": "https://bigsoundbank.com/UPLOAD/bwf-en/0922.wav",
+      "bytes": 3456106,
+      "sha256": "208f9edb5090163d45c07a940cf4b2b59418a1a9b59b203d1839feebeeec7272",
+      "instrument": "castanets",
+      "note": 86,
+      "outputFile": "castanets-2.wav",
+      "cropSeconds": [
+        0.87,
+        1.06
+      ],
+      "gain": 0.8,
+      "fadeInSeconds": 0.0002,
+      "fadeOutSeconds": 0.035
+    },
+    {
+      "file": "RopeSnare_hi_sn_Main_vl3_rr1.wav",
+      "url": "https://raw.githubusercontent.com/sgossner/VCSL/c1ea7bcc3c7309650ab0da9d15c9cd1fbc4a4c7e/Membranophones/Struck%20Membranophones/Snare%20Drum%2C%20Rope%20Tension/Hi/RopeSnare_hi_sn_Main_vl3_rr1.wav",
+      "bytes": 659012,
+      "sha256": "d586d6c74ae7a755a6379f9bdee22253caada99f9054aefeda0b9672e5b5e938",
+      "instrument": "side-drum",
+      "note": 38,
+      "outputFile": "side-drum-1.wav",
+      "cropSeconds": [
+        0,
+        2.4904308390022676
+      ],
+      "gain": 2.2,
+      "fadeInSeconds": 0.0002,
+      "fadeOutSeconds": 0.12
+    },
+    {
+      "file": "RopeSnare_hi_sn_Main_vl3_rr3.wav",
+      "url": "https://raw.githubusercontent.com/sgossner/VCSL/c1ea7bcc3c7309650ab0da9d15c9cd1fbc4a4c7e/Membranophones/Struck%20Membranophones/Snare%20Drum%2C%20Rope%20Tension/Hi/RopeSnare_hi_sn_Main_vl3_rr3.wav",
+      "bytes": 691910,
+      "sha256": "bb1a8313e47650d62cff67217c135c569a5204083d516fc358792132df874a55",
+      "instrument": "side-drum",
+      "note": 40,
+      "outputFile": "side-drum-2.wav",
+      "cropSeconds": [
+        0,
+        2.6147619047619046
+      ],
+      "gain": 2.85,
+      "fadeInSeconds": 0.0002,
+      "fadeOutSeconds": 0.12
+    }
+  ],
+  "recorderMethod": "Existing VCSL soprano samples transposed five semitones, retaining fine tuning and buffer-relative loop markers. Sopranino approximation, not a separately recorded sopranino.",
+  "timpaniMethod": "Existing GeneralUser GS 1.471 rendered pitches 36\u201360 reused without modification."
+}

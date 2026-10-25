@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#101d2c">
+<meta name="description" content="A calm classroom display of the United States and New Mexico flags, with gently waving animation, large pledge text, and lyrics for The Star-Spangled Banner and O Fair New Mexico.">
+<title>Morning Pledges · Classroom Display</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app" id="app">
+<header class="topbar">
+  <a class="brand" href="./" aria-label="Morning Pledges home"><span class="brand-mark" aria-hidden="true">✦</span><span>Morning Pledges<small>CLASSROOM DISPLAY</small></span></a>
+  <nav class="flag-tabs" aria-label="Choose a pledge or song">
+    <button class="flag-tab selected" data-page="us" aria-pressed="true"><canvas id="mini-us" width="76" height="40" aria-hidden="true"></canvas>U.S. Pledge</button>
+    <button class="flag-tab" data-page="nm" aria-pressed="false"><canvas id="mini-nm" width="60" height="40" aria-hidden="true"></canvas>New Mexico Pledge</button>
+    <button class="flag-tab" data-page="anthem" aria-pressed="false">National Anthem</button>
+    <button class="flag-tab" data-page="fair-new-mexico" aria-pressed="false">O Fair New Mexico</button>
+  </nav>
+  <button id="present" class="button primary"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5"/></svg>Full screen</button>
+</header>
+<main class="stage" id="stage">
+  <section class="flag-panel" aria-label="Flag display">
+    <div class="flag-heading"><span class="eyebrow" id="flag-eyebrow">THE STARS &amp; STRIPES</span><h1 id="flag-title">United States</h1><span class="heading-rule"></span><p class="song-byline" id="song-byline" hidden></p></div>
+    <div class="flag-art" id="flag-art"><canvas id="flag-canvas" role="img" aria-label="Gently waving flag of the United States, with 50 stars and 13 stripes"></canvas></div>
+    <div class="flag-caption"><span class="status-dot" id="motion-dot" aria-hidden="true"></span><span id="motion-caption">Gently waving</span></div>
+  </section>
+  <section class="words-panel" id="words-panel" aria-labelledby="pledge-heading">
+    <div class="words-content">
+      <div class="pledge-label"><span class="pledge-number" id="pledge-number">01</span><h2 id="pledge-heading">The Pledge of Allegiance</h2></div>
+      <div class="lyric-controls" id="lyric-controls" hidden>
+        <button class="lyric-arrow" id="lyric-prev" aria-label="Previous lyric screen" title="Previous lyrics (Left arrow)">‹</button>
+        <label class="section-picker"><span class="sr-only">Choose a lyric section</span><select id="lyric-section"></select></label>
+        <span class="lyric-count" id="lyric-count"></span>
+        <button class="lyric-arrow" id="lyric-next" aria-label="Next lyric screen" title="Next lyrics (Right arrow or Space)">›</button>
+      </div>
+      <p id="pledge" class="pledge"><span>I pledge allegiance to the Flag</span> <span>of the United States of America,</span> <span>and to the Republic</span> <span>for which it stands,</span> <span>one Nation under God,</span> <span>indivisible,</span> <span>with liberty and justice for all.</span></p>
+      <div class="end-mark" aria-hidden="true">✦</div>
+    </div>
+  </section>
+</main>
+<footer class="toolbar">
+  <div class="display-tools">
+    <button class="button subtle" id="words-toggle" aria-pressed="true" title="Show or hide words (T)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16M12 5v15M8 20h8"/></svg><span id="words-label">Words on</span></button>
+    <button class="button subtle" id="motion-toggle" aria-pressed="true" title="Pause or resume flag animation (A)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14M16 5v14" id="motion-icon"/></svg><span id="motion-label">Pause waving</span></button>
+    <div class="text-tools" aria-label="Text size"><button id="smaller" aria-label="Smaller text" title="Smaller text">A<span>−</span></button><button id="larger" aria-label="Larger text" title="Larger text">A<span>+</span></button></div>
+  </div>
+  <div class="footer-right"><button class="info-button" id="info" aria-label="About this display and keyboard shortcuts" title="About & shortcuts">i</button><button class="button next-button" id="next"><span id="next-label">New Mexico</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></button></div>
+</footer>
+<div class="present-controls" id="present-controls"><button id="present-switch" class="button subtle">New Mexico →</button><button id="exit-present" class="button primary">Exit full screen</button></div>
+<button class="wake-controls" id="wake-controls" aria-label="Show full-screen controls">•••</button>
+</div>
+<dialog id="about-dialog">
+<button class="dialog-close" id="close-info" aria-label="Close">×</button>
+<span class="eyebrow">MADE FOR THE CLASSROOM</span><h2>One place to look.<br>Words everyone can see.</h2>
+<p>Choose a pledge or song, adjust the words, and use full screen for your Smartboard. You set the pace. For songs, use the arrows or section menu to move through the lyrics. “O Fair New Mexico” includes all three verses and repeats the chorus after each. The national anthem uses the commonly sung first verse, shown across two screens.</p>
+<div class="shortcut-list"><span><kbd>←</kbd> <kbd>→</kbd> Previous / next screen</span><span><kbd>Space</kbd> Next lyric screen</span><span><kbd>1</kbd>–<kbd>4</kbd> Choose pledge / song</span><span><kbd>F</kbd> Full screen</span><span><kbd>T</kbd> Show / hide words</span><span><kbd>A</kbd> Pause / resume waving</span><span><kbd>Esc</kbd> Leave full screen</span></div>
+<h3>Pledge wording</h3><p class="source-note">The U.S. pledge follows <a href="https://www.govinfo.gov/content/pkg/USCODE-2018-title4/html/USCODE-2018-title4-chap1-sec4.htm" target="_blank" rel="noopener noreferrer">4 U.S.C. § 4</a>. The New Mexico salute follows the <a href="https://web.ped.nm.gov/wp-content/uploads/_legacy/pec/1_Executive_Summary_Call_to_OrderAug0116.pdf" target="_blank" rel="noopener noreferrer">New Mexico Public Education Commission</a>: “the Zia symbol,” without an added “and.” Flag design reference: <a href="https://www.sos.nm.gov/about-new-mexico/state-flag/" target="_blank" rel="noopener noreferrer">New Mexico Secretary of State</a>.</p>
+<h3>Song lyrics</h3><p class="source-note">“The Star-Spangled Banner”: <a href="https://www.va.gov/files/2025-02/Star-Spangled%20Banner%20Lyrics.pdf" target="_blank" rel="noopener noreferrer">U.S. Department of Veterans Affairs</a> and <a href="https://amhistory.si.edu/starspangledbanner/the-lyrics.aspx" target="_blank" rel="noopener noreferrer">Smithsonian National Museum of American History</a>. “O Fair New Mexico”: Elizabeth Garrett’s 1915 sheet music, provided by the <a href="https://www.sos.nm.gov/about-new-mexico/state-songs/official-state-song-o-fair-new-mexico/" target="_blank" rel="noopener noreferrer">New Mexico Secretary of State</a>. The original wording and Spanish place-name spelling are preserved; line breaks are arranged for classroom reading.</p>
+<p class="credit">Created by Drew Wichman</p>
+</dialog>
+<div class="sr-only" id="announcement" role="status" aria-live="polite"></div>
+<script src="flags.js"></script><script src="content.js"></script><script src="app.js"></script>
+</body>
+</html>

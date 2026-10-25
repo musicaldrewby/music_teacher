@@ -1,0 +1,12 @@
+{
+  "prompt": "Use case: identity-preserve. Precise image edit of provided reference, not a new composition. Transparent animation sprite of Ichabod riding Gunpowder. Preserve EXACT original entire horse, mane, tail, bridle, reins, saddle, rider body posture, coat silhouette, hands, legs, shoes, hat, all four hoof positions, camera framing and proportions. Preserve original 3:2 landscape composition and generous transparent margins. Request same 900×600 canvas if possible, horse hoof baseline y≈570 in that canvas. Keep hand-felted miniature style and lighting exactly consistent. True transparent alpha background. ONLY EDIT Ichabod's head and face as described; every pixel outside his head should stay unchanged. Do not add or remove any object. No songbook, raised arm, duplicate person or horse, no open mouth. Expression edit: Ichabod is UNEASY and worried, listening for something behind him. Closed tense mouth with absolutely no smile, concerned slightly raised inner eyebrows, eyes glancing backward toward IMAGE LEFT. Keep head placement and hat intact; only turn the face slightly toward image left, without moving shoulders or body. He must clearly NOT be smiling or singing.",
+  "tool": "built-in image_gen",
+  "reference": "/workspace/scratch/110acee071c2/sleepy-hollow/acting-references/mounted-stand.png",
+  "asset": "mounted-uneasy.png",
+  "dimensions": [
+    1536,
+    1024
+  ],
+  "alphaInspection": "RGBA; alpha min0 max254, approximately1.24million fullytransparent pixels. RGB beneath alpha0 contains a warm halo which appears in tool preview but has zero opacity.",
+  "inspection": "Closed tense mouth and concerned brows, head/eyes look toward image left. No smile. Complete rider and horse, four hooves visible, same broad silhouette and mounted pose. Image generation repainted details and slightly altered tail/hoof silhouette, so not a pixel-exact face-only replacement."
+}

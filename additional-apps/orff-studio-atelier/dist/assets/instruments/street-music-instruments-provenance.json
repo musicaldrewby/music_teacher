@@ -1,0 +1,126 @@
+{
+  "mode": "Built-in image_gen; original generated transparent PNGs copied without raster modification.",
+  "generated": "2026-10-17",
+  "styleReference": "Existing instrument assets were visually inspected to match natural warm wood and metal materials and premium product photography. No reference image pixels were composited.",
+  "assets": [
+    {
+      "file": "castanets.png",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "prompt": "Use case: product-mockup. Asset type: premium photorealistic musical-instrument cutout for the Mallet & Measure Orff ensemble studio. Primary request: exactly TWO pairs of traditional handheld wooden castanets, one pair on the LEFT and the other pair on the RIGHT, placed close but clearly separated. Each pair consists of TWO matching rounded pear-shaped hollow wood shells joined at their narrow necks by a short dark cord loop. Show the front convex shell and a slight visible seam with its rear shell, so each pair reads as an operable clapper, not bowls or spoons. Natural warm chestnut-brown hardwood with realistic grain and satin polished finish, darker recessed seam, two small drilled cord holes at the neck, simple black cord loops resting naturally above each pair. One left pair angled slightly counterclockwise and right pair slightly clockwise. Front three-quarter overhead view, whole objects visible with modest transparent padding around all sides, landscape 3:2 canvas, both pairs filling most of width. Premium product photo with soft warm studio light from upper left, crisp realistic wood detail and restrained natural highlights matching an educational percussion gallery. Genuinely transparent background, no backdrop, no floor, no shadows extending into the background, no glow, no gradients, no hands, no people, no text, no labels, no logo, no watermark, no extra props, no mallets. Two distinct tappable castanet pairs.",
+      "alphaPreserved": true,
+      "hitRegions": [
+        {
+          "label": "Left",
+          "type": "ellipse",
+          "cx": 0.215,
+          "cy": 0.57,
+          "rx": 0.17,
+          "ry": 0.3
+        },
+        {
+          "label": "Right",
+          "type": "ellipse",
+          "cx": 0.7,
+          "cy": 0.57,
+          "rx": 0.17,
+          "ry": 0.3
+        }
+      ],
+      "labelPosition": [
+        0.5,
+        0.93
+      ],
+      "visibleBoundsAlphaAbove128": [
+        68,
+        77,
+        1495,
+        911
+      ]
+    },
+    {
+      "file": "side-drum.png",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "prompt": "Use case: product-mockup. Asset type: realistic playable instrument cutout for the premium Mallet & Measure Orff studio. Generate one accurate acoustic orchestral SIDE DRUM / SNARE DRUM, a modest 14-inch diameter natural maple shell about 5.5 inches deep. Show one drum only in a front three-quarter overhead view, fully visible and centered, with a wide clean ivory-white coated top drumhead forming a readable ellipse and occupying about the upper half of the drum. Natural warm honey-brown maple shell with realistic grain, chrome hoops and eight evenly spaced tension lugs, small credible snare throw-off visible on right side. Side drum should look like a real concert snare, not a floor tom, marching drum, or toy. Include two pale maple drumsticks laid parallel on the far right completely beside the drum, not crossing or blocking its head. No stand, no mallet, no additional drum. Premium studio product photograph with lifelike material detail, soft warm diffuse upper-left light, restrained chrome highlights, a genuine product rather than an illustration. Landscape 3:2 canvas, modest transparent padding, whole drum and sticks entirely inside frame. Genuinely transparent background with alpha, no floor, no scene, no gradients, no colored halo, no spotlight glow, no labels, no logo, no lettering, no hands, no watermark.",
+      "alphaPreserved": true,
+      "hitRegions": [
+        {
+          "label": "Head",
+          "type": "ellipse",
+          "cx": 0.451,
+          "cy": 0.306,
+          "rx": 0.329,
+          "ry": 0.209
+        }
+      ],
+      "labelPosition": [
+        0.451,
+        0.306
+      ],
+      "visibleBoundsAlphaAbove128": [
+        113,
+        54,
+        1481,
+        987
+      ]
+    },
+    {
+      "file": "sopranino-recorder.png",
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "prompt": "Use case: product-mockup. Asset type: photorealistic woodwind instrument image for a premium educational virtual instrument studio. Primary request: one real-looking small wooden SOPRANINO RECORDER IN F, the compact high-pitched member of the recorder family, about 23 centimeters long in real life. It has the authentic rounded beak mouthpiece, rectangular dark windway window and sloped labium on the front near the top, turned wooden rings at the head/body join, seven front finger positions arranged down the body, the lower two positions having paired small holes, and a compact gently flared foot. Rear thumbhole is hidden from this frontal view. Warm medium honey-brown boxwood with fine natural grain and subtle satin varnish, no keys, no metal, no logo. Perfectly straight vertical upright instrument, mouthpiece at top and flared foot at bottom, entirely visible with safe padding and no cropping. Compact sopranino proportions rather than a long tenor recorder, barrel length short relative to bore. Clean premium studio product photograph with soft warm upper-left illumination, realistic wood detail, restrained highlights. Portrait canvas, centered isolated instrument. Genuinely transparent alpha background; absolutely no room, no floor, no scenery, no atmospheric glow, no gradient, no printed labels, no words, no hands, no watermark, no other objects.",
+      "alphaPreserved": true,
+      "hitRegions": [],
+      "visibleBoundsAlphaAbove128": [
+        431,
+        48,
+        595,
+        1469
+      ]
+    },
+    {
+      "file": "timpani.png",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "prompt": "Use case: product-mockup. Asset type: photorealistic playable percussion instrument cutout for Mallet & Measure Orff studio. Generate one matching PAIR OF TWO ORCHESTRAL TIMPANI, also called kettledrums: larger low drum on the LEFT and smaller high drum on the RIGHT, placed closely together with a narrow clear gap, no overlap between their circular heads. Both have genuine smoothly hammered warm copper hemispherical bowls, stretched ivory natural-looking drumheads, silver tuning hoops with evenly spaced tension screws, dark charcoal tripod frames and compact credible floor pedal mechanisms. The heads are wide readable ellipses facing the camera from a front three-quarter elevated view, enough elevation to clearly see and tap the full surfaces. The copper bowls and stands are completely visible, entirely within the frame. Include a single pair of slender maple timpani mallets with round cream felt heads together at far right, separate from the heads. Premium product photography, lifelike copper and felt texture, soft warm diffuse studio lighting and controlled natural reflections matching premium classroom percussion imagery. Landscape 3:2 canvas, objects fill most of frame with safe transparent margin. Genuinely transparent alpha background, no floor, no room, no gradient, no glow, no shadows in empty background, no musicians, no hands, no other props, no labels, no lettering, no brand, no watermark. Exactly two timpani, left visibly larger than right.",
+      "alphaPreserved": true,
+      "hitRegions": [
+        {
+          "label": "Low",
+          "type": "ellipse",
+          "cx": 0.275,
+          "cy": 0.168,
+          "rx": 0.235,
+          "ry": 0.082
+        },
+        {
+          "label": "High",
+          "type": "ellipse",
+          "cx": 0.744,
+          "cy": 0.221,
+          "rx": 0.171,
+          "ry": 0.075
+        }
+      ],
+      "labelPosition": [
+        0.5,
+        0.12
+      ],
+      "visibleBoundsAlphaAbove128": [
+        17,
+        73,
+        1510,
+        955
+      ]
+    }
+  ]
+}

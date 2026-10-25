@@ -1,0 +1,37 @@
+Felt & Fable Studio v1.50 — Director tools
+
+Movie tools → Storyboard: plan and reorder shots, import/export Director Plans.
+Shots: easing and subject tracking. Look: focus depth. Text: dialogue and titles.
+Timing: markers, beat grid and snapping. Sound: audio leads/tails across cuts.
+Acting → Speech from audio: analyze narration or an imported cue to drive mouths.
+Export: whole movie, current scene or marked range, 1080p or 540p, looping preview and Movie Check.
+
+FELT & FABLE STUDIO — CHATGPT SITE
+Created by Drew Wichman. v1.40 — Cinematic Stories.
+
+Open the site to start making stories. Artwork loads as you use it.
+Build arranges your story. Animate opens a compact timeline and a side editor.
+Sound adds music and scene narration. Export makes a video or a still image.
+Use Download story to keep an editable project, including imported images and audio.
+Use File > Open story to restore a project from the desktop folder app or this site.
+Edits create recovery copies in this browser on this device, including images and audio.
+File > Recover recent story offers up to eight recent editing sessions.
+Recovery is not cloud saving. Clearing browser site data removes recovery copies.
+Download a story file for a lasting backup or to continue on a different computer.
+Chrome or Edge is recommended for the existing MP4 export feature.
+Quick tour walks through a first story. File > Guide & shortcuts explains more tools.
+Use the star on a piece or backdrop for Favorites. Recently used helps find it again.
+Workspace zoom changes your editing view; Camera zoom changes the recorded shot.
+
+Click a piece for nearby Duplicate, Delete and More actions.
+Select several pieces for Group, or one group for Ungroup.
+Locked pieces are protected. Undo in the top toolbar reverses a deletion.
+
+MOVIE TOOLS
+Movie tools above the board opens Shots, Look, Titles and Dialogue in the side panel.
+Use File > Open cinematic example for a complete 23-second sample.
+Find six new story packs under Collection > New · Movie collection or pack filters.
+Cast characters have expressions, poses and timed acting cues.
+Placement & accessories attaches props and assigns depth layers.
+Sound offers editable sound-effect and ambience cues, with imports and fades.
+259 pieces and 94 backdrops total. New artwork loads only when used.

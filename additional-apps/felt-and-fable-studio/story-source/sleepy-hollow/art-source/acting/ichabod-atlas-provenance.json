@@ -1,0 +1,34 @@
+{
+  "generator": "built-in image_gen",
+  "date": "2026-10-19",
+  "reference_paths": [
+    "/workspace/scratch/110acee071c2/sleepy-hollow/acting-references/ichabod-stand.png",
+    "/workspace/scratch/110acee071c2/sleepy-hollow/acting-references/ichabod-sing.png"
+  ],
+  "atlases": [
+    {
+      "file": "ichabod-everyday-atlas.png",
+      "original_file": "/workspace/scratch/110acee071c2/generated_images/exec-989efee7-f796-4e8e-8831-0b57590888dd.png",
+      "prompt": "Use case: identity-preserve. Asset type: transparent full-body felt puppet animation pose atlas, 4 figures in a strict equal 2-by-2 grid.\nCreate four NEW everyday acting poses of EXACTLY the Ichabod Crane character shown in the two reference images. The reference images are identity, costume, proportion, and material guides. Preserve his tall slender adult build, narrow long face and nose, brown hair tucked back, brown broad-brim hat, dark teal long coat, rust waistcoat, cream neckcloth, tan knee breeches, black stockings, brown buckled shoes, expressive warm brown eyes. Same handcrafted felt miniature look, stitching, tactile fibers, softly lit dimensional puppet. Same recognizable face in every cell.\nAll poses have CLOSED MOUTH or very subtle quiet conversational expression: none are singing. No large raised arm, no songbook.\nTop-left: attentive neutral full-body standing pose, face and chest three-quarter toward camera-right, hands resting low at sides.\nTop-right: calm teaching pose, small plain chalkboard slate held at waist level in one hand, other hand holding chalk and pointing gently at the slate; relaxed shoulders and closed mouth.\nBottom-left: quietly reading a small folded invitation held low at his waist, gaze downward, full-body standing, slight thoughtful smile.\nBottom-right: polite greeting full-body standing, one hand at his chest, slight courteous bow, other hand relaxed, hat on head, no book.\nComposition: one complete figure centered within each equal rectangular quadrant, generous clear margins around hats, hands and shoes, generous totally transparent horizontal and vertical gutters. Uniform head size and body proportions in all four cells, same camera distance, feet aligned within each row. Every hat and every shoe fully inside its own quadrant. No overlap between quadrants.\nScene/backdrop: TRUE transparent alpha cutout background and transparent gutters, no environment, no floor or ground plane, no contact shadow, no checkerboard or opaque background, no text labels, no borders, no watermarks.\nUse the exact reference character rather than redesigning him. No singing gestures in any cell.",
+      "order": [
+        "attentive",
+        "teaching",
+        "invitation",
+        "greeting"
+      ],
+      "inspection": "Visually inspected. Identity and costume match; closed mouths throughout; all full figures visible. Greeting has a gentle smile, not singing. No visual anatomy issues."
+    },
+    {
+      "file": "ichabod-listening-atlas.png",
+      "original_file": "/workspace/scratch/110acee071c2/generated_images/exec-e2d70cdb-4ad3-4cf2-85c6-79d12dd2d9cc.png",
+      "prompt": "Use case: identity-preserve. Asset type: transparent full-body felt puppet animation pose atlas, 4 figures in a strict equal 2-by-2 grid.\nCreate four NEW everyday acting poses of EXACTLY the Ichabod Crane character shown in the two reference images. The reference images are identity, costume, proportion, and material guides. Preserve his tall slender adult build, narrow long face and nose, brown hair tucked back, brown broad-brim hat, dark teal long coat, rust waistcoat, cream neckcloth, tan knee breeches, black stockings, brown buckled shoes, expressive warm brown eyes. Same handcrafted felt miniature look, stitching, tactile fibers, softly lit dimensional puppet. Same recognizable face in every cell.\nAll poses have CLOSED MOUTH, no singing expressions, no singing gestures, no songbook.\nTop-left: fully seated on a simple rustic wooden chair, attentive listening with relaxed hands on knees, head and eyes turned toward camera-right, torso three-quarter to the camera. Entire chair from backrest to all wooden feet visible, both his legs and shoes visible below the knees. Believable seated anatomy.\nTop-right: SAME wooden chair and SAME seated body framing as top-left, but now increasingly uneasy while listening: hands clasped near his lap, shoulders slightly tense, concerned eyebrows, head turned toward camera-right. Closed mouth. Entire figure and all chair feet visible. Both seated poses should match in camera distance, head size, chair size and seat height.\nBottom-left: full-body standing, carrying a small basket of red apples in BOTH hands at waist height, relaxed shoulders, slight weary but pleasant closed-mouth expression. Hat on his head.\nBottom-right: full-body standing, subdued disappointed expression with head slightly lowered, his hat held low in BOTH hands near his waist, same brown hair as reference revealed on head. Closed mouth. No tears and no exaggerated cartoon slump.\nComposition: one complete figure and chair/prop centered within each equal rectangular quadrant, generous empty clear margins on all four sides of each individual pose, fully transparent horizontal and vertical gutters. Uniform character head size and body proportions across all four cells. Every chair leg, hat, hand and shoe fully inside its own quadrant. Figures must NOT touch outer canvas edges or central dividing lines.\nScene/backdrop: TRUE transparent alpha cutout background and transparent gutters, no environment, no floor or ground plane, no contact shadow, no checkerboard or opaque background, no text labels, no borders, no watermarks.\nUse the exact reference character rather than redesigning him. The seated poses should look like the adult Ichabod truly sitting in a normal adult chair, not a child or miniature chair.",
+      "order": [
+        "seated-attentive",
+        "seated-uneasy",
+        "apple-chore",
+        "disappointed"
+      ],
+      "inspection": "Visually inspected. Coherent seated anatomy with whole chairs and both shoes; matching chair design/framing. Full standing figures visible. Same identity and closed mouths. Seated head heights are slightly larger than standing cells, so normalize scale based on head/body reference rather than total chair-inclusive bounding height."
+    }
+  ]
+}

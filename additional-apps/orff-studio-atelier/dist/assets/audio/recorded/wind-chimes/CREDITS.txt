@@ -1,0 +1,16 @@
+Five Bar Chimes Samples.wav
+Author: tosha73 / Freesound
+Source: https://freesound.org/people/tosha73/sounds/495327/
+License: CC0 1.0 Universal
+https://creativecommons.org/publicdomain/zero/1.0/
+Full legal text: ../CC0-1.0.txt
+
+Prepared from the original WAV uploaded by the user: 44.1 kHz, 16-bit stereo, 84 seconds. No MP3 preview was used.
+
+The five 16-second performances begin at 0, 17, 34, 51 and 68 seconds. The first two are downward sweeps (brisk and slow); the final three are upward sweeps (brisk, medium and slow). Direction refers to pitch; speeds are relative labels, not tempo-synchronized values. Secondary chime contacts and natural ringing are retained.
+
+Processing: 60 Hz second-order high-pass for sub-bass rumble; constant gain per take to balance the strongest one-second RMS with a 0.65 peak ceiling; 2 ms start and 160 ms end fades; 16-bit TPDF dither. No pitch shift, speed change, reversal, compression or added reverb. Full 16-second excerpts retained.
+
+Each gesture has a labeled playing stroke and a corresponding sequencer/notation position. These musically different directions and speeds are not randomly interchanged. Legacy note 84 continues to work as the default downward sweep.
+
+PROVENANCE.json records original/derived SHA-256 hashes and exact processing. Rebuild with scripts/prepare-wind-chimes.py and the supplied source WAV.

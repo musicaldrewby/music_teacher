@@ -1,0 +1,44 @@
+MALLET & MEASURE - OCTOBER 24, 2026
+Full downloadable edition for Teachers Pay Teachers
+
+COMPOSE AND REVISE
+- Enter notes and rests directly on the staff with fixed note values.
+- Add chords and borduns; select, copy, paste, and delete phrases.
+- Change note values, clear measures, and edit played and written lengths.
+- Add dynamics, articulations, crescendos, and recorder phrasing.
+- Hear or loop a selection, use Focus, and see the instrument beside the score.
+
+SEQUENCER AND RECORDING
+- Dedicated Write, Select, and Erase tools, plus phrase editing.
+- Drag note edges to change duration; use Note details for precise edits.
+- Shared section lengths and repeat-to-fill tools for accompaniments.
+- Recording grid, held-length options, count-in, and Undo take.
+- Improved recording/transport timing and remembered recording preferences.
+
+WORKSPACE AND SAVING
+- Section bars and Undo take are always visible in the bottom console;
+  no More menu is needed. Compact groups keep controls steady on laptops.
+- A bounded sequencer that brings notes into view and remembers each part's
+  grid position during the session.
+- Menus, note details, and quick mixer open over the workspace.
+- Steadier controls and save status during routine edits and part changes.
+- The downloaded app opens even when the browser blocks local storage;
+  score-view controls still work for the session.
+- Named versions, editable .orff downloads, and browser-save recovery.
+
+PRINT AND SHARE
+- Actual PDF page previews, staff sizes, note names, and line/page breaks.
+- Compact teacher scores with optional hiding of inactive staves.
+- Classroom packages with scores, student parts, and rehearsal audio.
+- Large-notation / large-instrument video layouts and a four-measure preview.
+
+DOCUMENTATION
+- Updated 20-page user manual focused on using the program.
+- Two-page START-HERE guide with installation, updating, and folder care.
+- Student first-composition walkthrough and creative challenges.
+
+INSTALLING THIS UPDATE
+Download your current compositions as .orff files first. Extract this entire
+ZIP into a new folder. Open Software/Open-Mallet-Measure.html, then use
+Project > Open a project file to load your music. Keep the complete Software
+folder together. See START-HERE.pdf before replacing your previous copy.

@@ -1,0 +1,39 @@
+Street Song instrument additions
+================================
+
+CASTANETS
+Castanets (simple), sound #0922, by Joseph SARDIN / BigSoundBank.com.
+Source: https://bigsoundbank.com/castanets-simple-s0922.html
+Original WAV: https://bigsoundbank.com/UPLOAD/bwf-en/0922.wav
+License: CC0 1.0 Universal (public domain dedication).
+https://bigsoundbank.com/licenses.html
+Two separate single strokes selected from the unclipped opening of the recording.
+Native pitch; silence/tails trimmed, constant gain, endpoint fades, polyphase
+48 kHz to 44.1 kHz resampling, TPDF dither to 16-bit PCM WAV.
+
+SIDE DRUM
+Rope-tension snare drum, high tension, snares on, velocity layer 3, round robins
+1 and 3. Recorded by Versilian Studios LLC / Versilian Community Sample Library.
+Source: https://github.com/sgossner/VCSL
+Source commit: c1ea7bcc3c7309650ab0da9d15c9cd1fbc4a4c7e
+License: CC0 1.0 Universal.
+https://creativecommons.org/publicdomain/zero/1.0/
+Natural pitch and decay retained. Constant gain and endpoint fades only,
+with TPDF dither to 44.1 kHz stereo 16-bit PCM WAV.
+
+SOPRANINO RECORDER IN F — TRANSPOSED APPROXIMATION
+Uses the existing CC0 VCSL Baroque Soprano Recorder recordings, raised five
+semitones (a perfect fourth) to cover F5–F7. This is not a separate physical
+sopranino recording. Existing buffer-relative sustain loops and fine pitch
+corrections are retained. No source bytes are duplicated or changed.
+See ../recorders/PROVENANCE.json and CREDITS.txt for the original source paths,
+hashes, tuning and loop preparation. Existing native SATB recorders are unchanged.
+
+TIMPANI
+Uses the existing C2–C4 chromatic samples rendered from GeneralUser GS 1.471,
+by S. Christian Collins, with TinySoundFont. No audio bytes are changed.
+Source: https://schristiancollins.com/generaluser.php
+License: GeneralUser GS License v2.0, reproduced in ../../CREDITS.txt.
+
+PROVENANCE.json records source and output hashes, transformations and mapping.
+manifest-fragment.json contains instrumentSamples entries for app integration.

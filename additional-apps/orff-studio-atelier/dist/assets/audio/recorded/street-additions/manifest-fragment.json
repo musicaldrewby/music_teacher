@@ -1,0 +1,519 @@
+{
+  "instrumentSamples": {
+    "castanets": {
+      "credit": "Castanets (simple), Joseph SARDIN / BigSoundBank.com",
+      "license": "CC0-1.0",
+      "source": "https://bigsoundbank.com/castanets-simple-s0922.html",
+      "licensePage": "https://bigsoundbank.com/licenses.html",
+      "description": "Two separate acoustic single strikes; original pitches retained.",
+      "notes": {
+        "85": {
+          "url": "assets/audio/recorded/street-additions/castanets-1.wav",
+          "gain": 1,
+          "tuningSemitones": 0,
+          "duration": 0.17700680272108843,
+          "articulation": "Stroke 1"
+        },
+        "86": {
+          "url": "assets/audio/recorded/street-additions/castanets-2.wav",
+          "gain": 1,
+          "tuningSemitones": 0,
+          "duration": 0.19,
+          "articulation": "Stroke 2"
+        }
+      }
+    },
+    "side-drum": {
+      "credit": "Rope-tension snare drum, Versilian Studios LLC / VCSL",
+      "license": "CC0-1.0",
+      "source": "https://versilian-studios.com/vcsl/",
+      "sourceCommit": "c1ea7bcc3c7309650ab0da9d15c9cd1fbc4a4c7e",
+      "description": "Two native snare-on strokes of one rope-tension side drum.",
+      "notes": {
+        "38": {
+          "url": "assets/audio/recorded/street-additions/side-drum-1.wav",
+          "gain": 1,
+          "tuningSemitones": 0,
+          "duration": 2.4904308390022676,
+          "articulation": "Stroke 1"
+        },
+        "40": {
+          "url": "assets/audio/recorded/street-additions/side-drum-2.wav",
+          "gain": 1,
+          "tuningSemitones": 0,
+          "duration": 2.6147619047619046,
+          "articulation": "Stroke 2"
+        }
+      }
+    },
+    "sopranino-recorder": {
+      "sourceInstrument": "Baroque Soprano Recorder, transposed approximation",
+      "source": "https://github.com/sgossner/VCSL",
+      "sourceCommit": "c1ea7bcc3c7309650ab0da9d15c9cd1fbc4a4c7e",
+      "credit": "Versilian Studios LLC / VCSL",
+      "license": "CC0-1.0",
+      "sustain": true,
+      "description": "Sopranino in F range, F5\u2013F7. VCSL soprano recordings raised a perfect fourth; not separately recorded sopranino samples.",
+      "notes": {
+        "77": {
+          "url": "assets/audio/recorded/recorders/soprano-72.wav",
+          "gain": 1,
+          "tuningSemitones": 4.968879,
+          "loopStart": 0.6,
+          "loopEnd": 3.1372108843537414,
+          "duration": 3.2372108843537415,
+          "sourceRootMidi": 72
+        },
+        "78": {
+          "url": "assets/audio/recorded/recorders/soprano-72.wav",
+          "gain": 1,
+          "tuningSemitones": 5.968879,
+          "loopStart": 0.6,
+          "loopEnd": 3.1372108843537414,
+          "duration": 3.2372108843537415,
+          "sourceRootMidi": 72
+        },
+        "79": {
+          "url": "assets/audio/recorded/recorders/soprano-74.wav",
+          "gain": 1,
+          "tuningSemitones": 4.963146,
+          "loopStart": 1.65,
+          "loopEnd": 3.345215419501134,
+          "duration": 3.445215419501134,
+          "sourceRootMidi": 74
+        },
+        "80": {
+          "url": "assets/audio/recorded/recorders/soprano-74.wav",
+          "gain": 1,
+          "tuningSemitones": 5.963146,
+          "loopStart": 1.65,
+          "loopEnd": 3.345215419501134,
+          "duration": 3.445215419501134,
+          "sourceRootMidi": 74
+        },
+        "81": {
+          "url": "assets/audio/recorded/recorders/soprano-76.wav",
+          "gain": 1,
+          "tuningSemitones": 4.95946,
+          "loopStart": 1.65,
+          "loopEnd": 3.2008163265306124,
+          "duration": 3.300816326530612,
+          "sourceRootMidi": 76
+        },
+        "82": {
+          "url": "assets/audio/recorded/recorders/soprano-76.wav",
+          "gain": 1,
+          "tuningSemitones": 5.95946,
+          "loopStart": 1.65,
+          "loopEnd": 3.2008163265306124,
+          "duration": 3.300816326530612,
+          "sourceRootMidi": 76
+        },
+        "83": {
+          "url": "assets/audio/recorded/recorders/soprano-78.wav",
+          "gain": 1,
+          "tuningSemitones": 4.935458,
+          "loopStart": 1.5,
+          "loopEnd": 3.2453968253968255,
+          "duration": 3.3453968253968256,
+          "sourceRootMidi": 78
+        },
+        "84": {
+          "url": "assets/audio/recorded/recorders/soprano-78.wav",
+          "gain": 1,
+          "tuningSemitones": 5.935458,
+          "loopStart": 1.5,
+          "loopEnd": 3.2453968253968255,
+          "duration": 3.3453968253968256,
+          "sourceRootMidi": 78
+        },
+        "85": {
+          "url": "assets/audio/recorded/recorders/soprano-80.wav",
+          "gain": 1,
+          "tuningSemitones": 5.007223,
+          "loopStart": 1.5,
+          "loopEnd": 3.2714739229024943,
+          "duration": 3.3714739229024944,
+          "sourceRootMidi": 80
+        },
+        "86": {
+          "url": "assets/audio/recorded/recorders/soprano-80.wav",
+          "gain": 1,
+          "tuningSemitones": 6.007223,
+          "loopStart": 1.5,
+          "loopEnd": 3.2714739229024943,
+          "duration": 3.3714739229024944,
+          "sourceRootMidi": 80
+        },
+        "87": {
+          "url": "assets/audio/recorded/recorders/soprano-82.wav",
+          "gain": 1,
+          "tuningSemitones": 5.001464,
+          "loopStart": 1.35,
+          "loopEnd": 3.466190476190476,
+          "duration": 3.566190476190476,
+          "sourceRootMidi": 82
+        },
+        "88": {
+          "url": "assets/audio/recorded/recorders/soprano-82.wav",
+          "gain": 1,
+          "tuningSemitones": 6.001464,
+          "loopStart": 1.35,
+          "loopEnd": 3.466190476190476,
+          "duration": 3.566190476190476,
+          "sourceRootMidi": 82
+        },
+        "89": {
+          "url": "assets/audio/recorded/recorders/soprano-84.wav",
+          "gain": 1,
+          "tuningSemitones": 4.995549,
+          "loopStart": 1.35,
+          "loopEnd": 3.529886621315193,
+          "duration": 3.6298866213151926,
+          "sourceRootMidi": 84
+        },
+        "90": {
+          "url": "assets/audio/recorded/recorders/soprano-84.wav",
+          "gain": 1,
+          "tuningSemitones": 5.995549,
+          "loopStart": 1.35,
+          "loopEnd": 3.529886621315193,
+          "duration": 3.6298866213151926,
+          "sourceRootMidi": 84
+        },
+        "91": {
+          "url": "assets/audio/recorded/recorders/soprano-86.wav",
+          "gain": 1,
+          "tuningSemitones": 4.996757,
+          "loopStart": 1.65,
+          "loopEnd": 3.760294784580499,
+          "duration": 3.860294784580499,
+          "sourceRootMidi": 86
+        },
+        "92": {
+          "url": "assets/audio/recorded/recorders/soprano-86.wav",
+          "gain": 1,
+          "tuningSemitones": 5.996757,
+          "loopStart": 1.65,
+          "loopEnd": 3.760294784580499,
+          "duration": 3.860294784580499,
+          "sourceRootMidi": 86
+        },
+        "93": {
+          "url": "assets/audio/recorded/recorders/soprano-88.wav",
+          "gain": 1,
+          "tuningSemitones": 4.983314,
+          "loopStart": 1.65,
+          "loopEnd": 3.4790702947845804,
+          "duration": 3.5790702947845805,
+          "sourceRootMidi": 88
+        },
+        "94": {
+          "url": "assets/audio/recorded/recorders/soprano-88.wav",
+          "gain": 1,
+          "tuningSemitones": 5.983314,
+          "loopStart": 1.65,
+          "loopEnd": 3.4790702947845804,
+          "duration": 3.5790702947845805,
+          "sourceRootMidi": 88
+        },
+        "95": {
+          "url": "assets/audio/recorded/recorders/soprano-90.wav",
+          "gain": 1,
+          "tuningSemitones": 4.982653,
+          "loopStart": 1.35,
+          "loopEnd": 3.8130839002267574,
+          "duration": 3.9130839002267575,
+          "sourceRootMidi": 90
+        },
+        "96": {
+          "url": "assets/audio/recorded/recorders/soprano-91.wav",
+          "gain": 1,
+          "tuningSemitones": 4.986436,
+          "loopStart": 1.8,
+          "loopEnd": 3.397120181405896,
+          "duration": 3.497120181405896,
+          "sourceRootMidi": 91
+        },
+        "97": {
+          "url": "assets/audio/recorded/recorders/soprano-91.wav",
+          "gain": 1,
+          "tuningSemitones": 5.986436,
+          "loopStart": 1.8,
+          "loopEnd": 3.397120181405896,
+          "duration": 3.497120181405896,
+          "sourceRootMidi": 91
+        },
+        "98": {
+          "url": "assets/audio/recorded/recorders/soprano-94.wav",
+          "gain": 1,
+          "tuningSemitones": 3.970248,
+          "loopStart": 1.5,
+          "loopEnd": 3.9011791383219956,
+          "duration": 4.001179138321995,
+          "sourceRootMidi": 94
+        },
+        "99": {
+          "url": "assets/audio/recorded/recorders/soprano-94.wav",
+          "gain": 1,
+          "tuningSemitones": 4.970248,
+          "loopStart": 1.5,
+          "loopEnd": 3.9011791383219956,
+          "duration": 4.001179138321995,
+          "sourceRootMidi": 94
+        },
+        "100": {
+          "url": "assets/audio/recorded/recorders/soprano-94.wav",
+          "gain": 1,
+          "tuningSemitones": 5.970248,
+          "loopStart": 1.5,
+          "loopEnd": 3.9011791383219956,
+          "duration": 4.001179138321995,
+          "sourceRootMidi": 94
+        },
+        "101": {
+          "url": "assets/audio/recorded/recorders/soprano-96.wav",
+          "gain": 1,
+          "tuningSemitones": 4.978167,
+          "loopStart": 0.6,
+          "loopEnd": 3.473106575963719,
+          "duration": 3.5731065759637186,
+          "sourceRootMidi": 96
+        }
+      }
+    },
+    "timpani": {
+      "credit": "GeneralUser GS 1.471 \u2014 S. Christian Collins; TinySoundFont rendering",
+      "source": "https://schristiancollins.com/generaluser.php",
+      "license": "GeneralUser GS License v2.0; see assets/audio/CREDITS.txt",
+      "description": "Existing pitched timpani C2\u2013C4; audio bytes unchanged.",
+      "notes": {
+        "36": {
+          "url": "assets/audio/timpani/36.mp3",
+          "duration": 4.2,
+          "peak": 0.56821,
+          "rms": 0.05906,
+          "bytes": 34316,
+          "gain": 1,
+          "tuningSemitones": 0
+        },
+        "37": {
+          "url": "assets/audio/timpani/37.mp3",
+          "duration": 4.2,
+          "peak": 0.57426,
+          "rms": 0.05773,
+          "bytes": 34316,
+          "gain": 1,
+          "tuningSemitones": 0
+        },
+        "38": {
+          "url": "assets/audio/timpani/38.mp3",
+          "duration": 4.2,
+          "peak": 0.5669,
+          "rms": 0.05641,
+          "bytes": 34316,
+          "gain": 1,
+          "tuningSemitones": 0
+        },
+        "39": {
+          "url": "assets/audio/timpani/39.mp3",
+          "duration": 4.2,
+          "peak": 0.56589,
+          "rms": 0.05496,
+          "bytes": 34316,
+          "gain": 1,
+          "tuningSemitones": 0
+        },
+        "40": {
+          "url": "assets/audio/timpani/40.mp3",
+          "duration": 4.2,
+          "peak": 0.58179,
+          "rms": 0.05368,
+          "bytes": 34316,
+          "gain": 1,
+          "tuningSemitones": 0
+        },
+        "41": {
+          "url": "assets/audio/timpani/41.mp3",
+          "duration": 4.2,
+          "peak": 0.56224,
+          "rms": 0.05235,
+          "bytes": 34316,
+          "gain": 1,
+          "tuningSemitones": 0
+        },
+        "42": {
+          "url": "assets/audio/timpani/42.mp3",
+          "duration": 4.2,
+          "peak": 0.56836,
+          "rms": 0.05113,
+          "bytes": 34316,
+          "gain": 1,
+          "tuningSemitones": 0
+        },
+        "43": {
+          "url": "assets/audio/timpani/43.mp3",
+          "duration": 4.2,
+          "peak": 0.56925,
+          "rms": 0.0498,
+          "bytes": 34316,
+          "gain": 1,
+          "tuningSemitones": 0
+        },
+        "44": {
+          "url": "assets/audio/timpani/44.mp3",
+          "duration": 4.2,
+          "peak": 0.5715,
+          "rms": 0.04865,
+          "bytes": 34316,
+          "gain": 1,
+          "tuningSemitones": 0
+        },
+        "45": {
+          "url": "assets/audio/timpani/45.mp3",
+          "duration": 4.2,
+          "peak": 0.56838,
+          "rms": 0.04726,
+          "bytes": 34316,
+          "gain": 1,
+          "tuningSemitones": 0
+        },
+        "46": {
+          "url": "assets/audio/timpani/46.mp3",
+          "duration": 4.2,
+          "peak": 0.56687,
+          "rms": 0.04619,
+          "bytes": 34316,
+          "gain": 1,
+          "tuningSemitones": 0
+        },
+        "47": {
+          "url": "assets/audio/timpani/47.mp3",
+          "duration": 4.2,
+          "peak": 0.56972,
+          "rms": 0.04505,
+          "bytes": 34316,
+          "gain": 1,
+          "tuningSemitones": 0
+        },
+        "48": {
+          "url": "assets/audio/timpani/48.mp3",
+          "duration": 4.2,
+          "peak": 0.58038,
+          "rms": 0.04383,
+          "bytes": 34316,
+          "gain": 1,
+          "tuningSemitones": 0
+        },
+        "49": {
+          "url": "assets/audio/timpani/49.mp3",
+          "duration": 4.2,
+          "peak": 0.56377,
+          "rms": 0.0427,
+          "bytes": 34316,
+          "gain": 1,
+          "tuningSemitones": 0
+        },
+        "50": {
+          "url": "assets/audio/timpani/50.mp3",
+          "duration": 4.2,
+          "peak": 0.56736,
+          "rms": 0.04168,
+          "bytes": 34316,
+          "gain": 1,
+          "tuningSemitones": 0
+        },
+        "51": {
+          "url": "assets/audio/timpani/51.mp3",
+          "duration": 4.2,
+          "peak": 0.57447,
+          "rms": 0.04066,
+          "bytes": 34316,
+          "gain": 1,
+          "tuningSemitones": 0
+        },
+        "52": {
+          "url": "assets/audio/timpani/52.mp3",
+          "duration": 4.2,
+          "peak": 0.5637,
+          "rms": 0.03945,
+          "bytes": 34316,
+          "gain": 1,
+          "tuningSemitones": 0
+        },
+        "53": {
+          "url": "assets/audio/timpani/53.mp3",
+          "duration": 4.2,
+          "peak": 0.56363,
+          "rms": 0.03847,
+          "bytes": 34316,
+          "gain": 1,
+          "tuningSemitones": 0
+        },
+        "54": {
+          "url": "assets/audio/timpani/54.mp3",
+          "duration": 4.2,
+          "peak": 0.56567,
+          "rms": 0.03747,
+          "bytes": 34316,
+          "gain": 1,
+          "tuningSemitones": 0
+        },
+        "55": {
+          "url": "assets/audio/timpani/55.mp3",
+          "duration": 4.2,
+          "peak": 0.54906,
+          "rms": 0.0365,
+          "bytes": 34316,
+          "gain": 1,
+          "tuningSemitones": 0
+        },
+        "56": {
+          "url": "assets/audio/timpani/56.mp3",
+          "duration": 4.2,
+          "peak": 0.57661,
+          "rms": 0.03577,
+          "bytes": 34316,
+          "gain": 1,
+          "tuningSemitones": 0
+        },
+        "57": {
+          "url": "assets/audio/timpani/57.mp3",
+          "duration": 4.2,
+          "peak": 0.56636,
+          "rms": 0.03471,
+          "bytes": 34316,
+          "gain": 1,
+          "tuningSemitones": 0
+        },
+        "58": {
+          "url": "assets/audio/timpani/58.mp3",
+          "duration": 4.2,
+          "peak": 0.58125,
+          "rms": 0.03402,
+          "bytes": 34316,
+          "gain": 1,
+          "tuningSemitones": 0
+        },
+        "59": {
+          "url": "assets/audio/timpani/59.mp3",
+          "duration": 4.2,
+          "peak": 0.55554,
+          "rms": 0.03295,
+          "bytes": 34316,
+          "gain": 1,
+          "tuningSemitones": 0
+        },
+        "60": {
+          "url": "assets/audio/timpani/60.mp3",
+          "duration": 4.2,
+          "peak": 0.5673,
+          "rms": 0.03231,
+          "bytes": 34316,
+          "gain": 1,
+          "tuningSemitones": 0
+        }
+      }
+    }
+  }
+}

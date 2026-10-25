@@ -1,0 +1,23 @@
+AGOGO BELLS, COWBELL AND SLAPSTICK
+
+Versilian Community Sample Library (VCSL)
+Author: Versilian Studios LLC
+Source: https://versilian-studios.com/vcsl/
+Repository: https://github.com/sgossner/VCSL
+Pinned source commit: c1ea7bcc3c7309650ab0da9d15c9cd1fbc4a4c7e
+License: CC0-1.0 (full text at ../CC0-1.0.txt)
+The publisher explicitly permits commercial software use.
+
+Agogo: Agogo_Low_v2_rr1_Mid.wav and Agogo_High_v2_rr1_Mid.wav.
+Cowbell: Cowbell2_Normal_v2_rr1_Mid.wav and Cowbell2_Muted_v2_rr1_Mid.wav.
+Slapstick: slapstick_rr1.wav.
+
+Native pitch, speed and stereo image retained. Quiet lead/tails trimmed,
+levels balanced with constant gain, short endpoint fades and 16-bit TPDF
+dither. No synthetic replacement, pitch shifting, compression or EQ.
+Open/Muted use different recordings of the same cowbell; the exact muting
+technique is not specified by the source.
+
+Complete source URLs and source/derived SHA-256 hashes: PROVENANCE.json.
+Reproducible preparation: scripts/prepare-bells-slapstick.py with the
+pinned originals listed in scripts/bells-slapstick-sources.json.

@@ -1,0 +1,16 @@
+import fs from 'node:fs/promises';
+import assert from 'node:assert/strict';
+import {createCanvas} from '@napi-rs/canvas';
+import * as THREE from 'three';
+import {RoundedBoxGeometry} from 'three/addons/geometries/RoundedBoxGeometry.js';
+const source=await fs.readFile(new URL('../dist/scene.js',import.meta.url),'utf8');
+let body=source.slice(source.indexOf('export function createRoom')).replace('export function','function');
+body=body.replace(/ const renderer=new THREE.WebGLRenderer[^\n]+/,' const renderer={domElement:{addEventListener(){},style:{}},capabilities:{getMaxAnisotropy:()=>8},render(){},dispose(){},setPixelRatio(){},setSize(){},toneMappingExposure:1};');
+body=body.replace(/ const pmrem=[^\n]+/,'');body=body.replace(/ const composer=[^\n]+/,' const composer={render(){},setSize(){},setPixelRatio(){}};const renderPass={enabled:true};');body=body.replace(/ const ao=[^\n]+/,' const ao={enabled:true};');body=body.replace(/ const bloom=[^\n]+/,'');
+body=body.replace('const loader=new THREE.TextureLoader();','const loader={load:()=>new THREE.Texture()};');
+const ctx={createElement(type){if(type==='canvas')return createCanvas(1,1);throw Error(type);}};
+const factory=new Function('THREE','RoundedBoxGeometry','document','innerWidth','innerHeight','devicePixelRatio','requestAnimationFrame','window','performance',body+';return createRoom;');
+const create=factory(THREE,RoundedBoxGeometry,ctx,1440,900,1,()=>{},{addEventListener(){}},performance);
+const room=create({appendChild(){}},()=>{},()=>{});let meshes=0,vertices=0,materials=new Set();room.scene.traverse(o=>{if(o.isMesh){meshes++;const a=o.geometry.attributes.position;if(a){vertices+=a.count;for(let v of a.array)assert.ok(Number.isFinite(v),'Nonfinite geometry');}for(let v of [...o.position,...o.scale])assert.ok(Number.isFinite(v));if(o.material)materials.add(o.material);}});
+assert.equal(Object.keys(room.views).length,7);assert.ok(meshes>250);room.setView('tv');room.setVideoShelf([{id:'1',name:'A test tape'}]);room.setAudioShelf([{id:'2',name:'My first mixtape'}]);room.setSpell('MUSIC');room.setSimon(0,true);room.setSimon(0,false);room.loadTape('MOVIE');room.ejectTape();room.setTVMode('demo');room.setWear(.8);room.setTracking(.7);room.setSharpness(.4);room.setPower(false);room.setLamp(false);room.setQuality('balanced');room.setCounter('01:23');
+console.log(JSON.stringify({passed:true,meshes,vertices,materials:materials.size,views:7,note:'Scene construction and geometry checked; GPU shaders and browser rendering require WebGL.'},null,2));

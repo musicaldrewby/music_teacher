@@ -1,0 +1,208 @@
+{
+  "prepared": "2026-10-17",
+  "author": "Versilian Studios LLC",
+  "collection": "Versilian Community Sample Library",
+  "source": "https://versilian-studios.com/vcsl/",
+  "license": "CC0-1.0",
+  "sourceCommit": "c1ea7bcc3c7309650ab0da9d15c9cd1fbc4a4c7e",
+  "qualityNotes": [
+    "Acoustic agogo low/high bells from the same velocity layer, native pitches retained.",
+    "Cowbell2 normal/open and muted are separate performances of one physical instrument.",
+    "Slapstick is an acoustic hinged-board clap, not a synthesized noise burst.",
+    "Quiet lead/tails trimmed, constant gains balanced, endpoints faded; no EQ or pitch shifts.",
+    "Instrument-specific mappings leave other percussion instruments unchanged."
+  ],
+  "instrumentSamples": {
+    "slapstick": {
+      "credit": "Versilian Community Sample Library \u2014 Versilian Studios LLC",
+      "license": "CC0-1.0",
+      "source": "https://versilian-studios.com/vcsl/",
+      "sourceCommit": "c1ea7bcc3c7309650ab0da9d15c9cd1fbc4a4c7e",
+      "notes": {
+        "28": {
+          "url": "assets/audio/recorded/bells-slapstick/slapstick.wav",
+          "gain": 1,
+          "tuningSemitones": 0,
+          "duration": 0.6,
+          "articulation": "Clap"
+        }
+      }
+    },
+    "agogo-bells": {
+      "credit": "Versilian Community Sample Library \u2014 Versilian Studios LLC",
+      "license": "CC0-1.0",
+      "source": "https://versilian-studios.com/vcsl/",
+      "sourceCommit": "c1ea7bcc3c7309650ab0da9d15c9cd1fbc4a4c7e",
+      "notes": {
+        "68": {
+          "url": "assets/audio/recorded/bells-slapstick/agogo-low.wav",
+          "gain": 1,
+          "tuningSemitones": 0,
+          "duration": 2.0950113378684807,
+          "articulation": "Low"
+        },
+        "67": {
+          "url": "assets/audio/recorded/bells-slapstick/agogo-high.wav",
+          "gain": 1,
+          "tuningSemitones": 0,
+          "duration": 0.9950113378684807,
+          "articulation": "High"
+        }
+      }
+    },
+    "cowbell": {
+      "credit": "Versilian Community Sample Library \u2014 Versilian Studios LLC",
+      "license": "CC0-1.0",
+      "source": "https://versilian-studios.com/vcsl/",
+      "sourceCommit": "c1ea7bcc3c7309650ab0da9d15c9cd1fbc4a4c7e",
+      "notes": {
+        "56": {
+          "url": "assets/audio/recorded/bells-slapstick/cowbell-open.wav",
+          "gain": 1,
+          "tuningSemitones": 0,
+          "duration": 1.5450113378684807,
+          "articulation": "Open"
+        },
+        "57": {
+          "url": "assets/audio/recorded/bells-slapstick/cowbell-muted.wav",
+          "gain": 1,
+          "tuningSemitones": 0,
+          "duration": 0.9450113378684807,
+          "articulation": "Muted"
+        }
+      }
+    }
+  },
+  "assets": [
+    {
+      "file": "slapstick.wav",
+      "sha256": "312d4125d18de6ee1ad19a84c22b3e1dcc441c791d015a87a7b8673369c9fee1",
+      "instrument": "slapstick",
+      "note": 28,
+      "label": "Clap",
+      "sourceUrl": "https://raw.githubusercontent.com/sgossner/VCSL/c1ea7bcc3c7309650ab0da9d15c9cd1fbc4a4c7e/Idiophones/Struck%20Idiophones/Slapstick/slapstick_rr1.wav",
+      "sourceSha256": "e73b38bf43b385d95e2c790e7424526a91af8d1cdf484002912a4a8eabe73300",
+      "sourceStartSeconds": 0.0,
+      "sourceEndSeconds": 0.6,
+      "sampleRate": 44100,
+      "channels": 2,
+      "format": "PCM signed 16-bit WAV",
+      "duration": 0.6,
+      "peak": 0.697418212890625,
+      "clippedSamples": 0,
+      "processing": {
+        "gain": 0.75,
+        "fadeInSeconds": 0.00020408163265306123,
+        "fadeOutSeconds": 0.05,
+        "dither": "TPDF at one 16-bit LSB",
+        "pitchShift": 0,
+        "timeStretch": false,
+        "eq": false
+      }
+    },
+    {
+      "file": "agogo-low.wav",
+      "sha256": "8f511ad733a17b8ebe86e5bf64dd3a50f7433450089329e962dc4b901870cc69",
+      "instrument": "agogo-bells",
+      "note": 68,
+      "label": "Low",
+      "sourceUrl": "https://raw.githubusercontent.com/sgossner/VCSL/c1ea7bcc3c7309650ab0da9d15c9cd1fbc4a4c7e/Idiophones/Struck%20Idiophones/Agogo%20Bells/Agogo_Low_v2_rr1_Mid.wav",
+      "sourceSha256": "36fb0e28c0ba39336082902d299a5b2d20b9f5f0cb448cb64e4b13837b896eea",
+      "sourceStartSeconds": 0.005,
+      "sourceEndSeconds": 2.1,
+      "sampleRate": 44100,
+      "channels": 2,
+      "format": "PCM signed 16-bit WAV",
+      "duration": 2.0950113378684807,
+      "peak": 0.358795166015625,
+      "clippedSamples": 0,
+      "processing": {
+        "gain": 4.6,
+        "fadeInSeconds": 0.00020408163265306123,
+        "fadeOutSeconds": 0.05,
+        "dither": "TPDF at one 16-bit LSB",
+        "pitchShift": 0,
+        "timeStretch": false,
+        "eq": false
+      }
+    },
+    {
+      "file": "agogo-high.wav",
+      "sha256": "af71ca0eed3cdd20c9e000e9830edb6d2089880c93b51b29ad809682bd2c04d4",
+      "instrument": "agogo-bells",
+      "note": 67,
+      "label": "High",
+      "sourceUrl": "https://raw.githubusercontent.com/sgossner/VCSL/c1ea7bcc3c7309650ab0da9d15c9cd1fbc4a4c7e/Idiophones/Struck%20Idiophones/Agogo%20Bells/Agogo_High_v2_rr1_Mid.wav",
+      "sourceSha256": "f74a3100634a4372f2e2f81adf2f6a7839861ec4dcf13291001a3268e37806de",
+      "sourceStartSeconds": 0.005,
+      "sourceEndSeconds": 1.0,
+      "sampleRate": 44100,
+      "channels": 2,
+      "format": "PCM signed 16-bit WAV",
+      "duration": 0.9950113378684807,
+      "peak": 0.551666259765625,
+      "clippedSamples": 0,
+      "processing": {
+        "gain": 11.2,
+        "fadeInSeconds": 0.00020408163265306123,
+        "fadeOutSeconds": 0.05,
+        "dither": "TPDF at one 16-bit LSB",
+        "pitchShift": 0,
+        "timeStretch": false,
+        "eq": false
+      }
+    },
+    {
+      "file": "cowbell-open.wav",
+      "sha256": "9455ccbff63cb6cc29f29f251c251ead18abd625083ac0a4c1c2f08fd0d059de",
+      "instrument": "cowbell",
+      "note": 56,
+      "label": "Open",
+      "sourceUrl": "https://raw.githubusercontent.com/sgossner/VCSL/c1ea7bcc3c7309650ab0da9d15c9cd1fbc4a4c7e/Idiophones/Struck%20Idiophones/Cowbells/Cowbell2_Normal_v2_rr1_Mid.wav",
+      "sourceSha256": "ca715bc515a349c4fb2c02d91040ce9e7069d54e8b168c99f85365ec9d64ea91",
+      "sourceStartSeconds": 0.005,
+      "sourceEndSeconds": 1.55,
+      "sampleRate": 44100,
+      "channels": 2,
+      "format": "PCM signed 16-bit WAV",
+      "duration": 1.5450113378684807,
+      "peak": 0.3463134765625,
+      "clippedSamples": 0,
+      "processing": {
+        "gain": 1.5,
+        "fadeInSeconds": 0.00020408163265306123,
+        "fadeOutSeconds": 0.05,
+        "dither": "TPDF at one 16-bit LSB",
+        "pitchShift": 0,
+        "timeStretch": false,
+        "eq": false
+      }
+    },
+    {
+      "file": "cowbell-muted.wav",
+      "sha256": "90b0248268495f9c81fb2a778f5c3a10616b720b3673bcedd27368294a8b9668",
+      "instrument": "cowbell",
+      "note": 57,
+      "label": "Muted",
+      "sourceUrl": "https://raw.githubusercontent.com/sgossner/VCSL/c1ea7bcc3c7309650ab0da9d15c9cd1fbc4a4c7e/Idiophones/Struck%20Idiophones/Cowbells/Cowbell2_Muted_v2_rr1_Mid.wav",
+      "sourceSha256": "619ea2edc4f020148f267fdcf50a2bd0f9eb441bcbb3e74c4e8092f1d910aa39",
+      "sourceStartSeconds": 0.005,
+      "sourceEndSeconds": 0.95,
+      "sampleRate": 44100,
+      "channels": 2,
+      "format": "PCM signed 16-bit WAV",
+      "duration": 0.9450113378684807,
+      "peak": 0.570159912109375,
+      "clippedSamples": 0,
+      "processing": {
+        "gain": 5.45,
+        "fadeInSeconds": 0.00020408163265306123,
+        "fadeOutSeconds": 0.05,
+        "dither": "TPDF at one 16-bit LSB",
+        "pitchShift": 0,
+        "timeStretch": false,
+        "eq": false
+      }
+    }
+  ]
+}

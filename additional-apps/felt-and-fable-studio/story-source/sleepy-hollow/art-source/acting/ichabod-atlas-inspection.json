@@ -1,0 +1,247 @@
+{
+  "ichabod-everyday-atlas.png": {
+    "size": [
+      1244,
+      1264
+    ],
+    "mode": "RGBA",
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "transparent_fraction": 0.7636147177337295,
+    "quadrants": [
+      {
+        "cell": [
+          0,
+          0,
+          622,
+          632
+        ],
+        "alpha_bbox": [
+          15,
+          0,
+          622,
+          632
+        ]
+      },
+      {
+        "cell": [
+          622,
+          0,
+          1244,
+          632
+        ],
+        "alpha_bbox": [
+          622,
+          0,
+          1224,
+          632
+        ]
+      },
+      {
+        "cell": [
+          0,
+          632,
+          622,
+          1264
+        ],
+        "alpha_bbox": [
+          17,
+          632,
+          622,
+          1221
+        ]
+      },
+      {
+        "cell": [
+          622,
+          632,
+          1244,
+          1264
+        ],
+        "alpha_bbox": [
+          623,
+          632,
+          1208,
+          1221
+        ]
+      }
+    ],
+    "recommended_crop_boxes": [
+      [
+        0,
+        0,
+        622,
+        625
+      ],
+      [
+        622,
+        0,
+        1244,
+        625
+      ],
+      [
+        0,
+        625,
+        622,
+        1264
+      ],
+      [
+        622,
+        625,
+        1244,
+        1264
+      ]
+    ],
+    "visible_body_boxes_alpha_gt_32": [
+      [
+        251,
+        6,
+        481,
+        616
+      ],
+      [
+        780,
+        9,
+        1074,
+        616
+      ],
+      [
+        237,
+        632,
+        481,
+        1218
+      ],
+      [
+        762,
+        631,
+        1070,
+        1219
+      ]
+    ]
+  },
+  "ichabod-listening-atlas.png": {
+    "size": [
+      1244,
+      1264
+    ],
+    "mode": "RGBA",
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "transparent_fraction": 0.7354682221498636,
+    "quadrants": [
+      {
+        "cell": [
+          0,
+          0,
+          622,
+          632
+        ],
+        "alpha_bbox": [
+          0,
+          12,
+          614,
+          632
+        ]
+      },
+      {
+        "cell": [
+          622,
+          0,
+          1244,
+          632
+        ],
+        "alpha_bbox": [
+          623,
+          26,
+          1216,
+          632
+        ]
+      },
+      {
+        "cell": [
+          0,
+          632,
+          622,
+          1264
+        ],
+        "alpha_bbox": [
+          49,
+          632,
+          622,
+          1246
+        ]
+      },
+      {
+        "cell": [
+          622,
+          632,
+          1244,
+          1264
+        ],
+        "alpha_bbox": [
+          631,
+          632,
+          1224,
+          1264
+        ]
+      }
+    ],
+    "recommended_crop_boxes": [
+      [
+        0,
+        0,
+        622,
+        603
+      ],
+      [
+        622,
+        0,
+        1244,
+        603
+      ],
+      [
+        0,
+        603,
+        622,
+        1264
+      ],
+      [
+        622,
+        603,
+        1244,
+        1264
+      ]
+    ],
+    "visible_body_boxes_alpha_gt_32": [
+      [
+        204,
+        14,
+        559,
+        588
+      ],
+      [
+        792,
+        28,
+        1107,
+        593
+      ],
+      [
+        259,
+        613,
+        523,
+        1241
+      ],
+      [
+        825,
+        627,
+        1060,
+        1238
+      ]
+    ]
+  },
+  "notes": "True alpha verified. Transparent pixels approximately 74\u201376 percent. Very faint alpha specks make unthresholded bounding boxes misleading. Use recommended crop boxes rather than exact half-height: second atlas lower-left hat extends to y613. No visible figure pixels touch outer canvas edge. Root should normalize and pad cropped figures, preserving alpha."
+}

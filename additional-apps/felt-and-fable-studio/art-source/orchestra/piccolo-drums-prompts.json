@@ -1,0 +1,27 @@
+{
+  "tool": "built-in image_gen",
+  "assets": [
+    {
+      "file": "piccolo.png",
+      "prompt": "Use case: scientific-educational. Asset type: transparent felt story-board instrument cutout. Create exactly one orchestral PICCOLO matching the handcrafted felt aesthetic of the reference instruments. Reference image 1 flute provides soft wool surface, padded seams and cream/silver felt keywork; reference image 2 clarinet provides black felt material only. New instrument: anatomically recognizable short transverse piccolo, black grenadilla-colored felt body, silver-grey felt head joint with a visible side embouchure hole and small lip plate, accurate compact silver/ivory keywork and rods. It must have the short compact proportions of a piccolo (roughly half a concert flute's length), no flared bell and no reed mouthpiece. Place full instrument diagonally upper left to lower right, all parts inside canvas with generous transparent margin. High clarity fuzzy wool fibers, gentle padding, hand sewn edges, tactile shallow craft dimension like reference. True transparent background including spaces between keys. No floor, cast shadow, labels, text, watermark, people or extra objects. Do not turn this into plastic, shiny metal or a 3D movie prop.",
+      "reference_files": [
+        "piece196.webp",
+        "piece197.webp"
+      ]
+    },
+    {
+      "file": "concert-bass-drum.png",
+      "prompt": "Use case: scientific-educational. Asset type: transparent felt story-board instrument cutout. Create exactly one ORCHESTRAL CONCERT BASS DRUM. The reference timpani is a STYLE reference only: match its fuzzy wool felt, cream stitched drumhead, warm copper-brown felt wood, charcoal felt structural parts, light grey felt hardware and gently padded hand-sewn craft aesthetic, but the new instrument must be a cylindrical large concert bass drum, not a timpani. A large double-headed drum suspended upright at a slight tilt in a simple black concert cradle stand, front cream drumhead clearly visible in a front three-quarter view, warm wood shell with moderate depth, front and rear hoops joined by equally spaced tension rods and lugs. The black cradle supports the drum at its two sides with pivots and has a stable rectangular footed base. No kick pedal, no drum kit, no kettle bowl, no mallets needed. Full drum and stand inside canvas with clear transparent margin. High clarity felt fibers and stitching, simplified readable silhouette like the reference. Real alpha transparent background including holes of stand. No floor, cast shadow, labels, text, logos, watermark or people. No shiny plastic or movie-style 3D rendering.",
+      "reference_files": [
+        "piece195.webp"
+      ]
+    },
+    {
+      "file": "snare-drum.png",
+      "prompt": "Use case: scientific-educational. Asset type: transparent felt story-board instrument cutout. Create exactly one ORCHESTRAL CONCERT SNARE DRUM on a simple black tripod snare stand. The reference timpani is a STYLE reference only: match its fuzzy wool felt, cream stitched drumhead, warm copper-brown felt wood, charcoal felt structural parts, light grey felt hardware and gently padded hand-sewn craft aesthetic. New instrument is a shallow straight cylindrical snare drum (diameter about 2.5 times shell depth), warm wood-colored felt shell, cream felt drumhead, silver-grey rims, vertical tension rods and lugs and small snare strainer on shell. A pair of slender tan felt drumsticks rests neatly diagonally across the head. Snare held by a three-arm basket atop a single slim height-adjustable post, ending in exactly three tripod feet. Show entire drum and full stand in front three-quarter view from slightly above. COMPOSITION: fit all objects well within the canvas with a generous 10% transparent margin at ALL sides; no hardware or feet touching canvas edges. High clarity visible fuzzy wool and sewing, readable craft cutout silhouette. Real alpha transparent background including spaces between tripod legs. No ground or exterior cast shadow, no labels, no text, no logos, watermark or people. No kick pedal, no extra drums or cymbals, no drum kit, no timpani kettle shape. No shiny plastic or movie-style 3D rendering.",
+      "reference_files": [
+        "piece195.webp"
+      ]
+    }
+  ]
+}

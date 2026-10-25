@@ -1,0 +1,21 @@
+Orff Atelier — ensemble additions
+
+Tambourine, shakers, sleigh bells, cabasa, and low-marimba source recordings:
+Versilian Studios LLC — Versilian Community Sample Library (VCSL)
+https://versilian-studios.com/vcsl/
+https://github.com/sgossner/VCSL
+Pinned commit: c1ea7bcc3c7309650ab0da9d15c9cd1fbc4a4c7e
+License: Creative Commons CC0 1.0 Universal public-domain dedication. The author explicitly permits commercial software use and redistribution.
+
+Maracas:
+FreePats World Percussion, version 2020-09-05.
+Recorded January 2019 by Xavimart, Gonzalo and Roberto with two Zoom H1 recorders.
+https://freepats.zenvoid.org/Percussion/world-and-rare-percussion.html
+https://github.com/freepats/world-percussion
+Pinned commit: e54eb2912a0d6d4444ab205d52f778e27da0fc96
+License: Creative Commons CC0 1.0 Universal public-domain dedication.
+
+The contrabass bar sound uses separate softly played acoustic marimba recordings, not Sonor or Peripole contrabass-bar recordings. The lowest C2 is shifted from the measured F2 marimba source. The soft layer replaces the medium strikes on 2026-10-17; the first 500 ms RMS level is matched to the previous samples, with natural attack and decay retained and no upper-frequency EQ.
+
+See PROVENANCE.json for exact original URLs and SHA-256 hashes, processed-file hashes, measured pitch, level and timing data, and processing details.
+CC0 license text: ../CC0-1.0.txt

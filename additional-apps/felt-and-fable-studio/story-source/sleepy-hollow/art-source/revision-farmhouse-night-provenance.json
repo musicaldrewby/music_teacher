@@ -1,0 +1,6 @@
+{
+  "tool": "built-in image_gen",
+  "reference": "farmhouse.png",
+  "asset": "revision-farmhouse-night.png",
+  "prompt": "Use case: lighting-weather edit. Edit supplied farmhouse miniature scene from DAY to TRUE NIGHT. Preserve the EXACT same farmhouse geometry, windows, door, camera framing, barn location, trees, fences, clear empty foreground yard and exquisite tactile needle-felt miniature style. Replace sky with very dark navy blue night sky, tiny subtle stars, dim pale clouds. Remove all golden sunlight completely. All foliage and yard now cool dark blue muted nighttime colors, no bright golden trees, no warm daylight anywhere. Windows of farmhouse glow warmly amber from candlelit party inside, a little localized warm light pooling ONLY directly at doorway. Rest of scene is softly lit by cool moonlight from offscreen; keep house and foreground yard legible in deep blue twilight-night values for animated characters later. Do not add a moon, people, horses, props, text or new geometry. The result must read unambiguously as night, not sunset and not daytime with a blue filter. Single full 16:9 image."
+}

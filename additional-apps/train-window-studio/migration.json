@@ -1,0 +1,188 @@
+{
+  "source_library_file_id": "libfile_fb60868877348191a3a5dfc1ce36facf",
+  "source_version": 14,
+  "source_sha256": "d71d855db203528f6fbb0c258091403d4797fb1ba35ba2b9afaca12901bae1b0",
+  "assets": [
+    {
+      "path": "assets/landscape.webp",
+      "bytes": 446694,
+      "sha256": "62459d7edc7c617a09f793c3c8d443a86087df3957fb549d9422ac9c56b6d44d"
+    },
+    {
+      "path": "assets/woodland.webp",
+      "bytes": 1055536,
+      "sha256": "071bb2c27497dd18f51bedfe884c5d0c21f3800c5c0a826abc8b31cefe7293f4"
+    },
+    {
+      "path": "assets/foreground.webp",
+      "bytes": 1704518,
+      "sha256": "98c8cf048ad9cad37edb40db110556f20e3056d102ea6cb380f928c8d4ba0c4e"
+    },
+    {
+      "path": "assets/citysky.webp",
+      "bytes": 512966,
+      "sha256": "f1c4a067035b44a3c77bc0260a0d2e2c1c3dadfe9bf3383e4b1a5969053c7b7e"
+    },
+    {
+      "path": "assets/citymid.webp",
+      "bytes": 1369112,
+      "sha256": "e4c3164f1c484615feef53aeca5219b44a16d7a0d32880b97a0c84ff9488fca0"
+    },
+    {
+      "path": "assets/citynear.webp",
+      "bytes": 898246,
+      "sha256": "2534d3050d34c195da6bfb70d482ed3fd87ce90ce8eef92e3786cd05670bb9c3"
+    },
+    {
+      "path": "assets/cityrail.webp",
+      "bytes": 427588,
+      "sha256": "aaf0c60992354b0d96c242bcc935842ba0ab91d6a877de405530bab79b518624"
+    },
+    {
+      "path": "assets/desertsky.webp",
+      "bytes": 524186,
+      "sha256": "1fc08feb6a933a97ea90bea0c2cb3a45ce5b2601d439cc76747a7cb0f1a2908b"
+    },
+    {
+      "path": "assets/desertmesa.webp",
+      "bytes": 1150994,
+      "sha256": "b2c3438ef32f3d5de7760f2c5bd49202374897d514b8cc5cac294c78d7a778a0"
+    },
+    {
+      "path": "assets/desertnear.webp",
+      "bytes": 1385076,
+      "sha256": "1869fb9fe69a1e7826abe6485f9838742f1d1410821b2349011400a60cc91d21"
+    },
+    {
+      "path": "assets/desertgrass.webp",
+      "bytes": 1110186,
+      "sha256": "ce6a94896179cda8cfebfd1428aa46d9b9972d920573ff979cf69b868c79ba04"
+    },
+    {
+      "path": "assets/christmassky.webp",
+      "bytes": 253376,
+      "sha256": "24d908c783a7f43ea99ac0de54c0a0c1de807293e8205a04b50f847a7aa235e5"
+    },
+    {
+      "path": "assets/christmasmid.webp",
+      "bytes": 982686,
+      "sha256": "515701c518cbe5f932b02288443e19727b75a2e4c9f10b276a62b46c5384b8a3"
+    },
+    {
+      "path": "assets/christmasnear.webp",
+      "bytes": 1398840,
+      "sha256": "433d69bc966d41adbcc8fea6a6925b8f71476a0ee3ec94c8d356e8e29fb762b7"
+    },
+    {
+      "path": "assets/christmasfront.webp",
+      "bytes": 1128178,
+      "sha256": "2eeab7522b669b553a2fbd56d610cc04d00ae684edfc0fa1dbf7c6baa151bdf3"
+    },
+    {
+      "path": "assets/halloweensky.webp",
+      "bytes": 231952,
+      "sha256": "1e38eb5c136cc83e7bc2c5f89a392abf2cecbe1b62ea20b051822ef9d17ef0fc"
+    },
+    {
+      "path": "assets/halloweenmid.webp",
+      "bytes": 1925670,
+      "sha256": "ba3452b45ece081209277e2d1de9a18d7b4effd8856be4700fb00fdf1986e6e2"
+    },
+    {
+      "path": "assets/halloweennear.webp",
+      "bytes": 1331570,
+      "sha256": "499c0a7b95adacf64f71106ca91990440341da6c3d5ccce67850d3e44b6df1d9"
+    },
+    {
+      "path": "assets/halloweenfront.webp",
+      "bytes": 1301274,
+      "sha256": "54a94dfaea895d47d3b8dfeb41cc851c8b339c099ab13254e59fe431ec3928dc"
+    },
+    {
+      "path": "assets/bayousky.webp",
+      "bytes": 261084,
+      "sha256": "236833f0674ca929363c6d839b101bdd667acc867b12480abced59bf553304b4"
+    },
+    {
+      "path": "assets/bayoumid.webp",
+      "bytes": 1376340,
+      "sha256": "8c7c50cd0183ca043a54673b90b3df957ffe78152cb6eeb688d88f6d44af79c6"
+    },
+    {
+      "path": "assets/bayounear.webp",
+      "bytes": 1910706,
+      "sha256": "bfa1560098b565ffc1b73c2787153bf57d156b09866e82fde69e9a882be9297e"
+    },
+    {
+      "path": "assets/bayoufront.webp",
+      "bytes": 1072910,
+      "sha256": "3d5d3144854fe510f3d0707bb59ad75762576dfa5afe9d115b47b64064fb8900"
+    },
+    {
+      "path": "assets/interior.webp",
+      "bytes": 134872,
+      "sha256": "5cbbe67daebb1c096679b6cc913db24e9f3e459f8bab12b83ae5efd0967eae14"
+    },
+    {
+      "path": "assets/window_commuter.webp",
+      "bytes": 121344,
+      "sha256": "8e382abd840e61b218bb0eefcbee060f7c7c02fe44709fb8a8e85d799066a854"
+    },
+    {
+      "path": "assets/window_sleeper.webp",
+      "bytes": 198470,
+      "sha256": "389edb146c2d26d42c1d3a2f0bee32d9aceb4e69a2f01963b34e91f86ecd8f01"
+    },
+    {
+      "path": "assets/window_panorama.webp",
+      "bytes": 63868,
+      "sha256": "d51c297ebdfe38c0207f834190283140dce7e4bd03ce466bab49b275bb510ba0"
+    },
+    {
+      "path": "assets/window_vintage.webp",
+      "bytes": 204576,
+      "sha256": "b1364d766f0cd8770ba3e64b88ad2b1d8ac6d57dc79f4d6333daa13b5405c480"
+    },
+    {
+      "path": "assets/window_luxury.webp",
+      "bytes": 184304,
+      "sha256": "49be12c71065c9c4a91374a4faded7e3f79d1024dcb47f913ef051a15474a532"
+    },
+    {
+      "path": "assets/window_alpine.webp",
+      "bytes": 105350,
+      "sha256": "dbb7acf69a3810140b986bf19f81b27544abdb368d93a0d3b2d84f2d7c4c3acc"
+    },
+    {
+      "path": "assets/window_retro.webp",
+      "bytes": 167982,
+      "sha256": "b7ff35e90fe4d241a2ae74466286c9203a7bfaddd48a098b6491fc48698aaeff"
+    },
+    {
+      "path": "assets/journey_atlas.webp",
+      "bytes": 3128064,
+      "sha256": "954d28a5e5cbc310683f5893a654455a42171db4ee85c9b11b267131194a9c5b"
+    },
+    {
+      "path": "assets/cabin_curtain.webp",
+      "bytes": 80652,
+      "sha256": "9ea0f35883b2c890af7587c2213eb9283a407511bd36c17544e969cbd3cdcd6d"
+    },
+    {
+      "path": "assets/cabin_mug.webp",
+      "bytes": 48290,
+      "sha256": "7fdee07e75a6308cedb17109d2181f00b6dd65a0c121d1d08ed8256c003fd5db"
+    },
+    {
+      "path": "assets/rain.ogg",
+      "bytes": 729932,
+      "sha256": "c349c672de510d718a489bf5d2df5e3070d3218a377313ad09171389fe8910f7"
+    }
+  ],
+  "changes": [
+    "Extract embedded assets byte-for-byte for same-origin hosting",
+    "Load scenery images with six concurrent requests and progress",
+    "Update offline/downloaded-file guidance for hosted site"
+  ],
+  "browser_qa": "Unavailable: control-browser skill not supplied in managed environment"
+}

@@ -1,0 +1,13 @@
+import {MAX_SCENE_DURATION} from './timeline-limits';
+import {z} from 'zod';
+const n=z.number().finite().min(-10000).max(10000),v=z.tuple([n,n,n]);
+export const fractureProps=['cube','sphere','diamond','pyramid','cylinder','cone','star','heart','arrow','lightning','moon','play','check','gear','torus'] as const;
+export const fractureSchema=z.object({enabled:z.boolean().default(false),trigger:z.enum(['timeline','interaction']).default('timeline'),parts:z.number().int().min(2).max(16).default(8),seed:z.number().int().min(0).max(10000).default(17),mode:z.enum(['explode','reassemble','explode-reassemble']).default('explode-reassemble'),start:z.number().min(0).max(MAX_SCENE_DURATION).default(1),duration:z.number().min(.1).max(30).default(2),hold:z.number().min(0).max(MAX_SCENE_DURATION).default(1),returnDuration:z.number().min(.1).max(30).default(2),force:z.number().min(0).max(20).default(2),gravity:z.number().min(0).max(20).default(0),spin:z.number().min(0).max(10).default(1),bounce:z.number().min(0).max(.8).default(.25),insideColor:z.string().regex(/^#[0-9a-fA-F]{6}$/).default('#c17b36')});
+export type Fracture=z.infer<typeof fractureSchema>;
+export const interactionSchema=z.object({enabled:z.boolean().default(false),label:z.string().max(80).default('Activate'),axis:z.enum(['x','y','z']).default('y'),action:z.enum(['open','spin','explode','glow']).default('open'),targetId:z.string().max(80).default(''),duration:z.number().min(.1).max(10).default(1),amount:z.number().min(.1).max(5).default(1)});
+export const worldEventSchema=z.object({id:z.string().min(1).max(80),controlId:z.string().min(1).max(80),time:z.number().min(0).max(MAX_SCENE_DURATION),value:z.union([z.literal(0),z.literal(1)])});
+const cameraSample=z.object({time:z.number().min(0).max(MAX_SCENE_DURATION),position:v,target:v,fov:z.number().min(15).max(90)});
+export const walkSchema=z.object({enabled:z.boolean().default(false),samples:z.array(cameraSample).max(3601).default([])});
+export const explorerSchema=z.object({eyeHeight:z.number().min(.05).max(4).default(1.6),speed:z.number().min(.05).max(12).default(2.5),mode:z.enum(['walk','fly']).default('walk'),collisions:z.boolean().default(true),spawn:z.object({position:v,target:v,fov:z.number().min(15).max(90)}).nullable().default(null)});
+export type ExplorerSettings=z.infer<typeof explorerSchema>;
+export type WorldEvent=z.infer<typeof worldEventSchema>;

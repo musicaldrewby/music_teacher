@@ -1,0 +1,198 @@
+{
+  "prepared": "2026-10-17",
+  "source": "https://freesound.org/people/tosha73/sounds/495327/",
+  "author": "tosha73",
+  "license": "CC0-1.0",
+  "sourceFilename": "495327__tosha73__five-bar-chimes-samples.wav",
+  "sourceSha256": "8ec378f92294df4576714de6f46176d751ca84b2a330e696932a940e8a791948",
+  "sourceFormat": "User-supplied original 44.1 kHz, 16-bit stereo WAV",
+  "sourceDurationSeconds": 84,
+  "qualityNotes": [
+    "Five performances separated by one-second silent gaps in the original WAV.",
+    "Pitch direction identified from the onset order of chime resonances in each spectrogram.",
+    "Speed labels are relative to this recording; no fixed tempo or synchronization is implied.",
+    "All 16 seconds of each take are retained, including natural ringing and secondary chime contacts.",
+    "Gestures are selected explicitly because directions and sweep speeds are musically different.",
+    "No reversed audio, pitch shifting, time stretching, added reverb or synthetic variations.",
+    "Legacy note 84 remains the default downward sweep; other instrument mappings are unchanged."
+  ],
+  "instrumentSamples": {
+    "wind-chimes": {
+      "credit": "Five Bar Chimes Samples \u2014 tosha73 / Freesound",
+      "license": "CC0-1.0",
+      "source": "https://freesound.org/people/tosha73/sounds/495327/",
+      "licensePage": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "sourceInstrument": "Acoustic bar chimes, five studio-recorded sweep performances",
+      "sourceFormat": "User-supplied original 44.1 kHz, 16-bit stereo WAV",
+      "notes": {
+        "84": {
+          "url": "assets/audio/recorded/wind-chimes/down-brisk.wav",
+          "gain": 1,
+          "tuningSemitones": 0,
+          "duration": 16.0,
+          "articulation": "Down \u00b7 brisk"
+        },
+        "85": {
+          "url": "assets/audio/recorded/wind-chimes/down-slow.wav",
+          "gain": 1,
+          "tuningSemitones": 0,
+          "duration": 16.0,
+          "articulation": "Down \u00b7 slow"
+        },
+        "86": {
+          "url": "assets/audio/recorded/wind-chimes/up-brisk.wav",
+          "gain": 1,
+          "tuningSemitones": 0,
+          "duration": 16.0,
+          "articulation": "Up \u00b7 brisk"
+        },
+        "87": {
+          "url": "assets/audio/recorded/wind-chimes/up-medium.wav",
+          "gain": 1,
+          "tuningSemitones": 0,
+          "duration": 16.0,
+          "articulation": "Up \u00b7 medium"
+        },
+        "88": {
+          "url": "assets/audio/recorded/wind-chimes/up-slow.wav",
+          "gain": 1,
+          "tuningSemitones": 0,
+          "duration": 16.0,
+          "articulation": "Up \u00b7 slow"
+        }
+      }
+    }
+  },
+  "assets": [
+    {
+      "file": "down-brisk.wav",
+      "sha256": "cc2f0adecf853e2d9ed95a3b5e077484974ae179de6a73d974ac57fdd5b0b830",
+      "note": 84,
+      "label": "Down \u00b7 brisk",
+      "sourceStartSeconds": 0,
+      "sourceEndSeconds": 16,
+      "duration": 16.0,
+      "sampleRate": 44100,
+      "channels": 2,
+      "format": "PCM signed 16-bit WAV",
+      "peak": 0.34014892578125,
+      "clippedSamples": 0,
+      "processing": {
+        "highpassHz": 60,
+        "highpassOrder": 2,
+        "gain": 0.8077636290754263,
+        "strongestOneSecondRms": 0.05,
+        "fadeInSeconds": 0.00199546485260771,
+        "fadeOutSeconds": 0.16,
+        "dither": "TPDF at one 16-bit LSB",
+        "pitchShift": 0,
+        "timeStretch": false,
+        "reversed": false
+      }
+    },
+    {
+      "file": "down-slow.wav",
+      "sha256": "d6b13c061a2e69f36c0ffd035e073b30f9cf0eda9bea90081f0647ee10473fb2",
+      "note": 85,
+      "label": "Down \u00b7 slow",
+      "sourceStartSeconds": 17,
+      "sourceEndSeconds": 33,
+      "duration": 16.0,
+      "sampleRate": 44100,
+      "channels": 2,
+      "format": "PCM signed 16-bit WAV",
+      "peak": 0.35711669921875,
+      "clippedSamples": 0,
+      "processing": {
+        "highpassHz": 60,
+        "highpassOrder": 2,
+        "gain": 0.9332966355276714,
+        "strongestOneSecondRms": 0.05,
+        "fadeInSeconds": 0.00199546485260771,
+        "fadeOutSeconds": 0.16,
+        "dither": "TPDF at one 16-bit LSB",
+        "pitchShift": 0,
+        "timeStretch": false,
+        "reversed": false
+      }
+    },
+    {
+      "file": "up-brisk.wav",
+      "sha256": "4014303017a60f9177ce57e80739ac9994c17fc1a7092c6534de65d2e79edbb9",
+      "note": 86,
+      "label": "Up \u00b7 brisk",
+      "sourceStartSeconds": 34,
+      "sourceEndSeconds": 50,
+      "duration": 16.0,
+      "sampleRate": 44100,
+      "channels": 2,
+      "format": "PCM signed 16-bit WAV",
+      "peak": 0.38604736328125,
+      "clippedSamples": 0,
+      "processing": {
+        "highpassHz": 60,
+        "highpassOrder": 2,
+        "gain": 0.8803187280081651,
+        "strongestOneSecondRms": 0.05,
+        "fadeInSeconds": 0.00199546485260771,
+        "fadeOutSeconds": 0.16,
+        "dither": "TPDF at one 16-bit LSB",
+        "pitchShift": 0,
+        "timeStretch": false,
+        "reversed": false
+      }
+    },
+    {
+      "file": "up-medium.wav",
+      "sha256": "cad700af33c17852f3c8daea4cdbfa93b4f1764b93b976830f3d7f53bdacf5cb",
+      "note": 87,
+      "label": "Up \u00b7 medium",
+      "sourceStartSeconds": 51,
+      "sourceEndSeconds": 67,
+      "duration": 16.0,
+      "sampleRate": 44100,
+      "channels": 2,
+      "format": "PCM signed 16-bit WAV",
+      "peak": 0.490875244140625,
+      "clippedSamples": 0,
+      "processing": {
+        "highpassHz": 60,
+        "highpassOrder": 2,
+        "gain": 0.9723763931327951,
+        "strongestOneSecondRms": 0.05,
+        "fadeInSeconds": 0.00199546485260771,
+        "fadeOutSeconds": 0.16,
+        "dither": "TPDF at one 16-bit LSB",
+        "pitchShift": 0,
+        "timeStretch": false,
+        "reversed": false
+      }
+    },
+    {
+      "file": "up-slow.wav",
+      "sha256": "6327c31df2e5844225a88e6d48a9f1d47c65b46a9f79f79e5b9ad3f3168b3b48",
+      "note": 88,
+      "label": "Up \u00b7 slow",
+      "sourceStartSeconds": 68,
+      "sourceEndSeconds": 84,
+      "duration": 16.0,
+      "sampleRate": 44100,
+      "channels": 2,
+      "format": "PCM signed 16-bit WAV",
+      "peak": 0.544952392578125,
+      "clippedSamples": 0,
+      "processing": {
+        "highpassHz": 60,
+        "highpassOrder": 2,
+        "gain": 1.2621540922784795,
+        "strongestOneSecondRms": 0.05,
+        "fadeInSeconds": 0.00199546485260771,
+        "fadeOutSeconds": 0.16,
+        "dither": "TPDF at one 16-bit LSB",
+        "pitchShift": 0,
+        "timeStretch": false,
+        "reversed": false
+      }
+    }
+  ]
+}

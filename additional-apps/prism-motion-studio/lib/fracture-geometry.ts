@@ -1,0 +1,34 @@
+import * as T from 'three';
+type Vertex={p:T.Vector3;n:T.Vector3;uv:T.Vector2};
+type Face={v:Vertex[];material:number};
+const mix=(a:Vertex,b:Vertex,t:number):Vertex=>({p:a.p.clone().lerp(b.p,t),n:a.n.clone().lerp(b.n,t).normalize(),uv:a.uv.clone().lerp(b.uv,t)});
+function faces(geometry:T.BufferGeometry):Face[]{const p=geometry.getAttribute('position'),n=geometry.getAttribute('normal'),uv=geometry.getAttribute('uv'),idx=geometry.index,count=idx?.count||p.count,result:Face[]=[];for(let i=0;i<count;i+=3){const material=geometry.groups.find(g=>i>=g.start&&i<g.start+g.count)?.materialIndex||0;result.push({material,v:[0,1,2].map(j=>{const k=idx?idx.getX(i+j):i+j;return {p:new T.Vector3().fromBufferAttribute(p,k),n:n?new T.Vector3().fromBufferAttribute(n,k):new T.Vector3(0,0,1),uv:uv?new T.Vector2(uv.getX(k),uv.getY(k)):new T.Vector2()};})});}return result;}
+function bounds(fs:Face[]){const b=new T.Box3();for(const f of fs)for(const v of f.v)b.expandByPoint(v.p);return b;}
+function contains(loop:T.Vector2[],p:T.Vector2){let inside=false;for(let i=0,j=loop.length-1;i<loop.length;j=i++){const a=loop[i],b=loop[j];if((a.y>p.y)!==(b.y>p.y)&&p.x<(b.x-a.x)*(p.y-a.y)/(b.y-a.y)+a.x)inside=!inside;}return inside;}
+/** Split a closed surface and triangulate all cap loops, retaining holes and exterior UVs. */
+function split(fs:Face[],normal:T.Vector3,constant:number,inside:number):[Face[],Face[]]|null{
+ const eps=1e-7*Math.max(1,bounds(fs).getSize(new T.Vector3()).length());const sides:[Face[],Face[]]=[[],[]],segments:[T.Vector3,T.Vector3][]=[];
+ for(const f of fs){const d=f.v.map(v=>normal.dot(v.p)-constant);if(d.some(x=>Math.abs(x)<eps))return null;
+  if(d.every(x=>x>0)){sides[1].push(f);continue;}if(d.every(x=>x<0)){sides[0].push(f);continue;}
+  const intersections:T.Vector3[]=[];for(let i=0;i<3;i++){const j=(i+1)%3;if(d[i]*d[j]<0)intersections.push(mix(f.v[i],f.v[j],d[i]/(d[i]-d[j])).p);}if(intersections.length!==2)return null;segments.push([intersections[0],intersections[1]]);
+  for(const side of [0,1]){const poly:Vertex[]=[];for(let i=0;i<3;i++){const j=(i+1)%3,a=d[i]*(side?1:-1)>0,b=d[j]*(side?1:-1)>0;if(a)poly.push(f.v[i]);if(a!==b)poly.push(mix(f.v[i],f.v[j],d[i]/(d[i]-d[j])));}for(let i=1;i<poly.length-1;i++)sides[side].push({v:[poly[0],poly[i],poly[i+1]],material:f.material});}
+ }
+ if(!segments.length||!sides[0].length||!sides[1].length)return null;
+ const points:T.Vector3[]=[],links=new Map<number,Set<number>>(),buckets=new Map<string,number[]>(),tol=eps*10;
+ const weld=(p:T.Vector3)=>{const cell=[p.x,p.y,p.z].map(v=>Math.floor(v/tol));for(let x=-1;x<=1;x++)for(let y=-1;y<=1;y++)for(let z=-1;z<=1;z++){const ids=buckets.get([cell[0]+x,cell[1]+y,cell[2]+z].join(','))||[];for(const id of ids)if(points[id].distanceToSquared(p)<tol*tol)return id;}const id=points.length;points.push(p);const key=cell.join(',');buckets.set(key,[...(buckets.get(key)||[]),id]);return id;};
+ for(const [a,b] of segments){const i=weld(a),j=weld(b);if(i===j)continue;if(!links.has(i))links.set(i,new Set());if(!links.has(j))links.set(j,new Set());links.get(i)!.add(j);links.get(j)!.add(i);}if([...links.values()].some(n=>n.size!==2))return null;
+ const loops:number[][]=[],seen=new Set<number>();for(const start of links.keys()){if(seen.has(start))continue;const loop:number[]=[];let at=start,previous=-1;for(let safety=0;safety<=links.size;safety++){if(seen.has(at))break;seen.add(at);loop.push(at);const next=[...links.get(at)!].find(n=>n!==previous)!;previous=at;at=next;}if(at!==start||loop.length<3)return null;loops.push(loop);}
+ const axis=Math.abs(normal.y)<.9?new T.Vector3(0,1,0):new T.Vector3(1,0,0),u=axis.cross(normal).normalize(),v=normal.clone().cross(u).normalize(),project=(p:T.Vector3)=>new T.Vector2(p.dot(u),p.dot(v));const projected=loops.map(loop=>loop.map(i=>project(points[i]))),areas=projected.map(p=>Math.abs(T.ShapeUtils.area(p)));
+ const parents=projected.map((p,i)=>{let parent=-1;for(let j=0;j<projected.length;j++)if(i!==j&&areas[j]>areas[i]&&contains(projected[j],p[0])&&(parent<0||areas[j]<areas[parent]))parent=j;return parent;});const depth=(i:number):number=>parents[i]<0?0:1+depth(parents[i]);
+ for(let i=0;i<loops.length;i++){if(depth(i)%2)continue;const holes=loops.map((_,j)=>j).filter(j=>parents[j]===i),flat=[...loops[i],...holes.flatMap(j=>loops[j])],triangles=T.ShapeUtils.triangulateShape(projected[i],holes.map(j=>projected[j]));if(!triangles.length)return null;
+  for(const tri of triangles){const p=tri.map(j=>points[flat[j]]);if(new T.Vector3().subVectors(p[1],p[0]).cross(new T.Vector3().subVectors(p[2],p[0])).dot(normal)<0)[p[1],p[2]]=[p[2],p[1]];for(const side of [0,1]){const ordered=side?[p[0],p[2],p[1]]:p;sides[side].push({material:inside,v:ordered.map(point=>({p:point,n:normal.clone().multiplyScalar(side?-1:1),uv:project(point)}))});}}
+ }
+ return sides;
+}
+function geometry(fs:Face[]){const p:number[]=[],n:number[]=[],uv:number[]=[],g=new T.BufferGeometry();let last=-1,start=0;for(const f of [...fs].sort((a,b)=>a.material-b.material)){if(f.material!==last){if(last>=0)g.addGroup(start,p.length/3-start,last);start=p.length/3;last=f.material;}for(const vertex of f.v){p.push(...vertex.p.toArray());n.push(...vertex.n.toArray());uv.push(...vertex.uv.toArray());}}if(last>=0)g.addGroup(start,p.length/3-start,last);g.setAttribute('position',new T.Float32BufferAttribute(p,3));g.setAttribute('normal',new T.Float32BufferAttribute(n,3));g.setAttribute('uv',new T.Float32BufferAttribute(uv,2));return g;}
+export function seeded(seed:number){let state=seed>>>0;return()=>{state=(Math.imul(state,1664525)+1013904223)>>>0;return state/4294967296;};}
+export function fractureGeometry(source:T.BufferGeometry,count:number,seed:number,interiorIndex:number,extruded=false){
+ const initial=faces(source);if(initial.length>50000)throw Error('This mesh is too detailed to fracture. Use a simpler shape.');const parts=[initial],random=seeded(seed);let attempts=0;
+ while(parts.length<count&&attempts++<count*20){const ranked=parts.map((fs,index)=>({index,size:bounds(fs).getSize(new T.Vector3())})).sort((a,b)=>b.size.lengthSq()-a.size.lengthSq());const chosen=ranked[attempts%Math.min(3,ranked.length)],part=parts[chosen.index],box=bounds(part),center=box.getCenter(new T.Vector3()),size=box.getSize(new T.Vector3());const angle=random()*Math.PI*2,normal=extruded?new T.Vector3(Math.cos(angle),Math.sin(angle),0):new T.Vector3(random()-.5,random()-.5,random()-.5).normalize();const constant=normal.dot(center)+(random()-.5)*Math.min(...size.toArray().filter(x=>x>1e-6))*.3;const pieces=split(part,normal,constant,interiorIndex);if(pieces){parts.splice(chosen.index,1,...pieces);}}
+ return parts.map(fs=>{const center=bounds(fs).getCenter(new T.Vector3()),geo=geometry(fs);geo.translate(-center.x,-center.y,-center.z);geo.computeBoundingSphere();return {geometry:geo,center};});
+}

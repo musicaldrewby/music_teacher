@@ -1,0 +1,314 @@
+[
+  {
+    "id": "01", "title": "A quiet little valley", "delivery": "Warm and welcoming",
+    "paragraphs": [
+      "Long ago, beside New York’s Hudson River, there was a quiet little valley called Sleepy Hollow. A brook wandered through the trees. Farmhouses stood among apple orchards. On an autumn afternoon, the whole place seemed ready for a nap.",
+      "But after sunset, the neighbors had stories to tell. And if you listened to enough of them, even an ordinary shadow could begin to look very strange."
+    ],
+    "shots": [
+      ["Long ago", "Wide valley view. A brook glints and two leaves fall; make a very slow push toward the village. This gives us a peaceful place worth remembering."],
+      ["But after sunset", "Dissolve to the same valley at dusk, then hold. A single farmhouse window warms as the surrounding woods darken. Establish the change in mood without introducing the rider."]
+    ]
+  },
+  {
+    "id": "02", "title": "The story everyone knew", "delivery": "Lower your voice slightly",
+    "paragraphs": [
+      "Their most famous story was about the Headless Horseman. People said he was the ghost of a soldier who had lost his head in a battle, many years before.",
+      "They said he rode through the hollow at night, searching for it. Before daylight, he had to return to the old churchyard.",
+      "At least, that was the story. And in Sleepy Hollow, stories had a way of growing."
+    ],
+    "shots": [
+      ["Their most famous story", "Medium shot of neighbors telling a tale by a hearth. One gestures toward the window; the others lean closer. Keep the legend framed as something people say."],
+      ["the old churchyard", "Show the church and its nearby wooden bridge in one still wide view. A few low wisps of fog move. Save the actual Horseman reveal for section 17."]
+    ]
+  },
+  {
+    "id": "03", "title": "Meet Ichabod Crane", "delivery": "Dry gentle humor",
+    "paragraphs": [
+      "Now, the village schoolteacher was a man named Ichabod Crane. He was tall and thin, with long arms, long legs, and a coat that never quite seemed to catch up with him.",
+      "He taught reading and writing. He also taught singing, and was very pleased with his own voice.",
+      "When Ichabod sang, no one had to ask where the music was coming from."
+    ],
+    "shots": [
+      ["Ichabod Crane", "Cut to a locked wide schoolroom view. Ichabod unfolds from a small desk and straightens his coat. Plant his feet before the upper body stretches."],
+      ["He also taught singing", "Medium shot at a music stand. Animate a proud breath and one sustained singing pose, followed by a pupil’s sideways glance. Let the joke play in a steady frame."]
+    ]
+  },
+  {
+    "id": "04", "title": "An excellent appetite", "delivery": "Amused but affectionate",
+    "paragraphs": [
+      "The families of the village took turns giving him a place to stay and meals to eat. Ichabod helped with chores, carried little children, and made himself useful.",
+      "He also made himself hungry. Very hungry.",
+      "Looking at that narrow schoolteacher, you might wonder where he put so much supper. Looking at his empty plate, you would know that somehow, he managed."
+    ],
+    "shots": [
+      ["Ichabod helped with chores", "In a farmhouse yard, Ichabod sets down a basket of kindling. Use the pickup and release poses with the prop attached to his hand while carried."],
+      ["his empty plate", "Cut to a table insert, then let an empty plate slide into view from his hand. Use the insert to land the appetite joke; no camera drift is needed."]
+    ]
+  },
+  {
+    "id": "05", "title": "Brave beside the fire", "delivery": "Enjoy the contrast in his confidence",
+    "paragraphs": [
+      "After supper, Ichabod loved to sit by the fire and listen to ghost stories. With a warm room around him and other people close by, he could listen for hours.",
+      "Walking home alone was another matter.",
+      "A frog croaked. A branch cracked. Ichabod hurried along, singing to make himself feel braver. The louder the woods became, the louder Ichabod sang."
+    ],
+    "shots": [
+      ["sit by the fire", "Return to the hearth. A slow push ends on Ichabod’s absorbed expression. His growing interest prepares the fears that follow."],
+      ["A frog croaked", "Cut outside. Show a frog near his boot, then Ichabod’s startled reaction within the same composition. Use a short planted recoil and a careful step, not a floating body bounce."]
+    ]
+  },
+  {
+    "id": "06", "title": "Katrina and the farm", "delivery": "Light and knowing",
+    "paragraphs": [
+      "One of Ichabod’s singing pupils was Katrina Van Tassel, a young woman whose family owned a prosperous farm. Ichabod admired her smile. He also admired the orchard, the full barns, and the marvelous things that came out of the kitchen.",
+      "Soon he was imagining himself married to Katrina, sitting comfortably at the Van Tassel table.",
+      "In these pleasant daydreams, there was always plenty of pie."
+    ],
+    "shots": [
+      ["Katrina Van Tassel", "Medium two shot at a singing lesson. Katrina closes her music book while Ichabod searches for another reason to stay. Give her an amused, independent reaction."],
+      ["there was always plenty of pie", "Cut to a brief imagined table setting with Ichabod and a generous pie. Use a soft dissolve into and out of the thought; a static comic image is enough."]
+    ]
+  },
+  {
+    "id": "07", "title": "Brom Bones", "delivery": "Give Brom confidence without a villain voice",
+    "paragraphs": [
+      "Unfortunately for Ichabod, another man hoped to marry Katrina. His name was Brom Van Brunt, though everyone called him Brom Bones.",
+      "Brom was strong, confident, and famous for his riding. He loved a joke, especially when somebody else was the last to understand it.",
+      "Ichabod had no wish to challenge him. He simply kept visiting Katrina whenever he thought Brom would be somewhere else."
+    ],
+    "shots": [
+      ["Brom Bones", "Low, modestly angled medium view of Brom beside his horse. Use purpose drawn art for this angle. His relaxed posture communicates confidence without making him monstrous."],
+      ["whenever he thought Brom would be somewhere else", "Wide farmhouse doorway view. Ichabod peeks around the gate and smooths his coat before entering. Hold the camera so the cautious behavior supplies the comedy."]
+    ]
+  },
+  {
+    "id": "08", "title": "An invitation", "delivery": "Brighten the pace",
+    "paragraphs": [
+      "One autumn day, an invitation arrived. The Van Tassels were giving a party, with supper, music, and dancing. Ichabod could hardly wait.",
+      "He borrowed an old horse named Gunpowder. It was a grand name for a rather tired-looking animal.",
+      "Ichabod brushed his coat, put on his best expression, and climbed aboard. With his knees sticking up and his elbows sticking out, he set off to impress Katrina."
+    ],
+    "shots": [
+      ["an invitation arrived", "Close insert of an invitation in Ichabod’s hand; his other hand briskly closes a schoolbook. The prop makes the change of plans immediate."],
+      ["his knees sticking up", "Locked side wide of Ichabod on Gunpowder. Animate an ear flick and the rider settling awkwardly into the saddle. Begin travel only after the seated pose is secure."]
+    ]
+  },
+  {
+    "id": "09", "title": "A very promising supper", "delivery": "Savor the food words",
+    "paragraphs": [
+      "The farmhouse windows shone with warm light. Inside, the tables were crowded with cakes, pies, and dishes that made Ichabod forget how to be shy.",
+      "He tasted this. He tried that. He discovered room for a little more.",
+      "As he looked around the cheerful house, his dreams grew larger. Surely, he thought, a life with Katrina would be a very comfortable life indeed."
+    ],
+    "shots": [
+      ["The farmhouse windows", "Establish the house at evening with arriving guests. A short eased approach ends at the glowing doorway, bringing us into the celebration."],
+      ["He discovered room for a little more", "Medium table view. Ichabod considers his plate, then accepts one more small slice. Keep the slice visibly in his hand and on the plate; avoid unexplained prop appearances."]
+    ]
+  },
+  {
+    "id": "10", "title": "The dance", "delivery": "Lively without rushing",
+    "paragraphs": [
+      "Then the fiddle began, and Ichabod danced with Katrina.",
+      "His arms swung. His knees bent. Every part of him seemed determined to join the dance. Katrina smiled, and Ichabod felt magnificent.",
+      "Across the room, Brom Bones watched from his chair. He did not look nearly so pleased.",
+      "For a little while, Ichabod forgot that he had a rival at all."
+    ],
+    "shots": [
+      ["Ichabod danced with Katrina", "Full body two shot. Use a short alternating footstep cycle with planted support feet and moving arms. Hold the frame so the playful dancing stays readable."],
+      ["Brom Bones watched", "Cut to a still reaction shot of Brom tapping one finger on his chair. This is a story motivated cut, not another camera move on the dancers."]
+    ]
+  },
+  {
+    "id": "11", "title": "Brom tells a story", "delivery": "Brom boasts casually then return to a hush",
+    "paragraphs": [
+      "Later, the guests settled down to tell stories. Before long, someone mentioned the Headless Horseman.",
+      "Brom claimed he had raced the ghost himself, on his horse Daredevil. He would have won, he said, except that the Horseman vanished in a flash of fire near the church bridge.",
+      "Ichabod listened closely. The bridge. He would remember that.",
+      "Outside the windows, the darkness had grown very deep."
+    ],
+    "shots": [
+      ["Brom claimed", "Medium group view of Brom telling his tale. His sweeping gesture ends toward the dark window. Keep his alleged race off screen so the film does not certify it as fact."],
+      ["The bridge", "Close reaction shot of Ichabod listening. Slowly shift attention from the warm listeners to the dark window, ending before the narration moves on. The emphasis plants his later hope."]
+    ]
+  },
+  {
+    "id": "12", "title": "The party ends", "delivery": "Let the warmth fade",
+    "paragraphs": [
+      "At last the guests went home. Ichabod stayed behind for a few private words with Katrina.",
+      "What did they say? We do not know. But when Ichabod came out, his bright hopes had disappeared. He climbed onto Gunpowder without a smile.",
+      "The music was over. The windows grew dim behind him. Ahead lay the road through Sleepy Hollow, and a long, lonely ride."
+    ],
+    "shots": [
+      ["a few private words", "Wide exterior of the house; the conversation remains inside and unheard. Hold on the door until Ichabod emerges, keeping Katrina’s actual words unknown."],
+      ["The windows grew dim", "Rear three quarter riding view with separately drawn art. Hold the ground and mounted pair together as the house recedes. Let the last fiddle phrase fade into night sounds."]
+    ]
+  },
+  {
+    "id": "13", "title": "The lonely road", "delivery": "Slower with room between sounds",
+    "paragraphs": [
+      "Clip. Clop. Clip. Clop.",
+      "Gunpowder’s hooves sounded very loud in the quiet. Far away, a dog barked. Nearby, something rustled in the grass.",
+      "Ichabod remembered every ghost story he had heard that evening. Why had he listened to so many?",
+      "He tried a little tune. It sounded much smaller out here than it had in the schoolroom."
+    ],
+    "shots": [
+      ["Clip. Clop.", "Locked side riding composition with road, hoof contacts, and shadows in one grounded set. Use a few deliberate gait poses; do not glide a frozen horse across the road."],
+      ["He tried a little tune", "Cut to Ichabod’s face and hands on the reins. A tiny swallow and wavering mouth shape show his failing confidence; leave surrounding darkness still."]
+    ]
+  },
+  {
+    "id": "14", "title": "The old tree", "delivery": "Build each fright then release it",
+    "paragraphs": [
+      "An enormous old tree leaned over the road. Something white shone among its branches. Ichabod stopped breathing.",
+      "Then he saw it properly: pale wood where lightning had stripped away the bark.",
+      "A groan came from above. Ichabod’s knees knocked together.",
+      "Only two branches rubbing in the wind.",
+      "He let out a breath. The tree was just a tree. He wished the rest of the road would be just a road."
+    ],
+    "shots": [
+      ["Something white shone", "Ichabod’s viewpoint of a pale shape between branches. A small, controlled push reveals exposed wood on the same tree. No morphing ghost or invented apparition."],
+      ["Only two branches", "Show the branches touching, then ease focus back to Ichabod below. The sound and visible cause match, allowing the audience to solve this scare with him."]
+    ]
+  },
+  {
+    "id": "15", "title": "A shape in the dark", "delivery": "Quiet and watchful",
+    "paragraphs": [
+      "Near a little stream, Gunpowder stopped. Ichabod urged him forward, but the old horse stepped sideways instead.",
+      "Then came a heavy sound from the darkness beside the road.",
+      "Something was there. Something large.",
+      "“Who’s there?” Ichabod called.",
+      "No answer.",
+      "The shape moved out from beneath the trees. It was a rider on a powerful black horse. The stranger said nothing."
+    ],
+    "shots": [
+      ["Gunpowder stopped", "Medium wide at the small stream crossing. Show one hesitant sidestep, feet visibly resetting. This crossing has no church and looks distinct from the later church bridge."],
+      ["The shape moved out", "Locked Ichabod viewpoint with a tree trunk partly blocking the rider. A small forward movement reveals horse and cloak but keeps the upper silhouette obscured until section 17."]
+    ]
+  },
+  {
+    "id": "16", "title": "An unwelcome companion", "delivery": "Measured and increasingly uneasy",
+    "paragraphs": [
+      "Ichabod went a little faster. The stranger went faster too.",
+      "Ichabod slowed down. The stranger slowed down.",
+      "They traveled side by side, with only the sound of hooves between them. Ichabod wanted to sing again, but no tune would come.",
+      "The road rose gently ahead. As they climbed, the stranger’s dark outline began to stand clear against the sky."
+    ],
+    "shots": [
+      ["Ichabod went a little faster", "Side two shot of both mounted riders with the stranger’s shoulders still behind foliage. Match the gait changes to show deliberate imitation; camera motion would weaken the comparison."],
+      ["The road rose gently", "Wide view approaching a low ridge. Clear the foreground obstruction gradually, ending on the approach to the reveal. Maintain the same travel direction."]
+    ]
+  },
+  {
+    "id": "17", "title": "Against the sky", "delivery": "Read the cue and hold the silence",
+    "paragraphs": [
+      "Ichabod looked at the great horse. The heavy cloak. The broad shoulders.",
+      {"cue": "Pause for two beats"},
+      "There was no head.",
+      "Something round rested in front of the rider, against the saddle. In that terrible moment, Ichabod was sure he knew what it was.",
+      "The Headless Horseman.",
+      "“Go, Gunpowder!” he cried.",
+      "And this time, Gunpowder went."
+    ],
+    "shots": [
+      ["There was no head", "Reveal a clean cloaked silhouette against moonlit sky on the first word after the two beat pause. No visible neck wound. A very slight camera tilt may mark Ichabod’s disorientation; keep the horizon safely cropped."],
+      ["Something round rested", "Brief dark saddle insert, then Ichabod’s reaction in the same shot setup. The object has no readable face, stem, or glow. Preserve the mystery until the daylight clue."]
+    ]
+  },
+  {
+    "id": "18", "title": "The chase", "delivery": "Urgent but keep the words clear",
+    "paragraphs": [
+      "Down the road they raced. Ichabod bent low over the horse’s neck. His coat tails flew behind him.",
+      "Behind them came the pounding of the black horse’s hooves.",
+      "Gunpowder took a turn and plunged downhill. Branches rushed past. Loose stones scattered.",
+      "Ichabod did not dare look back. The other rider was still there. He could hear him getting closer."
+    ],
+    "shots": [
+      ["Down the road they raced", "Grounded side tracking shot of the mounted pair at a gallop. Synchronize contact poses, road movement, and shadow so hooves do not skate. Keep the rider attached to the horse."],
+      ["Gunpowder took a turn", "Use one foreground trunk wipe to cut to a purpose drawn downhill angle. Both horses continue the established screen direction. Faster cuts and hoofbeats supply speed without strong camera shake."]
+    ]
+  },
+  {
+    "id": "19", "title": "The slipping saddle", "delivery": "A flash of comedy inside the danger",
+    "paragraphs": [
+      "Then the saddle began to slip.",
+      "Ichabod grabbed at it. Too late! Down it went, and he only saved himself by clutching Gunpowder around the neck.",
+      "For one ridiculous moment, he remembered that this was a borrowed saddle. Its owner would be furious.",
+      "But that worry could wait. Ahead, through the trees, he saw the pale walls of the church. And below them, the bridge."
+    ],
+    "shots": [
+      ["the saddle began to slip", "Medium side insert of saddle shifting, followed by Ichabod’s arms gripping the neck. Drop the detached saddle behind the horse, keeping the rider visibly supported."],
+      ["the pale walls of the church", "Wide view reestablishes church beyond bridge, road in front, pursuit behind. Match the geography planted in section 02. This clear view matters more than a dramatic lens effect."]
+    ]
+  },
+  {
+    "id": "20", "title": "Across the bridge", "delivery": "Let hope enter his voice",
+    "paragraphs": [
+      "The bridge! That was where Brom said the Horseman had vanished.",
+      "If Ichabod could only reach the other side!",
+      "Gunpowder’s hooves struck the wooden planks. The whole bridge seemed to thunder beneath them.",
+      "Across they flew, and out onto the road beyond.",
+      "Ichabod turned to look. He expected a flash, a burst of smoke, an empty road.",
+      "But the rider was still behind him."
+    ],
+    "shots": [
+      ["Gunpowder’s hooves struck", "Wide side view of the entire crossing with the church beyond. Increase the wooden hoof sound, not the camera shake. Show Gunpowder reaching solid road on the far side."],
+      ["Ichabod turned to look", "Over shoulder composition from Ichabod’s separate rear view art. The rider remains in pursuit. Hold a moment on the failed expectation; do not add a supernatural flash."]
+    ]
+  },
+  {
+    "id": "21", "title": "One last terrible moment", "delivery": "Short phrases then leave silence",
+    "paragraphs": [
+      "The Horseman rose in his stirrups. He lifted the round shape from his saddle.",
+      "Ichabod ducked.",
+      "Something hurtled through the night. There was a crash, a tumble, and a cloud of dust.",
+      "The horses rushed past. Their hoofbeats faded down the road.",
+      {"cue": "Pause for three beats"},
+      "Then Sleepy Hollow was quiet again."
+    ],
+    "shots": [
+      ["He lifted the round shape", "Rider silhouette lifts and releases the object. Show its short arc, then cut behind roadside foliage before contact. No flying head detail or visible injury."],
+      ["a cloud of dust", "Locked roadside aftermath with dust and a hat settling, bodies hidden by the foreground bank. Let hoofbeats recede, then keep the frame quiet through the three beat pause."]
+    ]
+  },
+  {
+    "id": "22", "title": "The clues at daybreak", "delivery": "Clear daylight with a little surprise",
+    "paragraphs": [
+      "In the morning, Gunpowder was found at his owner’s gate, eating grass without his saddle. Ichabod did not come to breakfast. He did not come to school.",
+      "The neighbors searched the road. They found the fallen saddle and the marks of galloping horses.",
+      "Beyond the church bridge lay Ichabod’s hat. Beside it were the broken pieces of a pumpkin.",
+      "But there was no sign of Ichabod Crane."
+    ],
+    "shots": [
+      ["In the morning", "Dissolve to a steady warm dawn view of Gunpowder grazing at the gate without saddle. The calm horse and birdsong release the night’s tension."],
+      ["the broken pieces of a pumpkin", "Close insert reveals the hat first and pumpkin pieces beside it as focus settles. Make the plain orange rind unmistakable. Hold long enough for children to register the clue."]
+    ]
+  },
+  {
+    "id": "23", "title": "What became of Ichabod", "delivery": "Reassuring but leave the question open",
+    "paragraphs": [
+      "Some people said the Horseman had carried him away. Others were not so sure.",
+      "Years later, a farmer brought back news that Ichabod was alive in another part of the country. According to him, the schoolteacher had started a new life and even studied law.",
+      "Perhaps Ichabod had decided that one night in Sleepy Hollow was quite enough.",
+      "But the neighbors could never agree."
+    ],
+    "shots": [
+      ["Some people said", "Medium village group exchanging theories. Different gestures communicate disagreement without dialogue or added signs."],
+      ["a farmer brought back news", "The farmer recounts his news to the group. Keep the reported new life off screen so it remains a report, not a confirmed flash forward. End on a thoughtful listener."]
+    ]
+  },
+  {
+    "id": "24", "title": "Brom and the pumpkin", "delivery": "A knowing smile followed by a gentle hush",
+    "paragraphs": [
+      "Brom Bones married Katrina. And whenever someone told the story of Ichabod’s midnight ride, Brom listened with a very knowing look.",
+      "At the mention of the pumpkin, he always laughed.",
+      "Did Brom know something he wasn’t telling? Was there really a ghost on that road? Or had fear, darkness, and a very clever trick done all the work?",
+      "No one could prove it.",
+      "But when evening settled over the valley, people still glanced toward the church bridge. And they still told the legend of Sleepy Hollow."
+    ],
+    "shots": [
+      ["At the mention of the pumpkin", "Medium view of Brom with Katrina and neighbors. Give him one knowing laugh, not a wink or costume reveal. Katrina’s reaction can remain unreadable."],
+      ["when evening settled over the valley", "Return to the opening valley and bridge composition at dusk. Hold the empty road, then fade. A final surprise rider would answer a mystery the narration deliberately leaves open."]
+    ]
+  }
+]

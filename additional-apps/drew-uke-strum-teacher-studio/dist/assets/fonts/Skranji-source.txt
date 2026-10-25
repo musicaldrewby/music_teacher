@@ -1,0 +1,2 @@
+Unmodified Skranji Bold, Font Diner. Source: https://raw.githubusercontent.com/google/fonts/main/ofl/skranji/Skranji-Bold.ttf
+SIL Open Font License 1.1 is included as Skranji-OFL.txt.

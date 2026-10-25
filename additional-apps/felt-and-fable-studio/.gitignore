@@ -1,0 +1,11 @@
+node_modules/
+.DS_Store
+
+# Hosted build and local tooling
+/dist/
+/.sites-runtime/
+/.wrangler/
+/.vinext/
+/.next/
+/public/__asset-seed/
+.env*

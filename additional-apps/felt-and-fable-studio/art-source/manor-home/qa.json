@@ -1,0 +1,253 @@
+[
+  {
+    "slug": "manor-gate",
+    "dimensions": [
+      1672,
+      941
+    ],
+    "losslessPixelMatch": true,
+    "bytes": 2189792
+  },
+  {
+    "slug": "manor-entrance-hall",
+    "dimensions": [
+      1672,
+      941
+    ],
+    "losslessPixelMatch": true,
+    "bytes": 1982506
+  },
+  {
+    "slug": "manor-upstairs-corridor",
+    "dimensions": [
+      1672,
+      941
+    ],
+    "losslessPixelMatch": true,
+    "bytes": 1944208
+  },
+  {
+    "slug": "manor-library",
+    "dimensions": [
+      1672,
+      941
+    ],
+    "losslessPixelMatch": true,
+    "bytes": 2002404
+  },
+  {
+    "slug": "manor-attic",
+    "dimensions": [
+      1672,
+      941
+    ],
+    "losslessPixelMatch": true,
+    "bytes": 1857632
+  },
+  {
+    "slug": "manor-cellar",
+    "dimensions": [
+      1672,
+      941
+    ],
+    "losslessPixelMatch": true,
+    "bytes": 2086808
+  },
+  {
+    "slug": "home-exterior",
+    "dimensions": [
+      1672,
+      941
+    ],
+    "losslessPixelMatch": true,
+    "bytes": 2082792
+  },
+  {
+    "slug": "home-living-room",
+    "dimensions": [
+      1672,
+      940
+    ],
+    "losslessPixelMatch": true,
+    "bytes": 2077174
+  },
+  {
+    "slug": "home-kitchen",
+    "dimensions": [
+      1672,
+      941
+    ],
+    "losslessPixelMatch": true,
+    "bytes": 2136570
+  },
+  {
+    "slug": "home-bedroom",
+    "dimensions": [
+      1672,
+      940
+    ],
+    "losslessPixelMatch": true,
+    "bytes": 1921012
+  },
+  {
+    "slug": "home-backyard",
+    "dimensions": [
+      1672,
+      941
+    ],
+    "losslessPixelMatch": true,
+    "bytes": 2268286
+  },
+  {
+    "slug": "manor-flashlight",
+    "dimensions": [
+      1254,
+      1254
+    ],
+    "losslessPixelMatch": true,
+    "bytes": 649622,
+    "alphaExtrema": [
+      0,
+      255
+    ],
+    "visibleBounds": [
+      20,
+      364,
+      1236,
+      889
+    ]
+  },
+  {
+    "slug": "manor-antique-key",
+    "dimensions": [
+      1254,
+      1254
+    ],
+    "losslessPixelMatch": true,
+    "bytes": 554360,
+    "alphaExtrema": [
+      0,
+      255
+    ],
+    "visibleBounds": [
+      19,
+      291,
+      1236,
+      929
+    ]
+  },
+  {
+    "slug": "manor-candle-holder",
+    "dimensions": [
+      1254,
+      1254
+    ],
+    "losslessPixelMatch": true,
+    "bytes": 731080,
+    "alphaExtrema": [
+      0,
+      255
+    ],
+    "visibleBounds": [
+      226,
+      35,
+      1161,
+      1212
+    ]
+  },
+  {
+    "slug": "manor-sealed-letter",
+    "dimensions": [
+      1254,
+      1254
+    ],
+    "losslessPixelMatch": true,
+    "bytes": 1198364,
+    "alphaExtrema": [
+      0,
+      255
+    ],
+    "visibleBounds": [
+      51,
+      272,
+      1207,
+      991
+    ]
+  },
+  {
+    "slug": "home-backpack",
+    "dimensions": [
+      1254,
+      1254
+    ],
+    "losslessPixelMatch": true,
+    "bytes": 1558706,
+    "alphaExtrema": [
+      0,
+      255
+    ],
+    "visibleBounds": [
+      118,
+      48,
+      1136,
+      1205
+    ]
+  },
+  {
+    "slug": "home-umbrella",
+    "dimensions": [
+      1254,
+      1254
+    ],
+    "losslessPixelMatch": true,
+    "bytes": 881980,
+    "alphaExtrema": [
+      0,
+      255
+    ],
+    "visibleBounds": [
+      29,
+      29,
+      1226,
+      1217
+    ]
+  },
+  {
+    "slug": "home-parcel",
+    "dimensions": [
+      1254,
+      1254
+    ],
+    "losslessPixelMatch": true,
+    "bytes": 1214626,
+    "alphaExtrema": [
+      0,
+      255
+    ],
+    "visibleBounds": [
+      79,
+      218,
+      1198,
+      1104
+    ]
+  },
+  {
+    "slug": "home-pet-bed",
+    "dimensions": [
+      1254,
+      1254
+    ],
+    "losslessPixelMatch": true,
+    "bytes": 1042688,
+    "alphaExtrema": [
+      0,
+      255
+    ],
+    "visibleBounds": [
+      16,
+      311,
+      1238,
+      934
+    ]
+  }
+]

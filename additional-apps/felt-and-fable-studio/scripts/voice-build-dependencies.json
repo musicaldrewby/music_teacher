@@ -1,0 +1,5 @@
+{
+  "esbuild": "0.25.0",
+  "onnxruntime-web": "1.22.0",
+  "phonemizer": "1.2.1"
+}

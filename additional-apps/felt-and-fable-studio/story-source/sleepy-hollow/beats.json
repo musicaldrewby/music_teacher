@@ -1,0 +1,345 @@
+[
+  {
+    "id": "01A",
+    "name": "A quiet little valley",
+    "text": "Long ago, beside New York’s Hudson River, there was a quiet little valley called Sleepy Hollow. A brook wandered through the trees. Farmhouses stood among apple orchards. On an autumn afternoon, the whole place seemed ready for a nap.",
+    "duration": 20,
+    "direction": "Read aloud · Space for the next shot"
+  },
+  {
+    "id": "01B",
+    "name": "A quiet little valley",
+    "text": "But after sunset, the neighbors had stories to tell. And if you listened to enough of them, even an ordinary shadow could begin to look very strange.",
+    "duration": 14,
+    "direction": "Read aloud · Space for the next shot"
+  },
+  {
+    "id": "02A",
+    "name": "The story everyone knew",
+    "text": "Their most famous story was about the Headless Horseman. People said he was the ghost of a soldier who had lost his head in a battle, many years before.\n\nThey said he rode through the hollow at night, searching for it.",
+    "duration": 21,
+    "direction": "Read aloud · Space for the next shot"
+  },
+  {
+    "id": "02B",
+    "name": "The story everyone knew",
+    "text": "Before daylight, he had to return to the old churchyard.\n\nAt least, that was the story. And in Sleepy Hollow, stories had a way of growing.",
+    "duration": 14,
+    "direction": "Read aloud · Space for the next shot"
+  },
+  {
+    "id": "03A",
+    "name": "Meet Ichabod Crane",
+    "text": "Now, the village schoolteacher was a man named Ichabod Crane. He was tall and thin, with long arms, long legs, and a coat that never quite seemed to catch up with him.\n\nHe taught reading and writing.",
+    "duration": 19,
+    "direction": "Read aloud · Space for the next shot"
+  },
+  {
+    "id": "03B",
+    "name": "Meet Ichabod Crane",
+    "text": "He also taught singing, and was very pleased with his own voice.\n\nWhen Ichabod sang, no one had to ask where the music was coming from.",
+    "duration": 14,
+    "direction": "Read aloud · Space for the next shot"
+  },
+  {
+    "id": "04A",
+    "name": "An excellent appetite",
+    "text": "The families of the village took turns giving him a place to stay and meals to eat. Ichabod helped with chores, carried little children, and made himself useful.\n\nHe also made himself hungry. Very hungry.",
+    "duration": 18,
+    "direction": "Read aloud · Space for the next shot"
+  },
+  {
+    "id": "04B",
+    "name": "An excellent appetite",
+    "text": "Looking at that narrow schoolteacher, you might wonder where he put so much supper. Looking at his empty plate, you would know that somehow, he managed.",
+    "duration": 14,
+    "direction": "Read aloud · Space for the next shot"
+  },
+  {
+    "id": "05A",
+    "name": "Brave beside the fire",
+    "text": "After supper, Ichabod loved to sit by the fire and listen to ghost stories. With a warm room around him and other people close by, he could listen for hours.",
+    "duration": 15,
+    "direction": "Read aloud · Space for the next shot"
+  },
+  {
+    "id": "05B",
+    "name": "Brave beside the fire",
+    "text": "Walking home alone was another matter.\n\nA frog croaked. A branch cracked. Ichabod hurried along, singing to make himself feel braver. The louder the woods became, the louder Ichabod sang.",
+    "duration": 15,
+    "direction": "Read aloud · Space for the next shot"
+  },
+  {
+    "id": "06A",
+    "name": "Katrina and the farm",
+    "text": "One of Ichabod’s singing pupils was Katrina Van Tassel, a young woman whose family owned a prosperous farm. Ichabod admired her smile. He also admired the orchard, the full barns, and the marvelous things that came out of the kitchen.",
+    "duration": 20,
+    "direction": "Read aloud · Space for the next shot"
+  },
+  {
+    "id": "06B",
+    "name": "Katrina and the farm",
+    "text": "Soon he was imagining himself married to Katrina, sitting comfortably at the Van Tassel table.\n\nIn these pleasant daydreams, there was always plenty of pie.",
+    "duration": 13,
+    "direction": "Read aloud · Space for the next shot"
+  },
+  {
+    "id": "07A",
+    "name": "Brom Bones",
+    "text": "Unfortunately for Ichabod, another man hoped to marry Katrina. His name was Brom Van Brunt, though everyone called him Brom Bones.\n\nBrom was strong, confident, and famous for his riding. He loved a joke, especially when somebody else was the last to understand it.",
+    "duration": 22,
+    "direction": "Read aloud · Space for the next shot"
+  },
+  {
+    "id": "07B",
+    "name": "Brom Bones",
+    "text": "Ichabod had no wish to challenge him. He simply kept visiting Katrina whenever he thought Brom would be somewhere else.",
+    "duration": 11,
+    "direction": "Read aloud · Space for the next shot"
+  },
+  {
+    "id": "08A",
+    "name": "An invitation",
+    "text": "One autumn day, an invitation arrived. The Van Tassels were giving a party, with supper, music, and dancing. Ichabod could hardly wait.",
+    "duration": 12,
+    "direction": "Read aloud · Space for the next shot"
+  },
+  {
+    "id": "08B",
+    "name": "An invitation",
+    "text": "He borrowed an old horse named Gunpowder. It was a grand name for a rather tired-looking animal.\n\nIchabod brushed his coat, put on his best expression, and climbed aboard. With his knees sticking up and his elbows sticking out, he set off to impress Katrina.",
+    "duration": 22,
+    "direction": "Read aloud · Space for the next shot"
+  },
+  {
+    "id": "09A",
+    "name": "A very promising supper",
+    "text": "The farmhouse windows shone with warm light. Inside, the tables were crowded with cakes, pies, and dishes that made Ichabod forget how to be shy.",
+    "duration": 13,
+    "direction": "Read aloud · Space for the next shot"
+  },
+  {
+    "id": "09B",
+    "name": "A very promising supper",
+    "text": "He tasted this. He tried that. He discovered room for a little more.\n\nAs he looked around the cheerful house, his dreams grew larger. Surely, he thought, a life with Katrina would be a very comfortable life indeed.",
+    "duration": 19,
+    "direction": "Read aloud · Space for the next shot"
+  },
+  {
+    "id": "10A",
+    "name": "The dance",
+    "text": "Then the fiddle began, and Ichabod danced with Katrina.\n\nHis arms swung. His knees bent. Every part of him seemed determined to join the dance. Katrina smiled, and Ichabod felt magnificent.",
+    "duration": 16,
+    "direction": "Read aloud · Space for the next shot"
+  },
+  {
+    "id": "10B",
+    "name": "The dance",
+    "text": "Across the room, Brom Bones watched from his chair. He did not look nearly so pleased.\n\nFor a little while, Ichabod forgot that he had a rival at all.",
+    "duration": 15,
+    "direction": "Read aloud · Space for the next shot"
+  },
+  {
+    "id": "11A",
+    "name": "Brom tells a story",
+    "text": "Later, the guests settled down to tell stories. Before long, someone mentioned the Headless Horseman.\n\nBrom claimed he had raced the ghost himself, on his horse Daredevil. He would have won, he said, except that the Horseman vanished in a flash of fire near the church bridge.",
+    "duration": 23,
+    "direction": "Read aloud · Space for the next shot"
+  },
+  {
+    "id": "11B",
+    "name": "Brom tells a story",
+    "text": "Ichabod listened closely. The bridge. He would remember that.\n\nOutside the windows, the darkness had grown very deep.",
+    "duration": 10,
+    "direction": "Read aloud · Space for the next shot"
+  },
+  {
+    "id": "12A",
+    "name": "The party ends",
+    "text": "At last the guests went home. Ichabod stayed behind for a few private words with Katrina.",
+    "duration": 9,
+    "direction": "Read aloud · Space for the next shot"
+  },
+  {
+    "id": "12B",
+    "name": "The party ends",
+    "text": "What did they say? We do not know. But when Ichabod came out, his bright hopes had disappeared. He climbed onto Gunpowder without a smile.\n\nThe music was over. The windows grew dim behind him. Ahead lay the road through Sleepy Hollow, and a long, lonely ride.",
+    "duration": 23,
+    "direction": "Read aloud · Space for the next shot"
+  },
+  {
+    "id": "13A",
+    "name": "The lonely road",
+    "text": "Clip. Clop. Clip. Clop.\n\nGunpowder’s hooves sounded very loud in the quiet. Far away, a dog barked. Nearby, something rustled in the grass.\n\nIchabod remembered every ghost story he had heard that evening. Why had he listened to so many?",
+    "duration": 20,
+    "direction": "Read aloud · Space for the next shot"
+  },
+  {
+    "id": "13B",
+    "name": "The lonely road",
+    "text": "He tried a little tune. It sounded much smaller out here than it had in the schoolroom.",
+    "duration": 9,
+    "direction": "Read aloud · Space for the next shot"
+  },
+  {
+    "id": "14A",
+    "name": "The old tree",
+    "text": "An enormous old tree leaned over the road. Something white shone among its branches. Ichabod stopped breathing.\n\nThen he saw it properly: pale wood where lightning had stripped away the bark.",
+    "duration": 16,
+    "direction": "Read aloud · Space for the next shot"
+  },
+  {
+    "id": "14B",
+    "name": "The old tree",
+    "text": "A groan came from above. Ichabod’s knees knocked together.\n\nOnly two branches rubbing in the wind.\n\nHe let out a breath. The tree was just a tree. He wished the rest of the road would be just a road.",
+    "duration": 20,
+    "direction": "Read aloud · Space for the next shot"
+  },
+  {
+    "id": "15A",
+    "name": "A shape in the dark",
+    "text": "Near a little stream, Gunpowder stopped. Ichabod urged him forward, but the old horse stepped sideways instead.\n\nThen came a heavy sound from the darkness beside the road.\n\nSomething was there. Something large.\n\n“Who’s there?” Ichabod called.\n\nNo answer.",
+    "duration": 20,
+    "direction": "Read aloud · Space for the next shot"
+  },
+  {
+    "id": "15B",
+    "name": "A shape in the dark",
+    "text": "The shape moved out from beneath the trees. It was a rider on a powerful black horse. The stranger said nothing.",
+    "duration": 11,
+    "direction": "Read aloud · Space for the next shot"
+  },
+  {
+    "id": "16A",
+    "name": "An unwelcome companion",
+    "text": "Ichabod went a little faster. The stranger went faster too.\n\nIchabod slowed down. The stranger slowed down.\n\nThey traveled side by side, with only the sound of hooves between them. Ichabod wanted to sing again, but no tune would come.",
+    "duration": 20,
+    "direction": "Read aloud · Space for the next shot"
+  },
+  {
+    "id": "16B",
+    "name": "An unwelcome companion",
+    "text": "The road rose gently ahead. As they climbed, the stranger’s dark outline began to stand clear against the sky.",
+    "duration": 10,
+    "direction": "Read aloud · Space for the next shot"
+  },
+  {
+    "id": "17P",
+    "name": "Against the sky",
+    "text": "Ichabod looked at the great horse. The heavy cloak. The broad shoulders.\n\n[Pause for two beats]",
+    "duration": 8,
+    "direction": "Read the setup. Pause two beats. Space reveals the rider."
+  },
+  {
+    "id": "17A",
+    "name": "Against the sky",
+    "text": "There was no head.",
+    "duration": 7,
+    "direction": "Reveal: “There was no head.” Hold before advancing."
+  },
+  {
+    "id": "17B",
+    "name": "Against the sky",
+    "text": "Something round rested in front of the rider, against the saddle. In that terrible moment, Ichabod was sure he knew what it was.\n\nThe Headless Horseman.\n\n“Go, Gunpowder!” he cried.\n\nAnd this time, Gunpowder went.",
+    "duration": 18,
+    "direction": "Read aloud · Space for the next shot"
+  },
+  {
+    "id": "18A",
+    "name": "The chase",
+    "text": "Down the road they raced. Ichabod bent low over the horse’s neck. His coat tails flew behind him.\n\nBehind them came the pounding of the black horse’s hooves.",
+    "duration": 15,
+    "direction": "Read aloud · Space for the next shot"
+  },
+  {
+    "id": "18B",
+    "name": "The chase",
+    "text": "Gunpowder took a turn and plunged downhill. Branches rushed past. Loose stones scattered.\n\nIchabod did not dare look back. The other rider was still there. He could hear him getting closer.",
+    "duration": 16,
+    "direction": "Read aloud · Space for the next shot"
+  },
+  {
+    "id": "19A",
+    "name": "The slipping saddle",
+    "text": "Then the saddle began to slip.\n\nIchabod grabbed at it. Too late! Down it went, and he only saved himself by clutching Gunpowder around the neck.\n\nFor one ridiculous moment, he remembered that this was a borrowed saddle. Its owner would be furious.",
+    "duration": 21,
+    "direction": "Read aloud · Space for the next shot"
+  },
+  {
+    "id": "19B",
+    "name": "The slipping saddle",
+    "text": "But that worry could wait. Ahead, through the trees, he saw the pale walls of the church. And below them, the bridge.",
+    "duration": 12,
+    "direction": "Read aloud · Space for the next shot"
+  },
+  {
+    "id": "20A",
+    "name": "Across the bridge",
+    "text": "The bridge! That was where Brom said the Horseman had vanished.\n\nIf Ichabod could only reach the other side!\n\nGunpowder’s hooves struck the wooden planks. The whole bridge seemed to thunder beneath them.\n\nAcross they flew, and out onto the road beyond.",
+    "duration": 21,
+    "direction": "Read aloud · Space for the next shot"
+  },
+  {
+    "id": "20B",
+    "name": "Across the bridge",
+    "text": "Ichabod turned to look. He expected a flash, a burst of smoke, an empty road.\n\nBut the rider was still behind him.",
+    "duration": 12,
+    "direction": "Read aloud · Space for the next shot"
+  },
+  {
+    "id": "21A",
+    "name": "One last terrible moment",
+    "text": "The Horseman rose in his stirrups. He lifted the round shape from his saddle.",
+    "duration": 8,
+    "direction": "Read through “saddle.” Space begins the throw."
+  },
+  {
+    "id": "21B",
+    "name": "One last terrible moment",
+    "text": "Ichabod ducked.\n\nSomething hurtled through the night. There was a crash, a tumble, and a cloud of dust.\n\nThe horses rushed past. Their hoofbeats faded down the road.\n\n[Pause for three beats]\n\nThen Sleepy Hollow was quiet again.",
+    "duration": 17,
+    "direction": "Read the tumble, pause three beats, then the quiet line."
+  },
+  {
+    "id": "22A",
+    "name": "The clues at daybreak",
+    "text": "In the morning, Gunpowder was found at his owner’s gate, eating grass without his saddle. Ichabod did not come to breakfast. He did not come to school.",
+    "duration": 14,
+    "direction": "Read aloud · Space for the next shot"
+  },
+  {
+    "id": "22B",
+    "name": "The clues at daybreak",
+    "text": "The neighbors searched the road. They found the fallen saddle and the marks of galloping horses.\n\nBeyond the church bridge lay Ichabod’s hat. Beside it were the broken pieces of a pumpkin.\n\nBut there was no sign of Ichabod Crane.",
+    "duration": 20,
+    "direction": "Read aloud · Space for the next shot"
+  },
+  {
+    "id": "23A",
+    "name": "What became of Ichabod",
+    "text": "Some people said the Horseman had carried him away. Others were not so sure.",
+    "duration": 8,
+    "direction": "Read aloud · Space for the next shot"
+  },
+  {
+    "id": "23B",
+    "name": "What became of Ichabod",
+    "text": "Years later, a farmer brought back news that Ichabod was alive in another part of the country. According to him, the schoolteacher had started a new life and even studied law.\n\nPerhaps Ichabod had decided that one night in Sleepy Hollow was quite enough.\n\nBut the neighbors could never agree.",
+    "duration": 25,
+    "direction": "Read aloud · Space for the next shot"
+  },
+  {
+    "id": "24A",
+    "name": "Brom and the pumpkin",
+    "text": "Brom Bones married Katrina. And whenever someone told the story of Ichabod’s midnight ride, Brom listened with a very knowing look.\n\nAt the mention of the pumpkin, he always laughed.",
+    "duration": 15,
+    "direction": "Read aloud · Space for the next shot"
+  },
+  {
+    "id": "24B",
+    "name": "Brom and the pumpkin",
+    "text": "Did Brom know something he wasn’t telling? Was there really a ghost on that road? Or had fear, darkness, and a very clever trick done all the work?\n\nNo one could prove it.\n\nBut when evening settled over the valley, people still glanced toward the church bridge. And they still told the legend of Sleepy Hollow.",
+    "duration": 28,
+    "direction": "Read aloud · Space for the next shot"
+  }
+]

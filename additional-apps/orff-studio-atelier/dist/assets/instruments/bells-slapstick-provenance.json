@@ -1,0 +1,228 @@
+{
+  "mode": "Built-in image_gen; transparent PNGs, no post-generation raster modification",
+  "bells": {
+    "mode": "built-in image_gen",
+    "assets": [
+      {
+        "file": "agogo-bells.png",
+        "generationPath": "/workspace/scratch/f510c3edf10b/generated_images/exec-ea08d65c-00a6-4606-8991-d26867934e04.png",
+        "dimensions": [
+          1536,
+          1024
+        ],
+        "alphaPreserved": true,
+        "prompt": "Use case: product-mockup. Asset type: premium realistic playable musical-instrument cutout for Orff Atelier, a virtual classroom percussion studio. Generate one isolated photographic agog\u00f4 instrument, exactly TWO joined matte charcoal-black steel bells, larger and longer low bell on the LEFT and smaller shorter high bell on the RIGHT. Whole instrument visible with generous safe padding on all four edges, front three-quarter overhead view showing both bell bodies and hollow open mouths toward the viewer, necks toward the top. Bells separated by a visible gap, united by one realistic bent steel handle behind their necks. Natural forged metal texture with subtle brushed highlights, believable fine scratches, soft warm studio light from upper left, controlled highlights and deep open interiors. One simple pale natural wood striker set neatly alongside at the far right, completely separate from bells, not crossing either body. Premium product photograph, crisp lifelike material detail, no room or background scene, actual transparent background, no floor, no cast shadow extending beyond the object, no gradients or glow. No words, no labels, no logos, no hands, no people, no decorative objects. Composition must clearly show exactly two individually tappable bells, left visibly larger than right.",
+        "hitRegions": [
+          {
+            "label": "Low",
+            "polygon": [
+              [
+                0.39,
+                0.24
+              ],
+              [
+                0.45,
+                0.3
+              ],
+              [
+                0.47,
+                0.84
+              ],
+              [
+                0.44,
+                0.94
+              ],
+              [
+                0.32,
+                0.93
+              ],
+              [
+                0.14,
+                0.82
+              ],
+              [
+                0.06,
+                0.72
+              ],
+              [
+                0.06,
+                0.65
+              ],
+              [
+                0.2,
+                0.46
+              ]
+            ],
+            "labelPosition": [
+              0.31,
+              0.62
+            ]
+          },
+          {
+            "label": "High",
+            "polygon": [
+              [
+                0.62,
+                0.32
+              ],
+              [
+                0.67,
+                0.34
+              ],
+              [
+                0.8,
+                0.7
+              ],
+              [
+                0.79,
+                0.77
+              ],
+              [
+                0.68,
+                0.82
+              ],
+              [
+                0.57,
+                0.79
+              ],
+              [
+                0.51,
+                0.72
+              ]
+            ],
+            "labelPosition": [
+              0.66,
+              0.6
+            ]
+          }
+        ]
+      },
+      {
+        "file": "cowbell.png",
+        "generationPath": "/workspace/scratch/f510c3edf10b/generated_images/exec-505c45ba-1a4c-409e-a9dd-a14b500e38c5.png",
+        "dimensions": [
+          1536,
+          1024
+        ],
+        "alphaPreserved": true,
+        "prompt": "Use case: product-mockup. Asset type: premium realistic playable musical-instrument cutout for Orff Atelier, a virtual classroom percussion studio. Generate one isolated photographic dark charcoal-black metal cowbell: a real untuned percussion cowbell with broad flattened trapezoidal body that widens from narrow rear shoulder at upper center to its broad rectangular hollow open mouth toward lower left/front. A small practical steel mounting eye or loop at its narrow rear top. No clapper. Front three-quarter overhead angle showing broad upper striking surface, one side, and open mouth with dark interior. The single whole cowbell fills most of a square or landscape frame with ample safe padding; one simple plain cylindrical natural wood beater lies alongside on the right without overlapping the bell. Soft warm studio key light upper-left, beautiful subtle satin metal highlights and fine believable metal grain/small wear marks, realistic geometry and perspective, detailed premium music equipment catalog photo. Actual transparent background, no room or environment, no floor, no cast shadows beyond the object, no painted backdrop or gradient, no decorative glow. No text, no brand logo, no hands, no people, no additional bells. Realistic professional percussion cowbell and plain wood stick only.",
+        "hitRegions": [
+          {
+            "label": "Strike",
+            "polygon": [
+              [
+                0.56,
+                0.09
+              ],
+              [
+                0.64,
+                0.1
+              ],
+              [
+                0.74,
+                0.19
+              ],
+              [
+                0.75,
+                0.28
+              ],
+              [
+                0.58,
+                0.77
+              ],
+              [
+                0.49,
+                0.98
+              ],
+              [
+                0.42,
+                0.96
+              ],
+              [
+                0.06,
+                0.67
+              ],
+              [
+                0.045,
+                0.49
+              ]
+            ],
+            "labelPosition": [
+              0.42,
+              0.51
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "slapstick": {
+    "mode": "Built-in image_gen; one generation plus targeted grip correction",
+    "sourceGeneratedPath": "/workspace/scratch/f510c3edf10b/generated_images/exec-c20967e4-f254-4c2d-b26e-28ebe2864598.png",
+    "selectedAsset": "/workspace/scratch/f510c3edf10b/new-percussion-art/slapstick.png",
+    "dimensions": [
+      1536,
+      1024
+    ],
+    "alphaRange": [
+      0,
+      254
+    ],
+    "initialPrompt": "Use case: product-mockup. Create one premium photorealistic product photograph of an accurate orchestral/classroom SLAPSTICK percussion instrument, also called a whip. The instrument consists of exactly TWO long broad rectangular flat hardwood clapping boards of equal length, joined by one credible metal hinge at a short end. Each board has its own modest wooden grip attached on the OUTER face near that hinged end, leaving the two facing inner striking surfaces flat and unobstructed so they can clap fully shut. Show the pair slightly OPEN, about 25 degrees, forming a readable shallow V at their shared hinged end. Entire single connected instrument visible, no cropping. Three-quarter overhead perspective, long instrument running diagonally across a 3:2 LANDSCAPE image, fills approximately 80 percent of the canvas with transparent margin all around. Warm honey-maple hardwood, realistic subtle wood grain, smoothly rounded edges, believable thickness and small brushed metal hinge with screws. Physical construction should be practical, not abstract, not two loose sticks or tongs, not a wooden book or clipboard. Clean premium catalog product photography matching close-up educational percussion instrument photography: detailed tactile surface, broad soft warm studio highlights and realistic subtle shading, no harsh dramatic spotlight. Genuinely transparent background, no floor, no room, no props, no hands, no text, no labels, no logos, no watermark. One isolated slapstick instrument only.",
+    "finalEditPrompt": "Use case: precise-object-edit. Correct ONLY the lower hand grip in this image of a wooden orchestral slapstick. The lower board's wooden handle is currently mounted on the upper facing striking surface, preventing the two boards from closing flat. Remove that lower handle from the visible upper striking face and relocate it to the UNDERSIDE / OUTER face of the LOWER board, near the hinged end; it should be partly obscured under the board, with only its outer wooden grip visible beneath the left edge. Both facing striking surfaces must be completely flat and unobstructed so these two boards can clap together. Keep the upper handle, both boards' shapes and wood grain, metal hinge, camera angle, soft warm lighting, image size, framing, transparent alpha, and all other details unchanged. Preserve a genuinely transparent background; no added scene or props, no text.",
+    "suggestedHitPolygon": [
+      [
+        0.025,
+        0.13
+      ],
+      [
+        0.06,
+        0.04
+      ],
+      [
+        0.25,
+        0.08
+      ],
+      [
+        0.28,
+        0.2
+      ],
+      [
+        0.985,
+        0.52
+      ],
+      [
+        0.985,
+        0.62
+      ],
+      [
+        0.9,
+        0.68
+      ],
+      [
+        0.35,
+        0.4
+      ],
+      [
+        0.94,
+        0.82
+      ],
+      [
+        0.94,
+        0.91
+      ],
+      [
+        0.86,
+        0.98
+      ],
+      [
+        0.06,
+        0.36
+      ]
+    ],
+    "labelPosition": [
+      0.62,
+      0.43
+    ]
+  }
+}
