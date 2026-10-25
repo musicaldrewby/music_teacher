@@ -34,11 +34,16 @@ def load(entry):
     path.parent.mkdir(parents=True,exist_ok=True)
     path.write_bytes(data)
 
+failures=[]
 with ThreadPoolExecutor(max_workers=8) as pool:
     futures={pool.submit(load,e):e for e in manifest}
     for n,future in enumerate(as_completed(futures),1):
-        future.result()
+        try: future.result()
+        except Exception as exc:
+            failures.append((futures[future]['path'],str(exc)))
+            print('FAILED '+futures[future]['path']+': '+str(exc),flush=True)
         if n%50==0:print(f'Verified {n}/{len(manifest)} files',flush=True)
+if failures: raise RuntimeError(f'{len(failures)} files failed verification')
 for e in manifest:
     if digest((ROOT/e['path']).read_bytes())!=e['sha256']:raise ValueError(e['path'])
 print(f'Imported and verified {len(manifest)} application files.',flush=True)
