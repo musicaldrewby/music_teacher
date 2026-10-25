@@ -1,0 +1,34 @@
+name: Import the complete arcade snapshot
+on:
+  push:
+    branches: [migration/complete-arcade-2026-10-25]
+    paths:
+      - migration/assets.json
+      - migration/import_assets.py
+      - .github/workflows/import-arcade.yml
+permissions:
+  contents: write
+concurrency:
+  group: arcade-import-20261025
+  cancel-in-progress: false
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: migration/complete-arcade-2026-10-25
+          fetch-depth: 1
+      - name: Download and verify the public app files
+        run: python3 migration/import_assets.py
+      - name: Save the complete files to the migration branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --all
+          git add --force apps/ source/ assets/ migration/
+          if ! git diff --cached --quiet; then
+            git commit -m "Import all 20 arcade apps with verified images, audio, fonts and code"
+            git push origin HEAD:migration/complete-arcade-2026-10-25
+          fi
