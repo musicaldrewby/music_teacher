@@ -48,3 +48,7 @@ Fonts and browser libraries formerly loaded from CDNs are bundled locally. Their
 `migration/assets.json` records the source URL and SHA-256 hashes for every app file, plus the reviewed path/link adjustments. `migration/import_assets.py` imports that exact snapshot and refuses content drift. The one-time import workflow runs only on `migration/complete-arcade-2026-10-25`; it does not continuously synchronize or overwrite future changes on `main`.
 
 The previous homepage is preserved in branch `backup/arcade-before-app-migration-2026-10-25`.
+
+## Additional projects
+
+[26 additional app projects](additional-apps/README.md) are stored under `additional-apps/` for source import and further development. They are intentionally absent from the arcade homepage and simple app directory. Their full project layouts and bundled assets are preserved; framework/server projects require their own build/runtime.
