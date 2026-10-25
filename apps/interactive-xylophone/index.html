@@ -1,0 +1,1212 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Interactive Xylophone</title><meta name="description" content="Drew Wichman’s free classroom xylophone. Play, highlight, record, loop, and overdub in three realistic tabletop scenes."><meta name="theme-color" content="#46311e"><style id="offline-styles">
+* { box-sizing:border-box; }
+html,body { margin:0; width:100%; height:100%; overflow:hidden; background:#2e2117; font-family:'Trebuchet MS','Segoe UI',sans-serif; }
+button,a,input { -webkit-tap-highlight-color:transparent; }
+button { cursor:pointer; touch-action:manipulation; }
+button:disabled { cursor:default; }
+[hidden],.hidden { display:none !important; }
+.sr-only { position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important; }
+#scene-viewport { position:fixed; inset:0; overflow:auto; background:radial-gradient(ellipse at center,#b18b54,#493321); }
+#scene-viewport[data-theme="studio"] { background:radial-gradient(ellipse at center,#4a3421,#15130f); }
+#scene-viewport[data-theme="maple"] { background:radial-gradient(ellipse at center,#f3e4cc,#c2aa84); }
+#scene-viewport[data-fullscreen="true"] { overflow:hidden; }
+#main-wrapper { --scene-scale:1; --highlight:rgba(238,166,45,.47); --active:#b17729; position:absolute; width:1672px; height:941px; isolation:isolate; user-select:none; background-image:var(--scene); background-size:100% 100%; background-repeat:no-repeat; }
+#main-wrapper[data-theme="warm"] { --scene:url('assets/scenes/warm-reference.png'); --neutral:url('assets/scenes/warm-neutral.png'); }
+#main-wrapper[data-theme="studio"] { --scene:url('assets/scenes/studio-reference.png'); --neutral:url('assets/scenes/studio-neutral.png'); --highlight:rgba(248,179,43,.23); --active:#ffc265; }
+#main-wrapper[data-theme="maple"] { --scene:url('assets/scenes/maple-reference.png'); --neutral:url('assets/scenes/maple-neutral.png'); --highlight:rgba(105,149,114,.62); --active:#718a5b; }
+#neutral-patch { position:absolute; inset:0; background-image:var(--neutral); background-size:100% 100%; background-repeat:no-repeat; pointer-events:none; z-index:1; }
+#controls-panel,#xylo-wrapper,#bars-container,#app-footer { position:absolute; inset:0; pointer-events:none; }
+#xylo-wrapper { z-index:3; pointer-events:auto; touch-action:none; }
+#controls-panel { z-index:5; }
+#bars-container { z-index:3; touch-action:none; }
+[data-scene-control] { position:absolute; margin:0; border:0; padding:0; background:transparent!important; color:transparent!important; box-shadow:none; border-radius:calc(8px * var(--scene-scale)); pointer-events:auto; font-size:0; text-decoration:none; }
+[data-scene-control]:focus-visible,.top-zone:focus-visible,.middle-zone:focus-visible,.bottom-zone:focus-visible { outline:calc(3px * var(--scene-scale)) solid #f4c75e; outline-offset:calc(2px * var(--scene-scale)); }
+button[data-scene-control]:active:not(:disabled) { background:rgba(30,15,0,.09)!important; box-shadow:0 0 calc(6px * var(--scene-scale)) rgba(40,20,0,.3) inset; }
+button[data-scene-control][aria-pressed="true"] { box-shadow:0 0 0 calc(2px * var(--scene-scale)) var(--active) inset,0 0 calc(10px * var(--scene-scale)) color-mix(in srgb,var(--active),transparent 65%); }
+#btn-rec[aria-pressed="true"] { box-shadow:0 0 0 calc(3px * var(--scene-scale)) #df5b3b inset,0 0 calc(10px * var(--scene-scale)) #ff9b57; }
+#fs-btn { z-index:6; }
+#fs-btn-icon,#fs-btn-text { display:none; }
+.control-input { position:absolute; inset:0; width:100%; height:100%; opacity:0; margin:0; cursor:pointer; z-index:2; }
+.switch-paint { position:absolute; inset:0; pointer-events:none; border-radius:inherit; }
+.control-input:focus-visible + .switch-paint { outline:calc(3px * var(--scene-scale)) solid #4f84a5; outline-offset:calc(3px * var(--scene-scale)); }
+[data-on="true"] .switch-paint { box-shadow:0 0 0 calc(2px * var(--scene-scale)) var(--active) inset; background:#7caa4820; }
+[data-theme="warm"] [data-on="true"] .switch-paint { border-radius:999px; background:linear-gradient(#718956,#55693f); box-shadow:0 calc(2px * var(--scene-scale)) calc(3px * var(--scene-scale)) #1c270a88 inset; }
+[data-theme="warm"] [data-on="true"] .switch-paint::after { content:''; position:absolute; right:4%; top:9%; height:82%; aspect-ratio:1; border-radius:50%; background:linear-gradient(#fffdf3,#d6caba); box-shadow:0 calc(2px * var(--scene-scale)) calc(3px * var(--scene-scale)) #33211180; }
+#octave-display { position:absolute; display:flex; align-items:center; justify-content:center; z-index:6; pointer-events:none; color:#2e261e; background:linear-gradient(#f3ebdd,#f1e7d6); border-radius:calc(4px * var(--scene-scale)); font:600 calc(22px * var(--scene-scale))/1 Georgia,serif; }
+[data-theme="studio"] #octave-display { color:#f1c77c; background:#32312b; font:600 calc(16px * var(--scene-scale))/1 monospace; }
+[data-theme="maple"] #octave-display { background:linear-gradient(#f2eee4,#e8e1d4); font-size:calc(25px * var(--scene-scale)); }
+.xylo-bar { position:absolute; pointer-events:none; }
+.bar-surface { position:absolute; inset:0; clip-path:var(--bar-shape); pointer-events:none; }
+.top-zone,.middle-zone,.bottom-zone { position:absolute; left:0; width:100%; border:0; background:transparent!important; box-shadow:none!important; cursor:pointer; pointer-events:auto; touch-action:none; }
+.top-zone { top:0; height:var(--top-end); }
+.middle-zone { top:var(--top-end); bottom:calc(100% - var(--bottom-start)); }
+.bottom-zone { top:var(--bottom-start); bottom:0; }
+.highlight-overlay,.strike-overlay,.disabled-overlay { position:absolute; inset:0; pointer-events:none; }
+.highlight-overlay { background:var(--highlight); mix-blend-mode:screen; }
+[data-theme="maple"] .highlight-overlay { mix-blend-mode:multiply; }
+[data-theme="studio"] .xylo-bar[data-highlight="true"] { filter:drop-shadow(0 0 calc(4px * var(--scene-scale)) #ffcd63); }
+.disabled-overlay { opacity:0; background:rgba(4,3,2,.94); z-index:3; }
+.xylo-bar.bg-gray-900 .disabled-overlay { opacity:1; }
+.xylo-bar.bg-gray-900 .middle-zone { cursor:default; }
+.accidental-mark { position:absolute; left:var(--accidental-x); top:var(--accidental-y); transform:translateY(-50%); color:#fff0d1; font:700 calc(33px * var(--scene-scale))/1 'Trebuchet MS',sans-serif; text-shadow:0 calc(1px * var(--scene-scale)) calc(2px * var(--scene-scale)) #231109; pointer-events:none; z-index:2; }
+[data-theme="studio"] .accidental-mark { font-family:Georgia,serif; font-size:calc(29px * var(--scene-scale)); color:#f9e1a9; }
+[data-theme="maple"] .accidental-mark { font-family:Georgia,serif; font-size:calc(30px * var(--scene-scale)); color:#33200e; text-shadow:none; }
+@keyframes strike { 0% { opacity:0; } 12% { opacity:.3; } 100% { opacity:0; } }
+.strike-overlay { opacity:0; background:#fff3ba; mix-blend-mode:screen; }
+.bar-glow-effect .strike-overlay { animation:strike .3s ease-out; }
+#app-footer { z-index:8; }
+.theme-dock { position:absolute; left:34%; top:92.8%; display:flex; align-items:center; justify-content:center; gap:calc(5px * var(--scene-scale)); pointer-events:auto; padding:calc(4px * var(--scene-scale)); border:calc(1px * var(--scene-scale)) solid #cfb99588; border-radius:calc(22px * var(--scene-scale)); background:#f8efdcca; box-shadow:0 calc(2px * var(--scene-scale)) calc(7px * var(--scene-scale)) #37200840; backdrop-filter:blur(4px); }
+.theme-dock button,.theme-dock summary { border:0; margin:0; padding:calc(7px * var(--scene-scale)) calc(12px * var(--scene-scale)); border-radius:calc(18px * var(--scene-scale)); background:transparent; color:#584127; font:600 calc(13px * var(--scene-scale))/1.15 'Trebuchet MS',sans-serif; cursor:pointer; white-space:nowrap; }
+.theme-dock button[aria-pressed="true"] { background:#856138; color:#fff5dd; }
+[data-theme="studio"] .theme-dock { background:#272721ed; border-color:#8b724c; }
+[data-theme="studio"] .theme-dock button,[data-theme="studio"] .theme-dock summary { color:#e0cfaf; }
+[data-theme="studio"] .theme-dock button[aria-pressed="true"] { color:#ffcf79; background:#574328; }
+[data-theme="maple"] .theme-dock button[aria-pressed="true"] { background:#7e8e6b; }
+#more-tools { position:relative; }
+#more-tools summary { list-style:none; }
+#more-tools summary::-webkit-details-marker { display:none; }
+.tools-popover { position:absolute; bottom:calc(100% + 10px); right:0; width:calc(300px * var(--scene-scale)); padding:calc(15px * var(--scene-scale)); border:1px solid #9a8462; border-radius:calc(12px * var(--scene-scale)); background:#fcf5e9; color:#463521; box-shadow:0 5px 20px #0005; font-size:calc(14px * var(--scene-scale)); line-height:1.5; }
+.tools-popover button { background:#e2d3ba; border-radius:calc(6px * var(--scene-scale)); margin-bottom:calc(7px * var(--scene-scale)); }
+.tools-popover p { margin:calc(8px * var(--scene-scale)) 0 0; }
+.sound-tools { margin-bottom:calc(13px * var(--scene-scale)); padding-bottom:calc(12px * var(--scene-scale)); border-bottom:1px solid #c9b89b; }
+.sound-tools strong { display:block; margin-bottom:calc(7px * var(--scene-scale)); }
+.reverb-row { display:flex; justify-content:space-between; align-items:center; gap:calc(8px * var(--scene-scale)); }
+.reverb-row input[type="checkbox"] { width:calc(20px * var(--scene-scale)); height:calc(20px * var(--scene-scale)); accent-color:#856138; cursor:pointer; }
+.sound-tools input[type="range"] { width:100%; margin:calc(8px * var(--scene-scale)) 0 0; accent-color:#856138; touch-action:pan-y; }
+.sound-tools input:disabled { opacity:.45; }
+.sound-credit { display:block; margin-top:calc(6px * var(--scene-scale)); color:#6a563c; font-size:calc(11px * var(--scene-scale)); }
+#audio-status { position:fixed; z-index:40; top:12px; left:50%; transform:translateX(-50%); max-width:calc(100vw - 220px); padding:10px 16px; border:1px solid #b09a74; border-radius:10px; background:#302419f5; color:#fff4de; font-size:14px; box-shadow:0 3px 12px #0004; text-align:center; }
+#audio-retry { margin-left:8px; border:1px solid #c9af7d; border-radius:6px; padding:6px 10px; color:#362716; background:#f6e8cb; }
+@media(max-width:600px) { #audio-status { top:66px; max-width:90vw; width:max-content; } }
+#seq-status { position:absolute; left:34%; top:89.1%; width:30%; text-align:center; color:#fff1cc; text-shadow:0 1px 3px #231503; font:600 calc(15px * var(--scene-scale))/1.2 monospace; z-index:7; pointer-events:none; }
+#seq-status[data-mode="idle"] { visibility:hidden; }
+[data-theme="maple"] #seq-status { color:#554631; text-shadow:none; }
+[data-theme="studio"] #seq-status { left:38.2%; top:8.42%; width:23.5%; height:4.5%; display:flex; align-items:center; justify-content:center; visibility:visible; border-radius:calc(3px * var(--scene-scale)); background:radial-gradient(ellipse,#593502,#201202); color:#ffcf69; text-shadow:0 0 5px #f7b528; font-size:calc(21px * var(--scene-scale)); }
+#project-message { position:absolute; z-index:10; bottom:9%; left:24%; width:48%; margin:0; padding:calc(9px * var(--scene-scale)) calc(14px * var(--scene-scale)); border-radius:calc(7px * var(--scene-scale)); color:#fff6de; background:#302419ef; font-size:calc(14px * var(--scene-scale)); line-height:1.4; text-align:center; pointer-events:none; }
+#project-message[data-error="true"] { background:#762c1fed; }
+#fullscreen-stop,#fullscreen-exit { position:fixed; top:14px; z-index:30; min-height:42px; padding:9px 17px; border:1px solid #b09a74; border-radius:8px; background:linear-gradient(#f9f0dc,#d8c4a4); color:#402e1c; font-size:14px; font-weight:700; box-shadow:0 3px 8px #0004; }
+#fullscreen-stop { left:16px; } #fullscreen-exit { right:16px; }
+#fullscreen-stop:disabled { opacity:.7; }
+@media(prefers-reduced-motion:reduce) { .bar-glow-effect .strike-overlay { animation:none; opacity:.22; } }
+
+#main-wrapper[data-theme="warm"] #neutral-patch { clip-path:polygon(33.791866% 28.055260%,40.729665% 28.055260%,40.550239% 79.064825%,33.373206% 80.127524%); }
+#main-wrapper[data-theme="warm"][data-fullscreen="true"] { clip-path:inset(24.654623% 0.837321% 12.964931% 1.196172%); }
+#main-wrapper[data-theme="warm"] #btn-rec { left:21.889952%; top:5.844846%; width:9.150718%; height:8.289054%; }
+#main-wrapper[data-theme="warm"] #btn-play { left:31.997608%; top:5.844846%; width:6.519139%; height:8.289054%; }
+#main-wrapper[data-theme="warm"] #btn-stop { left:39.354067%; top:5.844846%; width:6.040670%; height:8.289054%; }
+#main-wrapper[data-theme="warm"] #btn-loop { left:46.172249%; top:5.844846%; width:5.980861%; height:8.289054%; }
+#main-wrapper[data-theme="warm"] #btn-overdub { left:52.870813%; top:5.844846%; width:6.339713%; height:8.289054%; }
+#main-wrapper[data-theme="warm"] #btn-undo-overdub { left:62.978469%; top:6.269926%; width:5.083732%; height:7.545165%; }
+#main-wrapper[data-theme="warm"] #btn-clear-recording { left:68.959330%; top:6.376196%; width:8.253589%; height:7.545165%; }
+#main-wrapper[data-theme="warm"] #btn-save-project { left:78.050239%; top:6.376196%; width:5.263158%; height:7.332625%; }
+#main-wrapper[data-theme="warm"] #btn-open-project { left:84.090909%; top:6.269926%; width:5.143541%; height:7.545165%; }
+#main-wrapper[data-theme="warm"] #fs-btn { left:91.387560%; top:5.207226%; width:3.229665%; height:5.632306%; }
+#main-wrapper[data-theme="warm"] #bb-control { left:10.466507%; top:18.597237%; width:3.050239%; height:2.869288%; }
+#main-wrapper[data-theme="warm"] #fs-control { left:21.650718%; top:18.597237%; width:3.050239%; height:2.869288%; }
+#main-wrapper[data-theme="warm"] #octave-down { left:35.705742%; top:17.853348%; width:2.571770%; height:4.144527%; }
+#main-wrapper[data-theme="warm"] #octave-up { left:42.583732%; top:17.853348%; width:2.571770%; height:4.144527%; }
+#main-wrapper[data-theme="warm"] #octave-display { left:39.354067%; top:18.384697%; width:2.033493%; height:3.294368%; }
+#main-wrapper[data-theme="warm"] #preset-c { left:56.459330%; top:17.853348%; width:11.004785%; height:4.250797%; }
+#main-wrapper[data-theme="warm"] #preset-f { left:68.899522%; top:17.853348%; width:10.944976%; height:4.250797%; }
+#main-wrapper[data-theme="warm"] #preset-g { left:81.279904%; top:17.853348%; width:10.944976%; height:4.250797%; }
+#main-wrapper[data-theme="warm"] #coffee-link { left:22.607656%; top:92.986185%; width:9.509569%; height:4.250797%; }
+#main-wrapper[data-theme="warm"] #bar-0 { left:5.322967%; top:25.611052%; width:7.535885%; height:55.154091%; --bar-shape:polygon(23.809524% 0.000000%,100.000000% 0.192678%,81.746032% 99.421965%,0.000000% 100.000000%); --top-end:20.231214%; --bottom-start:80.732177%; --accidental-x:66.666667%; --accidental-y:50.481696%; }
+#main-wrapper[data-theme="warm"] #bar-1 { left:12.440191%; top:26.461211%; width:7.356459%; height:53.985122%; --bar-shape:polygon(21.138211% 0.000000%,100.000000% 0.196850%,81.300813% 99.409449%,0.000000% 100.000000%); --top-end:20.078740%; --bottom-start:80.118110%; --accidental-x:66.666667%; --accidental-y:50.000000%; }
+#main-wrapper[data-theme="warm"] #bar-2 { left:19.557416%; top:27.205101%; width:7.117225%; height:52.603613%; --bar-shape:polygon(16.806723% 0.000000%,100.000000% 0.202020%,83.193277% 99.393939%,0.000000% 100.000000%); --top-end:20.202020%; --bottom-start:80.202020%; --accidental-x:67.226891%; --accidental-y:49.898990%; }
+#main-wrapper[data-theme="warm"] #bar-3 { left:26.674641%; top:27.948990%; width:6.758373%; height:51.434644%; --bar-shape:polygon(12.389381% 0.000000%,100.000000% 0.206612%,87.610619% 99.380165%,0.000000% 100.000000%); --top-end:20.454545%; --bottom-start:79.958678%; --accidental-x:69.911504%; --accidental-y:49.586777%; }
+#main-wrapper[data-theme="warm"] #bar-4 { left:33.732057%; top:28.799150%; width:6.399522%; height:49.734325%; --bar-shape:polygon(10.280374% 0.000000%,100.000000% 0.213675%,92.523364% 99.358974%,0.000000% 100.000000%); --top-end:20.726496%; --bottom-start:80.555556%; --accidental-x:70.093458%; --accidental-y:49.572650%; }
+#main-wrapper[data-theme="warm"] #bar-5 { left:40.849282%; top:29.543039%; width:6.040670%; height:48.352816%; --bar-shape:polygon(4.950495% 0.000000%,100.000000% 0.219780%,95.049505% 99.340659%,0.000000% 100.000000%); --top-end:21.098901%; --bottom-start:80.439560%; --accidental-x:70.297030%; --accidental-y:49.450549%; }
+#main-wrapper[data-theme="warm"] #bar-6 { left:47.787081%; top:30.286929%; width:5.741627%; height:47.077577%; --bar-shape:polygon(0.000000% 0.000000%,100.000000% 0.225734%,100.000000% 99.322799%,0.000000% 100.000000%); --top-end:21.444695%; --bottom-start:79.909707%; --accidental-x:72.916667%; --accidental-y:49.209932%; }
+#main-wrapper[data-theme="warm"] #bar-7 { left:54.545455%; top:31.137088%; width:5.801435%; height:45.802338%; --bar-shape:polygon(0.000000% 0.000000%,100.000000% 0.232019%,100.000000% 99.303944%,2.061856% 100.000000%); --top-end:21.577726%; --bottom-start:79.350348%; --accidental-x:72.164948%; --accidental-y:48.723898%; }
+#main-wrapper[data-theme="warm"] #bar-8 { left:61.244019%; top:31.880978%; width:5.801435%; height:44.527099%; --bar-shape:polygon(0.000000% 0.000000%,100.000000% 0.238663%,100.000000% 99.284010%,5.154639% 100.000000%); --top-end:22.195704%; --bottom-start:78.997613%; --accidental-x:75.257732%; --accidental-y:48.448687%; }
+#main-wrapper[data-theme="warm"] #bar-9 { left:68.002392%; top:32.731137%; width:5.980861%; height:43.039320%; --bar-shape:polygon(0.000000% 0.000000%,94.000000% 0.246914%,100.000000% 99.259259%,5.000000% 100.000000%); --top-end:22.469136%; --bottom-start:78.518519%; --accidental-x:74.000000%; --accidental-y:48.148148%; }
+#main-wrapper[data-theme="warm"] #bar-10 { left:74.641148%; top:33.687566%; width:6.279904%; height:41.339001%; --bar-shape:polygon(0.000000% 0.000000%,89.523810% 0.257069%,100.000000% 99.228792%,8.571429% 100.000000%); --top-end:22.622108%; --bottom-start:77.892031%; --accidental-x:70.476190%; --accidental-y:47.814910%; }
+#main-wrapper[data-theme="warm"] #bar-11 { left:81.339713%; top:34.537726%; width:6.459330%; height:39.851222%; --bar-shape:polygon(0.000000% 0.000000%,87.962963% 0.266667%,100.000000% 99.200000%,11.111111% 100.000000%); --top-end:23.200000%; --bottom-start:77.066667%; --accidental-x:67.592593%; --accidental-y:47.466667%; }
+#main-wrapper[data-theme="warm"] #bar-12 { left:88.038278%; top:35.387885%; width:6.818182%; height:37.938363%; --bar-shape:polygon(0.000000% 0.000000%,81.578947% 0.280112%,100.000000% 99.159664%,13.157895% 100.000000%); --top-end:23.809524%; --bottom-start:76.470588%; --accidental-x:64.035088%; --accidental-y:47.619048%; }
+
+#main-wrapper[data-theme="studio"] #neutral-patch { clip-path:polygon(21.232057% 32.837407%,27.990431% 33.262487%,27.811005% 82.678002%,20.574163% 82.890542%); }
+#main-wrapper[data-theme="studio"][data-fullscreen="true"] { clip-path:inset(30.712009% 1.315789% 8.501594% 2.093301%); }
+#main-wrapper[data-theme="studio"] #btn-rec { left:6.220096%; top:17.428268%; width:5.622010%; height:7.651435%; }
+#main-wrapper[data-theme="studio"] #btn-play { left:13.157895%; top:17.428268%; width:5.263158%; height:7.651435%; }
+#main-wrapper[data-theme="studio"] #btn-stop { left:19.617225%; top:17.428268%; width:5.263158%; height:7.651435%; }
+#main-wrapper[data-theme="studio"] #btn-loop { left:26.555024%; top:17.534538%; width:5.203349%; height:7.651435%; }
+#main-wrapper[data-theme="studio"] #btn-overdub { left:33.193780%; top:17.534538%; width:4.425837%; height:7.651435%; }
+#main-wrapper[data-theme="studio"] #btn-undo-overdub { left:40.311005%; top:17.747078%; width:3.588517%; height:5.526036%; }
+#main-wrapper[data-theme="studio"] #btn-clear-recording { left:45.095694%; top:17.747078%; width:3.767943%; height:5.526036%; }
+#main-wrapper[data-theme="studio"] #btn-save-project { left:49.880383%; top:17.747078%; width:3.648325%; height:5.526036%; }
+#main-wrapper[data-theme="studio"] #btn-open-project { left:54.665072%; top:17.747078%; width:3.708134%; height:5.526036%; }
+#main-wrapper[data-theme="studio"] #fs-btn { left:91.985646%; top:8.182784%; width:2.990431%; height:5.207226%; }
+#main-wrapper[data-theme="studio"] #bb-control { left:62.500000%; top:19.766206%; width:2.332536%; height:4.569607%; }
+#main-wrapper[data-theme="studio"] #fs-control { left:65.550239%; top:19.766206%; width:2.452153%; height:4.569607%; }
+#main-wrapper[data-theme="studio"] #octave-down { left:69.976077%; top:19.341126%; width:2.930622%; height:4.888417%; }
+#main-wrapper[data-theme="studio"] #octave-up { left:73.923445%; top:19.234857%; width:2.990431%; height:4.994687%; }
+#main-wrapper[data-theme="studio"] #octave-display { left:72.009569%; top:25.398512%; width:2.870813%; height:2.337938%; }
+#main-wrapper[data-theme="studio"] #preset-c { left:79.246411%; top:17.747078%; width:5.203349%; height:7.332625%; }
+#main-wrapper[data-theme="studio"] #preset-f { left:85.107656%; top:17.747078%; width:5.263158%; height:7.332625%; }
+#main-wrapper[data-theme="studio"] #preset-g { left:90.968900%; top:17.747078%; width:5.322967%; height:7.332625%; }
+#main-wrapper[data-theme="studio"] #coffee-link { left:86.961722%; top:93.304995%; width:10.287081%; height:4.250797%; }
+#main-wrapper[data-theme="studio"] #bar-0 { left:7.057416%; top:32.306057%; width:6.578947%; height:49.946865%; --bar-shape:polygon(18.181818% 0.000000%,100.000000% 0.212766%,84.545455% 99.361702%,0.000000% 100.000000%); --top-end:21.063830%; --bottom-start:79.787234%; --accidental-x:68.181818%; --accidental-y:64.468085%; }
+#main-wrapper[data-theme="studio"] #bar-1 { left:14.055024%; top:33.368757%; width:6.220096%; height:48.459086%; --bar-shape:polygon(16.346154% 0.000000%,100.000000% 0.219298%,86.538462% 99.342105%,0.000000% 100.000000%); --top-end:20.888158%; --bottom-start:79.517544%; --accidental-x:67.307692%; --accidental-y:64.254386%; }
+#main-wrapper[data-theme="studio"] #bar-2 { left:20.873206%; top:34.431456%; width:6.399522%; height:46.865037%; --bar-shape:polygon(12.149533% 0.000000%,100.000000% 0.226757%,90.654206% 99.319728%,0.000000% 100.000000%); --top-end:20.748299%; --bottom-start:79.410431%; --accidental-x:64.485981%; --accidental-y:64.172336%; }
+#main-wrapper[data-theme="studio"] #bar-3 { left:27.870813%; top:35.175345%; width:5.801435%; height:45.802338%; --bar-shape:polygon(7.216495% 0.000000%,100.000000% 0.232019%,89.690722% 99.303944%,0.000000% 100.000000%); --top-end:21.055684%; --bottom-start:79.071926%; --accidental-x:65.979381%; --accidental-y:64.037123%; }
+#main-wrapper[data-theme="studio"] #bar-4 { left:34.629187%; top:36.663124%; width:5.442584%; height:43.889479%; --bar-shape:polygon(3.296703% 0.000000%,100.000000% 0.242131%,98.901099% 99.273608%,0.000000% 100.000000%); --top-end:20.096852%; --bottom-start:78.547215%; --accidental-x:69.230769%; --accidental-y:63.438257%; }
+#main-wrapper[data-theme="studio"] #bar-5 { left:41.327751%; top:37.513284%; width:5.382775%; height:42.507970%; --bar-shape:polygon(3.333333% 0.000000%,100.000000% 0.250000%,100.000000% 99.250000%,0.000000% 100.000000%); --top-end:20.312500%; --bottom-start:78.500000%; --accidental-x:71.111111%; --accidental-y:63.500000%; }
+#main-wrapper[data-theme="studio"] #bar-6 { left:48.145933%; top:38.257173%; width:5.322967%; height:41.339001%; --bar-shape:polygon(0.000000% 0.000000%,100.000000% 0.257069%,96.629213% 99.228792%,0.000000% 100.000000%); --top-end:20.694087%; --bottom-start:78.303342%; --accidental-x:69.662921%; --accidental-y:63.496144%; }
+#main-wrapper[data-theme="studio"] #bar-7 { left:54.724880%; top:39.319872%; width:5.562201%; height:39.638682%; --bar-shape:polygon(0.000000% 0.000000%,94.623656% 0.268097%,100.000000% 99.195710%,5.376344% 100.000000%); --top-end:20.576408%; --bottom-start:78.337802%; --accidental-x:69.892473%; --accidental-y:63.538874%; }
+#main-wrapper[data-theme="studio"] #bar-8 { left:61.423445%; top:40.276302%; width:5.681818%; height:38.150903%; --bar-shape:polygon(0.000000% 0.000000%,91.578947% 0.278552%,100.000000% 99.164345%,7.368421% 100.000000%); --top-end:20.612813%; --bottom-start:78.217270%; --accidental-x:68.421053%; --accidental-y:62.952646%; }
+#main-wrapper[data-theme="studio"] #bar-9 { left:68.062201%; top:41.232731%; width:5.681818%; height:36.450584%; --bar-shape:polygon(0.000000% 0.000000%,89.473684% 0.291545%,100.000000% 99.125364%,7.368421% 100.000000%); --top-end:20.772595%; --bottom-start:78.542274%; --accidental-x:70.526316%; --accidental-y:63.265306%; }
+#main-wrapper[data-theme="studio"] #bar-10 { left:74.461722%; top:42.189160%; width:5.921053%; height:34.856536%; --bar-shape:polygon(0.000000% 0.000000%,87.878788% 0.304878%,100.000000% 99.085366%,12.121212% 100.000000%); --top-end:20.884146%; --bottom-start:78.658537%; --accidental-x:72.727273%; --accidental-y:63.414634%; }
+#main-wrapper[data-theme="studio"] #bar-11 { left:81.040670%; top:43.251860%; width:5.921053%; height:33.156217%; --bar-shape:polygon(0.000000% 0.000000%,86.868687% 0.320513%,100.000000% 99.038462%,11.111111% 100.000000%); --top-end:20.753205%; --bottom-start:78.717949%; --accidental-x:74.747475%; --accidental-y:63.461538%; }
+#main-wrapper[data-theme="studio"] #bar-12 { left:87.559809%; top:44.102019%; width:5.861244%; height:31.562168%; --bar-shape:polygon(0.000000% 0.000000%,84.693878% 0.336700%,100.000000% 98.989899%,12.244898% 100.000000%); --top-end:21.212121%; --bottom-start:79.191919%; --accidental-x:79.591837%; --accidental-y:63.973064%; }
+
+#main-wrapper[data-theme="maple"] #neutral-patch { clip-path:polygon(41.447368% 35.387885%,49.043062% 35.387885%,49.102871% 87.991498%,41.387560% 89.373007%); }
+#main-wrapper[data-theme="maple"][data-fullscreen="true"] { clip-path:inset(30.286929% 0.956938% 7.438895% 1.076555%); }
+#main-wrapper[data-theme="maple"] #btn-rec { left:25.897129%; top:8.820404%; width:4.784689%; height:8.501594%; }
+#main-wrapper[data-theme="maple"] #btn-play { left:32.834928%; top:8.926674%; width:4.784689%; height:8.501594%; }
+#main-wrapper[data-theme="maple"] #btn-stop { left:39.772727%; top:8.820404%; width:4.784689%; height:8.501594%; }
+#main-wrapper[data-theme="maple"] #btn-loop { left:45.813397%; top:8.926674%; width:4.724880%; height:8.501594%; }
+#main-wrapper[data-theme="maple"] #btn-overdub { left:52.212919%; top:8.820404%; width:4.724880%; height:8.501594%; }
+#main-wrapper[data-theme="maple"] #btn-undo-overdub { left:61.483254%; top:10.095643%; width:3.528708%; height:5.951116%; }
+#main-wrapper[data-theme="maple"] #btn-clear-recording { left:67.882775%; top:10.414453%; width:3.468900%; height:5.738576%; }
+#main-wrapper[data-theme="maple"] #btn-save-project { left:74.581340%; top:10.520723%; width:3.349282%; height:5.632306%; }
+#main-wrapper[data-theme="maple"] #btn-open-project { left:80.083732%; top:10.308183%; width:3.349282%; height:5.844846%; }
+#main-wrapper[data-theme="maple"] #fs-btn { left:87.200957%; top:8.289054%; width:2.691388%; height:4.994687%; }
+#main-wrapper[data-theme="maple"] #bb-control { left:25.239234%; top:23.060574%; width:4.425837%; height:4.144527%; }
+#main-wrapper[data-theme="maple"] #fs-control { left:30.083732%; top:23.060574%; width:4.425837%; height:4.144527%; }
+#main-wrapper[data-theme="maple"] #octave-down { left:41.208134%; top:23.060574%; width:2.332536%; height:4.038257%; }
+#main-wrapper[data-theme="maple"] #octave-up { left:48.325359%; top:22.954304%; width:2.332536%; height:4.144527%; }
+#main-wrapper[data-theme="maple"] #octave-display { left:44.078947%; top:23.379384%; width:3.708134%; height:3.188098%; }
+#main-wrapper[data-theme="maple"] #preset-c { left:54.665072%; top:23.166844%; width:10.167464%; height:4.038257%; }
+#main-wrapper[data-theme="maple"] #preset-f { left:66.148325%; top:23.166844%; width:10.586124%; height:4.038257%; }
+#main-wrapper[data-theme="maple"] #preset-g { left:78.050239%; top:23.166844%; width:10.885167%; height:4.038257%; }
+#main-wrapper[data-theme="maple"] #coffee-link { left:89.533493%; top:92.879915%; width:8.313397%; height:5.313496%; }
+#main-wrapper[data-theme="maple"] #bar-0 { left:5.622010%; top:31.030818%; width:8.074163%; height:59.298618%; --bar-shape:polygon(22.222222% 0.000000%,100.000000% 0.179211%,70.370370% 99.462366%,0.000000% 100.000000%); --top-end:18.100358%; --bottom-start:86.738351%; --accidental-x:56.296296%; --accidental-y:77.240143%; }
+#main-wrapper[data-theme="maple"] #bar-1 { left:12.918660%; top:32.093518%; width:7.296651%; height:57.917109%; --bar-shape:polygon(20.491803% 0.000000%,100.000000% 0.183486%,87.704918% 99.449541%,0.000000% 100.000000%); --top-end:17.798165%; --bottom-start:86.422018%; --accidental-x:63.114754%; --accidental-y:76.880734%; }
+#main-wrapper[data-theme="maple"] #bar-2 { left:20.275120%; top:33.156217%; width:7.177033%; height:56.110521%; --bar-shape:polygon(15.833333% 0.000000%,100.000000% 0.189394%,88.333333% 99.431818%,0.000000% 100.000000%); --top-end:17.992424%; --bottom-start:86.553030%; --accidental-x:65.000000%; --accidental-y:77.083333%; }
+#main-wrapper[data-theme="maple"] #bar-3 { left:27.811005%; top:34.218916%; width:6.638756%; height:54.303932%; --bar-shape:polygon(9.009009% 0.000000%,100.000000% 0.195695%,90.990991% 99.412916%,0.000000% 100.000000%); --top-end:18.590998%; --bottom-start:86.692759%; --accidental-x:66.666667%; --accidental-y:77.103718%; }
+#main-wrapper[data-theme="maple"] #bar-4 { left:35.107656%; top:35.387885%; width:6.160287%; height:52.497343%; --bar-shape:polygon(3.883495% 0.000000%,100.000000% 0.202429%,95.145631% 99.392713%,0.000000% 100.000000%); --top-end:18.825911%; --bottom-start:86.437247%; --accidental-x:68.932039%; --accidental-y:76.923077%; }
+#main-wrapper[data-theme="maple"] #bar-5 { left:41.985646%; top:36.663124%; width:6.339713%; height:50.690755%; --bar-shape:polygon(0.000000% 0.000000%,100.000000% 0.209644%,100.000000% 99.371069%,0.000000% 100.000000%); --top-end:18.867925%; --bottom-start:86.373166%; --accidental-x:69.811321%; --accidental-y:76.519916%; }
+#main-wrapper[data-theme="maple"] #bar-6 { left:49.162679%; top:37.725824%; width:5.861244%; height:48.777896%; --bar-shape:polygon(0.000000% 0.000000%,95.918367% 0.217865%,100.000000% 99.346405%,0.000000% 100.000000%); --top-end:19.607843%; --bottom-start:86.492375%; --accidental-x:71.428571%; --accidental-y:76.470588%; }
+#main-wrapper[data-theme="maple"] #bar-7 { left:55.921053%; top:39.001063%; width:6.100478%; height:46.758767%; --bar-shape:polygon(0.000000% 0.000000%,92.156863% 0.227273%,100.000000% 99.318182%,4.901961% 100.000000%); --top-end:19.772727%; --bottom-start:86.136364%; --accidental-x:72.549020%; --accidental-y:76.136364%; }
+#main-wrapper[data-theme="maple"] #bar-8 { left:62.619617%; top:40.382572%; width:6.339713%; height:44.420829%; --bar-shape:polygon(0.000000% 0.000000%,88.679245% 0.239234%,100.000000% 99.282297%,7.547170% 100.000000%); --top-end:19.856459%; --bottom-start:86.124402%; --accidental-x:72.641509%; --accidental-y:75.837321%; }
+#main-wrapper[data-theme="maple"] #bar-9 { left:69.318182%; top:41.764081%; width:6.399522%; height:42.082891%; --bar-shape:polygon(0.000000% 0.000000%,85.981308% 0.252525%,100.000000% 99.242424%,10.280374% 100.000000%); --top-end:20.454545%; --bottom-start:85.858586%; --accidental-x:72.897196%; --accidental-y:75.252525%; }
+#main-wrapper[data-theme="maple"] #bar-10 { left:75.897129%; top:43.145590%; width:6.459330%; height:39.638682%; --bar-shape:polygon(0.000000% 0.000000%,84.259259% 0.268097%,100.000000% 99.195710%,15.740741% 100.000000%); --top-end:20.911528%; --bottom-start:85.522788%; --accidental-x:74.074074%; --accidental-y:74.530831%; }
+#main-wrapper[data-theme="maple"] #bar-11 { left:82.416268%; top:44.633369%; width:6.519139%; height:37.088204%; --bar-shape:polygon(0.000000% 0.000000%,82.568807% 0.286533%,100.000000% 99.140401%,14.678899% 100.000000%); --top-end:20.916905%; --bottom-start:85.386819%; --accidental-x:74.311927%; --accidental-y:73.925501%; }
+#main-wrapper[data-theme="maple"] #bar-12 { left:88.875598%; top:45.908608%; width:6.638756%; height:34.643996%; --bar-shape:polygon(0.000000% 0.000000%,79.279279% 0.306748%,100.000000% 99.079755%,18.918919% 100.000000%); --top-end:21.472393%; --bottom-start:85.276074%; --accidental-x:74.774775%; --accidental-y:74.233129%; }
+</style></head>
+<body>
+<div id="scene-viewport" data-theme="warm">
+ <main id="main-wrapper" data-theme="warm">
+  <h1 class="sr-only">Interactive Xylophone</h1>
+  <div id="neutral-patch" aria-hidden="true"></div>
+  <section id="controls-panel" aria-label="Xylophone controls">
+<button id="btn-rec" data-scene-control type="button" aria-label="Record" title="Record"></button>
+<button id="btn-play" data-scene-control type="button" aria-label="Play recording" title="Play recording"></button>
+<button id="btn-stop" data-scene-control type="button" aria-label="Stop" title="Stop"></button>
+<button id="btn-loop" data-scene-control type="button" aria-label="Loop" title="Loop"></button>
+<button id="btn-overdub" data-scene-control type="button" aria-label="Overdub" title="Overdub"></button>
+<button id="btn-undo-overdub" data-scene-control type="button" aria-label="Undo last overdub" title="Undo last overdub"></button>
+<button id="btn-clear-recording" data-scene-control type="button" aria-label="Clear recording" title="Clear recording"></button>
+<button id="btn-save-project" data-scene-control type="button" aria-label="Save project" title="Save project"></button>
+<button id="btn-open-project" data-scene-control type="button" aria-label="Open project" title="Open project"></button>
+<button id="octave-down" data-scene-control type="button" aria-label="Octave down" title="Octave down"></button>
+<button id="octave-up" data-scene-control type="button" aria-label="Octave up" title="Octave up"></button>
+<button id="preset-c" data-scene-control type="button" aria-label="C major / A la pentatonic" title="C major / A la pentatonic"></button>
+<button id="preset-f" data-scene-control type="button" aria-label="F major / D la pentatonic" title="F major / D la pentatonic"></button>
+<button id="preset-g" data-scene-control type="button" aria-label="G major / E la pentatonic" title="G major / E la pentatonic"></button>
+   <label id="bb-control" data-scene-control title="Use B flat"><input id="bb-checkbox" class="control-input" type="checkbox" aria-label="Use B flat"><span class="switch-paint" aria-hidden="true"></span></label>
+   <label id="fs-control" data-scene-control title="Use F sharp"><input id="fs-checkbox" class="control-input" type="checkbox" aria-label="Use F sharp"><span class="switch-paint" aria-hidden="true"></span></label>
+   <output id="octave-display" aria-label="Octave offset">0</output>
+   <input id="project-input" type="file" hidden accept=".json,application/json" aria-label="Open xylophone project">
+   <button id="fs-btn" data-scene-control type="button" aria-label="Enlarge instrument" title="Enlarge instrument"><span id="fs-btn-icon"></span><span id="fs-btn-text">Fullscreen</span></button>
+   <span id="seq-status" role="status" aria-live="polite" data-mode="idle">READY TO PLAY</span>
+  </section>
+  <div id="xylo-wrapper"><div id="bars-container" aria-label="Playable xylophone"></div></div>
+  <p id="project-message" hidden role="status" aria-live="polite"></p>
+  <footer id="app-footer" aria-label="Created by Drew Wichman. Free classroom music tools.">
+   <a id="coffee-link" data-scene-control href="https://www.buymeacoffee.com/musicaldrewby" target="_blank" rel="noopener noreferrer" aria-label="Enjoying this free app? Support Drew Wichman on Buy Me a Coffee (opens in a new tab)" title="Enjoying this free app? Your support helps me create more music classroom tools."></a>
+   <div class="theme-dock" role="group" aria-label="Theme and tools">
+    <button id="theme-warm" type="button" aria-pressed="true">Warm Music Room</button><button id="theme-studio" type="button" aria-pressed="false">Hardware Studio</button><button id="theme-maple" type="button" aria-pressed="false">Bright Maple</button>
+    <details id="more-tools"><summary>Tools</summary><div class="tools-popover">
+     <div class="sound-tools"><strong>Marimba</strong>
+      <label class="reverb-row" for="reverb-toggle"><span>Room reverb</span><input id="reverb-toggle" type="checkbox"></label>
+      <label class="reverb-row" for="reverb-amount"><span>Amount</span><output id="reverb-value" for="reverb-amount">12%</output></label>
+      <input id="reverb-amount" type="range" min="0" max="30" step="1" value="12" disabled aria-label="Reverb amount">
+      <a class="sound-credit" href="assets/audio/LICENSE.txt" target="_blank" rel="noopener noreferrer">SoundFont by S. Christian Collins</a>
+     </div>
+     <button id="preset-all" type="button" aria-pressed="true">All bars</button><button id="reset-btn" type="button">Reset all</button><p>Top screw and above: highlight on/off.</p><p>Bottom screw and below: disable/restore. Dark bars are silent.</p><p>Tap or slide the middle to play. On a narrow screen, scroll sideways or turn your device.</p></div></details>
+   </div>
+  </footer>
+ </main>
+</div>
+<button id="fullscreen-stop" hidden disabled type="button" aria-label="Stop recording and playback">■ Stop</button>
+<button id="fullscreen-exit" hidden type="button">Exit Fullscreen</button>
+<div id="audio-status" role="status" aria-live="polite"><span id="audio-status-text">Loading marimba…</span><button id="audio-retry" type="button" hidden>Retry sound</button></div>
+<script>
+    // --- Icons ---
+    const maximizeIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>`;
+    const minimizeIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3v3a2 2 0 0 1-2 2H3m18 0h-3a2 2 0 0 1-2-2V3m0 18v-3a2 2 0 0 1 2-2h3M3 16h3a2 2 0 0 1 2 2v3"/></svg>`;
+
+    // --- State & Constants ---
+    const notesData = ['C', 'D', 'E', 'F', 'G', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'A'];
+    // One teaching highlight, independent of the selected visual theme.
+    const maxH = 94;
+    const minH = 65;
+    const step = (maxH - minH) / (notesData.length - 1);
+
+    let state = {
+      useBb: false,
+      useFSharp: false,
+      isFullscreen: false,
+      octaveOffset: 0,
+      bars: notesData.map((note, index) => ({
+        note: note,
+        heightPercent: maxH - (step * index),
+        highlight: 0,
+        blackout: false
+      }))
+    };
+
+    let seq = {
+      armed: false,
+      recording: false,
+      overdubbing: false,
+      playing: false,
+      loop: false,
+      startTime: 0,
+      playbackStartTime: 0,
+      duration: 0,
+      track: [], // Stores { relativeTime, barIndex, freq, octave }
+      timeouts: new Set(),
+      schedulerTimer: null,
+      playbackGeneration: 0,
+      playbackEndTime: Infinity,
+      scheduledNotes: new Map(),
+      scheduledVoices: new Set(),
+      overdubHistory: [],
+      activeTakeId: null,
+      nextTakeId: 1
+    };
+
+    // --- DOM Elements ---
+    const mainWrapper = document.getElementById('main-wrapper');
+    const controlsPanel = document.getElementById('controls-panel');
+    const xyloWrapper = document.getElementById('xylo-wrapper');
+    const barsContainer = document.getElementById('bars-container');
+    const fsBtn = document.getElementById('fs-btn');
+    const fsBtnIcon = document.getElementById('fs-btn-icon');
+    const fsBtnText = document.getElementById('fs-btn-text');
+
+    const sceneCrops = {"warm": [20, 232, 1638, 587], "studio": [35, 289, 1615, 572], "maple": [18, 285, 1638, 586]};
+    const themeNames = ['warm', 'studio', 'maple'];
+    function setTheme(name, persist = true) {
+      if (!themeNames.includes(name)) return;
+      mainWrapper.dataset.theme = name;
+      document.getElementById('scene-viewport').dataset.theme = name;
+      fitScene();
+      themeNames.forEach(theme => document.getElementById(`theme-${theme}`).setAttribute('aria-pressed', String(theme === name)));
+      if (persist) {
+        try { window.localStorage.setItem('xylophone-theme', name); } catch (error) {}
+      }
+    }
+    themeNames.forEach(name => document.getElementById(`theme-${name}`).addEventListener('click', () => setTheme(name)));
+    let savedTheme = 'warm';
+    try { savedTheme = window.localStorage.getItem('xylophone-theme') || 'warm'; } catch (error) {}
+    setTheme(themeNames.includes(savedTheme) ? savedTheme : 'warm', false);
+
+    // --- Audio & Visual FX Setup ---
+    let audioCtx = null;
+    let masterCompressor = null;
+    let reverbInput = null, reverbWet = null, roomConvolver = null;
+    let marimbaBuffer = null, marimbaNotes = [], marimbaLoadPromise = null;
+    const sound = { reverbEnabled: false, reverbAmount: 12 };
+    const soundingVoices = new Set();
+    
+    function initAudio(resume = true) {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)({ latencyHint: 'interactive' });
+        
+        // Prevent clipping when many notes play simultaneously
+        masterCompressor = audioCtx.createDynamicsCompressor();
+        masterCompressor.threshold.setValueAtTime(-12, audioCtx.currentTime);
+        masterCompressor.knee.setValueAtTime(30, audioCtx.currentTime);
+        masterCompressor.ratio.setValueAtTime(12, audioCtx.currentTime);
+        masterCompressor.attack.setValueAtTime(0.003, audioCtx.currentTime);
+        masterCompressor.release.setValueAtTime(0.25, audioCtx.currentTime);
+        masterCompressor.connect(audioCtx.destination);
+
+        // A short, warm stereo room. Dry marimba always goes directly to the compressor.
+        reverbInput = audioCtx.createGain();
+        roomConvolver = audioCtx.createConvolver();
+        reverbWet = audioCtx.createGain();
+        const sampleRate = audioCtx.sampleRate;
+        const impulse = audioCtx.createBuffer(2, Math.ceil(sampleRate * 1.1), sampleRate);
+        for (let channel = 0; channel < 2; channel++) {
+          const samples = impulse.getChannelData(channel);
+          let seed = 1234567 + channel * 317, smooth = 0;
+          for (let i = 0; i < samples.length; i++) {
+            seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0;
+            smooth = .64 * smooth + .36 * (seed / 2147483648 - 1);
+            const t = i / sampleRate;
+            samples[i] = t < .018 ? 0 : smooth * Math.exp(-7 * (t - .018)) * Math.min(1, (t - .018) / .012);
+          }
+        }
+        roomConvolver.buffer = impulse;
+        reverbInput.connect(roomConvolver);
+        roomConvolver.connect(reverbWet);
+        reverbWet.connect(masterCompressor);
+        reverbWet.gain.setValueAtTime(sound.reverbEnabled ? sound.reverbAmount / 100 : 0, audioCtx.currentTime);
+      }
+      if (resume && (audioCtx.state === 'suspended' || audioCtx.state === 'interrupted')) {
+        audioCtx.resume().catch(() => {
+          announce('Tap a bar again to enable sound.', true);
+        });
+      }
+    }
+
+    function syncSoundUI(persist = false) {
+      document.getElementById('reverb-toggle').checked = sound.reverbEnabled;
+      document.getElementById('reverb-amount').value = sound.reverbAmount;
+      document.getElementById('reverb-amount').disabled = !sound.reverbEnabled;
+      document.getElementById('reverb-amount').setAttribute('aria-valuetext', `${sound.reverbAmount} percent`);
+      document.getElementById('reverb-value').textContent = `${sound.reverbAmount}%`;
+      if (reverbWet) {
+        // Smooth the wet path only: switching reverb never changes the dry attack.
+        reverbWet.gain.setTargetAtTime(sound.reverbEnabled ? sound.reverbAmount / 100 : 0, audioCtx.currentTime, .015);
+      }
+      if (persist) {
+        try { window.localStorage.setItem('xylophone-sound', JSON.stringify(sound)); } catch (error) {}
+      }
+    }
+
+    async function fetchAudioAsset(url, kind) {
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), 30000);
+      try {
+        const response = await fetch(url, { signal: controller.signal });
+        if (!response.ok) throw new Error('Could not load marimba');
+        return await (kind === 'json' ? response.json() : response.arrayBuffer());
+      } finally { clearTimeout(timer); }
+    }
+
+    function validateMarimbaPack(manifest, buffer) {
+      if (manifest.version !== 1 || !Array.isArray(manifest.notes) || manifest.notes.length !== 70 ||
+          buffer.numberOfChannels !== 1) throw new Error('Invalid marimba pack');
+      let previousEnd = 0;
+      for (let i = 0; i < manifest.notes.length; i++) {
+        const note = manifest.notes[i];
+        if (note.midi !== 36 + i || !Number.isFinite(note.offset) || !Number.isFinite(note.duration) ||
+            note.offset < 0 || note.duration < .2 || note.duration > 12 ||
+            Math.abs(note.offset - previousEnd) > .0001 || note.offset + note.duration > buffer.duration + .0001) {
+          throw new Error('Invalid marimba note');
+        }
+        previousEnd = note.offset + note.duration;
+      }
+      return manifest.notes;
+    }
+
+    function loadMarimba() {
+      if (marimbaLoadPromise) return marimbaLoadPromise;
+      if (marimbaBuffer) return Promise.resolve(true);
+      document.getElementById('audio-status').hidden = false;
+      document.getElementById('audio-status-text').textContent = 'Loading marimba…';
+      document.getElementById('audio-retry').hidden = true;
+      marimbaLoadPromise = (async () => {
+        await Promise.resolve(); // Assign the in-flight promise before any synchronous failure.
+        try {
+          // Prepare audio while the scene loads; resume only from a user gesture.
+          initAudio(false);
+          const manifest = await fetchAudioAsset('assets/audio/marimba-notes-v1.json', 'json');
+          let buffer;
+          try {
+            const data = await fetchAudioAsset('assets/audio/marimba-notes-v1.flac');
+            buffer = await audioCtx.decodeAudioData(data);
+          } catch (error) {
+            // Older browsers can use the identical PCM WAV instead.
+            const data = await fetchAudioAsset('assets/audio/marimba-notes-v1.wav');
+            buffer = await audioCtx.decodeAudioData(data);
+          }
+          const notes = validateMarimbaPack(manifest, buffer);
+          marimbaNotes = notes;
+          marimbaBuffer = buffer;
+          document.getElementById('audio-status').hidden = true;
+          updateTransportUI();
+          state.bars.forEach((_, i) => updateBarVisuals(i));
+          return true;
+        } catch (error) {
+          document.getElementById('audio-status-text').textContent = 'Marimba could not load. Check your connection and retry.';
+          document.getElementById('audio-retry').hidden = false;
+          return false;
+        } finally { marimbaLoadPromise = null; }
+      })();
+      return marimbaLoadPromise;
+    }
+
+    function audioReady() {
+      // Do not queue late notes or start a recording before its sound is ready.
+      if (!marimbaBuffer) return false;
+      initAudio();
+      return true;
+    }
+
+    function getFrequency(index) {
+      // Base Octave (C4 to A5) with F#/Bb support
+      const baseFreqs = [
+        261.63, 293.66, 329.63, state.useFSharp ? 370.00 : 349.23,
+        392.00, 440.00, state.useBb ? 466.16 : 493.88, 523.25,
+        587.33, 659.25, state.useFSharp ? 739.99 : 698.46, 783.99, 880.00
+      ];
+      const baseFreq = parseInt(index) >= 0 ? baseFreqs[index] : 0;
+      return baseFreq * Math.pow(2, state.octaveOffset);
+    }
+
+    function playTone(freq, startTime = 0, isScheduled = false, barIndex = null) {
+      if (!audioReady() || !Number.isFinite(freq) || freq <= 0) return null;
+      const time = Math.max(startTime, audioCtx.currentTime);
+      const midi = Math.max(36, Math.min(105, Math.round(69 + 12 * Math.log2(freq / 440))));
+      const sample = marimbaNotes[midi - 36];
+      const rate = freq / (440 * Math.pow(2, (midi - 69) / 12));
+      const source = audioCtx.createBufferSource();
+      const gainNode = audioCtx.createGain();
+      source.buffer = marimbaBuffer;
+      source.playbackRate.setValueAtTime(rate, time);
+      source.connect(gainNode);
+      gainNode.connect(masterCompressor);
+      gainNode.connect(reverbInput);
+      gainNode.gain.setValueAtTime(1, time);
+      const end = time + sample.duration / rate;
+      source.start(time, sample.offset, sample.duration);
+      source.stop(end);
+
+      const voice = { source, startTime: time, visualTimer: null, barIndex, stop() {
+        const now = audioCtx.currentTime;
+        // Cancel future notes outright; fade a sounding voice over 8 ms to avoid clicks.
+        if (time > now) source.stop(now);
+        else {
+          gainNode.gain.cancelScheduledValues(now);
+          gainNode.gain.setTargetAtTime(0, now, .002);
+          source.stop(Math.min(end, now + .008));
+        }
+      } };
+      soundingVoices.add(voice);
+
+      // Clean up nodes strictly after playback ends
+      source.onended = () => {
+        source.disconnect();
+        gainNode.disconnect();
+        seq.scheduledVoices.delete(voice);
+        soundingVoices.delete(voice);
+      };
+
+      if (isScheduled) {
+        seq.scheduledVoices.add(voice);
+      }
+      return voice;
+    }
+
+    function flashBar(index) {
+      if (state.bars[index]?.blackout) return;
+      const bar = document.getElementById(`bar-${index}`);
+      if (!bar) return;
+      
+      // Reset animation to allow rapid re-triggering
+      bar.classList.remove('bar-glow-effect');
+      void bar.offsetWidth; // Trigger DOM reflow
+      bar.classList.add('bar-glow-effect');
+      clearTimeout(bar.flashTimer);
+      bar.flashTimer = setTimeout(() => { bar.classList.remove('bar-glow-effect'); bar.flashTimer = null; }, 320);
+    }
+
+    // --- Sequencer Implementation ---
+    function clearTimeouts() {
+      seq.timeouts.forEach(clearTimeout);
+      seq.timeouts.clear();
+    }
+
+    function updateTransportUI() {
+      const recBtn = document.getElementById('btn-rec');
+      const playBtn = document.getElementById('btn-play');
+      const overdubBtn = document.getElementById('btn-overdub');
+      const loopBtn = document.getElementById('btn-loop');
+      const statusText = document.getElementById('seq-status');
+      recBtn.disabled = !marimbaBuffer;
+      recBtn.setAttribute('aria-pressed', String(seq.recording || seq.armed));
+      playBtn.setAttribute('aria-pressed', String(seq.playing));
+      overdubBtn.setAttribute('aria-pressed', String(seq.overdubbing));
+      loopBtn.setAttribute('aria-pressed', String(seq.loop));
+      statusText.dataset.mode = seq.recording ? 'recording' : seq.armed ? 'armed' : seq.overdubbing ? 'overdubbing' : seq.playing ? 'playing' : 'idle';
+      document.getElementById('fullscreen-stop').disabled = !(seq.armed || seq.recording || seq.playing || seq.overdubbing);
+      document.getElementById('btn-clear-recording').disabled = seq.track.length === 0 && !seq.armed;
+      document.getElementById('btn-undo-overdub').disabled = seq.overdubHistory.length === 0 || seq.recording;
+
+      recBtn.setAttribute('aria-label', seq.armed ? 'Recording armed: play a note to start' : seq.recording ? 'Finish recording' : 'Record');
+      playBtn.disabled = !marimbaBuffer || seq.track.length === 0;
+      overdubBtn.disabled = !marimbaBuffer || seq.duration === 0;
+      if (seq.recording) statusText.innerText = 'RECORDING...';
+      else if (seq.armed) statusText.innerText = 'PLAY NOTE TO START';
+      else if (seq.overdubbing) statusText.innerText = 'OVERDUBBING...';
+      else if (seq.playing) statusText.innerText = 'PLAYING';
+      else if (seq.track.length > 0) statusText.innerText = 'TRACK READY';
+      else statusText.innerText = 'READY TO PLAY';
+    }
+
+    function toggleRecord() {
+      if (!audioReady()) return;
+      if (seq.recording || seq.armed) {
+        stopTransport();
+      } else {
+        stopTransport();
+        seq.track = [];
+        seq.duration = 0;
+        resetOverdubHistory();
+        seq.armed = true;
+        updateTransportUI();
+      }
+    }
+
+    function toggleOverdub() {
+      if (!audioReady()) return;
+      if (seq.duration === 0) return;
+      if (seq.overdubbing) {
+        seq.overdubbing = false;
+        seq.activeTakeId = null;
+      } else {
+        seq.overdubbing = true;
+        seq.activeTakeId = seq.nextTakeId++;
+        if (!seq.playing) playTransport();
+      }
+      updateTransportUI();
+    }
+
+    function stopTransport() {
+      if (seq.recording) {
+        const lastNoteTime = seq.track.length ? seq.track[seq.track.length - 1].relativeTime : 0;
+        seq.duration = Math.max(0.01, audioCtx.currentTime - seq.startTime, lastNoteTime + 0.001);
+      }
+      
+      seq.armed = false;
+      seq.recording = false;
+      seq.overdubbing = false;
+      seq.activeTakeId = null;
+      seq.playing = false;
+      seq.playbackGeneration++;
+      
+      clearTimeouts();
+      clearTimeout(seq.schedulerTimer);
+      seq.schedulerTimer = null;
+      seq.scheduledNotes.clear();
+      
+      // Stop currently scheduled sounds instantly
+      soundingVoices.forEach(voice => {
+          try { voice.stop(); } catch(e) {}
+      });
+      seq.scheduledVoices.clear();
+      
+      updateTransportUI();
+    }
+
+    // One audio-clock scheduler, with a short lookahead for smooth loop boundaries.
+    function schedulePlayback(generation) {
+      if (!seq.playing || generation !== seq.playbackGeneration) return;
+      const now = audioCtx.currentTime;
+      if (now >= seq.playbackEndTime) {
+        stopTransport();
+        return;
+      }
+
+      const firstCycle = Math.max(0, Math.floor((now - seq.playbackStartTime) / seq.duration));
+      const horizon = Math.min(now + 0.08, seq.playbackEndTime);
+      const lastCycle = Math.floor((horizon - seq.playbackStartTime) / seq.duration);
+
+      // Keep bookkeeping bounded, even when a recording loops for a whole lesson.
+      for (const [key, event] of seq.scheduledNotes) {
+        if (event.cycle < firstCycle) seq.scheduledNotes.delete(key);
+      }
+
+      for (let cycle = firstCycle; cycle <= lastCycle; cycle++) {
+        const cycleStart = seq.playbackStartTime + cycle * seq.duration;
+        seq.track.forEach((note, index) => {
+          const noteTime = cycleStart + note.relativeTime;
+          const key = `${cycle}:${index}`;
+          if (seq.scheduledNotes.has(key) || noteTime < now - 0.05 ||
+              noteTime >= horizon || noteTime >= seq.playbackEndTime) return;
+
+          seq.scheduledNotes.set(key, { cycle, time: noteTime });
+          if (state.bars[note.barIndex].blackout) return;
+          const voice = playTone(note.freq, Math.max(now, noteTime), true, note.barIndex);
+          const tid = setTimeout(() => {
+            seq.timeouts.delete(tid);
+            if (seq.playing && generation === seq.playbackGeneration && !state.bars[note.barIndex].blackout &&
+                note.octave === state.octaveOffset) flashBar(note.barIndex);
+          }, Math.max(0, (noteTime - now) * 1000));
+          if (voice) voice.visualTimer = tid;
+          seq.timeouts.add(tid);
+        });
+      }
+
+      seq.schedulerTimer = setTimeout(() => schedulePlayback(generation),
+        Math.max(1, Math.min(20, (seq.playbackEndTime - now) * 1000)));
+    }
+
+    function toggleLoop() {
+      seq.loop = !seq.loop;
+      if (seq.playing) {
+        const now = audioCtx.currentTime;
+        const cycle = Math.max(0, Math.floor((now - seq.playbackStartTime) / seq.duration));
+        seq.playbackEndTime = seq.loop ? Infinity :
+          seq.playbackStartTime + (cycle + 1) * seq.duration;
+
+        // Turning Loop off cancels any next-pass notes already in the lookahead.
+        for (const voice of seq.scheduledVoices) {
+          if (voice.startTime >= seq.playbackEndTime) {
+            try { voice.stop(); } catch(e) {}
+            clearTimeout(voice.visualTimer);
+            seq.timeouts.delete(voice.visualTimer);
+            seq.scheduledVoices.delete(voice);
+          }
+        }
+        for (const [key, event] of seq.scheduledNotes) {
+          if (event.time >= seq.playbackEndTime) seq.scheduledNotes.delete(key);
+        }
+        clearTimeout(seq.schedulerTimer);
+        schedulePlayback(seq.playbackGeneration);
+      }
+      updateTransportUI();
+    }
+
+    function playTransport() {
+      if (seq.playing || seq.recording || seq.armed || seq.track.length === 0 || seq.duration <= 0 || !audioReady()) return;
+      clearTimeouts();
+      clearTimeout(seq.schedulerTimer);
+      seq.scheduledNotes.clear();
+      seq.playing = true;
+      seq.playbackStartTime = audioCtx.currentTime;
+      seq.playbackEndTime = seq.loop ? Infinity : seq.playbackStartTime + seq.duration;
+      schedulePlayback(++seq.playbackGeneration);
+      updateTransportUI();
+    }
+
+    function handleNotePlay(index, freq) {
+      if (!state.bars[index] || state.bars[index].blackout || !audioReady()) return;
+      const now = audioCtx.currentTime;
+      
+      playTone(freq, now, false, index);
+      
+      // Immediate flash if the note belongs to the currently viewed octave
+      flashBar(index);
+
+      if (seq.armed) {
+        seq.armed = false;
+        seq.recording = true;
+        seq.startTime = now;
+        seq.track.push({ relativeTime: 0, barIndex: index, freq, octave: state.octaveOffset });
+        updateTransportUI();
+      } else if (seq.recording) {
+        seq.track.push({ relativeTime: now - seq.startTime, barIndex: index, freq, octave: state.octaveOffset });
+      } else if (seq.overdubbing) {
+        if (!seq.playing) playTransport(); // Restarts play engine
+        let relTime = (now - seq.playbackStartTime) % seq.duration;
+        if (relTime < 0) relTime += seq.duration;
+        const takeId = seq.activeTakeId;
+        if (!seq.overdubHistory.includes(takeId)) seq.overdubHistory.push(takeId);
+        seq.track.push({ relativeTime: relTime, barIndex: index, freq, octave: state.octaveOffset, takeId });
+        // This note was just played live; replay it only on subsequent passes.
+        const cycle = Math.max(0, Math.floor((now - seq.playbackStartTime) / seq.duration));
+        seq.scheduledNotes.set(`${cycle}:${seq.track.length - 1}`, { cycle, time: now });
+        updateTransportUI();
+      }
+    }
+
+    // --- DOM View & Updates ---
+    function getLabel(note) {
+      if (note === 'B' && state.useBb) return 'Bb';
+      if (note === 'F' && state.useFSharp) return 'F#';
+      return note;
+    }
+
+    function initBars() {
+      barsContainer.innerHTML = state.bars.map((bar, index) => {
+        const label = getLabel(bar.note);
+        return `<div id="bar-${index}" class="xylo-bar bg-white" data-highlight="false"><div class="bar-surface">
+          <div class="highlight-overlay hidden"></div><div class="strike-overlay"></div><div class="disabled-overlay"></div>
+          <div class="top-zone" data-index="${index}" role="button" tabindex="0" aria-label="Highlight ${label}, bar ${index + 1}" aria-pressed="false" title="Highlight on/off"></div>
+          <div class="middle-zone" data-index="${index}" role="button" tabindex="0" aria-label="Play ${label}, bar ${index + 1}" title="Tap or slide to play"><span class="note-label sr-only" data-altered="${label.length > 1}">${label}</span></div>
+          <div class="bottom-zone" data-index="${index}" role="button" tabindex="0" aria-label="Disable or restore ${label}, bar ${index + 1}" aria-pressed="false" title="Disable / restore bar"></div>
+          <span class="accidental-mark" aria-hidden="true">${label.endsWith('b') ? '♭' : label.endsWith('#') ? '♯' : ''}</span>
+        </div></div>`;
+      }).join('');
+    }
+
+    function updateBarVisuals(index) {
+      const barState = state.bars[index];
+      const barEl = document.getElementById(`bar-${index}`);
+      if (!barEl) return;
+
+      const overlay = barEl.querySelector('.highlight-overlay');
+      const label = barEl.querySelector('.note-label');
+      const isActiveBlackout = barState.blackout;
+      barEl.dataset.highlight = String(barState.highlight > 0 && !isActiveBlackout);
+      barEl.querySelector('.middle-zone').setAttribute('aria-disabled', String(isActiveBlackout || !marimbaBuffer));
+      if (isActiveBlackout) {
+        for (const voice of soundingVoices) {
+          if (voice.barIndex !== index) continue;
+          try { voice.stop(); } catch (error) {}
+          clearTimeout(voice.visualTimer);
+          seq.timeouts.delete(voice.visualTimer);
+          seq.scheduledVoices.delete(voice);
+          soundingVoices.delete(voice);
+        }
+        clearTimeout(barEl.flashTimer);
+        barEl.classList.remove('bar-glow-effect');
+      }
+
+      barEl.querySelector('.top-zone').setAttribute('aria-pressed', String(barState.highlight > 0));
+      barEl.querySelector('.bottom-zone').setAttribute('aria-pressed', String(isActiveBlackout));
+
+      // Background Toggle
+      if (isActiveBlackout) {
+        barEl.classList.replace('bg-white', 'bg-gray-900');
+        label.classList.replace('text-black', 'text-white');
+        label.classList.replace('opacity-100', 'opacity-20');
+      } else {
+        barEl.classList.replace('bg-gray-900', 'bg-white');
+        label.classList.replace('text-white', 'text-black');
+        label.classList.replace('opacity-20', 'opacity-100');
+      }
+
+      // Highlight logic respects blackout state
+      if (barState.highlight > 0 && !isActiveBlackout) {
+        overlay.className = `highlight-overlay absolute inset-0 pointer-events-none z-10 teaching-highlight`;
+      } else {
+        overlay.className = `highlight-overlay absolute inset-0 pointer-events-none z-10 hidden`;
+      }
+    }
+
+    function updateLabels() {
+      state.bars.forEach((bar, index) => {
+        const labelStr = getLabel(bar.note);
+        const isAltered = labelStr.length > 1;
+        const barEl = document.getElementById(`bar-${index}`);
+        const labelEl = barEl.querySelector('.note-label');
+
+        labelEl.innerText = labelStr;
+        labelEl.dataset.altered = String(isAltered);
+        barEl.querySelector('.accidental-mark').textContent = labelStr.endsWith('b') ? '♭' : labelStr.endsWith('#') ? '♯' : '';
+        for (const [zone, action] of [['top', 'Highlight'], ['middle', 'Play'], ['bottom', 'Disable or restore']]) {
+          barEl.querySelector(`.${zone}-zone`).setAttribute('aria-label', `${action} ${labelStr}, bar ${index + 1}`);
+        }
+      });
+    }
+
+    function updateToggles() {
+      document.getElementById('bb-control').dataset.on = String(state.useBb);
+      document.getElementById('fs-control').dataset.on = String(state.useFSharp);
+    }
+
+    function fitScene() {
+      const width = window.innerWidth || 1672, height = window.innerHeight || 941;
+      const theme = mainWrapper.dataset.theme || 'warm';
+      // Catch touches in the instrument's gaps, without covering the surrounding controls.
+      const [cropX,cropY,cropW,cropH] = sceneCrops[theme];
+      xyloWrapper.style.clipPath = `inset(${cropY / 941 * 100}% ${(1672 - cropX - cropW) / 1672 * 100}% ${(941 - cropY - cropH) / 941 * 100}% ${cropX / 1672 * 100}%)`;
+      let scale, left, top;
+      if (state.isFullscreen) {
+        const [x,y,w,h] = sceneCrops[theme];
+        scale = Math.min(width / w, Math.max(120,height - 74) / h);
+        left = (width - w * scale) / 2 - x * scale;
+        top = 66 + (height - 74 - h * scale) / 2 - y * scale;
+      } else {
+        scale = Math.max(.48, Math.min(width / 1672, height / 941));
+        left = Math.max(0, (width - 1672 * scale) / 2);
+        top = Math.max(0, (height - 941 * scale) / 2);
+      }
+      mainWrapper.style.width = `${1672 * scale}px`;
+      mainWrapper.style.height = `${941 * scale}px`;
+      mainWrapper.style.left = `${left}px`;
+      mainWrapper.style.top = `${top}px`;
+      mainWrapper.style.setProperty('--scene-scale', scale);
+    }
+
+    function toggleFullscreen() {
+      state.isFullscreen = !state.isFullscreen;
+      mainWrapper.dataset.fullscreen = String(state.isFullscreen);
+      document.getElementById('scene-viewport').dataset.fullscreen = String(state.isFullscreen);
+      document.getElementById('fullscreen-stop').hidden = !state.isFullscreen;
+      document.getElementById('fullscreen-exit').hidden = !state.isFullscreen;
+      document.getElementById('app-footer').hidden = state.isFullscreen;
+      controlsPanel.hidden = state.isFullscreen;
+      fsBtn.title = state.isFullscreen ? 'Exit Fullscreen' : 'Fullscreen';
+      fitScene();
+    }
+
+    // --- Classroom setups and recording tools ---
+    const barPresets = {
+      all: { useBb: false, useFSharp: false, remove: [], message: 'All bars restored with natural notes.' },
+      c: { useBb: false, useFSharp: false, remove: ['F', 'B'], message: 'C major / A relative minor (la pentatonic): keep C, D, E, G, A. Disable F and B.' },
+      f: { useBb: true, useFSharp: false, remove: ['E', 'B'], message: 'F major / D relative minor (la pentatonic): keep F, G, A, C, D. Disable E and B-flat.' },
+      g: { useBb: false, useFSharp: true, remove: ['C', 'F'], message: 'G major / E relative minor (la pentatonic): keep G, A, B, D, E. Disable C and F-sharp.' }
+    };
+
+    function announce(message, isError = false) {
+      const el = document.getElementById('project-message');
+      el.textContent = message;
+      el.dataset.error = String(isError);
+      el.hidden = false;
+      clearTimeout(el.noticeTimer);
+      el.noticeTimer = setTimeout(() => { el.hidden = true; }, isError ? 10000 : 5000);
+    }
+
+    function updatePresetUI() {
+      for (const [name, preset] of Object.entries(barPresets)) {
+        const selected = state.useBb === preset.useBb && state.useFSharp === preset.useFSharp &&
+          state.bars.every(bar => bar.blackout === preset.remove.includes(bar.note));
+        document.getElementById(`preset-${name}`).setAttribute('aria-pressed', String(selected));
+      }
+    }
+
+    function syncSetupUI() {
+      document.getElementById('bb-checkbox').checked = state.useBb;
+      document.getElementById('fs-checkbox').checked = state.useFSharp;
+      document.getElementById('octave-display').innerText = state.octaveOffset > 0 ? `+${state.octaveOffset}` : state.octaveOffset;
+      updateToggles();
+      updateLabels();
+      state.bars.forEach((_, i) => updateBarVisuals(i));
+      updatePresetUI();
+    }
+
+    function applyBarPreset(name) {
+      const preset = barPresets[name];
+      if (!preset) return;
+      state.useBb = preset.useBb;
+      state.useFSharp = preset.useFSharp;
+      state.bars.forEach(bar => { bar.blackout = preset.remove.includes(bar.note); });
+      syncSetupUI();
+      announce(preset.message);
+    }
+
+    function resetOverdubHistory() {
+      seq.overdubHistory = [];
+      seq.activeTakeId = null;
+      seq.nextTakeId = 1;
+    }
+
+    function clearRecording() {
+      stopTransport();
+      seq.track = [];
+      seq.duration = 0;
+      resetOverdubHistory();
+      activePointers.clear();
+      updateTransportUI();
+      announce('Recording cleared. Your bar setup is ready for another take.');
+    }
+
+    function undoLastOverdub() {
+      if (seq.recording || seq.overdubHistory.length === 0) return;
+      const takeId = seq.overdubHistory[seq.overdubHistory.length - 1];
+      stopTransport();
+      seq.overdubHistory.pop();
+      seq.track = seq.track.filter(note => note.takeId !== takeId);
+      updateTransportUI();
+      announce('Last overdub removed. Press Play to hear the recording.');
+    }
+
+    // Project files contain only validated setup and note data; no running timers or audio nodes.
+    const PROJECT_FORMAT = 'interactive-xylophone-project';
+    const MAX_PROJECT_BYTES = 10 * 1024 * 1024;
+
+    function createProject() {
+      return {
+        format: PROJECT_FORMAT,
+        version: 1,
+        setup: {
+          useBb: state.useBb,
+          useFSharp: state.useFSharp,
+          octaveOffset: state.octaveOffset,
+          bars: state.bars.map(bar => ({ highlight: bar.highlight > 0 ? 1 : 0, blackout: bar.blackout }))
+        },
+        sound: { ...sound },
+        recording: {
+          duration: seq.duration,
+          loop: seq.loop,
+          notes: seq.track.map(note => ({ relativeTime: note.relativeTime, barIndex: note.barIndex,
+            freq: note.freq, octave: note.octave, takeId: note.takeId || 0 }))
+        }
+      };
+    }
+
+    function validateProject(project) {
+      const object = value => value !== null && typeof value === 'object' && !Array.isArray(value);
+      const integer = (value, min, max) => Number.isInteger(value) && value >= min && value <= max;
+      const number = (value, min, max) => typeof value === 'number' && Number.isFinite(value) && value >= min && value <= max;
+      if (!object(project) || project.format !== PROJECT_FORMAT || project.version !== 1 ||
+          !object(project.setup) || !object(project.recording)) throw new Error('Choose a project saved by this xylophone app.');
+      const s = project.setup, r = project.recording;
+      const a = project.sound ?? { reverbEnabled: false, reverbAmount: 12 };
+      if (!object(a) || typeof a.reverbEnabled !== 'boolean' || !integer(a.reverbAmount, 0, 30)) {
+        throw new Error('This project has invalid sound settings.');
+      }
+      if (typeof s.useBb !== 'boolean' || typeof s.useFSharp !== 'boolean' || !integer(s.octaveOffset, -2, 2) ||
+          !Array.isArray(s.bars) || s.bars.length !== notesData.length ||
+          !s.bars.every(bar => object(bar) && integer(bar.highlight, 0, 3) && typeof bar.blackout === 'boolean')) {
+        throw new Error('This project has an invalid bar setup.');
+      }
+      if (typeof r.loop !== 'boolean' || !number(r.duration, 0, 86400) || !Array.isArray(r.notes) ||
+          r.notes.length > 50000 || (r.notes.length ? r.duration < 0.01 : r.duration !== 0)) {
+        throw new Error('This project has an invalid recording or exceeds the 24-hour / 50,000-note limit.');
+      }
+      const notes = r.notes.map(note => {
+        if (!object(note) || !number(note.relativeTime, 0, r.duration) || note.relativeTime >= r.duration ||
+            !integer(note.barIndex, 0, notesData.length - 1) || !number(note.freq, 20, 8000) ||
+            !integer(note.octave, -2, 2) || !integer(note.takeId ?? 0, 0, 1000000)) {
+          throw new Error('This project contains invalid notes.');
+        }
+        return { relativeTime: note.relativeTime, barIndex: note.barIndex, freq: note.freq,
+          octave: note.octave, takeId: note.takeId ?? 0 };
+      });
+      return {
+        format: PROJECT_FORMAT, version: 1,
+        setup: { useBb: s.useBb, useFSharp: s.useFSharp, octaveOffset: s.octaveOffset,
+          bars: s.bars.map(bar => ({ highlight: bar.highlight > 0 ? 1 : 0, blackout: bar.blackout })) },
+        sound: { reverbEnabled: a.reverbEnabled, reverbAmount: a.reverbAmount },
+        recording: { duration: r.duration, loop: r.loop, notes }
+      };
+    }
+
+    function loadProject(project) {
+      // Finish validation before changing the user's current work.
+      const clean = validateProject(project);
+      stopTransport();
+      activePointers.clear();
+      state.useBb = clean.setup.useBb;
+      state.useFSharp = clean.setup.useFSharp;
+      state.octaveOffset = clean.setup.octaveOffset;
+      Object.assign(sound, clean.sound);
+      syncSoundUI(true);
+      state.bars.forEach((bar, index) => Object.assign(bar, clean.setup.bars[index]));
+      seq.track = clean.recording.notes;
+      seq.duration = clean.recording.duration;
+      seq.loop = clean.recording.loop;
+      seq.overdubHistory = [...new Set(seq.track.map(note => note.takeId).filter(id => id > 0))].sort((a, b) => a - b);
+      seq.nextTakeId = (seq.overdubHistory[seq.overdubHistory.length - 1] || 0) + 1;
+      syncSetupUI();
+      updateTransportUI();
+    }
+
+    function saveProject() {
+      if (seq.recording || seq.overdubbing || seq.armed) stopTransport();
+      try {
+        const project = validateProject(createProject());
+        const blob = new Blob([JSON.stringify(project, null, 2)], { type: 'application/json' });
+        if (blob.size > MAX_PROJECT_BYTES) throw new Error('This project is too large to save. The limit is 10 MB.');
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = 'xylophone-project.json';
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+        setTimeout(() => URL.revokeObjectURL(url), 1000);
+        announce('Project download started: recording and bar setup included.');
+      } catch (error) {
+        announce(error.message || 'The project could not be saved.', true);
+      }
+    }
+
+    let projectOpenToken = 0;
+    async function openProjectFile(event) {
+      const input = event.target;
+      const file = input.files[0];
+      const token = ++projectOpenToken;
+      input.value = '';
+      if (!file) return;
+      try {
+        if (file.size > MAX_PROJECT_BYTES) throw new Error('This file is too large. Choose a xylophone project under 10 MB.');
+        const text = await file.text();
+        if (token !== projectOpenToken) return;
+        let project;
+        try { project = JSON.parse(text); } catch { throw new Error('This file could not be read. Choose a saved xylophone project.'); }
+        loadProject(project);
+        announce(`Opened ${file.name}. ${seq.track.length ? 'Your recording is ready to play.' : 'Your bar setup is ready.'}`);
+      } catch (error) {
+        if (token === projectOpenToken) announce(error.message || 'The project could not be opened.', true);
+      }
+    }
+
+    // --- Input & Event Listeners ---
+
+    // Each finger owns its own last-played bar and release state.
+    const activePointers = new Map();
+    
+    // Replace click with pointerdown for zero-lag mobile reaction
+    xyloWrapper.addEventListener('pointerdown', (e) => {
+      if (e.pointerType === 'mouse' && e.button !== 0) return;
+      const topZone = e.target.closest('.top-zone');
+      const bottomZone = e.target.closest('.bottom-zone');
+      const middleZone = e.target.closest('.middle-zone');
+
+      if (topZone) {
+        const index = parseInt(topZone.getAttribute('data-index'), 10);
+        state.bars[index].highlight = state.bars[index].highlight > 0 ? 0 : 1;
+        updateBarVisuals(index);
+      } else if (bottomZone) {
+        const index = parseInt(bottomZone.getAttribute('data-index'), 10);
+        state.bars[index].blackout = !state.bars[index].blackout;
+        updateBarVisuals(index);
+        updatePresetUI();
+      } else {
+        // A slide may begin on a bar OR in the transparent space between bars.
+        e.preventDefault();
+        audioReady(); // Unlock audio during the initial touch, including a silent gap touch.
+        activePointers.set(e.pointerId, middleZone);
+        try { xyloWrapper.setPointerCapture(e.pointerId); } catch(e) {}
+        if (middleZone) {
+          const index = parseInt(middleZone.getAttribute('data-index'), 10);
+          handleNotePlay(index, getFrequency(index));
+        }
+      }
+    });
+
+    barsContainer.addEventListener('keydown', (e) => {
+      if ((e.key !== 'Enter' && e.key !== ' ') || e.repeat) return;
+      const zone = e.target.closest('[data-index]');
+      if (!zone) return;
+      e.preventDefault();
+      const index = Number(zone.getAttribute('data-index'));
+      if (zone.classList.contains('top-zone')) {
+        state.bars[index].highlight = state.bars[index].highlight > 0 ? 0 : 1;
+        updateBarVisuals(index);
+      } else if (zone.classList.contains('bottom-zone')) {
+        state.bars[index].blackout = !state.bars[index].blackout;
+        updateBarVisuals(index);
+        updatePresetUI();
+      } else if (zone.classList.contains('middle-zone')) handleNotePlay(index, getFrequency(index));
+    });
+
+    // Handle seamless sliding (glissando) across keys
+    window.addEventListener('pointermove', (e) => {
+      if (!activePointers.has(e.pointerId)) return;
+      
+      const elem = document.elementFromPoint(e.clientX, e.clientY);
+      const middleZone = elem?.closest('.middle-zone') || null;
+      if (middleZone === activePointers.get(e.pointerId)) return;
+      // Leaving a bar rearms it, so sliding back from a gap can strike it again.
+      activePointers.set(e.pointerId, middleZone);
+      if (middleZone) {
+        const index = parseInt(middleZone.getAttribute('data-index'), 10);
+        handleNotePlay(index, getFrequency(index));
+      }
+    });
+
+    // Reset sliding state
+    const releasePointer = (e) => activePointers.delete(e.pointerId);
+    window.addEventListener('pointerup', releasePointer);
+    window.addEventListener('pointercancel', releasePointer);
+    xyloWrapper.addEventListener('lostpointercapture', releasePointer);
+    window.addEventListener('blur', () => activePointers.clear());
+
+    document.getElementById('bb-checkbox').addEventListener('change', (e) => {
+      state.useBb = e.target.checked;
+      updateToggles();
+      updateLabels();
+      updatePresetUI();
+    });
+
+    document.getElementById('fs-checkbox').addEventListener('change', (e) => {
+      state.useFSharp = e.target.checked;
+      updateToggles();
+      updateLabels();
+      updatePresetUI();
+    });
+
+    document.getElementById('octave-up').addEventListener('click', () => {
+      if (state.octaveOffset < 2) {
+        state.octaveOffset++;
+        document.getElementById('octave-display').innerText = state.octaveOffset > 0 ? `+${state.octaveOffset}` : state.octaveOffset;
+      }
+    });
+
+    document.getElementById('octave-down').addEventListener('click', () => {
+      if (state.octaveOffset > -2) {
+        state.octaveOffset--;
+        document.getElementById('octave-display').innerText = state.octaveOffset > 0 ? `+${state.octaveOffset}` : state.octaveOffset;
+      }
+    });
+
+    document.getElementById('reset-btn').addEventListener('click', () => {
+      // Reset variables
+      state.useBb = false;
+      state.useFSharp = false;
+      state.octaveOffset = 0;
+      sound.reverbEnabled = false;
+      sound.reverbAmount = 12;
+      syncSoundUI(true);
+      state.bars.forEach(bar => { bar.highlight = 0; bar.blackout = false; });
+      
+      // Stop and reset Sequence Engine
+      stopTransport();
+      seq.track = [];
+      seq.duration = 0;
+      seq.loop = false;
+      resetOverdubHistory();
+      activePointers.clear();
+      updateTransportUI();
+      
+      // Sync DOM
+      syncSetupUI();
+      announce('All settings and the recording have been reset.');
+    });
+
+    // Sequencer Transport Controls
+    document.getElementById('btn-rec').addEventListener('click', toggleRecord);
+    document.getElementById('btn-play').addEventListener('click', playTransport);
+    document.getElementById('btn-stop').addEventListener('click', stopTransport);
+    document.getElementById('btn-overdub').addEventListener('click', toggleOverdub);
+    document.getElementById('btn-loop').addEventListener('click', toggleLoop);
+    document.getElementById('fullscreen-stop').addEventListener('click', stopTransport);
+    document.getElementById('btn-clear-recording').addEventListener('click', clearRecording);
+    document.getElementById('btn-undo-overdub').addEventListener('click', undoLastOverdub);
+    document.getElementById('btn-save-project').addEventListener('click', saveProject);
+    document.getElementById('btn-open-project').addEventListener('click', () => document.getElementById('project-input').click());
+    document.getElementById('project-input').addEventListener('change', openProjectFile);
+    document.getElementById('audio-retry').addEventListener('click', () => {
+      // Resume immediately within this gesture, then retry the asset request.
+      try { initAudio(); } catch (error) {}
+      loadMarimba();
+    });
+    document.getElementById('reverb-toggle').addEventListener('change', event => {
+      sound.reverbEnabled = event.target.checked;
+      syncSoundUI(true);
+    });
+    document.getElementById('reverb-amount').addEventListener('input', event => {
+      const amount = Number(event.target.value);
+      if (Number.isInteger(amount) && amount >= 0 && amount <= 30) sound.reverbAmount = amount;
+      syncSoundUI(true);
+    });
+    Object.keys(barPresets).forEach(name => {
+      document.getElementById(`preset-${name}`).addEventListener('click', () => applyBarPreset(name));
+    });
+
+    fsBtn.addEventListener('click', toggleFullscreen);
+
+    document.getElementById('fullscreen-exit').addEventListener('click', toggleFullscreen);
+    window.addEventListener('resize', fitScene);
+    window.addEventListener('keydown', e => { if (e.key === 'Escape' && state.isFullscreen) toggleFullscreen(); });
+
+    // --- Init ---
+    fsBtnIcon.innerHTML = maximizeIcon;
+    initBars();
+    updateTransportUI();
+    updatePresetUI();
+    try {
+      const saved = JSON.parse(window.localStorage.getItem('xylophone-sound'));
+      if (saved && typeof saved.reverbEnabled === 'boolean' && Number.isInteger(saved.reverbAmount) &&
+          saved.reverbAmount >= 0 && saved.reverbAmount <= 30) Object.assign(sound, {
+        reverbEnabled: saved.reverbEnabled, reverbAmount: saved.reverbAmount
+      });
+    } catch (error) {}
+    syncSoundUI();
+    loadMarimba();
+
+  </script>
+</body></html>

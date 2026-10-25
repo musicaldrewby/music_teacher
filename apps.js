@@ -1,4 +1,4 @@
-/* Mr. Drew’s app collection. All app destinations are GPT Sites. */
+/* Mr. Drew’s app collection. Apps are hosted in this GitHub Pages repository. */
 window.ARCADE_REGIONS = [
   {
     "id": "grove",
@@ -58,7 +58,7 @@ window.ARCADE_APPS = [
     "free",
     "classroom"
   ],
-  "url": "https://mallet-measure-free.musicaldrewby.chatgpt.site",
+  "url": "https://musicaldrewby.github.io/music_teacher/apps/mallet-measure-free/",
   "thumbnail": "assets/mallet-measure-free-screen.svg"
 },
   {
@@ -69,7 +69,7 @@ window.ARCADE_APPS = [
     "region": "grove",
     "description": "Choose a chord, brush the strings, and record your performance. Explore six instrument sounds and four inviting rooms with this playable photographic autoharp.",
     "tags": ["autoharp", "auto harp", "chords", "strumming", "dulcimer", "acoustic", "recording"],
-    "url": "https://mr-drews-autoharp.musicaldrewby.chatgpt.site",
+    "url": "https://musicaldrewby.github.io/music_teacher/apps/mr-drews-autoharp/",
     "thumbnail": "assets/autoharp-screen.webp"
   },
 {
@@ -90,7 +90,7 @@ window.ARCADE_APPS = [
     "memory",
     "mastermind"
   ],
-  "url": "https://poison-rhythm.musicaldrewby.chatgpt.site",
+  "url": "https://musicaldrewby.github.io/music_teacher/apps/poison-rhythm/",
   "thumbnail": "assets/poison-rhythm-screen.webp"
 },
   {
@@ -102,7 +102,7 @@ window.ARCADE_APPS = [
     "additionalRegions": ["ridge"],
     "description": "Explore evolving ambient worlds and interlocking rhythms with eight instruments, deep reverb, 46 presets, and an immersive listening view.",
     "tags": ["ambient", "polyrhythm", "euclidean", "synthesizer", "pads", "space", "event horizon", "sequencer"],
-    "url": "https://orbit-polyrhythm-studio.musicaldrewby.chatgpt.site"
+    "url": "https://musicaldrewby.github.io/music_teacher/apps/orbit-polyrhythm-studio/"
   },
   {
     "id": "drew-uke-strum",
@@ -119,7 +119,7 @@ window.ARCADE_APPS = [
       "lyrics",
       "strumming"
     ],
-    "url": "https://drew-uke-strum.musicaldrewby.chatgpt.site"
+    "url": "https://musicaldrewby.github.io/music_teacher/apps/drew-uke-strum/"
   },
   {
     "id": "pocket-orff",
@@ -134,7 +134,7 @@ window.ARCADE_APPS = [
       "triangle",
       "guiro"
     ],
-    "url": "https://pocket-orff.musicaldrewby.chatgpt.site"
+    "url": "https://musicaldrewby.github.io/music_teacher/apps/pocket-orff/"
   },
   {
     "id": "interactive-xylophone",
@@ -150,7 +150,7 @@ window.ARCADE_APPS = [
       "recording",
       "melody"
     ],
-    "url": "https://interactive-xylophone.musicaldrewby.chatgpt.site"
+    "url": "https://musicaldrewby.github.io/music_teacher/apps/interactive-xylophone/"
   },
   {
     "id": "mr-drew-vocal-explorations",
@@ -161,17 +161,17 @@ window.ARCADE_APPS = [
     "region": "grove",
     "description": "Draw animated pitch paths and follow them with your voice, with themed scenes, looping, and optional sound.",
     "tags": ["voice", "vocal", "singing", "pitch", "paths", "warmups", "draw", "loop"],
-    "url": "https://mr-drew-vocal-explorations.musicaldrewby.chatgpt.site"
+    "url": "https://musicaldrewby.github.io/music_teacher/apps/mr-drew-vocal-explorations/"
   },
   {
     "id": "drews-boomwhacker-creator",
     "cover": 2,
-    "title": "Boomwhacker Play-Along Creator",
+    "title": "Boomwhacker Play-Along — Teacher Edition",
     "art": "tubes",
     "region": "ridge",
     "additionalRegions": ["tower"],
     "description": "Create colorful arrangements with tubes, Orff instruments, percussion, and lyrics.",
-    "edition": "Creator Edition",
+    "edition": "Teacher Edition",
     "tags": [
       "compose",
       "play along",
@@ -179,7 +179,7 @@ window.ARCADE_APPS = [
       "video",
       "boomwhackers"
     ],
-    "url": "https://drews-boomwhacker-creator.musicaldrewby.chatgpt.site"
+    "url": "https://musicaldrewby.github.io/music_teacher/apps/drews-boomwhacker-creator/"
   },
   {
     "id": "rhythm-builder",
@@ -196,7 +196,7 @@ window.ARCADE_APPS = [
       "counting",
       "rests"
     ],
-    "url": "https://mr-drews-rhythm-builder.musicaldrewby.chatgpt.site"
+    "url": "https://musicaldrewby.github.io/music_teacher/apps/mr-drews-rhythm-builder/"
   },
   {
     "id": "music-stoplight",
@@ -219,7 +219,7 @@ window.ARCADE_APPS = [
       "slide",
       "music"
     ],
-    "url": "https://drews-movement-stoplight.musicaldrewby.chatgpt.site",
+    "url": "https://musicaldrewby.github.io/music_teacher/apps/drews-movement-stoplight/",
     "thumbnail": "assets/cabinet-music-stoplight.webp"
   },
   {
@@ -236,7 +236,7 @@ window.ARCADE_APPS = [
       "poses",
       "brain break"
     ],
-    "url": "https://sneaky-cat.musicaldrewby.chatgpt.site"
+    "url": "https://musicaldrewby.github.io/music_teacher/apps/sneaky-cat/"
   },
   {
     "id": "mr-drews-name-that-tune",
@@ -252,7 +252,7 @@ window.ARCADE_APPS = [
       "songs",
       "teams"
     ],
-    "url": "https://mr-drews-name-that-tune.musicaldrewby.chatgpt.site"
+    "url": "https://musicaldrewby.github.io/music_teacher/apps/mr-drews-name-that-tune/"
   },
   {
     "id": "classroom-connect-four",
@@ -267,7 +267,7 @@ window.ARCADE_APPS = [
       "connect four",
       "competition"
     ],
-    "url": "https://classroom-connect-four.musicaldrewby.chatgpt.site"
+    "url": "https://musicaldrewby.github.io/music_teacher/apps/classroom-connect-four/"
   },
   {
     "id": "mr-drews-name-that-note",
@@ -284,7 +284,7 @@ window.ARCADE_APPS = [
       "spelling bee",
       "notation"
     ],
-    "url": "https://mr-drews-name-that-note.musicaldrewby.chatgpt.site"
+    "url": "https://musicaldrewby.github.io/music_teacher/apps/mr-drews-name-that-note/"
   },
   {
     "id": "soundroom",
@@ -300,7 +300,7 @@ window.ARCADE_APPS = [
       "midi",
       "workstation"
     ],
-    "url": "https://soundroom.musicaldrewby.chatgpt.site"
+    "url": "https://musicaldrewby.github.io/music_teacher/apps/soundroom/"
   },
   {
     "id": "drews-music-lab-vr",
@@ -318,7 +318,7 @@ window.ARCADE_APPS = [
       "orff",
       "recording"
     ],
-    "url": "https://drews-music-lab-vr.musicaldrewby.chatgpt.site"
+    "url": "https://musicaldrewby.github.io/music_teacher/apps/drews-music-lab-vr/"
   },
   {
     "id": "round-helper",
@@ -334,7 +334,7 @@ window.ARCADE_APPS = [
       "metronome",
       "teacher"
     ],
-    "url": "https://round-helper.musicaldrewby.chatgpt.site/"
+    "url": "https://musicaldrewby.github.io/music_teacher/apps/round-helper/"
   },
   {
     "id": "mr-drews-production-media-player",
@@ -352,7 +352,7 @@ window.ARCADE_APPS = [
       "projector",
       "teacher"
     ],
-    "url": "https://mr-drews-production-media-player.musicaldrewby.chatgpt.site"
+    "url": "https://musicaldrewby.github.io/music_teacher/apps/mr-drews-production-media-player/"
   },
   {
     "id": "from-tips-to-tours",
@@ -376,7 +376,7 @@ window.ARCADE_APPS = [
       "upgrades",
       "tour"
     ],
-    "url": "https://from-tips-to-tours.musicaldrewby.chatgpt.site",
+    "url": "https://musicaldrewby.github.io/music_teacher/apps/from-tips-to-tours/",
     "thumbnail": "assets/from-tips-to-tours-screen.webp"
   }
 ];

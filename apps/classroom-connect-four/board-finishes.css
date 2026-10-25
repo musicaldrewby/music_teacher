@@ -1,0 +1,50 @@
+/* Material surfaces are also used by the setup previews. */
+[data-board-style=steel]{--board-finish:linear-gradient(115deg,#fff3,#d8e1e800 40%,#07172726),url('assets/materials/brushed-steel.png') center/cover;--board-edge:#eef4f8;--board-base:#505e6b;--rim:#afbdc9}
+[data-board-style=black]{--board-finish:linear-gradient(130deg,#ffffff0b,transparent 42%,#0004),url('assets/materials/satin-grain.svg');--board-edge:#565e6a;--board-base:#080c12;--rim:#9aa3af}
+[data-board-style=pearl]{--board-finish:radial-gradient(ellipse at 20% 0,#fff 0,transparent 50%),linear-gradient(130deg,#f8f7f1,#cfd9e1 48%,#f9fafb 75%,#c5d3e0);--board-edge:#fff;--board-base:#8a9bab;--rim:#b8c5d0}
+[data-board-style=stone]{--board-finish:linear-gradient(120deg,#acb5be11,#08131b33),url('assets/materials/slate.png') center/cover;--board-edge:#8a9197;--board-base:#252e34;--rim:#5f6c74}
+.board{position:relative}
+body[data-board-style=steel] .board{border-radius:17px;box-shadow:inset 0 3px 0 #fff9,inset 3px 0 0 #dfe7eb88,inset -3px 0 0 #44536177,inset 0 -6px 0 #46525ec9,0 8px 0 #394955,0 10px 0 #9aaab5}
+body[data-board-style=steel] .board:after{content:"";position:absolute;inset:4px;pointer-events:none;background:url('assets/materials/bolt.svg') left top/11px 11px no-repeat,url('assets/materials/bolt.svg') right top/11px 11px no-repeat,url('assets/materials/bolt.svg') left bottom/11px 11px no-repeat,url('assets/materials/bolt.svg') right bottom/11px 11px no-repeat}
+body[data-board-style=black] .board{border-radius:21px;border-color:#66717e;box-shadow:inset 0 2px 0 #fff3,inset 2px 0 0 #fff1,inset 0 -7px 0 #0009,0 8px 0 #050a10,0 10px 0 #596671}
+body[data-board-style=pearl] .board{border-radius:28px;box-shadow:inset 0 4px 0 #fff,inset 3px 0 0 #fff9,inset -3px 0 0 #a6b9c980,inset 0 -7px 0 #92a4b977,0 8px 0 #a7b6c4,0 10px 0 #e8f1f8}
+body[data-board-style=stone] .board{border-radius:15px 12px 18px 11px;border:1px solid #75818a;box-shadow:inset 0 5px 2px #becad755,inset 5px 0 2px #bcc6ce22,inset -5px 0 2px #101b2677,inset 0 -7px 2px #111b26aa,0 8px 0 #263039,0 11px 0 #414d59}
+body:is([data-board-style=steel],[data-board-style=black]) .hole{background:linear-gradient(#020a10,#132432);box-shadow:inset 0 5px 9px #000,0 0 0 2px var(--rim),0 -2px 0 2px #e6edf488,0 2px 0 2px #26323e}
+body[data-board-style=pearl] .hole{background:linear-gradient(#112133,#263c50);box-shadow:inset 0 5px 10px #010b19dd,0 -2px 1px 2px #a6b5c4,0 2px 1px 2px #fff}
+body[data-board-style=stone] .hole{background:linear-gradient(#0b141c,#19232b);box-shadow:inset 0 6px 10px #000d,0 -2px 1px 2px #1b252e,0 2px 1px 2px #919da566}
+.style-choice[data-board-style=steel] .board-swatch,.style-choice[data-board-style=black] .board-swatch{box-shadow:inset 0 2px #fff8,inset 0 -4px #0005,0 3px 0 var(--board-base)}
+.style-choice[data-board-style=pearl] .board-swatch{box-shadow:inset 0 3px #fff,inset 0 -4px #a3b4c580,0 3px 0 var(--board-base)}
+.style-choice[data-board-style=stone] .board-swatch{border-radius:8px 6px 9px 5px;box-shadow:inset 2px 3px 1px #bbc6cc44,inset -3px -4px 1px #07131c77,0 3px 0 var(--board-base)}
+.style-choice:not([data-board-style=classic]) .board-swatch i{box-shadow:inset 0 3px 5px #000a,0 0 0 1px var(--rim)}
+.board-swatch i{justify-self:center;aspect-ratio:1;width:26px;max-width:100%;height:26px}
+
+/* Static material surfaces: no extra animation or per-frame texture work. */
+[data-board-style=obsidian]{--board-finish:linear-gradient(122deg,transparent 18%,#a892d533 19%,#e0d1ff44 20%,#16132300 24%,transparent 61%,#8e77ad22 64%,transparent 69%),radial-gradient(ellipse at 15% 0,#51415f,#16131e 48%,#05060c 90%);--board-edge:#9b85bb;--board-base:#090811;--rim:#534665}
+[data-board-style=titanium]{--board-finish:linear-gradient(115deg,#182637c9,#56657799 35%,#182331bb 70%,#8292a566),url('assets/materials/brushed-steel.png') center/cover;--board-edge:#a3b3c3;--board-base:#202c39;--rim:#768a9d}
+[data-board-style=ice]{--board-finish:linear-gradient(140deg,#eeffff55,transparent 45%,#166e9b22),url('assets/materials/ice.webp') center/cover;--board-edge:#ddfbff;--board-base:#4899b8;--rim:#c8faff}
+[data-board-style=copper]{--board-finish:linear-gradient(110deg,#fff0d733,transparent 35%,#57201944),url('assets/materials/copper.webp') center/cover;--board-edge:#f3c19b;--board-base:#693b2b;--rim:#bc7d58}
+[data-board-style=marble]{--board-finish:linear-gradient(120deg,#fff7,transparent 55%,#7a716111),url('assets/materials/marble.webp') center/cover;--board-edge:#e3c58d;--board-base:#a18b61;--rim:#bb9a59}
+[data-board-style=carbon]{--board-finish:linear-gradient(120deg,#ffffff18,transparent 38%,#0005),url('assets/materials/carbon-weave.svg') center/24px 24px;--board-edge:#778899;--board-base:#080e15;--rim:#61798d}
+[data-board-style=ceramic]{--board-finish:radial-gradient(ellipse at 25% 0,#d7fff699,transparent 43%),linear-gradient(125deg,#0e8d8e,#075253 48%,#168f89 75%,#033a42);--board-edge:#8fe7d8;--board-base:#04373e;--rim:#6dc8bd}
+[data-board-style=walnut]{--board-finish:linear-gradient(125deg,#ffe3b533,transparent 36%,#12070444),url('assets/materials/walnut.webp') center/cover;--board-edge:#bd8c5b;--board-base:#342014;--rim:#9b6b42}
+
+body[data-board-style=obsidian] .board{border-radius:18px;box-shadow:inset 0 3px 0 #e3d1ff88,inset 3px 0 0 #bda7dd33,inset -3px -6px 0 #040309cc,0 8px 0 #08070e,0 10px 0 #68567e}
+body[data-board-style=titanium] .board{border-radius:11px;box-shadow:inset 0 3px 0 #d7e5f0aa,inset 3px 0 0 #b4c6d755,inset -3px -6px 0 #152431bb,0 8px 0 #182432,0 10px 0 #8499a9}
+body[data-board-style=titanium] .board:after{content:"";position:absolute;inset:4px;pointer-events:none;background:url('assets/materials/bolt.svg') left top/11px 11px no-repeat,url('assets/materials/bolt.svg') right top/11px 11px no-repeat,url('assets/materials/bolt.svg') left bottom/11px 11px no-repeat,url('assets/materials/bolt.svg') right bottom/11px 11px no-repeat}
+body[data-board-style=ice] .board{border-radius:19px 26px 17px 23px;box-shadow:inset 0 5px 2px #fff9,inset 4px 0 2px #d6ffff88,inset -4px -7px 2px #4195b588,0 8px 0 #3d90aebf,0 10px 0 #b2f0ffc9,0 0 22px #b2f0ff33}
+body[data-board-style=copper] .board{border-radius:19px;box-shadow:inset 0 4px 0 #ffdfbfa6,inset 3px 0 0 #efc39666,inset -3px -6px 0 #65312199,0 8px 0 #653829,0 10px 0 #d59b70}
+body[data-board-style=marble] .board{border-radius:18px;border-color:#e4c887;box-shadow:inset 0 4px 0 #fff,inset 3px 0 0 #fff9,inset -3px -7px 0 #93887577,0 7px 0 #c7bca6,0 10px 0 #b49251}
+body[data-board-style=carbon] .board{border-radius:15px;border-color:#869cae;box-shadow:inset 0 3px 0 #adc0d377,inset 3px 0 0 #849bb544,inset -3px -6px 0 #02060b99,0 8px 0 #0a111b,0 10px 0 #4f6579}
+body[data-board-style=ceramic] .board{border-radius:32px;box-shadow:inset 0 5px 3px #c7fffbbb,inset 5px 0 4px #73d9cb66,inset -5px -8px 4px #013b42aa,0 8px 0 #063940,0 10px 0 #388a86}
+body[data-board-style=walnut] .board{border-radius:22px;box-shadow:inset 0 5px 2px #f3c58b77,inset 4px 0 2px #eeb47933,inset -4px -8px 2px #231108aa,0 8px 0 #352013,0 10px 0 #755033}
+
+body:is([data-board-style=obsidian],[data-board-style=titanium],[data-board-style=carbon]) .hole{background:linear-gradient(#030710,#121c2b);box-shadow:inset 0 6px 10px #000e,0 -2px 0 2px #02050b,0 2px 0 2px var(--rim)}
+body[data-board-style=ice] .hole{background:linear-gradient(#133c57,#286781);box-shadow:inset 0 5px 9px #05293bbb,0 -2px 1px 2px #4784a0,0 2px 2px 2px #e0ffff,0 0 8px #c0ffff55}
+body[data-board-style=copper] .hole{background:linear-gradient(#1e1716,#342623);box-shadow:inset 0 6px 10px #000d,0 -2px 1px 2px #613523,0 2px 1px 2px #eebc8a}
+body[data-board-style=marble] .hole{background:linear-gradient(#172633,#293c4b);box-shadow:inset 0 5px 10px #020a15dd,0 0 0 2px #b79a64,0 2px 1px 3px #fff9}
+body[data-board-style=ceramic] .hole{background:linear-gradient(#03222b,#09444a);box-shadow:inset 0 6px 10px #00131ccc,0 -3px 2px 2px #023a43,0 3px 2px 2px #98e6d7aa}
+body[data-board-style=walnut] .hole{background:linear-gradient(#160e0b,#34251c);box-shadow:inset 0 6px 10px #080402ee,0 -2px 1px 2px #29160b,0 2px 1px 2px #c2945f99}
+
+.style-choice:is([data-board-style=obsidian],[data-board-style=titanium],[data-board-style=ice],[data-board-style=copper],[data-board-style=marble],[data-board-style=carbon],[data-board-style=ceramic],[data-board-style=walnut]) .board-swatch{box-shadow:inset 0 3px 1px #fff7,inset 0 -5px 1px #0005,0 3px 0 var(--board-base)}
+.style-choice[data-board-style=ceramic] .board-swatch{border-radius:17px}
+.style-label{display:block;min-height:2.6em;line-height:1.3}

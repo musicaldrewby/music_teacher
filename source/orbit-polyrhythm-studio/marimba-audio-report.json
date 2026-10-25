@@ -1,0 +1,137 @@
+{
+  "existing46Unchanged": true,
+  "swellsAndIntervalsVerified": true,
+  "browserQA": false,
+  "presets": [
+    {
+      "name": "Obsidian Steps",
+      "seconds": 32,
+      "marimbaParts": 4,
+      "pureMarimba": true,
+      "leadVelocityRange": [
+        42,
+        115
+      ],
+      "maxVoices": 81,
+      "peakDb": -10.4,
+      "rmsDb": -25.7
+    },
+    {
+      "name": "Prism Dance",
+      "seconds": 32,
+      "marimbaParts": 5,
+      "pureMarimba": true,
+      "leadVelocityRange": [
+        52,
+        115
+      ],
+      "maxVoices": 87,
+      "peakDb": -12.2,
+      "rmsDb": -26.9
+    },
+    {
+      "name": "Temple Circuit",
+      "seconds": 32,
+      "marimbaParts": 3,
+      "pureMarimba": false,
+      "leadVelocityRange": [
+        52,
+        115
+      ],
+      "maxVoices": 126,
+      "peakDb": -8.3,
+      "rmsDb": -25.4
+    },
+    {
+      "name": "Glass Canopy",
+      "seconds": 32,
+      "marimbaParts": 4,
+      "pureMarimba": false,
+      "leadVelocityRange": [
+        35,
+        115
+      ],
+      "maxVoices": 36,
+      "peakDb": -11.9,
+      "rmsDb": -31.9
+    },
+    {
+      "name": "Gravity Garden",
+      "seconds": 32,
+      "marimbaParts": 5,
+      "pureMarimba": true,
+      "leadVelocityRange": [
+        39,
+        115
+      ],
+      "maxVoices": 106,
+      "peakDb": -9.5,
+      "rmsDb": -25.9
+    },
+    {
+      "name": "Wood & Stars",
+      "seconds": 32,
+      "marimbaParts": 4,
+      "pureMarimba": false,
+      "leadVelocityRange": [
+        41,
+        115
+      ],
+      "maxVoices": 44,
+      "peakDb": -12.5,
+      "rmsDb": -31.2
+    },
+    {
+      "name": "Mallet Riot",
+      "seconds": 32,
+      "marimbaParts": 3,
+      "pureMarimba": false,
+      "leadVelocityRange": [
+        55,
+        115
+      ],
+      "maxVoices": 128,
+      "peakDb": -9.9,
+      "rmsDb": -26.4
+    },
+    {
+      "name": "Quicksilver Eleven",
+      "seconds": 32,
+      "marimbaParts": 5,
+      "pureMarimba": true,
+      "leadVelocityRange": [
+        43,
+        115
+      ],
+      "maxVoices": 144,
+      "peakDb": -11.3,
+      "rmsDb": -26.7
+    },
+    {
+      "name": "Ember Relay",
+      "seconds": 32,
+      "marimbaParts": 4,
+      "pureMarimba": false,
+      "leadVelocityRange": [
+        44,
+        115
+      ],
+      "maxVoices": 73,
+      "peakDb": -12,
+      "rmsDb": -27.9
+    },
+    {
+      "name": "Tidal Machinery",
+      "seconds": 32,
+      "marimbaParts": 4,
+      "pureMarimba": false,
+      "leadVelocityRange": [
+        36,
+        115
+      ],
+      "maxVoices": 97,
+      "peakDb": -9.7,
+      "rmsDb": -28.2
+    }
+  ]
+}

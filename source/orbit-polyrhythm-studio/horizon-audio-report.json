@@ -1,0 +1,138 @@
+{
+  "original34StatesUnchanged": true,
+  "eventHorizonSHA256": "085b45859ed8a8ba334624d7dc8b2fd0141a3e8c0fb4e327bdbed992e884db20",
+  "presets": [
+    {
+      "name": "Beyond the Horizon",
+      "direction": "Drift",
+      "seconds": 60,
+      "firstPitchChangeSeconds": 1.5,
+      "movingVoicesBefore4Seconds": 4,
+      "filterValuesIn4Seconds": 28,
+      "maxVoices": 55,
+      "peakDb": -17.2,
+      "rmsDb": -32.9
+    },
+    {
+      "name": "Dark Matter",
+      "direction": "Drift",
+      "seconds": 60,
+      "firstPitchChangeSeconds": 1.66,
+      "movingVoicesBefore4Seconds": 3,
+      "filterValuesIn4Seconds": 20,
+      "maxVoices": 43,
+      "peakDb": -15.9,
+      "rmsDb": -32.6
+    },
+    {
+      "name": "The Quiet Singularity",
+      "direction": "Drift",
+      "seconds": 60,
+      "firstPitchChangeSeconds": 1.78,
+      "movingVoicesBefore4Seconds": 3,
+      "filterValuesIn4Seconds": 35,
+      "maxVoices": 45,
+      "peakDb": -18.9,
+      "rmsDb": -34.6
+    },
+    {
+      "name": "Redshift Cathedral",
+      "direction": "Drift",
+      "seconds": 60,
+      "firstPitchChangeSeconds": 1.55,
+      "movingVoicesBefore4Seconds": 4,
+      "filterValuesIn4Seconds": 34,
+      "maxVoices": 57,
+      "peakDb": -17.8,
+      "rmsDb": -33.8
+    },
+    {
+      "name": "Photon Rail",
+      "direction": "Pulse",
+      "seconds": 60,
+      "firstPitchChangeSeconds": 0.33,
+      "movingVoicesBefore4Seconds": 4,
+      "filterValuesIn4Seconds": 38,
+      "maxVoices": 54,
+      "peakDb": -18.9,
+      "rmsDb": -34
+    },
+    {
+      "name": "Tachyon Bloom",
+      "direction": "Pulse",
+      "seconds": 60,
+      "firstPitchChangeSeconds": 0.36,
+      "movingVoicesBefore4Seconds": 4,
+      "filterValuesIn4Seconds": 35,
+      "maxVoices": 47,
+      "peakDb": -17.9,
+      "rmsDb": -34
+    },
+    {
+      "name": "Gravity Engine",
+      "direction": "Pulse",
+      "seconds": 60,
+      "firstPitchChangeSeconds": 0.45,
+      "movingVoicesBefore4Seconds": 4,
+      "filterValuesIn4Seconds": 38,
+      "maxVoices": 59,
+      "peakDb": -20.2,
+      "rmsDb": -35.3
+    },
+    {
+      "name": "Midnight Transmission",
+      "direction": "Pulse",
+      "seconds": 60,
+      "firstPitchChangeSeconds": 0.58,
+      "movingVoicesBefore4Seconds": 4,
+      "filterValuesIn4Seconds": 38,
+      "maxVoices": 50,
+      "peakDb": -18.2,
+      "rmsDb": -34.2
+    },
+    {
+      "name": "First Light Beyond",
+      "direction": "Radiance",
+      "seconds": 60,
+      "firstPitchChangeSeconds": 1.45,
+      "movingVoicesBefore4Seconds": 4,
+      "filterValuesIn4Seconds": 38,
+      "maxVoices": 56,
+      "peakDb": -18,
+      "rmsDb": -33.3
+    },
+    {
+      "name": "Opal Exosphere",
+      "direction": "Radiance",
+      "seconds": 60,
+      "firstPitchChangeSeconds": 1.37,
+      "movingVoicesBefore4Seconds": 4,
+      "filterValuesIn4Seconds": 33,
+      "maxVoices": 52,
+      "peakDb": -20.2,
+      "rmsDb": -34.9
+    },
+    {
+      "name": "Solar Veil",
+      "direction": "Radiance",
+      "seconds": 60,
+      "firstPitchChangeSeconds": 1.3,
+      "movingVoicesBefore4Seconds": 4,
+      "filterValuesIn4Seconds": 38,
+      "maxVoices": 47,
+      "peakDb": -18.3,
+      "rmsDb": -33.7
+    },
+    {
+      "name": "Homeward Through Stars",
+      "direction": "Radiance",
+      "seconds": 60,
+      "firstPitchChangeSeconds": 1.6,
+      "movingVoicesBefore4Seconds": 3,
+      "filterValuesIn4Seconds": 30,
+      "maxVoices": 50,
+      "peakDb": -17.7,
+      "rmsDb": -33.1
+    }
+  ]
+}

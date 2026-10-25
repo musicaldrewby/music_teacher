@@ -1,0 +1,5 @@
+Mediabunny 1.24.0 by Vanilagy and contributors, unmodified.
+Distributed under Mozilla Public License 2.0; see LICENSE.txt.
+Corresponding source package is included as source.tgz in this directory.
+Upstream: https://github.com/Vanilagy/mediabunny
+Package: https://www.npmjs.com/package/mediabunny/v/1.24.0

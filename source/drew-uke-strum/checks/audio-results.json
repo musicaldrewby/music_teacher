@@ -1,0 +1,118 @@
+{
+  "method": "Actual MP3 decode and OfflineAudioContext rendering using node-web-audio-api 1.0.7; no listening or browser test",
+  "decodedSamples": 130,
+  "songs": [
+    {
+      "title": "Are You Sleeping?",
+      "seconds": 27,
+      "countInSeconds": 3,
+      "peak": 0.48,
+      "rms": 0.0316,
+      "silentAfterCutoff": true
+    },
+    {
+      "title": "Rain, Rain, Go Away",
+      "seconds": 12.86,
+      "countInSeconds": 2.86,
+      "peak": 0.4802,
+      "rms": 0.0349,
+      "silentAfterCutoff": true
+    },
+    {
+      "title": "Hot Cross Buns",
+      "seconds": 16.67,
+      "countInSeconds": 3.33,
+      "peak": 0.4801,
+      "rms": 0.0291,
+      "silentAfterCutoff": true
+    },
+    {
+      "title": "London Bridge",
+      "seconds": 13.5,
+      "countInSeconds": 3,
+      "peak": 0.48,
+      "rms": 0.0367,
+      "silentAfterCutoff": true
+    },
+    {
+      "title": "Skip to My Lou",
+      "seconds": 24.55,
+      "countInSeconds": 2.73,
+      "peak": 0.4802,
+      "rms": 0.0336,
+      "silentAfterCutoff": true
+    },
+    {
+      "title": "Twinkle, Twinkle, Little Star",
+      "seconds": 41.05,
+      "countInSeconds": 3.16,
+      "peak": 0.4802,
+      "rms": 0.0287,
+      "silentAfterCutoff": true
+    },
+    {
+      "title": "Apple Tree",
+      "seconds": 13.5,
+      "countInSeconds": 3,
+      "peak": 0.48,
+      "rms": 0.0357,
+      "silentAfterCutoff": true
+    },
+    {
+      "title": "Lucy Locket",
+      "seconds": 15,
+      "countInSeconds": 3,
+      "peak": 0.48,
+      "rms": 0.0298,
+      "silentAfterCutoff": true
+    },
+    {
+      "title": "The More We Get Together",
+      "seconds": 36.43,
+      "countInSeconds": 2.14,
+      "peak": 0.4802,
+      "rms": 0.0292,
+      "silentAfterCutoff": true
+    },
+    {
+      "title": "The Farmer in the Dell",
+      "seconds": 18,
+      "countInSeconds": 2,
+      "peak": 0.4801,
+      "rms": 0.0357,
+      "silentAfterCutoff": true
+    },
+    {
+      "title": "Itsy Bitsy Spider",
+      "seconds": 34,
+      "countInSeconds": 2,
+      "peak": 0.4801,
+      "rms": 0.0337,
+      "silentAfterCutoff": true
+    },
+    {
+      "title": "BINGO",
+      "seconds": 39,
+      "countInSeconds": 3,
+      "peak": 0.48,
+      "rms": 0.0318,
+      "silentAfterCutoff": true
+    },
+    {
+      "title": "She’ll Be Coming ’Round the Mountain",
+      "seconds": 48.57,
+      "countInSeconds": 2.86,
+      "peak": 0.4802,
+      "rms": 0.0343,
+      "silentAfterCutoff": true
+    },
+    {
+      "title": "Epo e Tai",
+      "seconds": 27,
+      "countInSeconds": 3,
+      "peak": 0.48,
+      "rms": 0.0266,
+      "silentAfterCutoff": true
+    }
+  ]
+}

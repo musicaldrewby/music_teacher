@@ -1,0 +1,8 @@
+{
+  "name": "mr-drews-autoharp",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "check": "node --check dist/app.js && node --check dist/auto-strum-ui.js && node tests/auto-strum.mjs && node --check dist/engine.js && node --check dist/preset-bank.js && node tests/music.mjs && node tests/presets.mjs && node --check dist/scene.js && node tests/scene.mjs && node tests/recorder.mjs && node --experimental-vm-modules tests/interactions.mjs"
+  }
+}

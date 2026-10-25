@@ -1,0 +1,14 @@
+/* Painted perspective scenery is drawn by the shared live/video renderer. */
+.stage{background:#80d6f5;isolation:isolate}.stage:before{display:none}.road-scene{position:absolute;inset:0;overflow:hidden;z-index:-1;pointer-events:none}
+/* Rounded highway sign, white inset border, sturdy continuous post. */
+.cue{filter:drop-shadow(4px 7px 0 #16352b40);isolation:isolate}
+.cue:before,body.present .cue:before{inset:-24px -28px;border-radius:22px;background:linear-gradient(145deg,#188454,#0c6740 70%);border:5px solid #edf6d9;outline:4px solid #154d37;box-shadow:inset 0 0 0 3px #246947,inset 0 0 0 5px #e3f2da,6px 7px 0 #154d37,8px 12px 0 #153e332a;backdrop-filter:none}
+.cue:after{content:'';position:absolute;top:calc(100% + 24px);left:calc(50% - 17px);width:34px;height:max(100vh,1200px);z-index:-2;background:repeating-linear-gradient(0deg,transparent 0 22px,#37494d55 22px 25px),linear-gradient(90deg,#536a71,#c5d2ce 25%,#a6b8b5 49%,#5e747a 80%);border-left:3px solid #304951;border-right:3px solid #304951;box-shadow:5px 0 0 #153e3340;pointer-events:none}
+.cue-icon{color:var(--active);height:clamp(105px,12vw,160px);filter:drop-shadow(0 0 3px var(--active)) drop-shadow(0 0 14px color-mix(in srgb,var(--active) 75%,transparent));animation:none!important;transform:none!important}
+.cue-icon svg{width:auto;height:100%;filter:drop-shadow(0 2px 0 #174b37);shape-rendering:geometricPrecision}
+.cue h1{font-family:'Barlow Condensed','Arial Narrow',Impact,sans-serif;text-shadow:0 3px 0 #08442e;letter-spacing:2px}
+.cue p{color:#fffdec;text-shadow:0 1px 0 #08442e}
+body.present .cue-icon{height:clamp(70px,23vh,280px)}
+body.present .cue:after{width:clamp(28px,3vw,56px);left:calc(50% - clamp(14px,1.5vw,28px))}
+@media(max-width:760px){.cue:before,body.present .cue:before{inset:-20px -12px;border-width:3px;outline-width:3px;border-radius:16px}.cue:after{top:calc(100% + 20px);width:24px;left:calc(50% - 12px)}.cue-icon{height:clamp(85px,19vw,125px)}}
+@media(max-height:500px){body.present .cue-icon{height:18vh}body.present .cue:before{inset:-10px -12px}body.present .cue:after{top:calc(100% + 10px)}}

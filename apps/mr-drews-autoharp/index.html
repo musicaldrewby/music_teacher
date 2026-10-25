@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#ede7d9"><meta name="description" content="Play a photographic autoharp by sunlit windows, in a classroom, or in two realistic spooky settings. Six sampled instruments, touch strumming, eight auto-strum patterns, and real chord damping.">
+<title>Mr. Drew’s Auto Harp</title><link rel="icon" type="image/svg+xml" href="icon.svg"><link rel="stylesheet" href="style.css?v=auto-strum-1">
+<link rel="preload" as="image" href="assets/sunlit-walnut.png">
+</head>
+<body>
+<main id="scene" class="scene" tabindex="-1" aria-label="Playable autoharp — Sunlit windows">
+  <img id="sceneBackdrop" class="scene-backdrop" src="assets/sunlit-walnut.png" alt="" aria-hidden="true" draggable="false">
+  <img id="sceneBackdropClassroom" class="scene-backdrop scene-crossfade" alt="" aria-hidden="true" draggable="false">
+  <img id="sceneBackdropManor" class="scene-backdrop scene-crossfade" alt="" aria-hidden="true" draggable="false">
+  <img id="sceneBackdropStorm" class="scene-backdrop scene-crossfade" alt="" aria-hidden="true" draggable="false">
+  <div id="instrumentPosition" class="instrument-position">
+    <div id="instrumentWrap" class="instrument-wrap">
+      <div id="scenePhotoLayer" class="scene-layer"><img id="scenePhoto" class="scene-photo" src="assets/sunlit-walnut.png" alt="Sunburst autoharp on a walnut table" draggable="false" fetchpriority="high"></div>
+      <div id="scenePhotoClassroomLayer" class="scene-layer scene-crossfade"><img id="scenePhotoClassroom" class="scene-photo" alt="" aria-hidden="true" draggable="false"></div>
+      <div id="scenePhotoManorLayer" class="scene-layer scene-crossfade"><img id="scenePhotoManor" class="scene-photo" alt="" aria-hidden="true" draggable="false"></div>
+      <div id="scenePhotoStormLayer" class="scene-layer scene-crossfade"><img id="scenePhotoStorm" class="scene-photo" alt="" aria-hidden="true" draggable="false"></div>
+      <svg id="harp" viewBox="0 0 1672 941" aria-hidden="true">
+        <defs><mask id="stringMask"><rect width="1672" height="941" fill="white"/><rect id="barMask" x="0" y="555" width="1672" height="157" fill="black"/></mask></defs>
+        <g mask="url(#stringMask)"><g id="stringGlows"></g><g id="noteLabels"></g></g>
+      </svg>
+      <div id="stringSurface" aria-label="Brush the strings to strum, or tap a string to pluck"></div>
+      <div id="chordBoard" aria-label="Playable chord buttons"></div>
+    </div>
+  </div>
+</main>
+<header class="topbar" id="topbar">
+  <div class="header-actions">
+    <button id="audioBtn" class="sound-button"><span class="sound-led"></span><span id="audioLabel">Enable sound</span></button>
+    <button id="autoQuickBtn" class="tool-button auto-quick" aria-label="Open auto strum patterns" aria-controls="optionsPanel"><span aria-hidden="true">↻</span><b id="autoQuickLabel">Auto strum</b></button>
+    <button id="optionsBtn" class="tool-button" aria-expanded="false" aria-controls="optionsPanel"><span aria-hidden="true">☷</span> Options</button>
+    <button id="fullBtn" class="icon-button" aria-label="Enter full screen" title="Full screen" aria-pressed="false">⛶</button>
+    <button id="helpBtn" class="icon-button" aria-label="How to play" title="How to play">?</button>
+  </div>
+</header>
+<div class="playing-status" aria-live="polite"><div class="chord-name" id="chordName">C<span>major</span></div><div class="chord-detail"><span id="modeTag">LATCHED</span><div class="chord-tones" id="chordTones">C · E · G</div></div></div>
+
+<div id="autoNow" class="auto-now" hidden><span id="autoPulse" class="auto-pulse" aria-hidden="true"><span id="autoBeat">1</span></span><div><strong id="autoNowName">Steady beats</strong><span id="autoNowTempo">92 BPM</span></div><button id="autoEditBtn" aria-label="Edit auto strum pattern">Edit</button></div>
+<div id="stageHint" class="stage-hint">Choose a chord. Brush the strings.</div>
+<aside id="optionsPanel" class="options-panel" aria-label="Autoharp options" hidden>
+  <div class="panel-heading"><h2>Options</h2><button id="closeOptions" class="icon-button" aria-label="Close options">×</button></div>
+  <div class="options-tabs" role="tablist" aria-label="Options categories">
+    <button id="soundTab" role="tab" data-options-tab="sound" aria-controls="soundPanel" aria-selected="true">Sound</button>
+    <button id="playingTab" role="tab" data-options-tab="playing" aria-controls="playingPanel" aria-selected="false" tabindex="-1">Playing</button>
+    <button id="strumTab" role="tab" data-options-tab="strum" aria-controls="strumPanel" aria-selected="false" tabindex="-1">Strum</button>
+    <button id="sceneTab" role="tab" data-options-tab="scene" aria-controls="scenePanel" aria-selected="false" tabindex="-1">Scene</button>
+  </div>
+  <div class="options-body">
+    <section id="soundPanel" role="tabpanel" aria-labelledby="soundTab">
+      <div class="sound-options"><label for="presetSelect">Instrument sound</label><select id="presetSelect" aria-describedby="presetStatus"></select><p id="presetStatus" class="microcopy" role="status">Bright, ringing hammered strings.</p></div>
+      <div class="sound-controls" aria-label="Sound settings">
+        <div class="sound-setting"><div class="slider-row"><label for="volume">Volume</label><output id="volumeValue">70%</output></div><input id="volume" type="range" min="0" max="100" value="70" aria-label="Volume"></div>
+        <div class="sound-setting"><div class="slider-row"><label for="tone">Tone</label><output id="toneValue">Warm</output></div><input id="tone" type="range" min="0" max="100" value="55" aria-label="Tone"></div>
+        <div class="sound-setting"><div class="slider-row"><label for="reverb">Room reverb</label><output id="reverbValue">20%</output></div><input id="reverb" type="range" min="0" max="100" value="20" aria-label="Reverb"></div>
+        <div class="sound-setting"><div class="slider-row"><label for="strength">Pick strength</label><output id="strengthValue">Natural</output></div><input id="strength" type="range" min="10" max="100" value="65" aria-label="Pick strength"></div>
+      </div>
+      <button id="demoBtn" class="demo-button"><span id="demoIcon" aria-hidden="true">▷</span><span id="demoLabel">Hear it play</span><span class="demo-sub">DEMO</span></button>
+    </section>
+    <section id="playingPanel" role="tabpanel" aria-labelledby="playingTab" hidden>
+      <div class="mode-control"><div class="field-heading"><span>Chord buttons</span><button id="modeHelp" class="little-help" aria-label="Explain chord modes">?</button></div><div class="segmented" role="group" aria-label="Chord button mode"><button class="selected" data-mode="latch" aria-pressed="true">Latch</button><button data-mode="hold" aria-pressed="false">Hold</button></div><p id="modeDescription" class="microcopy">Tap a chord. It stays selected while you strum.</p></div>
+      <div class="chord-select-field"><label for="chordSelect">Choose a chord</label><select id="chordSelect" aria-label="Choose a chord"><option value="open">Open strings</option><option value="held" disabled hidden>Multiple bars held</option></select></div>
+      <div class="utility-actions"><button id="openBtn">Open strings</button><button id="notesBtn" aria-pressed="false">Show notes</button></div>
+      <button id="lastRecordingBtn" class="guide-button" hidden>Play or download last recording ↗</button>
+      <button id="footerHelp" class="guide-button">Playing guide &amp; keyboard shortcuts ↗</button><button id="aboutBtn" class="guide-button about-button">Welcome &amp; support ↗</button>
+    </section>
+    <section id="strumPanel" role="tabpanel" aria-labelledby="strumTab" hidden>
+      <div class="strum-heading"><h3>Auto strum</h3><span id="autoMeter" class="meter-badge">4/4</span></div>
+      <label for="autoPattern">Pattern</label><select id="autoPattern" aria-describedby="autoDescription"></select>
+      <p id="autoDescription" class="microcopy"></p>
+      <div id="autoPatternGrid" class="pattern-grid" role="img" aria-label="Strum pattern"></div>
+      <p class="pattern-legend">↓ down &nbsp; ↑ up &nbsp; B bass &nbsp; ♪ pick &nbsp; — gap</p>
+      <div class="auto-tempo-setting">
+        <div class="slider-row"><label for="autoTempo">Tempo</label><span id="autoTempoUnit">BPM · quarter note beat</span></div>
+        <div class="tempo-entry"><button id="autoSlower" aria-label="Slower by 1 BPM">−</button><input id="autoTempoNumber" type="number" inputmode="numeric" min="40" max="180" step="1" value="92" aria-label="Tempo in BPM"><button id="autoFaster" aria-label="Faster by 1 BPM">+</button></div>
+        <input id="autoTempo" type="range" min="40" max="180" step="1" value="92" aria-label="Auto strum tempo">
+        <div class="tempo-range"><span>40 · slow</span><span>180 · fast</span></div>
+      </div>
+      <button id="autoStart" class="auto-start" aria-pressed="false">Start auto strum</button>
+      <p id="autoStatus" class="microcopy" role="status">Choose a pattern and tempo, then press Start.</p>
+    </section>
+    <section id="scenePanel" role="tabpanel" aria-labelledby="sceneTab" hidden>
+      <div class="scene-options"><label for="sceneSelect">Environment</label><select id="sceneSelect"><option value="sunlit">Sunlit windows</option><option value="classroom">Classroom studio</option><option value="manor">Moonlit manor</option><option value="storm">Stormy old house</option></select><p class="microcopy">Choose your setting. The rooms gently fade into one another.</p></div>
+    </section>
+  </div>
+</aside>
+<nav id="playbar" class="playbar" aria-label="Playing and scene controls">
+  <div class="play-controls">
+    <div class="strum-tools"><button id="downBtn" class="primary-play"><span aria-hidden="true">↓</span> Strum</button><button id="upBtn" class="square-play" aria-label="Strum up" title="Strum up">↑</button><button id="dampBtn" class="damp-button">Damp</button></div>
+    <div id="recordTools" class="record-tools"><button id="recordBtn" class="record-button" aria-label="Start recording" aria-pressed="false"><span class="record-dot" aria-hidden="true"></span><span id="recordLabel">Record</span></button><span id="recordTimer" class="record-timer" aria-label="Recording time" hidden>00:00</span></div>
+  </div>
+  <div class="scene-switch"><label for="sceneQuickSelect">Scene</label><select id="sceneQuickSelect"><option value="sunlit">Sunlit windows</option><option value="classroom">Classroom studio</option><option value="manor">Moonlit manor</option><option value="storm">Stormy old house</option></select></div>
+</nav>
+<aside id="recordResult" class="record-result" aria-labelledby="recordHeading" hidden>
+  <div class="record-result-heading"><div><h2 id="recordHeading">Your recording</h2><p id="recordTakeLabel">Take 1</p></div><button id="closeRecording" class="icon-button" aria-label="Close recording playback">×</button></div>
+  <audio id="recordPlayback" controls preload="metadata" aria-label="Play your autoharp recording"></audio>
+  <a id="recordDownload" class="record-download" download>↓ Download audio</a>
+  <p class="record-save-note">Download to keep your take before recording again or leaving this page.</p>
+</aside>
+<div id="recordStatus" class="sr-only" role="status"></div>
+<div id="sceneStatus" class="sr-only" role="status"></div>
+<div class="note-feedback" id="noteFeedback" role="status" aria-live="off">Ready to play</div>
+<div id="toast" role="status" aria-live="polite"></div>
+<dialog id="helpDialog"><div class="dialog-head"><span class="eyebrow">WELCOME TO YOUR AUTOHARP</span><button id="closeHelp" class="icon-button" aria-label="Close playing guide">×</button></div><h2>Press a chord.<br>Let the strings sing.</h2><p>Tap <strong>Enable sound</strong>, tap one of the ivory chord buttons, then brush left or right across the exposed strings. Tap an individual string to pick it.</p><div class="guide-grid"><div><h3>Latch mode</h3><p>The default: tap a chord and it stays pressed. Perfect for playing with a mouse or one hand.</p></div><div><h3>Hold mode</h3><p>Like a real autoharp: hold a chord with one finger and strum with another. Release the bar to open the strings. Holding two bars lets only their shared strings ring. With a mouse, hold a keyboard chord key while strumming, or choose Latch.</p></div><div><h3>Real chord damping</h3><p>Pressing a bar mutes notes outside the chord—even strings that are already ringing. Plucked strings light up as they ring.</p></div><div><h3>Expressive strumming</h3><p>Brush slowly for an arpeggio or quickly for a full chord. Pick higher or lower on the strings for a change in color.</p></div></div><h3>Four places to play</h3><p>Choose <strong>Sunlit windows</strong>, <strong>Classroom studio</strong>, <strong>Moonlit manor</strong>, or <strong>Stormy old house</strong> using the scene menu below. Each scene stays still while you play and fits your screen automatically. On a smaller screen, you can also choose your chord in Options.</p><h3>Auto-strum patterns</h3><p>Tap <strong>Auto strum</strong> at the top, or open <strong>Options → Strum</strong>. Choose from eight patterns, set a tempo from 40–180 BPM, and press <strong>Start auto strum</strong>. Tap chord buttons as you play; Latch mode is easiest for one-handed accompaniment. The moving highlight shows the pattern. In 6/8, BPM counts dotted-quarter beats. Changing a pattern restarts its first beat. Use the top <strong>Stop strum</strong> button, <strong>Damp</strong>, or <strong>Esc</strong> to stop. Pattern and tempo are remembered, but playback always starts manually. Auto strum is included in recordings.</p><h3>Record a performance</h3><p>Press <strong>Record</strong>, play the autoharp, then press <strong>Stop</strong>. Play back your take or choose <strong>Download audio</strong> to keep it. Recording captures the instrument sound, including reverb. You can reopen your last take under Options → Playing. Keep this page visible while recording.</p><h3>Keyboard</h3><div class="shortcut-grid"><span><kbd>1</kbd>–<kbd>7</kbd> Top major row</span><span><kbd>Q</kbd>–<kbd>U</kbd> Seventh-chord row</span><span><kbd>A</kbd>–<kbd>J</kbd> A♭, B♭7, then minor row</span><span><kbd>Space</kbd> Strum down</span><span><kbd>↑</kbd> Strum up</span><span><kbd>↓</kbd> Strum down</span><span><kbd>O</kbd> Open strings</span><span><kbd>Esc</kbd> Damp all</span></div><p class="sound-note">36 sampled notes in standard F2–C6 autoharp tuning. The standard 21-button layout has 8 major, 8 dominant seventh, and 5 minor chords, with conventional felt-bar bass damping. Choose from six sampled instrument sounds under Options. Your choice is remembered on this device. Sounds rendered from GeneralUser GS 1.471 by S. Christian Collins. <a href="soundfont-license.txt" target="_blank" rel="noopener">SoundFont credits &amp; license</a>. Use headphones or speakers for the fullest sound.</p><button id="startPlaying" class="primary-play">Let’s play <span>↗</span></button></dialog>
+<dialog id="welcomeDialog" class="welcome-dialog" aria-labelledby="welcomeTitle" aria-describedby="welcomeCredit welcomeDonation">
+  <div class="welcome-content">
+    <div class="welcome-ornament" aria-hidden="true">♫</div>
+    <h1 id="welcomeTitle">Mr. Drew’s <span>Auto Harp</span></h1>
+    <p id="welcomeCredit" class="welcome-credit">Created by Drew Wunschman</p>
+    <div class="welcome-rule" aria-hidden="true"></div>
+    <p id="welcomeDonation" class="welcome-donation">If you enjoy using this software,<br>please consider donating.</p>
+    <a class="coffee-button" href="https://buymeacoffee.com/musicaldrewby" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h12v7a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5V8Zm12 1h2a3 3 0 0 1 0 6h-2M3 22h15M8 2v3m5-3v3"/></svg>Buy me a coffee <span class="external-mark" aria-hidden="true">↗</span></a>
+    <button id="welcomePlay" class="welcome-play" autofocus>Let’s play <span aria-hidden="true">→</span></button>
+  </div>
+</dialog>
+<script type="module" src="app.js?v=auto-strum-1"></script>
+</body></html>

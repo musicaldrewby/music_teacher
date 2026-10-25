@@ -1,0 +1,7 @@
+{
+  "mode": "built-in image_gen",
+  "use_case": "logo-brand",
+  "asset": "dist/assets/collage/uke-strum-logo.png",
+  "prompt": "Use case: logo-brand. Asset type: transparent illustrated emblem for the splash screen of Mr. Drew's Uke Strum, an elementary classroom ukulele play-along app. Create a polished, memorable compact emblem: a beautifully shaped honey-orange soprano ukulele tilted slightly to the right, four strings and four tuning pegs, paired with a warm golden sun behind its upper body and two curling turquoise and deep-blue ocean waves at its base. Rich saturated painted paper-collage style, hand-torn layered paper edges, brushed gouache texture, dimensional paper shadows, friendly but professional illustration, organic contours rather than geometric icons. Simple readable silhouette that remains attractive at 180px wide. All objects joined into one balanced compact composition in the central 85% of a square canvas. No lettering, no text, no words, no music-note confetti, no hands, no people, no faces, no scenery outside the emblem, no rectangular frame. Actual transparent background around the entire emblem. Warm sunshine yellow, coral orange, ocean cobalt and turquoise, soft cream paper highlights.",
+  "transparent_background": true
+}

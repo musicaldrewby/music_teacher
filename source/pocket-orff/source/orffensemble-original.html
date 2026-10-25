@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Mr. Drew's Pocket Ensemble</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&family=Lora:ital,wght@1,400;1,600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --boho-bg: #f4f1ea;
+            --boho-dark: #2c2420;
+            --terra-cotta: #c06c58;
+            --sage-green: #8da399;
+            --mustard: #d4a056;
+            --silver: #a0a0a0;
+        }
+
+        body {
+            margin: 0;
+            background-color: var(--boho-bg);
+            /* Soft linen texture */
+            background-image: radial-gradient(#d3d0c9 1px, transparent 1px);
+            background-size: 20px 20px;
+            color: var(--boho-dark);
+            font-family: 'Lora', serif;
+            overflow: hidden;
+            touch-action: none;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        /* --- LANDSCAPE WARNING --- */
+        #rotate-overlay {
+            display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background: rgba(44, 36, 32, 0.95); z-index: 9999;
+            flex-direction: column; justify-content: center; align-items: center; text-align: center;
+            color: var(--boho-bg);
+        }
+        .rotate-msg {
+            border: 2px dashed var(--mustard); padding: 40px; border-radius: 50% 20% / 10% 40%;
+            font-family: 'Amatic SC', cursive; font-size: 2rem;
+        }
+
+        /* --- MAIN MENU --- */
+        #main-menu {
+            display: flex; flex-direction: column; height: 100vh; padding: 20px; box-sizing: border-box; overflow-y: auto;
+        }
+
+        .header { margin: 20px 0 30px 0; text-align: center; }
+
+        h1 {
+            font-family: 'Amatic SC', cursive; font-size: 3.5rem; margin: 0; line-height: 1;
+            color: var(--terra-cotta); letter-spacing: 2px;
+        }
+        
+        .section-label {
+            display: inline-block;
+            font-family: 'Amatic SC', cursive; font-size: 1.8rem; margin: 30px 0 10px 0;
+            color: var(--boho-dark); border-bottom: 3px solid var(--mustard);
+            width: fit-content;
+        }
+
+        .grid-container { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+
+        .card {
+            background: #fff;
+            border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
+            border: 2px solid var(--boho-dark);
+            padding: 15px; height: 100px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
+            position: relative; overflow: hidden;
+            box-shadow: 5px 5px 0 rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+        }
+        .card:active { transform: scale(0.98); box-shadow: 2px 2px 0 rgba(0,0,0,0.1); }
+
+        .accent-wood { background: #fffbf0; border-color: var(--mustard); color: #8c6a38; }
+        .accent-metal { background: #f0f7f4; border-color: var(--silver); color: #666; }
+        .accent-gold { background: #fff; border-color: var(--silver); color: #444; }
+        .accent-perc { background: #fff0f5; border-color: var(--terra-cotta); color: var(--terra-cotta); }
+
+        .card h3 { margin: 0; font-family: 'Amatic SC', cursive; font-size: 2rem; font-weight: 700; z-index: 2; }
+        .card span { font-size: 0.8rem; font-style: italic; color: #666; z-index: 2; font-family: 'Lora', serif; }
+
+        .icon-bg {
+            position: absolute; width: 60px; height: 60px; border-radius: 50%; 
+            opacity: 0.2; z-index: 0; top: -10px; right: -10px;
+        }
+        .accent-wood .icon-bg { background: var(--mustard); }
+        .accent-metal .icon-bg { background: var(--silver); }
+        .accent-gold .icon-bg { background: var(--silver); }
+        .accent-perc .icon-bg { background: var(--terra-cotta); }
+
+        .wide-card { grid-column: span 2; }
+
+        /* --- INSTRUMENT VIEW --- */
+        #instrument-view {
+            display: none; flex-direction: column; height: 100vh; width: 100vw;
+            background: var(--boho-dark);
+        }
+        
+        .top-bar {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 10px 20px; background: #fff; 
+            border-bottom: 4px solid var(--mustard);
+            height: 45px; z-index: 10;
+        }
+
+        .back-btn, .damper-toggle {
+            background: transparent; border: 2px solid var(--boho-dark); color: var(--boho-dark);
+            padding: 5px 20px; font-family: 'Amatic SC', cursive; font-size: 1.4rem; font-weight: bold;
+            border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
+            cursor: pointer;
+        }
+        .damper-toggle.active { background: var(--sage-green); color: #fff; border-color: var(--sage-green); }
+
+        #inst-title { font-family: 'Amatic SC', cursive; font-size: 2rem; color: var(--boho-dark); }
+
+        #instrument-container {
+            flex: 1; display: flex; justify-content: center; align-items: center;
+            padding: 0 20px; width: 100%; box-sizing: border-box;
+            background-image: radial-gradient(rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 20px 20px;
+            touch-action: none;
+        }
+
+        .instrument-frame {
+            display: flex; justify-content: center; align-items: center;
+            gap: 8px; height: 85%; width: 100%; max-width: none;
+            background: rgba(255,255,255,0.05); 
+            border-radius: 20px; padding: 20px;
+        }
+
+        .bar {
+            flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center;
+            position: relative; cursor: pointer; transition: transform 0.1s;
+            -webkit-tap-highlight-color: transparent; margin-top: auto; margin-bottom: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            pointer-events: auto;
+        }
+
+        .bar.hit { transform: translateY(5px) scale(0.98); filter: brightness(1.1); }
+        .bar.disabled { opacity: 0.2; pointer-events: none; filter: grayscale(100%); transform: scale(0.9); }
+
+        .note-label {
+            font-size: 1.8rem; font-family: 'Amatic SC', cursive; pointer-events: none; 
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3); font-weight: bold;
+        }
+
+        .bar-bottom-trigger {
+            position: absolute; bottom: 0; left: 0; width: 100%; height: 25%;
+            background: linear-gradient(to top, rgba(0,0,0,0.3), transparent);
+            border-bottom-left-radius: 8px; border-bottom-right-radius: 8px;
+            pointer-events: none;
+        }
+        
+        /* --- MATERIALS --- */
+        
+        /* Light/Warm Wood (Pine/Oak) */
+        .mat-wood { 
+            background: linear-gradient(to bottom, #eecfa1, #d2b48c);
+            border-bottom: 6px solid #8b7355;
+            border-radius: 10px 10px 20px 20px;
+        }
+        .mat-wood .note-label { color: #5d4037; text-shadow: none; }
+        
+        /* Silver (Used for Metallophones AND Glock) */
+        .mat-silver { 
+            background: linear-gradient(to bottom, #f5f5f5, #cfd8dc);
+            border-bottom: 6px solid #78909c;
+            color: #333;
+        }
+        .mat-silver .note-label { color: #37474f; text-shadow: none; }
+
+        /* --- PERCUSSION --- */
+        .perc-display { 
+            width: 200px; height: 200px; display: flex; justify-content: center; align-items: center; 
+            margin-bottom: 20px; position: relative;
+            background: #fff; border-radius: 50%;
+            border: 4px dashed var(--sage-green);
+        }
+        
+        .perc-triangle { 
+            width: 0; height: 0; 
+            border-left: 80px solid transparent; border-right: 80px solid transparent; border-bottom: 140px solid var(--mustard); 
+        }
+
+        /* Gourd Guiro */
+        .perc-guiro-large {
+            width: 70vw; height: 50vh;
+            background: #d4a056; 
+            border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+            box-shadow: inset 10px 10px 30px rgba(0,0,0,0.2), 10px 10px 0 rgba(0,0,0,0.2);
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            touch-action: none; position: relative; overflow: hidden;
+            border: 2px solid #8c6a38;
+        }
+        .guiro-ridges {
+            width: 60%; height: 80%;
+            background: repeating-linear-gradient(180deg, transparent, transparent 15px, rgba(0,0,0,0.1) 15px, rgba(0,0,0,0.1) 18px);
+            border-radius: 20px;
+            border: 2px solid rgba(0,0,0,0.1);
+        }
+        .perc-guiro-large::after {
+            content: "SCRAPE"; color: rgba(255,255,255,0.5); font-family: 'Amatic SC'; font-size: 3rem;
+            position: absolute; pointer-events: none;
+        }
+
+        .perc-claves { font-size: 5rem; color: var(--terra-cotta); font-family: 'Amatic SC'; }
+
+    </style>
+</head>
+<body>
+
+    <div id="rotate-overlay">
+        <div class="rotate-msg"><p>PLEASE TURN SIDEWAYS</p></div>
+    </div>
+
+    <div id="main-menu">
+        <div class="header">
+            <h1>Mr. Drew's Pocket Ensemble</h1>
+        </div>
+
+        <div class="section-label">Wooden Bars</div>
+        <div class="grid-container">
+            <div class="card accent-wood" onclick="loadInstrument('xylo_bass')">
+                <div class="icon-bg"></div><h3>Bass</h3><span>Deep Resonance</span>
+            </div>
+            <div class="card accent-wood" onclick="loadInstrument('xylo_alto')">
+                <div class="icon-bg"></div><h3>Alto</h3><span>Warm Oak</span>
+            </div>
+            <div class="card accent-wood wide-card" onclick="loadInstrument('xylo_sop')">
+                <div class="icon-bg"></div><h3>Soprano</h3><span>Bright Maple</span>
+            </div>
+        </div>
+
+        <div class="section-label">Metal Bars</div>
+        <div class="grid-container">
+            <div class="card accent-metal" onclick="loadInstrument('met_bass')">
+                <div class="icon-bg"></div><h3>Bass</h3><span>Silver Sustain</span>
+            </div>
+            <div class="card accent-metal" onclick="loadInstrument('met_alto')">
+                <div class="icon-bg"></div><h3>Alto</h3><span>Pure Tone</span>
+            </div>
+            <div class="card accent-metal" onclick="loadInstrument('met_sop')">
+                <div class="icon-bg"></div><h3>Soprano</h3><span>Shimmer</span>
+            </div>
+            <div class="card accent-gold" onclick="loadInstrument('glock')">
+                <div class="icon-bg"></div><h3>Glockenspiel</h3><span>Bright Chime</span>
+            </div>
+        </div>
+
+        <div class="section-label">Unpitched Percussion</div>
+        <div class="grid-container">
+            <div class="card accent-perc" onclick="loadInstrument('perc_triangle')">
+                <div class="icon-bg"></div><h3>Triangle</h3>
+            </div>
+            <div class="card accent-perc" onclick="loadInstrument('perc_guiro')">
+                <div class="icon-bg"></div><h3>Guiro</h3>
+            </div>
+            <div class="card accent-perc wide-card" onclick="loadInstrument('perc_claves')">
+                <div class="icon-bg"></div><h3>Claves</h3>
+            </div>
+        </div>
+    </div>
+
+    <div id="instrument-view">
+        <div class="top-bar">
+            <button class="back-btn" onclick="goHome()">&#8592; Menu</button>
+            <span id="inst-title">Instrument</span>
+            <button id="damper-btn" class="damper-toggle" onclick="toggleDamper()">Damper</button>
+        </div>
+        
+        <div id="instrument-container"></div>
+    </div>
+
+    <script>
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        const ctx = new AudioContext();
+
+        // --- DISTORTION FIX ---
+        // 1. Master Gain to lower overall volume before hitting speakers
+        const masterGain = ctx.createGain();
+        masterGain.gain.value = 0.4; 
+
+        // 2. Hard Limiter (Compressor)
+        const limiter = ctx.createDynamicsCompressor();
+        limiter.threshold.value = -3; 
+        limiter.knee.value = 0;       
+        limiter.ratio.value = 20;     
+        limiter.attack.value = 0.001; 
+        limiter.release.value = 0.1;
+
+        // Chain: Source -> MasterGain -> Limiter -> Speakers
+        masterGain.connect(limiter);
+        limiter.connect(ctx.destination);
+
+        let isDamperActive = false;
+        let currentInstrumentId = null;
+        let lastPlayedNote = null;
+
+        const notes = {
+            'C3': 130.81, 'D3': 146.83, 'E3': 164.81, 'F3': 174.61, 'G3': 196.00, 'A3': 220.00, 'B3': 246.94,
+            'C4': 261.63, 'D4': 293.66, 'E4': 329.63, 'F4': 349.23, 'G4': 392.00, 'A4': 440.00, 'B4': 493.88,
+            'C5': 523.25, 'D5': 587.33, 'E5': 659.25, 'F5': 698.46, 'G5': 783.99, 'A5': 880.00, 'B5': 987.77,
+            'C6': 1046.50, 'D6': 1174.66, 'E6': 1318.51, 'F6': 1396.91, 'G6': 1567.98, 'A6': 1760.00, 'B6': 1975.53,
+            'C7': 2093.00, 'D7': 2349.32, 'E7': 2637.02, 'F7': 2793.83, 'G7': 3135.96, 'A7': 3520.00
+        };
+
+        function checkOrientation() {
+            if (!currentInstrumentId || currentInstrumentId.startsWith('perc_')) {
+                document.getElementById('rotate-overlay').style.display = 'none';
+                return;
+            }
+            if (window.innerHeight > window.innerWidth) {
+                document.getElementById('rotate-overlay').style.display = 'flex';
+                document.getElementById('instrument-view').style.visibility = 'hidden';
+            } else {
+                document.getElementById('rotate-overlay').style.display = 'none';
+                document.getElementById('instrument-view').style.visibility = 'visible';
+            }
+        }
+        window.addEventListener('resize', checkOrientation);
+
+        function playTone(freq, type) {
+            if (ctx.state === 'suspended') ctx.resume();
+            const t = ctx.currentTime;
+            
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            
+            // Connect to MASTER GAIN instead of destination
+            osc.connect(gain);
+            gain.connect(masterGain); 
+            
+            osc.frequency.value = freq;
+            
+            if (type === 'wood') {
+                osc.type = 'sine';
+                const harmOsc = ctx.createOscillator();
+                const harmGain = ctx.createGain();
+                harmOsc.type = 'sine';
+                harmOsc.frequency.value = freq * 3; 
+                harmOsc.connect(harmGain);
+                harmGain.connect(masterGain);
+
+                const attackOsc = ctx.createOscillator();
+                const attackGain = ctx.createGain();
+                attackOsc.type = 'sine'; 
+                attackOsc.frequency.value = freq; 
+                attackOsc.connect(attackGain);
+                attackGain.connect(masterGain);
+
+                gain.gain.setValueAtTime(0, t);
+                gain.gain.linearRampToValueAtTime(0.6, t + 0.005); 
+                gain.gain.exponentialRampToValueAtTime(0.001, t + 1.1); 
+
+                harmGain.gain.setValueAtTime(0, t);
+                harmGain.gain.linearRampToValueAtTime(0.2, t + 0.005); 
+                harmGain.gain.exponentialRampToValueAtTime(0.001, t + 0.8);
+
+                attackGain.gain.setValueAtTime(0, t);
+                attackGain.gain.linearRampToValueAtTime(0.4, t + 0.002);
+                attackGain.gain.exponentialRampToValueAtTime(0.001, t + 0.04);
+                
+                osc.start(t); osc.stop(t + 1.2);
+                harmOsc.start(t); harmOsc.stop(t + 0.9);
+                attackOsc.start(t); attackOsc.stop(t + 0.1);
+
+            } else if (type === 'metal') {
+                osc.type = 'sine';
+                const osc2 = ctx.createOscillator();
+                const gain2 = ctx.createGain();
+                osc2.type = 'sine';
+                osc2.frequency.value = freq * 2.99;
+                osc2.connect(gain2);
+                gain2.connect(masterGain);
+
+                const decay = isDamperActive ? 0.2 : 3.0;
+                
+                gain.gain.setValueAtTime(0, t);
+                gain.gain.linearRampToValueAtTime(0.5, t + 0.01);
+                gain.gain.exponentialRampToValueAtTime(0.001, t + decay);
+                
+                gain2.gain.setValueAtTime(0, t);
+                gain2.gain.linearRampToValueAtTime(0.05, t + 0.01);
+                gain2.gain.exponentialRampToValueAtTime(0.001, t + (decay * 0.5));
+                
+                osc.start(t); osc.stop(t + decay + 0.1);
+                osc2.start(t); osc2.stop(t + decay + 0.1);
+
+            } else if (type === 'glock') {
+                osc.type = 'sine';
+                gain.gain.setValueAtTime(0, t);
+                gain.gain.linearRampToValueAtTime(0.3, t + 0.002); 
+                gain.gain.exponentialRampToValueAtTime(0.001, t + 2.0);
+                osc.start(t); osc.stop(t + 2.1);
+            }
+        }
+
+        function playGuiroScrape() {
+            if (ctx.state === 'suspended') ctx.resume();
+            const t = ctx.currentTime;
+            const freq = 1200 + Math.random() * 800; 
+            const bufferSize = ctx.sampleRate * 0.05; 
+            const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+            const data = buffer.getChannelData(0);
+            for (let i = 0; i < bufferSize; i++) data[i] = Math.random() * 2 - 1;
+            
+            const noise = ctx.createBufferSource();
+            noise.buffer = buffer;
+            const filter = ctx.createBiquadFilter();
+            filter.type = 'bandpass';
+            filter.frequency.value = freq;
+            filter.Q.value = 5;
+            const gain = ctx.createGain();
+            noise.connect(filter);
+            filter.connect(gain);
+            gain.connect(masterGain); 
+            gain.gain.setValueAtTime(0.6, t);
+            gain.gain.exponentialRampToValueAtTime(0.01, t + 0.04);
+            noise.start(t);
+        }
+
+        function playPercussion(type) {
+            if (ctx.state === 'suspended') ctx.resume();
+            const t = ctx.currentTime;
+            if (type === 'claves') {
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.connect(gain);
+                gain.connect(masterGain);
+                osc.type = 'sine';
+                osc.frequency.value = 2300;
+                gain.gain.setValueAtTime(0, t);
+                gain.gain.linearRampToValueAtTime(0.6, t + 0.001);
+                gain.gain.exponentialRampToValueAtTime(0.001, t + 0.15);
+                osc.start(t); osc.stop(t+0.2);
+            } else if (type === 'triangle') {
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.connect(gain);
+                gain.connect(masterGain);
+                osc.type = 'triangle';
+                osc.frequency.value = 6000;
+                const osc2 = ctx.createOscillator();
+                const gain2 = ctx.createGain();
+                osc2.connect(gain2);
+                gain2.connect(masterGain);
+                osc2.frequency.value = 9000;
+                gain.gain.setValueAtTime(0, t);
+                gain.gain.linearRampToValueAtTime(0.15, t + 0.01);
+                gain.gain.exponentialRampToValueAtTime(0.001, t + 2.5);
+                gain2.gain.setValueAtTime(0, t);
+                gain2.gain.linearRampToValueAtTime(0.08, t + 0.01);
+                gain2.gain.exponentialRampToValueAtTime(0.001, t + 2.5);
+                osc.start(t); osc.stop(t+3);
+                osc2.start(t); osc2.stop(t+3);
+            }
+        }
+
+        const rangeBass = ['C3','D3','E3','F3','G3','A3','B3','C4','D4','E4','F4','G4','A4'];
+        const rangeAlto = ['C4','D4','E4','F4','G4','A4','B4','C5','D5','E5','F5','G5','A5'];
+        const rangeSop =  ['C5','D5','E5','F5','G5','A5','B5','C6','D6','E6','F6','G6','A6'];
+        const rangeGlock =['C6','D6','E6','F6','G6','A6','B6','C7','D7','E7','F7','G7','A7'];
+
+        const instrumentConfig = {
+            'xylo_bass': { type: 'wood', range: rangeBass, mat: 'mat-wood', title: 'Bass Xylophone' },
+            'xylo_alto': { type: 'wood', range: rangeAlto, mat: 'mat-wood', title: 'Alto Xylophone' },
+            'xylo_sop':  { type: 'wood', range: rangeSop, mat: 'mat-wood', title: 'Soprano Xylophone' },
+            /* Metallophones now use 'mat-silver' */
+            'met_bass':  { type: 'metal', range: rangeBass, mat: 'mat-silver', title: 'Bass Metallophone', damper: true },
+            'met_alto':  { type: 'metal', range: rangeAlto, mat: 'mat-silver', title: 'Alto Metallophone', damper: true },
+            'met_sop':   { type: 'metal', range: rangeSop, mat: 'mat-silver', title: 'Soprano Metallophone', damper: true },
+            'glock':     { type: 'glock', range: rangeGlock, mat: 'mat-silver', title: 'Glockenspiel' }
+        };
+
+        function goHome() {
+            currentInstrumentId = null;
+            document.getElementById('rotate-overlay').style.display = 'none';
+            document.getElementById('instrument-view').style.display = 'none';
+            document.getElementById('main-menu').style.display = 'flex';
+        }
+
+        function toggleDamper() {
+            isDamperActive = !isDamperActive;
+            const btn = document.getElementById('damper-btn');
+            btn.classList.toggle('active');
+        }
+
+        function loadInstrument(id) {
+            currentInstrumentId = id;
+            if (id.startsWith('perc_')) {
+                loadPercussion(id);
+                return;
+            }
+
+            document.getElementById('main-menu').style.display = 'none';
+            document.getElementById('instrument-view').style.display = 'flex';
+            checkOrientation();
+
+            const container = document.getElementById('instrument-container');
+            container.innerHTML = '';
+            
+            const handleTouchMove = (e) => {
+                e.preventDefault(); 
+                const touch = e.touches[0];
+                const target = document.elementFromPoint(touch.clientX, touch.clientY);
+                if (target && target.classList.contains('bar') && !target.classList.contains('disabled')) {
+                    const note = target.getAttribute('data-note');
+                    if (note !== lastPlayedNote) {
+                        lastPlayedNote = note;
+                        target.classList.add('hit');
+                        setTimeout(() => target.classList.remove('hit'), 100);
+                        const freq = notes[note];
+                        const config = instrumentConfig[currentInstrumentId];
+                        playTone(freq, config.type);
+                    }
+                }
+            };
+            const resetGlissando = () => { lastPlayedNote = null; };
+            container.addEventListener('touchmove', handleTouchMove, { passive: false });
+            container.addEventListener('touchend', resetGlissando);
+
+            // Mouse Glissando for Testing
+            let isMouseDown = false;
+            container.addEventListener('mousedown', () => isMouseDown = true);
+            container.addEventListener('mouseup', () => { isMouseDown = false; resetGlissando(); });
+            container.addEventListener('mousemove', (e) => {
+                if(!isMouseDown) return;
+                const target = document.elementFromPoint(e.clientX, e.clientY);
+                if (target && target.classList.contains('bar') && !target.classList.contains('disabled')) {
+                    const note = target.getAttribute('data-note');
+                    if (note !== lastPlayedNote) {
+                        lastPlayedNote = note;
+                        target.classList.add('hit');
+                        setTimeout(() => target.classList.remove('hit'), 100);
+                        playTone(notes[note], instrumentConfig[currentInstrumentId].type);
+                    }
+                }
+            });
+
+            const config = instrumentConfig[id];
+            document.getElementById('inst-title').innerText = config.title;
+            const damperBtn = document.getElementById('damper-btn');
+            if (config.damper) {
+                damperBtn.style.display = 'block';
+                isDamperActive = false;
+                damperBtn.classList.remove('active');
+            } else {
+                damperBtn.style.display = 'none';
+            }
+            const frame = document.createElement('div');
+            frame.className = 'instrument-frame';
+            config.range.forEach((note, index) => {
+                const bar = document.createElement('div');
+                bar.className = `bar ${config.mat}`;
+                bar.setAttribute('data-note', note);
+                const heightPercent = 95 - (index * 2.5); 
+                bar.style.height = `${heightPercent}%`;
+                const label = document.createElement('span');
+                label.className = 'note-label';
+                label.innerText = note.substring(0, note.length-1);
+                bar.appendChild(label);
+                
+                const bottomTrigger = document.createElement('div');
+                bottomTrigger.className = 'bar-bottom-trigger';
+                let holdTimer = null;
+                const startHold = (e) => {
+                    e.preventDefault(); e.stopPropagation();
+                    holdTimer = setTimeout(() => {
+                        bar.classList.toggle('disabled');
+                        if(navigator.vibrate) navigator.vibrate(50);
+                    }, 1500);
+                };
+                const endHold = () => clearTimeout(holdTimer);
+                
+                bottomTrigger.addEventListener('touchstart', startHold);
+                bottomTrigger.addEventListener('touchend', endHold);
+                bottomTrigger.addEventListener('mousedown', startHold);
+                bottomTrigger.addEventListener('mouseup', endHold);
+
+                const hitBar = (e) => {
+                    if (bar.classList.contains('disabled')) return;
+                    e.preventDefault();
+                    lastPlayedNote = note;
+                    bar.classList.add('hit');
+                    setTimeout(() => bar.classList.remove('hit'), 100);
+                    playTone(notes[note] || 440, config.type);
+                };
+                bar.addEventListener('touchstart', hitBar);
+                bar.addEventListener('mousedown', hitBar);
+                
+                bar.appendChild(bottomTrigger);
+                frame.appendChild(bar);
+            });
+            container.appendChild(frame);
+        }
+
+        function loadPercussion(id) {
+            document.getElementById('main-menu').style.display = 'none';
+            document.getElementById('instrument-view').style.display = 'flex';
+            document.getElementById('rotate-overlay').style.display = 'none';
+            const container = document.getElementById('instrument-container');
+            container.innerHTML = '';
+            
+            const clone = container.cloneNode(false);
+            container.parentNode.replaceChild(clone, container);
+            const newContainer = document.getElementById('instrument-container');
+            
+            document.getElementById('inst-title').innerText = "UNPITCHED PERCUSSION";
+            document.getElementById('damper-btn').style.display = 'none';
+
+            if (id === 'perc_guiro') {
+                const guiro = document.createElement('div');
+                guiro.className = 'perc-guiro-large';
+                const ridges = document.createElement('div');
+                ridges.className = 'guiro-ridges';
+                guiro.appendChild(ridges);
+                
+                let lastY = 0;
+                let accumulate = 0;
+                const scrapeThreshold = 10; 
+                const scrape = (y) => {
+                    const delta = Math.abs(y - lastY);
+                    lastY = y;
+                    accumulate += delta;
+                    if (accumulate > scrapeThreshold) {
+                        playGuiroScrape();
+                        accumulate = 0;
+                    }
+                };
+                guiro.addEventListener('touchstart', (e) => { lastY = e.touches[0].clientY; });
+                guiro.addEventListener('touchmove', (e) => { e.preventDefault(); scrape(e.touches[0].clientY); });
+                let isDragging = false;
+                guiro.addEventListener('mousedown', (e) => { isDragging = true; lastY = e.clientY; });
+                guiro.addEventListener('mousemove', (e) => { if(isDragging) scrape(e.clientY); });
+                guiro.addEventListener('mouseup', () => isDragging = false);
+                guiro.addEventListener('mouseleave', () => isDragging = false);
+                newContainer.appendChild(guiro);
+                return;
+            }
+
+            const btn = document.createElement('div');
+            btn.className = 'perc-display';
+            let type = '';
+            if (id === 'perc_triangle') { type = 'triangle'; btn.innerHTML = '<div class="perc-triangle"></div>'; }
+            if (id === 'perc_claves') { type = 'claves'; btn.innerHTML = '<div style="font-size:3rem;">X X</div>'; }
+
+            const hit = (e) => {
+                e.preventDefault();
+                btn.style.transform = "scale(0.95)";
+                setTimeout(()=> btn.style.transform = "scale(1)", 100);
+                playPercussion(type);
+            };
+            btn.addEventListener('touchstart', hit);
+            btn.addEventListener('mousedown', hit);
+            newContainer.appendChild(btn);
+        }
+    </script>
+</body>
+</html>

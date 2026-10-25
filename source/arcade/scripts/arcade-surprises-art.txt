@@ -1,0 +1,11 @@
+SEASIDE SURPRISES — 2026-10-09
+
+Generated with ImageGen on transparent backgrounds; encoded to WebP with alpha.
+The final seagull atlas was refined so wings remain inside their equal quadrants.
+CSS registers the two flight poses and aligns the two perched poses.
+
+SEAGULL BRIEF
+Use case: stylized-concept. Asset type: transparent 2-by-2 game sprite atlas for a tiny illustrated seaside website seagull. Generate a square 1024 by 1024 image with exactly four equal 512 by 512 cells, no borders, no labels. Same naturalistic white and soft gray seagull in all four cells, facing right, short yellow beak, small black eyes, dark gray wing tips, two orange-yellow legs. Polished warm 3D animated film illustration with feather detail; charming but anatomically birdlike, no costume or human expression. Top left: flying in profile, wings lifted. Top right: flying in profile, wings lowered. Bottom left: perched standing upright, wings folded. Bottom right: same perched bird with head tilted inquisitively downward. Each whole bird centered horizontally in its own cell, no overlap between cells, same torso size across all four. Keep the bird's feet at 85 percent height within each cell. Wings fully contained with generous clear margins. Body about 35 percent of cell width; extended wings may occupy up to 80 percent. All four poses entirely isolated on actual transparent background. Soft neutral warm lighting. No shadows on a floor, no scenery, no text.
+
+SAILBOAT BRIEF
+Use case: stylized-concept. Asset type: transparent isolated sailboat for a very small distant boat in an illustrated seaside website. A complete small traditional wooden sailboat in strict right-facing side profile, warm cedar hull, one tall mast, two elegant ivory triangular sails, a tiny warm amber cabin lantern. Polished gently realistic 3D animated-film illustration, believable proportions and delicate nautical details, clean legible silhouette. Boat and all sails fit in a square 1024x1024 composition with generous transparent margins. No people, no water, no ocean, no horizon, no ground, no cast shadow, no lettering, no frame. True transparent background. Soft late-afternoon light, restrained cream, walnut, and muted teal palette. The hull is horizontal.

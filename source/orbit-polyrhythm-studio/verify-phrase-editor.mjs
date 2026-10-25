@@ -1,0 +1,41 @@
+import {installCreativeControls as realCreativeControls} from './dist/creative-ui.js';
+import {createPresetLibrary} from './dist/preset-library.js';
+import fs from 'node:fs';import vm from 'node:vm';import assert from 'node:assert/strict';
+import {ALL_PRESETS,PRESET_CATEGORIES,getFactoryPreset} from './dist/factory-presets.js';import * as rhythm from './dist/rhythm.js';import * as phrase from './dist/phrases.js';import {AMBIENT_PRESETS} from './dist/ambient.js';import {paletteFor,blendPalette,dialStyle} from './dist/visuals.js';
+// DOM-independent smoke check of actual app handlers. This is not browser/layout QA.
+const node=()=>({value:'',hidden:false,disabled:false,textContent:'',innerHTML:'',dataset:{},style:{setProperty(){}},classList:{toggle(){},add(){},remove(){}},setAttribute(){},getContext(){return {}},addEventListener(){},showModal(){},close(){},focus(){},click(){},parentElement:{hidden:false,classList:{toggle(){}}}});
+const html=fs.readFileSync('dist/index.html','utf8'),els=Object.fromEntries([...html.matchAll(/id="([^"]+)"/g)].map(m=>[m[1],node()])),listeners={};
+const document={getElementById(id){assert(els[id],'DOM element exists: '+id);return els[id]},documentElement:node(),body:node(),querySelector(){return node()},querySelectorAll(){return []},addEventListener(name,fn){(listeners[name]??=[]).push(fn)}};
+const stored=new Map();
+const context={createPresetLibrary,installCreativeControls(bridge){globalThis.document=document;return realCreativeControls(bridge)},confirm:()=>true,...rhythm,...phrase,ALL_PRESETS,PRESET_CATEGORIES,getFactoryPreset,AMBIENT_PRESETS,paletteFor,blendPalette,dialStyle,OrbitLights:class{clear(){}draw(){}energy(){return 0}},installShows(){},installPresetAudio(){return {busy:()=>false}},document,structuredClone,matchMedia:()=>({matches:false,addEventListener(){}}),localStorage:{getItem:k=>stored.get(k)||null,setItem:(k,v)=>stored.set(k,v)},ResizeObserver:class{observe(){}},requestAnimationFrame(){},performance:{now:()=>100},setTimeout(){return 1},clearTimeout(){},fetch:async()=>({ok:true,json:async()=>JSON.parse(fs.readFileSync('dist/assets/presets.json','utf8'))}),console};
+vm.createContext(context);const source=fs.readFileSync('dist/app.js','utf8').replace(/^import .*;\n/gm,'');await vm.runInContext(`(async()=>{${source}\nglobalThis.api={loadFactory,selectTrack,render,setState:s=>{state=s;render()},state:()=>state,library:()=>userLibrary.export()};})()`,context);
+const {api}=context;
+const fixture=getFactoryPreset('Event Horizon');fixture.name='Phrase editor fixture';fixture.key=2;
+Object.assign(fixture.tracks[0],{octave:4,mode:'step',steps:16,gate:100,pattern:Array(16).fill(1),phrase:Array.from({length:8},(_,i)=>({label:'Measure '+(i+1),pattern:Array(16).fill(1),notes:Array.from({length:16},()=>[12]),gates:Array(16).fill(85)}))});
+api.setState(structuredClone(fixture));assert.equal(els.phraseControls.hidden,false);assert.equal(els.steps.disabled,true);assert.equal(els.scale.disabled,true);assert.equal(els.addNote.hidden,true);
+const original=structuredClone(api.state().tracks[0].phrase[0]);els.phraseBar.value='5';els.phraseBar.onchange();assert(els.phraseBar.innerHTML.includes('5" selected'));
+els.notes.onchange({target:{dataset:{phraseNote:'0'},value:'D5 F5 A5'}});assert.deepEqual(Array.from(api.state().tracks[0].phrase[5].notes[0]),[12,15,19]);assert.deepEqual(api.state().tracks[0].phrase[0],original);
+els.notes.onchange({target:{dataset:{phraseGate:'0'},value:'1.5'}});assert.equal(api.state().tracks[0].phrase[5].gates[0],600);
+els.notes.onchange({target:{dataset:{phraseNote:'0'},value:'-'}});assert.equal(api.state().tracks[0].phrase[5].pattern[0],0);
+const button={dataset:{step:'0'}};for(const handler of listeners.click)handler({target:{closest:()=>button}});assert.equal(api.state().tracks[0].phrase[5].pattern[0],1);assert.deepEqual(Array.from(api.state().tracks[0].phrase[5].notes[0]),[0]);
+els.hits.value='5';els.hits.onchange();assert.equal(api.state().tracks[0].phrase[5].pattern.filter(Boolean).length,5);assert.deepEqual(api.state().tracks[0].phrase[0],original);
+const saved=rhythm.sanitize(JSON.parse(JSON.stringify(api.state())));assert.equal(saved.tracks[0].phrase[5].gates[0],600);
+api.loadFactory('Event Horizon');assert.equal(els.phraseControls.hidden,true);assert.equal(els.steps.disabled,false);assert.equal(els.scale.disabled,false);assert.equal(els.addNote.hidden,false);
+fixture.tracks[0].steps=12;fixture.tracks[0].phrase.forEach(p=>{p.pattern.length=p.notes.length=p.gates.length=12});fixture.tracks[3].bank=128;fixture.tracks[3].program=0;fixture.tracks[3].drum=36;api.setState(fixture);assert(els.phraseHint.textContent.includes('3 beats each'));
+api.selectTrack(3);assert.equal(els.drumLabel.hidden,false);assert.equal(els.notes.parentElement.hidden,true);
+console.log('PASS: actual editor handlers load, select and edit composed measures; rests, accents, duration and persistence work; legacy editor remains available. Browser QA unavailable.');
+
+// Exercise the actual new panel and collection handlers against the same app.
+api.loadFactory('Event Horizon');els.evolveEnabled.onclick();assert.equal(api.state().evolution.enabled,true);
+els.evolveAmount.value='72';els.evolveAmount.oninput();assert.equal(api.state().evolution.amount,72);
+els.evolveLocks.onclick({target:{closest:()=>({dataset:{evolveLock:'2'}})}});assert(api.state().tracks[2].evolveLock);
+els.grooveFeel.value='swing';els.grooveFeel.onchange();els.grooveHumanize.value='45';els.grooveHumanize.oninput();assert.equal(api.state().groove.feel,'swing');assert.equal(api.state().groove.humanize,45);
+els.savePersonal.onclick();els.personalName.value='My evolving sky';els.personalCollection.value='Night sets';els.savePresetForm.onsubmit({preventDefault(){}});
+assert.equal(api.library().presets.length,1);assert.equal(api.state().name,'My evolving sky');const personal=api.library().presets[0];
+els.favoritePreset.onclick();assert(api.library().favorites.includes(personal.id));
+api.loadFactory('Glass Orbits');assert(!api.state().evolution);api.loadFactory(personal.id);assert.equal(api.state().groove.humanize,45);assert(api.state().tracks[2].evolveLock);
+els.presetCategories.onclick({target:{closest:()=>({dataset:{presetCategory:'Favorites'}})}});assert(els.presetCards.innerHTML.includes('My evolving sky'));assert(!els.presetCards.innerHTML.includes('<h3>Glass Orbits</h3>'));
+els.savePersonal.onclick();els.personalName.value='My evolving sky';els.savePresetForm.onsubmit({preventDefault(){}});assert(els.personalSaveError.textContent.includes('already in use'));assert.equal(api.library().presets.length,1);
+els.grooveReset.onclick();assert(!api.state().groove);els.evolveEnabled.onclick();assert.equal(api.state().evolution.enabled,false);
+els.presetCards.onclick({target:{closest:()=>({dataset:{personalRemove:personal.id}})}});assert.equal(api.library().presets.length,0);assert.equal(api.state().name,'My evolving sky');
+console.log('PASS: actual evolution, track protection, groove, save, reload, favorite, filter, duplicate-name and remove handlers.');

@@ -1,0 +1,8 @@
+CRAB AND MOTH — 2026-10-09
+Generated as transparent cutouts with built-in ImageGen, based on the user-approved scene previews. Encoded to WebP with alpha. Movement and timing are handled by CSS and arcade-surprises.js.
+
+CRAB
+Use case: background-extraction. Asset type: small animated website visitor. Extract ONLY the same rust-red crab from this reference, isolated on a true transparent background. Preserve its original polished gently realistic 3D illustrated appearance, warm red-orange shell, tiny raised eyestalks, two claws, articulated legs, and friendly natural animal character. Show the entire crab in a slightly elevated frontal three-quarter view, all legs and claws fully visible, body low and ready to scuttle sideways. Center it in a square image with generous clear padding, animal occupies about 75 percent of the width. No boardwalk, no cabinet, no environment, no sand or cast ground shadow, no lettering, no border. One crab only. Soft neutral warm lighting.
+
+MOTH
+Use case: background-extraction. Asset type: tiny flying moth for an illustrated website. Isolate ONLY the same cream-and-tan moth from this reference on a true transparent background. Preserve its natural fine wing patterns, fuzzy cream body, and feathery antennae, with realistic moth anatomy and polished illustrated 3D animated-feature style. Reorient to a symmetrical view from slightly above, wings fully spread to both sides, body pointing upward, to support a gentle CSS wingbeat. The entire moth centered in a square with generous clear margins, occupying about 70 percent of the width. Warm ivory and toasted tan, subtle soft warm edge light. No lantern, environment, shadow, text, border or extra insects.

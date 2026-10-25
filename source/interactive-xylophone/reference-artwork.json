@@ -1,0 +1,24 @@
+{
+  "method": "Original user images retained byte-for-byte; built-in image_gen retouches are clipped to the single initially highlighted bar.",
+  "references": [
+    {
+      "theme": "warm",
+      "original": "dist/assets/scenes/warm-reference.png",
+      "retouch": "dist/assets/scenes/warm-neutral.png",
+      "prompt": "Edit target: this exact uploaded UI photograph. This is a precision retouch, NOT a redesign. Preserve the complete composition, crop, perspective, EVERY pixel location of all thirteen bars, screws, note letters, control panel, buttons, labels, plants, mallets, lighting and shadows as closely as possible. CHANGE ONLY the highlighted golden G bar (the FIFTH wooden bar from the left) back to normal reddish-brown rosewood matching its unhighlighted neighboring bars. Preserve that G bar's shape, its wood grain, its cream G letter and both black pins. Remove the yellow/orange highlighted coloration. All thirteen bars should now be normal reddish-brown rosewood. Do not alter any other bars or objects, do not add or remove text, do not shift or resize anything. Keep the exact 16:9 frame. Output should look identical except the fifth bar is no longer highlighted."
+    },
+    {
+      "theme": "studio",
+      "original": "dist/assets/scenes/studio-reference.png",
+      "retouch": "dist/assets/scenes/studio-neutral.png",
+      "prompt": "Edit target: this exact uploaded UI photograph. Precision retouch only. Preserve the COMPLETE image composition, crop, perspective, every bar and every screw at its exact original location, all labels and controls, all lighting and shadows. CHANGE ONLY the THIRD wooden bar from the left, labeled E: remove its bright yellow glowing edge/halo and warm highlight, restoring normal dark reddish-brown rosewood with normal edges matching adjacent bars. Preserve the E letter, bar shape, grain, black pins. Clean only the tiny golden spill onto wood around that bar. All thirteen bars must be in normal unhighlighted state. Do not alter the controls, text, title, background or any other element. Do not resize or shift anything. Output identical except third bar no longer highlighted."
+    },
+    {
+      "theme": "maple",
+      "original": "dist/assets/scenes/maple-reference.png",
+      "retouch": "dist/assets/scenes/maple-neutral.png",
+      "prompt": "Edit target: this exact uploaded UI photograph. Precision retouch only, NOT a redesign. Preserve the entire composition, crop, perspective, all thirteen bar shapes and positions, every screw/pin, letters, all controls, text, plants, cloth, mallets, lighting and shadows. CHANGE ONLY the SIXTH wooden bar from the left labeled A: remove the sage-green highlight and glowing light outline, restore its normal warm caramel-brown wood matching neighboring bars. Preserve the black A letter, ivory pins, the bar's exact shape and all wood grain details. All thirteen bars should be normally colored and unhighlighted. Do not change anything else, no objects moved, no text altered or added, no reframing or resizing. Output identical except the sixth bar no longer highlighted."
+    }
+  ],
+  "geometry": "scene-layout.json contains original-image coordinate polygons, screw centers, button rectangles, and focus crops."
+}

@@ -1,0 +1,7 @@
+jSteelDrum version 2 — Jeff Learman
+Acoustic steelpan hand-made in Trinidad; recorded September 2021.
+Source: https://github.com/sfzinstruments/jlearman.SteelDrum
+Upstream commit: c3647b5bf764a3f8230176e5233432db461a42bf
+License: public domain / Unlicense. The source SFZ also declares CC0 / Unlicense.
+Adaptation: 24 original pitches, two recorded dynamic layers; one sample per pitch/layer, stereo MP3 at 32 kHz / 96 kbps, maximum four seconds with a short tail fade and 6 dB encoding headroom (playback level is normalized).
+See manifest.json for the exact source recordings and LICENSE.txt for the full license.

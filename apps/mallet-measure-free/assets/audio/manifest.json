@@ -1,0 +1,397 @@
+{
+  "version": 1,
+  "source": "GeneralUser GS 1.471",
+  "sourceSha256": "f45b6b4a68b6bf3d792fcbb6d7de24dc701a0f89c5900a21ef3aaece993b839a",
+  "sampleRate": 22050,
+  "channels": 1,
+  "codec": "MP3",
+  "bitrateKbps": 64,
+  "renderer": "TinySoundFont (MIT)",
+  "instrumentSamples": {
+    "hand-drums": {
+      "credit": "Frame Drum, small — Versilian Studios LLC / Versilian Community Sample Library",
+      "license": "CC0-1.0",
+      "licensePage": "https://versilian-studios.com/vcsl/",
+      "source": "https://github.com/sgossner/VCSL",
+      "sourceCommit": "c1ea7bcc3c7309650ab0da9d15c9cd1fbc4a4c7e",
+      "notes": {
+        "41": {
+          "url": "assets/audio/recorded/hand-drum-small-lowest.mp3",
+          "gain": 1,
+          "register": "lowest",
+          "sourceDrum": "small",
+          "sourceFile": "HDrumS_Hit_v3_rr1_Sum.wav",
+          "download": "https://raw.githubusercontent.com/sgossner/VCSL/c1ea7bcc3c7309650ab0da9d15c9cd1fbc4a4c7e/Membranophones/Struck%20Membranophones/Frame%20Drum/HDrumS_Hit_v3_rr1_Sum.wav",
+          "original_sha256": "09721cec12ab8d2336cddd60953a2505ea1c8c8324d0b4ed245b9c5ea4561c33",
+          "sha256": "279cd944f977baa4faed78afcca5a2251bd6907107aa6e2eab8791fdb3831061",
+          "processing": {
+            "pitchSemitones": -12,
+            "method": "Playback-rate resampling; natural decay scales with pitch",
+            "amplitudeGain": 6.177646108268246,
+            "format": "44.1kHz stereo MP3 VBR quality 1",
+            "fullDecay": true,
+            "endFadeSeconds": 0.08
+          },
+          "duration": 4.205079365079365,
+          "peak": 0.7024624943733215,
+          "rms": 0.030856844037771225,
+          "dominantResonanceHz": 113,
+          "bytes": 76365,
+          "tuningSemitones": 0
+        },
+        "43": {
+          "url": "assets/audio/recorded/hand-drum-small-low.mp3",
+          "gain": 1,
+          "register": "low",
+          "sourceDrum": "small",
+          "sourceFile": "HDrumS_Hit_v3_rr1_Sum.wav",
+          "download": "https://raw.githubusercontent.com/sgossner/VCSL/c1ea7bcc3c7309650ab0da9d15c9cd1fbc4a4c7e/Membranophones/Struck%20Membranophones/Frame%20Drum/HDrumS_Hit_v3_rr1_Sum.wav",
+          "original_sha256": "09721cec12ab8d2336cddd60953a2505ea1c8c8324d0b4ed245b9c5ea4561c33",
+          "sha256": "d00ad1e9afe9e02f10e0e480b2e5f6d0aac8edc23449b88d921926ca3467c6eb",
+          "processing": {
+            "pitchSemitones": -9,
+            "method": "Playback-rate resampling; natural decay scales with pitch",
+            "amplitudeGain": 6.177646108268246,
+            "format": "44.1kHz stereo MP3 VBR quality 1",
+            "fullDecay": true,
+            "endFadeSeconds": 0.08
+          },
+          "duration": 3.5360544217687075,
+          "peak": 0.7037772536277771,
+          "rms": 0.03085305541753769,
+          "dominantResonanceHz": 134,
+          "bytes": 71470,
+          "tuningSemitones": 1.5
+        },
+        "45": {
+          "url": "assets/audio/recorded/hand-drum-small-middle.mp3",
+          "gain": 1,
+          "register": "middle",
+          "sourceDrum": "small",
+          "sourceFile": "HDrumS_Hit_v3_rr1_Sum.wav",
+          "download": "https://raw.githubusercontent.com/sgossner/VCSL/c1ea7bcc3c7309650ab0da9d15c9cd1fbc4a4c7e/Membranophones/Struck%20Membranophones/Frame%20Drum/HDrumS_Hit_v3_rr1_Sum.wav",
+          "original_sha256": "09721cec12ab8d2336cddd60953a2505ea1c8c8324d0b4ed245b9c5ea4561c33",
+          "sha256": "c4e0c04ef7f940ac9328fe359c9c198a7abb900e19f1f9900a24bd51df1bce60",
+          "processing": {
+            "pitchSemitones": -6,
+            "method": "Playback-rate resampling; natural decay scales with pitch",
+            "amplitudeGain": 6.177646108268246,
+            "format": "44.1kHz stereo MP3 VBR quality 1",
+            "fullDecay": true,
+            "endFadeSeconds": 0.08
+          },
+          "duration": 2.9734920634920634,
+          "peak": 0.7013654112815857,
+          "rms": 0.030839158222079277,
+          "dominantResonanceHz": 159,
+          "bytes": 63900,
+          "tuningSemitones": 3
+        },
+        "47": {
+          "url": "assets/audio/recorded/hand-drum-small-high.mp3",
+          "gain": 1,
+          "register": "high",
+          "sourceDrum": "small",
+          "sourceFile": "HDrumS_Hit_v3_rr1_Sum.wav",
+          "download": "https://raw.githubusercontent.com/sgossner/VCSL/c1ea7bcc3c7309650ab0da9d15c9cd1fbc4a4c7e/Membranophones/Struck%20Membranophones/Frame%20Drum/HDrumS_Hit_v3_rr1_Sum.wav",
+          "original_sha256": "09721cec12ab8d2336cddd60953a2505ea1c8c8324d0b4ed245b9c5ea4561c33",
+          "sha256": "322d08aede64baa1ec5a1406ff97f5cb76151cf820649c1a580bfc85b0ce0616",
+          "processing": {
+            "pitchSemitones": -3,
+            "method": "Playback-rate resampling; natural decay scales with pitch",
+            "amplitudeGain": 6.177646108268246,
+            "format": "44.1kHz stereo MP3 VBR quality 1",
+            "fullDecay": true,
+            "endFadeSeconds": 0.08
+          },
+          "duration": 2.500340136054422,
+          "peak": 0.7085292935371399,
+          "rms": 0.030938638374209404,
+          "dominantResonanceHz": 185,
+          "bytes": 53621,
+          "tuningSemitones": 4.5
+        },
+        "50": {
+          "url": "assets/audio/recorded/hand-drum-small-highest.mp3",
+          "gain": 1,
+          "register": "highest",
+          "sourceDrum": "small",
+          "sourceFile": "HDrumS_Hit_v3_rr1_Sum.wav",
+          "download": "https://raw.githubusercontent.com/sgossner/VCSL/c1ea7bcc3c7309650ab0da9d15c9cd1fbc4a4c7e/Membranophones/Struck%20Membranophones/Frame%20Drum/HDrumS_Hit_v3_rr1_Sum.wav",
+          "original_sha256": "09721cec12ab8d2336cddd60953a2505ea1c8c8324d0b4ed245b9c5ea4561c33",
+          "sha256": "859263261e521a849a45e0dd94204d401e5d68d1448977db85c351ec4c0b0b18",
+          "processing": {
+            "pitchSemitones": 0,
+            "method": "Playback-rate resampling; natural decay scales with pitch",
+            "amplitudeGain": 6.177646108268246,
+            "format": "44.1kHz stereo MP3 VBR quality 1",
+            "fullDecay": true,
+            "endFadeSeconds": 0.08
+          },
+          "duration": 2.1025396825396827,
+          "peak": 0.6970462799072266,
+          "rms": 0.030784817412495613,
+          "dominantResonanceHz": 220,
+          "bytes": 44881,
+          "tuningSemitones": 6
+        }
+      },
+      "tuningDescription": "Lowest pitch retained; five drums spaced 4.5 semitones apart. Highest raised 6 semitones from the original set. Applied at playback and export."
+    },
+    "soprano-recorder": {
+      "notes": {
+        "72": {
+          "url": "assets/audio/recorded/recorders/soprano-72.wav",
+          "gain": 1,
+          "tuningSemitones": -0.031121,
+          "loopStart": 0.6,
+          "loopEnd": 3.1372108843537414,
+          "duration": 3.2372108843537415,
+          "sourceRootMidi": 72
+        },
+        "73": {
+          "url": "assets/audio/recorded/recorders/soprano-72.wav",
+          "gain": 1,
+          "tuningSemitones": 0.968879,
+          "loopStart": 0.6,
+          "loopEnd": 3.1372108843537414,
+          "duration": 3.2372108843537415,
+          "sourceRootMidi": 72
+        },
+        "74": {
+          "url": "assets/audio/recorded/recorders/soprano-74.wav",
+          "gain": 1,
+          "tuningSemitones": -0.036854,
+          "loopStart": 1.65,
+          "loopEnd": 3.345215419501134,
+          "duration": 3.445215419501134,
+          "sourceRootMidi": 74
+        },
+        "75": {
+          "url": "assets/audio/recorded/recorders/soprano-74.wav",
+          "gain": 1,
+          "tuningSemitones": 0.963146,
+          "loopStart": 1.65,
+          "loopEnd": 3.345215419501134,
+          "duration": 3.445215419501134,
+          "sourceRootMidi": 74
+        },
+        "76": {
+          "url": "assets/audio/recorded/recorders/soprano-76.wav",
+          "gain": 1,
+          "tuningSemitones": -0.04054,
+          "loopStart": 1.65,
+          "loopEnd": 3.2008163265306124,
+          "duration": 3.300816326530612,
+          "sourceRootMidi": 76
+        },
+        "77": {
+          "url": "assets/audio/recorded/recorders/soprano-76.wav",
+          "gain": 1,
+          "tuningSemitones": 0.95946,
+          "loopStart": 1.65,
+          "loopEnd": 3.2008163265306124,
+          "duration": 3.300816326530612,
+          "sourceRootMidi": 76
+        },
+        "78": {
+          "url": "assets/audio/recorded/recorders/soprano-78.wav",
+          "gain": 1,
+          "tuningSemitones": -0.064542,
+          "loopStart": 1.5,
+          "loopEnd": 3.2453968253968255,
+          "duration": 3.3453968253968256,
+          "sourceRootMidi": 78
+        },
+        "79": {
+          "url": "assets/audio/recorded/recorders/soprano-78.wav",
+          "gain": 1,
+          "tuningSemitones": 0.935458,
+          "loopStart": 1.5,
+          "loopEnd": 3.2453968253968255,
+          "duration": 3.3453968253968256,
+          "sourceRootMidi": 78
+        },
+        "80": {
+          "url": "assets/audio/recorded/recorders/soprano-80.wav",
+          "gain": 1,
+          "tuningSemitones": 0.007223,
+          "loopStart": 1.5,
+          "loopEnd": 3.2714739229024943,
+          "duration": 3.3714739229024944,
+          "sourceRootMidi": 80
+        },
+        "81": {
+          "url": "assets/audio/recorded/recorders/soprano-80.wav",
+          "gain": 1,
+          "tuningSemitones": 1.007223,
+          "loopStart": 1.5,
+          "loopEnd": 3.2714739229024943,
+          "duration": 3.3714739229024944,
+          "sourceRootMidi": 80
+        },
+        "82": {
+          "url": "assets/audio/recorded/recorders/soprano-82.wav",
+          "gain": 1,
+          "tuningSemitones": 0.001464,
+          "loopStart": 1.35,
+          "loopEnd": 3.466190476190476,
+          "duration": 3.566190476190476,
+          "sourceRootMidi": 82
+        },
+        "83": {
+          "url": "assets/audio/recorded/recorders/soprano-82.wav",
+          "gain": 1,
+          "tuningSemitones": 1.001464,
+          "loopStart": 1.35,
+          "loopEnd": 3.466190476190476,
+          "duration": 3.566190476190476,
+          "sourceRootMidi": 82
+        },
+        "84": {
+          "url": "assets/audio/recorded/recorders/soprano-84.wav",
+          "gain": 1,
+          "tuningSemitones": -0.004451,
+          "loopStart": 1.35,
+          "loopEnd": 3.529886621315193,
+          "duration": 3.6298866213151926,
+          "sourceRootMidi": 84
+        },
+        "85": {
+          "url": "assets/audio/recorded/recorders/soprano-84.wav",
+          "gain": 1,
+          "tuningSemitones": 0.995549,
+          "loopStart": 1.35,
+          "loopEnd": 3.529886621315193,
+          "duration": 3.6298866213151926,
+          "sourceRootMidi": 84
+        },
+        "86": {
+          "url": "assets/audio/recorded/recorders/soprano-86.wav",
+          "gain": 1,
+          "tuningSemitones": -0.003243,
+          "loopStart": 1.65,
+          "loopEnd": 3.760294784580499,
+          "duration": 3.860294784580499,
+          "sourceRootMidi": 86
+        },
+        "87": {
+          "url": "assets/audio/recorded/recorders/soprano-86.wav",
+          "gain": 1,
+          "tuningSemitones": 0.996757,
+          "loopStart": 1.65,
+          "loopEnd": 3.760294784580499,
+          "duration": 3.860294784580499,
+          "sourceRootMidi": 86
+        },
+        "88": {
+          "url": "assets/audio/recorded/recorders/soprano-88.wav",
+          "gain": 1,
+          "tuningSemitones": -0.016686,
+          "loopStart": 1.65,
+          "loopEnd": 3.4790702947845804,
+          "duration": 3.5790702947845805,
+          "sourceRootMidi": 88
+        },
+        "89": {
+          "url": "assets/audio/recorded/recorders/soprano-88.wav",
+          "gain": 1,
+          "tuningSemitones": 0.983314,
+          "loopStart": 1.65,
+          "loopEnd": 3.4790702947845804,
+          "duration": 3.5790702947845805,
+          "sourceRootMidi": 88
+        },
+        "90": {
+          "url": "assets/audio/recorded/recorders/soprano-90.wav",
+          "gain": 1,
+          "tuningSemitones": -0.017347,
+          "loopStart": 1.35,
+          "loopEnd": 3.8130839002267574,
+          "duration": 3.9130839002267575,
+          "sourceRootMidi": 90
+        },
+        "91": {
+          "url": "assets/audio/recorded/recorders/soprano-91.wav",
+          "gain": 1,
+          "tuningSemitones": -0.013564,
+          "loopStart": 1.8,
+          "loopEnd": 3.397120181405896,
+          "duration": 3.497120181405896,
+          "sourceRootMidi": 91
+        },
+        "92": {
+          "url": "assets/audio/recorded/recorders/soprano-91.wav",
+          "gain": 1,
+          "tuningSemitones": 0.986436,
+          "loopStart": 1.8,
+          "loopEnd": 3.397120181405896,
+          "duration": 3.497120181405896,
+          "sourceRootMidi": 91
+        },
+        "93": {
+          "url": "assets/audio/recorded/recorders/soprano-94.wav",
+          "gain": 1,
+          "tuningSemitones": -1.029752,
+          "loopStart": 1.5,
+          "loopEnd": 3.9011791383219956,
+          "duration": 4.001179138321995,
+          "sourceRootMidi": 94
+        },
+        "94": {
+          "url": "assets/audio/recorded/recorders/soprano-94.wav",
+          "gain": 1,
+          "tuningSemitones": -0.029752,
+          "loopStart": 1.5,
+          "loopEnd": 3.9011791383219956,
+          "duration": 4.001179138321995,
+          "sourceRootMidi": 94
+        },
+        "95": {
+          "url": "assets/audio/recorded/recorders/soprano-94.wav",
+          "gain": 1,
+          "tuningSemitones": 0.970248,
+          "loopStart": 1.5,
+          "loopEnd": 3.9011791383219956,
+          "duration": 4.001179138321995,
+          "sourceRootMidi": 94
+        },
+        "96": {
+          "url": "assets/audio/recorded/recorders/soprano-96.wav",
+          "gain": 1,
+          "tuningSemitones": -0.021833,
+          "loopStart": 0.6,
+          "loopEnd": 3.473106575963719,
+          "duration": 3.5731065759637186,
+          "sourceRootMidi": 96
+        }
+      },
+      "sourceInstrument": "Baroque Soprano Recorder",
+      "source": "VCSL / Versilian Studios",
+      "sustain": true
+    },
+    "woodblock": {
+      "credit": "Versilian Studios LLC / VCSL (low); Joseph SARDIN / BigSoundBank (high)",
+      "license": "CC0-1.0",
+      "sourceInstrument": "Two independently recorded acoustic wooden blocks, native pitches",
+      "notes": {
+        "76": {
+          "url": "assets/audio/recorded/woodblock/high.wav",
+          "gain": 1,
+          "tuningSemitones": 0,
+          "duration": 0.45,
+          "articulation": "High",
+          "source": "https://bigsoundbank.com/UPLOAD/bwf-en/0466.wav"
+        },
+        "77": {
+          "url": "assets/audio/recorded/woodblock/low.wav",
+          "gain": 1,
+          "tuningSemitones": 0,
+          "duration": 0.55,
+          "articulation": "Low",
+          "source": "https://raw.githubusercontent.com/sgossner/VCSL/c1ea7bcc3c7309650ab0da9d15c9cd1fbc4a4c7e/Idiophones/Struck%20Idiophones/Woodblock/wood_click_f_rr1.wav"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,1232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mr. Drew's Animated Vocal Explorations</title>
+    <link rel="preload" href="assets/space-background.webp" as="image">
+    <link rel="preload" href="assets/rocket-explorer.webp" as="image">
+    <style>
+        :root {
+            --primary: #4a90e2;
+            --accent: #ff6b6b;
+            --text: #ffffff;
+            --panel-bg: rgba(20, 20, 30, 0.9);
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            user-select: none;
+            background: #000;
+            touch-action: none; 
+        }
+
+        #app-container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            touch-action: none;
+        }
+
+        /* --- THEME BACKGROUNDS --- */
+        #background-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+
+        }
+
+        #decor-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        /* Illustrated scenes: painted backdrops with independent motion layers. */
+        .bg-space {
+            background: #071326 url('assets/space-background.webp') center center / cover no-repeat;
+        }
+        .bg-ocean {
+            background: #075b89 url('assets/ocean-background.webp') center center / cover no-repeat;
+        }
+        .decor-space .star {
+            position: absolute; background: #e0f6ff; border-radius: 50%;
+            box-shadow: 0 0 5px #a2d9ff; animation: twinkle var(--speed) infinite ease-in-out;
+        }
+        .scene-planet {
+            position: absolute; right: 4%; top: 13%; width: clamp(145px, 24vw, 365px);
+            opacity: 0.84; animation: planet-drift 65s ease-in-out infinite alternate;
+        }
+        .scene-planet img, .kelp-cluster img { display: block; width: 100%; height: auto; pointer-events: none; }
+        .scene-meteor {
+            position: absolute; top: 17%; left: 35%; width: 110px; height: 2px; opacity: 0;
+            background: linear-gradient(90deg, transparent, #d8f3ff);
+            border-radius: 50%; animation: meteor-pass 29s linear infinite;
+        }
+        .ocean-sunbeam {
+            position: absolute; top: -10%; left: var(--left); width: 15%; height: 96%;
+            background: linear-gradient(180deg, rgba(196, 255, 247, .16), rgba(147, 225, 255, .05) 52%, transparent);
+            clip-path: polygon(38% 0, 57% 0, 100% 100%, 0 100%);
+            transform-origin: 50% 0; mix-blend-mode: screen;
+            animation: sunbeam-sway var(--speed) ease-in-out infinite alternate;
+        }
+        .ocean-bubble {
+            position: absolute; bottom: -35px; left: var(--left); width: var(--size); height: var(--size);
+            border: 1px solid rgba(202, 248, 255, .44); border-radius: 50%;
+            background: radial-gradient(circle at 30% 25%, rgba(255,255,255,.58) 0 7%, transparent 18%),
+                radial-gradient(circle at 50% 60%, transparent 45%, rgba(158,225,255,.14) 80%);
+            opacity: 0; animation: ocean-rise var(--speed) linear infinite;
+        }
+        .kelp-cluster {
+            position: absolute; bottom: -4%; width: clamp(85px, 13vw, 200px); opacity: .9;
+            transform-origin: 50% 95%; animation: kelp-sway var(--speed) ease-in-out infinite alternate;
+        }
+        .kelp-cluster.left { left: -1%; }
+        .kelp-cluster.right { right: -1%; }
+        .kelp-cluster.right img { transform: scaleX(-1); }
+        .ocean-caustic {
+            position: absolute; bottom: -7%; left: 23%; width: 55%; height: 30%; opacity: .1;
+            background: radial-gradient(ellipse at 30% 45%, rgba(163,255,236,.9), transparent 48%),
+                radial-gradient(ellipse at 70% 65%, rgba(100,230,255,.8), transparent 45%);
+            mix-blend-mode: screen; animation: caustic-drift 13s ease-in-out infinite alternate;
+        }
+        @keyframes planet-drift { from { transform: translate(0, 0) rotate(-3deg); } to { transform: translate(-3vw, 2vh) rotate(3deg); } }
+        @keyframes meteor-pass {
+            0%, 89% { opacity: 0; transform: translate(-100px, -40px) rotate(18deg); }
+            90% { opacity: .7; }
+            93%, 100% { opacity: 0; transform: translate(430px, 125px) rotate(18deg); }
+        }
+        @keyframes sunbeam-sway { from { transform: rotate(-14deg); opacity: .45; } to { transform: rotate(-7deg); opacity: .9; } }
+        @keyframes ocean-rise {
+            0% { transform: translate(0, 0); opacity: 0; }
+            12%, 82% { opacity: .52; }
+            100% { transform: translate(28px, -115vh); opacity: 0; }
+        }
+        @keyframes kelp-sway { from { transform: rotate(-3deg) skewX(-1deg); } to { transform: rotate(4deg) skewX(2deg); } }
+        @keyframes caustic-drift { from { transform: translateX(-4%) scale(.94); opacity: .08; } to { transform: translateX(4%) scale(1.06); opacity: .18; } }
+
+        /* Painted scenery stays still; a few independent layers supply the movement. */
+        .bg-sky { background: #85cdea url('assets/sky-background.webp') center / cover no-repeat; }
+        .bg-garden { background: #9eb86c url('assets/garden-background.webp') center / cover no-repeat; }
+        .bg-graveyard { background: #14233c url('assets/graveyard-background.webp') center / cover no-repeat; }
+        .bg-winter { background: #bddbea url('assets/winter-background.webp') center / cover no-repeat; }
+        .bg-fantasy { background: #192b50 url('assets/fantasy-background.webp') center / cover no-repeat; }
+        .bg-arctic { background: #598aaf url('assets/arctic-background.webp') center / cover no-repeat; }
+        .sky-cloud {
+            position: absolute; left: -36vw; width: 34vw; max-width: 540px; opacity: .65;
+            animation: cloud-crossing var(--speed) linear infinite;
+        }
+        .sky-cloud img, .garden-flowers img { display: block; width: 100%; height: auto; }
+        .garden-flowers {
+            position: absolute; bottom: -8%; width: clamp(100px, 16vw, 230px);
+            transform-origin: 50% 95%; animation: flower-sway var(--speed) ease-in-out infinite alternate;
+        }
+        .garden-flowers.left { left: -2%; }
+        .garden-flowers.right { right: -2%; }
+        .garden-flowers.right img { transform: scaleX(-1); }
+        .scene-mote {
+            position: absolute; width: var(--size); height: var(--size); border-radius: 50%;
+            background: var(--color); box-shadow: 0 0 9px var(--color);
+            animation: mote-float var(--speed) ease-in-out infinite alternate;
+        }
+        .scene-fog {
+            position: absolute; left: -12%; bottom: 0; width: 110%; height: 28%;
+            background: radial-gradient(ellipse at 30% 65%, #b9dce955, transparent 65%),
+                radial-gradient(ellipse at 75% 80%, #88afdb44, transparent 55%);
+            animation: fog-drift var(--speed) ease-in-out infinite alternate;
+        }
+        .snowflake {
+            position: absolute; top: -14px; width: var(--size); height: var(--size); border-radius: 50%;
+            background: #fff; animation: snowfall var(--speed) linear infinite;
+        }
+        .aurora {
+            position: absolute; left: -10%; top: 4%; width: 110%; height: 25%;
+            background: linear-gradient(175deg, transparent 20%, #b6ffe52b 35%, #70efc951 43%, #81b6fa29 55%, transparent 70%);
+            border-radius: 50%; transform-origin: 50% 20%;
+            animation: aurora-flow var(--speed) ease-in-out infinite alternate;
+        }
+        .ice-shimmer {
+            position: absolute; bottom: 0; left: 18%; width: 65%; height: 12%;
+            background: radial-gradient(ellipse, #d3faff40, transparent 70%);
+            animation: caustic-drift 16s ease-in-out infinite alternate;
+        }
+        @keyframes twinkle { 0%, 100% { opacity: .3; } 50% { opacity: 1; } }
+        @keyframes cloud-crossing { from { transform: translateX(0); } to { transform: translateX(172vw); } }
+        @keyframes flower-sway { from { transform: rotate(-3deg); } to { transform: rotate(3deg); } }
+        @keyframes mote-float { from { transform: translate(-12px, 16px); opacity: .15; } to { transform: translate(18px, -25px); opacity: .75; } }
+        @keyframes fog-drift { from { transform: translateX(-4%) scaleY(.9); opacity: .35; } to { transform: translateX(7%) scaleY(1.1); opacity: .7; } }
+        @keyframes snowfall { 0% { transform: translate(0, 0); opacity: 0; } 8% { opacity: .65; } 90% { opacity: .45; } 100% { transform: translate(45px, 110vh); opacity: 0; } }
+        @keyframes aurora-flow { from { transform: skewX(-9deg) scaleY(.8); opacity: .35; } to { transform: skewX(7deg) scaleY(1.15); opacity: .8; } }
+
+        /* --- UI ELEMENTS --- */
+        
+        /* Storybook controls: enamel surfaces, warm rims, and transform-only press feedback. */
+        .top-ui-container {
+            position: absolute; top: max(18px, env(safe-area-inset-top)); width: 100%;
+            display: flex; justify-content: center; pointer-events: none; z-index: 100;
+        }
+        .glass-capsule {
+            display: flex; align-items: center; justify-content: center; gap: 9px;
+            max-width: calc(100% - 24px); box-sizing: border-box; padding: 10px 13px 13px;
+            border: 1px solid #9b865f; border-radius: 28px; pointer-events: auto;
+            background: linear-gradient(160deg, #263c55f5, #112339f5);
+            box-shadow: inset 0 1px 0 #fff2, 0 8px 22px #0004;
+        }
+        #app-title {
+            margin: 0 5px 0 1px; padding-right: 13px; min-width: 86px;
+            color: #efdaa7; font-size: .9rem; font-weight: 600; letter-spacing: .5px;
+            border-right: 1px solid #bca57466; text-align: center;
+        }
+        .btn-small, .btn-big {
+            display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0;
+            color: #f7f3e8; cursor: pointer; touch-action: manipulation; -webkit-tap-highlight-color: transparent;
+            transition: transform .12s ease; user-select: none;
+        }
+        .btn-small {
+            min-height: 44px; padding: 0 13px; gap: 7px; border: 1px solid #b49b6d;
+            border-radius: 16px; background: linear-gradient(#3d5670, #1e334b);
+            box-shadow: inset 0 2px 0 #ffffff2a, 0 4px 0 #091726, 0 7px 10px #0003;
+            font: 600 .8rem 'Segoe UI', Tahoma, sans-serif;
+        }
+        .btn-icon { width: 44px; padding: 0; border-radius: 50%; }
+        .control-icon { width: 19px; height: 19px; display: block; flex-shrink: 0; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; pointer-events: none; }
+        .icon-sound-on { display: none; }
+        .sound-on .icon-sound-on { display: block; }
+        .sound-on .icon-sound-off { display: none; }
+        .btn-small.sound-on, .btn-small.loop-active, .btn-small[aria-expanded="true"] {
+            color: #fff0bb; border-color: #ead29b; background: linear-gradient(#506665, #2a4448);
+            box-shadow: inset 0 2px 5px #0005, 0 2px 0 #0c1b29; transform: translateY(2px);
+        }
+        .btn-small:active { transform: translateY(3px); }
+        .btn-small:focus-visible, .btn-big:focus-visible { outline: 3px solid #fff2c6; outline-offset: 6px; }
+        @media (hover: hover) {
+            .btn-small:hover { border-color: #ffe8b4; }
+            .btn-big:hover:not(:disabled) { transform: translateY(-2px); }
+        }
+        .bottom-controls {
+            position: absolute; bottom: max(34px, env(safe-area-inset-bottom)); width: 100%;
+            display: flex; justify-content: center; gap: 34px; z-index: 100; pointer-events: none;
+        }
+        .btn-big {
+            position: relative; width: 94px; height: 94px; padding: 0; pointer-events: auto;
+            border: 4px solid #dfc58e; border-radius: 50%;
+        }
+        .btn-big .control-icon { width: 32px; height: 32px; stroke-width: 1.5; }
+        .btn-big .icon-record, .btn-big .icon-play, .btn-big .icon-stop { fill: currentColor; }
+        .btn-big .icon-play { margin-left: 4px; }
+        .btn-big .icon-stop { display: none; }
+        .btn-record {
+            background: linear-gradient(145deg, #fa8a7b, #b93353);
+            box-shadow: inset 0 4px 3px #ffffff4d, 0 6px 0 #683647, 0 13px 22px #0006;
+        }
+        .btn-play {
+            background: linear-gradient(145deg, #80e4c7, #247d72);
+            box-shadow: inset 0 4px 3px #ffffff4d, 0 6px 0 #174d50, 0 13px 22px #0006;
+        }
+        .btn-big.is-recording, .btn-big.is-playing-btn {
+            background: linear-gradient(145deg, #596c7d, #263a51);
+            box-shadow: inset 0 3px 6px #0005, 0 3px 0 #102336, 0 10px 18px #0004;
+            transform: translateY(3px); border-color: #fff0bc;
+        }
+        .is-recording .icon-record, .is-playing-btn .icon-play { display: none; }
+        .is-recording .icon-stop, .is-playing-btn .icon-stop { display: block; }
+        .btn-big:active:not(:disabled) { transform: translateY(5px); }
+        .btn-big:disabled {
+            cursor: not-allowed; color: #ced9dc; border-color: #a5a28e;
+            background: linear-gradient(145deg, #536d72, #2d454b);
+            box-shadow: inset 0 2px 2px #ffffff20, 0 4px 0 #1c3038, 0 8px 15px #0003;
+        }
+        @media (max-width: 680px) {
+            .glass-capsule { flex-wrap: wrap; max-width: calc(100% - 20px); gap: 8px; border-radius: 23px; padding: 9px 11px 12px; }
+            #app-title { flex-basis: 100%; border-right: 0; margin: 0 0 2px; padding: 0; }
+        }
+        @media (max-width: 520px) {
+            .btn-small { width: 44px; padding: 0; }
+            .btn-small .button-label { display: none; }
+        }
+        @media (max-width: 420px) {
+            .btn-big { width: 82px; height: 82px; }
+            .bottom-controls { gap: 28px; bottom: 25px; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .btn-small, .btn-big { transition: none; }
+        }
+
+        canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; cursor: default; z-index: 5; }
+        
+        #voyager-object {
+            position: absolute; z-index: 10; cursor: grab; display: flex; justify-content: center; align-items: center;
+            font-size: 110px; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
+            transition: opacity 0.2s; will-change: transform; pointer-events: auto; left: -500px; top: -500px;
+        }
+        #voyager-object:active { cursor: grabbing; }
+
+        .face-right-ufo { transform: translate(-50%, -50%) rotate(45deg); }
+        .face-right-fish { transform: translate(-50%, -50%) scaleX(-1); }
+        .face-right-balloon { transform: translate(-50%, -50%); }
+        .face-right-bee { transform: translate(-50%, -50%) scaleX(-1); }
+        .face-right-skier { transform: translate(-50%, -50%) scaleX(-1); } 
+        .face-right-dragon { transform: translate(-50%, -50%) scaleX(-1); }
+        .face-right-penguin { transform: translate(-50%, -50%) scaleX(-1); }
+        .face-right-ghost { transform: translate(-50%, -50%); }
+
+        #voyager-object.illustrated {
+            width: clamp(132px, 12vw, 190px); height: auto; aspect-ratio: 3 / 2;
+            font-size: 0; transform: translate3d(var(--x, -500px), var(--y, -500px), 0) translate(-50%, -50%);
+            left: 0; top: 0; isolation: isolate;
+        }
+        #voyager-object.singing { filter: drop-shadow(0 0 8px var(--line-color)); }
+        .explorer-art, .explorer-tail {
+            display: block; position: absolute; inset: 0; width: 100%; height: 100%;
+            object-fit: contain; pointer-events: none; opacity: 0; -webkit-user-drag: none;
+        }
+        .art-ready .explorer-art, .art-ready .explorer-tail { opacity: 1; }
+        .explorer-fallback { position: absolute; font-size: 100px; line-height: 1; pointer-events: none; }
+        .art-ready .explorer-fallback { display: none; }
+        .explorer-space .explorer-art { z-index: 1; }
+        .rocket-exhaust {
+            position: absolute; z-index: 0; left: -15%; top: 43%; width: 25%; height: 18%;
+            opacity: 0; border-radius: 90% 20% 20% 90%; transform-origin: right center;
+            background: linear-gradient(90deg, transparent, #48bfff 40%, #fff0a6 82%, #fffdeb);
+            filter: drop-shadow(0 0 6px #71d7ff); animation: rocket-flicker .24s ease-in-out infinite alternate;
+        }
+        .art-ready .rocket-exhaust { opacity: .86; }
+        .explorer-ocean .explorer-art { clip-path: inset(0 0 0 29.8%); }
+        .explorer-tail {
+            clip-path: inset(0 69.7% 0 0); transform-origin: 30% 52%;
+            animation: fish-tail-beat .8s ease-in-out infinite alternate;
+        }
+        @keyframes rocket-flicker { from { transform: scale(.76, .92); } to { transform: scale(1.05, 1.08); } }
+        @keyframes fish-tail-beat { from { transform: scaleX(.78) skewY(-3deg); } to { transform: scaleX(1) skewY(3deg); } }
+        #voyager-object.explorer-sky { width: clamp(100px, 9vw, 140px); aspect-ratio: 2 / 3; }
+        #voyager-object.explorer-graveyard, #voyager-object.explorer-arctic { aspect-ratio: 1; width: clamp(120px, 10vw, 160px); }
+        #voyager-object.explorer-winter { aspect-ratio: 1; }
+        .explorer-sky .explorer-art { transform-origin: 50% 20%; animation: explorer-rock 6s ease-in-out infinite alternate; }
+        .explorer-garden .explorer-art { animation: explorer-hover 1.5s ease-in-out infinite alternate; }
+        .explorer-graveyard .explorer-art { animation: ghost-float 3.5s ease-in-out infinite alternate; }
+        .explorer-winter .explorer-art { animation: explorer-rock 4s ease-in-out infinite alternate; }
+        .explorer-fantasy .explorer-art { animation: explorer-hover 2.4s ease-in-out infinite alternate; }
+        .explorer-arctic .explorer-art { transform-origin: 50% 85%; animation: explorer-rock 3s ease-in-out infinite alternate; }
+        @keyframes explorer-rock { from { transform: rotate(-2deg); } to { transform: rotate(2deg); } }
+        @keyframes explorer-hover { from { transform: translateY(2px) rotate(-1deg); } to { transform: translateY(-3px) rotate(1deg); } }
+        @keyframes ghost-float { from { transform: translateY(3px) scaleY(.98); } to { transform: translateY(-4px) scaleY(1.02); } }
+        .scene-paused #decor-layer *, .scene-paused #voyager-object * { animation-play-state: paused; }
+        @media (prefers-reduced-motion: reduce) {
+            #decor-layer *, #voyager-object * { animation: none !important; }
+            .sky-cloud { left: 4%; }
+            .sky-cloud:nth-child(2) { left: 72%; }
+            .sky-cloud:nth-child(3) { left: 40%; }
+            .scene-meteor, .snowflake, .ocean-bubble { display: none; }
+        }
+
+        .instruction-overlay {
+            position: absolute; bottom: 140px; /* Moved up to clear big buttons */
+            left: 50%; transform: translateX(-50%);
+            background: rgba(0,0,0,0.6); color: rgba(255,255,255,0.9); 
+            padding: 8px 20px; border-radius: 50px;
+            pointer-events: none; z-index: 20; font-size: 0.9rem; text-align: center;
+            border: 1px solid rgba(255,255,255,0.1); 
+            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+        }
+
+        /* SETTINGS PANEL */
+        #settings-panel {
+            position: absolute; top: 94px; left: 50%; transform: translateX(-50%) scale(0.9);
+            width: min(322px, calc(100% - 28px)); box-sizing: border-box;
+            background: linear-gradient(155deg, #263c55, #14273d);
+            border-radius: 20px; padding: 20px; z-index: 200;
+            color: #f7f3e8; border: 1px solid #b49b6d;
+            opacity: 0; pointer-events: none;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex; flex-direction: column; gap: 15px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+        }
+        #settings-panel.open { transform: translateX(-50%) scale(1); opacity: 1; pointer-events: auto; }
+        
+        .setting-row { display: flex; flex-direction: column; gap: 8px; }
+        .setting-label { font-size: 0.8rem; font-weight: 700; color: #aaa; text-transform: uppercase; letter-spacing: 1px; }
+        select {
+            width: 100%; padding: 12px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.1);
+            background: rgba(0,0,0,0.3); color: white; font-size: 0.95rem;
+            cursor: pointer; outline: none; transition: border 0.3s;
+        }
+        select:focus { border-color: var(--primary); }
+        select option { background: #2f3542; color: white; }
+        .toggle-row { display: flex; align-items: center; justify-content: space-between; cursor: pointer; padding: 5px 0; }
+        .toggle-switch {
+            position: relative; width: 44px; height: 24px; background: rgba(255,255,255,0.2);
+            border-radius: 20px; cursor: pointer; transition: background 0.3s;
+        }
+        .toggle-switch::after {
+            content: ''; position: absolute; top: 2px; left: 2px; width: 20px; height: 20px;
+            background: white; border-radius: 50%; transition: left 0.3s; box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        .toggle-active { background: #2ed573; }
+        .toggle-active::after { left: 22px; }
+        @media (max-width: 680px) { #settings-panel { top: 130px; } }
+    </style>
+</head>
+<body>
+<svg aria-hidden="true" focusable="false" style="position:absolute;width:0;height:0;overflow:hidden"><defs><symbol id="icon-sound-on" viewBox="0 0 24 24"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15 8a6 6 0 0 1 0 8M18 5a10 10 0 0 1 0 14"/></symbol><symbol id="icon-sound-off" viewBox="0 0 24 24"><path d="M11 5 6 9H3v6h3l5 4zM16 9l5 6m0-6-5 6"/></symbol><symbol id="icon-sparkles" viewBox="0 0 24 24"><path d="m12 3 2.4 6.6L21 12l-6.6 2.4L12 21l-2.4-6.6L3 12l6.6-2.4zM4 2v4M2 4h4M20 18v4m-2-2h4"/></symbol><symbol id="icon-loop" viewBox="0 0 24 24"><path d="m17 2 4 4-4 4M3 11V8a2 2 0 0 1 2-2h16M7 22l-4-4 4-4m14-1v3a2 2 0 0 1-2 2H3"/></symbol><symbol id="icon-reset" viewBox="0 0 24 24"><path d="M3 10a9 9 0 1 1 2 8M3 4v6h6"/></symbol><symbol id="icon-settings" viewBox="0 0 24 24"><path d="m9 3-.7 2.1-2 .9-2.2-.4-2 3.4 1.5 1.7v2.6L2.1 15l2 3.4 2.2-.4 2 .9L9 21h4l.7-2.1 2-.9 2.2.4 2-3.4-1.5-1.7v-2.6L19.9 9l-2-3.4-2.2.4-2-.9L13 3z"/><circle cx="11" cy="12" r="3"/></symbol><symbol id="icon-record" viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/></symbol><symbol id="icon-play" viewBox="0 0 24 24"><path d="M7 4v16l14-8z"/></symbol><symbol id="icon-stop" viewBox="0 0 24 24"><rect x="5" y="5" width="14" height="14" rx="2"/></symbol></defs></svg>
+
+<div id="app-container">
+    <div id="background-layer" class="bg-space"></div>
+    <div id="decor-layer"></div>
+
+    <!-- Storybook toolbar -->
+    <div class="top-ui-container">
+        <div class="glass-capsule">
+            <h1 id="app-title">Space</h1>
+            <button type="button" class="btn-small" id="sound-btn" onclick="toggleSound()" aria-label="Turn sound on" aria-pressed="false" title="Turn sound on"><svg class="control-icon icon-sound-off" aria-hidden="true" focusable="false"><use href="#icon-sound-off"></use></svg><svg class="control-icon icon-sound-on" aria-hidden="true" focusable="false"><use href="#icon-sound-on"></use></svg><span class="button-label">Sound</span></button>
+            <button type="button" class="btn-small" id="theme-btn" onclick="cycleTheme()" aria-label="Change theme" title="Change theme"><svg class="control-icon icon-sparkles" aria-hidden="true" focusable="false"><use href="#icon-sparkles"></use></svg><span class="button-label">Theme</span></button>
+            <button type="button" class="btn-small" id="loop-btn" onclick="toggleLoop()" aria-label="Turn loop on" aria-pressed="false" title="Turn loop on"><svg class="control-icon icon-loop" aria-hidden="true" focusable="false"><use href="#icon-loop"></use></svg><span class="button-label">Loop</span></button>
+            <button type="button" class="btn-small" onclick="resetApp()" aria-label="Reset recording" title="Reset recording"><svg class="control-icon icon-reset" aria-hidden="true" focusable="false"><use href="#icon-reset"></use></svg><span class="button-label">Reset</span></button>
+            <button type="button" class="btn-small btn-icon" id="settings-btn" onclick="toggleSettings()" aria-label="Settings" aria-controls="settings-panel" aria-expanded="false" title="Settings"><svg class="control-icon icon-settings" aria-hidden="true" focusable="false"><use href="#icon-settings"></use></svg></button>
+        </div>
+    </div>
+
+    <!-- Record and playback controls -->
+    <div class="bottom-controls">
+        <button type="button" class="btn-big btn-record" id="record-btn" onclick="toggleRecordingMode()" title="Record a path" aria-label="Record a path" aria-pressed="false"><svg class="control-icon icon-record" aria-hidden="true" focusable="false"><use href="#icon-record"></use></svg><svg class="control-icon icon-stop" aria-hidden="true" focusable="false"><use href="#icon-stop"></use></svg></button>
+        <button type="button" class="btn-big btn-play" id="play-btn" onclick="togglePlay()" disabled title="Play recording" aria-label="Play recording" aria-pressed="false"><svg class="control-icon icon-play" aria-hidden="true" focusable="false"><use href="#icon-play"></use></svg><svg class="control-icon icon-stop" aria-hidden="true" focusable="false"><use href="#icon-stop"></use></svg></button>
+    </div>
+
+    <!-- Settings Panel (Centered) -->
+    <div id="settings-panel">
+        <div class="setting-row">
+            <span class="setting-label">Instrument Sound</span>
+            <select id="inst-select" onchange="changeInstrument(this.value)">
+                <option value="triangle">Triangle (Classic)</option>
+                <option value="sine">Sine (Flute-like)</option>
+                <option value="sawtooth">Sawtooth (Synth)</option>
+                <option value="square">Square (8-bit)</option>
+            </select>
+        </div>
+        <div class="setting-row">
+            <span class="setting-label">Pitch Scale</span>
+            <select id="scale-select" onchange="changeScale(this.value)">
+                <option value="continuous">Continuous (Slide)</option>
+                <option value="chromatic">Chromatic (All Notes)</option>
+                <option value="major">C Major (Happy)</option>
+                <option value="minor">C Minor (Sad)</option>
+                <option value="pentatonic">Pentatonic (Folk)</option>
+            </select>
+        </div>
+        <!-- NEW FEATURE: SKIPS & LEAPS -->
+        <div class="toggle-row" onclick="toggleMultiStroke()">
+            <span class="setting-label">Draw Skips & Leaps</span>
+            <div id="multistroke-toggle" class="toggle-switch"></div>
+        </div>
+        <div class="toggle-row" onclick="toggleReverb()">
+            <span class="setting-label">Space Echo</span>
+            <div id="reverb-toggle" class="toggle-switch"></div>
+        </div>
+    </div>
+
+    <div id="voyager-object" class="face-right-ufo">🚀</div>
+    <canvas id="canvas"></canvas>
+
+    <div class="instruction-overlay" id="status">
+        Drag the voyager to your starting position!
+    </div>
+</div>
+
+<script>
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    const voyager = document.getElementById('voyager-object');
+    const bgLayer = document.getElementById('background-layer');
+    const decorLayer = document.getElementById('decor-layer');
+    const appContainer = document.getElementById('app-container');
+    const appTitle = document.getElementById('app-title');
+    const statusText = document.getElementById('status');
+    const playBtn = document.getElementById('play-btn');
+    const recordBtn = document.getElementById('record-btn');
+    const soundBtn = document.getElementById('sound-btn');
+    const loopBtn = document.getElementById('loop-btn');
+    const settingsPanel = document.getElementById('settings-panel');
+    const reverbToggle = document.getElementById('reverb-toggle');
+
+    // Cache the static path separately from animated particles.
+    const pathCanvas = document.createElement('canvas');
+    const pathCtx = pathCanvas.getContext('2d');
+    let pathDirty = true, pathRenderId = null, playbackIndex = 0;
+    let pathRenderedCount = 0, pathDistance = 0;
+    let activePointerId = null, activePointerTarget = null;
+
+    const DEFAULT_SIZE = 110;
+    let isPositioning = true, isRecordingMode = false, isDrawing = false, isPlaying = false;
+    let path = [], animationId = null, playbackStartTime = 0, recordingStartTime = 0, voyagerX = 0, voyagerY = 0;
+    
+    // Offsets
+    let dragOffsetX = 0, dragOffsetY = 0;
+
+    // Settings State
+    let isLooping = false;
+    let isMultiStroke = false; // New feature toggle
+    let currentInstrument = 'triangle';
+    let currentScale = 'continuous';
+    let isReverbOn = false;
+    let particles = [];
+
+    // Audio Context
+    let audioCtx = null, oscillator = null, gainNode = null, delayNode = null, feedbackNode = null, wetGainNode = null, outputGain = null, soundEnabled = false;
+
+    function setControlState(button, active, idleLabel, activeLabel) {
+        const label = active ? activeLabel : idleLabel;
+        button.setAttribute('aria-pressed', String(active));
+        button.setAttribute('aria-label', label); button.title = label;
+    }
+
+    // --- AUDIO ENGINE ---
+    function initAudio() {
+        if (!audioCtx) {
+            audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            oscillator = audioCtx.createOscillator();
+            gainNode = audioCtx.createGain(); 
+            
+            delayNode = audioCtx.createDelay();
+            delayNode.delayTime.value = 0.3; 
+            
+            feedbackNode = audioCtx.createGain();
+            feedbackNode.gain.value = 0.4; 
+
+            wetGainNode = audioCtx.createGain(); 
+            wetGainNode.gain.value = 0; 
+
+            oscillator.type = currentInstrument;
+            gainNode.gain.setValueAtTime(0, audioCtx.currentTime);
+
+            outputGain = audioCtx.createGain();
+            outputGain.gain.value = 0;
+            outputGain.connect(audioCtx.destination);
+            oscillator.connect(gainNode);
+            gainNode.connect(outputGain);
+            gainNode.connect(delayNode);
+            delayNode.connect(wetGainNode);
+            wetGainNode.connect(outputGain);
+            delayNode.connect(feedbackNode);
+            feedbackNode.connect(delayNode);
+            
+            oscillator.start();
+            updateReverbState();
+        }
+    }
+
+    function toggleSound() {
+        if (!audioCtx) initAudio();
+        soundEnabled = !soundEnabled;
+        if (soundEnabled) resumeAudio();
+        else silenceAudio();
+        setControlState(soundBtn, soundEnabled, 'Turn sound on', 'Turn sound off');
+        soundBtn.classList.toggle('sound-on', soundEnabled);
+        if (!soundEnabled) gainNode.gain.setTargetAtTime(0, audioCtx.currentTime, 0.05);
+    }
+
+    function changeInstrument(type) {
+        currentInstrument = type;
+        if (oscillator) oscillator.type = type;
+    }
+
+    function changeScale(scale) {
+        currentScale = scale;
+    }
+
+    function toggleReverb() {
+        isReverbOn = !isReverbOn;
+        reverbToggle.classList.toggle('toggle-active', isReverbOn);
+        if(audioCtx) updateReverbState();
+    }
+
+    // New Toggle for skips/leaps
+    function toggleMultiStroke() {
+        isMultiStroke = !isMultiStroke;
+        document.getElementById('multistroke-toggle').classList.toggle('toggle-active', isMultiStroke);
+    }
+
+    function updateReverbState() {
+        if(!audioCtx || !wetGainNode) return;
+        const wetLevel = isReverbOn ? 0.4 : 0;
+        wetGainNode.gain.setTargetAtTime(wetLevel, audioCtx.currentTime, 0.1);
+    }
+
+    function resumeAudio() {
+        if (!audioCtx || !soundEnabled) return;
+        if (audioCtx.state !== 'running' && audioCtx.state !== 'closed') {
+            audioCtx.resume().catch(() => { silenceAudio(); });
+        }
+        outputGain.gain.setTargetAtTime(1, audioCtx.currentTime, 0.01);
+    }
+
+    function silenceAudio() {
+        stopPitch();
+        if (outputGain) outputGain.gain.setTargetAtTime(0, audioCtx.currentTime, 0.01);
+    }
+
+    // --- PITCH LOGIC ---
+    const scaleNotes = {
+        chromatic: [0,1,2,3,4,5,6,7,8,9,10,11],
+        major: [0,2,4,5,7,9,11],
+        minor: [0,2,3,5,7,8,10],
+        pentatonic: [0,3,5,7,10]
+    };
+
+    function pitchRatioAt(y) {
+        return 1 - Math.max(0, Math.min(1, y / Math.max(1, canvas.height)));
+    }
+
+    function getQuantizedFrequency(y) {
+        const ratio = pitchRatioAt(y);
+        if (currentScale === 'continuous') return 130.81 * Math.pow(2, ratio * 4);
+        const continuousNote = 48 + ratio * 48;
+        const allowed = scaleNotes[currentScale] || scaleNotes.chromatic;
+        const octave = Math.floor(continuousNote / 12);
+        let nearest = 48, distance = Infinity;
+        // Compare real pitches, including notes across either octave boundary.
+        for (let o = octave - 1; o <= octave + 1; o++) {
+            for (const degree of allowed) {
+                const note = o * 12 + degree;
+                if (note < 48 || note > 96) continue;
+                const difference = Math.abs(note - continuousNote);
+                if (difference < distance) { nearest = note; distance = difference; }
+            }
+        }
+        return 440 * Math.pow(2, (nearest - 69) / 12);
+    }
+
+    function updatePitch(y) {
+        const freq = getQuantizedFrequency(y);
+        // A stable highlight avoids rerasterizing a changing blur on every pointer/frame update.
+        voyager.classList.add('singing');
+        if (!soundEnabled || !audioCtx) return;
+        oscillator.frequency.setTargetAtTime(freq, audioCtx.currentTime, 0.03);
+        let volume = 0.2;
+        if (currentInstrument === 'sawtooth' || currentInstrument === 'square') volume = 0.15;
+        gainNode.gain.setTargetAtTime(volume, audioCtx.currentTime, 0.03);
+    }
+
+    function stopPitch() { 
+        if (gainNode && audioCtx) gainNode.gain.setTargetAtTime(0, audioCtx.currentTime, 0.05); 
+        voyager.classList.remove('singing');
+    }
+
+    // --- PARTICLES ---
+    function createParticle(x, y) {
+        if (particles.length >= 36) return;
+        const angle = Math.random() * Math.PI * 2;
+        const speed = Math.random() * 2 + 0.5;
+        const themeColor = themes[currentThemeIndex].line;
+        particles.push({ x: x, y: y, vx: Math.cos(angle) * speed, vy: Math.sin(angle) * speed, life: 1.0, color: themeColor });
+    }
+
+    function updateParticles() {
+        for (let i = particles.length - 1; i >= 0; i--) {
+            let p = particles[i];
+            p.x += p.vx; p.y += p.vy; p.life -= 0.02;
+            if (p.life <= 0) particles.splice(i, 1);
+        }
+    }
+
+    function drawParticles() {
+        for (let p of particles) {
+            ctx.globalAlpha = p.life; ctx.fillStyle = p.color; ctx.beginPath();
+            ctx.arc(p.x, p.y, Math.random() * 3 + 1, 0, Math.PI * 2); ctx.fill();
+        }
+        ctx.globalAlpha = 1.0;
+    }
+
+    function makeSceneImage(src) {
+        const img = document.createElement('img');
+        img.src = src; img.alt = ''; img.draggable = false; img.decoding = 'async';
+        return img;
+    }
+
+    function updateVoyagerAppearance() {
+        const theme = themes[currentThemeIndex];
+        voyager.innerHTML = '';
+        if (!theme.sprite) {
+            voyager.className = theme.face;
+            voyager.innerText = theme.emoji;
+            return;
+        }
+        voyager.className = 'illustrated explorer-' + theme.name.toLowerCase();
+        const fallback = document.createElement('span'); fallback.className = 'explorer-fallback';
+        fallback.innerText = theme.emoji; voyager.appendChild(fallback);
+        const art = document.createElement('img'); art.className = 'explorer-art';
+        art.alt = ''; art.draggable = false; art.decoding = 'async';
+        const revealArt = () => {
+            if (themes[currentThemeIndex] === theme) voyager.classList.add('art-ready');
+        };
+        art.addEventListener('load', revealArt);
+        art.src = theme.sprite;
+        if (theme.name === 'Space') {
+            const flame = document.createElement('span'); flame.className = 'rocket-exhaust'; voyager.appendChild(flame);
+        } else if (theme.name === 'Ocean') {
+            const tail = makeSceneImage(theme.sprite); tail.className = 'explorer-tail'; voyager.appendChild(tail);
+        }
+        voyager.appendChild(art);
+        if (art.complete && art.naturalWidth > 0) revealArt();
+    }
+
+    // --- MAIN RENDER LOOP ---
+    function updateDecor() {
+        decorLayer.innerHTML = '';
+        const theme = themes[currentThemeIndex].name;
+        decorLayer.className = 'decor-' + theme.toLowerCase();
+        document.documentElement.style.setProperty('--line-color', themes[currentThemeIndex].line);
+
+        if (theme === 'Space') {
+            for (let i = 0; i < 28; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%'; star.style.top = Math.random() * 78 + '%';
+                star.style.width = star.style.height = (Math.random() * 1.8 + 1) + 'px';
+                star.style.setProperty('--speed', (Math.random() * 5 + 4) + 's');
+                star.style.animationDelay = -Math.random() * 9 + 's'; decorLayer.appendChild(star);
+            }
+            const planet = document.createElement('div'); planet.className = 'scene-planet';
+            planet.appendChild(makeSceneImage('assets/ringed-planet.webp')); decorLayer.appendChild(planet);
+            const meteor = document.createElement('div'); meteor.className = 'scene-meteor';
+            meteor.style.animationDelay = '-8s'; decorLayer.appendChild(meteor);
+        } else if (theme === 'Ocean') {
+            for (let i = 0; i < 4; i++) {
+                const ray = document.createElement('div'); ray.className = 'ocean-sunbeam';
+                ray.style.setProperty('--left', (20 + i * 14) + '%');
+                ray.style.setProperty('--speed', (12 + i * 3) + 's');
+                ray.style.animationDelay = (-i * 3) + 's'; decorLayer.appendChild(ray);
+            }
+            const light = document.createElement('div'); light.className = 'ocean-caustic'; decorLayer.appendChild(light);
+            for (let i = 0; i < 16; i++) {
+                const bubble = document.createElement('div'); bubble.className = 'ocean-bubble';
+                // Most bubbles rise along the edges, leaving the singing path easy to follow.
+                const left = i < 12 ? (i % 2 ? 78 + Math.random() * 20 : Math.random() * 20) : 25 + Math.random() * 50;
+                bubble.style.setProperty('--left', left + '%');
+                bubble.style.setProperty('--size', (4 + Math.random() * 11) + 'px');
+                bubble.style.setProperty('--speed', (14 + Math.random() * 16) + 's');
+                bubble.style.animationDelay = (-Math.random() * 30) + 's'; decorLayer.appendChild(bubble);
+            }
+            for (const [side, speed] of [['left', 7], ['right', 9]]) {
+                const plant = document.createElement('div'); plant.className = 'kelp-cluster ' + side;
+                plant.style.setProperty('--speed', speed + 's'); plant.style.animationDelay = '-4s';
+                plant.appendChild(makeSceneImage('assets/ocean-kelp.webp')); decorLayer.appendChild(plant);
+            }
+        } else if (theme === 'Sky') {
+            for (let i = 0; i < 3; i++) {
+                const cloud = layer('sky-cloud', 85 + i * 19);
+                cloud.style.top = (12 + i * 22) + '%';
+                cloud.style.animationDelay = (-18 - i * 31) + 's';
+                cloud.appendChild(makeSceneImage('assets/sky-cloud.webp'));
+            }
+        } else if (theme === 'Garden') {
+            for (const [side, speed] of [['left', 6], ['right', 8]]) {
+                const flowers = layer('garden-flowers ' + side, speed);
+                flowers.appendChild(makeSceneImage('assets/garden-flower.webp'));
+            }
+            addMotes(12, '#ffefae', 15);
+        } else if (theme === 'Graveyard') {
+            layer('scene-fog', 28); layer('scene-fog', 37).style.bottom = '8%';
+            addMotes(5, '#aed6fa', 11);
+        } else if (theme === 'Winter') {
+            addSnow(24);
+        } else if (theme === 'Fantasy') {
+            addMotes(16, '#ddfda9', 7);
+        } else if (theme === 'Arctic') {
+            layer('aurora', 24); layer('aurora', 31).style.top = '12%';
+            layer('ice-shimmer', 16); addSnow(14);
+        }
+    }
+
+    function layer(className, speed) {
+        const el = document.createElement('div'); el.className = className;
+        el.style.setProperty('--speed', speed + 's');
+        el.style.animationDelay = (-Math.random() * speed) + 's';
+        decorLayer.appendChild(el); return el;
+    }
+
+    function addMotes(count, color, speed) {
+        for (let i = 0; i < count; i++) {
+            const mote = layer('scene-mote', speed + Math.random() * 6);
+            mote.style.left = (4 + Math.random() * 92) + '%';
+            mote.style.top = (35 + Math.random() * 52) + '%';
+            mote.style.setProperty('--size', (2 + Math.random() * 3) + 'px');
+            mote.style.setProperty('--color', color);
+        }
+    }
+
+    function addSnow(count) {
+        for (let i = 0; i < count; i++) {
+            const snow = layer('snowflake', 13 + Math.random() * 14);
+            snow.style.left = Math.random() * 100 + '%';
+            snow.style.setProperty('--size', (2 + Math.random() * 3) + 'px');
+        }
+    }
+
+    const themes = [
+        { name: 'Space', sprite: 'assets/rocket-explorer.webp', emoji: '🚀', bg: 'bg-space', title: "Space", line: '#ffffff', face: 'face-right-ufo' },
+        { name: 'Ocean', sprite: 'assets/fish-explorer.webp', emoji: '🐠', bg: 'bg-ocean', title: "Ocean", line: '#e0f7fa', face: 'face-right-fish' },
+        { name: 'Sky', sprite: 'assets/balloon-explorer.webp', emoji: '🎈', bg: 'bg-sky', title: "Clouds", line: '#ff8c00', face: 'face-right-balloon' },
+        { name: 'Garden', sprite: 'assets/bee-explorer.webp', emoji: '🐝', bg: 'bg-garden', title: "Garden", line: '#ffff00', face: 'face-right-bee' },
+        { name: 'Graveyard', sprite: 'assets/ghost-explorer.webp', emoji: '👻', bg: 'bg-graveyard', title: "Graveyard", line: '#a29bfe', face: 'face-right-ghost' },
+        { name: 'Winter', sprite: 'assets/skier-explorer.webp', emoji: '⛷️', bg: 'bg-winter', title: "Winter", line: '#2563eb', face: 'face-right-skier' },
+        { name: 'Fantasy', sprite: 'assets/dragon-explorer.webp', emoji: '🐉', bg: 'bg-fantasy', title: "Fantasy", line: '#e040fb', face: 'face-right-dragon' },
+        { name: 'Arctic', sprite: 'assets/penguin-explorer.webp', emoji: '🐧', bg: 'bg-arctic', title: "Arctic", line: '#00bcd4', face: 'face-right-penguin' }
+    ];
+    let currentThemeIndex = 0;
+
+    function initCanvas() {
+        if (window.innerHeight <= 100) { requestAnimationFrame(initCanvas); return; }
+        canvas.width = pathCanvas.width = window.innerWidth;
+        canvas.height = pathCanvas.height = window.innerHeight;
+        pathDirty = true;
+        updateVoyagerPos(Math.min(100, canvas.width / 2), canvas.height / 2);
+        updateDecor(); updateVoyagerAppearance();
+    }
+
+    function resizeCanvas() {
+        if (!canvas.width || !canvas.height || !window.innerWidth || !window.innerHeight) return;
+        // End any active stroke before its coordinate system changes.
+        endActivePointer();
+        const scaleX = window.innerWidth / canvas.width;
+        const scaleY = window.innerHeight / canvas.height;
+        for (const point of path) { point.x *= scaleX; point.y *= scaleY; }
+        for (const particle of particles) { particle.x *= scaleX; particle.y *= scaleY; }
+        updateVoyagerPos(voyagerX * scaleX, voyagerY * scaleY);
+        canvas.width = pathCanvas.width = window.innerWidth;
+        canvas.height = pathCanvas.height = window.innerHeight;
+        pathDirty = true;
+        clearCanvas(); drawPath();
+    }
+
+    function updateVoyagerPos(x, y) {
+        voyagerX = x; voyagerY = y;
+        voyager.style.setProperty('--x', x + 'px'); voyager.style.setProperty('--y', y + 'px');
+    }
+
+    function handleStart(e) {
+        if (isPlaying) return;
+        resumeAudio();
+
+        const pos = getEventPos(e);
+        
+        if (isPositioning) {
+            if (Math.hypot(pos.x - voyagerX, pos.y - voyagerY) < DEFAULT_SIZE * 1.2) { 
+                isDrawing = true; 
+                dragOffsetX = voyagerX - pos.x; dragOffsetY = voyagerY - pos.y;
+                updatePitch(voyagerY); 
+            }
+        } else if (isRecordingMode) {
+            // First stroke of a recording session always requires grabbing the object
+            if (path.length === 0) {
+                if (Math.hypot(pos.x - voyagerX, pos.y - voyagerY) < DEFAULT_SIZE * 1.2) {
+                    isDrawing = true; recordingStartTime = performance.now();
+                    dragOffsetX = voyagerX - pos.x; dragOffsetY = voyagerY - pos.y;
+                    path = [];
+                    appendPoint('down', voyagerX, voyagerY, 0);
+                    statusText.innerText = isMultiStroke ? "Recording! Lift and click elsewhere to skip/leap." : "Recording motion... lead the way!";
+                    updatePitch(voyagerY);
+                }
+            } 
+            // In multi-stroke, subsequent strokes can just start wherever you click
+            else if (isMultiStroke) {
+                isDrawing = true;
+                const t = performance.now() - recordingStartTime;
+                dragOffsetX = 0; dragOffsetY = 0; // Teleport to exact click
+                updateVoyagerPos(pos.x, pos.y);
+                appendPoint('down', pos.x, pos.y, t);
+                updatePitch(pos.y);
+            }
+        }
+        if(settingsPanel.classList.contains('open')) toggleSettings();
+    }
+
+    function handleMove(e) {
+        if (!isDrawing || isPlaying) return;
+        const pos = getEventPos(e);
+        const targetX = Math.max(0, Math.min(canvas.width, pos.x + dragOffsetX));
+        const targetY = Math.max(0, Math.min(canvas.height, pos.y + dragOffsetY));
+
+        if (isPositioning) { 
+            updateVoyagerPos(targetX, targetY); updatePitch(targetY); 
+            statusText.innerText = "Positioned! Hit 'Record' to start."; 
+        } else if (isRecordingMode) {
+            const t = performance.now() - recordingStartTime;
+            appendPoint('move', targetX, targetY, t);
+            queuePathRedraw(); updateVoyagerPos(targetX, targetY); updatePitch(targetY);
+        }
+    }
+
+    function handleEnd() {
+        if (!isDrawing) return;
+        isDrawing = false; stopPitch();
+        
+        if (isRecordingMode) {
+            const t = performance.now() - recordingStartTime;
+            appendPoint('up', voyagerX, voyagerY, t); // Mark the gap
+
+            if (!isMultiStroke) {
+                // Legacy behavior: immediately stop and get ready to play
+                finishRecordingSession();
+            } else {
+                statusText.innerText = "Draw another line, or hit Stop (⏹️) to finish!";
+            }
+        }
+    }
+
+    function getEventPos(e) {
+        const rect = canvas.getBoundingClientRect();
+        return {
+            x: Math.max(0, Math.min(canvas.width, (e.clientX - rect.left) * canvas.width / rect.width)),
+            y: Math.max(0, Math.min(canvas.height, (e.clientY - rect.top) * canvas.height / rect.height))
+        };
+    }
+
+    function appendPoint(type, x, y, t) {
+        path.push({ type, x, y, t });
+    }
+
+    function queuePathRedraw() {
+        if (pathRenderId !== null) return;
+        pathRenderId = requestAnimationFrame(() => { pathRenderId = null; drawPath(); });
+    }
+
+    function toggleRecordingMode() {
+        if (isPlaying) stopPlayback();
+        
+        if (!isRecordingMode) {
+            isPositioning = false; isRecordingMode = true; path = []; pathDirty = true; clearCanvas();
+            setControlState(recordBtn, true, 'Record a path', 'Stop recording'); recordBtn.classList.add('is-recording');
+            statusText.innerText = isMultiStroke ? "Grab object to start. Draw, lift, draw again!" : "Grab the object and move it to record!"; 
+            playBtn.disabled = true;
+        } else { 
+            // Manual Stop clicked
+            finishRecordingSession(); 
+        }
+    }
+    
+    function finishRecordingSession() {
+        releaseActivePointer();
+        if (isDrawing) {
+            // Force an 'up' event if they hit stop mid-draw
+            isDrawing = false; stopPitch();
+            appendPoint('up', voyagerX, voyagerY, performance.now() - recordingStartTime);
+        }
+
+        if (path.length > 2 && path[path.length - 1].t > 0) {
+            isRecordingMode = false; playBtn.disabled = false;
+            recordBtn.classList.remove('is-recording'); setControlState(recordBtn, false, 'Record a path', 'Stop recording');
+            statusText.innerText = "Motion Captured! Ready to Sing!";
+        } else { 
+            clearCanvas(); path = []; pathDirty = true; resetToPositioning();
+            statusText.innerText = "Too short! Try moving more.";
+        }
+    }
+
+    function resetToPositioning() {
+        isRecordingMode = false; isPositioning = true; isDrawing = false;
+        setControlState(recordBtn, false, 'Record a path', 'Stop recording'); recordBtn.classList.remove('is-recording');
+        statusText.innerText = "Drag to your starting position!"; 
+        voyager.style.opacity = '1';
+        stopPitch();
+    }
+
+    function drawPath() {
+        if (!isPlaying) clearCanvas();
+        if (path.length === 0) return;
+        if (pathDirty) {
+            pathCtx.clearRect(0, 0, pathCanvas.width, pathCanvas.height);
+            pathRenderedCount = 0; pathDistance = 0; pathDirty = false;
+        }
+        // Append only new samples while recording. A long stroke costs no more per
+        // frame than a short one. Resize/theme changes rebuild this cache once.
+        while (pathRenderedCount < path.length) {
+            const start = pathRenderedCount;
+            const first = path[start];
+            const previous = start > 0 && first.type !== 'down' ? path[start - 1] : first;
+            if (first.type === 'down') pathDistance = 0;
+            pathCtx.beginPath(); pathCtx.moveTo(previous.x, previous.y);
+            pathCtx.setLineDash([12, 18]); pathCtx.lineDashOffset = -pathDistance;
+            pathCtx.lineCap = 'round'; pathCtx.lineJoin = 'round'; pathCtx.shadowBlur = 0;
+            let last = previous;
+            do {
+                const point = path[pathRenderedCount++];
+                if (point.type === 'move') {
+                    pathCtx.lineTo(point.x, point.y);
+                    pathDistance += Math.hypot(point.x - last.x, point.y - last.y);
+                }
+                last = point;
+            } while (pathRenderedCount < path.length && path[pathRenderedCount].type !== 'down');
+            pathCtx.strokeStyle = 'rgba(4, 19, 35, .7)'; pathCtx.lineWidth = 9; pathCtx.stroke();
+            pathCtx.strokeStyle = themes[currentThemeIndex].line; pathCtx.lineWidth = 6; pathCtx.stroke();
+        }
+        ctx.save();
+        ctx.shadowBlur = 0;
+        ctx.drawImage(pathCanvas, 0, 0);
+        ctx.restore();
+    }
+
+    function clearCanvas() { ctx.clearRect(0, 0, canvas.width, canvas.height); }
+
+    function resetApp() {
+        endActivePointer();
+        stopPlayback(); path = []; pathDirty = true; particles = []; clearCanvas(); playBtn.disabled = true;
+        voyagerX = window.innerWidth / 2; voyagerY = window.innerHeight / 2; 
+        initCanvas(); resetToPositioning(); 
+    }
+
+    function toggleLoop() {
+        isLooping = !isLooping;
+        loopBtn.classList.toggle('loop-active', isLooping);
+        setControlState(loopBtn, isLooping, 'Turn loop on', 'Turn loop off');
+    }
+    
+    function toggleSettings() {
+        settingsPanel.classList.toggle('open');
+        document.getElementById('settings-btn').setAttribute('aria-expanded', String(settingsPanel.classList.contains('open')));
+    }
+
+    function togglePlay() { if (path.length < 2) return; isPlaying ? stopPlayback() : startPlayback(); }
+
+    function startPlayback() {
+        if (path.length < 2 || path[path.length - 1].t <= 0) return;
+        resumeAudio();
+        playbackIndex = 0;
+        isPlaying = true; playbackStartTime = performance.now();
+        setControlState(playBtn, true, 'Play recording', 'Stop playback'); playBtn.classList.add('is-playing-btn');
+        appContainer.classList.add('is-playing'); statusText.innerText = isLooping ? "Looping! 🎶" : "Follow and sing! 🎶"; animate();
+    }
+
+    function stopPlayback() {
+        isPlaying = false; cancelAnimationFrame(animationId); animationId = null; playbackIndex = 0;
+        setControlState(playBtn, false, 'Play recording', 'Stop playback'); playBtn.classList.remove('is-playing-btn');
+        appContainer.classList.remove('is-playing'); 
+        voyager.style.opacity = '1'; stopPitch();
+        particles = []; clearCanvas(); drawPath(); 
+        if (path.length > 0) updateVoyagerPos(path[0].x, path[0].y);
+    }
+
+    function animate() {
+        if (!isPlaying) return;
+        clearCanvas(); drawPath();
+        const now = performance.now();
+        let elapsed = now - playbackStartTime;
+        const totalDuration = path[path.length - 1].t;
+        if (elapsed >= totalDuration) {
+            if (!isLooping) { stopPlayback(); return; }
+            elapsed %= totalDuration;
+            playbackStartTime = now - elapsed;
+            playbackIndex = 0;
+        }
+
+        // Each sample is visited once per loop, instead of rescanning from the start.
+        while (playbackIndex + 1 < path.length && path[playbackIndex + 1].t <= elapsed) playbackIndex++;
+        const point = path[playbackIndex];
+        const next = path[playbackIndex + 1];
+        const isGap = point.type === 'up';
+        let x = point.x, y = point.y;
+        // Only interpolate inside a stroke. Gaps retain their silence and jumps.
+        if (!isGap && next && next.type !== 'down' && next.t > point.t) {
+            const progress = Math.max(0, Math.min(1, (elapsed - point.t) / (next.t - point.t)));
+            x += (next.x - point.x) * progress;
+            y += (next.y - point.y) * progress;
+        }
+        updateVoyagerPos(x, y);
+        if (isGap) {
+            stopPitch();
+            voyager.style.opacity = '0.3';
+        } else {
+            voyager.style.opacity = '1';
+            updatePitch(y);
+            if (Math.random() > 0.5) createParticle(x, y);
+        }
+        ctx.shadowBlur = 10; ctx.shadowColor = themes[currentThemeIndex].line;
+        updateParticles(); drawParticles();
+        animationId = requestAnimationFrame(animate);
+    }
+
+    // Keep only nearby decoded artwork, and run one scene load at a time.
+    // Rapid taps are coalesced to the latest choice instead of launching eight downloads.
+    const imageCache = new Map();
+    const sceneExtras = { Space: ['ringed-planet'], Ocean: ['ocean-kelp'], Sky: ['sky-cloud'], Garden: ['garden-flower'] };
+    let requestedThemeIndex = 0, sceneLoadTask = null, warmTimer = null;
+
+    function sceneAssets(index) {
+        const theme = themes[index];
+        return ['assets/' + theme.name.toLowerCase() + '-background.webp', theme.sprite,
+            ...(sceneExtras[theme.name] || []).map(name => 'assets/' + name + '.webp')];
+    }
+
+    function loadSceneImage(src) {
+        if (imageCache.has(src)) return imageCache.get(src).promise;
+        const image = new Image(); image.decoding = 'async';
+        const entry = { image, ready: false };
+        entry.promise = new Promise((resolve, reject) => {
+            let settled = false;
+            const finish = error => {
+                if (settled) return; settled = true;
+                clearTimeout(timer); image.onload = image.onerror = null;
+                if (error) { imageCache.delete(src); image.src = ''; reject(error); }
+                else { entry.ready = true; resolve(image); }
+            };
+            const timer = setTimeout(() => finish(new Error('Image load timed out')), 8000);
+            image.onload = () => {
+                if (image.decode) image.decode().then(() => finish(), () => finish(new Error('Image decode failed')));
+                else finish();
+            };
+            image.onerror = () => finish(new Error('Image load failed'));
+            image.src = src;
+        });
+        imageCache.set(src, entry); return entry.promise;
+    }
+
+    async function prepareScene(index) {
+        const assets = sceneAssets(index);
+        // At most two network/decode jobs at a time, including optional scenery.
+        for (let i = 0; i < assets.length; i += 2) {
+            const results = await Promise.allSettled(assets.slice(i, i + 2).map(loadSceneImage));
+            const failed = results.find(result => result.status === 'rejected');
+            if (failed) throw failed.reason;
+        }
+    }
+
+    function trimSceneCache(extraIndex = currentThemeIndex) {
+        const keep = new Set([currentThemeIndex, requestedThemeIndex, extraIndex].flatMap(sceneAssets));
+        for (const [src, entry] of imageCache) if (entry.ready && !keep.has(src)) imageCache.delete(src);
+    }
+
+    function applyTheme(index) {
+        currentThemeIndex = index;
+        const theme = themes[index]; bgLayer.className = theme.bg; appTitle.innerText = theme.title;
+        updateVoyagerAppearance(); updateDecor(); pathDirty = true; drawPath();
+    }
+
+    function scheduleSceneWarmup() {
+        clearTimeout(warmTimer);
+        warmTimer = setTimeout(() => {
+            if (document.hidden || isDrawing || isPlaying || sceneLoadTask) { scheduleSceneWarmup(); return; }
+            const next = (currentThemeIndex + 1) % themes.length;
+            trimSceneCache(next);
+            sceneLoadTask = prepareScene(next).catch(() => {}).finally(() => {
+                sceneLoadTask = null;
+                if (requestedThemeIndex !== currentThemeIndex) switchRequestedScene();
+                else appTitle.innerText = themes[currentThemeIndex].title;
+            });
+        }, 1500);
+    }
+
+    function switchRequestedScene() {
+        if (sceneLoadTask) return sceneLoadTask;
+        sceneLoadTask = (async () => {
+            while (requestedThemeIndex !== currentThemeIndex) {
+                const target = requestedThemeIndex;
+                trimSceneCache(target);
+                try {
+                    await prepareScene(target);
+                    // A late result must never replace a newer user choice.
+                    if (target === requestedThemeIndex) applyTheme(target);
+                } catch (error) {
+                    if (target === requestedThemeIndex) {
+                        requestedThemeIndex = currentThemeIndex;
+                        statusText.innerText = 'This scene could not load. Tap Theme to try again.';
+                    }
+                }
+            }
+        })().finally(() => {
+            sceneLoadTask = null;
+            appTitle.innerText = themes[currentThemeIndex].title;
+            trimSceneCache(); scheduleSceneWarmup();
+        });
+        return sceneLoadTask;
+    }
+
+    function cycleTheme() {
+        requestedThemeIndex = (requestedThemeIndex + 1) % themes.length;
+        appTitle.innerText = themes[currentThemeIndex].title + '…';
+        clearTimeout(warmTimer);
+        return switchRequestedScene();
+    }
+
+    // Track one pointer so extra fingers cannot steal or end a stroke.
+    function releaseActivePointer() {
+        const target = activePointerTarget, pointerId = activePointerId;
+        activePointerId = null; activePointerTarget = null;
+        if (target && target.hasPointerCapture(pointerId)) target.releasePointerCapture(pointerId);
+    }
+
+    function endActivePointer() {
+        releaseActivePointer();
+        handleEnd();
+    }
+
+    function pointerStart(e) {
+        if (activePointerId !== null || (e.pointerType === 'mouse' && e.button !== 0)) return;
+        handleStart(e);
+        if (!isDrawing) return;
+        activePointerId = e.pointerId;
+        activePointerTarget = e.currentTarget;
+        activePointerTarget.setPointerCapture(e.pointerId);
+        e.preventDefault();
+    }
+
+    function pointerMove(e) {
+        if (e.pointerId !== activePointerId) return;
+        handleMove(e);
+        e.preventDefault();
+    }
+
+    function pointerEnd(e) {
+        if (e.pointerId !== activePointerId) return;
+        endActivePointer();
+    }
+
+    function pointerCancel(e) {
+        if (e.pointerId !== activePointerId) return;
+        endActivePointer();
+        silenceAudio();
+    }
+
+    function interruptInteraction() {
+        endActivePointer();
+        if (isRecordingMode) finishRecordingSession();
+        if (isPlaying) stopPlayback();
+        silenceAudio();
+    }
+
+    for (const surface of [canvas, voyager]) {
+        surface.addEventListener('pointerdown', pointerStart);
+        surface.addEventListener('lostpointercapture', pointerCancel);
+    }
+    window.addEventListener('pointermove', pointerMove, { passive: false });
+    window.addEventListener('pointerup', pointerEnd);
+    window.addEventListener('pointercancel', pointerCancel);
+    window.addEventListener('blur', interruptInteraction);
+    window.addEventListener('pagehide', interruptInteraction);
+    document.addEventListener('visibilitychange', () => {
+        appContainer.classList.toggle('scene-paused', document.hidden);
+        if (document.hidden) interruptInteraction();
+    });
+    window.addEventListener('resize', resizeCanvas);
+    // The DOM is already parsed; image downloads must not delay interaction startup.
+    initCanvas();
+    scheduleSceneWarmup();
+
+</script>
+</body>
+</html>

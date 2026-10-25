@@ -1,0 +1,89 @@
+/* The instrument browser lives in the same LCD as the patch home display. */
+.layout{grid-template-columns:minmax(0,1fr)}
+.instrument .lcd-screen{padding:12px 17px 0;height:var(--lcd-fixed-height,auto);overflow-y:auto;scrollbar-gutter:stable;scrollbar-color:var(--lcd-ink) var(--lcd)}
+.instrument .lcd-size-probe{position:absolute;top:0;left:0;visibility:hidden!important;pointer-events:none;height:auto!important;min-height:0;max-height:none}
+.instrument .lcd-topline{font-size:14px;gap:12px;padding-bottom:8px}
+.instrument .lcd-topline span:first-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:80%}
+.instrument .lcd-topline span:last-child{white-space:nowrap}
+.lcd-menu,.lcd-categories,.lcd-menu-actions{display:flex;align-items:center;gap:6px}
+.lcd-menu{justify-content:space-between;flex-wrap:wrap;padding:5px 0 10px;border-bottom:1px solid var(--lcd-ink)}
+.lcd-categories{flex-wrap:wrap}.lcd-menu-actions{margin-left:auto}
+.instrument .lcd-screen button{font-family:'Soundroom Matrix',monospace;color:var(--lcd-ink);background:transparent;border:1px solid var(--lcd-ink);border-radius:2px;box-shadow:none!important;transform:none!important;min-height:44px;padding:7px 12px;letter-spacing:0;font-size:16px;line-height:1.2;text-transform:none;transition:none}
+.instrument .lcd-screen button:hover{background:var(--lcd-grid)}
+.instrument .lcd-screen button[aria-pressed=true],.instrument .lcd-screen button[aria-expanded=true],.instrument .lcd-screen #lcd-done{background:var(--lcd-select);color:var(--lcd-select-ink)}
+.instrument .lcd-screen button:focus-visible,.instrument .lcd-screen input:focus-visible,.instrument .lcd-screen select:focus-visible{outline:2px solid var(--lcd-ink);outline-offset:2px}
+.instrument .lcd-screen button:disabled{opacity:.4}
+.instrument .lcd-categories button{text-transform:uppercase}
+.instrument #lcd-home{min-height:164px}
+.instrument .instrument-top{padding-top:13px}
+.instrument h1{font-size:clamp(28px,3vw,38px);margin:5px 0 7px}
+.instrument .lcd-screen #patchname{font:inherit;color:inherit;display:block;text-align:left;border:0;padding:0;width:100%;min-height:44px;overflow-wrap:anywhere;background:transparent}
+.instrument .lcd-screen #patchname:hover{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:5px}
+.lcd-home-hint{margin:10px 0 0;color:var(--lcd-muted);font:13px/1.3 'Soundroom Matrix',monospace}
+.instrument .visualrow{height:59px}
+.lcd-bank{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 0 8px;font:14px/1.3 'Soundroom Matrix',monospace;color:var(--lcd-ink)}
+.lcd-bank>div{min-width:0}.lcd-bank #bankname{display:block;overflow-wrap:anywhere}.lcd-bank small{display:block;margin-top:3px;color:var(--lcd-muted);font-size:11px}.lcd-bank #browser-part{text-align:right;max-width:180px;font-size:12px}
+.lcd-current{font:15px/1.3 'Soundroom Matrix',monospace;padding:8px 0 10px;color:var(--lcd-ink);overflow-wrap:anywhere}
+.instrument .lcd-search-panel{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr) auto;gap:10px;align-items:end;padding:8px 0 10px;border-bottom:1px solid var(--lcd-grid)}
+.lcd-search-panel label{display:flex;flex-direction:column;gap:5px;min-width:0;font:13px 'Soundroom Matrix',monospace;color:var(--lcd-ink)}
+.instrument .lcd-search-panel input,.instrument .lcd-search-panel select{background:var(--lcd);color:var(--lcd-ink);border:1px solid var(--lcd-ink);border-radius:2px;box-shadow:none;min-height:44px;min-width:0;width:100%;font:16px 'Soundroom Matrix',monospace;padding:8px 10px;user-select:text;-webkit-user-select:text}
+.instrument .lcd-search-panel input::placeholder{font:16px 'Soundroom Matrix',monospace;color:var(--lcd-muted);opacity:1}
+.instrument .lcd-search-panel select{padding-right:24px}
+.instrument .patchlist{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:repeat(4,76px);grid-auto-rows:76px;align-content:start;gap:4px 12px;height:auto;min-height:316px;padding:0;background:none;border:0;border-radius:0;box-shadow:none;overflow:visible}
+.instrument .lcd-screen .patch{display:flex;text-align:left;align-items:center;gap:9px;min-width:0;min-height:52px;margin:0;padding:7px 9px;border:1px solid var(--lcd-grid);border-bottom-color:var(--lcd-muted);background:transparent}
+.instrument .lcd-screen .patch[aria-pressed=true]{background:var(--lcd-select);color:var(--lcd-select-ink);border-color:var(--lcd-ink)}
+.instrument .patch .num{font-size:15px;min-width:30px;width:30px;padding:0}.instrument .patch .pname{font-size:18px;line-height:1.1;text-transform:none;color:inherit}.instrument .patch .pmeta{font-size:11px;margin-top:4px;color:inherit;text-transform:none}.instrument .patch .dot{flex-shrink:0}
+.instrument .patch .pname{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}.instrument .patch .pmeta{overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.instrument .patchlist .empty{grid-column:1/-1;padding:25px 10px;font-size:17px}
+.lcd-pagination{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:10px;padding:12px 0;border-top:1px solid var(--lcd-ink);margin-top:9px}
+.lcd-pagination>div{text-align:center;font:16px/1.2 'Soundroom Matrix',monospace;color:var(--lcd-ink)}
+.lcd-pagination small{display:block;font-size:11px;margin-top:4px;color:var(--lcd-muted)}
+.performance-view .instrument #lcd-home{min-height:134px}.performance-view .lcd-home-hint{margin-top:7px}
+@media(max-width:760px){.instrument .lcd-screen{padding:11px 10px 0}.instrument .lcd-topline{font-size:12px}.instrument .lcd-screen button{padding:7px 9px;font-size:15px}.instrument .lcd-menu{gap:7px}.lcd-bank #browser-part{max-width:130px}.instrument .patchlist{gap:4px 7px}.instrument .lcd-screen .patch{padding:7px;gap:6px}.instrument .patch .pname{font-size:16px}.instrument .patch .num{font-size:13px;min-width:25px;width:25px}.instrument .lcd-search-panel{grid-template-columns:minmax(0,1fr) auto}.lcd-search-panel label:first-child{grid-column:1/-1}.lcd-pagination{gap:6px}.instrument .lcd-pagination button{font-size:14px}}
+@media(max-width:519px){.instrument .patchlist{grid-template-columns:minmax(0,1fr)}.lcd-menu-actions{width:100%;justify-content:flex-end}.lcd-categories{width:100%;gap:4px}.lcd-categories button{flex:1}.lcd-bank{align-items:start}.lcd-bank #browser-part{max-width:100px}.instrument .lcd-topline span:last-child{font-size:10px}.instrument .lcd-topline span:first-child{max-width:73%}.instrument h1{font-size:28px}}
+
+/* One LCD holds the performance's sound and controller settings. */
+#play-station{margin-bottom:16px}
+#play-station>.instrument{margin-bottom:14px}
+.instrument .startbar{margin:0 0 10px;padding:8px 10px}
+.instrument .startbar.ready{margin-bottom:10px}
+.instrument .startbar .primary{min-height:44px}
+.lcd-page-nav{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px;margin:8px 0 12px;padding-bottom:12px;border-bottom:2px solid var(--lcd-ink)}
+.instrument .lcd-page-nav button{font-size:17px;min-width:0;min-height:46px;padding:7px 5px}
+.instrument .soundfont-panel{display:grid;grid-template-columns:auto minmax(0,1fr);gap:5px 10px;border:0;border-radius:0;background:none;box-shadow:none;padding:0;margin:0 0 10px}
+.instrument .soundfont-panel>label{font:13px 'Soundroom Matrix',monospace;color:var(--lcd-ink);letter-spacing:0;text-transform:none}
+.instrument .soundfont-panel select{font:16px 'Soundroom Matrix',monospace!important;color:var(--lcd-ink);background:var(--lcd);border:1px solid var(--lcd-ink);border-radius:2px;box-shadow:none;padding:7px 28px 7px 9px;min-height:44px}
+.instrument .soundfont-panel>span{grid-column:2;font:11px/1.3 'Soundroom Matrix',monospace;color:var(--lcd-muted);max-width:none}
+.instrument .soundfont-panel select:focus-visible{outline-color:var(--lcd-ink)}
+.lcd-editor-page{padding:3px 0 16px;min-height:238px}
+.lcd-editor-page .lcd-page-heading,.lcd-editor-page .effect-heading{padding:0 0 12px;margin:0 0 14px;border-bottom:1px solid var(--lcd-ink)}
+.lcd-page-heading h2,.lcd-editor-page .effect-heading h2{font:25px/1.15 'Soundroom Matrix',monospace;color:var(--lcd-ink);margin:0}
+.lcd-page-heading p,.lcd-scope-note{font:14px/1.5 'Soundroom Matrix',monospace;color:var(--lcd-muted);margin:6px 0 0}
+.lcd-scope-note{margin:-5px 0 17px}
+.lcd-editor-page .shape-controls,.lcd-editor-page .effect-controls{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:19px 25px;align-items:start}
+.lcd-editor-page .rangehead{font:15px/1.3 'Soundroom Matrix',monospace;color:var(--lcd-ink);text-transform:none;letter-spacing:0;gap:8px;min-height:30px;margin:0 0 4px}
+.lcd-editor-page .rangehead output{font:16px/1.2 'Soundroom Matrix',monospace;color:var(--lcd-select-ink);background:var(--lcd-select);border:0;min-width:58px;padding:5px 7px;white-space:nowrap}
+.lcd-editor-page input[type=range]{height:44px;width:100%;background:linear-gradient(var(--lcd-ink),var(--lcd-ink)) center/100% 2px no-repeat;border:0;box-shadow:none;accent-color:var(--lcd-ink)}
+.lcd-editor-page input[type=range]::-webkit-slider-thumb{background:var(--lcd-select);border:2px solid var(--lcd-select-ink);border-radius:2px;width:21px;height:27px;box-shadow:none}
+.lcd-editor-page input[type=range]::-moz-range-thumb{background:var(--lcd-select);border:2px solid var(--lcd-select-ink);border-radius:2px;width:18px;height:24px;box-shadow:none}
+.lcd-editor-page .effect-select,.lcd-editor-page .midi-selectors>label{font:15px/1.3 'Soundroom Matrix',monospace;color:var(--lcd-ink);letter-spacing:0;text-transform:none;gap:10px}
+.lcd-editor-page select{min-height:44px;font:16px 'Soundroom Matrix',monospace!important;color:var(--lcd-ink);background:var(--lcd);border:1px solid var(--lcd-ink);border-radius:2px;box-shadow:none}
+.lcd-editor-page .panel-hint{font:13px/1.6 'Soundroom Matrix',monospace;color:var(--lcd-muted);margin-top:12px}
+.lcd-editor-page .shape-foot{border-top:1px solid var(--lcd-grid);padding-top:9px;gap:16px}
+.lcd-editor-page .shape-foot p{margin:0}
+.lcd-editor-page .shape-foot button{max-width:none;flex-shrink:0}
+.lcd-editor-page .midi-top{margin-bottom:22px;gap:16px}
+.lcd-editor-page .midi-top>span{font:16px/1.5 'Soundroom Matrix',monospace;color:var(--lcd-ink)}
+.lcd-editor-page .midi-selectors{gap:20px}
+.lcd-effects-tools{display:flex;justify-content:space-between;gap:12px;align-items:center;border-top:1px solid var(--lcd-ink);padding:11px 0;margin-top:0;font:13px 'Soundroom Matrix',monospace;color:var(--lcd-muted)}
+.instrument .lcd-effects-tools button{font-size:14px}
+#play-keyboard{margin:0 0 12px}
+#play-keyboard #performance-view{font-size:10px;letter-spacing:.3px;padding:9px}
+#keyboard-settings .settings{margin:10px 0 0;border:0;border-top:1px solid #65717e;border-radius:0;padding:11px 4px 2px;box-shadow:none;background:none}
+.mixer-lcd-links{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin-top:15px;font-size:11px;color:var(--accent)}
+.mixer-lcd-links span{margin-right:5px}.mixer-lcd-links button{font-size:12px}
+#mixer-master-controls .settings{margin:14px 0 0}
+.studio-nav #open-lcd-controls{font-size:11px}
+.performance-view .instrument .soundfont-panel{display:grid}
+.performance-view .lcd-editor-page{min-height:220px}
+@media(max-width:760px){.lcd-page-nav{grid-template-columns:repeat(3,minmax(0,1fr));gap:5px}.instrument .lcd-page-nav button{font-size:16px}.lcd-editor-page .shape-controls,.lcd-editor-page .effect-controls{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 19px}.lcd-editor-page .rangehead{font-size:14px}.lcd-editor-page .rangehead output{font-size:15px}.lcd-editor-page .midi-selectors{grid-template-columns:1fr}.lcd-editor-page .midi-top{align-items:flex-start;flex-wrap:wrap}.lcd-editor-page .midi-top>span{font-size:14px}.lcd-page-heading h2,.lcd-editor-page .effect-heading h2{font-size:22px}.lcd-effects-tools>span{max-width:110px}.instrument .soundfont-panel>span{display:none}.instrument .startbar strong{display:none}#play-keyboard #performance-view{margin-left:auto}#keyboard-settings .settings .sustain{grid-column:1/-1}}

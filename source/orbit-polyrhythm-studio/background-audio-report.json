@@ -1,0 +1,79 @@
+{
+  "presets": 10,
+  "existing92Unchanged": true,
+  "phraseCycles": 2,
+  "scheduledPitchesAndDurations": true,
+  "browserQA": false,
+  "audio": [
+    {
+      "name": "Window Seat",
+      "seconds": 49.25,
+      "rmsDb": -31.2,
+      "peakDb": -14.1,
+      "maxVoices": 13
+    },
+    {
+      "name": "Honeyed Wood",
+      "seconds": 44.67,
+      "rmsDb": -30.9,
+      "peakDb": -15,
+      "maxVoices": 19
+    },
+    {
+      "name": "Rain at the Desk",
+      "seconds": 53.35,
+      "rmsDb": -31.6,
+      "peakDb": -18,
+      "maxVoices": 12
+    },
+    {
+      "name": "Paper Lantern Glow",
+      "seconds": 46.85,
+      "rmsDb": -34.2,
+      "peakDb": -16.1,
+      "maxVoices": 12
+    },
+    {
+      "name": "Blue Hour Room",
+      "seconds": 58.2,
+      "rmsDb": -30.5,
+      "peakDb": -16,
+      "maxVoices": 17
+    },
+    {
+      "name": "Small Hours",
+      "seconds": 51.91,
+      "rmsDb": -30.4,
+      "peakDb": -15,
+      "maxVoices": 27
+    },
+    {
+      "name": "Sunday Current",
+      "seconds": 40.87,
+      "rmsDb": -29.9,
+      "peakDb": -14.7,
+      "maxVoices": 12
+    },
+    {
+      "name": "Distant Chimes",
+      "seconds": 61.96,
+      "rmsDb": -35.3,
+      "peakDb": -21.2,
+      "maxVoices": 18
+    },
+    {
+      "name": "Velvet Air",
+      "seconds": 54.88,
+      "rmsDb": -32.2,
+      "peakDb": -19.2,
+      "maxVoices": 27
+    },
+    {
+      "name": "Night Train Home",
+      "seconds": 43.66,
+      "rmsDb": -29.2,
+      "peakDb": -15.7,
+      "maxVoices": 32
+    }
+  ]
+}

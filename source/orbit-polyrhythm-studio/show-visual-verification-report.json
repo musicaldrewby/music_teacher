@@ -1,0 +1,27 @@
+{
+  "worlds": 7,
+  "deterministicFrames": true,
+  "distinctScenes": true,
+  "legacyScores": true,
+  "mutedTracksDark": true,
+  "zeroMotionFrozen": true,
+  "cinemaNoOverlays": true,
+  "dissolveEndpointsExact": true,
+  "portraitAndUltrawide": true,
+  "elapsedSeconds": 4.026,
+  "browserQA": false,
+  "native60fpsFrames": true,
+  "velocitySensitiveLight": true,
+  "noteReactiveScenes": true,
+  "audioRegressionUnchanged": true,
+  "firstFrameHasTimedStrikes": true,
+  "encodedFilm": {
+    "width": 1920,
+    "height": 1080,
+    "fps": 60,
+    "frames": 2040,
+    "seconds": 34,
+    "fullDecode": true,
+    "avDurationMatch": true
+  }
+}

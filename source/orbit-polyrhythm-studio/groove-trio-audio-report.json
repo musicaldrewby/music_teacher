@@ -1,0 +1,144 @@
+{
+  "original112Unchanged": true,
+  "newPresets": 15,
+  "twoCompletePhrases": true,
+  "accurateGeneratedNotesAndTiming": true,
+  "exportStateRoundtrip": true,
+  "audio": [
+    {
+      "name": "Emberwood Spiral",
+      "seconds": 35.61,
+      "rmsDb": -26.9,
+      "peakDb": -8.1,
+      "maxVoices": 67,
+      "firstPadChangeSeconds": 2.22,
+      "notes": 561
+    },
+    {
+      "name": "Moonlit Mallet Express",
+      "seconds": 32.05,
+      "rmsDb": -25.8,
+      "peakDb": -8.6,
+      "maxVoices": 100,
+      "firstPadChangeSeconds": 2,
+      "notes": 667
+    },
+    {
+      "name": "Prismatic Canopy",
+      "seconds": 40.9,
+      "rmsDb": -26.6,
+      "peakDb": -6.7,
+      "maxVoices": 66,
+      "firstPadChangeSeconds": 2.55,
+      "notes": 511
+    },
+    {
+      "name": "Obsidian Bloom",
+      "seconds": 46.88,
+      "rmsDb": -27.3,
+      "peakDb": -7.9,
+      "maxVoices": 64,
+      "firstPadChangeSeconds": 2.56,
+      "notes": 419
+    },
+    {
+      "name": "Sunwheel Ceremony",
+      "seconds": 33.73,
+      "rmsDb": -25.6,
+      "peakDb": -7.4,
+      "maxVoices": 100,
+      "firstPadChangeSeconds": 2.11,
+      "notes": 647
+    },
+    {
+      "name": "Electric Coastline",
+      "seconds": 32.59,
+      "rmsDb": -28.5,
+      "peakDb": -13.5,
+      "maxVoices": 36,
+      "firstPadChangeSeconds": 2.03,
+      "notes": 695
+    },
+    {
+      "name": "Midnight Overpass",
+      "seconds": 36.28,
+      "rmsDb": -29.2,
+      "peakDb": -14.5,
+      "maxVoices": 29,
+      "firstPadChangeSeconds": 2.26,
+      "notes": 707
+    },
+    {
+      "name": "Violet Velocity",
+      "seconds": 29.59,
+      "rmsDb": -28.9,
+      "peakDb": -13.4,
+      "maxVoices": 46,
+      "firstPadChangeSeconds": 1.27,
+      "notes": 796
+    },
+    {
+      "name": "Tunnel of Afterimages",
+      "seconds": 31.02,
+      "rmsDb": -27.4,
+      "peakDb": -15.1,
+      "maxVoices": 71,
+      "firstPadChangeSeconds": 1.94,
+      "notes": 724
+    },
+    {
+      "name": "Dawn on the Ring Road",
+      "seconds": 39.23,
+      "rmsDb": -31.7,
+      "peakDb": -14.1,
+      "maxVoices": 36,
+      "firstPadChangeSeconds": 2.45,
+      "notes": 545
+    },
+    {
+      "name": "Five Against the Floor",
+      "seconds": 34.34,
+      "rmsDb": -27.8,
+      "peakDb": -13.4,
+      "maxVoices": 49,
+      "firstPadChangeSeconds": 2.14,
+      "notes": 521
+    },
+    {
+      "name": "Sevenfold Switch",
+      "seconds": 33.15,
+      "rmsDb": -29.1,
+      "peakDb": -13.5,
+      "maxVoices": 62,
+      "firstPadChangeSeconds": 2.07,
+      "notes": 596
+    },
+    {
+      "name": "Eleven Moons Dancing",
+      "seconds": 41.79,
+      "rmsDb": -28.4,
+      "peakDb": -12.3,
+      "maxVoices": 28,
+      "firstPadChangeSeconds": 2.61,
+      "notes": 500
+    },
+    {
+      "name": "Thirteen-Step Fever",
+      "seconds": 30.05,
+      "rmsDb": -26.8,
+      "peakDb": -13.1,
+      "maxVoices": 83,
+      "firstPadChangeSeconds": 1.88,
+      "notes": 661
+    },
+    {
+      "name": "The Great Alignment",
+      "seconds": 36.97,
+      "rmsDb": -32,
+      "peakDb": -14.7,
+      "maxVoices": 44,
+      "firstPadChangeSeconds": 2.31,
+      "notes": 544
+    }
+  ]
+}

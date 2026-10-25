@@ -1,0 +1,10 @@
+{
+  "factoryPresetsUnchanged": 102,
+  "deterministicVariations": 5642,
+  "protectedTrackExact": true,
+  "legacySynthEventsExact": true,
+  "grooveTimingWithinOneSample": true,
+  "personalCollectionRoundtrip": true,
+  "invalidImportAndQuotaPreserveData": true,
+  "browserQA": false
+}

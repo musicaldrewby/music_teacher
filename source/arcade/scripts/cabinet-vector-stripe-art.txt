@@ -1,0 +1,19 @@
+APPROVED 1980s-INSPIRED CABINET ART
+
+Midnight Vector and Sunset Stripe were generated as original illustrations,
+previewed, and approved by Drew. The approved 1024 x 1536 transparent PNGs
+were encoded as WebP with their dimensions and alpha channels preserved.
+
+Midnight Vector — dist/assets/cabinet-midnight-vector.webp
+Black upright cabinet with cyan trim, magenta controls, and original geometric
+line art. Its empty teal marquee and rounded CRT receive live app content.
+Used for Soundroom and Name That Note.
+
+Sunset Stripe — dist/assets/cabinet-sunset-stripe.webp
+Walnut and orange upright cabinet with original cream and amber ribbon art.
+Its empty ivory marquee and rounded CRT receive live app content.
+Used for Four in a Row and Bingo Maker.
+
+The names above label the cabinet designs only. The webpage shows the actual
+app titles on the marquees, fitted to at most two complete lines with padding.
+All eleven designs remain represented in the sixteen-app collection.

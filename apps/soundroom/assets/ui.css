@@ -1,0 +1,172 @@
+/* One outer frame and one toolbar layout in every workspace. */
+html{scrollbar-gutter:stable}
+body[data-workspace] #workstation-main{max-width:none;width:100%;margin:0 auto;padding:18px 22px 16px}
+.studio-nav{display:grid!important;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:12px;margin-bottom:16px}
+.layout{border-top:1px solid #4a4c54;border-radius:12px;min-height:calc(100vh - 30px)}
+.workspace-navigation{grid-column:1/-1;display:flex;align-items:center;gap:14px;min-width:0}
+.workspace-navigation .theme-control{flex-shrink:0}
+.workspace-navigation .theme-choice{min-height:46px}
+.workspace-tabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;width:100%;max-width:440px}
+.workspace-tabs button{min-width:0;min-height:46px;padding:10px 12px;letter-spacing:1px}
+.studio-nav .nav-track{min-width:0;max-width:440px;width:100%;margin:0}
+.workspace-actions{display:grid;grid-template-columns:repeat(3,116px);gap:8px}
+.workspace-actions button{min-height:46px;padding:9px 8px;white-space:nowrap}
+.studio-nav #fullscreen,.studio-nav #open-lcd-controls{font-size:10px}
+.studio-nav #compact-layout{font-size:10px}
+
+/* Common heading and control positions on the LCD setting pages. */
+.lcd-editor-page .lcd-page-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:18px;min-height:80px;padding:0 0 14px;margin:0 0 18px}
+.lcd-page-heading>div{min-width:0}
+.lcd-page-heading p{overflow-wrap:anywhere}
+.instrument .lcd-page-heading>button{min-width:70px;flex-shrink:0}
+.lcd-editor-page .shape-controls,.lcd-editor-page .effect-controls{gap:20px 28px}
+.lcd-editor-page .effect-select{display:flex;flex-direction:column;gap:0}
+.lcd-editor-page .effect-select .rangehead{display:flex;align-items:center}
+.lcd-editor-page .shape-foot{margin-top:22px;padding-top:14px}
+.lcd-editor-page .midi-top{margin-bottom:20px}
+.lcd-browser-status{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:10px 0}
+.lcd-browser-status .lcd-current{min-width:0;padding:0}
+.lcd-browser-status #browser-part{flex-shrink:0;font:12px 'Soundroom Matrix',monospace;color:var(--lcd-muted)}
+.instrument .lcd-screen button.quiet-action{border-color:var(--lcd-muted);font-size:14px}
+
+/* Keep Save and editing within reach; group file operations under Project. */
+.project-bar{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr) auto;align-items:end;gap:16px}
+.transport .project-name{min-width:0!important}
+.project-actions{display:flex;flex-wrap:nowrap;align-items:center;gap:10px}
+.project-actions>button,.project-menu>summary{min-height:46px;min-width:100px}
+.project-actions button{font-size:11px;padding:10px 13px}
+.edit-history{display:flex;gap:5px;padding-left:10px;border-left:1px solid #56606b}
+.edit-history button{min-width:44px;padding:10px 8px;font-size:10px}
+.project-menu{position:relative}
+.project-menu>summary{display:flex;align-items:center;justify-content:center;gap:12px;padding:10px 13px;border:1px solid #64707f;border-radius:4px;list-style:none;font-size:11px;color:#e2e8f0;background:#303944;cursor:pointer;touch-action:manipulation}
+.project-menu>summary::-webkit-details-marker{display:none}
+.project-menu>summary::after{content:'▾';font-size:12px;color:var(--accent)}
+.project-menu[open]>summary{border-color:var(--accent);background:#3a4450}
+.project-menu[open]>summary::after{content:'▴'}
+.project-menu>summary:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.project-menu-panel{position:absolute;z-index:20;top:calc(100% + 8px);right:0;width:264px;max-width:calc(100vw - 72px);display:grid;gap:6px;padding:9px;border:1px solid #738091;border-radius:5px;background:#202832;box-shadow:0 8px 24px #0009}
+.project-menu-panel button{min-height:46px;width:100%;text-align:left;border:1px solid transparent;background:#303b48;box-shadow:none;color:#e3eaf2;font-size:12px}
+.project-menu-panel button:hover{border-color:var(--accent);background:#3b4857}
+.project-menu-panel #seq-new{border-top-color:#64707f;margin-top:3px}
+.export-panel:not([open]){padding-bottom:0}
+
+/* Play, Record, Stop and Save read as the main actions in either theme. */
+.transport-buttons #seq-play,.transport-buttons #seq-record,.transport-buttons #seq-stop{min-height:50px;min-width:94px;font-size:12px;font-weight:600}
+#seq-record{background:linear-gradient(#552e39,#3c232c);border-color:#b56578;color:#ffdce4}
+html #seq-record[aria-pressed=true]{background:#842a40;border-color:#ff9bb0;color:#fff;box-shadow:0 0 14px #fc325a55}
+#seq-stop{background:linear-gradient(#d3dce5,#a7b5c2);color:#18212c;border-color:#edf3f8 #83929f #667684}
+#seq-save{min-width:106px}
+button.quiet-action,.edit-history button{background:#29323d;box-shadow:inset 0 1px #ffffff08;border-color:#536071;color:#c7d2df}
+button.quiet-action:hover,.edit-history button:hover{background:#374351;border-color:#8697aa;color:#fff}
+button:disabled{opacity:.45}
+
+.metronome-options{border-top:1px solid #454e5a;margin-top:15px}
+.metronome-options summary{font-size:11px;letter-spacing:.5px;color:var(--accent);padding:14px 0;cursor:pointer}
+.metronome-options summary span{margin-left:12px;color:#b8c5d3;font-size:10px;letter-spacing:0}
+.metronome-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));align-items:end;gap:16px 20px}
+.metronome-grid .rangehead{margin:0;font-size:10px;min-height:13px}
+.metronome-grid input[type=range]{height:44px;width:100%;accent-color:var(--accent)}
+.metronome-grid .check-label{align-self:center}
+.metronome-grid>button{min-height:44px;font-size:11px}
+.metronome-options p{margin-bottom:12px}
+
+/* Compact is a persistent display preference, separate from keyboard expansion. */
+html[data-layout=compact] body[data-workspace] #workstation-main{padding:12px 16px}
+html[data-layout=compact] .studio-nav{margin-bottom:10px;gap:10px}
+html[data-layout=compact] #play-station>.instrument{margin-bottom:10px}
+html[data-layout=compact] .instrument .lcd-screen:not(.lcd-size-probe){height:clamp(260px,40vh,340px);height:clamp(260px,40svh,340px)}
+html[data-layout=compact] .lcd-navigation{position:sticky;top:-12px;z-index:3;background:var(--lcd);padding-top:10px;margin-top:-10px;box-shadow:0 4px 0 var(--lcd)}
+html[data-layout=compact] .instrument .audition{padding-top:7px;padding-bottom:9px}
+html[data-layout=compact] body:not(.performance-view) .keyboard{height:165px}
+html[data-layout=compact] body:not(.performance-view) .key.white{height:160px}
+html[data-layout=compact] body:not(.performance-view) .key.white.playing{height:157px}
+html[data-layout=compact] body:not(.performance-view) .key.black{height:103px}
+html[data-layout=compact] .scene-panel,html[data-layout=compact] .transport,html[data-layout=compact] .sequence-panel,html[data-layout=compact] .song-panel,html[data-layout=compact] .mixer-panel{margin-bottom:10px}
+
+
+@media(max-width:1100px){
+ body[data-workspace] #workstation-main{padding:15px}
+ .studio-nav{grid-template-columns:minmax(0,1fr) auto}
+ .workspace-tabs{max-width:none}
+ .project-bar{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+ .project-actions{grid-column:1/-1;justify-self:end}
+}
+@media(max-width:760px){
+ body[data-workspace] #workstation-main{padding:12px}
+ html[data-layout=compact] body[data-workspace] #workstation-main{padding:10px}
+ .metronome-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+ .metronome-options summary span{display:block;margin:7px 0 0}
+ .studio-nav{gap:10px}
+ .workspace-tabs button{font-size:10px;padding:10px 7px;letter-spacing:.5px}
+ .lcd-editor-page .lcd-page-heading{gap:12px;min-height:80px}
+ .lcd-editor-page .shape-controls,.lcd-editor-page .effect-controls{gap:16px 20px}
+ .transport-buttons #seq-play,.transport-buttons #seq-record,.transport-buttons #seq-stop{min-width:76px}
+}
+@media(max-width:519px){
+ .studio-nav{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .studio-nav .nav-track{grid-column:1/-1}
+ .workspace-actions{grid-column:1/-1;grid-template-columns:repeat(3,minmax(0,1fr))}.workspace-actions button{white-space:normal;line-height:1.3}
+ .project-bar{grid-template-columns:minmax(0,1fr)}
+ .project-actions{width:100%;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+ .project-menu>summary{width:100%}
+ .edit-history{grid-column:1/-1;justify-content:flex-end;border-left:0;padding-left:0}
+ .lcd-browser-status{gap:10px}
+}
+
+/* Timing correction stays in the MIDI page and does not resize other pages. */
+.midi-timing{border-top:1px solid var(--lcd-muted);padding-top:14px;margin-top:18px}
+.midi-timing>label{font:16px 'Soundroom Matrix',monospace}
+.midi-adjustment-control{display:flex;align-items:center;gap:12px;margin:10px 0}
+.instrument .midi-adjustment-control input{width:120px;min-height:44px;font:18px 'Soundroom Matrix',monospace;color:var(--lcd-ink);background:var(--lcd);border:1px solid var(--lcd-ink);border-radius:2px;padding:8px}
+.midi-timing .panel-hint{margin:10px 0 0}
+@media(min-width:1450px){
+ .studio-nav{grid-template-columns:minmax(600px,1fr) minmax(150px,200px) auto}
+ .workspace-navigation{grid-column:auto;gap:12px}
+}
+@media(max-width:650px){
+ .workspace-navigation{flex-wrap:wrap;gap:10px}
+ .workspace-navigation .theme-control{margin-left:auto}
+ .workspace-tabs{max-width:none;flex-basis:100%}
+}
+
+/* Composition controls share the existing chassis and LCD palette. */
+.lcd-page-nav{grid-template-columns:repeat(6,minmax(0,1fr))}
+.preset-fields{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.preset-fields label{display:grid;gap:6px;font-size:12px;min-width:0}
+.preset-fields input,.preset-fields select{width:100%;min-width:0;min-height:44px}
+.preset-parts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px 12px;margin:16px 0;font-size:12px}
+.preset-parts span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.preset-parts b{opacity:.65}
+.preset-actions{display:flex;gap:6px;flex-wrap:wrap}.preset-actions button{min-height:44px;padding:8px 12px;font-size:12px}
+#preset-status{min-height:36px}
+.play-track-strip{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:6px;margin:12px 0}
+body:not([data-workspace=perform]) .play-track-strip{display:none}
+.play-part{position:relative;min-width:0;border:1px solid var(--line);border-radius:7px;background:#151b18;padding:4px}
+.play-part.selected{border-color:var(--accent);box-shadow:inset 0 0 0 1px #e5bd6030}.play-part.muted{opacity:.65}
+.play-part-select{display:block;text-align:left;width:100%;min-height:48px;border:0;padding:5px;background:transparent;font-size:11px;overflow:hidden}
+.play-part-select b,.play-part-select span{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.play-part-select span{color:var(--muted);margin-top:4px}
+.play-part-controls{display:flex;align-items:center;gap:5px}.play-part-controls button{min-width:44px;min-height:44px;padding:4px;font:11px ui-monospace,monospace}
+.play-part-controls button[data-action=arm][aria-pressed=true]{background:#713f36;border-color:#e9a899;color:#ffe9e0}
+.play-part-signal{height:5px;flex:1;overflow:hidden;border-radius:3px;background:#080c09}.play-part-signal i{display:block;width:0;height:100%;background:#b2eb91;box-shadow:0 0 6px #a1ef92}
+.step-recorder,.song-entry-tools{display:flex;align-items:end;flex-wrap:wrap;gap:8px;margin:12px 0}
+.step-recorder label,.song-entry-tools label{display:grid;gap:5px;color:var(--muted);font-size:11px}
+.step-recorder input,.step-recorder select,.song-entry-tools input,.song-entry-tools select,.song-timeline-heading select{min-height:44px;background:#111713;border:1px solid var(--line);border-radius:6px;color:var(--text);padding:8px}
+.step-recorder input{width:75px}.step-recorder button,.song-entry-tools button{min-height:44px;font-size:12px}
+.step-recorder output{font:14px ui-monospace,monospace;color:var(--accent);padding:12px 6px;min-width:105px}.step-playhead{background:#ffc46d!important;box-shadow:0 0 7px #ffcc7970;pointer-events:none}
+#step-toggle[aria-pressed=true]{background:#68502b;color:#ffe1ac;border-color:#e7bd70}
+.song-timeline-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:13px}.song-timeline-heading small{color:var(--muted)}.song-timeline-heading label{display:flex;align-items:center;gap:10px;font-size:11px}
+.song-timeline-scroll{overflow:auto;border:1px solid var(--line);border-radius:8px;background:#0f1512;margin:10px 0;touch-action:pan-x pan-y;scrollbar-width:thin}
+.song-timeline-canvas{position:relative;min-width:100%;height:136px}
+.song-timeline-ruler{position:relative;height:28px;border-bottom:1px solid var(--line);font:10px ui-monospace,monospace;color:var(--muted)}.song-timeline-ruler span{position:absolute;padding:7px 5px;border-left:1px solid #4c5e4a}
+.song-timeline-blocks{position:relative;height:106px}.song-block{position:absolute;top:4px;height:98px;padding:0 3px;min-width:0;overflow:hidden}
+.song-block-select{height:94px;width:100%;text-align:left;display:block;border:1px solid hsl(var(--scene-hue) 27% 40%);background:hsl(var(--scene-hue) 23% 21%);padding:8px 10px 29px;border-radius:6px;overflow:hidden;font-size:12px}
+.song-block-select small,.song-block-select b{display:block;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}.song-block-select small{font:10px ui-monospace,monospace;opacity:.7;margin-bottom:7px}.song-block-select span{position:absolute;bottom:14px;left:14px;font:11px ui-monospace,monospace}
+.song-block.selected .song-block-select{border-color:#edcf8c;background:hsl(var(--scene-hue) 29% 29%);color:#fff4d9}.song-block.sounding .song-block-select{box-shadow:inset 0 0 0 2px #d7eeb7,0 0 15px #bfd78650}
+.song-drag-handle{position:absolute;right:5px;bottom:7px;width:44px;height:44px;border:0;background:#0003;padding:4px;font-size:22px;touch-action:none;cursor:grab}.song-drag-handle:active{cursor:grabbing}
+.song-drop-marker,.song-timeline-playhead{position:absolute;top:0;bottom:0;width:2px;background:#fff2ac;pointer-events:none;z-index:3}.song-drop-marker{width:4px;background:#f8b85e}.song-timeline-playhead{box-shadow:0 0 8px #edf9ce}
+.song-entry-tools select{max-width:330px;min-width:160px}.song-entry-tools input{width:74px}
+@media(max-width:1100px){.play-track-strip{grid-template-columns:repeat(4,minmax(0,1fr))}.play-part{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center}.play-part-signal{position:absolute;left:8px;right:8px;bottom:3px;flex:none}.play-part-controls{gap:3px}}
+@media(max-width:760px){.lcd-page-nav{grid-template-columns:repeat(3,minmax(0,1fr))}.preset-parts{grid-template-columns:repeat(2,minmax(0,1fr))}.play-part{display:block}.song-timeline-heading{align-items:start}.song-entry-tools label:first-child{width:100%}.song-entry-tools select{max-width:100%;width:100%}}
+@media(max-width:480px){.play-track-strip{grid-template-columns:repeat(2,minmax(0,1fr))}.play-part{display:grid}.preset-fields{grid-template-columns:1fr}.step-recorder{gap:6px}}
+.instrument .preset-fields label,.instrument .preset-parts{font-family:'Soundroom Matrix',monospace;color:var(--lcd-ink);font-size:15px}
+.instrument .preset-fields input{background:var(--lcd);color:var(--lcd-ink);border:1px solid var(--lcd-ink);border-radius:2px;box-shadow:none;padding:8px;font:16px 'Soundroom Matrix',monospace;user-select:text;-webkit-user-select:text}
+.instrument .preset-fields input::placeholder{color:var(--lcd-muted)}

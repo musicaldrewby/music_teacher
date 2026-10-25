@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Event Horizon",
+    "firstPadChangeSeconds": 1.45,
+    "padPartsChangingBefore4Seconds": 4,
+    "filterValuesIn4Seconds": 37,
+    "maxVoices": 53,
+    "peakDb": -17.3
+  },
+  {
+    "name": "Blue Hour Suspension",
+    "firstPadChangeSeconds": 1.33,
+    "padPartsChangingBefore4Seconds": 4,
+    "filterValuesIn4Seconds": 25,
+    "maxVoices": 45,
+    "peakDb": -18.2
+  },
+  {
+    "name": "Aurora Cathedral",
+    "firstPadChangeSeconds": 1.07,
+    "padPartsChangingBefore4Seconds": 4,
+    "filterValuesIn4Seconds": 31,
+    "maxVoices": 52,
+    "peakDb": -17.5
+  },
+  {
+    "name": "Slow Tides of Titan",
+    "firstPadChangeSeconds": 1.71,
+    "padPartsChangingBefore4Seconds": 3,
+    "filterValuesIn4Seconds": 27,
+    "maxVoices": 42,
+    "peakDb": -16.8
+  },
+  {
+    "name": "Velvet Nebula",
+    "firstPadChangeSeconds": 1.23,
+    "padPartsChangingBefore4Seconds": 4,
+    "filterValuesIn4Seconds": 37,
+    "maxVoices": 49,
+    "peakDb": -17.5
+  },
+  {
+    "name": "Weightless Dawn",
+    "firstPadChangeSeconds": 1.41,
+    "padPartsChangingBefore4Seconds": 4,
+    "filterValuesIn4Seconds": 32,
+    "maxVoices": 56,
+    "peakDb": -17.7
+  }
+]

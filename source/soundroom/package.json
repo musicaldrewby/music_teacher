@@ -1,0 +1,19 @@
+{
+  "name": "soundroom",
+  "version": "6.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "test": "node --test tests/*.test.js"
+  },
+  "dependencies": {
+    "spessasynth_core": "4.3.22",
+    "spessasynth_lib": "4.3.14"
+  },
+  "devDependencies": {
+    "esbuild": "0.28.0",
+    "fake-indexeddb": "^6.2.5",
+    "happy-dom": "^21.0.1"
+  }
+}

@@ -1,0 +1,28 @@
+/* Welcome and optional support, using the live nighttime game scene. */
+#game[data-welcome=true] #home,#game[data-welcome=true]>header{visibility:hidden;opacity:0}
+#welcome{position:absolute;inset:0;z-index:110;overflow:auto;overscroll-behavior:contain;background:linear-gradient(180deg,#030b1dcc 0%,#05102433 34%,transparent 57%,#03101a44 78%,#030b19dd 100%);opacity:1;transition:opacity .65s ease}
+#welcome.is-leaving{opacity:0;pointer-events:none}
+.welcome-content{position:relative;min-height:100%;width:100%;animation:welcomeArrival 1.2s ease both}
+#welcome h1{position:absolute;top:12%;left:12px;right:12px;margin:0;text-align:center;white-space:nowrap;font:italic bold clamp(60px,8vw,112px)/1 Georgia,serif;letter-spacing:-4px;color:#ffe3a1;text-shadow:0 4px 0 #101524,0 10px 18px #020816cc,0 0 38px #f5cf791f}
+#welcome .title-letter{display:inline-block;animation:titleWave 2.8s ease-in-out infinite;animation-delay:var(--wave-delay);will-change:transform;--wave-height:.14em}
+#welcome .title-space{display:inline-block;width:.25em}
+.welcome-credit{display:block;margin-top:19px;color:#d1e7e4;font:400 clamp(14px,1.6vw,19px)/1.4 Trebuchet MS,Arial,sans-serif;letter-spacing:1px;text-shadow:0 2px 10px #000}
+.welcome-credit strong{font-weight:700;color:#fff2d4}
+.welcome-panel{position:absolute;bottom:clamp(16px,3vh,30px);left:50%;transform:translateX(-50%);width:min(800px,calc(100% - 32px));display:grid;grid-template-columns:repeat(2,minmax(0,1fr));align-items:stretch;gap:0;padding:22px 28px;border:1px solid #b6d8d342;border-radius:22px;background:linear-gradient(125deg,#142c41f5,#0b1929ed);box-shadow:0 15px 50px #0006,0 1px 0 #fff1 inset;backdrop-filter:blur(10px)}
+.welcome-play,.welcome-support{display:flex;flex-direction:column;align-items:center;min-width:0;text-align:center}
+.welcome-play{padding-right:24px}
+.welcome-play p,.welcome-support p{flex:1;margin:0 0 14px;color:#c5d6d8;font-size:14px;line-height:1.5;text-wrap:balance}
+.welcome-play p strong,.welcome-support p strong{display:block;color:#f5edda;font-weight:700;font-size:15px;margin-bottom:3px}
+.welcome-description{display:block;text-wrap:balance}
+#welcomeEnter{width:min(230px,100%);min-height:49px;padding:12px 20px;border-radius:13px;display:flex;align-items:center;justify-content:center;gap:17px;font-size:18px}
+#welcomeEnter svg{width:22px;height:22px;flex-shrink:0}
+.welcome-support{border-left:1px solid #adc7c536;padding-left:24px}
+.coffee-link{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:10px 18px;width:min(230px,100%);min-height:49px;border:1px solid #ffea73;border-radius:11px;background:#ffdd00;color:#171b22;text-decoration:none;font:700 15px/1.2 Trebuchet MS,Arial,sans-serif;box-shadow:0 4px 15px #0003;transition:background .2s,box-shadow .2s}
+.coffee-link:hover{background:#ffe85d;box-shadow:0 5px 20px #ffdd0020}.coffee-link:focus-visible{outline:3px solid #fff;outline-offset:4px}.coffee-link span[aria-hidden]{font-size:23px;line-height:1}
+#aboutSupportBtn{font-size:13px;padding:10px 16px;min-height:42px}
+#game:not([data-menu=true]) #aboutSupportBtn{display:none}
+@keyframes welcomeArrival{from{opacity:0}to{opacity:1}}
+@media(max-width:700px){#welcome h1{font-size:clamp(48px,11vw,78px);letter-spacing:-2px;top:12%}.welcome-panel{grid-template-columns:1fr;gap:15px;padding:18px 22px;width:min(430px,calc(100% - 28px));bottom:14px}.welcome-play{padding:0}.welcome-play p{display:none}.welcome-support{padding:14px 0 0;border-left:0;border-top:1px solid #adc7c536;text-align:center}.welcome-support p{font-size:13px;margin:0 0 10px}.welcome-support p strong{font-size:14px}.welcome-credit{margin-top:15px;letter-spacing:.4px}}
+@media(max-height:550px) and (min-width:701px){#welcome h1{top:8%;font-size:clamp(40px,9vh,60px)}.welcome-credit{margin-top:10px;font-size:13px}.welcome-panel{bottom:10px;padding:12px 22px;gap:0;grid-template-columns:repeat(2,minmax(0,1fr));border-radius:17px}.welcome-play{padding-right:20px}.welcome-support{padding-left:20px}.welcome-play p,.welcome-support p{font-size:12px;line-height:1.3;margin-bottom:8px}.welcome-play p strong,.welcome-support p strong{font-size:13px}.welcome-description{display:none}#welcomeEnter{min-height:40px;font-size:16px;padding-block:8px}.coffee-link{min-height:40px;padding:7px 13px;font-size:13px}.coffee-link span[aria-hidden]{font-size:20px}}
+@media(max-height:640px) and (max-width:700px){.welcome-content{min-height:600px}#welcome h1{top:45px}.welcome-panel{bottom:18px}}
+@media(prefers-reduced-motion:reduce){#welcome,.welcome-content,#welcome .title-letter{animation:none;transition:none}}

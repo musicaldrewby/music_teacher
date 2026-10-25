@@ -1,0 +1,290 @@
+[
+  {
+    "midi": 60,
+    "layer": "soft",
+    "source": "jsdb_060__C4_2-1.flac",
+    "file": "60-soft.mp3"
+  },
+  {
+    "midi": 60,
+    "layer": "bright",
+    "source": "SteelDrum_060__C4_4-1.flac",
+    "file": "60-bright.mp3"
+  },
+  {
+    "midi": 61,
+    "layer": "soft",
+    "source": "jsdb_061_Db4_2-1.flac",
+    "file": "61-soft.mp3"
+  },
+  {
+    "midi": 61,
+    "layer": "bright",
+    "source": "SteelDrum_061_Db4_4-1.flac",
+    "file": "61-bright.mp3"
+  },
+  {
+    "midi": 62,
+    "layer": "soft",
+    "source": "jsdb_062__D4_2-1.flac",
+    "file": "62-soft.mp3"
+  },
+  {
+    "midi": 62,
+    "layer": "bright",
+    "source": "SteelDrum_062__D4_4-1.flac",
+    "file": "62-bright.mp3"
+  },
+  {
+    "midi": 63,
+    "layer": "soft",
+    "source": "jsdb_063_Eb4_2-1.flac",
+    "file": "63-soft.mp3"
+  },
+  {
+    "midi": 63,
+    "layer": "bright",
+    "source": "SteelDrum_063_Eb4_4-1.flac",
+    "file": "63-bright.mp3"
+  },
+  {
+    "midi": 64,
+    "layer": "soft",
+    "source": "jsdb_064__E4_2-1.flac",
+    "file": "64-soft.mp3"
+  },
+  {
+    "midi": 64,
+    "layer": "bright",
+    "source": "SteelDrum_064__E4_4-1.flac",
+    "file": "64-bright.mp3"
+  },
+  {
+    "midi": 65,
+    "layer": "soft",
+    "source": "jsdb_065__F4_2-1.flac",
+    "file": "65-soft.mp3"
+  },
+  {
+    "midi": 65,
+    "layer": "bright",
+    "source": "SteelDrum_065__F4_4-1.flac",
+    "file": "65-bright.mp3"
+  },
+  {
+    "midi": 66,
+    "layer": "soft",
+    "source": "jsdb_066_Gb4_2-1.flac",
+    "file": "66-soft.mp3"
+  },
+  {
+    "midi": 66,
+    "layer": "bright",
+    "source": "SteelDrum_066_Gb4_4-1.flac",
+    "file": "66-bright.mp3"
+  },
+  {
+    "midi": 67,
+    "layer": "soft",
+    "source": "jsdb_067__G4_2-1.flac",
+    "file": "67-soft.mp3"
+  },
+  {
+    "midi": 67,
+    "layer": "bright",
+    "source": "SteelDrum_067__G4_4-1.flac",
+    "file": "67-bright.mp3"
+  },
+  {
+    "midi": 68,
+    "layer": "soft",
+    "source": "jsdb_068_Ab4_2-1.flac",
+    "file": "68-soft.mp3"
+  },
+  {
+    "midi": 68,
+    "layer": "bright",
+    "source": "SteelDrum_068_Ab4_4-1.flac",
+    "file": "68-bright.mp3"
+  },
+  {
+    "midi": 69,
+    "layer": "soft",
+    "source": "jsdb_069__A4_2-1.flac",
+    "file": "69-soft.mp3"
+  },
+  {
+    "midi": 69,
+    "layer": "bright",
+    "source": "SteelDrum_069__A4_4-1.flac",
+    "file": "69-bright.mp3"
+  },
+  {
+    "midi": 70,
+    "layer": "soft",
+    "source": "jsdb_070_Bb4_2-1.flac",
+    "file": "70-soft.mp3"
+  },
+  {
+    "midi": 70,
+    "layer": "bright",
+    "source": "SteelDrum_070_Bb4_4-1.flac",
+    "file": "70-bright.mp3"
+  },
+  {
+    "midi": 71,
+    "layer": "soft",
+    "source": "jsdb_071__B4_2-1.flac",
+    "file": "71-soft.mp3"
+  },
+  {
+    "midi": 71,
+    "layer": "bright",
+    "source": "SteelDrum_071__B4_4-1.flac",
+    "file": "71-bright.mp3"
+  },
+  {
+    "midi": 72,
+    "layer": "soft",
+    "source": "SteelDrum_072__C5_2-1.flac",
+    "file": "72-soft.mp3"
+  },
+  {
+    "midi": 72,
+    "layer": "bright",
+    "source": "SteelDrum_072__C5_4-2.flac",
+    "file": "72-bright.mp3"
+  },
+  {
+    "midi": 73,
+    "layer": "soft",
+    "source": "SteelDrum_073_Db5_2-1.flac",
+    "file": "73-soft.mp3"
+  },
+  {
+    "midi": 73,
+    "layer": "bright",
+    "source": "SteelDrum_073_Db5_4-1.flac",
+    "file": "73-bright.mp3"
+  },
+  {
+    "midi": 74,
+    "layer": "soft",
+    "source": "SteelDrum_074__D5_2-1.flac",
+    "file": "74-soft.mp3"
+  },
+  {
+    "midi": 74,
+    "layer": "bright",
+    "source": "SteelDrum_074__D5_4-1.flac",
+    "file": "74-bright.mp3"
+  },
+  {
+    "midi": 75,
+    "layer": "soft",
+    "source": "SteelDrum_075_Eb5_2-1.flac",
+    "file": "75-soft.mp3"
+  },
+  {
+    "midi": 75,
+    "layer": "bright",
+    "source": "SteelDrum_075_Eb5_4-1.flac",
+    "file": "75-bright.mp3"
+  },
+  {
+    "midi": 76,
+    "layer": "soft",
+    "source": "SteelDrum_076__E5_2-1.flac",
+    "file": "76-soft.mp3"
+  },
+  {
+    "midi": 76,
+    "layer": "bright",
+    "source": "SteelDrum_076__E5_4-1.flac",
+    "file": "76-bright.mp3"
+  },
+  {
+    "midi": 77,
+    "layer": "soft",
+    "source": "SteelDrum_077__F5_2-1.flac",
+    "file": "77-soft.mp3"
+  },
+  {
+    "midi": 77,
+    "layer": "bright",
+    "source": "SteelDrum_077__F5_4-1.flac",
+    "file": "77-bright.mp3"
+  },
+  {
+    "midi": 78,
+    "layer": "soft",
+    "source": "SteelDrum_078_Gb5_2-1.flac",
+    "file": "78-soft.mp3"
+  },
+  {
+    "midi": 78,
+    "layer": "bright",
+    "source": "SteelDrum_078_Gb5_4-1.flac",
+    "file": "78-bright.mp3"
+  },
+  {
+    "midi": 79,
+    "layer": "soft",
+    "source": "SteelDrum_079__G5_2-1.flac",
+    "file": "79-soft.mp3"
+  },
+  {
+    "midi": 79,
+    "layer": "bright",
+    "source": "SteelDrum_079__G5_4-1.flac",
+    "file": "79-bright.mp3"
+  },
+  {
+    "midi": 80,
+    "layer": "soft",
+    "source": "SteelDrum_080_Ab5_2-1.flac",
+    "file": "80-soft.mp3"
+  },
+  {
+    "midi": 80,
+    "layer": "bright",
+    "source": "SteelDrum_080_Ab5_4-1.flac",
+    "file": "80-bright.mp3"
+  },
+  {
+    "midi": 81,
+    "layer": "soft",
+    "source": "SteelDrum_081__A5_2-1.flac",
+    "file": "81-soft.mp3"
+  },
+  {
+    "midi": 81,
+    "layer": "bright",
+    "source": "SteelDrum_081__A5_4-1.flac",
+    "file": "81-bright.mp3"
+  },
+  {
+    "midi": 82,
+    "layer": "soft",
+    "source": "SteelDrum_082_Bb5_2-1.flac",
+    "file": "82-soft.mp3"
+  },
+  {
+    "midi": 82,
+    "layer": "bright",
+    "source": "SteelDrum_082_Bb5_4-1.flac",
+    "file": "82-bright.mp3"
+  },
+  {
+    "midi": 83,
+    "layer": "soft",
+    "source": "SteelDrum_083__B5_2-1.flac",
+    "file": "83-soft.mp3"
+  },
+  {
+    "midi": 83,
+    "layer": "bright",
+    "source": "SteelDrum_083__B5_4-1.flac",
+    "file": "83-bright.mp3"
+  }
+]

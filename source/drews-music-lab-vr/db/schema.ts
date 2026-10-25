@@ -1,0 +1,4 @@
+import {sqliteTable,text,integer,index,primaryKey} from 'drizzle-orm/sqlite-core';
+export const songs=sqliteTable('gallery_songs',{id:text('id').primaryKey(),title:text('title').notNull(),data:text('data').notNull(),created:integer('created').notNull(),bpm:integer('bpm').notNull(),bars:integer('bars').notNull(),notes:integer('notes').notNull(),hidden:integer('hidden').notNull().default(0),reports:integer('reports').notNull().default(0),deleteHash:text('delete_hash').notNull()},t=>[index('idx_gallery_recent').on(t.hidden,t.created,t.id)]);
+export const rate=sqliteTable('gallery_rate',{key:text('key').primaryKey(),hits:integer('hits').notNull(),expires:integer('expires').notNull()},t=>[index('idx_gallery_rate_expiry').on(t.expires)]);
+export const reports=sqliteTable('gallery_reports',{song:text('song').notNull(),reporter:text('reporter').notNull()},t=>[primaryKey({columns:[t.song,t.reporter]})]);

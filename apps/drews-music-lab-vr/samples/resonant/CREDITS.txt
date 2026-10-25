@@ -1,0 +1,21 @@
+Acoustic gong and wind-chime recordings — Music Lab
+
+Gong2_96Khz24bit.wav by psuess
+https://freesound.org/people/psuess/sounds/194433/
+Public HQ preview: https://cdn.freesound.org/previews/194/194433_829962-hq.mp3
+
+WindChime1.wav by perrydolia
+https://freesound.org/people/perrydolia/sounds/556410/
+Public HQ preview: https://cdn.freesound.org/previews/556/556410_12481079-hq.mp3
+
+Both authors released these recordings under CC0 1.0 Universal:
+https://creativecommons.org/publicdomain/zero/1.0/
+Source pages and licenses checked September 23, 2026.
+
+Adaptations: mono, leading silence removed from gong, low-frequency noise filtering,
+gentle noise reduction on gong, level adjustment, fading the recorded room noise
+at the end, and MP3 encoding. Playback transposes the chime to the room's notes.
+The source chime's dominant lowest tonal partial measures approximately 587.3 Hz
+(D5); this measured frequency is used for tuning rather than the uploader's C4 tag.
+No user attribution, personal information, voices, or outside links are recorded
+into shared songs. Songs store only Music Lab instrument events.

@@ -1,0 +1,91 @@
+{
+  "complete": true,
+  "fingerprint": "b2e5ad70a7876a0cbdc11626bb2f03e5d2a10423e7c0c280541a645b02ae5f23",
+  "title": "First Transmission",
+  "durationSeconds": 60,
+  "sourceRange": {
+    "from": 0,
+    "to": 60
+  },
+  "audio": {
+    "sampleRate": 48000,
+    "channels": 2,
+    "bitDepth": 16,
+    "frames": 2880000,
+    "peakDb": -14.623584227446685,
+    "rmsDb": -34.05803893331101,
+    "limitedSamples": 0,
+    "silentSeconds": 5.3750000000000036,
+    "longestSilence": 5.125000000000002,
+    "maxVoices": 54
+  },
+  "video": {
+    "width": 1280,
+    "height": 720,
+    "fps": 24,
+    "frames": 1440
+  },
+  "sections": 6,
+  "elapsedSeconds": 158.196,
+  "warnings": [],
+  "show": {
+    "title": "First Transmission",
+    "seconds": 60,
+    "seed": 20261011,
+    "cues": [
+      {
+        "id": "test-0",
+        "title": "Event Horizon",
+        "start": 0,
+        "duration": 16,
+        "crossfade": 4,
+        "bpm": 66,
+        "automation": 4
+      },
+      {
+        "id": "test-1",
+        "title": "Photon Rail",
+        "start": 16,
+        "duration": 16,
+        "crossfade": 4,
+        "bpm": 92,
+        "automation": 4
+      },
+      {
+        "id": "test-2",
+        "title": "Wood & Stars",
+        "start": 32,
+        "duration": 16,
+        "crossfade": 4,
+        "bpm": 76,
+        "automation": 4
+      }
+    ],
+    "presetsAvailable": 92
+  },
+  "resumedAndUninterruptedAudioIdentical": true,
+  "ffprobe": {
+    "programs": [],
+    "streams": [
+      {
+        "codec_name": "h264",
+        "codec_type": "video",
+        "width": 1280,
+        "height": 720,
+        "r_frame_rate": "24/1",
+        "duration": "60.000000"
+      },
+      {
+        "codec_name": "aac",
+        "codec_type": "audio",
+        "sample_rate": "48000",
+        "r_frame_rate": "0/0",
+        "duration": "60.000000"
+      }
+    ],
+    "format": {
+      "duration": "60.000000"
+    }
+  },
+  "browserQA": false
+}
