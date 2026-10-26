@@ -318,7 +318,7 @@ window.ARCADE_APPS = [
       "orff",
       "recording"
     ],
-    "url": "https://musicaldrewby.github.io/music_teacher/apps/drews-music-lab-vr/"
+    "url": "https://github.com/musicaldrewby/drews-music-lab-vr"
   },
   {
     "id": "round-helper",
