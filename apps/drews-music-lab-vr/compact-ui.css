@@ -1,0 +1,54 @@
+/* A quiet room with a compact instrument bar and always-visible transport. */
+header{height:48px;top:12px}
+#workspace-toolbar{top:72px;gap:7px}
+#workspace-toolbar>button{padding:8px 12px;min-height:40px}
+#workspace-toolbar .view-tabs button{min-height:32px;padding:6px 10px}
+#desktop-navigation{top:126px}
+#desktop-navigation span{display:none}
+#family-label,#play-hint,#midi-shortcut,#instrument-position{display:none!important}
+#studio-dock{width:min(960px,calc(100% - 32px));gap:6px}
+#studio-dock #playbar{padding:9px 14px;border-top-width:2px}
+.playbar-top h2{font-size:20px;margin:0}
+.playbar-foot{padding-top:3px;min-height:0;justify-content:flex-end}
+#note-readout{font-size:10px}
+#studio-dock #studio-quick{display:block;padding:9px 12px;box-shadow:none;border-color:#6c9284}
+.song-compact{display:flex;align-items:center;gap:12px;min-width:0}
+#studio-quick .song-heading{display:flex;flex:1;min-width:0;gap:3px}
+#quick-title{font-size:15px;line-height:1.3;max-width:100%}
+#quick-status{font-size:12px;line-height:1.35;color:#d3e4da}
+#studio-quick .song-primary{display:flex;gap:6px;flex:none}
+#studio-quick .song-primary button{min-height:40px;padding:8px 15px;font-size:14px}
+#studio-quick #song-tools-toggle{background:transparent;border:1px solid #809b8e;color:#f7ebcf;padding:8px 11px;min-height:40px;white-space:nowrap}
+#song-tools-toggle span{margin-left:5px}
+#song-tools{border-top:1px solid #648378;margin-top:10px;padding-top:10px}
+#studio-quick .song-secondary{display:flex;flex-wrap:wrap;gap:6px}
+#studio-quick .song-secondary button{padding:8px 12px;min-height:40px;flex:1}
+#studio-quick #quick-overdub{background:#8b581c;color:white}
+.song-guidance{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:9px}
+#studio-quick .guide-start{font-size:12px;min-height:36px;padding:7px 10px}
+#quick-measures{width:140px;flex-shrink:0}
+@media(max-width:650px){
+ header{height:50px;top:10px}
+ #workspace-toolbar{top:70px;left:10px;right:10px;gap:5px}
+ #workspace-toolbar>button{min-height:40px;padding:8px 10px}
+ #desktop-navigation{top:164px;right:10px}
+ #studio-dock{width:calc(100% - 16px);bottom:8px;max-height:48dvh}
+ #studio-dock #playbar{padding:8px 10px}
+ #playbar .playbar-top{gap:7px}
+ #keys-toggle,#instrument-edit{min-height:40px}
+ .playbar-top h2{font-size:18px}
+ .playbar-foot{display:none}
+ .song-compact{flex-wrap:wrap;gap:7px}
+ #studio-quick .song-heading{flex-basis:100%;flex-direction:row;justify-content:space-between;align-items:baseline;gap:8px}
+ #quick-title{font-size:14px;max-width:45%}
+ #quick-status{font-size:11px;text-align:right}
+ #studio-quick .song-primary{flex:1}
+ #studio-quick .song-primary button{flex:1;padding:8px 10px;min-height:44px}
+ #studio-quick #song-tools-toggle{min-height:44px;padding:8px 10px}
+ #studio-quick .song-secondary button{flex:1 0 25%;min-height:44px}
+}
+@media(max-height:630px) and (min-width:651px){
+ header{height:44px;top:8px}#workspace-toolbar{top:62px}#desktop-navigation{top:114px}
+ #studio-dock{bottom:8px;gap:4px}#studio-dock #playbar{padding:6px 12px}
+ #studio-dock #studio-quick{padding:7px 10px}
+}

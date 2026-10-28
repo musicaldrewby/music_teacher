@@ -182,3 +182,7 @@ The existing three shadow-free fill lights use softer colors and lower intensity
 Desktop styling is coordinated in `studio-theme.css`. The selected instrument and Song Station share one centered, bounded-height bottom dock. Family accents also appear in the instrument chooser. Controls, dialogs, play view and the gallery use the same teal/cream palette; VR hides the desktop dock. Advanced settings remain in their existing menus.
 
 Validation: existing recording/gallery/MIDI/reach tests passed. DOM/Three.js smoke checks exercised the refreshed room, gallery, dock and controls, retained three shadow-free accent lights, and batched room decoration. No physical-headset or full browser visual check was available in this environment.
+
+## Compact desktop and touch controls
+
+Record, Play and Stop remain visible in a compact transport strip. Song tools expands New Song, Overdub, Save Song, My Songs, Mixer, Perform, More and the first-song guide; selecting Song Station also opens this tray. Reach adjustment and MIDI connection remain in Settings. Instrument selection, optional on-screen keys and the instrument-specific editor stay available. The room geometry, VR controls, audio engine and saved-song formats are unchanged.
