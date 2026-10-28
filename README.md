@@ -6,28 +6,30 @@ Created by Drew Wichman. This repository contains the arcade and all 20 apps fro
 
 | App | Website | Folder under `apps/` |
 | --- | --- | --- |
-| Mallet & Measure — Free Classroom Edition | [Open app](https://musicaldrewby.github.io/music_teacher/apps/mallet-measure-free/) | `mallet-measure-free` |
-| Mr. Drew’s Autoharp | [Open app](https://musicaldrewby.github.io/music_teacher/apps/mr-drews-autoharp/) | `mr-drews-autoharp` |
-| Poison Rhythm | [Open app](https://musicaldrewby.github.io/music_teacher/apps/poison-rhythm/) | `poison-rhythm` |
-| Orbit — Polyrhythm Studio | [Open app](https://musicaldrewby.github.io/music_teacher/apps/orbit-polyrhythm-studio/) | `orbit-polyrhythm-studio` |
-| Mr. Drew's Uke Strum | [Open app](https://musicaldrewby.github.io/music_teacher/apps/drew-uke-strum/) | `drew-uke-strum` |
-| Mr. Drew's Pocket Orff | [Open app](https://musicaldrewby.github.io/music_teacher/apps/pocket-orff/) | `pocket-orff` |
-| Interactive Xylophone | [Open app](https://musicaldrewby.github.io/music_teacher/apps/interactive-xylophone/) | `interactive-xylophone` |
-| Mr. Drew's Animated Vocal Explorations | [Open app](https://musicaldrewby.github.io/music_teacher/apps/mr-drew-vocal-explorations/) | `mr-drew-vocal-explorations` |
-| Boomwhacker Play-Along — Teacher Edition | [Open app](https://musicaldrewby.github.io/music_teacher/apps/drews-boomwhacker-creator/) | `drews-boomwhacker-creator` |
-| Mr. Drew's Rhythm Builder | [Open app](https://musicaldrewby.github.io/music_teacher/apps/mr-drews-rhythm-builder/) | `mr-drews-rhythm-builder` |
-| Movement Stoplight | [Open app](https://musicaldrewby.github.io/music_teacher/apps/drews-movement-stoplight/) | `drews-movement-stoplight` |
-| Sneaky Cat | [Open app](https://musicaldrewby.github.io/music_teacher/apps/sneaky-cat/) | `sneaky-cat` |
-| Mr. Drew’s Name That Tune! | [Open app](https://musicaldrewby.github.io/music_teacher/apps/mr-drews-name-that-tune/) | `mr-drews-name-that-tune` |
-| Four in a Row | [Open app](https://musicaldrewby.github.io/music_teacher/apps/classroom-connect-four/) | `classroom-connect-four` |
-| Mr. Drew's Name That Note Challenge | [Open app](https://musicaldrewby.github.io/music_teacher/apps/mr-drews-name-that-note/) | `mr-drews-name-that-note` |
-| Soundroom | [Open app](https://musicaldrewby.github.io/music_teacher/apps/soundroom/) | `soundroom` |
-| Mr. Drew’s Music Lab · VR | [Open app](https://musicaldrewby.github.io/music_teacher/apps/drews-music-lab-vr/) | `drews-music-lab-vr` |
-| Round Helper | [Open app](https://musicaldrewby.github.io/music_teacher/apps/round-helper/) | `round-helper` |
-| Mr. Drew's Production Media Player | [Open app](https://musicaldrewby.github.io/music_teacher/apps/mr-drews-production-media-player/) | `mr-drews-production-media-player` |
-| From Tips to Tours | [Open app](https://musicaldrewby.github.io/music_teacher/apps/from-tips-to-tours/) | `from-tips-to-tours` |
+| Mallet & Measure — Free Classroom Edition | [Open app](https://mallet-measure-free.musicaldrewby.chatgpt.site) | `mallet-measure-free` |
+| Mr. Drew’s Autoharp | [Open app](https://mr-drews-autoharp.musicaldrewby.chatgpt.site) | `mr-drews-autoharp` |
+| Poison Rhythm | [Open app](https://poison-rhythm.musicaldrewby.chatgpt.site) | `poison-rhythm` |
+| Orbit — Polyrhythm Studio | [Open app](https://orbit-polyrhythm-studio.musicaldrewby.chatgpt.site) | `orbit-polyrhythm-studio` |
+| Mr. Drew's Uke Strum | [Open app](https://drew-uke-strum.musicaldrewby.chatgpt.site) | `drew-uke-strum` |
+| Mr. Drew's Pocket Orff | [Open app](https://pocket-orff.musicaldrewby.chatgpt.site) | `pocket-orff` |
+| Interactive Xylophone | [Open app](https://interactive-xylophone.musicaldrewby.chatgpt.site) | `interactive-xylophone` |
+| Mr. Drew's Animated Vocal Explorations | [Open app](https://mr-drew-vocal-explorations.musicaldrewby.chatgpt.site) | `mr-drew-vocal-explorations` |
+| Boomwhacker Play-Along — Teacher Edition | [Open app](https://drews-boomwhacker-creator.musicaldrewby.chatgpt.site) | `drews-boomwhacker-creator` |
+| Mr. Drew's Rhythm Builder | [Open app](https://mr-drews-rhythm-builder.musicaldrewby.chatgpt.site) | `mr-drews-rhythm-builder` |
+| Movement Stoplight | [Open app](https://drews-movement-stoplight.musicaldrewby.chatgpt.site) | `drews-movement-stoplight` |
+| Sneaky Cat | [Open app](https://sneaky-cat.musicaldrewby.chatgpt.site) | `sneaky-cat` |
+| Mr. Drew’s Name That Tune! | [Open app](https://mr-drews-name-that-tune.musicaldrewby.chatgpt.site) | `mr-drews-name-that-tune` |
+| Four in a Row | [Open app](https://classroom-connect-four.musicaldrewby.chatgpt.site) | `classroom-connect-four` |
+| Mr. Drew's Name That Note Challenge | [Open app](https://mr-drews-name-that-note.musicaldrewby.chatgpt.site) | `mr-drews-name-that-note` |
+| Soundroom | [Open app](https://soundroom.musicaldrewby.chatgpt.site) | `soundroom` |
+| Mr. Drew’s Music Lab · VR | [Open app](https://drews-music-lab-vr.musicaldrewby.chatgpt.site) | `drews-music-lab-vr` |
+| Round Helper | [Open app](https://round-helper.musicaldrewby.chatgpt.site) | `round-helper` |
+| Mr. Drew's Production Media Player | [Open app](https://mr-drews-production-media-player.musicaldrewby.chatgpt.site) | `mr-drews-production-media-player` |
+| From Tips to Tours | [Open app](https://from-tips-to-tours.musicaldrewby.chatgpt.site) | `from-tips-to-tours` |
 
 ## Hosting
+
+As of October 28, 2026, the arcade and simple directory open the live ChatGPT Sites versions of all 20 apps. Publish app updates through Sites to make them available at those same links. The GitHub copies under `apps/` are retained separately and do not automatically synchronize with Sites.
 
 The existing `main` branch and GitHub Pages publishing location are retained. The arcade is at the repository root; each app has its own folder under `apps/`. `.nojekyll` makes these static files publish unchanged. No ChatGPT sign-in is needed for the public apps.
 
