@@ -185,4 +185,12 @@ Validation: existing recording/gallery/MIDI/reach tests passed. DOM/Three.js smo
 
 ## Compact desktop and touch controls
 
-Record, Play and Stop remain visible in a compact transport strip. Song tools expands New Song, Overdub, Save Song, My Songs, Mixer, Perform, More and the first-song guide; selecting Song Station also opens this tray. Reach adjustment and MIDI connection remain in Settings. Instrument selection, optional on-screen keys and the instrument-specific editor stay available. The room geometry, VR controls, audio engine and saved-song formats are unchanged.
+Record, Play and Stop remain visible in a compact transport strip. Song tools expands New Song, Overdub, Save Song, My Songs, Mixer, Perform, More and the first-song guide; selecting Song Station also opens this tray. Reach adjustment and MIDI connection remain in Settings. Instrument selection, optional on-screen keys and the instrument-specific editor stay available. Instrument functions and saved-song formats remain available through the compact controls.
+
+## Cozy creative studio
+
+The room uses oak, sage, oat and terracotta surfaces, rounded flat rugs, narrow linen curtains that retain the landscape view, a low window bench, small framed prints and warm shaded lamps. The steelpan and musical mobile remain central. Xylophones and metallophones are grouped on soft rugs; the small percussion tables move to the left rear, clearing the route into the Listening Room. Duplicate raised instrument plaques are removed while table labels, note names and PLAY HERE controls remain.
+
+The Listening Room has two cushioned side sofas, a central rug and side tables, with a clear central route. Invisible ray boundaries prevent selecting the floor through the sofas or window bench. A quiet gold floor outline follows the selected instrument, including saved reach adjustments; it hides in focused Play view and at utility stations. Decoration batches with the existing scene and introduces no extra lights, shadows or downloaded assets.
+
+Calm is the default lighting style for new visitors; saved lighting preferences are retained. Settings → Room mood & lights exposes Calm, Colorful and Concert. Existing outdoor weather, instrument sounds, note ranges, recording, gallery and VR controls remain available. The studio geometry tests check station identity, entrance and lounge clearance, furniture ray boundaries, decoration cost and selection behavior after batching. Physical-headset feel and WebGL visual rendering still require a capable device check.

@@ -19,16 +19,16 @@ export function addAtmosphere(scene){
   }
   const points=[];for(let i=0;i<110;i++){const t=i*2.399963;points.push(-20-(i%11)*2.5,12+(i*7%29),Math.sin(t)*38);}
   const stars=new THREE.Points(new THREE.BufferGeometry().setAttribute('position',new THREE.Float32BufferAttribute(points,3)),new THREE.PointsMaterial({color:0xe4f0ff,size:.10,sizeAttenuation:true,fog:false}));scene.add(stars);scene.userData.weather=new OutdoorWeather(scene,sky,stars,sun,moon);
-  for(const [x,z,color] of [[-5.5,0,0xffe0b4],[5.5,2,0xb9ded0],[0,-5,0xffeac9]]){const light=new THREE.PointLight(color,14,13,2);light.position.set(x,3.5,z);light.userData.baseIntensity=14;light.userData.baseColor=light.color.clone();scene.userData.showLights.push(light);scene.add(light);}
+  for(const [x,z,color] of [[-5.5,0,0xffe0b4],[5.5,2,0xe6d5ab],[0,-5,0xffeac9]]){const light=new THREE.PointLight(color,14,13,2);light.position.set(x,3.5,z);light.userData.baseIntensity=14;light.userData.baseColor=light.color.clone();scene.userData.showLights.push(light);scene.add(light);}
   // Luminous coves, floating ring fixtures and colorful acoustic wall tiles.
-  for(const [x,color] of [[-9.05,0xffdfb0],[9.05,0xc8e0d1]])mesh(new THREE.BoxGeometry(.045,.055,18.5),basic(color),x,3.96,0);
+  for(const [x,color] of [[-9.05,0xffdfb0],[9.05,0xe7d5ad]])mesh(new THREE.BoxGeometry(.045,.055,18.5),basic(color),x,3.96,0);
   for(const z of [-9.13,9.13])mesh(new THREE.BoxGeometry(18,.055,.045),basic(z<0?0xf3ddb5:0xffd7a3),0,3.96,z);
-  for(const [z,color] of [[-3.5,0xc8e6d8],[2,0xffdfad]]){
+  for(const [z,color] of [[-3.5,0xe3d9bc],[2,0xffdfad]]){
     const ring=mesh(new THREE.TorusGeometry(1.15,.035,8,64),basic(color),0,4.04,z);ring.rotation.x=Math.PI/2;
     for(const x of [-.9,.9])mesh(new THREE.CylinderGeometry(.008,.008,.46,6),solid(0x51648a),x,4.32,z);
   }
   for(let i=0;i<7;i++){
     const tile=mesh(new THREE.CylinderGeometry(.36,.36,.09,6),solid([0x8aab9b,0x9e7b66,0xc0a26c][i%3]),-7.8+i*.88,2.0+Math.sin(i*.9)*.34,9.12);tile.rotation.x=Math.PI/2;
   }
-  for(const x of [-4.7,4.7])for(const z of [-4.7,0,4.7])mesh(new THREE.BoxGeometry(1.5,.035,.025),basic(x<0?0xffc26f:0xbce5d8),x,.06,z+.65);
+  // Family rugs replace the luminous floor bars.
 }
