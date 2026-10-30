@@ -20,11 +20,12 @@ assert.equal(deliberateMalletStrike('xylophone',from,from.clone().add(new THREE.
 const pulses=[],controller={userData:{source:{gamepad:{hapticActuators:[{pulse:(strength,ms)=>{pulses.push([strength,ms]);return Promise.resolve();}}]}}}};
 malletFeedback(controller,velocities[0]);malletFeedback(controller,velocities[3]);assert.ok(pulses[1][0]>pulses[0][0]&&pulses[1][1]>pulses[0][1]);
 assert.doesNotThrow(()=>malletFeedback({userData:{}},.8));controller.userData.source.gamepad.hapticActuators[0].pulse=()=>{throw Error('unsupported');};assert.doesNotThrow(()=>malletFeedback(controller,.8));
-// Compare actual tone partials: loud strikes change timbre as well as gain.
-const audio=new MusicAudio();audio.ctx={state:'running',currentTime:0};audio.burst=()=>{};
+// Expressive strike strengths reach the SoundFont/sample players unchanged.
+const audio=new MusicAudio();audio.ctx={state:'running',currentTime:0};
 for(const type of ['xylophone','metallophone','glockenspiel','boomwhacker']){
- let tones=[];audio.tone=(...args)=>tones.push(args);audio.play(type,60,velocities[0]);const soft=tones;tones=[];audio.play(type,60,velocities[3]);const hard=tones;
- assert.ok(hard[0][3]>soft[0][3]);assert.ok(hard[1][3]/hard[0][3]>soft[1][3]/soft[0][3],'accent has a brighter overtone balance');
+ const calls=[];audio.fontVoice={play:(...args)=>calls.push(args)};audio.boomwhackers={play:(...args)=>calls.push(['boomwhacker',...args])};
+ audio.play(type,60,velocities[0]);audio.play(type,60,velocities[3]);
+ assert.equal(calls[0][2],velocities[0]);assert.equal(calls[1][2],velocities[3]);
 }
 // Synth contact opens once, holds, and releases without repeat attacks.
 const source=fs.readFileSync(new URL('../dist/app.js',import.meta.url),'utf8');
@@ -39,4 +40,4 @@ context.updateSynthMallet(con,{hit:null,contacts:new Set()},from,0);assert.equal
 const recorded=new LoopRecorder({play:()=>{}});recorded.startTake(0,{mode:'replace'});recorded.tick(recorded.recordStart);
 velocities.forEach((velocity,i)=>recorded.capture({type:'xylophone',instrumentId:'ax',midi:60+i*2,velocity},recorded.recordStart+.2+i*.3));recorded.finish(recorded.recordStart+2);
 const played=[],replay=new LoopRecorder({play:e=>played.push(e.velocity)});replay.load(recorded.snapshot(),0);assert.deepEqual(replay.events.map(e=>e.velocity),velocities);replay.play(0);for(let t=0;t<2;t+=.025)replay.tick(t);assert.deepEqual(played,velocities);
-console.log('PASS: mallet dynamics across frame rates, directional accents, haptics fallback, brighter tone, sustained synth contact and recorded/playback strength.');
+console.log('PASS: mallet dynamics across frame rates, directional accents, haptics fallback, SoundFont/sample velocity, sustained synth contact and recorded/playback strength.');

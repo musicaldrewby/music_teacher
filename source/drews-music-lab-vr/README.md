@@ -200,3 +200,26 @@ Calm is the default lighting style for new visitors; saved lighting preferences 
 The room and compact controls now use midnight blue, cobalt, violet and coral. Slate floors, blue window frames, pale curtains, violet sofas and coral cushions replace the sage and brown decor; the actual instruments keep their wood and metal materials. Lighting stays steady by default, with warm-white lamps and cool cove accents. Play view uses a blue-gray backdrop, and dialogs share the new dark palette. Existing saved lighting preferences and music behavior are unchanged.
 
 The acoustic tile row ends after six panels; the extra seventh tile that crossed into the Listening Room doorway is removed. Source geometry checks verify that every remaining tile clears the doorway trim.
+
+
+### Instrument audio
+
+GeneralUser GS 1.471 is bundled unchanged in four binary chunks under
+`dist/samples/soundfont/`. Its original license and credit are alongside it.
+The piano, xylophones, vibraphone-backed metallophones, glockenspiel, percussion,
+drum machine, bass and wall synth use its sample zones. The Web Audio player
+preserves key/velocity zones, root tuning, looping, stereo pan and volume envelopes;
+the wall synth and bass apply the studio's existing filters and envelopes.
+SoundFont program/bank choices travel with new recorded synth patches. Older
+songs still load and use the corresponding SoundFont tone family.
+
+Gong, wind-chime and steelpan recordings are unchanged. Boomwhackers reuse the
+22 WAVs from Drew's Boomwhacker Creator, with its original root pitches and gains;
+nearest-note transposition supplies chromatic pitches. Provenance is recorded in
+`scripts/boomwhacker-source.json` and each sample directory's `CREDITS.txt`.
+All sound assets use relative URLs and are hosted with the app. Live playing,
+shared-song playback and WAV exports share the same voices and buffers.
+
+Run `npm test` with Node 22 or later. The audio regression tests render real PCM
+through a Web Audio implementation, checking all instrument mappings, expressive
+velocity, held synth release, bass, Boomwhacker recordings and complete WAV export.

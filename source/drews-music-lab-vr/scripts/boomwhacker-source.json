@@ -1,0 +1,156 @@
+[
+  {
+    "number": 1,
+    "name": "1.wav",
+    "rootPitch": 48,
+    "gain": 1.2118929,
+    "data": "./assets/f11794e74b4904346a6f.wav"
+  },
+  {
+    "number": 2,
+    "name": "2.wav",
+    "rootPitch": 50,
+    "gain": 1.2318088,
+    "data": "./assets/a9a15dad4b8e69ef85c5.wav"
+  },
+  {
+    "number": 3,
+    "name": "3.wav",
+    "rootPitch": 52,
+    "gain": 1.0054887,
+    "data": "./assets/26b975e6b1ca74fd667d.wav"
+  },
+  {
+    "number": 4,
+    "name": "4.wav",
+    "rootPitch": 53,
+    "gain": 0.9102595,
+    "data": "./assets/00f46a5d591bb7ae05ef.wav"
+  },
+  {
+    "number": 5,
+    "name": "5.wav",
+    "rootPitch": 55,
+    "gain": 0.8632655,
+    "data": "./assets/e99519918b9773cc1191.wav"
+  },
+  {
+    "number": 6,
+    "name": "6.wav",
+    "rootPitch": 57,
+    "gain": 0.8901874,
+    "data": "./assets/e08d852e8d5faa7a7e5d.wav"
+  },
+  {
+    "number": 7,
+    "name": "7.wav",
+    "rootPitch": 59,
+    "gain": 0.8463958,
+    "data": "./assets/ce8fc83871a6ce8288cd.wav"
+  },
+  {
+    "number": 8,
+    "name": "8.wav",
+    "rootPitch": 60,
+    "gain": 0.8714524,
+    "data": "./assets/aefb7b6935c21b9c163f.wav"
+  },
+  {
+    "number": 9,
+    "name": "9.wav",
+    "rootPitch": 62,
+    "gain": 1.1297047,
+    "data": "./assets/9f8fbeaea3de9b38a1a2.wav"
+  },
+  {
+    "number": 10,
+    "name": "10.wav",
+    "rootPitch": 64,
+    "gain": 0.8615669,
+    "data": "./assets/66a30773f702806b1b08.wav"
+  },
+  {
+    "number": 11,
+    "name": "11.wav",
+    "rootPitch": 65,
+    "gain": 0.877561,
+    "data": "./assets/382036e009eb7d225c07.wav"
+  },
+  {
+    "number": 12,
+    "name": "12.wav",
+    "rootPitch": 67,
+    "gain": 0.9038914,
+    "data": "./assets/7023ef954e1a3410c44e.wav"
+  },
+  {
+    "number": 13,
+    "name": "13.wav",
+    "rootPitch": 69,
+    "gain": 0.84917,
+    "data": "./assets/4e11376786b4cd079102.wav"
+  },
+  {
+    "number": 14,
+    "name": "14.wav",
+    "rootPitch": 71,
+    "gain": 0.8479837,
+    "data": "./assets/5c3a90a758967d13c1cd.wav"
+  },
+  {
+    "number": 15,
+    "name": "15.wav",
+    "rootPitch": 72,
+    "gain": 0.8356806,
+    "data": "./assets/82063eb264b3b15c55d4.wav"
+  },
+  {
+    "number": 16,
+    "name": "16.wav",
+    "rootPitch": 74,
+    "gain": 0.8614367,
+    "data": "./assets/55d3bef0eb9f9294afc4.wav"
+  },
+  {
+    "number": 17,
+    "name": "17.wav",
+    "rootPitch": 76,
+    "gain": 0.8331175,
+    "data": "./assets/1cdefa13f8b295cbc585.wav"
+  },
+  {
+    "number": 18,
+    "name": "18.wav",
+    "rootPitch": 77,
+    "gain": 0.85715,
+    "data": "./assets/f9d05eff978297d5870a.wav"
+  },
+  {
+    "number": 19,
+    "name": "19.wav",
+    "rootPitch": 79,
+    "gain": 0.8951029,
+    "data": "./assets/93745b188fadef470a30.wav"
+  },
+  {
+    "number": 20,
+    "name": "20.wav",
+    "rootPitch": 81,
+    "gain": 0.8536485,
+    "data": "./assets/66aa2cc9ad626a7e081a.wav"
+  },
+  {
+    "number": 21,
+    "name": "21.wav",
+    "rootPitch": 83,
+    "gain": 1.2416009,
+    "data": "./assets/003faeaf9a0f4a15326f.wav"
+  },
+  {
+    "number": 22,
+    "name": "22.wav",
+    "rootPitch": 84,
+    "gain": 0.826221,
+    "data": "./assets/31648c80fa9808f1bdd6.wav"
+  }
+]

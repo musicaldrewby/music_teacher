@@ -1,0 +1,6 @@
+The 22 Boomwhacker WAV recordings bundled with Drew's Boomwhacker Creator.
+Source: musicaldrewby/music_teacher, apps/drews-boomwhacker-creator
+Source commit: dfb6f78e617eb0487e909fc30430ac7fd2979e10
+Copied unchanged; filenames here are their original root MIDI pitches.
+Original asset paths and gain mapping: scripts/boomwhacker-source.json.
+Chromatic notes use the nearest recording with pitch adjustment.

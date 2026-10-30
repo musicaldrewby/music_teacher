@@ -5,11 +5,12 @@
   "scripts": {
     "build": "node scripts/build.mjs",
     "db:generate": "drizzle-kit generate",
-    "test": "node tests/song-station.mjs && node tests/gallery.mjs && node tests/resonant.mjs && node tests/room-tools.mjs && node tests/midi-input.mjs && node tests/mallet-expression.mjs && node tests/creative-tools.mjs && node tests/cozy-studio.mjs"
+    "test": "node tests/song-station.mjs && node tests/gallery.mjs && node tests/resonant.mjs && node tests/room-tools.mjs && node tests/midi-input.mjs && node tests/mallet-expression.mjs && node tests/creative-tools.mjs && node tests/cozy-studio.mjs && node tests/soundfont.mjs"
   },
   "devDependencies": {
     "drizzle-kit": "0.31.4",
     "drizzle-orm": "0.44.5",
-    "esbuild": "0.25.10"
+    "esbuild": "0.25.10",
+    "node-web-audio-api": "2.2.0"
   }
 }
