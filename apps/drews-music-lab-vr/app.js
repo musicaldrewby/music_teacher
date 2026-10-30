@@ -10,7 +10,7 @@ import {SongGallery} from './gallery.js?v=31';
 import * as THREE from './vendor/three.module.js';
 import {findMalletStrike,MALLET_RADIUS,malletStillTouches,deliberateMalletStrike,MALLET_SENSITIVITY,malletVelocity,malletImpactVelocity,malletFeedback} from './mallets.js?v=35';
 import {addAtmosphere} from './atmosphere.js?v=40';
-import {arrangeCozyStudio,buildCozyStudio} from './cozy-studio.js?v=40';
+import {arrangeCozyStudio,buildCozyStudio} from './cozy-studio.js?v=41';
 let cozyStudio=null;
 import {optimizeRoom,configureVRPerformance} from './performance.js?v=16';
 import {LoopRecorder,SongStore,validateSong} from './recorder.js?v=36';

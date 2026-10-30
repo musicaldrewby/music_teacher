@@ -79,10 +79,9 @@ export function buildCozyStudio(scene,stations) {
   }
   box(.06,.065,18.1,0x56678c,-8.99,3.91,.5,studio,'Curtain rail');
 
-  // Low window bench and a few books: outside every playing position.
+  // Clear window bench: outside every playing position.
   box(.72,.53,2.7,0x354467,-8.55,.30,2.15,studio,'Painted window bench');
   cushion(.75,.15,2.7,0x7488c8,-8.55,.66,2.15);
-  for(let i=0;i<6;i++) box(.13,.28+(i%3)*.04,.25,[0xef8d83,0x7f88d9,0xe3d8f5][i%3],-8.48,.94,1.15+i*.15,studio,'Studio sketchbook');
   lamp(-8.2,4.05);planter(-8.25,.25);
   blocker(.78,.83,2.8,-8.55,.42,2.15);
 
