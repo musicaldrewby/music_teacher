@@ -11,19 +11,19 @@ header{height:48px;top:12px}
 .playbar-top h2{font-size:20px;margin:0}
 .playbar-foot{padding-top:3px;min-height:0;justify-content:flex-end}
 #note-readout{font-size:10px}
-#studio-dock #studio-quick{display:block;padding:9px 12px;box-shadow:none;border-color:#6c9284}
+#studio-dock #studio-quick{display:block;padding:9px 12px;box-shadow:none;border-color:#586e9a}
 .song-compact{display:flex;align-items:center;gap:12px;min-width:0}
 #studio-quick .song-heading{display:flex;flex:1;min-width:0;gap:3px}
 #quick-title{font-size:15px;line-height:1.3;max-width:100%}
-#quick-status{font-size:12px;line-height:1.35;color:#d3e4da}
+#quick-status{font-size:12px;line-height:1.35;color:#c6d4ef}
 #studio-quick .song-primary{display:flex;gap:6px;flex:none}
 #studio-quick .song-primary button{min-height:40px;padding:8px 15px;font-size:14px}
-#studio-quick #song-tools-toggle{background:transparent;border:1px solid #809b8e;color:#f7ebcf;padding:8px 11px;min-height:40px;white-space:nowrap}
+#studio-quick #song-tools-toggle{background:transparent;border:1px solid #6e82aa;color:#edf2ff;padding:8px 11px;min-height:40px;white-space:nowrap}
 #song-tools-toggle span{margin-left:5px}
-#song-tools{border-top:1px solid #648378;margin-top:10px;padding-top:10px}
+#song-tools{border-top:1px solid #4b6087;margin-top:10px;padding-top:10px}
 #studio-quick .song-secondary{display:flex;flex-wrap:wrap;gap:6px}
 #studio-quick .song-secondary button{padding:8px 12px;min-height:40px;flex:1}
-#studio-quick #quick-overdub{background:#8b581c;color:white}
+#studio-quick #quick-overdub{background:#7652aa;color:white}
 .song-guidance{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:9px}
 #studio-quick .guide-start{font-size:12px;min-height:36px;padding:7px 10px}
 #quick-measures{width:140px;flex-shrink:0}

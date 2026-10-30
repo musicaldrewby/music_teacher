@@ -194,3 +194,9 @@ The room uses oak, sage, oat and terracotta surfaces, rounded flat rugs, narrow 
 The Listening Room has two cushioned side sofas, a central rug and side tables, with a clear central route. Invisible ray boundaries prevent selecting the floor through the sofas or window bench. A quiet gold floor outline follows the selected instrument, including saved reach adjustments; it hides in focused Play view and at utility stations. Decoration batches with the existing scene and introduces no extra lights, shadows or downloaded assets.
 
 Calm is the default lighting style for new visitors; saved lighting preferences are retained. Settings → Room mood & lights exposes Calm, Colorful and Concert. Existing outdoor weather, instrument sounds, note ranges, recording, gallery and VR controls remain available. The studio geometry tests check station identity, entrance and lounge clearance, furniture ray boundaries, decoration cost and selection behavior after batching. Physical-headset feel and WebGL visual rendering still require a capable device check.
+
+## Midnight studio palette (version 40)
+
+The room and compact controls now use midnight blue, cobalt, violet and coral. Slate floors, blue window frames, pale curtains, violet sofas and coral cushions replace the sage and brown decor; the actual instruments keep their wood and metal materials. Lighting stays steady by default, with warm-white lamps and cool cove accents. Play view uses a blue-gray backdrop, and dialogs share the new dark palette. Existing saved lighting preferences and music behavior are unchanged.
+
+The acoustic tile row ends after six panels; the extra seventh tile that crossed into the Listening Room doorway is removed. Source geometry checks verify that every remaining tile clears the doorway trim.

@@ -9,8 +9,8 @@ import {buildResonantInstrument} from './resonant-instruments.js?v=30';
 import {SongGallery} from './gallery.js?v=31';
 import * as THREE from './vendor/three.module.js';
 import {findMalletStrike,MALLET_RADIUS,malletStillTouches,deliberateMalletStrike,MALLET_SENSITIVITY,malletVelocity,malletImpactVelocity,malletFeedback} from './mallets.js?v=35';
-import {addAtmosphere} from './atmosphere.js?v=39';
-import {arrangeCozyStudio,buildCozyStudio} from './cozy-studio.js?v=39';
+import {addAtmosphere} from './atmosphere.js?v=40';
+import {arrangeCozyStudio,buildCozyStudio} from './cozy-studio.js?v=40';
 let cozyStudio=null;
 import {optimizeRoom,configureVRPerformance} from './performance.js?v=16';
 import {LoopRecorder,SongStore,validateSong} from './recorder.js?v=36';
@@ -27,7 +27,7 @@ let preferenceStorage;try{preferenceStorage=localStorage;}catch{}
 const instrumentPlacement=new InstrumentPlacement(preferenceStorage),frameMonitor=new FrameMonitor();
 document.addEventListener('visibilitychange',()=>frameMonitor.reset());
 let playUI=null,midiInput=null,midiSoundReady=false;
-import {setupPlayView} from './play-view.js?v=39';
+import {setupPlayView} from './play-view.js?v=40';
 import {preloadSteelpan} from './steelpan-voice.js?v=22';
 preloadSteelpan().catch(()=>{});
 const weatherStart=performance.now();
@@ -83,7 +83,7 @@ let current=specs[0],pent=false,soundOn=false,media=[],selectedMedia={screen:0,l
 let bpm=100,playing=false;let pattern=Array.from({length:4},()=>Array(16).fill(false));
 const drums=['kick','snare','hat','clap'];let renderer,scene,camera,rig;const clickable=[],flashes=[],barMeshes=[],worldCells=[],controllers=[],heldKeys=new Set();
 let yaw=0,pitch=-.15;const ray=new THREE.Raycaster(),pointer=new THREE.Vector2(),clock=new THREE.Clock();
-const c={wood:0xb88758,darkWood:0x79523b,metal:0xc3d8ce,teal:0x205356,ink:0x163638,cream:0xf5edda,gold:0xd9ae65};
+const c={wood:0xb88758,darkWood:0x79523b,metal:0xc3d8ce,teal:0x364fc0,ink:0x202c48,cream:0xf0f2ff,gold:0xff8f78};
 const colors=[0xde3837,0xef782f,0xf2d544,0x99cb3c,0x16865b,0x5646ad,0xc5318c,0xde3837];
 let toastTimer;function toast(s){$('toast').textContent=s;$('toast').style.opacity=1;clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('toast').style.opacity=0,4200);}
 async function startSound(){try{await audio.start();if(audio.resonant?.buffers.size!==2){$('sound').textContent='Loading gong & chimes…';await audio.prepareResonant();}if(audio.steelpan?.buffers.size!==48){$('sound').textContent='Loading steelpan…';try{await audio.prepareSteelpan();}catch(e){if(current.type==='steelpan')throw e;toast('Steelpan samples could not load. Other instruments are ready.');}}startStudioClock();soundOn=true;midiSoundReady=true;$('sound').textContent=muted?'Sound muted':'Sound on';return true;}catch(e){toast('Instrument recordings could not load. Check your connection and tap Enable sound to retry.');return false;}}
@@ -113,29 +113,29 @@ function refreshMobileMode(){const text='MOBILE: '+['OFF','CALM','LIVELY'][cente
 function makeBoomwhackers(s){let g=stationGroup(s);box(1.5,1.5,.15,c.teal,0,1.15,-.1,g);label('BOOMWHACKERS',0,1.80,.0,1.3,.14,g);s.notes.forEach((n,i)=>{const h=.9*2**(-n/12),x=(i-3.5)*.155;const tube=cylinder(.058,h,colors[i],x,1.5-h/2,.17,g);tube.material.roughness=.32;makePlayable(tube,s,s.midi+n);cylinder(.043,.008,0x314634,x,1.504,.17,g);const nl=label(noteName(s.midi+n),x,1.61,.20,.115,.08,g);nl.userData.staticText=true;tube.userData.noteLabel=nl;});label('Strike any tube with a mallet',0,.51,.0,1.35,.10,g,'#b5ccbe');}
 function makePerc(s){let g=stationGroup(s);table(g,1.2,.9,.85);label(s.name,0,.86,.465,1.05,.17,g);if(s.type==='maracas'){for(let x of [-.24,.24]){cylinder(.04,.37,c.wood,x,1.13,0,g);let egg=sphere(.15,x<0?0xcb7637:0xd6a345,x,1.41,0,g);egg.scale.y=1.35;makePlayable(egg,s);cylinder(.151,.04,c.cream,x,1.41,0,g);}}else if(s.type==='tambourine'){let ring=new THREE.Mesh(new THREE.TorusGeometry(.31,.045,10,40),mat(c.wood));ring.position.set(0,1.28,0);g.add(ring);makePlayable(ring,s);let face=new THREE.Mesh(new THREE.CircleGeometry(.285,40),mat(0xebddb5));face.position.set(0,1.28,-.008);g.add(face);makePlayable(face,s);for(let i=0;i<8;i++){let a=i*Math.PI/4;let d=cylinder(.07,.023,c.metal,Math.sin(a)*.31,1.28+Math.cos(a)*.31,.01,g);d.rotation.x=Math.PI/2;}}else{let geom=new THREE.CylinderGeometry(.16,.28,.42,4,1,true);geom.rotateY(Math.PI/4);let cow=new THREE.Mesh(geom,mat(0x61787a,.7,.3));cow.position.set(0,1.24,0);g.add(cow);makePlayable(cow,s);box(.32,.04,.3,0x1a3034,0,1.04,0,g);} }
 function addRoom(){
- scene.background=new THREE.Color(0x314f56);scene.fog=new THREE.Fog(0x7c9998,28,75);
- const ambient=new THREE.HemisphereLight(0xfff3df,0x788c82,1.18);scene.add(ambient);scene.userData.ambientLight=ambient;
- const sun=new THREE.DirectionalLight(0xffe5c3,1.65);sun.position.set(-7,12,2);sun.castShadow=true;sun.shadow.mapSize.set(2048,2048);Object.assign(sun.shadow.camera,{left:-14,right:14,top:14,bottom:-14,near:1,far:40});sun.shadow.bias=-.001;sun.shadow.normalBias=.035;scene.add(sun);scene.userData.daylight=sun;
- box(18.6,.16,19.2,0x967753,0,-.09,0);
- const floor=box(18,.025,18.7,0xc4a780,0,0,0);floor.userData.floor=true;clickable.push(floor);
- for(let z=-9;z<=9;z+=.6)box(18,.003,.010,0xb3936d,0,.014,z);
- for(let z=-8;z<=8;z+=2)for(let x=-8;x<=8;x+=3)box(.008,.003,2,0xb79972,x+(z%4===0?1.5:0),.016,z);
- box(18.4,4.6,.22,0x53645a,0,2.3,-9.3);box(.22,4.6,19,0x48594e,9.2,2.3,0);
- for(const x of [-6,6])box(6.4,4.6,.22,0x76816b,x,2.3,9.3);box(5.6,1.5,.22,0x76816b,0,3.85,9.3);
- for(const x of [-2.85,2.85])box(.13,3.1,.28,c.wood,x,1.55,9.25);box(5.8,.14,.28,c.wood,0,3.13,9.25);
- label('LISTENING ROOM',0,3.66,9.12,4.6,.30,scene,'#f7e8c9').rotation.y=Math.PI;
+ scene.background=new THREE.Color(0x18233f);scene.fog=new THREE.Fog(0xa0acc7,28,75);
+ const ambient=new THREE.HemisphereLight(0xf4f3ff,0x77849f,1.18);scene.add(ambient);scene.userData.ambientLight=ambient;
+ const sun=new THREE.DirectionalLight(0xfff3e3,1.65);sun.position.set(-7,12,2);sun.castShadow=true;sun.shadow.mapSize.set(2048,2048);Object.assign(sun.shadow.camera,{left:-14,right:14,top:14,bottom:-14,near:1,far:40});sun.shadow.bias=-.001;sun.shadow.normalBias=.035;scene.add(sun);scene.userData.daylight=sun;
+ box(18.6,.16,19.2,0x404a63,0,-.09,0);
+ const floor=box(18,.025,18.7,0xa0a9bc,0,0,0);floor.userData.floor=true;clickable.push(floor);
+ for(let z=-9;z<=9;z+=.6)box(18,.003,.010,0x8b95ab,0,.014,z);
+ for(let z=-8;z<=8;z+=2)for(let x=-8;x<=8;x+=3)box(.008,.003,2,0x929cb1,x+(z%4===0?1.5:0),.016,z);
+ box(18.4,4.6,.22,0x445696,0,2.3,-9.3);box(.22,4.6,19,0x354476,9.2,2.3,0);
+ for(const x of [-6,6])box(6.4,4.6,.22,0x4d4878,x,2.3,9.3);box(5.6,1.5,.22,0x4d4878,0,3.85,9.3);
+ for(const x of [-2.85,2.85])box(.13,3.1,.28,0x293655,x,1.55,9.25);box(5.8,.14,.28,0x293655,0,3.13,9.25);
+ label('LISTENING ROOM',0,3.66,9.12,4.6,.30,scene,'#f1edff').rotation.y=Math.PI;
  const door=new THREE.Group();door.position.z=9.12;door.rotation.y=Math.PI;scene.add(door);button3('ENTER LISTENING ROOM',0,2.9,.03,2.6,.28,enterGallery,door);
- box(.22,1.0,19,0xc2a77d,-9.2,.5,0);box(.22,.5,19,0x315d5f,-9.2,4.35,0);
- for(let z=-8;z<10;z+=3.4){box(.24,3.1,.12,0x7c664c,-9.2,2.55,z);box(.10,.10,3.28,0x907557,-9.19,2.2,z+1.7);const win=box(.04,3.1,3.25,0xafd2d0,-9.25,2.55,z+1.7);win.material=new THREE.MeshBasicMaterial({color:0xd9ebe3,transparent:true,opacity:.055,depthWrite:false});}
- for(const side of [-1,1])box(.035,.09,18.5,0xbaa17a,side*9.065,1.0,0);
- for(const x of [-9.04,9.04])box(.1,.14,18.8,0x173d40,x,.14,0);box(18,.14,.1,0x173d40,0,.14,-9.11);for(const x of [-6,6])box(6.4,.14,.1,0x173d40,x,.14,9.11);
- box(18.5,.1,19,0xe6dcc5,0,4.65,0);
- for(const x of [-6,0,6]){box(.19,.3,18.8,0x96744e,x,4.45,0);for(const z of [-5,2,7]){cylinder(.43,.07,0x385758,x,3.95,z);const disc=cylinder(.38,.015,0xffedcf,x,3.91,z);disc.material=new THREE.MeshBasicMaterial({color:0xffedcf});cylinder(.012,.5,0x53635d,x,4.22,z);}}
- for(let i=0;i<8;i++)box(.19,1.9,.14,i%2?0xb58d59:0x886948,5.7+i*.36,2.65,-9.11);
- label('MR. DREW’S',-6.35,3.3,-9.16,2.7,.20,scene,'#dfc99f');label('MUSIC LAB',-6.35,2.95,-9.16,3.2,.34,scene,'#fff4db');label('PLAY AT YOUR OWN PACE',-6.35,2.59,-9.16,3.0,.14,scene,'#d4ddc6');
+ box(.22,1.0,19,0x67739d,-9.2,.5,0);box(.22,.5,19,0x293655,-9.2,4.35,0);
+ for(let z=-8;z<10;z+=3.4){box(.24,3.1,.12,0x293655,-9.2,2.55,z);box(.10,.10,3.28,0x8795b4,-9.19,2.2,z+1.7);const win=box(.04,3.1,3.25,0xbdceec,-9.25,2.55,z+1.7);win.material=new THREE.MeshBasicMaterial({color:0xeaf0ff,transparent:true,opacity:.055,depthWrite:false});}
+ for(const side of [-1,1])box(.035,.09,18.5,0x9faed0,side*9.065,1.0,0);
+ for(const x of [-9.04,9.04])box(.1,.14,18.8,0x26314d,x,.14,0);box(18,.14,.1,0x26314d,0,.14,-9.11);for(const x of [-6,6])box(6.4,.14,.1,0x26314d,x,.14,9.11);
+ box(18.5,.1,19,0xdfe4f2,0,4.65,0);
+ for(const x of [-6,0,6]){box(.19,.3,18.8,0x334566,x,4.45,0);for(const z of [-5,2,7]){cylinder(.43,.07,0x465373,x,3.95,z);const disc=cylinder(.38,.015,0xfff3e0,x,3.91,z);disc.material=new THREE.MeshBasicMaterial({color:0xfff3e0});cylinder(.012,.5,0xa3b0c9,x,4.22,z);}}
+ for(let i=0;i<8;i++)box(.19,1.9,.14,i%2?0x7898f0:0x9c86d0,5.7+i*.36,2.65,-9.11);
+ label('MR. DREW’S',-6.35,3.3,-9.16,2.7,.20,scene,'#ff9c87');label('MUSIC LAB',-6.35,2.95,-9.16,3.2,.34,scene,'#f4f5ff');label('PLAY AT YOUR OWN PACE',-6.35,2.59,-9.16,3.0,.14,scene,'#c9d8ff');
  // Woven rugs and furniture are built around the final station layout.
  addAtmosphere(scene);
- for(const [x,z]of [[-7.8,-8],[7.8,7.4]]){cylinder(.28,.55,0xb68f6e,x,.29,z,scene,.23);for(let i=0;i<6;i++){const a=i*1.1,leaf=sphere(.23,0x547861,x+Math.cos(a)*.16,.95+i*.10,z+Math.sin(a)*.15);leaf.scale.set(.65,2.3,.45);leaf.rotation.z=Math.cos(a)*.6;}}
+ for(const [x,z]of [[-7.8,-8],[7.8,7.4]]){cylinder(.28,.55,0xe5e8f5,x,.29,z,scene,.23);for(let i=0;i<6;i++){const a=i*1.1,leaf=sphere(.23,0x547861,x+Math.cos(a)*.16,.95+i*.10,z+Math.sin(a)*.15);leaf.scale.set(.65,2.3,.45);leaf.rotation.z=Math.cos(a)*.6;}}
 }
 
 let board,boardDefault,mediaWorld={},pendingYoutube=null,boardNoticeTexture=null;
@@ -532,7 +532,7 @@ function applyRoomHarmony(){if(studio.appliedHarmony===recorder.harmony)return;r
 }
 function addPresetSelect(target,kind){const holder=$(target),label=document.createElement('label');label.className='field';label.textContent=kind==='drums'?'20 drum rhythms':'40 bass lines';const select=document.createElement('select');const presets=kind==='drums'?DRUM_PRESETS:BASS_PRESETS;for(const [name,p]of Object.entries(presets)){const option=document.createElement('option');option.value=name;option.textContent=p.category+' · '+name;select.append(option);}select.value=kind==='drums'?(studio.drumPreset||Object.keys(presets)[0]):(Object.keys(presets)[bassWorld.preset]||Object.keys(presets)[0]);const button=document.createElement('button');button.className='primary';button.textContent='Load preset';button.onclick=()=>kind==='drums'?chooseDrumPreset(select.value):chooseBassPreset(select.value);label.append(select);holder.append(label,button);}
 function addHarmonySelect(target,prefix){const holder=$(target),label=document.createElement('label');label.className='field';label.textContent='Room key / mode';const select=document.createElement('select');select.id=prefix+'-key';for(const [id,h]of Object.entries(HARMONIES)){const option=document.createElement('option');option.value=id;option.textContent=h.name;select.append(option);}select.value=recorder.harmony;select.onchange=()=>{changeHarmony(select.value);select.value=recorder.harmony;};label.append(select);const hint=document.createElement('p');hint.id=prefix+'-key-hint';hint.className='synth-help';hint.textContent=harmony(recorder.harmony).hint+' · Stop to change. Live bars and bass follow this key; recorded notes keep their pitches.';holder.append(label,hint);}
-function wallBay(s,title,accent){const g=stationGroup(s);g.userData.wallBay={width:3.6,height:2.8,centerY:1.8};box(3.74,2.94,.12,c.wood,0,1.8,-.16,g);box(3.6,2.8,.14,0x3d4c44,0,1.8,-.09,g);box(3.48,.035,.025,accent,0,3.16,.0,g);label(title,0,3.02,.025,3.12,.20,g,'#f6e9d2');box(3.44,.025,.025,0x9c8b72,0,.48,.0,g);return g;}
+function wallBay(s,title,accent){const g=stationGroup(s);g.userData.wallBay={width:3.6,height:2.8,centerY:1.8};box(3.74,2.94,.12,0x2b3657,0,1.8,-.16,g);box(3.6,2.8,.14,0x253252,0,1.8,-.09,g);box(3.48,.035,.025,accent,0,3.16,.0,g);label(title,0,3.02,.025,3.12,.20,g,'#f0f3ff');box(3.44,.025,.025,0x8296ca,0,.48,.0,g);return g;}
 function explorerGraph(parent,w,h,x,y){const canvas=document.createElement('canvas');canvas.width=512;canvas.height=144;const texture=new THREE.CanvasTexture(canvas);texture.colorSpace=THREE.SRGBColorSpace;texture.generateMipmaps=false;texture.minFilter=THREE.LinearFilter;const mesh=new THREE.Mesh(new THREE.PlaneGeometry(w,h),new THREE.MeshBasicMaterial({map:texture,toneMapped:false}));mesh.position.set(x,y,.15);parent.add(mesh);return{canvas,texture,mesh};}
 function makeSoundExplorer(parent){synthWorld.envelopes=[];for(const [i,[wave,title]]of [['sine','SINE'],['triangle','TRIANGLE'],['sawtooth','SAW'],['square','SQUARE']].entries()){const x=-1.2+i*.8;const mesh=button3('',x,2.72,.105,.74,.32,()=>setSynth('wave',wave),parent,0x285467);synthWorld.choices.push({key:'wave',value:wave,mesh});const graph=explorerGraph(parent,.67,.15,x,2.75);drawWaveform(graph.canvas,wave);graph.texture.needsUpdate=true;label(title,x,2.62,.151,.66,.09,parent,'#e0f7f4');}
  for(const [i,name]of Object.keys(SIMPLE_ENVELOPES).entries()){const mesh=button3(name.toUpperCase(),-1.29+i*.54,2.37,.12,.50,.24,()=>chooseSimpleEnvelope(name),parent,0x285467);synthWorld.envelopes.push({name,mesh});}
@@ -636,16 +636,16 @@ function openPerformance(){
 }
 function enterGallery(){closeSongPanels();playUI?.explore();$('panel').close();selectStation('gallery');if(renderer?.xr.isPresenting)gallery.load();else openGallery();}
 function makeGalleryRoom(s){
- const g=stationGroup(s);const floor=box(7.8,.04,9.3,0xb39470,0,0,13.95,scene);floor.userData.floor=true;clickable.push(floor);
- for(const x of [-4,4])box(.16,4.6,9.6,0x71816b,x,2.3,14,scene);box(8.1,4.6,.16,0x4f6558,0,2.3,18.7,scene);box(8,.12,9.6,0xd6cbb6,0,4.6,14,scene);
- for(const x of [-3.8,3.8]){const strip=box(.06,.06,9.1,0xffdfaf,x,4.08,14,scene);strip.material=new THREE.MeshBasicMaterial({color:0xffdfaf});}
- for(const x of [-3.86,3.86])for(const [i,z]of [11.5,13.8,16.1].entries()){box(.10,1.70,1.55,c.wood,x,2.45,z,scene);box(.13,1.54,1.38,i%2?0x9c7961:0x68877b,x-Math.sign(x)*.035,2.45,z,scene);}
- label('THE LISTENING ROOM',-.6,4.3,.04,4.3,.22,g,'#ffe0a0');button3('BACK TO MUSIC',2.52,4.3,.06,1.5,.23,()=>{gallery.stop();overview();},g);
- box(6.72,1.77,.10,c.wood,0,3.32,-.025,g);box(6.6,1.65,.11,0x16383a,0,3.32,.03,g);const canvas=document.createElement('canvas');galleryWorld.visualizer=new ListeningVisualizer(canvas);galleryWorld.canvas=canvas;galleryWorld.texture=new THREE.CanvasTexture(canvas);galleryWorld.texture.colorSpace=THREE.SRGBColorSpace;galleryWorld.texture.generateMipmaps=false;galleryWorld.texture.minFilter=THREE.LinearFilter;
+ const g=stationGroup(s);const floor=box(7.8,.04,9.3,0x919bb2,0,0,13.95,scene);floor.userData.floor=true;clickable.push(floor);
+ for(const x of [-4,4])box(.16,4.6,9.6,0x595181,x,2.3,14,scene);box(8.1,4.6,.16,0x364675,0,2.3,18.7,scene);box(8,.12,9.6,0xdfe4f2,0,4.6,14,scene);
+ for(const x of [-3.8,3.8]){const strip=box(.06,.06,9.1,0xfff1de,x,4.08,14,scene);strip.material=new THREE.MeshBasicMaterial({color:0xfff1de});}
+ for(const x of [-3.86,3.86])for(const [i,z]of [11.5,13.8,16.1].entries()){box(.10,1.70,1.55,0x283552,x,2.45,z,scene);box(.13,1.54,1.38,i%2?0xd98083:0x7b75b4,x-Math.sign(x)*.035,2.45,z,scene);}
+ label('THE LISTENING ROOM',-.6,4.3,.04,4.3,.22,g,'#d5c8ff');button3('BACK TO MUSIC',2.52,4.3,.06,1.5,.23,()=>{gallery.stop();overview();},g);
+ box(6.72,1.77,.10,0x283552,0,3.32,-.025,g);box(6.6,1.65,.11,0x1c2745,0,3.32,.03,g);const canvas=document.createElement('canvas');galleryWorld.visualizer=new ListeningVisualizer(canvas);galleryWorld.canvas=canvas;galleryWorld.texture=new THREE.CanvasTexture(canvas);galleryWorld.texture.colorSpace=THREE.SRGBColorSpace;galleryWorld.texture.generateMipmaps=false;galleryWorld.texture.minFilter=THREE.LinearFilter;
  const screen=new THREE.Mesh(new THREE.PlaneGeometry(6.4,1.55),new THREE.MeshBasicMaterial({map:galleryWorld.texture,toneMapped:false}));screen.position.set(0,3.32,.10);g.add(screen);
- galleryWorld.title=label('NOW PLAYING · Choose a song below',0,2.35,.12,6.2,.20,g,'#ffde9c');
- galleryWorld.play=button3('',-2.65,2.04,.12,1.14,.24,()=>gallery.playPause(),g,0x20736a);galleryWorld.playLabel=label('Play',-2.65,2.04,.15,1.05,.17,g);
- button3('Stop',-1.48,2.04,.12,.96,.24,()=>gallery.stop(),g);button3('VOL −',-.47,2.04,.12,.87,.24,()=>listeningVolume(-.1),g);button3('VOL +',.49,2.04,.12,.87,.24,()=>listeningVolume(.1),g);button3('SHARE A SONG',2.15,2.04,.12,2.05,.24,()=>openSharePicker(),g,0x826335);
+ galleryWorld.title=label('NOW PLAYING · Choose a song below',0,2.35,.12,6.2,.20,g,'#ffd1c5');
+ galleryWorld.play=button3('',-2.65,2.04,.12,1.14,.24,()=>gallery.playPause(),g,0x375bc4);galleryWorld.playLabel=label('Play',-2.65,2.04,.15,1.05,.17,g);
+ button3('Stop',-1.48,2.04,.12,.96,.24,()=>gallery.stop(),g);button3('VOL −',-.47,2.04,.12,.87,.24,()=>listeningVolume(-.1),g);button3('VOL +',.49,2.04,.12,.87,.24,()=>listeningVolume(.1),g);button3('SHARE A SONG',2.15,2.04,.12,2.05,.24,()=>openSharePicker(),g,0x7956aa);
  galleryWorld.tabs=[];for(const [i,[id,name]]of [['all','All Songs'],['recent','Recently Played'],['mine','My Shared Songs']].entries()){const mesh=button3(name,(i-1)*2.17,1.68,.12,2.04,.23,()=>gallery.load(id),g);galleryWorld.tabs.push({id,mesh});}
  galleryWorld.status=label('',0,1.46,.12,6.2,.13,g,'#c2e3ee');galleryWorld.cards=[];
  for(let i=0;i<6;i++){const group=new THREE.Group(),x=i%2===0?-1.65:1.65,y=1.21-Math.floor(i/2)*.36;group.position.set(x,y,.12);g.add(group);
@@ -660,9 +660,9 @@ function listeningVolume(delta){$('volume').value=Math.max(0,Math.min(1,+$('volu
 function refreshGallery(){
  const state=galleryPlayer.state,playing=state==='playing',paused=state==='paused',name=gallery.current?.title||'Choose a song below',transport=playing?'Pause':paused?'Resume':'Play';
  if(galleryWorld.title){updateWorldLabel(galleryWorld.title,(playing?'NOW PLAYING':paused?'PAUSED':'READY')+' · '+name);updateWorldLabel(galleryWorld.status,gallery.message);updateWorldLabel(galleryWorld.playLabel,transport);updateWorldLabel(galleryWorld.page,gallery.busy?'Loading…':gallery.pageLabel);
-  for(const tab of galleryWorld.tabs)tab.mesh.material.color.setHex(tab.id===gallery.tab?0x356e82:0x315659);
-  for(const [i,card]of galleryWorld.cards.entries()){const row=gallery.rows[i];card.group.visible=!!row;if(!row)continue;const active=gallery.current?.id===row.id;card.mesh.material.color.setHex(active?0x20736a:0x24465d);updateWorldLabel(card.title,(active?'▶ ':'')+row.title);updateWorldLabel(card.info,(gallery.loadingId===row.id?'Loading…':row.hidden?'Removed':row.bpm+' BPM · '+row.bars+' measures'));}
-  galleryWorld.prev.material.color.setHex(gallery.offset&&!gallery.busy?0x315659:0x182f42);galleryWorld.next.material.color.setHex(gallery.more&&!gallery.busy?0x315659:0x182f42);
+  for(const tab of galleryWorld.tabs)tab.mesh.material.color.setHex(tab.id===gallery.tab?0x505cd4:0x34446b);
+  for(const [i,card]of galleryWorld.cards.entries()){const row=gallery.rows[i];card.group.visible=!!row;if(!row)continue;const active=gallery.current?.id===row.id;card.mesh.material.color.setHex(active?0x375bc4:0x293957);updateWorldLabel(card.title,(active?'▶ ':'')+row.title);updateWorldLabel(card.info,(gallery.loadingId===row.id?'Loading…':row.hidden?'Removed':row.bpm+' BPM · '+row.bars+' measures'));}
+  galleryWorld.prev.material.color.setHex(gallery.offset&&!gallery.busy?0x34446b:0x222d47);galleryWorld.next.material.color.setHex(gallery.more&&!gallery.busy?0x34446b:0x222d47);
  }
  if($('gallery-shared')){const shared=$('gallery-shared');shared.hidden=!gallery.sharedNotice;shared.replaceChildren();if(gallery.sharedNotice&&gallery.lastShared){const title=document.createElement('span');title.textContent='Your song is shared! '+gallery.lastShared.title;const play=document.createElement('button');play.className='primary';play.textContent='Hear it in the Listening Room';play.onclick=()=>{enterGallery();gallery.play(gallery.lastShared);};shared.append(title,play);}}
  if($('gallery-status')){$('gallery-status').textContent=gallery.message;$('gallery-playing').textContent=name;$('gallery-state').textContent=playing?'Now Playing':paused?'Paused':'Ready to listen';$('gallery-play').textContent=transport;$('gallery-play').disabled=!!gallery.loadingId||(!gallery.current&&!gallery.rows.length);$('gallery-volume').value=$('volume').value;renderGalleryList();}

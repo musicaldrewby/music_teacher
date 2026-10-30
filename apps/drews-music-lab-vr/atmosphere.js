@@ -1,5 +1,5 @@
 import * as THREE from './vendor/three.module.js';
-import {OutdoorWeather} from './weather.js?v=34';
+import {OutdoorWeather} from './weather.js?v=40';
 
 // Static geometry and three shadow-free fill lights keep the room XR-friendly.
 export function addAtmosphere(scene){
@@ -19,16 +19,17 @@ export function addAtmosphere(scene){
   }
   const points=[];for(let i=0;i<110;i++){const t=i*2.399963;points.push(-20-(i%11)*2.5,12+(i*7%29),Math.sin(t)*38);}
   const stars=new THREE.Points(new THREE.BufferGeometry().setAttribute('position',new THREE.Float32BufferAttribute(points,3)),new THREE.PointsMaterial({color:0xe4f0ff,size:.10,sizeAttenuation:true,fog:false}));scene.add(stars);scene.userData.weather=new OutdoorWeather(scene,sky,stars,sun,moon);
-  for(const [x,z,color] of [[-5.5,0,0xffe0b4],[5.5,2,0xe6d5ab],[0,-5,0xffeac9]]){const light=new THREE.PointLight(color,14,13,2);light.position.set(x,3.5,z);light.userData.baseIntensity=14;light.userData.baseColor=light.color.clone();scene.userData.showLights.push(light);scene.add(light);}
+  for(const [x,z,color] of [[-5.5,0,0xfff0df],[5.5,2,0xe3eaff],[0,-5,0xf4eaff]]){const light=new THREE.PointLight(color,14,13,2);light.position.set(x,3.5,z);light.userData.baseIntensity=14;light.userData.baseColor=light.color.clone();scene.userData.showLights.push(light);scene.add(light);}
   // Luminous coves, floating ring fixtures and colorful acoustic wall tiles.
-  for(const [x,color] of [[-9.05,0xffdfb0],[9.05,0xe7d5ad]])mesh(new THREE.BoxGeometry(.045,.055,18.5),basic(color),x,3.96,0);
-  for(const z of [-9.13,9.13])mesh(new THREE.BoxGeometry(18,.055,.045),basic(z<0?0xf3ddb5:0xffd7a3),0,3.96,z);
-  for(const [z,color] of [[-3.5,0xe3d9bc],[2,0xffdfad]]){
+  for(const [x,color] of [[-9.05,0xbfd6ff],[9.05,0xd1c4ff]])mesh(new THREE.BoxGeometry(.045,.055,18.5),basic(color),x,3.96,0);
+  for(const z of [-9.13,9.13])mesh(new THREE.BoxGeometry(18,.055,.045),basic(z<0?0xd7e5ff:0xeadbff),0,3.96,z);
+  for(const [z,color] of [[-3.5,0xdfd8ff],[2,0xc3d8ff]]){
     const ring=mesh(new THREE.TorusGeometry(1.15,.035,8,64),basic(color),0,4.04,z);ring.rotation.x=Math.PI/2;
     for(const x of [-.9,.9])mesh(new THREE.CylinderGeometry(.008,.008,.46,6),solid(0x51648a),x,4.32,z);
   }
-  for(let i=0;i<7;i++){
-    const tile=mesh(new THREE.CylinderGeometry(.36,.36,.09,6),solid([0x8aab9b,0x9e7b66,0xc0a26c][i%3]),-7.8+i*.88,2.0+Math.sin(i*.9)*.34,9.12);tile.rotation.x=Math.PI/2;
+  // Six panels end before the doorway trim at x = -2.915.
+  for(let i=0;i<6;i++){
+    const tile=mesh(new THREE.CylinderGeometry(.36,.36,.09,6),solid([0x9c8be0,0xed8f88,0x7ba4ee][i%3]),-7.8+i*.88,2.0+Math.sin(i*.9)*.34,9.12);tile.rotation.x=Math.PI/2;
   }
   // Family rugs replace the luminous floor bars.
 }

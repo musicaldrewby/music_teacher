@@ -24,8 +24,8 @@ export function setupPlayView(api){
   // Keep the physical keyboard in Play. Its wall of controls remains in Explore / VR.
   if(station.type==='synth')for(const child of station.group.children){const bounds=new THREE.Box3().setFromObject(child);if(bounds.max.y>1.3)hide(child);}
   if(['drums','bass','notewall','gallery'].includes(station.type)&&station.group)hide(station.group);
-  api.scene.background=new THREE.Color(0xd6d2be);api.scene.fog=null;
-  stage=new THREE.Mesh(new THREE.PlaneGeometry(60,60),new THREE.MeshStandardMaterial({color:0xd6d2be,roughness:1}));stage.rotation.x=-Math.PI/2;stage.position.y=-.015;stage.receiveShadow=true;api.scene.add(stage);
+  api.scene.background=new THREE.Color(0x7585ad);api.scene.fog=null;
+  stage=new THREE.Mesh(new THREE.PlaneGeometry(60,60),new THREE.MeshStandardMaterial({color:0x7585ad,roughness:1}));stage.rotation.x=-Math.PI/2;stage.position.y=-.015;stage.receiveShadow=true;api.scene.add(stage);
   api.renderer.shadowMap.needsUpdate=true;
  }
  function setMode(next,reset=true){mode=next;api.release();$('panel').close();document.body.classList.toggle('play-mode',mode==='play');$('view-play').setAttribute('aria-pressed',String(mode==='play'));$('view-explore').setAttribute('aria-pressed',String(mode==='explore'));focus();render();if(reset){if(mode==='play')api.fit();else api.overview();}}

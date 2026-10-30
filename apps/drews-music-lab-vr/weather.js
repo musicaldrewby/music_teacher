@@ -50,7 +50,7 @@ export class OutdoorWeather {
   this.bolt.visible=w.lightning>.01;this.bolt.material.opacity=w.lightning;
   // Preserve the room's playable nighttime lighting; only the existing daylight fill changes.
   const sunLight=this.scene.userData.daylight,ambient=this.scene.userData.ambientLight;
-  if(sunLight){sunLight.intensity=.60+w.day*1.05-w.cloud*.18;sunLight.color.set(w.elevation<.4&&w.elevation>-.1?0xffc294:0xffdfbc);}
+  if(sunLight){sunLight.intensity=.60+w.day*1.05-w.cloud*.18;sunLight.color.set(w.elevation<.4&&w.elevation>-.1?0xffc294:0xfff5e8);}
   if(ambient)ambient.intensity=1.0+w.day*.18-w.cloud*.06;
   if(this.scene.fog)this.scene.fog.color.copy(this.sky.material.uniforms.horizon.value);
   return w;
