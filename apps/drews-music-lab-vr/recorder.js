@@ -1,6 +1,6 @@
 import {HARMONIES} from './music-presets.js?v=14';
-import {validateBass,bassEvent} from './bass.js?v=42';
-import {SYNTH_DEFAULT,SYNTH_PARAMS} from './synth.js?v=42';
+import {validateBass,bassEvent} from './bass.js?v=43';
+import {SYNTH_DEFAULT,SYNTH_PARAMS} from './synth.js?v=43';
 const TYPES=['gong','windchimes','steelpan','piano','xylophone','metallophone','glockenspiel','boomwhacker','maracas','tambourine','cowbell','kick','snare','hat','clap','synth'];
 const IDS=['gong','windchimes','steelpan','piano','sx','ax','bx','sm','am','bm','glock','bw','maracas','tambourine','cowbell','synth','drums'];
 const copy=x=>JSON.parse(JSON.stringify(x));

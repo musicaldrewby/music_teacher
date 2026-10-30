@@ -1,4 +1,4 @@
-import {BASS_PROGRAMS} from './soundfont.js?v=42';
+import {BASS_PROGRAMS} from './soundfont.js?v=43';
 import {BASS_PRESETS,degreeNote} from './music-presets.js?v=21';
 export {BASS_PRESETS} from './music-presets.js?v=21';
 export function bassPreset(name,key='c-ionian'){const p=BASS_PRESETS[name]||BASS_PRESETS['Deep pulse'];return{presetName:Object.hasOwn(BASS_PRESETS,name)?name:'Deep pulse',wave:p.wave,cutoff:p.cutoff,resonance:p.resonance,decay:p.decay,steps:p.degrees.map((degree,i)=>degree===null?null:{midi:degreeNote(degree,key),accent:p.accents.includes(i),slide:p.slides.includes(i)})};}
@@ -22,7 +22,8 @@ export class BassVoice{
   gain.gain.setValueAtTime(0,at);gain.gain.linearRampToValueAtTime(peak,at+.006);gain.gain.linearRampToValueAtTime(peak*.78,at+settle);gain.gain.setValueAtTime(peak*.78,at+shape.gate);gain.gain.linearRampToValueAtTime(0,end);
   filter.connect(gain);gain.connect(output||this.audio.master);
   let voice;
-  const font=this.audio.soundfont.createVoice(c,{program:BASS_PROGRAMS[p.wave],midi:event.midi,velocity:event.velocity,when:at,output:filter,envelope:false,onended:()=>{this.voices.delete(voice);filter.disconnect();gain.disconnect();}});
+  const font=this.audio.soundfont.createVoice(c,{program:BASS_PROGRAMS[p.wave],midi:event.midi,velocity:event.velocity,when:at,output:filter,onended:()=>{this.voices.delete(voice);filter.disconnect();gain.disconnect();}});
+  font.release(at+shape.gate);
   const glide=p.slide?Math.min(.065,beatSeconds/4*.55):.003;
   for(const source of font.sources){const target=source.playbackRate.value;source.playbackRate.setValueAtTime(target*2**(((p.slide?p.fromMidi:event.midi)-event.midi)/12),at);source.playbackRate.exponentialRampToValueAtTime(target,at+glide);source.stop(end+.01);}
   voice={osc:font.sources,gain,at,end,peak,settle,gate:shape.gate,release:shape.release};this.voices.add(voice);

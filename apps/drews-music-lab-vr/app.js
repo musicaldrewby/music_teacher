@@ -1,23 +1,23 @@
 import {CHALLENGES,FirstSongGuide,songParts,mixLevel,Constellation,drawInstrumentIcon} from './creative-tools.js?v=36';
-import {renderSongWav} from './audio-export.js?v=42';
+import {renderSongWav} from './audio-export.js?v=43';
 import {MIDIInputController,midiTargets} from './midi-input.js?v=33';
 import {InstrumentPlacement,FrameMonitor,recordingCue} from './room-tools.js?v=32';
 import {ListeningVisualizer} from './listening-visualizer.js?v=31';
 import {preloadResonant} from './resonant-voice.js?v=30';
 preloadResonant().catch(()=>{});
 import {buildResonantInstrument} from './resonant-instruments.js?v=30';
-import {SongGallery} from './gallery.js?v=42';
+import {SongGallery} from './gallery.js?v=43';
 import * as THREE from './vendor/three.module.js';
 import {findMalletStrike,MALLET_RADIUS,malletStillTouches,deliberateMalletStrike,MALLET_SENSITIVITY,malletVelocity,malletImpactVelocity,malletFeedback} from './mallets.js?v=35';
 import {addAtmosphere} from './atmosphere.js?v=40';
 import {arrangeCozyStudio,buildCozyStudio} from './cozy-studio.js?v=41';
 let cozyStudio=null;
 import {optimizeRoom,configureVRPerformance} from './performance.js?v=16';
-import {LoopRecorder,SongStore,validateSong} from './recorder.js?v=42';
+import {LoopRecorder,SongStore,validateSong} from './recorder.js?v=43';
 import {PianoRoll,ROLL,rollBeat,instrument} from './piano-roll.js?v=30';
-import {MusicAudio} from './audio.js?v=42';
-import {WallSynth,SYNTH_PARAMS,SYNTH_PRESETS,normalized,fromNormalized,formatParam} from './synth.js?v=42';
-import {BassVoice,BASS_PRESETS,bassPreset,emptyBass} from './bass.js?v=42';
+import {MusicAudio} from './audio.js?v=43';
+import {WallSynth,SYNTH_PARAMS,SYNTH_PRESETS,normalized,fromNormalized,formatParam} from './synth.js?v=43';
+import {BassVoice,BASS_PRESETS,bassPreset,emptyBass} from './bass.js?v=43';
 import {HARMONIES,harmony,pitchClasses,tunedBar,retuneBass,nextScaleNote,degreeNote,DRUM_PRESETS,drumPreset} from './music-presets.js?v=21';
 import {SIMPLE_ENVELOPES,drawWaveform,drawEnvelope} from './sound-explorer.js?v=16';
 import {MusicMobile} from './music-mobile.js?v=16';
@@ -86,7 +86,7 @@ let yaw=0,pitch=-.15;const ray=new THREE.Raycaster(),pointer=new THREE.Vector2()
 const c={wood:0xb88758,darkWood:0x79523b,metal:0xc3d8ce,teal:0x364fc0,ink:0x202c48,cream:0xf0f2ff,gold:0xff8f78};
 const colors=[0xde3837,0xef782f,0xf2d544,0x99cb3c,0x16865b,0x5646ad,0xc5318c,0xde3837];
 let toastTimer;function toast(s){$('toast').textContent=s;$('toast').style.opacity=1;clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('toast').style.opacity=0,4200);}
-async function startSound(){try{await audio.start();if(!audio.soundfont){$('sound').textContent='Loading SoundFont…';await audio.prepareSoundfont();}if(audio.boomwhackers?.buffers.size!==22){$('sound').textContent='Loading Boomwhackers…';await audio.prepareBoomwhackers();}if(audio.resonant?.buffers.size!==2){$('sound').textContent='Loading gong & chimes…';await audio.prepareResonant();}if(audio.steelpan?.buffers.size!==48){$('sound').textContent='Loading steelpan…';try{await audio.prepareSteelpan();}catch(e){if(current.type==='steelpan')throw e;toast('Steelpan samples could not load. Other instruments are ready.');}}startStudioClock();soundOn=true;midiSoundReady=true;$('sound').textContent=muted?'Sound muted':'Sound on';return true;}catch(e){soundOn=false;midiSoundReady=false;$('sound').textContent='Enable sound';toast('Instrument sounds could not load. Check your connection and tap Enable sound to retry.');return false;}}
+async function startSound(){try{await audio.start();if(!audio.fontVoice){$('sound').textContent='Loading SoundFont…';await audio.prepareSoundfont();}if(audio.boomwhackers?.buffers.size!==22){$('sound').textContent='Loading Boomwhackers…';await audio.prepareBoomwhackers();}if(audio.resonant?.buffers.size!==2){$('sound').textContent='Loading gong & chimes…';await audio.prepareResonant();}if(audio.steelpan?.buffers.size!==48){$('sound').textContent='Loading steelpan…';try{await audio.prepareSteelpan();}catch(e){if(current.type==='steelpan')throw e;toast('Steelpan samples could not load. Other instruments are ready.');}}startStudioClock();soundOn=true;midiSoundReady=true;$('sound').textContent=muted?'Sound muted':'Sound on';return true;}catch(e){soundOn=false;midiSoundReady=false;$('sound').textContent='Enable sound';toast('Instrument sounds could not load. Check your connection and tap Enable sound to retry.');return false;}}
 function mat(color,metal=0,rough=.6){return new THREE.MeshStandardMaterial({color,metalness:metal,roughness:rough});}
 function box(w,h,d,color,x=0,y=0,z=0,parent=scene){let m=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),mat(color));m.position.set(x,y,z);m.castShadow=true;m.receiveShadow=true;parent.add(m);return m;}
 function cylinder(r,h,color,x,y,z,parent=scene,r2=r){let m=new THREE.Mesh(new THREE.CylinderGeometry(r,r2,h,12),mat(color));m.position.set(x,y,z);m.castShadow=true;m.receiveShadow=true;parent.add(m);return m;}

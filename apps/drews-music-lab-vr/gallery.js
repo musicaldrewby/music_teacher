@@ -1,4 +1,4 @@
-import {validateSong} from './recorder.js?v=42';
+import {validateSong} from './recorder.js?v=43';
 export const GALLERY_PAGE_SIZE=6;
 const validId=id=>typeof id==='string'&&/^[a-f0-9-]{36}$/.test(id);
 function read(key,fallback){try{return JSON.parse(localStorage.getItem(key)||'null')??fallback;}catch{return fallback;}}

@@ -1,6 +1,6 @@
 # Mr. Drew’s Music Lab VR
 
-Serve `dist/` over HTTPS. Uses vendored Three.js r180 (MIT), local Web Audio synthesis, and no downloaded sound samples. Each visitor has an independent session; this is not networked multiplayer.
+Serve `dist/` over HTTPS. Uses vendored Three.js r180 (MIT), a local SoundFont engine and bundled acoustic recordings. Each visitor has an independent session; this is not networked multiplayer.
 
 ## Room and controls
 
@@ -207,19 +207,32 @@ The acoustic tile row ends after six panels; the extra seventh tile that crossed
 GeneralUser GS 1.471 is bundled unchanged in four binary chunks under
 `dist/samples/soundfont/`. Its original license and credit are alongside it.
 The piano, xylophones, vibraphone-backed metallophones, glockenspiel, percussion,
-drum machine, bass and wall synth use its sample zones. The Web Audio player
-preserves key/velocity zones, root tuning, looping, stereo pan and volume envelopes;
-the wall synth and bass apply the studio's existing filters and envelopes.
+drum machine, bass and wall synth use complete authored SoundFont patches.
+
+SpessaSynth Core 4.3.22 runs in one AudioWorklet per audio context. It interprets
+all patch generators/modulators, volume and filter envelopes, velocity layers,
+tuning, loops and release stages. Note-off is sent to the engine; no custom
+sample-envelope approximation is used. In particular, tambourine and maracas
+use Standard Drum Kit keys 54 and 70. The earlier tambourine gain workaround
+has been removed. The studio's wall-synth and bass controls add their existing
+post-processing to these complete patch voices.
+
+The worklet has 64 independent stereo note channels and a 256-layer engine
+voice limit. Repeated strikes cannot release each other's notes. Future note
+cancellation and per-part routing are preserved. Live playing and offline WAV
+exports use the same worklet, with an acknowledged event queue before each
+offline scheduling window. HTTPS is required for AudioWorklet.
+
 SoundFont program/bank choices travel with new recorded synth patches. Older
 songs still load and use the corresponding SoundFont tone family.
+Gong, wind-chime and steelpan recordings are unchanged. Boomwhackers retain
+the 22 WAVs from Drew's Boomwhacker Creator with original pitch/gain mapping;
+nearest-note transposition supplies chromatic pitches. All audio assets and
+the engine bundle are hosted with the app, using relative URLs.
 
-Gong, wind-chime and steelpan recordings are unchanged. Boomwhackers reuse the
-22 WAVs from Drew's Boomwhacker Creator, with its original root pitches and gains;
-nearest-note transposition supplies chromatic pitches. Provenance is recorded in
-`scripts/boomwhacker-source.json` and each sample directory's `CREDITS.txt`.
-All sound assets use relative URLs and are hosted with the app. Live playing,
-shared-song playback and WAV exports share the same voices and buffers.
-
-Run `npm test` with Node 22 or later. The audio regression tests render real PCM
-through a Web Audio implementation, checking all instrument mappings, expressive
-velocity, held synth release, bass, Boomwhacker recordings and complete WAV export.
+Run `npm run build` and `npm test` with Node 22 or later. Regression tests
+compare the four reported instruments against direct full-engine PCM, assert
+natural decay before note-off, check velocity/repeated notes/future-note
+cancellation, exercise all 24 synth presets and bass, and render a mixed WAV
+through the actual AudioWorklet and export scheduler. These checks do not
+replace a listening/playability check on a Quest headset.

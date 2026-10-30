@@ -1,4 +1,4 @@
-import {preloadSoundfont,SoundFontVoice} from './soundfont.js?v=42';
+import {preloadSoundfont,SoundFontVoice} from './soundfont.js?v=43';
 import {BoomwhackerVoice} from './boomwhacker-voice.js?v=42';
 import {ResonantVoice} from './resonant-voice.js?v=30';
 import {SteelpanVoice} from './steelpan-voice.js?v=22';
@@ -7,7 +7,7 @@ export class MusicAudio {
  init(context){if(this.ctx)return;this.ctx=context;const c=this.ctx;this.master=c.createGain();this.master.gain.value=this.level*.55;const limiter=c.createDynamicsCompressor();limiter.threshold.value=-12;limiter.knee.value=18;limiter.ratio.value=8;limiter.attack.value=.003;limiter.release.value=.15;this.master.connect(limiter);limiter.connect(c.destination);this.noise=c.createBuffer(1,c.sampleRate,c.sampleRate);let d=this.noise.getChannelData(0);for(let i=0;i<d.length;i++)d[i]=Math.random()*2-1;this.reverb=c.createConvolver();let b=c.createBuffer(2,c.sampleRate*1.8,c.sampleRate);for(let ch=0;ch<2;ch++){let a=b.getChannelData(ch);for(let i=0;i<a.length;i++)a[i]=(Math.random()*2-1)*Math.pow(1-i/a.length,3);}this.reverb.buffer=b;let wet=c.createGain();wet.gain.value=.13;this.reverb.connect(wet);wet.connect(this.master);}
  async start(){if(!this.ctx)this.init(new AudioContext());if(this.ctx.state!=='running')await this.ctx.resume();}
  galleryOutput(){if(!this.galleryBus){this.galleryBus=this.ctx.createGain();this.galleryAnalyser=this.ctx.createAnalyser();this.galleryAnalyser.fftSize=1024;this.galleryAnalyser.smoothingTimeConstant=.75;this.galleryBus.connect(this.galleryAnalyser);this.galleryAnalyser.connect(this.master);}return this.galleryBus;}
- async prepareSoundfont(){this.soundfont??=await preloadSoundfont();this.fontVoice??=new SoundFontVoice(this.ctx,this.master,this.reverb,this.soundfont);return this.soundfont;}
+ async prepareSoundfont(){this.soundfont??=await preloadSoundfont();await this.soundfont.prepare(this.ctx);this.fontVoice??=new SoundFontVoice(this.ctx,this.master,this.reverb,this.soundfont);return this.soundfont;}
  async prepareBoomwhackers(){this.boomwhackers??=new BoomwhackerVoice(this.ctx,this.master,this.reverb);return this.boomwhackers.load();}
  async prepareResonant(){this.resonant??=new ResonantVoice(this.ctx,this.master,this.reverb);return this.resonant.load();}
  async prepareSteelpan(){this.steelpan??=new SteelpanVoice(this.ctx,this.master,this.reverb);return this.steelpan.load();}

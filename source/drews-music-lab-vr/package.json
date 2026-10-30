@@ -12,5 +12,8 @@
     "drizzle-orm": "0.44.5",
     "esbuild": "0.25.10",
     "node-web-audio-api": "2.2.0"
+  },
+  "dependencies": {
+    "spessasynth_core": "4.3.22"
   }
 }

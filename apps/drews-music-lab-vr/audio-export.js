@@ -1,11 +1,11 @@
-import {SoundFontVoice,FONT_INSTRUMENTS} from './soundfont.js?v=42';
+import {SoundFontVoice,FONT_INSTRUMENTS} from './soundfont.js?v=43';
 import {BoomwhackerVoice,BOOM_SAMPLES} from './boomwhacker-voice.js?v=42';
-import {MusicAudio} from './audio.js?v=42';
-import {WallSynth} from './synth.js?v=42';
-import {BassVoice,bassEvent} from './bass.js?v=42';
+import {MusicAudio} from './audio.js?v=43';
+import {WallSynth} from './synth.js?v=43';
+import {BassVoice,bassEvent} from './bass.js?v=43';
 import {SteelpanVoice} from './steelpan-voice.js?v=22';
 import {ResonantVoice} from './resonant-voice.js?v=30';
-import {validateSong} from './recorder.js?v=42';
+import {validateSong} from './recorder.js?v=43';
 import {instrument} from './piano-roll.js?v=30';
 import {mixLevel} from './creative-tools.js?v=36';
 export function songTimeline(input){const song=validateSong(input),beatSeconds=60/song.bpm,events=song.events.map(e=>({event:e,at:e.beat*beatSeconds}));
@@ -31,7 +31,7 @@ export async function renderSongWav(input,liveAudio,progress=()=>{}){
   ending=Math.max(ending,at+tail);
  }
  const seconds=Math.min(120,ending+.15),ctx=new Offline(2,Math.ceil(seconds*44100),44100),audio=new MusicAudio();audio.offline=true;audio.init(ctx);
- audio.soundfont=liveAudio.soundfont;audio.fontVoice=new SoundFontVoice(ctx,audio.master,audio.reverb,audio.soundfont);audio.boomwhackers=new BoomwhackerVoice(ctx,audio.master,audio.reverb);audio.boomwhackers.buffers=liveAudio.boomwhackers?.buffers||new Map();
+ audio.soundfont=liveAudio.soundfont;if(audio.soundfont)await audio.soundfont.prepare(ctx);audio.fontVoice=new SoundFontVoice(ctx,audio.master,audio.reverb,audio.soundfont);audio.boomwhackers=new BoomwhackerVoice(ctx,audio.master,audio.reverb);audio.boomwhackers.buffers=liveAudio.boomwhackers?.buffers||new Map();
  if(events.some(x=>FONT_INSTRUMENTS[x.event.type]||['synth','bass'].includes(x.event.type))&&!audio.soundfont)throw Error('SoundFont is not ready. Enable sound and try again.');
  if(events.some(x=>x.event.type==='boomwhacker')&&audio.boomwhackers.buffers.size!==22)throw Error('Boomwhacker recordings are not ready. Enable sound and try again.');
  audio.steelpan=new SteelpanVoice(ctx,audio.master,audio.reverb);audio.steelpan.buffers=liveAudio.steelpan?.buffers||new Map();audio.resonant=new ResonantVoice(ctx,audio.master,audio.reverb);audio.resonant.buffers=liveAudio.resonant?.buffers||new Map();
@@ -45,7 +45,7 @@ export async function renderSongWav(input,liveAudio,progress=()=>{}){
  }};
  // Render in small scheduling windows so Quest does not create an entire
  // dense song's sample voices at once. No metronome or live microphone enters.
- schedule(1);const pauses=[];for(let at=.8;at<seconds-.1;at+=.8)pauses.push(ctx.suspend(at));
+ schedule(1);await audio.soundfont?.flush(ctx);const pauses=[];for(let at=.8;at<seconds-.1;at+=.8)pauses.push(ctx.suspend(at));
  const rendered=ctx.startRendering();rendered.catch(()=>{});
- try{for(const pause of pauses){await pause;progress(Math.min(.96,ctx.currentTime/seconds));schedule(ctx.currentTime+1);await ctx.resume();}const buffer=await rendered;progress(1);return new Blob([encodeWav(buffer)],{type:'audio/wav'});}finally{for(const engine of synths.values())engine.dispose();}
+ try{for(const pause of pauses){await pause;progress(Math.min(.96,ctx.currentTime/seconds));schedule(ctx.currentTime+1);await audio.soundfont?.flush(ctx);await ctx.resume();}const buffer=await rendered;progress(1);return new Blob([encodeWav(buffer)],{type:'audio/wav'});}finally{for(const engine of synths.values())engine.dispose();audio.soundfont?.dispose(ctx);}
 }
