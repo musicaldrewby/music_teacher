@@ -2,16 +2,19 @@ import * as THREE from './vendor/three.module.min.js';
 import {TOOLS} from './equipment.js';
 export class HeldEquipment {
  constructor(scene,camera){
-  this.camera=camera;scene.add(camera);this.root=new THREE.Group();camera.add(this.root);this.root.position.set(.38,-.39,-.65);this.root.rotation.z=-.25;this.models={};this.lastSwing=-10;
-  const part=(g,w,h,d,x,y,z,color)=>{const m=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),new THREE.MeshBasicMaterial({color,depthTest:false,depthWrite:false}));m.position.set(x,y,z);m.renderOrder=10;g.add(m);return m;};
+  this.camera=camera;scene.add(camera);
+  this.foreground=new THREE.Scene();
+  this.viewCamera=new THREE.PerspectiveCamera();
+  this.root=new THREE.Group();this.foreground.add(this.root);this.root.position.set(.38,-.39,-.65);this.root.rotation.z=-.25;this.models={};this.lastSwing=-10;
+  const part=(g,w,h,d,x,y,z,color)=>{const m=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),new THREE.MeshBasicMaterial({color}));m.position.set(x,y,z);g.add(m);return m;};
   // Faceted silhouettes keep the carried tools recognizable against dark rock.
   const forge=(g,points,depth,color,z=-depth/2)=>{
    const shape=new THREE.Shape();shape.moveTo(...points[0]);
    for(const point of points.slice(1))shape.lineTo(...point);
    shape.closePath();
    const geometry=new THREE.ExtrudeGeometry(shape,{depth,bevelEnabled:false});
-   const mesh=new THREE.Mesh(geometry,new THREE.MeshBasicMaterial({color,depthTest:false,depthWrite:false}));
-   mesh.position.z=z;mesh.renderOrder=10;g.add(mesh);
+   const mesh=new THREE.Mesh(geometry,new THREE.MeshBasicMaterial({color}));
+   mesh.position.z=z;g.add(mesh);
   };
   for(const [id,tool] of Object.entries(TOOLS)){
    if(!tool.kind)continue;
@@ -33,9 +36,23 @@ export class HeldEquipment {
    this.root.add(g);this.models[id]=g;
   }
   const hand=new THREE.Group();part(hand,.12,.27,.14,0,-.06,0,'#477ccc');part(hand,.16,.17,.18,0,.13,-.025,'#d8a17c');part(hand,.055,.1,.09,-.09,.1,.025,'#b97c59');this.root.add(hand);this.models.hand=hand;
-  this.torch=new THREE.Group();camera.add(this.torch);this.torch.position.set(-.36,-.36,-.62);this.torch.rotation.z=.12;
-  part(this.torch,.055,.34,.055,0,0,0,'#9b683d');this.flame=part(this.torch,.09,.14,.09,0,.21,0,'#ffb34e');part(this.flame,.045,.11,.045,0,-.01,.01,'#fff0bb');
+  this.torch=new THREE.Group();this.foreground.add(this.torch);this.torch.position.set(-.36,-.36,-.62);this.torch.rotation.z=.12;
+  part(this.torch,.055,.34,.055,0,0,0,'#9b683d');this.flame=part(this.torch,.09,.14,.09,0,.21,0,'#ffb34e');part(this.flame,.045,.11,.045,0,-.01,.045,'#fff0bb');
   this.light=new THREE.PointLight('#ffd19a',0,11,1.3);this.light.position.set(-.17,-.12,-.24);this.light.castShadow=true;this.light.shadow.mapSize.set(256,256);this.light.shadow.bias=-.001;this.light.shadow.normalBias=.025;this.light.shadow.camera.near=.06;this.light.shadow.camera.far=11;camera.add(this.light);
+ }
+ render(renderer){
+  if(!this.root.visible&&!this.torch.visible)return;
+  this.viewCamera.projectionMatrix.copy(this.camera.projectionMatrix);
+  this.viewCamera.projectionMatrixInverse.copy(this.camera.projectionMatrixInverse);
+  // Keep the completed world image and give the carried equipment its own depth buffer contents.
+  const autoClear=renderer.autoClear;
+  renderer.autoClear=false;
+  try{
+   renderer.clearDepth();
+   renderer.render(this.foreground,this.viewCamera);
+  }finally{
+   renderer.autoClear=autoClear;
+  }
  }
  swing(){this.lastSwing=performance.now()/1000;}
  update(t,{tool=null,torch=false,visible=false,sky=1,world}){

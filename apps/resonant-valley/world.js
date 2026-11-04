@@ -130,7 +130,10 @@ export class World{
  async prepareEntry(equipment){
   this.setHeldEquipment({...equipment,visible:true});
   this.hands?.update(0,{...this.heldState,world:this,sky:1});
-  try{await this.renderer.compileAsync?.(this.scene,this.camera);}
+  try{await Promise.all([
+   this.renderer.compileAsync?.(this.scene,this.camera),
+   this.renderer.compileAsync?.(this.hands.foreground,this.hands.viewCamera)
+  ]);}
   catch(error){console.warn('Preparing the first view in the renderer:',error.message);}
   this.render(performance.now()/1000,false);
   await new Promise(resolve=>requestAnimationFrame(resolve));
@@ -312,6 +315,7 @@ export class World{
   for(const g of this.entityMeshes.values())g.traverse(o=>{if(o.userData.flame)o.scale.y=1+Math.sin(t*3.8+g.position.x)*.045;});
   this.hands?.update(t,{...this.heldState,sky:sky*(.25+sample.daylight*.75),world:this});
   this.renderer.render(this.scene,this.camera);
+  this.hands?.render(this.renderer);
  }
  serialize(){return {drops:this.drops?.serialize()||[],atmosphere:this.atmosphere?.serialize(),exploration:this.exploration?.serialize(),generator:this.generator.config(),tracks:this.railway?.serialize()||[],edits:[...this.edits],entities:this.entities.map(e=>({...e}))};}
 }
