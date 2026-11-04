@@ -158,5 +158,13 @@
     "original_url": "https://from-tips-to-tours.musicaldrewby.chatgpt.site",
     "source_commit": "742ccff543304d3214521cbfea97262641de9707",
     "backend": null
+  },
+  {
+    "title": "Resonant Valley",
+    "slug": "resonant-valley",
+    "url": "https://musicaldrewby.github.io/music_teacher/apps/resonant-valley/",
+    "original_url": "https://resonant-valley.musicaldrewby.chatgpt.site",
+    "source_commit": "9a8d307ae13fdd8d0114860cc42e2cb65b4ff710",
+    "backend": null
   }
 ]

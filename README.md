@@ -2,7 +2,7 @@
 
 [Open the arcade](https://musicaldrewby.github.io/music_teacher/) · [Simple app directory](https://musicaldrewby.github.io/music_teacher/directory.html)
 
-Created by Drew Wichman. This repository contains the arcade and all 20 apps from its October 25, 2026 collection, including their HTML, JavaScript, styles, images, instrument samples, soundfonts, music, and bundled libraries.
+Created by Drew Wichman. This repository contains the arcade and 21 apps, including the October 25 collection and Resonant Valley, including their HTML, JavaScript, styles, images, instrument samples, soundfonts, music, and bundled libraries.
 
 | App | Website | Folder under `apps/` |
 | --- | --- | --- |
@@ -25,15 +25,16 @@ Created by Drew Wichman. This repository contains the arcade and all 20 apps fro
 | Mr. Drew’s Music Lab · VR | [Open app](https://drews-music-lab-vr.musicaldrewby.chatgpt.site) | `drews-music-lab-vr` |
 | Round Helper | [Open app](https://round-helper.musicaldrewby.chatgpt.site) | `round-helper` |
 | Mr. Drew's Production Media Player | [Open app](https://mr-drews-production-media-player.musicaldrewby.chatgpt.site) | `mr-drews-production-media-player` |
+| Resonant Valley | [Live game](https://resonant-valley.musicaldrewby.chatgpt.site) · [GitHub edition](https://musicaldrewby.github.io/music_teacher/apps/resonant-valley/) | `resonant-valley` |
 | From Tips to Tours | [Open app](https://from-tips-to-tours.musicaldrewby.chatgpt.site) | `from-tips-to-tours` |
 
 ## Hosting
 
-As of October 28, 2026, the arcade and simple directory open the live ChatGPT Sites versions of all 20 apps. Publish app updates through Sites to make them available at those same links. The GitHub copies under `apps/` are retained separately and do not automatically synchronize with Sites.
+The arcade and simple directory open each live game or app. Resonant Valley also has a direct GitHub edition link in its cabinet details and directory entry. Publish app updates through Sites to make them available at those same links. The GitHub copies under `apps/` are retained separately and do not automatically synchronize with Sites.
 
 The existing `main` branch and GitHub Pages publishing location are retained. The arcade is at the repository root; each app has its own folder under `apps/`. `.nojekyll` makes these static files publish unchanged. No ChatGPT sign-in is needed for the public apps.
 
-Nineteen apps run entirely as static websites. **Music Lab VR’s shared Listening Room still uses its existing server and database** at `drews-music-lab-vr.musicaldrewby.chatgpt.site`. Its complete browser and server code are included here; GitHub Pages cannot run that database server. Private song saving and file export/import stay on the visitor’s device. Owner moderation continues through the original Music Lab website. The server accepts the GitHub website as a client, with the original validation, rate limits, publisher deletion tokens, and owner access restrictions.
+Twenty apps run entirely as static websites. **Music Lab VR’s shared Listening Room still uses its existing server and database** at `drews-music-lab-vr.musicaldrewby.chatgpt.site`. Its complete browser and server code are included here; GitHub Pages cannot run that database server. Private song saving and file export/import stay on the visitor’s device. Owner moderation continues through the original Music Lab website. The server accepts the GitHub website as a client, with the original validation, rate limits, publisher deletion tokens, and owner access restrictions.
 
 ## Existing saved work
 
@@ -41,7 +42,7 @@ Browser storage belongs to a website address. Songs, arrangements, favorites, up
 
 ## Source and assets
 
-`apps/` contains the runnable applications. `source/<app>/` preserves the accompanying original source modules, build scripts, tests, documentation, artwork and music source files outside each original `dist` folder. To reconstruct an original working project, copy that source folder into a new directory, then copy `apps/<app>/` into its `dist/` folder. `source/arcade/` contains the arcade’s companion source material; its runtime files are at the repository root. Original Git history remains in Sites, and original source commit IDs are recorded in `migration/apps.json`.
+`apps/` contains the runnable applications. `source/<app>/` preserves the accompanying original source modules, build scripts, tests, documentation, artwork and music source files outside each original `dist` folder. To reconstruct an original working project, copy that source folder into a new directory, then copy `apps/<app>/` into its `dist/` folder. `source/arcade/` contains the arcade’s companion source material; its runtime files are at the repository root. The Resonant Valley folder contains its editable browser modules and bundled audio engine. Its online song exchange is paused. Original Git history remains in Sites, and original source commit IDs are recorded in `migration/apps.json`.
 
 Fonts and browser libraries formerly loaded from CDNs are bundled locally. Their source URLs and checksums are recorded in `migration/font-sources.json`; existing bundled licenses and asset credits are retained. Links to YouTube, teaching references, Teachers Pay Teachers, and Buy Me a Coffee remain external destinations.
 

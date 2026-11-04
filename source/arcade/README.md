@@ -1,5 +1,7 @@
 # Mr. Drew’s Arcade — Seaside Boardwalk
 
+November 4, 2026: Added Resonant Valley to Games and Create. Its custom turntable cabinet alternates between the cabin and a harp discovery. The main play link opens the live game. The details and plain directory also link to the standalone GitHub edition. [View the cabinet on the boardwalk](docs/resonant-valley-cabinet.jpg).
+
 October 22, 2026: Added Mallet & Measure — Free Classroom Edition as the third featured cabinet, after Uke Strum and Boomwhacker Creator. Included in Create, Instruments, Teacher Tools, search, favorites and the generated directory. Uses the existing copper cabinet with a dedicated green SVG screen and a live free-edition label. Collection: 20 apps. Mirror: musicaldrewby/music_teacher. Destination and index access settings are preserved.
 
 October 18, 2026: Added From Tips to Tours to Games, search, favorites and the plain directory. It is placed last in the arcade lineup and Games category. Its exclusive amber guitar-amplifier cabinet and pixel-art screen are included in the export manifest. The collection contains 19 apps. The game and arcade hosting audiences remain unchanged. The matching GitHub Pages mirror is musicaldrewby/music_teacher.

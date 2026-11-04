@@ -355,6 +355,34 @@ window.ARCADE_APPS = [
     "url": "https://mr-drews-production-media-player.musicaldrewby.chatgpt.site"
   },
   {
+    "id": "resonant-valley",
+    "title": "Resonant Valley",
+    "art": "voxel-music",
+    "region": "games",
+    "additionalRegions": [
+      "cove"
+    ],
+    "description": "Build a cabin, mine for rare instruments, and turn the sounds you find into records you can play back home.",
+    "tags": [
+      "voxel",
+      "sandbox",
+      "explore",
+      "crafting",
+      "building",
+      "mining",
+      "instruments",
+      "compose",
+      "composition",
+      "sequencer",
+      "record player",
+      "tablet"
+    ],
+    "url": "https://resonant-valley.musicaldrewby.chatgpt.site",
+    "mirrorUrl": "https://musicaldrewby.github.io/music_teacher/apps/resonant-valley/",
+    "thumbnail": "assets/resonant-valley-screen.webp",
+    "singleLineTitle": true
+  },
+  {
     "id": "from-tips-to-tours",
     "title": "From Tips to Tours",
     "shortTitle": "From Tips to Tours",

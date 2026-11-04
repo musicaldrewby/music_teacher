@@ -1,0 +1,24 @@
+/* Keep world navigation above the pause shade, independently of the HUD. */
+.world-header{position:fixed;inset:0 0 auto;z-index:14;padding:14px 22px;min-height:72px;background:linear-gradient(#132446ed,#19335b88,transparent)}
+.world-actions{flex-wrap:wrap;justify-content:flex-end}
+.world-actions .hud-button{padding:10px 12px}
+#new-world-toolbar{border-top-color:#b9a2ff;border-left-color:#b9a2ff;background:#5d438f}
+.panel{top:calc(50% + 38px);max-height:calc(100dvh - 110px)}
+.studio{top:82px}
+#toast{z-index:30}
+.world-start-options{margin:18px 0;display:grid;gap:10px;border:0;padding:0}
+.world-start-options legend{font-size:17px;margin-bottom:10px}
+.world-start-option{display:grid;grid-template-columns:22px 1fr;gap:9px;padding:14px;background:#253455;border:2px solid #596f98;cursor:pointer}
+.world-start-option:has(input:checked){background:#364575;border-color:#b4a3ff}
+.world-start-option input{accent-color:#b4a3ff;margin-top:3px}
+.world-start-option strong,.world-start-option small{display:block}
+.world-start-option small{margin-top:5px;color:#bed0e7;font-size:14px;line-height:1.35}
+#collection-tools{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
+.upgrade-tag{padding:9px 11px;border:2px solid #58698c;color:#a8bad5;background:#1e2b44}
+.upgrade-tag.ready{color:#f3f5ff;border-color:#a38aff;background:#4d3d78}
+.track-card.locked{border-color:#766079;opacity:.75}
+.track-locked-note{display:block;color:#f8bd72;font-size:12px;margin-top:7px}
+#studio-access-note{color:#ffce74;font-size:13px;margin:0;padding:8px 16px;background:#292b40}
+#studio-access-note:empty{display:none}
+#advanced-controls label:has(input:disabled){opacity:.55}
+@media(max-width:740px){.world-header{padding:8px 10px;min-height:84px}.world-actions{gap:5px}.world-actions .hud-button{padding:7px 9px}.world-actions kbd{display:none}.panel{top:calc(50% + 46px);max-height:calc(100dvh - 116px)}.studio{top:98px}.world-start-option{padding:10px}.world-start-option small{font-size:13px}}

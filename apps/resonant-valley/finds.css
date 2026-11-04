@@ -1,0 +1,66 @@
+/* The illuminated stage sits at the viewport midpoint. The nameplate and
+   controls sit below it so even a long instrument name cannot move the art. */
+#discovery-panel{
+ --stage-width:min(740px,calc(100vw - 28px));--stage-height:clamp(178px,43dvh,382px);
+ --emblem-size:clamp(150px,min(38dvh,61vw),336px);
+ position:fixed;inset:0;transform:none;width:100%;height:100dvh;max-height:100dvh;max-width:none;
+ display:grid;grid-template-rows:minmax(max-content,1fr) var(--stage-height) minmax(max-content,1fr);
+ justify-items:center;align-items:start;z-index:32;overflow-y:auto;pointer-events:auto;
+ background:#101226b8;border:0;box-shadow:none;padding:0 0 env(safe-area-inset-bottom,0px);border-radius:0;
+ color:#ffedc6;text-shadow:none;font-family:'Pixelify Sans',monospace;
+}
+#discovery-panel[hidden],#discovery-panel [hidden]{display:none!important}
+.treasure-heading,.find-stage,.find-plaque{width:var(--stage-width);box-sizing:border-box}
+.treasure-heading,.find-plaque{background:#20233c;border:3px solid;border-color:#f6cc83 #79605b #544352 #cb9b63;box-shadow:4px 5px #0f102a65}
+.treasure-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;align-self:end;padding:12px 17px 11px;border-bottom:0}
+#discovery-panel .eyebrow{color:#e8c68f;font:11px/1.25 Silkscreen,monospace;letter-spacing:1.1px;margin:0 0 4px}
+#find-page:not(:empty){display:inline-block;border-left:2px solid #9b756b;margin-left:6px;padding-left:10px;color:#d2c4e0}
+#discovery-panel h2{margin:0;color:#fff0c5;font:clamp(20px,2.4vw,32px)/1.1 Silkscreen,monospace;letter-spacing:0}
+#discovery-panel h2:focus{outline:none}
+#discovery-panel .close{flex-shrink:0;background:#39324e;color:#ffe1ac}
+.find-stage{position:relative;isolation:isolate;display:grid;place-items:center;height:var(--stage-height);overflow:hidden;
+ background:#211d36;border:3px solid #c49a63;box-shadow:0 0 0 1px #332842;image-rendering:pixelated}
+.treasure-rays{position:absolute;inset:-2px;z-index:-1;background:#25213b url('assets/treasure-rays.png') center/cover no-repeat;image-rendering:pixelated;animation:ray-arrival .62s steps(9,end) both}
+.find-stage::before,.find-stage::after{content:'';position:absolute;inset:6px;z-index:2;pointer-events:none;--corner:#f7ce86;
+ background:linear-gradient(var(--corner),var(--corner)) left top/13px 3px,linear-gradient(var(--corner),var(--corner)) left top/3px 13px,linear-gradient(var(--corner),var(--corner)) right bottom/13px 3px,linear-gradient(var(--corner),var(--corner)) right bottom/3px 13px;background-repeat:no-repeat}
+.find-stage::after{transform:scaleX(-1)}
+#find-emblem,.treasure-sprite{position:relative;display:grid;place-items:center;line-height:0;z-index:1}
+.treasure-sprite{filter:drop-shadow(0 5px #1a173b75);animation:treasure-arrival .5s steps(8,end) both}
+#find-emblem svg{width:var(--emblem-size);height:var(--emblem-size);display:block;shape-rendering:crispEdges;image-rendering:pixelated}
+.treasure-spark{position:absolute;width:14px;height:14px;background:#ffe1a0;clip-path:polygon(40% 0,60% 0,60% 30%,70% 30%,70% 40%,100% 40%,100% 60%,70% 60%,70% 70%,60% 70%,60% 100%,40% 100%,40% 70%,30% 70%,30% 60%,0 60%,0 40%,30% 40%,30% 30%,40% 30%);animation:treasure-glint 2.8s steps(4,end) 2;pointer-events:none}
+.spark-a{left:21%;top:29%}.spark-b{right:19%;top:46%;width:11px;height:11px;animation-delay:.45s}.spark-c{left:29%;bottom:20%;width:8px;height:8px;animation-delay:.8s}
+.find-stamp{position:absolute;bottom:9px;z-index:3;color:#ffdda0;padding:2px 4px;background:#19192edb;font:10px/1.1 Silkscreen,monospace;letter-spacing:.6px;text-transform:uppercase}
+#find-number{left:13px}#find-source{right:13px}
+.find-plaque{text-align:center;align-self:start;border-top:0;padding:10px 15px 13px;background:#20233c}
+.find-kicker,.find-detail,.find-plaque>strong{display:block}.find-kicker{text-transform:uppercase;color:var(--find-rarity,#ecc78e);letter-spacing:1.5px;font:12px/1.2 Silkscreen,monospace}
+#find-name{color:#fff1cd;font:600 clamp(27px,3.4vw,42px)/1.06 'Pixelify Sans',monospace;margin:3px 0 2px;overflow-wrap:anywhere}
+#find-family,.find-detail{font-size:15px;color:#d3d7e7}#find-family,#find-listen:not(:empty){display:inline-block;vertical-align:middle}
+.find-audition{margin:2px 0 2px 10px;padding:4px 9px;color:#f7dbad;font-size:14px;line-height:1;background:#34344d}
+.find-audition::before{content:'';display:inline-block;margin-right:6px;border:4px solid transparent;border-left:6px solid #f6ca81;border-right:0}
+#discovery-credits{font-size:13px;color:#d8c4ae;margin:6px 0 10px}
+#discovery-panel .button-pair{display:flex;justify-content:center;gap:9px;margin:0;flex-wrap:wrap}
+#discovery-panel .button-pair button{min-width:135px;padding:8px 14px;font-size:16px}
+#discovery-panel button:focus-visible{outline:3px solid #ffda89;outline-offset:3px}
+.find-medallion{background:#252c42 url('assets/find-sunbeams.png') center/cover no-repeat;image-rendering:pixelated}
+@keyframes treasure-arrival{0%{opacity:.5;transform:translateY(8px) scale(.74)}70%{opacity:1;transform:translateY(-2px) scale(1.035)}100%{opacity:1;transform:none}}
+@keyframes ray-arrival{from{transform:scale(.94)}to{transform:none}}
+@keyframes treasure-glint{0%,70%,100%{opacity:.45;transform:scale(.75)}35%{opacity:1;transform:scale(1.2)}}
+@media(max-width:500px){#discovery-panel{--stage-width:calc(100vw - 16px);--stage-height:clamp(176px,36dvh,300px)}.treasure-heading{padding:10px}.find-plaque{padding:9px}.find-stamp{font-size:8px}#discovery-panel .button-pair button{font-size:14px;min-width:0;flex:1}#discovery-panel .eyebrow{font-size:9px}.find-kicker{font-size:10px}}
+@media(max-height:520px){#discovery-panel{--stage-width:min(610px,96vw);--stage-height:clamp(95px,42dvh,192px);--emblem-size:clamp(86px,37dvh,164px);grid-template-rows:minmax(max-content,1fr) var(--stage-height) minmax(max-content,1fr)}.treasure-heading{padding:4px 10px}#discovery-panel .eyebrow{font-size:9px;margin-bottom:0}#discovery-panel h2{font-size:18px}#find-name{font-size:24px}.find-plaque{padding:4px 9px 6px}#discovery-credits{margin:2px 0 4px}#discovery-panel .button-pair button{padding:5px 9px;font-size:14px}.find-kicker{font-size:10px}}
+#treasure-find,#gather-finds{position:absolute;right:18px;pointer-events:none;text-shadow:none;font-family:'Pixelify Sans',monospace}
+#treasure-find{top:99px;width:min(325px,calc(100vw - 28px))}
+.roaming #treasure-find{top:18px}
+.find-banner,.find-pickup{display:grid;align-items:center;background:#202b40f5;border:2px solid #b79a72;border-right-color:#5e504e;border-bottom-color:#52484b;box-shadow:3px 3px #121b2a80;color:#f8e6bf;animation:find-rise .24s steps(5,end) both}
+.find-banner{grid-template-columns:76px minmax(0,1fr);padding:5px;gap:0 10px}
+.find-banner .find-medallion{width:76px;height:72px}
+.find-medallion{display:grid;place-items:center;border:1px solid #816c53;line-height:0}
+.find-medallion svg{width:85%;height:85%;max-width:100%;shape-rendering:crispEdges;filter:drop-shadow(0 2px #191c2aa6)}
+.find-banner-copy strong{display:block;font-size:20px;line-height:1.08;font-weight:500;margin:4px 0}
+#gather-finds{bottom:153px;display:grid;justify-items:end;gap:5px;max-width:calc(100vw - 28px)}
+.find-pickup{grid-template-columns:40px minmax(0,1fr) auto;gap:8px;padding:3px 9px 3px 3px;border-width:1px}
+.find-pickup .find-medallion{width:40px;height:36px}
+.find-pickup-copy{display:grid;gap:1px}.find-pickup-copy small{font-size:10px;text-transform:uppercase;letter-spacing:.8px;color:#d7bd93}
+.find-pickup-copy strong{color:#f0e6cd;font-size:15px;font-weight:500}.find-quantity{color:#b6dbc3;font-size:17px}
+@keyframes find-rise{from{opacity:.3;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+@media(pointer:coarse),(max-width:740px){#treasure-find,.roaming #treasure-find{top:126px;right:8px;width:min(280px,calc(100vw - 16px))}#gather-finds{right:8px;bottom:212px}.find-banner{grid-template-columns:58px minmax(0,1fr)}.find-banner .find-medallion{width:58px;height:57px}.find-banner-copy strong{font-size:17px}}
+@media(prefers-reduced-motion:reduce){.treasure-rays,.treasure-sprite,.treasure-spark,.find-banner,.find-pickup{animation:none}}

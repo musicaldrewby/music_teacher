@@ -1,0 +1,16 @@
+.tool-icon{display:inline-block;width:32px;height:32px;shape-rendering:crispEdges;image-rendering:pixelated;vertical-align:middle;filter:drop-shadow(2px 2px 0 #0d1822)}
+#hotbar .tool-icon{width:34px;height:34px}.item-card .tool-icon{width:40px;height:40px}.craft-card .tool-icon{flex:none}
+#carry-torch{position:absolute;right:28px;bottom:155px;font-size:14px;padding:10px 14px;background:#26364c;border:2px outset #64758c;color:#e3dbcd;pointer-events:auto}
+#carry-torch.active{color:#30221b;background:#e7ad60;border-color:#ffe2a4;box-shadow:inset -2px -2px #a86d35}
+#inventory-tabs{flex-wrap:wrap}
+@media(max-width:700px){#carry-torch{right:15px;bottom:185px;font-size:12px}#hotbar .tool-icon{width:26px;height:26px}}
+
+#bare-hand{position:absolute;right:28px;bottom:201px;font-size:14px;padding:9px 14px;background:#26364c;border:2px outset #64758c;pointer-events:auto}
+#bare-hand.active{background:#476d9f;border-color:#abcfff}
+#mining-progress{position:absolute;left:50%;top:calc(50% + 70px);transform:translateX(-50%);width:190px;text-align:center;pointer-events:none;font-size:14px;text-shadow:1px 2px #142139}
+#mining-label{display:block;margin-bottom:7px;color:#fff3d6}
+.mining-track{height:10px;border:2px solid #d5e4f3;background:#142139;box-shadow:2px 2px #101724}
+#mining-fill{display:block;height:100%;width:0;background:#ffc866}
+#mining-progress.blocked{width:240px;color:#ffd393}
+#mining-progress.blocked .mining-track{display:none}
+@media(max-width:700px){#bare-hand{right:15px;bottom:230px;font-size:12px}#mining-progress{font-size:12px;width:160px}}

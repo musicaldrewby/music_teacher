@@ -1,0 +1,13 @@
+[data-record-sharing][hidden]{display:none!important}
+.venue-links{display:flex;gap:8px;margin:8px 0}.venue-links>button{flex:1;color:#f4c4a3}
+#opening-panel{width:min(790px,94vw)}
+#opening-panel h2{color:#ffc397}#opening-panel h3{color:#d8bbec;margin:12px 0 8px}
+#gig-layout{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+#gig-layout label{display:grid;color:#d7e6ed;gap:4px;margin:6px 0}
+#gig-layout input,#gig-layout select{width:100%;min-width:0;padding:7px 9px}
+#gig-checks{list-style:none;padding:0;margin:0;color:#b1bdd2}#gig-checks li{padding:3px 0}#gig-checks li[data-done=true]{color:#b5e4c2}
+.gig-bill{padding:16px;border:3px double #e9ab86;background:#393148}
+.gig-bill>small{font:13px Silkscreen,monospace;color:#edbb8f}#gig-set{list-style:none;padding:0}#gig-set li{display:flex;align-items:center;gap:10px;min-height:51px;padding:5px;border-bottom:1px solid #73657a}#gig-set canvas{width:42px;height:42px;image-rendering:pixelated}#gig-note{min-height:44px}
+#gig-souvenir{text-align:center;padding:12px}#gig-print{display:block;max-width:260px;width:100%;height:auto;margin:8px auto}#exchange-panel{width:min(1010px,96vw);padding:12px}#exchange-panel .panel-heading{margin:0 0 8px}#exchange-panel h2{font-size:19px}#exchange-frame iframe{background:#202136;border:0;display:block;width:100%;height:min(67dvh,670px)}
+.exchange-welcome{display:block;color:#f8c6aa;text-align:center;margin:8px 0;font-size:14px}.gig-bill button[hidden],#gig-souvenir[hidden],#album-share[hidden]{display:none}
+@media(max-width:580px){#gig-layout{grid-template-columns:1fr}.gig-bill{padding:10px}#exchange-frame iframe{height:62dvh}}

@@ -1,0 +1,149 @@
+import * as THREE from './vendor/three.module.min.js';
+import {BLOCKS} from './data.js';
+import {skylineSites,skylineBoxes} from './skyline.js';
+import {HorizonGround,horizonMaterial} from './horizon-ground.js';
+import {DistantWoods} from './distant-woods.js';
+import {blendSlot,blendMaterial,markChunk} from './terrain-blend.js';
+import {SceneryMesh} from './scenery-mesh.js';
+const RANGE=9,SIDE=RANGE*2+1,TILES=SIDE*SIDE;
+export class Horizon {
+ constructor(world){
+  this.w=world;this.root=new THREE.Group();world.scene.add(this.root);
+  this.landMat=horizonMaterial(world.atlas);
+  this.siteMat=new THREE.MeshLambertMaterial({vertexColors:true});
+  if(world.detailBlend){
+   blendMaterial(this.landMat,world.detailBlend,true);blendMaterial(this.siteMat,world.detailBlend,true);
+   this.woods=new DistantWoods(world,TILES);this.root.add(this.woods.mesh);
+  }
+  this.woodEdits=new Set();
+  this.surface=new HorizonGround(TILES);this.ground=this.surface.geometry;
+  if(world.detailBlend){
+   // Two-block terraces and individual banks can project onto different
+   // neighboring tiles. Fill uncovered pixels behind the depth-writing layers.
+   const backing=horizonMaterial(world.atlas,{backing:true});
+   backing.color=this.landMat.color;
+   const underlay=new THREE.Mesh(this.ground,backing);underlay.frustumCulled=false;underlay.renderOrder=-1;this.root.add(underlay);
+  }
+  const m=new THREE.Mesh(this.ground,this.landMat);m.frustumCulled=false;this.root.add(m);
+  this.features=new Map();this.dirty=new Set();this.tiles=new Map();this.pending=[];this.pendingParts=[];this.center='';this.revision=-1;
+ }
+ reset(){
+  this.woods?.clear();this.woodEdits.clear();this.dirty.clear();this.tiles.clear();this.center='';this.pending=[];this.pendingParts=[];this.revision=-1;this.ground.setDrawRange(0,0);
+  for(const {parts} of this.features.values())for(const m of parts.values()){this.root.remove(m);m.geometry.dispose();}
+  this.features.clear();
+ }
+ invalidate(x,z){
+  this.dirty.add(Math.floor(x/16)+','+Math.floor(z/16));
+  for(let i=Math.floor((x-4)/16);i<=Math.floor((x+4)/16);i++)for(let j=Math.floor((z-4)/16);j<=Math.floor((z+4)/16);j++){
+   const key=i+','+j;if(this.tiles.get(key)?.ready)this.woodEdits.add(key);
+  }
+ }
+ partGeometry(key,boxes){
+  const b=new SceneryMesh(),journal=this.w.stream.editChunks?.get(key);
+  const [cx,cz]=key.split(',').map(Number);
+  if(!journal?.size){
+   for(const p of boxes)b.box(p.x+p.w/2,p.y+p.h/2,p.z+p.d/2,p.w,p.h,p.d,BLOCKS[p.id].color);
+   const geo=b.geometry();markChunk(geo,cx,cz);return geo;
+  }
+  // Reconstruct the small part of a landmark in this edited chunk. An absent
+  // tree or a tunnel through the mesa must also disappear from the distant view.
+  const ox=cx*16,oz=cz*16;
+  const bottom=Math.max(-32,Math.min(...boxes.map(p=>p.y))),top=Math.min(96,Math.max(...boxes.map(p=>p.y+p.h)));
+  const layer=256,cells=new Uint8Array((top-bottom)*layer),at=(x,y,z)=>(y-bottom)*layer+(z-oz)*16+x-ox;
+  for(const p of boxes)for(let y=Math.max(bottom,p.y);y<Math.min(p.y+p.h,top);y++)for(let z=p.z;z<p.z+p.d;z++)cells.fill(p.id,at(p.x,y,z),at(p.x+p.w,y,z));
+  for(const [pos,id] of journal){
+   const [x,y,z]=pos.split(',').map(Number);if(y<bottom||y>=top)continue;
+   const i=at(x,y,z);if(cells[i])cells[i]=BLOCKS[id]?id:0;
+  }
+  // Join like-colored surface cells into strips; sealed interior cells have no silhouette.
+  const visible=(i,x,y,z)=>x===0||x===15||z===0||z===15||y===bottom||y===top-1||!cells[i-1]||!cells[i+1]||!cells[i-16]||!cells[i+16]||!cells[i-layer]||!cells[i+layer];
+  for(let y=bottom;y<top;y++)for(let z=0;z<16;z++){
+   let run=0,start=0;
+   for(let x=0;x<=16;x++){
+    const i=at(x+ox,y,z+oz),id=x<16&&visible(i,x,y,z)?cells[i]:0;if(id===run)continue;
+    if(run)b.box(ox+(start+x)/2,y+.5,oz+z+.5,x-start,1,1,BLOCKS[run].color);
+    start=x;run=id;
+   }
+  }
+  const geo=b.geometry();markChunk(geo,cx,cz);return geo;
+ }
+ feature(s){
+  const byChunk=new Map();
+  for(const b of skylineBoxes(this.w.generator,s)){
+   for(let cx=Math.floor(b.x/16);cx<=Math.floor((b.x+b.w-1)/16);cx++)for(let cz=Math.floor(b.z/16);cz<=Math.floor((b.z+b.d-1)/16);cz++){
+    const key=cx+','+cz,x=Math.max(b.x,cx*16),z=Math.max(b.z,cz*16),w=Math.min(b.x+b.w,cx*16+16)-x,d=Math.min(b.z+b.d,cz*16+16)-z;
+    if(!byChunk.has(key))byChunk.set(key,[]);
+    byChunk.get(key).push({...b,x,z,w,d});
+   }
+  }
+  return {site:s,parts:new Map(),byChunk};
+ }
+ plan(cx,cz){
+  const w=this.w,targets=skylineSites(w.generator,cx*16+8,cz*16+8,160),ids=new Set(targets.map(s=>s.id));
+  for(const [id,{parts}] of this.features)if(!ids.has(id)){for(const m of parts.values()){this.root.remove(m);m.geometry.dispose();}this.features.delete(id);}
+  for(const s of targets)if(!this.features.has(s.id))this.features.set(s.id,this.feature(s));
+  this.pendingParts=[];
+  for(const f of this.features.values())for(const k of f.byChunk.keys())if(!f.parts.has(k)){
+   const [x,z]=k.split(',').map(Number);this.pendingParts.push({f,k,d:(x-cx)**2+(z-cz)**2});
+  }
+  this.pendingParts.sort((a,b)=>b.d-a.d);
+  const next=new Map(),free=new Set(Array.from({length:TILES},(_,i)=>i)),missing=[];
+  for(let x=cx-RANGE;x<=cx+RANGE;x++)for(let z=cz-RANGE;z<=cz+RANGE;z++){
+   const key=x+','+z,tile=this.tiles.get(key);
+   if(tile){next.set(key,tile);free.delete(tile.slot);}else missing.push({x,z,key,ready:false});
+  }
+  const slots=free.values();for(const tile of missing){tile.slot=slots.next().value;next.set(tile.key,tile);}
+  for(const [k,t] of this.tiles)if(!next.has(k)){this.woods?.remove(t);this.woodEdits.delete(k);}
+  this.tiles=next;this.pending=[...next.values()].filter(v=>!v.ready).sort((a,b)=>((b.x-cx)**2+(b.z-cz)**2)-((a.x-cx)**2+(a.z-cz)**2));
+ }
+ fill(tile){
+  this.surface.fill(tile,this.w.generator,!!this.w.atlas);
+  this.woods?.fill(tile);tile.ready=true;
+ }
+ update(s,visible,dt=1/60){
+  const w=this.w,c=w.stream.center,cx=c.cx,cz=c.cz,key=cx+','+cz;
+  const returning=!this.root.visible;this.root.visible=visible;
+  if(!visible){w.detailBlend?.step(w.camera.position,w.viewDistance,dt,null);return;}
+  let changed=returning||this.revision!==w.detailRevision||this.distance!==w.viewDistance;
+  if(key!==this.center){this.plan(cx,cz);this.center=key;changed=true;}
+  const deadline=performance.now()+2;
+  // A whole mesa can span several chunks. Introduce its distant pieces while
+  // they are still in haze, without allocating every mesh on a boundary frame.
+  for(let i=0;i<2&&this.pendingParts.length;i++){
+   const {f,k}=this.pendingParts.pop(),m=new THREE.Mesh(this.partGeometry(k,f.byChunk.get(k)),this.siteMat);
+   this.root.add(m);f.parts.set(k,m);changed=true;if(performance.now()>=deadline)break;
+  }
+  if(this.pending.length){
+   // Give the collision stream the rest of the frame, even in dense forests.
+   for(let i=0;i<12&&this.pending.length;i++){
+    const tile=this.pending.pop();this.fill(tile);changed=true;
+    if(performance.now()>=deadline)break;
+   }
+  }
+  for(const k of this.woodEdits){
+   const t=this.tiles.get(k);if(t?.ready)this.woods?.fill(t);
+   this.woodEdits.delete(k);if(performance.now()>=deadline)break;
+  }
+  this.woods?.flush();
+  if(w.detailBlend?.step(w.camera.position,w.viewDistance,dt,this.tiles))changed=true;
+  this.landMat.color.setScalar(1-(s.wet||0)*.13);
+  if(!changed&&!this.dirty.size)return;this.revision=w.detailRevision;this.distance=w.viewDistance;
+  const detailed=(k,x,z)=>w.detailBlend?w.detailBlend.level(k)===255:Math.max(Math.abs(x-cx),Math.abs(z-cz))<=w.viewDistance&&w.chunks.has(k);
+  // Slopes can span the edge of a tile already at full detail. Its eight
+  // neighbors also need to be full before retiring the ground backing there.
+  const needsBacking=t=>{
+   if(!detailed(t.key,t.x,t.z))return true;
+   if(w.detailBlend)for(let dz=-1;dz<=1;dz++)for(let dx=-1;dx<=1;dx++){
+    if(w.detailBlend.bytes[blendSlot(t.x+dx,t.z+dz)]<255)return true;
+   }
+   return false;
+  };
+  this.surface.show(this.tiles.values(),needsBacking);
+  for(const {parts,byChunk} of this.features.values())for(const [k,m] of parts){
+   const [x,z]=k.split(',').map(Number);m.visible=!detailed(k,x,z);
+   if(this.dirty.has(k))m.userData.edited=true;
+   if(m.visible&&m.userData.edited){m.geometry.dispose();m.geometry=this.partGeometry(k,byChunk.get(k));m.userData.edited=false;}
+  }
+  this.dirty.clear();
+ }
+}

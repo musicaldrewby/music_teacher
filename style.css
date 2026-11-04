@@ -216,3 +216,20 @@
 .skin-mallet-measure .machine-screen .custom-cover img{object-fit:contain}
 .skin-mallet-measure .machine-actions{left:24%;right:24%;bottom:12%;justify-content:space-between}
 .skin-mallet-measure .machine-actions button{border-color:#d7b46b;background:linear-gradient(#3b6249,#183c2d);color:#fff0c8}
+
+/* Resonant Valley pairs the cabinet's brass marquee with its own pixel lettering. */
+@font-face{font-family:ValleyPixel;src:url('assets/fonts/pixelify-sans-latin-700-normal.woff2') format('woff2');font-style:normal;font-weight:700;font-display:swap}
+.skin-resonant-valley{--cabinet-image:url('assets/cabinet-resonant-valley.webp');--sheet-size:100%;--sheet-pos:50%;--title-left:18%;--title-width:64%;--title-top:3.95%;--title-height:6.2%;--screen-left:19.6%;--screen-width:60.8%;--screen-top:19.05%;--screen-height:19.4%}
+.skin-resonant-valley .machine-title{font:700 7.15cqw/1 ValleyPixel,monospace;letter-spacing:.04cqw;color:#ffe8a0;text-shadow:0 .35cqw #765025,0 0 1cqw #e69b425a;padding:0 .4cqw}
+.skin-resonant-valley .machine-screen{border-radius:3.5%;background:#111627;box-shadow:0 0 7px #b4eff922}
+.skin-resonant-valley .machine-screen .custom-cover{height:100%;aspect-ratio:auto;top:0;transform:none;background:#111627}
+.skin-resonant-valley .machine-screen img{object-fit:cover}
+@media(prefers-reduced-motion:no-preference){
+ .skin-resonant-valley .machine-screen .custom-cover::after{content:'';position:absolute;inset:0;background:center/cover no-repeat url('assets/resonant-valley-harp.webp');opacity:0;animation:valley-find 14s infinite}
+ .motion-paused .skin-resonant-valley .custom-cover::after,.page-hidden .skin-resonant-valley .custom-cover::after{animation-play-state:paused}
+}
+@keyframes valley-find{0%,59%,100%{opacity:0}65%,89%{opacity:1}}
+.skin-resonant-valley .machine-actions{left:18.5%;right:18.5%;bottom:10.9%;justify-content:space-between}
+.skin-resonant-valley .machine-actions button{color:#ffecaf;border-color:#ceaa69;background:linear-gradient(#38374f,#181828)}
+.floor-resonant-valley{--floor-left:3%;--floor-width:94%;--floor-bottom:1.7%}
+.detail-mirror{font-size:13px;font-weight:800;color:#245965;text-underline-offset:3px;padding:8px 0}

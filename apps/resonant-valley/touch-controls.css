@@ -1,0 +1,71 @@
+/* Both thumbs stay close to the bezel. The space between them belongs to the camera. */
+#world canvas { touch-action:none; }
+.touch-intro { display:none; }
+.touch-play .touch-intro { display:block; color:#c9d6e8; font-size:14px; margin:0 0 10px; }
+#touch-controls[hidden],#touch-controls [hidden] { display:none!important; }
+body.touch-play {
+  --stick-size:100px;
+  --touch-action:48px;
+  --touch-left:max(16px,env(safe-area-inset-left));
+  --touch-right:max(16px,env(safe-area-inset-right));
+  --touch-base:calc(max(16px,env(safe-area-inset-bottom)) + 80px);
+}
+.touch-play #touch-controls {
+  position:absolute; left:var(--touch-left); right:var(--touch-right); bottom:var(--touch-base);
+  display:flex; align-items:flex-end; justify-content:space-between; pointer-events:none;
+  -webkit-user-select:none; user-select:none; -webkit-touch-callout:none;
+}
+#touch-stick,#touch-controls button {
+  pointer-events:auto; touch-action:none; -webkit-tap-highlight-color:transparent;
+  border:2px solid; border-color:#a4b7c7aa #364a5dcc #263746cc #91a6b8aa;
+  background:#192c3dc2; color:#fff4d7; box-shadow:2px 2px #101a257d;
+}
+#touch-stick {
+  position:relative; width:var(--stick-size); height:var(--stick-size);
+  clip-path:polygon(16% 0,84% 0,84% 5%,94% 5%,94% 15%,100% 15%,100% 85%,94% 85%,94% 95%,84% 95%,84% 100%,16% 100%,16% 95%,6% 95%,6% 85%,0 85%,0 15%,6% 15%,6% 5%,16% 5%);
+}
+.stick-guide { position:absolute; inset:0; width:100%; height:100%; opacity:.75; shape-rendering:crispEdges; }
+.stick-thumb {
+  width:30%; height:30%; left:35%; top:35%; position:absolute;
+  background:#8caebad9; border:2px solid; border-color:#d9e7d7 #657f91 #4a6176 #cadfd8;
+  box-shadow:2px 2px #132332a6; pointer-events:none;
+}
+#touch-stick.pressed .stick-thumb { background:#f0c988; border-color:#ffeabe #ae8c65 #887357 #ffdc9d; }
+.touch-actions { display:grid; grid-template-columns:repeat(2,var(--touch-action)); align-items:end; gap:6px; }
+#touch-controls button {
+  width:var(--touch-action); height:var(--touch-action); display:grid; align-content:center;
+  justify-items:center; gap:1px; padding:2px; border-radius:0;
+  font:13px/1 'Pixelify Sans',monospace; text-shadow:1px 1px #172539;
+}
+#touch-controls button:active { background:#395364ed; border-color:#ffe2a7; }
+#touch-controls svg { pointer-events:none; shape-rendering:crispEdges; }
+.touch-actions svg { width:20px; height:20px; }
+#touch-jump,#touch-lower { grid-column:1; }
+#touch-rotate { grid-column:2; }
+#touch-jump svg,#touch-lower svg { color:#a6dce3; }
+#touch-use svg { color:#ffd693; }
+#touch-gather svg { color:#d9c3ed; }
+.touch-play.roaming #world-toolbar { display:flex; padding-top:max(10px,env(safe-area-inset-top)); }
+.touch-play.roaming :is(#world-status,#discovery-hint,#controls-hint,#new-world-toolbar),.touch-play #world-toolbar kbd { display:none; }
+.touch-play.roaming #field-compass { top:calc(max(10px,env(safe-area-inset-top)) + 48px); left:var(--touch-left); font-size:12px; padding:3px 7px; }
+.touch-play.roaming .world-footer { bottom:max(8px,env(safe-area-inset-bottom)); }
+.touch-play.roaming #bare-hand,.touch-play.roaming #carry-torch {
+  display:block; right:auto; bottom:calc(var(--touch-base) + var(--stick-size) + 6px);
+  width:48px; min-height:36px; padding:2px; background:#1b2e42c2; font-size:13px;
+}
+.touch-play.roaming #bare-hand { left:var(--touch-left); }
+.touch-play.roaming #carry-torch { left:calc(var(--touch-left) + 52px); }
+.touch-play.roaming :is(#bare-hand,#carry-torch).active { background:#65573d; color:#ffe1a0; }
+.touch-play.roaming #record-playing { top:calc(max(10px,env(safe-area-inset-top)) + 82px); left:var(--touch-left); bottom:auto; }
+@media (min-width:940px) {
+  body.touch-play { --touch-base:max(20px,env(safe-area-inset-bottom)); --touch-left:max(22px,env(safe-area-inset-left)); --touch-right:max(22px,env(safe-area-inset-right)); }
+}
+@media (max-width:600px), (max-height:450px) {
+  body.touch-play { --stick-size:88px; --touch-action:44px; --touch-left:max(8px,env(safe-area-inset-left)); --touch-right:max(8px,env(safe-area-inset-right)); --touch-base:calc(max(6px,env(safe-area-inset-bottom)) + min(16vw,76px)); }
+  .touch-play.roaming #world-toolbar { min-height:0; align-items:flex-start; padding:max(5px,env(safe-area-inset-top)) var(--touch-right) 4px var(--touch-left); }
+  .touch-play.roaming #world-toolbar .brand { display:none; }
+  .touch-play.roaming #world-toolbar .world-actions { flex:1; justify-content:space-between; }
+  .touch-play.roaming #field-compass { top:calc(max(4px,env(safe-area-inset-top)) + 40px); }
+  .touch-play.roaming #bare-hand,.touch-play.roaming #carry-torch { width:42px; min-height:32px; }
+  .touch-play.roaming #carry-torch { left:calc(var(--touch-left) + 46px); }
+}
