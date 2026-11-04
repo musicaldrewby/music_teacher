@@ -1,3 +1,33 @@
+/* Title credit and optional support, directly beneath the game name. */
+.welcome-creator { margin-top:10px; color:#fff6e4; text-shadow:1px 2px #19283a; }
+.creator-byline { margin:0; font-size:18px; line-height:1.25; }
+.creator-byline strong { color:#ffdfa6; }
+.creator-support { display:flex; align-items:center; gap:12px; margin-top:10px; }
+.creator-support p { flex:1; margin:0; max-width:240px; font-size:15px; line-height:1.25; }
+.creator-coffee {
+  display:inline-flex; flex:none; align-items:center; justify-content:center; gap:8px;
+  min-height:44px; padding:6px 11px; border:2px solid; border-color:#b6c8d1 #172536 #172536 #95aebc;
+  background:#26394b; color:#ffe0a0; box-shadow:2px 2px #1423369c;
+  font:700 16px/1 'Pixelify Sans',monospace; text-decoration:none; text-shadow:none;
+}
+.creator-coffee:hover { background:#354f60; color:#fff2c9; }
+.creator-coffee:focus-visible { outline:3px solid #ffdb84; outline-offset:3px; }
+@media (max-width:400px) {
+  .creator-support { flex-wrap:wrap; gap:6px 10px; }
+  .creator-support p { flex:1 1 135px; font-size:14px; }
+}
+@media (max-height:760px) {
+  #welcome { align-items:flex-start; overflow-y:auto; pointer-events:auto; padding-block:max(12px,env(safe-area-inset-top)) max(12px,env(safe-area-inset-bottom)); }
+  #welcome .welcome-card { margin-block:auto; }
+}
+
+@media (min-width:650px) and (max-height:540px) {
+  #welcome .welcome-card { display:grid; width:min(880px,100%); grid-template-columns:minmax(0,1.15fr) minmax(0,1fr); column-gap:clamp(22px,5vw,60px); }
+  .welcome-card > .welcome-heading { grid-column:1; grid-row:1 / span 7; align-self:center; }
+  .welcome-card > :not(.welcome-heading) { grid-column:2; }
+  .welcome-card > p { margin:0 0 12px; }
+}
+
 /* Scales the actual artwork along with the slot. All nine slots fit one row. */
 body { --bar-width: 584px; --slot-height: 63px; --icon-size: 50px; }
 body[data-hotbar-size="compact"] { --bar-width: 478px; --slot-height: 51px; --icon-size: 38px; }
