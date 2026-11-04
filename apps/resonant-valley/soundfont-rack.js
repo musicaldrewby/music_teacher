@@ -29,7 +29,7 @@ export class SoundFontRack {
   if(!patch)return;
   const id=event.id||'n'+this.serial++,pitch=patch.kind==='drum'?patch.note:event.pitch;
   this.events.push({...event,id,patch,pitch,type:'on'});
-  if(patch.kind!=='drum')this.events.push({type:'off',id,frame:event.frame+Math.round(event.duration*this.rate)});
+  if(patch.kind!=='drum'&&Number.isFinite(event.duration))this.events.push({type:'off',id,frame:event.frame+Math.round(event.duration*this.rate)});
   this.events.sort((a,b)=>a.frame-b.frame);return id;
  }
  release(id,frame){this.events.push({type:'off',id,frame});this.events.sort((a,b)=>a.frame-b.frame);}

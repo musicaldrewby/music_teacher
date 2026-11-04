@@ -1,6 +1,7 @@
 import {SOUNDS,sound,DEFAULT_PADS} from './catalog.js';
 import {INSTRUMENTS,NAMES,DRUMS,clamp,makeTrack,equipFoundSound,emptySong,normalizeSong} from './data.js';
 import {PIANO_CODES,keyboardRange,pitchName} from './studio-pitches.js';
+import {StudioMidi} from './studio-midi.js';
 const $=id=>document.getElementById(id);
 const escape=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 export class Studio{
@@ -48,7 +49,7 @@ export class Studio{
   $('advanced-toggle').onclick=()=>{const active=$('advanced-controls').classList.toggle('hidden')===false;$('studio-panel').classList.toggle('advanced',active);$('advanced-toggle').textContent=active?'Fewer controls':'More controls';this.scaleChoices();this.dirty=true;};
   const shiftOctave=step=>{this.releaseAll();this.octave+=step;this.keyboard();this.layout();this.focusRange();};
   $('octave-down').onclick=()=>shiftOctave(-1);$('octave-up').onclick=()=>shiftOctave(1);
-  $('midi-connect').onclick=()=>this.connectMidi();$('kit-edit').onclick=()=>this.kitEditor();$('studio-collection').onclick=()=>this.callbacks.openCollection();
+  this.midi=new StudioMidi(this);$('kit-edit').onclick=()=>this.kitEditor();$('studio-collection').onclick=()=>this.callbacks.openCollection();
   this.canvas.addEventListener('pointerdown',e=>this.gridDown(e));this.canvas.addEventListener('pointermove',e=>this.gridMove(e));this.canvas.addEventListener('pointerup',e=>this.gridUp(e));this.canvas.addEventListener('pointercancel',e=>this.gridUp(e));this.canvas.addEventListener('contextmenu',e=>e.preventDefault());
   addEventListener('keydown',e=>{
    if(!this.visible||['INPUT','SELECT','TEXTAREA'].includes(e.target.tagName)||!$('studio-popover').classList.contains('hidden'))return;
@@ -61,6 +62,7 @@ export class Studio{
   });
   addEventListener('keyup',e=>{if(PIANO_CODES.includes(e.code))this.noteOff(e.code);});
   addEventListener('blur',()=>this.releaseAll());
+  document.addEventListener('visibilitychange',()=>{if(document.hidden)this.releaseAll();});
   new ResizeObserver(()=>{if(this.visible)this.layout();}).observe($('grid-scroll'));
   $('song-file').addEventListener('change',async e=>{const f=e.target.files[0];if(!f)return;try{if(f.size>3e6)throw Error('Choose a composition file under 3 MB.');const raw=JSON.parse(await f.text());this.load(normalizeSong(raw.song||raw));this.closePopover();this.callbacks.toast('Composition opened.');}catch(err){this.callbacks.toast(err.message||'Could not open this composition.');}e.target.value='';});
  }
@@ -83,7 +85,8 @@ export class Studio{
   if(waiting)$('first-find-clue').textContent=this.callbacks.firstFindClue?.()||'Look for the brass case near your cabin.';
   $('studio-panel').classList.toggle('waiting-for-find',waiting);$('studio-first-find').classList.toggle('hidden',!waiting);
   $('play').disabled=!this.hasPlayableTrack();$('live-record').disabled=!this.allowedTrack();
-  $('midi-connect').disabled=$('add-track').disabled=!hasFinds;
+  this.midi?.describeReady();
+  $('add-track').disabled=!hasFinds;
   $('studio-save').disabled=waiting;
   $('kit-edit').classList.toggle('hidden',track.instrument!=='drums'||!this.allowedTrack());
   $('track-capacity').textContent=this.song.tracks.length+' / '+this.limit()+' tracks · GeneralUser GS';
@@ -206,8 +209,39 @@ export class Studio{
    button.onblur=()=>this.noteOff('button-'+pitch);keyboard.append(button);
   }
  }
- async noteOn(p,v,source){const initial=this.track();if(!this.allowedTrack()||!this.canPlayPitch(initial,p)){this.callbacks.toast('Discover this sound or expand your tracks to play it.');return;}if(!Number.isFinite(p))return;if(this.held.has(source))return;const pending={pending:true};this.held.set(source,pending);try{await this.audio.init();}catch(e){if(this.held.get(source)===pending)this.held.delete(source);this.callbacks.toast(e.message);return;}if(this.held.get(source)!==pending)return;if(this.track()!==initial||!this.allowedTrack()||!this.canPlayPitch(initial,p)){this.held.delete(source);return;}const mix=this.playable();this.audio.setRoom(mix.reverb);this.audio.setEcho(mix.delay,mix.bpm);const tr=this.track(),playable=mix.tracks[this.selected],handle=this.audio.audition(tr.instrument,p,12,v,playable.volume,playable.pads),entry={handle,p};if(this.recording&&this.audio.playing){const pos=this.audio.position();if(pos>=0){const snap=$('quantize').checked;const s=snap?Math.round(pos)% (this.song.bars*16):pos;entry.note={s,p,d:1,v};entry.started=this.audio.ctx.currentTime;entry.track=tr;tr.notes.push(entry.note);this.changed();if(!this.rows.includes(p))this.layout();}}this.held.set(source,entry);this.markKey(p);}
- noteOff(source){const entry=this.held.get(source);if(!entry)return;this.held.delete(source);if(entry.pending)return;entry.handle?.release();this.markKey(entry.p);if(entry.note){const d=(this.audio.ctx.currentTime-entry.started)/(60/this.song.bpm/4);entry.note.d=clamp($('quantize').checked?Math.max(1,Math.round(d)):d,.125,this.song.bars*16-entry.note.s);this.changed();}}
+ async noteOn(p,v,source,time){
+  const track=this.track();
+  if(!this.allowedTrack()||!this.canPlayPitch(track,p)){this.callbacks.toast('Discover this sound or expand your tracks to play it.');return;}
+  if(!Number.isInteger(p)||p<0||p>127||this.held.has(source))return;
+  if(!this.audio.ready||this.audio.ctx?.state!=='running'){
+   const pending={pending:true};this.held.set(source,pending);
+   try{await this.audio.init();}catch(e){if(this.held.get(source)===pending)this.held.delete(source);this.callbacks.toast(e.message);return;}
+   if(this.held.get(source)!==pending)return;
+   if(this.track()!==track||!this.allowedTrack()||!this.canPlayPitch(track,p)){this.held.delete(source);return;}
+  }
+  const mix=this.playable(),audible=mix.tracks[this.selected];
+  this.audio.setRoom(mix.reverb);this.audio.setEcho(mix.delay,mix.bpm);
+  const entry={p,handle:this.audio.audition(track.instrument,p,null,v,audible.volume,audible.pads)};
+  this.held.set(source,entry);
+  if(this.recording&&this.audio.playing){
+   const started=time??this.audio.ctx.currentTime,pos=this.audio.position(started);
+   if(pos>=0){
+    const s=$('quantize').checked?Math.round(pos)%(this.song.bars*16):pos;
+    entry.note={s,p,d:1,v};entry.started=started;track.notes.push(entry.note);
+    this.changed();if(!this.rows.includes(p))this.layout();
+   }
+  }
+  this.markKey(p);
+ }
+ noteOff(source,time){
+  const entry=this.held.get(source);if(!entry)return;
+  this.held.delete(source);if(entry.pending)return;
+  entry.handle?.release();this.markKey(entry.p);
+  if(entry.note){
+   const d=((time??this.audio.ctx.currentTime)-entry.started)/(60/this.song.bpm/4);
+   entry.note.d=clamp($('quantize').checked?Math.max(1,Math.round(d)):d,.125,this.song.bars*16-entry.note.s);this.changed();
+  }
+ }
  sounding(p){for(const entry of this.held.values())if(entry.p===p)return true;return false;}
  markKey(p){
   const on=this.sounding(p),selector='[data-pitch="'+p+'"]';
@@ -215,7 +249,7 @@ export class Studio{
   $('pitch-labels').querySelector(selector)?.classList.toggle('active',on);
   this.dirty=true;
  }
- releaseAll(){for(const k of [...this.held.keys()])this.noteOff(k);}
+ releaseAll(){this.midi?.clear();for(const k of [...this.held.keys()])this.noteOff(k);}
  async start(record){if(!this.hasPlayableTrack()||record&&!this.allowedTrack()){this.callbacks.toast('Find an instrument to play this track.');return;}try{await this.audio.init();}catch(e){this.callbacks.toast(e.message);return;}if(!this.visible)return;this.callbacks.stopRecordUI();this.releaseAll();if(record)this.history();this.recording=record;this.audio.start(this.song,{countIn:record&&$('count-in').checked,prepareSong:s=>this.callbacks.prepareSong?.(s)??s});this.updateTransport();this.callbacks.playbackChanged();}
  stop(){this.releaseAll();this.audio.stop();this.recording=false;this.updateTransport();this.dirty=true;}
  updateTransport(){$('play').classList.toggle('playing',this.audio.playing&&this.audio.source==='studio');$('play').textContent=this.audio.playing&&this.audio.source==='studio'?'Ⅱ':'▶';$('play').setAttribute('aria-label',this.audio.playing&&this.audio.source==='studio'?'Pause composition':'Play composition');$('live-record').classList.toggle('recording',this.recording);if(!this.audio.playing)$('position-readout').textContent='1 : 1';}
@@ -233,5 +267,4 @@ export class Studio{
   $('export-song').onclick=()=>this.callbacks.download(new Blob([JSON.stringify({format:'resonant-valley-composition',version:1,song:this.song},null,2)],{type:'application/json'}),this.song.title+'.composition.json');
   $('import-song').onclick=()=>$('song-file').click();$('export-audio').onclick=async()=>{const btn=$('export-audio');btn.disabled=true;btn.textContent='Rendering audio…';try{const blob=await this.audio.exportWav(this.playable());this.callbacks.download(blob,this.song.title+'.wav');btn.textContent='WAV downloaded';}catch(err){btn.textContent='Try export again';this.callbacks.toast('Audio export failed: '+err.message);}btn.disabled=false;};
  });}
- async connectMidi(){if(!navigator.requestMIDIAccess){$('midi-status').textContent='MIDI needs a browser with Web MIDI support.';return;}try{this.midi=await navigator.requestMIDIAccess({sysex:false});const bind=()=>{let count=0;for(const input of this.midi.inputs.values()){count++;input.onmidimessage=e=>{if(!this.visible)return;const [status,p,v]=e.data;const type=status&0xf0,source='midi-'+input.id+'-'+p;if(type===0x90&&v>0)this.noteOn(p,v/127,source);else if(type===0x80||(type===0x90&&!v))this.noteOff(source);};}$('midi-status').textContent=count?`${count} MIDI input${count>1?'s':''} connected`:'Plug in a MIDI keyboard to begin.';};bind();this.midi.onstatechange=bind;}catch(err){$('midi-status').textContent='MIDI permission was not granted.';}}
 }

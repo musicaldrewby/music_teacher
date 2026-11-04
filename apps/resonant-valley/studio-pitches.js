@@ -18,7 +18,7 @@ export function pitchName(p,key,scale){
 
 export function keyboardRange(key,scale,octave){
  const chromatic=scale==='chromatic',root=chromatic?0:key;
- // Stored melodic notes span MIDI 24–96. Always offer a complete octave.
+ // Keep the on-screen keyboard within C1–C7 and always offer a complete octave.
  const maxOctave=Math.floor((96-root-12)/12)-1;
  octave=Math.max(1,Math.min(maxOctave,octave));
  const low=(octave+1)*12+root;

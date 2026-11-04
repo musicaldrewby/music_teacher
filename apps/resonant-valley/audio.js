@@ -42,8 +42,10 @@ export class AudioEngine {
  setDistanceGain(v){if(this.output)this.output.gain.setTargetAtTime(v,this.ctx.currentTime,.1);}
  audition(instrument,pitch,duration=2,velocity=.7,volume=.7,pads=null){
   if(!this.ready)return null;const id='live-'+this.serial++;
-  this.send({type:'note',id,track:'audition',instrument,pads,pitch,velocity,volume,frame:Math.round((this.ctx.currentTime+.005)*this.ctx.sampleRate),duration});
-  return {release:()=>this.send({type:'release',id,frame:Math.round(this.ctx.currentTime*this.ctx.sampleRate)}),cancel:()=>this.send({type:'release',id,frame:Math.round(this.ctx.currentTime*this.ctx.sampleRate)})};
+  const frame=Math.round((this.ctx.currentTime+.005)*this.ctx.sampleRate);
+  this.send({type:'note',id,track:'audition',instrument,pads,pitch,velocity,volume,frame,duration});
+  const release=()=>this.send({type:'release',id,frame:Math.max(frame+1,Math.round(this.ctx.currentTime*this.ctx.sampleRate))});
+  return {release,cancel:release};
  }
  start(song,{source='studio',countIn=false,loop=true,onEnd=null,initialGain=1,prepareSong=s=>s}={}){
   if(!this.ready)return;this.stop(false);this.originalSong=song;this.prepareSong=prepareSong;this.song=prepareSong(song);this.source=source;this.loop=loop;this.onEnd=onEnd;this.playing=true;this.step=countIn?-16:0;this.startStep=this.step;this.sec=60/song.bpm/4;this.startTime=this.ctx.currentTime+.08;this.nextTime=this.startTime;this.setRoom(this.song.reverb);this.setEcho(this.song.delay,song.bpm);if(this.output){this.output.gain.cancelScheduledValues(this.ctx.currentTime);this.output.gain.setValueAtTime(initialGain,this.ctx.currentTime);}this.send({type:'configure',tracks:this.song.tracks});this.tick();this.timer=setInterval(()=>this.tick(),25);
@@ -58,7 +60,7 @@ export class AudioEngine {
    this.nextTime+=this.sec;this.step++;
   }
  }
- position(){if(!this.playing||!this.ctx)return 0;const raw=(this.ctx.currentTime-this.startTime)/this.sec+this.startStep;return raw<0?raw:raw%(this.song.bars*16);}
+ position(at=this.ctx?.currentTime){if(!this.playing||!this.ctx)return 0;const raw=(at-this.startTime)/this.sec+this.startStep;return raw<0?raw:raw%(this.song.bars*16);}
  stop(notify=true){clearInterval(this.timer);clearTimeout(this.endTimer);this.playing=false;this.send({type:'stop'});if(notify)this.onStop?.();}
  async exportWav(song){
   const bytes=await loadSoundFont(),rate=44100,worker=new Worker(new URL('./audio-render-worker.js',import.meta.url),{type:'module'});

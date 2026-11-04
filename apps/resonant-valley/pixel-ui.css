@@ -110,6 +110,16 @@ h2{font-family:'Silkscreen',monospace;font-size:25px;letter-spacing:-1px;line-he
 .studio-glyph:before{content:'';position:absolute;top:8px;left:10px;width:4px;height:4px;background:#f1bf80;box-shadow:4px 0 #f1bf80,8px 0 #f1bf80,0 4px #f1bf80,0 8px #f1bf80,0 12px #f1bf80,0 16px #f1bf80,-4px 16px #f1bf80,-8px 20px #f1bf80,-4px 20px #f1bf80,0 20px #f1bf80,8px 4px #f1bf80,8px 8px #f1bf80,8px 12px #f1bf80,4px 16px #f1bf80,8px 16px #f1bf80}
 .transport{border-bottom:2px solid #142138;background:#25344c;padding:11px 23px;gap:16px}
 .transport-buttons button{height:36px;width:38px;font-size:15px}
+.transport-buttons #midi-connect{width:auto;padding:0 10px;white-space:nowrap;font-size:14px}
+#midi-port{min-width:0;display:inline-flex;gap:6px;align-items:center;padding:3px 5px 3px 8px;color:#b8d7db;font-size:12px;border:1px solid #62768e;background:#213048}
+#midi-input{max-width:clamp(83px,12vw,170px);min-width:0;padding:4px 2px;background:#26374f;color:#edf3f7;border:0;font-size:14px}
+.midi-light{width:7px;height:7px;background:#637289;border:1px solid #112231}
+#midi-port.connected .midi-light{background:#87c9bd}
+#midi-port.receiving .midi-light{background:#ffe097;box-shadow:0 0 0 2px #7d6941}
+#midi-status:empty{display:none}
+#midi-status:not(:empty){color:#b9e3dc;margin-left:auto}
+#midi-status:not(:empty)+#studio-mode-label{display:none}
+@media(max-width:650px){.transport-buttons{flex-wrap:wrap}.transport-buttons #midi-connect{padding:0 6px;font-size:12px}#midi-port{gap:3px;padding-left:4px}#midi-input{font-size:12px}#midi-status:not(:empty){letter-spacing:0}}
 .transport-buttons .transport-play{border:2px outset #e9c99c;box-shadow:inset -2px -2px #ac784b;background:#efb777}
 .transport-buttons .transport-play.playing{border:2px outset #b7d6c1;background:#9cbaa5;color:#1b3136;box-shadow:inset -2px -2px #6d9284}
 .record-dot{border-radius:0;width:10px;height:10px;box-shadow:2px 2px #8a4b58}
