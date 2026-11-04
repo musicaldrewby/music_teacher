@@ -73,7 +73,7 @@ export function equipFoundSound(track,piece){
   track.instrument=drum?'drums':piece.id;track.name=INSTRUMENTS[track.instrument];
   track.pads=drum?{[piece.note]:piece.id}:undefined;track.padLocks={};
 }
-export function emptySong(piece=null){const track=makeTrack();equipFoundSound(track,piece);return {id:uid(),title:'Untitled piece',bpm:96,bars:4,key:0,scale:'chromatic',reverb:0,delay:0,tracks:[track]};}
+export function emptySong(piece=null){const track=makeTrack();equipFoundSound(track,piece);return {id:uid(),title:'Untitled piece',bpm:96,bars:4,key:0,scale:'major',reverb:0,delay:0,tracks:[track]};}
 export function demoSong(which=0){
   const s=emptySong();s.title=which?'By the Water':'First Light';s.bpm=which?84:100;s.tracks=[makeTrack('marimba',0),makeTrack('piano',1),makeTrack('bass',2),makeTrack('drums',3)];
   s.tracks[1].volume=.35;s.tracks[2].volume=.35;s.tracks[3].volume=.24;
@@ -89,7 +89,7 @@ export function demoSong(which=0){
 }
 export function normalizeSong(raw){
   if(!raw||!Array.isArray(raw.tracks)||raw.tracks.length>16)throw Error('This is not a valid composition.');
-  const song={id:typeof raw.id==='string'?raw.id.slice(0,40):uid(),title:String(raw.title||'Untitled piece').slice(0,70),bpm:clamp(raw.bpm,40,220),bars:[1,2,4,8].includes(raw.bars)?raw.bars:4,key:clamp(raw.key,0,11)|0,scale:Object.hasOwn(SCALES,raw.scale)?raw.scale:'pentatonic',reverb:clamp(raw.reverb,0,.6),delay:clamp(raw.delay,0,.5),tracks:[]};
+  const song={id:typeof raw.id==='string'?raw.id.slice(0,40):uid(),title:String(raw.title||'Untitled piece').slice(0,70),bpm:clamp(raw.bpm,40,220),bars:[1,2,4,8].includes(raw.bars)?raw.bars:4,key:clamp(raw.key,0,11)|0,scale:Object.hasOwn(SCALES,raw.scale)?raw.scale:'major',reverb:clamp(raw.reverb,0,.6),delay:clamp(raw.delay,0,.5),tracks:[]};
   song.tracks=raw.tracks.slice(0,16).map((t,i)=>({...makeTrack(Object.hasOwn(INSTRUMENTS,t.instrument)?t.instrument:null,i),name:String(t.name||INSTRUMENTS[t.instrument]||'Empty track').slice(0,35),volume:clamp(t.volume,0,1),pan:clamp(t.pan,-1,1),mute:!!t.mute,solo:!!t.solo,pads:t.instrument==='drums'?Object.fromEntries(Object.entries(t.pads&&typeof t.pads==='object'?t.pads:DEFAULT_PADS).filter(([n,id])=>Number.isInteger(+n)&&+n>=24&&+n<=96&&sound(id)?.kind==='drum').slice(0,48).map(([n,id])=>[n,soundId(id)])):undefined,padLocks:Object.fromEntries(Object.entries(t.padLocks||{}).filter(([n])=>+n>=24&&+n<=96).map(([n,v])=>[n,!!v])),notes:(Array.isArray(t.notes)?t.notes:[]).slice(0,4096).filter(n=>Number.isFinite(n.s)&&Number.isFinite(n.p)).map(n=>({s:clamp(n.s,0,127.999),p:clamp(n.p,24,96)|0,d:clamp(n.d,.125,32),v:clamp(n.v??.7,.03,1)}))}));
   if(!song.tracks.length)song.tracks=[makeTrack()];return song;
 }
