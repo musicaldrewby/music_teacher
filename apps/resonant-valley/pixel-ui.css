@@ -139,7 +139,12 @@ h2{font-family:'Silkscreen',monospace;font-size:25px;letter-spacing:-1px;line-he
 .track-mixer{gap:7px;margin-top:13px}.track-mixer button{font-size:12px;width:25px;height:24px;border-width:1px}
 .track-mixer input{width:calc(100% - 65px)}
 .track-mixer button.on{box-shadow:inset 2px 2px #fff2,inset -2px -2px #0003;border:1px outset var(--track)}
-.track-pan{font-size:13px;margin-top:12px}.track-pan input{width:72px}
+.studio:not(.waiting-for-find) .mixer-unlocked .track-pan,.studio.advanced .track-pan{display:grid}
+.track-pan{grid-template-columns:minmax(0,1fr);gap:2px;font-size:13px;margin-top:10px;padding-top:8px;border-top:1px solid #60758f;color:#dbe7f4}
+.pan-heading{display:flex;align-items:center;justify-content:space-between;gap:5px;color:#ffda9e}
+.pan-value{font-size:12px;color:#dbe7f4}
+.track-pan input{width:100%;min-width:0;height:24px;margin:0;accent-color:var(--track)}
+.pan-directions{display:flex;justify-content:space-between;gap:3px;font-size:11px;color:#b8c9dc}
 .track-bottom{border-top:2px solid #63748d;padding:11px;gap:8px}.track-bottom button{font-size:14px;padding:8px}
 .composition{background:#1a263b}.editor-toolbar{border-bottom:2px solid #142036;background:#2c3d55;padding:10px 16px;min-height:52px}
 .editor-toolbar>div:first-child select{font-size:16px;background:#25344b;border:1px solid #63758c;padding:4px 6px}
