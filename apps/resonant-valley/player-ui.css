@@ -1,3 +1,16 @@
+/* Game drags belong to the controls. Text fields keep native selection and copying. */
+body {
+  -webkit-user-select: none;
+  user-select: none;
+}
+input:not([type]),
+input:is([type="text"], [type="search"], [type="number"], [type="email"], [type="url"], [type="tel"], [type="password"]),
+textarea,
+[contenteditable]:not([contenteditable="false"]) {
+  -webkit-user-select: text;
+  user-select: text;
+}
+
 /* Title credit and optional support, directly beneath the game name. */
 .welcome-creator { margin-top:10px; color:#fff6e4; text-shadow:1px 2px #19283a; }
 .creator-byline { margin:0; font-size:18px; line-height:1.25; }
