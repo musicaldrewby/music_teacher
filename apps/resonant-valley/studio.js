@@ -2,6 +2,7 @@ import {SOUNDS,sound,DEFAULT_PADS} from './catalog.js';
 import {INSTRUMENTS,NAMES,DRUMS,clamp,makeTrack,equipFoundSound,emptySong,normalizeSong} from './data.js';
 import {PIANO_CODES,keyboardRange,pitchName} from './studio-pitches.js';
 import {StudioMidi} from './studio-midi.js';
+import {soundArt} from './instrument-art.js';
 const $=id=>document.getElementById(id);
 const escape=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const panLabel=value=>value===0?'Center':Math.round(Math.abs(value)*100)+'% '+(value<0?'left':'right');
@@ -96,10 +97,10 @@ export class Studio{
   const locked=this.song.tracks.some((t,i)=>i>=this.limit()||!this.can(t.instrument)||t.instrument==='drums'&&Object.values(t.pads||{}).some(id=>!this.can(id)));
   $('studio-access-note').textContent=!waiting&&locked?'Find the missing sounds or track expansions to hear the full piece.':'';
   $('song-title').value=this.song.title;$('tempo').value=this.song.bpm;$('bars').value=this.song.bars;$('key').value=this.song.key;this.scaleChoices();$('reverb').value=this.song.reverb;$('delay').value=this.song.delay||0;
-  $('selected-color').style.background=track.color;this.tracks();this.keyboard();this.layout();this.updateTransport();
+  $('studio-panel').style.setProperty('--selected-track',track.color);$('selected-color').style.background=track.color;this.tracks();this.keyboard();this.layout();this.updateTransport();
  }
  tracks(){
-  const list=$('track-list'),mixerOwned=this.callbacks.mixerOwned?.()??true;list.replaceChildren();this.song.tracks.forEach((t,i)=>{const card=document.createElement('div');const locked=i>=this.limit()||!!t.instrument&&!this.can(t.instrument);card.className='track-card'+(i===this.selected?' active':'')+(locked?' locked':'')+(mixerOwned?' mixer-unlocked':'');card.style.setProperty('--track',t.color);card.innerHTML=`<div class="track-title"><span class="track-dot"></span><strong>${escape(t.name)}</strong><button class="delete-track" aria-label="Remove ${escape(t.name)}">×</button></div><div class="track-mixer"><input type="range" min="0" max="1" step=".01" value="${t.volume}" aria-label="${escape(t.name)} volume"><button class="mute ${t.mute?'on':''}" aria-label="Mute ${escape(t.name)}">M</button><button class="solo ${t.solo?'on':''}" aria-label="Solo ${escape(t.name)}">S</button></div><div class="track-pan"><label class="pan-heading" for="track-pan-${i}"><span>Pan</span><span class="pan-value" aria-hidden="true">${panLabel(t.pan)}</span></label><input id="track-pan-${i}" type="range" min="-1" max="1" step=".05" value="${t.pan}" aria-label="${escape(t.name)} pan" aria-valuetext="${panLabel(t.pan)}"><div class="pan-directions" aria-hidden="true"><span>Left</span><span>Center</span><span>Right</span></div></div>`;
+  const list=$('track-list'),mixerOwned=this.callbacks.mixerOwned?.()??true;list.replaceChildren();this.song.tracks.forEach((t,i)=>{const card=document.createElement('div');const locked=i>=this.limit()||!!t.instrument&&!this.can(t.instrument);card.className='track-card'+(i===this.selected?' active':'')+(locked?' locked':'')+(mixerOwned?' mixer-unlocked':'');card.style.setProperty('--track',t.color);card.innerHTML=`<div class="track-title"><span class="track-portrait" aria-hidden="true">${t.instrument?soundArt(sound(t.instrument)||{id:t.instrument}):'<span class="unfound-sound">?</span>'}</span><span class="track-name"><small>TRACK ${String(i+1).padStart(2,'0')}</small><strong>${escape(t.name)}</strong></span><button class="delete-track" aria-label="Remove ${escape(t.name)}">×</button></div><div class="track-level-label">Volume</div><div class="track-mixer"><input type="range" min="0" max="1" step=".01" value="${t.volume}" aria-label="${escape(t.name)} volume"><button class="mute ${t.mute?'on':''}" aria-label="Mute ${escape(t.name)}">M</button><button class="solo ${t.solo?'on':''}" aria-label="Solo ${escape(t.name)}">S</button></div><div class="track-pan"><label class="pan-heading" for="track-pan-${i}"><span>Pan</span><span class="pan-value" aria-hidden="true">${panLabel(t.pan)}</span></label><input id="track-pan-${i}" type="range" min="-1" max="1" step=".05" value="${t.pan}" aria-label="${escape(t.name)} pan" aria-valuetext="${panLabel(t.pan)}"><div class="pan-directions" aria-hidden="true"><span>Left</span><span>Center</span><span>Right</span></div></div>`;
    if(locked)card.insertAdjacentHTML('beforeend',`<span class="track-locked-note">${i>=this.limit()?'Find a track expansion':'Sound undiscovered'}</span>`);
    card.onclick=e=>{if(e.target.closest('button,input,.track-pan'))return;this.releaseAll();this.selected=i;this.sync();this.focusRange();};card.querySelector('.track-mixer input').oninput=e=>{t.volume=+e.target.value;this.changed();};card.querySelector('.track-pan input').oninput=e=>{t.pan=+e.target.value;const label=panLabel(t.pan);e.target.setAttribute('aria-valuetext',label);card.querySelector('.pan-value').textContent=label;this.changed();};card.querySelector('.mute').onclick=e=>{t.mute=!t.mute;e.target.classList.toggle('on',t.mute);this.changed();};card.querySelector('.solo').onclick=e=>{t.solo=!t.solo;e.target.classList.toggle('on',t.solo);this.changed();};card.querySelector('.delete-track').onclick=()=>{if(this.song.tracks.length<2){this.callbacks.toast('Keep one track. Clear its notes to start again.');return;}this.history();this.song.tracks.splice(i,1);this.selected=Math.min(this.selected,this.song.tracks.length-1);const restart=this.audio.playing&&this.audio.source==='studio';this.stop();if(restart)this.start(false);this.sync();this.changed();};if(!mixerOwned){card.querySelectorAll('input,.solo').forEach(el=>{el.disabled=true;el.title='Discover the mixer to unlock volume and pan';});}list.append(card);
   });
@@ -151,18 +152,26 @@ export class Studio{
  draw(){
   if(!this.ctx||!this.rows)return;
   const c=this.ctx,w=this.cssWidth,h=this.cssHeight,left=this.labelWidth,cw=this.cellWidth,rh=this.rowHeight,steps=this.song.bars*16,tr=this.track();
-  c.clearRect(0,0,w,h);c.fillStyle='#1a2435';c.fillRect(0,0,w,h);
+  c.clearRect(0,0,w,h);c.fillStyle='#16243b';c.fillRect(0,0,w,h);
   c.fillStyle='#25334a';c.fillRect(0,0,left,h);c.fillStyle='#101928';c.fillRect(left-2,0,2,h);
   this.rows.forEach((p,i)=>{
-   const y=this.ruler+i*rh;c.fillStyle=this.keyPitches.has(p)?(i%2?'#26374d':'#203046'):'#192434';c.fillRect(left,y,w-left,rh);
-   if(p%12===this.song.key&&tr.instrument!=='drums'&&this.keyPitches.has(p)){c.fillStyle='#304454';c.fillRect(left,y,w-left,rh);}
-   if(this.sounding(p)){c.fillStyle='#65513f';c.fillRect(left,y,w-left,rh);}
+   const y=this.ruler+i*rh;c.fillStyle=this.keyPitches.has(p)?(i%2?'#243a59':'#20334f'):'#192434';c.fillRect(left,y,w-left,rh);
+   if(p%12===this.song.key&&tr.instrument!=='drums'&&this.keyPitches.has(p)){c.fillStyle='#28415b';c.fillRect(left,y,w-left,rh);}
+   if(this.sounding(p)){c.fillStyle='#405d79';c.fillRect(left,y,w-left,rh);}
    c.fillStyle='#111b2a';c.fillRect(left,y,w-left,1);
   });
-  const rc=this.rulerCtx;rc.clearRect(0,0,w,28);rc.fillStyle='#25334a';rc.fillRect(0,0,w,28);rc.fillStyle='#e7c38c';rc.font='12px \"Pixelify Sans\"';rc.textAlign='left';rc.fillText('BAR',12,19);
+  for(let beat=0;beat<steps/4;beat++)if(beat%2===0){c.fillStyle='#94bdff09';c.fillRect(Math.round(left+beat*4*cw),0,Math.ceil(4*cw),h);}
+  const rc=this.rulerCtx;rc.clearRect(0,0,w,28);rc.fillStyle='#172a46';rc.fillRect(0,0,w,28);rc.fillStyle='#b1c8e8';rc.font='12px "Pixelify Sans"';rc.textAlign='left';rc.fillText('BARS',12,19);
+  const playing=this.audio.playing&&this.audio.source==='studio',position=playing?this.audio.position():-1,beat=Math.floor(position/4);
   for(let s=0;s<=steps;s++){
-   const x=Math.round(left+s*cw);c.fillStyle=s%16===0?'#77859a':s%4===0?'#40536c':'#2d3b50';c.fillRect(x,this.ruler,s%16===0?2:1,h-this.ruler);
-   if(s%4===0&&s<steps){rc.font='14px "Pixelify Sans"';rc.fillStyle=s%16===0?'#f2cf95':'#879bb3';rc.textAlign='left';rc.fillText(s%16===0?`${s/16+1}`:`${s%16/4+1}`,x+6,19);if(s%16===0){rc.fillStyle='#efb27d';rc.fillRect(x,0,4,4);}}
+   const x=Math.round(left+s*cw),bar=s%16===0;c.fillStyle=bar?'#7392be':s%4===0?'#45658d':'#304766';c.fillRect(x,this.ruler,bar?2:1,h-this.ruler);
+   if(s%4===0&&s<steps){
+    const active=position>=0&&s/4===beat,bw=Math.ceil(cw*4)-2;
+    rc.fillStyle=active?'#ffdc7e':bar?'#365784':'#233b5c';rc.fillRect(x+1,2,bw,24);
+    rc.fillStyle=active?'#26324a':bar?'#e7f0ff':'#a8c0df';rc.font='14px "Pixelify Sans"';rc.textAlign='left';
+    rc.fillText(bar&&bw>50?'BAR '+(s/16+1):bar?String(s/16+1):String(s%16/4+1),x+6,19);
+    if(bar){rc.fillStyle=tr.color;rc.fillRect(x+1,2,3,24);}
+   }
   }
   tr.notes.forEach(n=>{
    if(n.s>=steps)return;const row=this.rows.indexOf(n.p);if(row<0)return;
@@ -253,7 +262,7 @@ export class Studio{
  releaseAll(){this.midi?.clear();for(const k of [...this.held.keys()])this.noteOff(k);}
  async start(record){if(!this.hasPlayableTrack()||record&&!this.allowedTrack()){this.callbacks.toast('Find an instrument to play this track.');return;}try{await this.audio.init();}catch(e){this.callbacks.toast(e.message);return;}if(!this.visible)return;this.callbacks.stopRecordUI();this.releaseAll();if(record)this.history();this.recording=record;this.audio.start(this.song,{countIn:record&&$('count-in').checked,prepareSong:s=>this.callbacks.prepareSong?.(s)??s});this.updateTransport();this.callbacks.playbackChanged();}
  stop(){this.releaseAll();this.audio.stop();this.recording=false;this.updateTransport();this.dirty=true;}
- updateTransport(){$('play').classList.toggle('playing',this.audio.playing&&this.audio.source==='studio');$('play').textContent=this.audio.playing&&this.audio.source==='studio'?'Ⅱ':'▶';$('play').setAttribute('aria-label',this.audio.playing&&this.audio.source==='studio'?'Pause composition':'Play composition');$('live-record').classList.toggle('recording',this.recording);if(!this.audio.playing)$('position-readout').textContent='1 : 1';}
+ updateTransport(){$('play').classList.toggle('playing',this.audio.playing&&this.audio.source==='studio');$('play').textContent=this.audio.playing&&this.audio.source==='studio'?'Ⅱ Pause':'▶ Play';$('play').setAttribute('aria-label',this.audio.playing&&this.audio.source==='studio'?'Pause composition':'Play composition');$('live-record').classList.toggle('recording',this.recording);$('live-record').innerHTML='<i class="record-dot" aria-hidden="true"></i>'+(this.recording?'Finish':'Record');$('live-record').setAttribute('aria-label',this.recording?'Finish recording':'Record keyboard performance');if(!this.audio.playing)$('position-readout').textContent='1 : 1';}
  frame(t){if(!this.visible)return;if(this.audio.playing&&this.audio.source==='studio'){const pos=this.audio.position();$('position-readout').textContent=pos<0?`IN ${Math.ceil(-pos/4)}`:`${Math.floor(pos/16)+1} : ${Math.floor(pos%16/4)+1}`;if(t-(this.lastDraw||0)>.033){this.draw();this.lastDraw=t;}}else if(this.dirty)this.draw();}
  show(instrument){this.visible=true;if(instrument){let index=this.song.tracks.findIndex(t=>t.instrument===instrument);if(index<0&&this.can(instrument)){
   const slot=this.song.tracks.findIndex((t,i)=>i<this.limit()&&!t.instrument&&!t.notes.length);

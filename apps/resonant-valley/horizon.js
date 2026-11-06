@@ -104,23 +104,24 @@ export class Horizon {
   const w=this.w,c=w.stream.center,cx=c.cx,cz=c.cz,key=cx+','+cz;
   const returning=!this.root.visible;this.root.visible=visible;
   if(!visible){w.detailBlend?.step(w.camera.position,w.viewDistance,dt,null);return;}
+  const deadline=performance.now()+2;
   let changed=returning||this.revision!==w.detailRevision||this.distance!==w.viewDistance;
   if(key!==this.center){this.plan(cx,cz);this.center=key;changed=true;}
-  const deadline=performance.now()+2;
   // A whole mesa can span several chunks. Introduce its distant pieces while
   // they are still in haze, without allocating every mesh on a boundary frame.
-  for(let i=0;i<2&&this.pendingParts.length;i++){
+  for(let i=0;i<2&&this.pendingParts.length&&performance.now()<deadline;i++){
    const {f,k}=this.pendingParts.pop(),m=new THREE.Mesh(this.partGeometry(k,f.byChunk.get(k)),this.siteMat);
    this.root.add(m);f.parts.set(k,m);changed=true;if(performance.now()>=deadline)break;
   }
   if(this.pending.length){
    // Give the collision stream the rest of the frame, even in dense forests.
-   for(let i=0;i<12&&this.pending.length;i++){
+   for(let i=0;i<12&&this.pending.length&&performance.now()<deadline;i++){
     const tile=this.pending.pop();this.fill(tile);changed=true;
     if(performance.now()>=deadline)break;
    }
   }
   for(const k of this.woodEdits){
+   if(performance.now()>=deadline)break;
    const t=this.tiles.get(k);if(t?.ready)this.woods?.fill(t);
    this.woodEdits.delete(k);if(performance.now()>=deadline)break;
   }

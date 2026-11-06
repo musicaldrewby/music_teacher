@@ -43,11 +43,11 @@ const finds=new FindReveal({cue:kind=>findCues.play(audio?.ctx,kind,findVolume()
  audition:piece=>auditionSound(piece).catch(error=>toast(error.message))});
 const breaking=new BreakSession();let lastMiningSwing=-Infinity,lastMiningFrame=null;
 let controls,velocityY=0,grounded=false,flying=false,target=null,lastPick=0,toastTimer=null,worldChanged=false,eyeHeight=1.66,mouseState='released',worldBusy=false;
-let panelFromFree=false,hotbarSize='standard',idleSave=null;
+let panelFromFree=false,hotbarSize='standard',idleSave=null,initializing=true;
 const download=(blob,name)=>{const a=document.createElement('a'),url=URL.createObjectURL(blob);a.href=url;a.download=name.replace(/[\\/:*?"<>|]/g,'-');document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),10000);};
 function toast(message){$('toast').textContent=message;$('toast').classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('toast').classList.remove('show'),3500);if(panel)$('studio-status').textContent=message;}
-function save(loud=false){if(worldBusy||!world?.stream||!studio)return false;try{const data=serialize();localStorage.setItem(SAVE_KEY,JSON.stringify(data));$('save-status').textContent='Saved on this device';worldChanged=false;if(loud)toast('World and music saved on this device.');return true;}catch(err){$('save-status').textContent='Download a backup';toast('Browser storage is unavailable or full. Download your world from the menu.');return false;}}
-function scheduleSave(){worldChanged=true;$('save-status').textContent='Saving…';clearTimeout(saveTimer);if(idleSave!==null)window.cancelIdleCallback?.(idleSave);idleSave=null;saveTimer=setTimeout(()=>{const flush=()=>{idleSave=null;if(worldChanged)save();};if(window.requestIdleCallback)idleSave=window.requestIdleCallback(flush,{timeout:1600});else flush();},900);}
+function save(loud=false){if(initializing||worldBusy||!world?.stream||!studio)return false;try{const data=serialize();localStorage.setItem(SAVE_KEY,JSON.stringify(data));$('save-status').textContent='Saved on this device';worldChanged=false;if(loud)toast('World and music saved on this device.');return true;}catch(err){$('save-status').textContent='Download a backup';toast('Browser storage is unavailable or full. Download your world from the menu.');return false;}}
+function scheduleSave(){if(initializing)return;worldChanged=true;$('save-status').textContent='Saving…';clearTimeout(saveTimer);if(idleSave!==null)window.cancelIdleCallback?.(idleSave);idleSave=null;saveTimer=setTimeout(()=>{const flush=()=>{idleSave=null;if(worldChanged)save();};if(window.requestIdleCallback)idleSave=window.requestIdleCallback(flush,{timeout:1600});else flush();},900);}
 function serialize(){return {format:'resonant-valley-world',version:10,opening,equipmentVersion:2,packedSigns,packedCrates,carryTorch,bareHand,favorites:[...favorites],collection:profile,world:world.serialize(),mode,hotbar,otherBar,selected,inventory,records,song:studio.song,player:{x:world.camera.position.x,y:world.camera.position.y-eyeHeight+1.66,z:world.camera.position.z,yaw:world.camera.rotation.y,pitch:world.camera.rotation.x},settings:{hotbarSize,volume:audio.volume,time:world.time,sensitivity,mouseMode:controls?.dragMode?'drag':'mouse',viewDistance:world.viewDistance}};}
 function validateState(data){if(!data||data.format!=='resonant-valley-world'||![1,2,3,4,5,6,7,8,9,10].includes(data.version)||!Array.isArray(data.world?.edits)||!Array.isArray(data.world?.entities))throw Error('Choose a Resonant Valley world file.');if(data.world.edits.length>180000||data.world.entities.length>300)throw Error('This world is too large for this version.');if(data.world.generator&&data.world.generator.version!==GENERATOR_VERSION)throw Error('This world needs a newer terrain generator.');const song=normalizeSong(data.song);const recs=(Array.isArray(data.records)?data.records:[]).slice(0,60).map((r,i)=>{
  const id=typeof r.id==='string'&&r.id.length?r.id.slice(0,80):uid();
@@ -639,6 +639,7 @@ function move(dt){
 async function init(){
  try{const raw=localStorage.getItem(SAVE_KEY);if(raw)savedState=JSON.parse(raw);}catch{}
  try{world=new World($('world'));}catch(err){$('loading').innerHTML='<div class="small-logo">RV</div><p>This world needs WebGL graphics.</p><p>Try a desktop browser with hardware acceleration enabled.</p>'+(recordSharingEnabled?'<p><a href="./exchange.html">Open the Record Exchange</a></p>':'');console.error(err);return;}
+ world.onLoading=message=>{$('loading-message').textContent=message;};
  audio=new AudioEngine();studio=new Studio(audio,emptySong(),{change:()=>scheduleSave(),toast,download,saveRecord,openRecords:record=>{openPanel('records-panel',record?{selected:record.id}:{});if(record)recordUI.editSleeve();},stopRecordUI,playbackChanged:()=>{},canInstrument:id=>hasSound(profile,id),firstSound:()=>sound(profile.owned[0]),firstFindClue:()=>profile.starter?'Find an unopened case or mine a violet inlay with a stone pickaxe.':firstCaseHint(world?.generator),trackLimit:()=>capacity(profile),mixerOwned:()=>profile.mixer,reverbOwned:()=>profile.reverb,delayOwned:()=>profile.delay,prepareSong:s=>playableSong(s,profile),openCollection:()=>openPanel('collection-panel')});
  audio.onStatus=message=>{$('studio-mode-label').textContent=message;};
  discoveryUI=new DiscoveryUI({state:()=>({profile,mode,world,inventory}),changed:collectionChanged,expanded:(craft,n)=>{finds.showExpansion(craft,n);openTreasure();},toast,listen:auditionSound,use:useSound});
@@ -647,7 +648,8 @@ async function init(){
  if(!savedState){world.setDiscoveryClaims(profile.claimed);await world.newWorld('Resonant Valley');}
  bind();collectListeningCopies();setHotbarSize(hotbarSize);updateMode();renderHotbar();refreshWorldInfo();
  $('loading-message').textContent='Getting the valley ready to explore…';
- await prepareArrival();
+ try{await prepareArrival();}catch(error){console.error(error);$('loading-message').textContent=error.message+' Reload to try again.';return;}
+ initializing=false;
  $('loading').classList.add('hidden');$('welcome').classList.remove('hidden');
  let previous=performance.now();
  function frame(now){
@@ -664,7 +666,7 @@ async function init(){
    audio.setDistanceGain(stationPlayback?stationGain(dist):$('record-distance').checked?1:Math.max(.015,Math.pow(Math.max(0,1-dist/40),1.4)));
    world.entityMeshes.get(recordEntity.id)?.traverse(o=>{if(o.userData.disc)o.rotation.y=now*.002;});
   }
-  updateHeldEquipment();studio.frame(now/1000);world.render(now/1000,started&&!worldBusy);fieldUI?.frame(now,started&&!worldBusy,panel);if(audio.ctx&&world.skyState&&now-(fieldAudio.last||0)>220){fieldAudio.last=now;findCues.setLevel(findVolume());fieldAudio.attach(audio.ctx);fieldAudio.update(world.skyState,world.atmosphere,{inside:world.skyScene?.sheltered,studio:panel==='studio-panel'||panel==='exchange-panel',active:started&&!worldBusy&&!document.hidden,master:audio.volume});}requestAnimationFrame(frame);
+  if(!worldBusy){updateHeldEquipment();world.render(now/1000,started);}studio.frame(now/1000);fieldUI?.frame(now,started&&!worldBusy,panel);if(audio.ctx&&world.skyState&&now-(fieldAudio.last||0)>220){fieldAudio.last=now;findCues.setLevel(findVolume());fieldAudio.attach(audio.ctx);fieldAudio.update(world.skyState,world.atmosphere,{inside:world.skyScene?.sheltered,studio:panel==='studio-panel'||panel==='exchange-panel',active:started&&!worldBusy&&!document.hidden,master:audio.volume});}requestAnimationFrame(frame);
  }
  requestAnimationFrame(frame);setInterval(()=>{if(started)save();},20000);
 }

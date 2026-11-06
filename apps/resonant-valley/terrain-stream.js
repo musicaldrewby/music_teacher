@@ -1,6 +1,7 @@
 import {solveLight,lightEdges,needsNeighborLight,LIGHT_NEIGHBORS,sampleLight} from './lighting.js';
 import {TerrainGenerator,applyChunkEdits,CHUNK_SIZE,MIN_Y,MAX_Y,WORLD_LIMIT,PAD,STRIDE,voxelIndex,chunkKey,chunkAt,blockKey} from './terrain.js';
 import {meshChunk} from './chunk-mesh.js';
+import {nextFrame} from './frame-work.js';
 
 // Only the moving neighborhood is resident. The edit journal survives eviction.
 export class TerrainStream {
@@ -65,6 +66,14 @@ export class TerrainStream {
   }
   importEdits(edits,validId){
     for(const item of edits){if(!Array.isArray(item)||item.length!==2)continue;const [k,id]=item;if(typeof k!=='string'||!validId(id))continue;const xyz=k.split(',').map(Number);if(xyz.length!==3)continue;this.set(...xyz,id);}
+  }
+  async restoreEdits(edits,validId,report=()=>{},yieldFrame=nextFrame){
+    for(let i=0;i<edits.length;){
+      report('Restoring your builds… '+Math.round(i/edits.length*100)+'%');await yieldFrame();
+      if(this.closed)throw Error('World loading was cancelled.');
+      const deadline=performance.now()+4,limit=Math.min(edits.length,i+1024);
+      do{const end=Math.min(limit,i+128);this.importEdits(edits.slice(i,end),validId);i=end;}while(i<limit&&performance.now()<deadline);
+    }
   }
   makeJob(){
     let task,kind='generate';

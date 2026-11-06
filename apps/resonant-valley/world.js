@@ -24,6 +24,7 @@ import * as THREE from './vendor/three.module.min.js';
 import {BLOCKS,FURNITURE,uid} from './data.js';
 import {TerrainGenerator,MIN_Y,MAX_Y,SEA_LEVEL,WATER,WORLD_LIMIT,GENERATOR_VERSION,solid,chunkAt,voxelIndex,BIOMES} from './terrain.js';
 import {TerrainStream} from './terrain-stream.js';
+import {prepareView} from './frame-work.js';
 export class World{
  constructor(container){
   this.container=container;this.chunks=new Map();this.entities=[];this.entityMeshes=new Map();this.stream=null;this.time='cycle';this.rotation=0;this.viewDistance=3;this.streamingError=null;
@@ -112,7 +113,7 @@ export class World{
   this.stream?.dispose();for(const e of [...this.entities])this.removeEntity(e.id);this.outline.visible=false;
   this.railway=new Railway(data?.tracks);this.trackMeshes=new Map();this.cabinRoofs=new Map();
   this.streamingError=null;this.stream=new TerrainStream(generator.config(),{worker:this.createWorker(),onLoad:(...args)=>this.installChunk(...args),onUnload:k=>this.disposeChunk(k),onError:message=>{this.streamingError=message;console.warn(message);}});
-  this.stream.importEdits(data?.edits||[],id=>id===0||id===WATER||Object.hasOwn(BLOCKS,id));
+  await this.stream.restoreEdits(data?.edits||[],id=>id===0||id===WATER||Object.hasOwn(BLOCKS,id),this.onLoading);
   const entities=data?.entities||generator.starterEntities();
   for(const e of entities){
    if(!e||!Object.hasOwn(FURNITURE,e.type)||![e.x,e.y,e.z].every(Number.isFinite)||Math.abs(e.x)>WORLD_LIMIT||Math.abs(e.z)>WORLD_LIMIT||e.y<MIN_Y||e.y>MAX_Y)continue;
@@ -123,20 +124,14 @@ export class World{
    this.camera.position.set(Math.max(-WORLD_LIMIT,Math.min(WORLD_LIMIT,position.x)),Math.max(MIN_Y+1.7,Math.min(MAX_Y+30,position.y)),Math.max(-WORLD_LIMIT,Math.min(WORLD_LIMIT,position.z)));
    this.camera.rotation.set(Math.max(-1.45,Math.min(1.45,position.pitch)),position.yaw,0,'YXZ');
   }
-  await this.ready(2);this.ensureStandingSpace();
+  await this.ready(1);this.ensureStandingSpace();
  }
  async newWorld(seed){return this.load({generator:{seed,version:GENERATOR_VERSION,legacy:false,skylineVersion:1,firstCaseVersion:FIRST_CASE_VERSION},edits:[],entities:new TerrainGenerator({seed}).starterEntities()});}
  async ready(radius=1){const p=this.camera.position;this.stream.update(p.x,p.z,this.viewDistance);await this.stream.readyAround(p.x,p.z,radius);}
  async prepareEntry(equipment){
   this.setHeldEquipment({...equipment,visible:true});
   this.hands?.update(0,{...this.heldState,world:this,sky:1});
-  try{await Promise.all([
-   this.renderer.compileAsync?.(this.scene,this.camera),
-   this.renderer.compileAsync?.(this.hands.foreground,this.hands.viewCamera)
-  ]);}
-  catch(error){console.warn('Preparing the first view in the renderer:',error.message);}
-  this.render(performance.now()/1000,false);
-  await new Promise(resolve=>requestAnimationFrame(resolve));
+  await prepareView(this,this.onLoading);
  }
  ensureStandingSpace(){const p=this.camera.position;if(!this.collides(p.x,p.y-1.66,p.z))return;for(let y=Math.max(MIN_Y+1,Math.floor(p.y-1.66));y<=MAX_Y+1;y++)if(!this.collides(p.x,y,p.z)){p.y=y+1.66;return;}}
  setViewDistance(value){this.viewDistance=Math.max(2,Math.min(5,Number(value)||3));if(this.stream)this.stream.update(this.camera.position.x,this.camera.position.z,this.viewDistance);}
