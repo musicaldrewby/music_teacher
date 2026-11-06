@@ -1,0 +1,144 @@
+/* Soundroom's playing surface. Utility text is plain; LCD type marks sound and time. */
+#workstation-header .workspace-tabs{grid-template-columns:repeat(5,minmax(0,1fr));max-width:510px;min-width:340px}
+#workstation-header .workspace-navigation{gap:14px;flex:1}
+#workstation-header .studio-nav{gap:8px}
+#workstation-header .workspace-tabs button{font:600 11px/1.2 system-ui;letter-spacing:.7px}
+#workstation-header .project-identity b{font-size:17px}
+#workstation-header .theme-choice{font:600 10px system-ui;letter-spacing:.3px}
+#workspace-content{padding:10px 14px}
+body[data-workspace=perform] #play-station{max-width:1600px;grid-template-columns:minmax(0,1fr) 300px;gap:10px 14px;align-items:start}
+body[data-workspace=perform] #soundroom-instrument{grid-column:1;grid-row:1;padding:10px 12px 0}
+body[data-workspace=perform] #play-keyboard{grid-column:1;grid-row:2}
+body[data-workspace=perform] #layer-panel{grid-column:2;grid-row:1;align-self:stretch}
+body[data-workspace=perform] #play-track-strip{grid-column:2;grid-row:2;grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:repeat(4,1fr);align-self:stretch;gap:5px}
+body[data-workspace=perform] #scene-panel{grid-column:1 / -1;grid-row:3}
+body[data-workspace=perform] #drumpads{grid-column:1 / -1;grid-row:4}
+body[data-workspace=perform] .keyboardhint{display:none}
+body[data-workspace=sequence] #layer-panel{display:none}
+#soundroom-instrument .panel-legend{margin:0 5px 7px;font-size:8px}
+#soundroom-instrument .startbar{padding:5px 8px;margin-bottom:8px;min-height:44px}
+#soundroom-instrument .startbar #statusdetail{display:none}
+#soundroom-instrument .startbar.ready{display:none}
+#soundroom-instrument .startbar button{min-height:38px;font-size:11px}
+#soundroom-instrument .lcd-bezel{border-width:6px}
+.instrument #patch-screen,.instrument #patch-screen[data-narrow=true],html[data-layout=compact] .instrument #patch-screen{height:330px!important;min-height:0;max-height:none;padding:7px 10px}
+.instrument #patch-screen[data-home=true],html[data-layout=compact] .instrument #patch-screen[data-home=true]{height:216px!important}
+#patch-screen .lcd-topline{height:25px!important;min-height:25px!important}
+#patch-screen .lcd-page-nav{margin:3px 0 6px!important}
+#patch-screen .lcd-page-nav button,#patch-screen .lcd-categories button,#patch-screen .lcd-menu-actions button,#patch-screen .lcd-subnav button{font:600 12px/1.2 system-ui!important;letter-spacing:0;min-height:38px!important}
+#patch-screen #lcd-help{font:12px system-ui!important;height:25px!important;min-height:25px!important}
+#patch-screen .lcd-menu{min-height:38px;margin-bottom:4px}
+#patch-screen .lcd-menu-actions{gap:4px}
+#patch-screen .lcd-category-picker select{min-height:38px;height:38px;font:13px system-ui}
+#patch-screen .lcd-home-hint,#patch-screen[data-home=true] .visualrow{display:none}
+#patch-screen .instrument-top{padding-top:0!important}
+#patch-screen #lcd-home{justify-content:center!important}
+#patch-screen h1{margin:2px 0 4px;font-size:30px}
+#patch-screen .eyebrow,#patch-screen .tag{font:11px/1.2 system-ui}
+#patch-screen .tags{gap:5px}
+#patch-screen .patch .pname{font:600 14px/1.3 system-ui}
+#patch-screen .patchlist{--lcd-patch-rows:3}
+#patch-screen .preset-parts{grid-template-columns:repeat(3,minmax(0,1fr));font:12px/1.4 system-ui;margin:7px 0}
+#patch-screen .preset-description{font:13px/1.45 system-ui;margin:9px 0 4px;max-width:650px}
+#patch-screen #performance-summary{margin:4px 0}
+#patch-screen .preset-recall-controls select{font:14px system-ui!important}
+#soundroom-instrument .audition{padding:5px 0;margin:0;gap:5px;min-height:43px}
+#soundroom-instrument .audition button{min-height:34px;font:11px system-ui;padding:5px 9px}
+#play-keyboard{padding:9px 12px;max-width:none}
+#play-keyboard .keytoolbar{margin:0;padding:0 0 5px;min-height:35px;gap:8px}
+#play-keyboard .keytoolbar button,#play-keyboard .keytoolbar select{min-height:32px;font:11px system-ui;padding:4px 8px}
+#play-keyboard .keytoolbar h2{font:600 10px system-ui;letter-spacing:.8px}
+body:not(.performance-view) .keyboard{height:128px}
+body:not(.performance-view) .key.white{height:123px}
+body:not(.performance-view) .key.white.playing{height:120px}
+body:not(.performance-view) .key.black{height:80px}
+#play-keyboard .settings{display:grid;grid-template-columns:1fr 1fr auto;gap:16px;padding:5px 0 0;margin:4px 0 0}
+#play-keyboard .settings input{height:25px;margin:0}
+#play-keyboard .settings .rangehead{font:10px system-ui;margin:0}
+#play-keyboard .sustain small{display:none}
+#play-keyboard .sustain button{min-height:36px;font:11px system-ui}
+#play-track-strip .play-part{display:flex;flex-direction:column;gap:0;padding:2px 4px 5px;min-height:50px;position:relative}
+#play-track-strip .play-part-select{min-height:32px;font:11px/1.2 system-ui;padding:2px 0;text-align:left;width:100%}
+#play-track-strip .play-part-select small{font:10px/1.2 system-ui;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#play-track-strip .play-part-controls{display:flex;position:absolute;right:2px;top:0;gap:1px;opacity:.8}
+#play-track-strip .play-part-controls button{min-height:24px;min-width:23px;padding:1px;font-size:9px}
+#play-track-strip .play-part-select b{display:block;max-width:calc(100% - 44px);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:9px}
+#play-track-strip .play-part-signal{position:absolute;left:4px;right:4px;bottom:1px;height:3px}
+#scene-panel .scene-heading h2{font:600 12px system-ui}
+body[data-workspace=perform] #scene-panel{display:flex;gap:12px;padding:6px 9px;align-items:center}
+body[data-workspace=perform] #scene-panel .scene-heading{margin:0;flex:none;display:block}
+body[data-workspace=perform] #scene-panel .scene-heading h2{display:none}
+body[data-workspace=perform] #scene-buttons{flex:1;grid-template-columns:repeat(8,minmax(0,1fr))}
+#scene-buttons .scene-button{min-height:48px}
+#scene-buttons .scene-button b,#scene-buttons .scene-button span{font:600 12px system-ui}
+#scene-buttons .scene-button small{font-size:9px;margin-top:3px}
+.layer-panel{border:1px solid #536275;border-top:3px solid #ef8c69;background:linear-gradient(135deg,#283441,#19232f);border-radius:5px;padding:14px;min-width:0;box-shadow:0 3px 10px #0004}
+.layer-heading{display:flex;justify-content:space-between;align-items:center;gap:10px;color:#eaa88b;font:600 10px system-ui;letter-spacing:1.4px}
+.layer-heading button{border-color:#d68d73;font:600 11px system-ui;letter-spacing:0;min-height:36px;padding:6px 9px;background:#3b3030;color:#ffdfc9}
+.layer-panel h2{font:600 20px/1.2 system-ui;margin:14px 0 7px;color:#f4f0eb}
+.layer-panel p{font:12px/1.5 system-ui;color:#bdcbdb;margin:5px 0 12px}
+.layer-panel label{font:12px system-ui;display:grid;gap:5px;color:#d6dfe9;margin:8px 0}
+.layer-panel select,.layer-panel input[type=number]{background:#121e2a;color:#f3f6fb;border:1px solid #65788e;border-radius:3px;width:100%;min-width:0;min-height:38px;padding:6px;font:14px system-ui}
+.layer-panel .mode-label{grid-template-columns:auto 1fr;align-items:center;margin:14px 0 8px;gap:9px}
+.layer-panel details summary{font:600 12px system-ui;min-height:38px;padding:10px 0;cursor:pointer;color:#e9bca4}
+.layer-panel .layer-check{display:flex;align-items:center;gap:8px;min-height:32px}.layer-panel input[type=checkbox]{width:18px;height:18px}
+.layer-fields{display:grid;grid-template-columns:1fr 1fr;gap:0 10px}
+.layer-actions{display:flex;gap:6px}.layer-actions button{flex:1;font:11px system-ui;min-height:40px;padding:5px}
+.layer-panel .layer-help{font-size:11px;margin:10px 0 0}
+.layer-range-row{display:grid;grid-template-columns:20px 1fr 70px;gap:6px;align-items:center;font:10px ui-monospace,monospace;margin:7px 0;color:#cbd6e2}
+.layer-range-row>div{height:8px;background:#101923;position:relative;border-radius:2px;overflow:hidden}.layer-range-row i{position:absolute;height:100%;border-radius:2px}
+#transport-dock{padding-top:6px!important;padding-bottom:6px!important}
+#transport-dock .tempo-control{padding:3px 6px}
+#transport-dock .tempo-caption{margin-bottom:1px}
+#transport-dock .transport-targets{margin-top:4px}
+#transport-dock #studio-status:empty{display:none}
+body[data-workspace=sequence] #sequence-panel{min-height:540px;display:grid;grid-template-columns:1fr auto;grid-template-rows:auto 1fr;gap:8px}
+#sequence-panel #pattern-heading{grid-column:1;grid-row:1;margin:0}
+#sequence-panel .editor-tabs{grid-column:2;grid-row:1;margin:0;align-self:center}
+#sequence-panel #pattern-editors{grid-column:1 / -1;grid-row:2;min-height:410px}
+#sequence-panel #pattern-editor-heading{margin:3px 0}
+#sequence-panel #roll-toolbar{gap:10px;margin:4px 0}
+#sequence-panel #piano-editor{min-height:280px}
+#sequence-panel #roll-scroll{min-height:280px}
+#sequence-panel #editor-track{font:600 14px system-ui}
+#sequence-panel #pattern-keyboard-toggle{font-size:10px}
+#sequence-panel .expression-editor{margin-top:8px}
+@media(min-height:850px){body[data-workspace=sequence] #sequence-panel{min-height:0}#sequence-panel #pattern-editors{min-height:360px}}
+@media(max-width:1100px){
+ #workstation-header .studio-nav{grid-template-columns:1fr}#workstation-header .workspace-actions{position:static}#workstation-header .workspace-tabs{max-width:none}
+ #workstation-header .workspace-navigation{flex-wrap:nowrap}#workstation-header .project-bar{padding:0}
+ body[data-workspace=perform] #play-station{grid-template-columns:minmax(0,1fr) 260px}
+ #layer-panel{padding:10px}#play-keyboard .keytoolbar h2{display:none}
+ #sequence-panel .editor-tabs{grid-column:1;grid-row:2}#sequence-panel #pattern-editors{grid-row:3}
+}
+@media(max-width:760px){
+ #workstation-header .workspace-navigation{display:flex;flex-wrap:wrap}#workstation-header .workspace-tabs{min-width:0;width:100%;flex-basis:100%}#workstation-header .theme-control{position:static;margin:0}
+ #workstation-header .workspace-actions{flex-wrap:wrap;justify-content:flex-start}#workstation-header .project-actions{width:auto;margin-left:auto}
+ body[data-workspace=perform] #play-station{display:flex;flex-direction:column;gap:9px}#play-station>*{width:100%}
+ body[data-workspace=perform] #soundroom-instrument{order:1}body[data-workspace=perform] #play-keyboard{order:2}body[data-workspace=perform] #layer-panel{order:3}body[data-workspace=perform] #play-track-strip{order:4;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-template-rows:auto}body[data-workspace=perform] #scene-panel{order:5;display:block}body[data-workspace=perform] #drumpads{order:6}
+ body[data-workspace=perform] #scene-buttons{grid-template-columns:repeat(4,minmax(0,1fr))}.instrument #patch-screen[data-home=true]{height:230px!important}
+ #patch-screen .preset-parts{grid-template-columns:repeat(2,minmax(0,1fr))}#play-keyboard .keytoolbar{flex-wrap:wrap}#play-keyboard .settings{gap:8px}#play-keyboard .sustain button{padding:5px}
+ #sequence-panel #pattern-heading{flex-wrap:wrap}#sequence-panel #pattern-editors{min-height:420px}
+}
+@media(max-height:800px) and (min-width:1101px){
+ .instrument #patch-screen[data-home=true]{height:196px!important}#soundroom-instrument .panel-legend{display:none}
+ #play-keyboard .keyboard{height:105px}#play-keyboard .key.white{height:100px}#play-keyboard .key.white.playing{height:97px}#play-keyboard .key.black{height:67px}
+ #play-keyboard .settings{padding-top:0}#play-keyboard .keytoolbar{padding-bottom:3px}#play-keyboard .settings .value-button{min-height:24px}
+}
+#soundroom-instrument .startbar #statusdetail.error{display:block;color:#ffc2b6;font:12px/1.4 system-ui;margin-top:4px}
+#play-keyboard .settings>label{grid-column:auto;grid-row:auto}
+#play-keyboard .settings>.sustain{grid-column:auto;grid-row:auto;width:auto}
+#play-keyboard #master-volume-control{grid-column:2;grid-row:1}
+#play-keyboard .settings>.sustain{grid-column:3;grid-row:1}
+#play-track-strip .play-part-select{font-size:12px}
+#play-track-strip .play-part-select small{font-size:11px;max-width:100%}
+#play-track-strip .play-part-select b{font-size:10px}
+#play-track-strip .play-part-select span{font:12px/1.3 system-ui;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block;margin-top:5px}
+#play-track-strip .play-part-select b{padding-right:0}
+#play-track-strip .play-part-controls button{min-height:28px;min-width:25px}
+body[data-workspace=perform] #layer-panel{max-height:370px;overflow:auto;scrollbar-width:thin}
+body.performance-view[data-workspace=perform] #layer-panel{display:none}
+body.performance-view[data-workspace=perform] #play-station{grid-template-columns:minmax(0,1fr)}
+@media(pointer:coarse){#play-track-strip .play-part{min-height:96px}#play-track-strip .play-part-controls{position:static;align-self:flex-end}#play-track-strip .play-part-controls button{min-height:44px;min-width:44px}#play-track-strip .play-part-select b{max-width:100%}.instrument #patch-screen .lcd-page-nav button{min-height:44px!important}}
+@media(max-width:760px){body[data-workspace=perform] #layer-panel{max-height:none}}
+#soundroom-instrument .startbar.ready:has(.error){display:flex}

@@ -40,3 +40,20 @@ export function decodeMIDI(data) {
   if (type === 0xd0) return { type: 'pressure', channel, value: a };
   return null;
 }
+
+// Zone boundaries use the played key before octave transposition. This keeps a
+// split at C4 stable when either instrument is shifted to a different register.
+export function keyboardTargets(project, inputTrack, layered = true) {
+  return layered && project.keyboardMode === 'layers'
+    ? project.tracks.flatMap((t, i) => t.zone?.enabled ? [i] : []) : [inputTrack];
+}
+export function keyboardRoutes(project, inputTrack, note, velocity, layered = true) {
+  return keyboardTargets(project, inputTrack, layered).flatMap(channel => {
+    const t = project.tracks[channel], z = t.zone;
+    if (layered && project.keyboardMode === 'layers' &&
+        (note < z.low || note > z.high || velocity < z.velocityLow || velocity > z.velocityHigh)) return [];
+    const pitch = note + t.shape.octave * 12;
+    if (!Number.isInteger(pitch) || pitch < 0 || pitch > 127) return [];
+    return [{channel, note:pitch, monitored:t.monitor && !t.mute && (!project.tracks.some(x=>x.solo) || t.solo)}];
+  });
+}

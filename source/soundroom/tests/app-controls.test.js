@@ -119,6 +119,8 @@ async function page(storage=new Map(),requestMIDIAccess=null) {
   vm.runInContext('globalThis.createWorkstation=(()=>{'+workstationSource+';return createWorkstation})()',context,{filename:'workstation.js'});
   const studioSource=(await readFile(new URL('../src/studio.js',import.meta.url),'utf8')).replace(/^import .*;\n/gm,'').replace('export function createStudio','function createStudio');
   vm.runInContext('globalThis.createStudio=(()=>{'+studioSource+';return createStudio})()',context,{filename:'studio.js'});vm.runInContext(source,context,{filename:'app.js'});
+  assert.equal(context.document.body.dataset.workspace,'compose','new visits open the blank composition workspace');
+  context.document.querySelectorAll('[data-workspace-choice]').find(b=>b.dataset.workspaceChoice==='perform').onclick();
   function advance(ms){const end=now+ms;while(true){const next=[...timers].sort((a,b)=>a[1].at-b[1].at)[0];if(!next||next[1].at>end)break;timers.delete(next[0]);now=next[1].at;next[1].fn()}now=end}
   return {storage,context,ids,events,timers,advance,faults,downloads,xrHost,receive:data=>workletPort.onmessage({data}),ackStart:()=>workletPort.onmessage({data:pendingStart}),ackInput:()=>{while(pendingReceipts.length)workletPort.onmessage({data:pendingReceipts.shift()})},ackStop:()=>workletPort.onmessage({data:pendingStop}),get audio(){return audioInstance},change:async(id,value)=>{ids.get(id).value=value;await ids.get(id).onchange()},fire:async (type,code,props={})=>{let prevented=false;await listeners.get(type)({code,target:context.document.body,preventDefault(){prevented=true},...props});return prevented},click:async id=>{await ids.get(id).onclick()}};
 }
@@ -327,13 +329,13 @@ test('eight named scenes share one performance; pattern edits, repeats and song 
  const first=saved.song[0];await p.change('song-selected-entry',first.id);await p.change('song-entry-repeats','2');
  p.context.document.querySelectorAll('[data-workspace-choice]').find(b=>b.dataset.workspaceChoice==='song').onclick();await p.click('seq-play');const song=p.events.filter(e=>e.type==='soundroom-start').at(-1);assert.equal(song.score.length,16);assert.equal(song.score.loop,false);assert.equal(song.score.events.filter(e=>e.message?.[0]===152).length,2);await p.click('seq-stop');
  p.ids.get('export-source').value='arrangement';await p.click('export-midi');assert.equal(Buffer.from(await p.downloads.at(-1).arrayBuffer()).subarray(0,4).toString(),'MThd');
- await p.click('seq-save');saved=parseProject(await p.downloads.at(-1).text());const reopened=await page(new Map([[recovery.RECOVERY_KEY,JSON.stringify({format:'soundroom-recovery',savedAt:new Date().toISOString(),project:saved})]]));assert.equal(reopened.context.soundroom.sequencer.sceneCount,8);assert.equal(reopened.ids.get('performance-name').value,'My eight sounds');
+ await p.click('seq-save');saved=parseProject(await p.downloads.at(-1).text());const reopened=await page(new Map([[recovery.RECOVERY_KEY,JSON.stringify({format:'soundroom-recovery',savedAt:new Date().toISOString(),project:saved})]]));assert.equal(reopened.context.soundroom.sequencer.sceneCount,8);await reopened.click('recovery-previous');assert.equal(reopened.ids.get('performance-name').value,'My eight sounds');
 });
 
 test('autosave recovers a recorded session and Previous session survives New',async()=>{
  const p=await page();await p.change('seq-name','Recovered music');await p.click('enable');await p.click('seq-record');const start=p.events.filter(e=>e.type==='soundroom-start').at(-1);p.audio.currentTime=start.origin+.1;await p.fire('keydown','KeyA');p.audio.currentTime+=.2;await p.fire('keyup','KeyA');await p.click('seq-stop');p.advance(1000);
  assert.equal(model.bindProject(JSON.parse(p.storage.get(recovery.RECOVERY_KEY)).project).tracks[0].notes.length,1);
- const reopened=await page(p.storage);assert.equal(reopened.ids.get('seq-name').value,'Recovered music');assert.equal(reopened.context.soundroom.sequencer.noteCounts[0],1);assert.match(reopened.ids.get('autosave-status').textContent,/Recovered/);
+ const reopened=await page(p.storage);assert.equal(reopened.ids.get('seq-name').value,'Untitled song');assert.equal(reopened.context.soundroom.sequencer.noteCounts[0],0);const kept=p.storage.get(recovery.RECOVERY_KEY);reopened.advance(1000);assert.equal(p.storage.get(recovery.RECOVERY_KEY),kept,'an untouched blank start preserves the saved session');await reopened.click('recovery-previous');assert.equal(reopened.ids.get('seq-name').value,'Recovered music');assert.equal(reopened.context.soundroom.sequencer.noteCounts[0],1);assert.match(reopened.ids.get('autosave-status').textContent,/Recovered/);
  await reopened.click('seq-new');reopened.advance(1000);assert.equal(model.bindProject(JSON.parse(p.storage.get(recovery.RECOVERY_KEY)).project).tracks[0].notes.length,0);await reopened.click('recovery-previous');assert.equal(reopened.context.soundroom.sequencer.noteCounts[0],1);assert.equal(reopened.ids.get('seq-name').value,'Recovered music');
 });
 
@@ -654,4 +656,25 @@ test('persistent BPM controls edit only the selected pattern, support Undo and f
  await p.click('seq-stop');assert.equal(+p.ids.get('seq-tempo').value,120);assert.equal(p.ids.get('seq-tempo').disabled,false);
  await p.change('seq-tempo','');assert.equal(+p.ids.get('seq-tempo').value,120);await p.change('seq-tempo','999');assert.equal(+p.ids.get('seq-tempo').value,300);await p.click('seq-undo');
  await p.click('seq-save');const saved=parseProject(await p.downloads.at(-1).text());assert.equal(saved.scenes[0].tempo,120);assert.equal(saved.scenes[1].tempo,60);
+});
+
+test('factory layers play and record independent tracks, sustain all layers, and survive undo and save',async()=>{
+ const p=await page();await p.click('enable');await p.change('preset-select','factory:glass-garden');await p.click('preset-load');
+ assert.equal(p.ids.get('keyboard-mode').value,'layers');assert.match(p.ids.get('record-summary').textContent,/Layers 1 \+ 2 \+ 3/);
+ p.events.length=0;await p.fire('keydown','KeyK');await p.fire('keyup','KeyK');
+ assert.deepEqual(p.events.filter(e=>e.type==='on').map(e=>e.ch),[0,1,2]);assert.deepEqual(p.events.filter(e=>e.type==='off').map(e=>e.ch),[0,1,2]);
+ await p.fire('keydown','Space');await p.fire('keyup','Space');assert.ok([0,1,2].every(ch=>p.events.some(e=>e.type==='cc'&&e.ch===ch&&e.cc===64&&e.value===127)));
+ await p.click('seq-record');const start=p.events.filter(e=>e.type==='soundroom-start').at(-1);p.audio.currentTime=start.origin+.31;await p.fire('keydown','KeyK');p.audio.currentTime+=.3;await p.fire('keyup','KeyK');await p.click('seq-stop');
+ assert.deepEqual(Array.from(p.context.soundroom.sequencer.noteCounts).slice(0,3),[1,1,1]);
+ await p.click('seq-save');const saved=parseProject(await p.downloads.at(-1).text());assert.equal(saved.keyboardMode,'layers');assert.ok(saved.tracks.slice(0,3).every(t=>t.zone.enabled));assert.ok(saved.tracks.slice(0,3).every(t=>t.notes[0].pitch===60));
+ await p.click('seq-undo');assert.deepEqual(Array.from(p.context.soundroom.sequencer.noteCounts).slice(0,3),[0,0,0]);
+ await p.change('keyboard-mode','single');p.events.length=0;await p.fire('keydown','KeyK');await p.fire('keyup','KeyK');assert.deepEqual(p.events.filter(e=>e.type==='on').map(e=>e.ch),[0]);
+});
+
+test('split performance routes at C4 and user presets keep keyboard zones',async()=>{
+ const p=await page();await p.click('enable');await p.change('preset-select','factory:after-hours');await p.click('preset-load');
+ p.events.length=0;await p.fire('keydown','KeyJ');await p.fire('keyup','KeyJ');assert.deepEqual(p.events.filter(e=>e.type==='on').map(e=>[e.ch,e.n]),[[0,59]]);
+ p.events.length=0;await p.fire('keydown','KeyK');await p.fire('keyup','KeyK');assert.deepEqual(p.events.filter(e=>e.type==='on').map(e=>[e.ch,e.n]),[[1,60],[2,60]]);
+ p.ids.get('preset-name').value='My split';await p.click('preset-save');const saved=JSON.parse(p.storage.get('soundroom-performances-v1'))[0];assert.equal(saved.keyboardMode,'layers');assert.equal(saved.tracks[0].zone.high,59);assert.equal(saved.tracks[1].zone.low,60);
+ assert.equal(p.ids.get('preset-delete').disabled,false);await p.change('preset-select','factory:after-hours');assert.equal(p.ids.get('preset-delete').disabled,true);
 });

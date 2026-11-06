@@ -10,12 +10,12 @@ const DRUMS={35:'Acoustic kick',36:'Kick',37:'Side stick',38:'Snare',39:'Clap',4
 const laneInfo={sustain:{type:'cc',controller:64,max:127,name:'Sustain'},modulation:{type:'cc',controller:1,max:127,name:'Modulation'},expression:{type:'cc',controller:11,max:127,name:'Expression'},bend:{type:'bend',max:16383,name:'Pitch bend'},pressure:{type:'pressure',max:127,name:'Channel pressure'}};
 export function createWorkstation(api,host){
  const $=id=>document.getElementById(id),p=()=>api.project(),track=()=>p().tracks[p().selectedTrack];
- let restoring=true,pendingRecovery=null,saveTimer=null,editor='piano',drumBar=1,drumSelection=null,laneSelection=null,laneGesture=null,exportWorker=null,exportURL=null,exportGeneration=0,exporting=false;
+ let restoring=true,pendingRecovery=null,previousSession=null,startupProject=null,saveTimer=null,editor='piano',drumBar=1,drumSelection=null,laneSelection=null,laneGesture=null,exportWorker=null,exportURL=null,exportGeneration=0,exporting=false;
  const timeline=createSongTimeline(api);
  const serialise=()=>({...clone(p()),soundfont:host.bank(),effects:host.effects(),master:host.master()});
- function persistNow(){if(restoring||pendingRecovery||api.playing())return;try{if(writeRecovery(localStorage,serialise()))$('autosave-status').textContent='Autosaved on this device · '+new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});}catch{$('autosave-status').textContent='Autosave unavailable or storage full. Use Save song.'}}
+ function persistNow(){if(restoring||pendingRecovery||api.playing())return;const current=serialise();if(startupProject===JSON.stringify(current))return;try{if(previousSession){retainRecovery(localStorage);previousSession=null}startupProject=null;if(writeRecovery(localStorage,current))$('autosave-status').textContent='Autosaved on this device · '+new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});}catch{$('autosave-status').textContent='Autosave unavailable or storage full. Use Save song.'}}
  function persist(){if(restoring||pendingRecovery)return;clearTimeout(saveTimer);saveTimer=setTimeout(persistNow,700)}
- function checkpoint(){try{persistNow();retainRecovery(localStorage);$('recovery-previous').disabled=false}catch{}}
+ function checkpoint(){try{persistNow();retainRecovery(localStorage);startupProject=null;$('recovery-previous').disabled=false}catch{}}
  function restore(entry){
   if(!entry)return false;
   if(entry.project.soundfont&&(entry.project.soundfont.id!==host.bank().id||entry.project.soundfont.name!==host.bank().name)){
@@ -24,11 +24,11 @@ export function createWorkstation(api,host){
   const next=validateProject(entry.project,host.presets());api.replace(next,entry.project.effects,entry.project.master);pendingRecovery=null;$('recovery-banner').hidden=true;$('autosave-status').textContent='Recovered '+next.name+' · saved '+new Date(entry.savedAt).toLocaleString();api.status('Recovered your last session from this device.');return true;
  }
  function initialise(){
-  try{restore(readRecovery(localStorage));$('recovery-previous').disabled=!readRecovery(localStorage,PREVIOUS_KEY)}catch{$('autosave-status').textContent='Recovery could not be read. Open a saved project, or start a new session.';}
-  restoring=false;
+  try{previousSession=readRecovery(localStorage);$('recovery-previous').disabled=!previousSession&&!readRecovery(localStorage,PREVIOUS_KEY);if(previousSession)$('autosave-status').textContent='A previous session is saved on this device. Choose Restore previous session to open it.'}catch{$('autosave-status').textContent='Recovery could not be read. Open a saved project, or start a new session.';}
+  startupProject=JSON.stringify(serialise());restoring=false;
  }
  $('recovery-fresh').onclick=()=>{pendingRecovery=null;$('recovery-banner').hidden=true;checkpoint();persist()};
- $('recovery-previous').onclick=()=>{if(api.playing())return;try{const prior=readRecovery(localStorage,PREVIOUS_KEY);if(!prior)return;checkpoint();restoring=true;restore(prior);restoring=false;persist()}catch(e){restoring=false;api.status('Could not restore: '+e.message)}};
+ $('recovery-previous').onclick=()=>{if(api.playing())return;try{const prior=previousSession||readRecovery(localStorage,PREVIOUS_KEY);if(!prior)return;checkpoint();previousSession=null;restoring=true;restore(prior);restoring=false;persist()}catch(e){restoring=false;api.status('Could not restore: '+e.message)}};
  for(const event of ['pagehide','beforeunload'])window.addEventListener(event,persistNow);
  document.addEventListener('visibilitychange',()=>{if(document.hidden)persistNow()});
  for(const event of ['change','input','pointerup','click'])document.addEventListener(event,persist,true);

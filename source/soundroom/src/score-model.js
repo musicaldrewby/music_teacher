@@ -8,7 +8,7 @@ export function newPart(presets,program=0,drums=false,name='Part 1'){
  if(!patch)throw Error('Instrument is unavailable.');
  return {id:uid(),name,patch:clone(patch),volume:100,pan:64,reverb:55,mute:false,solo:false,notes:[],controllers:[],programs:[]};
 }
-export function createScore(presets){return {format:'soundroom-composition',version:1,id:uid(),name:'Untitled composition',length:16,tempo:120,tempoChanges:[],meters:[{beat:0,numerator:4,denominator:4}],markers:[],tracks:[newPart(presets)],master:65,notes:'',source:''}}
+export function createScore(presets){return {format:'soundroom-composition',version:1,id:uid(),name:'Untitled song',length:16,tempo:120,tempoChanges:[],meters:[{beat:0,numerator:4,denominator:4}],markers:[],tracks:[],master:65,notes:'',source:''}}
 export function validateScore(raw,presets){
  if(raw?.format!=='soundroom-composition'||raw.version!==1)throw Error('Choose a Soundroom composition file.');
  const p={format:raw.format,version:1,id:typeof raw.id==='string'?raw.id.slice(0,100):uid(),name:String(raw.name||'Untitled composition').slice(0,100),length:num(raw.length,.001,MAX_BEATS,'song length'),tempo:num(raw.tempo,10,1000,'tempo'),master:num(raw.master??65,0,100,'master volume'),notes:String(raw.notes||'').slice(0,10000),source:String(raw.source||'').slice(0,2000)};
@@ -26,7 +26,7 @@ export function validateScore(raw,presets){
   out.programs=list(t.programs||[],10000,'instrument changes').map(c=>({beat:num(c.beat,0,p.length,'instrument position'),program:num(c.program,0,127,'program',true)}));
   events+=out.notes.length*2+out.controllers.length+out.programs.length;return out;
  });
- if(!p.tracks.length||events>MAX_EVENTS)throw Error('Use 1–32 parts and no more than 200,000 events.');
+ if(events>MAX_EVENTS)throw Error('Use no more than 32 parts and 200,000 events.');
  if(new TempoMap(p.tempo,p.tempoChanges).secondsAt(p.length)>14400)throw Error('Composition playback is limited to four hours.');return p;
 }
 export const audible=(p,i)=>!p.tracks[i].mute&&(!p.tracks.some(t=>t.solo)||p.tracks[i].solo);

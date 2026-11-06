@@ -4,7 +4,7 @@ import {StepRecorder} from './composition-model.js';
 import {createPerformanceLibrary} from './composition-ui.js';
 import {arrangeProject,arrangementBars} from './arrangement.js';
 import {createWorkstation} from './workstation.js';
-import {GRID_OPTIONS,gridBeats,barBeats,songBeats,noteSegments,clone,uid,patchKey,createProject,patternProject,MAX_SONG_BARS,snapBeat,quantizeNotes,restoreTiming,Recorder,compileScore,compileRecordedChange,trackAudible,validateProject} from './sequencer-model.js';
+import {GRID_OPTIONS,gridBeats,barBeats,songBeats,noteSegments,clone,uid,patchKey,createProject,patternProject,MAX_SONG_BARS,snapBeat,quantizeNotes,restoreTiming,KeyboardRecorder,compileScore,compileRecordedChange,trackAudible,validateProject} from './sequencer-model.js';
 import {clamp} from './performance-engine.js';
 import {METRONOME_SOUNDS} from './metronome.js';
 const escape=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -17,7 +17,7 @@ export function createStudio(host){
  let workstation=null,playbackProject=null,playbackTempo=null,queuedScene=null,sceneQueueId=0,sceneChanges=[];const $=id=>document.getElementById(id);let project=createProject(host.presets()),playing=false,recording=false,starting=false,startToken=0,origin=null,absoluteBeat=0,view='perform',tool='draw',selection=new Set(),undo=[],redo=[],dirty=false,gesture=null,px=56,meters=[],pendingInput=[],startTimer=null,endTimer=null;
  let recordedPaintTimer=null,recordedPaint=[],engineCapture=false,finishing=null,finishTimer=null,inputSerial=0;const pendingLive=new Map();
  const step=new StepRecorder(notes=>edit(()=>{track().notes.push(...notes);selection=new Set(notes.map(n=>n.id));return 'Step entered · '+notes.length+' note'+(notes.length===1?'':'s')+'.'}));let stepToken=0;
- const recorder=new Recorder(project,change=>{
+ const recorder=new KeyboardRecorder(project,change=>{
   dirty=true;if(!playing||origin===null)return;
   const events=compileRecordedChange(project,change);
   if(events.length)host.post({type:'soundroom-append',runId:startToken,events});
@@ -100,7 +100,7 @@ export function createStudio(host){
   $('seq-loop').setAttribute('aria-pressed',String(project.loop));$('seq-loop').textContent='Pattern loop '+(project.loop?'on':'off');
   for(const id of ['seq-tempo','tempo-down','tempo-up','seq-bars','seq-meter','seq-count-in','seq-record-mode','seq-record-grid','seq-click','seq-click-preview','seq-loop','seq-quantize','seq-restore','seq-clear-track','seq-save','seq-load','seq-new'])$(id).disabled=playing||starting||!!finishing;
   $('project-save').disabled=playing||starting||!!finishing;renderRecordSummary();host.recordingState?.(recording||starting||!!finishing);$('track-monitor').disabled=recording||!!finishing;
-  $('roll-scroll').setAttribute('aria-disabled',String(playing));updateHistory();renderPosition();workstation?.renderLock();performanceLibrary?.renderLock();renderStep();
+  host.performanceChanged?.();$('roll-scroll').setAttribute('aria-disabled',String(playing));updateHistory();renderPosition();workstation?.renderLock();performanceLibrary?.renderLock();renderStep();
  }
  function renderTempo(){
   const beat=Math.min(Math.max(0,absoluteBeat),songBeats(playbackProject||project)-1e-9),section=playbackProject?.sections.find(s=>beat>=(s.from-1)*barBeats(project)&&beat<(s.from+s.bars-1)*barBeats(project)),scene=section?.scene??project.selectedScene;
@@ -146,18 +146,19 @@ export function createStudio(host){
  function mixValue(key,value){return key==='pan'?(value===64?'C':value<64?'L '+Math.round((64-value)/64*100):'R '+Math.round((value-64)/63*100)):Math.round(value/127*100)+'%'}
  function renderRecordSummary(){
   const i=project.armedTrack<0?project.selectedTrack:project.armedTrack,t=project.tracks[i],scene=project.scenes[project.selectedScene],grid=project.recordGrid==='off'?'Free timing':project.recordGrid+' grid';
-  const summary=(recording?'Recording → ':'Record → ')+'Scene '+(project.selectedScene+1)+' · '+scene.name+' · T'+(i+1)+' '+t.name+' · '+(project.recordMode==='replace'?'Record over':'Overdub')+' · '+grid+(project.countIn?' · '+project.countIn+' bar count-in':'');
+  let summary=(recording?'Recording → ':'Record → ')+'Scene '+(project.selectedScene+1)+' · '+scene.name+' · T'+(i+1)+' '+t.name+' · '+(project.recordMode==='replace'?'Record over':'Overdub')+' · '+grid+(project.countIn?' · '+project.countIn+' bar count-in':'');
+  if(project.keyboardMode==='layers')summary='Record → Scene '+(project.selectedScene+1)+' · Layers '+project.tracks.flatMap((t,i)=>t.zone.enabled?[i+1]:[]).join(' + ')+' · '+(project.recordMode==='replace'?'Replace enabled parts':'Overdub')+' · '+project.recordGrid;
   $('record-summary').textContent=summary;$('record-summary').title=summary;$('transport-dock').dataset.recording=String(recording);
   const input=inputTrack(),selected=project.tracks[project.selectedTrack],live=project.tracks[input];
-  $('play-target').textContent='Selected: T'+(project.selectedTrack+1)+' '+selected.name+' · Keys / MIDI: T'+(input+1)+' '+live.name;$('play-target').title=$('play-target').textContent;
+  $('play-target').textContent=project.keyboardMode==='layers'?'Layers: '+project.tracks.flatMap((t,i)=>t.zone.enabled?['T'+(i+1)]:[]).join(' + '):'Selected: T'+(project.selectedTrack+1)+' '+selected.name+' · Keys / MIDI: T'+(input+1)+' '+live.name;$('play-target').title=$('play-target').textContent;
   for(const id of ['nav-track','editor-track','play-target','inspector-context'])$(id).style.setProperty('--track-color',trackColor(project.selectedTrack));
   $('record-summary').style.setProperty('--track-color',trackColor(i));
   $('inspector-context').textContent='Scene '+(project.selectedScene+1)+' · '+scene.name+' / T'+(project.selectedTrack+1)+' '+selected.name;
-  $('record-target').textContent='Records Track '+(i+1)+' · '+t.name+' in Scene '+(project.selectedScene+1)+'.';$('project-title').textContent=project.name;
+  $('record-target').textContent=project.keyboardMode==='layers'?'Records every enabled layer into its own track.':'Records Track '+(i+1)+' · '+t.name+' in Scene '+(project.selectedScene+1)+'.';$('project-title').textContent=project.name;
  }
- function renderRecordMode(){renderRecordSummary();$('record-mode-help').textContent=project.recordMode==='replace'?(project.punch.enabled?'Record over replaces only the punch range on the armed track. Undo restores it.':'Record over replaces the armed track with a fresh take. Undo restores it.'):'Overdub keeps existing notes and adds your new performance.'}
+ function renderRecordMode(){renderRecordSummary();$('record-mode-help').textContent=project.keyboardMode==='layers'?(project.recordMode==='replace'?'Record over replaces every enabled layer in the selected scene (or punch range). Undo restores the take.':'Overdub records every enabled layer into its own track.'):project.recordMode==='replace'?(project.punch.enabled?'Record over replaces only the punch range on the armed track. Undo restores it.':'Record over replaces the armed track with a fresh take. Undo restores it.'):'Overdub keeps existing notes and adds your new performance.'}
  function renderSettings(){renderRecordMode();renderMetronome();for(const [id,key] of [['seq-name','name'],['seq-tempo','tempo'],['seq-bars','bars'],['seq-count-in','countIn'],['seq-click','metronome'],['seq-click-volume','clickVolume'],['seq-grid','grid'],['seq-record-grid','recordGrid'],['seq-record-mode','recordMode'],['seq-quant-grid','quantizeGrid'],['seq-strength','strength'],['seq-swing','swing']])$(id).value=project[key];$('seq-meter').value=project.meter.join('/');$('seq-snap').checked=project.snap;$('seq-length-quant').checked=project.quantizeLength;$('seq-strength-value').textContent=project.strength+'%';$('seq-swing-value').textContent=project.swing+'%'}
- function renderAll(){renderSettings();renderTracks();renderInspector();renderNotes();renderMixer();renderTransport();displaySelected();workstation?.render();performanceLibrary?.render()}
+ function renderAll(){renderSettings();renderTracks();renderInspector();renderNotes();renderMixer();renderTransport();displaySelected();workstation?.render();performanceLibrary?.render();host.performanceChanged?.()}
  function edit(fn){if(step.held.size){status("Release the chord before editing.");return false}if(playing||starting||finishing){status('Stop playback before editing notes. Mixer controls remain live.');return false}snapshot();let message;try{message=fn();if(arrangementBars(project)>MAX_SONG_BARS)throw new Error('The song order is too long. Reduce repeats or remove entries.');if(project.tracks.some(t=>t.notes.length>10000||t.controllers.length>20000))throw new Error('This edit exceeds the event limit for one track. Use a shorter range or fewer repeats.')}catch(e){restoreState(undo.pop());recorder.project=project;applyAllTracks();renderAll();status(e.message);return false}renderAll();status(typeof message==='string'?message:'Edited. Undo is available.');return true}
  function afterModel(){step.cancel();step.cursor=Math.min(step.cursor,songBeats(project));recorder.project=project;selection.clear();applyAllTracks();renderAll()}
  function history(back){if(playing||starting||finishing)return;step.cancel();host.clearLive();const source=back?undo:redo,target=back?redo:undo;if(!source.length)return;target.push(historyState());restoreState(source.pop());dirty=true;afterModel();status(back?'Undone.':'Redone.')}
@@ -346,7 +347,7 @@ export function createStudio(host){
   const t=project.tracks[index];if(['volume','pan','reverb','delay'].includes(key))t[key]=clamp(Math.round(Number(value)||0),0,127);else if(['mute','solo'].includes(key))t[key]=!!value;else return;
   dirty=true;applyMixer();renderMixer();renderPlayStrip();workstation?.persist();
  }
- const api={get project(){return project},get playing(){return playing},get recording(){return recording},get inputTrack(){return inputTrack()},inputShape(){return project.tracks[inputTrack()].shape},monitor(){return project.tracks[inputTrack()].monitor&&trackAudible(project,inputTrack())},recordOn,recordOff,recordController,recordLive,receive,attachAudio,applyAllTracks,applyMixer,stop,setView,chooseScene,transport,xrEdit,xrMix,
+ const api={get project(){return project},get playing(){return playing},get recording(){return recording},get inputTrack(){return inputTrack()},get layeredInput(){return project.keyboardMode==='layers'&&!step.enabled},get inputLocked(){return playing||starting||!!finishing||step.held.size>0},editPerformance(fn){if(playing||starting||finishing||step.held.size)return false;host.clearLive();return edit(fn)},inputShape(){return project.tracks[inputTrack()].shape},monitor(){return project.tracks[inputTrack()].monitor&&trackAudible(project,inputTrack())},recordOn,recordOff,recordController,recordLive,receive,attachAudio,applyAllTracks,applyMixer,stop,setView,chooseScene,transport,xrEdit,xrMix,
   xrSelection:()=>[...selection],xrSelectTrack:chooseTrack,persist:()=>workstation?.persist(),
   xrLevels:()=>meters.map(m=>{m.analyser.getFloatTimeDomainData(m.samples);let peak=0;for(const sample of m.samples)peak=Math.max(peak,Math.abs(sample));return Math.min(1,peak*2.2)}),
   serialise:()=>({...clone(project),soundfont:host.bank(),effects:host.effects(),master:host.master()}),

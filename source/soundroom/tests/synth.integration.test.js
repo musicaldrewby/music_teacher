@@ -108,3 +108,21 @@ test('included catalogs match their sample banks', async () => {
   bank.destroySoundBank();
  }
 });
+
+test('factory performances render real layered SoundFont chords with headroom and release cleanly',async()=>{
+ const {factoryPerformances}=await import('../src/composition-model.js');
+ const {keyboardRoutes}=await import('../src/performance-engine.js');
+ const {createProject}=await import('../src/sequencer-model.js');
+ const bank=JSON.parse(await readFile(new URL('../src/soundfonts.json',import.meta.url),'utf8'))[0];
+ for(const preset of factoryPerformances(bank.presets,bank)){
+  const synth=await createSynth(true),adapter={sendMessage:m=>synth.processMessage(m),controllerChange:(...args)=>synth.controllerChange(...args),setSystemParameter:(...args)=>synth.setSystemParameter(...args)};
+  new SynthEffects(adapter,[]).apply(preset.effects);
+  preset.tracks.forEach((t,ch)=>{synth.midiChannels[ch].setDrums(t.patch.isGMGSDrum);synth.controllerChange(ch,0,t.patch.bankMSB);synth.controllerChange(ch,32,t.patch.bankLSB);synth.programChange(ch,t.patch.program);synth.midiChannels[ch].setSystemParameter('gain',.9);for(const [cc,value] of [[7,t.volume],[10,t.pan],[91,t.reverb],[94,preset.effects.delayEnabled?t.delay:0]])synth.controllerChange(ch,cc,value)});
+  const p=createProject(bank.presets);p.keyboardMode=preset.keyboardMode;p.tracks=preset.tracks;
+  const notes=[48,60,64,67,72].flatMap(n=>keyboardRoutes(p,0,n,110));notes.forEach(n=>synth.noteOn(n.channel,n.note,110));
+  let energy=0,peak=0;
+  for(let i=0;i<600;i++){if(i===350)notes.forEach(n=>synth.noteOff(n.channel,n.note));const l=new Float32Array(128),r=new Float32Array(128);synth.process(l,r);for(const samples of [l,r])for(const sample of samples){assert.ok(Number.isFinite(sample));const value=sample*preset.master/100;energy+=value*value;peak=Math.max(peak,Math.abs(value))}}
+  assert.ok(energy>.01,preset.name+' must sound');assert.ok(peak<.98,preset.name+' needs headroom: '+peak);
+  synth.stopAllChannels(true);for(let i=0;i<200;i++)synth.process(new Float32Array(128),new Float32Array(128));assert.equal(synth.voiceCount,0,preset.name+' must release all voices');synth.destroySynthProcessor();
+ }
+});

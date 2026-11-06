@@ -8,7 +8,7 @@ import {inputAudioTime} from './audio-clock.js';
 import {createStudio} from './studio.js';
 import INCLUDED_FONTS from './soundfonts.json';
 import { WorkletSynthesizer } from 'spessasynth_lib';
-import { VoiceLedger, decodeMIDI, clamp } from './performance-engine.js';
+import { VoiceLedger, decodeMIDI, clamp, keyboardRoutes, keyboardTargets } from './performance-engine.js';
 import { SynthEffects, delayMilliseconds } from './synth-effects.js';
 const $=id=>document.getElementById(id);
 const lcdPalettes={green:{ink:'#30440a',baseline:'#68950a'},purple:{ink:'#f5dfff',baseline:'#a96cda'}};
@@ -78,7 +78,7 @@ function renderPatchScreen(){
  for(const page of ['recall','save','manage'])$('preset-'+page+'-page').hidden=presetPage!==page;
  for(const effect of ['reverb','delay'])for(const detail of ['main','tone'])$(effect+'-'+detail+'-controls').hidden=effectDetail!==detail;
  for(const [attr,current] of [['shape-page',shapePage],['preset-page',presetPage],['effect-detail',effectDetail]])document.querySelectorAll('[data-'+attr+']').forEach(b=>b.setAttribute('aria-pressed',String(b.getAttribute('data-'+attr)===current)));
- $('patch-screen').classList.toggle('browsing',patchBrowserOpen);$('patchname').setAttribute('aria-expanded',String(patchBrowserOpen));
+ $('patch-screen').dataset.page=lcdPage;$('patch-screen').dataset.home=String(lcdPage==='sounds'&&!patchBrowserOpen);$('patch-screen').classList.toggle('browsing',patchBrowserOpen);$('patchname').setAttribute('aria-expanded',String(patchBrowserOpen));
  $('lcd-search-toggle').setAttribute('aria-expanded',String(patchBrowserOpen&&patchSearchOpen));
  $('lcd-search-toggle').textContent=patchSearchOpen?'Results':$('search').value||$('family').value!=='all'?'Search •':'Search';
  document.querySelectorAll('[data-filter]').forEach(b=>{const active=patchBrowserOpen&&b.dataset.filter===filter;b.classList.toggle('active',active);b.setAttribute('aria-pressed',String(active))});
@@ -97,7 +97,7 @@ function requestLCDSize(){
  requestAnimationFrame(()=>{lcdSizeQueued=false;measureLCDSize()});
 }
 let compactLayout=false;
-try{compactLayout=localStorage.getItem('soundroom-compact-layout')==='true'}catch{}
+try{compactLayout=localStorage.getItem('soundroom-comfortable-layout-v1')==='true'&&localStorage.getItem('soundroom-compact-layout')==='true';localStorage.setItem('soundroom-comfortable-layout-v1','true')}catch{}
 function setCompactLayout(on){
  compactLayout=!!on;document.documentElement.dataset.layout=on?'compact':'standard';$('compact-layout').setAttribute('aria-pressed',String(compactLayout));
  try{localStorage.setItem('soundroom-compact-layout',String(compactLayout))}catch{}
@@ -151,7 +151,7 @@ function renderSelection(){
  $('demo-scale').textContent=selected.isDrum?'▷ Kit sweep':'▷ Scale';$('demo-chord').textContent=selected.isDrum?'▷ Backbeat':'▷ Chords';$('demo-phrase').textContent=selected.isDrum?'▷ Groove':'▷ Phrase';
  $('keyboardtitle').textContent=selected.isDrum?'Play percussion on the keys':'Play the keyboard';$('drumpads').hidden=!selected.isDrum;
  $('lastnote').textContent='—';$('notedetail').textContent='Play a note';
- renderShape();
+ renderShape();renderLayers();
 }
 function applyPatch(){
  if(!ready)return;
@@ -221,7 +221,7 @@ async function ensureAudio(){
  initPromise=(async()=>{try{
   const Audio=window.AudioContext||window.webkitAudioContext;audio=new Audio({latencyHint:'interactive'});await audio.resume();
   if(!audio.audioWorklet)throw new Error('This browser does not support the audio engine. Please try an updated browser.');
-  await audio.audioWorklet.addModule('./assets/soundroom-processor.js?v=33');
+  await audio.audioWorklet.addModule('./assets/soundroom-processor.js?v=35');
   synth=new WorkletSynthesizer(audio,{audioNodeCreators:{worklet:(context,name,options)=>{workletNode=new AudioWorkletNode(context,'soundroom-worklet',options);return workletNode}}});
   if(workletNode){const engineMessage=workletNode.port.onmessage;workletNode.port.onmessage=event=>{if(event.data.type?.startsWith('composition-'))composer?.receive(event.data);else if(event.data.type?.startsWith('soundroom-'))studio?.receive(event.data);else engineMessage?.call(workletNode.port,event)}}synth.setLogLevel(false,false,false);gain=audio.createGain();gain.gain.value=+$('volume').value/100;analyser=audio.createAnalyser();analyser.fftSize=2048;
   synth.connect(gain);gain.connect(analyser);analyser.connect(audio.destination);
@@ -267,21 +267,26 @@ function captureLive(method,args,time,play,monitored,adjustment=0){
 }
 function noteOn(n,owner,velocity=+$('velocity').value,time=eventAudioTime(),adjustment=0){
  if(!ready||!Number.isInteger(n)||n<0||n>127)return;release(owner,time,adjustment);
- const inputShape=studio?.inputShape()||shape,note=n+inputShape.octave*12;if(note<0||note>127)return;
- const channel=studio?.inputTrack??0,monitored=!studio||studio.monitor();
- owners.set(owner,{note:n,soundNote:note,velocity,channel,monitored,adjustment});
- captureLive('noteOn',[owner,note,velocity],time,()=>{if(monitored)voices.press(owner,channel,note,velocity)},monitored,adjustment);
- highlight(n,true);$('lastnote').textContent=noteName(n);$('notedetail').textContent='Velocity '+velocity;
+ const layered=!!studio?.layeredInput;
+ const routes=studio?keyboardRoutes(studio.project,studio.inputTrack,n,velocity,layered):[{channel:0,note:n+shape.octave*12,monitored:true}];
+ const held={note:n,velocity,adjustment,routes:routes.map(r=>({...r,owner:layered?'layer:'+r.channel+':'+owner:owner}))};
+ owners.set(owner,held);
+ for(const r of held.routes)captureLive('noteOn',[r.owner,r.note,velocity],time,()=>{if(r.monitored)voices.press(r.owner,r.channel,r.note,velocity)},r.monitored,adjustment);
+ highlight(n,held.routes.length>0);$('lastnote').textContent=noteName(n);$('notedetail').textContent=held.routes.length>1?held.routes.length+' layers · vel '+velocity:held.routes.length?'Velocity '+velocity:'Outside active zones';
 }
 function release(owner,time=eventAudioTime(),adjustment){
  const held=owners.get(owner);if(!held)return;owners.delete(owner);
- captureLive('noteOff',[owner],time,()=>voices.release(owner),held.monitored,adjustment??held.adjustment);
+ for(const r of held.routes)captureLive('noteOff',[r.owner],time,()=>voices.release(r.owner),r.monitored,adjustment??held.adjustment);
  if(![...owners.values()].some(x=>x.note===held.note))highlight(held.note,false);
 }
 function liveController(event,time=eventAudioTime(),adjustment=0){
- if(!ready)return;const channel=studio?.inputTrack??0;
- const message=event.type==='bend'?[0xe0+channel,event.value&127,event.value>>7]:event.type==='pressure'?[0xd0+channel,event.value]:[0xb0+channel,event.controller,event.value];
- captureLive('controller',[event],time,()=>sendLiveMIDI(message),!studio||studio.monitor(),adjustment);
+ if(!ready)return;
+ const layered=!!studio?.layeredInput,targets=studio?keyboardTargets(studio.project,studio.inputTrack,layered):[0];
+ for(const channel of targets){
+  const message=event.type==='bend'?[0xe0+channel,event.value&127,event.value>>7]:event.type==='pressure'?[0xd0+channel,event.value]:[0xb0+channel,event.controller,event.value];
+  const recorded=layered?{...event,targetTrack:channel}:event;
+  captureLive('controller',[recorded],time,()=>sendLiveMIDI(message),!studio||studio.project.tracks[channel].monitor,adjustment);
+ }
 }
 function sustain(time=eventAudioTime(),adjustment=0){const on=sustainEnabled||spaceSustain||xrSustain||midiPedals.size>0;liveController({type:'cc',controller:64,value:on?127:0},time,adjustment);$('sustain').setAttribute('aria-pressed',String(on));$('sustain').textContent='Sustain '+(on?'on':'off')}
 function stopDemo(){demoToken++;demoTimers.forEach(clearTimeout);demoTimers=[];demoMode=null;document.querySelectorAll('.audition .active').forEach(b=>b.classList.remove('active'));for(const k of [...owners.keys()])if(k.startsWith('demo:'))release(k)}
@@ -439,15 +444,40 @@ if(!navigator.requestMIDIAccess){$('midi-connect').disabled=true;$('midi-connect
 
 const scope=$('scope'),pen=scope.getContext('2d'),samples=new Float32Array(2048);let frame=0;
 function paint(){requestAnimationFrame(paint);if(document.hidden||vr?.presenting||++frame%2)return;studio?.tick();if(workspaceUI.current==='settings'&&workspaceUI.settings==='midi'&&frame%30===0)renderMIDITiming();const w=Math.round(scope.clientWidth*devicePixelRatio),h=Math.round(scope.clientHeight*devicePixelRatio);if(scope.width!==w||scope.height!==h){scope.width=w;scope.height=h}pen.clearRect(0,0,w,h);pen.lineWidth=devicePixelRatio;pen.strokeStyle=lcdPalettes[lcdTheme].baseline;pen.beginPath();pen.moveTo(0,h/2);pen.lineTo(w,h/2);pen.stroke();if(!analyser)return;analyser.getFloatTimeDomainData(samples);pen.strokeStyle=lcdPalettes[lcdTheme].ink;pen.lineWidth=1.5*devicePixelRatio;pen.beginPath();for(let i=0;i<samples.length;i++){const x=i/(samples.length-1)*w,y=h/2+samples[i]*h*1.5;i?pen.lineTo(x,y):pen.moveTo(x,y)}pen.stroke()}
+function renderLayers(){
+ if(!studio)return;
+ const project=studio.project,layered=project.keyboardMode==='layers',locked=studio.inputLocked;
+ $('keyboard-mode').value=project.keyboardMode;$('keyboard-mode').disabled=locked;
+ $('layer-title').textContent=layered?project.performanceName:'Single part';
+ $('layer-summary').textContent=layered?project.tracks.flatMap((t,i)=>t.zone.enabled?[t.patch.name]:[]).join(' + '):'Play the selected track';
+ $('layer-zone-controls').hidden=!layered;$('layer-map').hidden=!layered;
+ for(const id of ['layer-part','layer-enabled','layer-low','layer-high','layer-vlow','layer-vhigh','layer-octave','layer-level','layer-split','layer-all'])$(id).disabled=locked;
+ const i=Number($('layer-part').value)||0,t=project.tracks[i],z=t.zone;
+ $('layer-part').replaceChildren(...project.tracks.map((t,i)=>new Option((i+1)+' · '+t.patch.name,String(i))));$('layer-part').value=i;
+ $('layer-enabled').checked=z.enabled;
+ for(const [id,value] of [['layer-low',z.low],['layer-high',z.high],['layer-vlow',z.velocityLow],['layer-vhigh',z.velocityHigh],['layer-octave',t.shape.octave],['layer-level',t.volume]])$(id).value=value;
+ $('layer-range').textContent=noteName(z.low)+' – '+noteName(z.high)+' · velocity '+z.velocityLow+'–'+z.velocityHigh;
+ $('layer-map').innerHTML=project.tracks.map((t,i)=>t.zone.enabled?'<div class="layer-range-row"><span>'+String(i+1).padStart(2,'0')+'</span><div><i style="left:'+t.zone.low/128*100+'%;width:'+(t.zone.high-t.zone.low+1)/128*100+'%;background:'+trackColor(i)+'"></i></div><span>'+noteName(t.zone.low)+'–'+noteName(t.zone.high)+'</span></div>':'').join('');
+}
+$('keyboard-mode').onchange=()=>studio.editPerformance(()=>{studio.project.keyboardMode=$('keyboard-mode').value;if(studio.project.keyboardMode==='layers'&&!studio.project.tracks.some(t=>t.zone.enabled))studio.project.tracks[studio.inputTrack].zone.enabled=true;return studio.project.keyboardMode==='layers'?'Layers on · each enabled layer records to its own track.':'Single part · selected track plays; armed track records.'});
+$('layer-part').onchange=renderLayers;
+function editLayer(fn){studio.editPerformance(()=>{const t=studio.project.tracks[Number($('layer-part').value)||0];fn(t);studio.applyAllTracks();return 'Keyboard zones updated. Undo is available.'})}
+$('layer-enabled').onchange=()=>{const value=$('layer-enabled').checked;editLayer(t=>{if(!value&&studio.project.tracks.filter(x=>x.zone.enabled).length===1)throw new Error('Keep at least one layer enabled.');t.zone.enabled=value})};
+for(const [id,key,min,max] of [['layer-low','low',0,127],['layer-high','high',0,127],['layer-vlow','velocityLow',1,127],['layer-vhigh','velocityHigh',1,127]])$(id).onchange=()=>{const value=Number($(id).value);editLayer(t=>{if(!Number.isInteger(value)||value<min||value>max)throw new Error('Enter a whole number from '+min+' to '+max+'.');t.zone[key]=value;if(t.zone.low>t.zone.high||t.zone.velocityLow>t.zone.velocityHigh)throw new Error('The low value must be at or below the high value.')})};
+for(const [id,key,min,max] of [['layer-octave','octave',-2,2],['layer-level','volume',0,127]])$(id).onchange=()=>{const value=Number($(id).value);editLayer(t=>{if(!Number.isInteger(value)||value<min||value>max)throw new Error('Enter a valid '+key+'.');if(key==='octave')t.shape.octave=value;else t.volume=value})};
+$('layer-all').onclick=()=>editLayer(t=>{t.zone.low=0;t.zone.high=127;t.zone.velocityLow=1;t.zone.velocityHigh=127});
+$('layer-split').onclick=()=>studio.editPerformance(()=>{const p=studio.project;p.keyboardMode='layers';p.tracks.forEach((t,i)=>{t.zone={enabled:i<2,low:i===1?60:0,high:i===0?59:127,velocityLow:1,velocityHigh:127}});p.performanceName='Two-part split';return 'Split at C4 · part 1 below, part 2 from C4 upward.'});
+$('quick-presets').onclick=()=>{setLCDPage('performance');$('patch-screen').scrollIntoView({block:'nearest'})};
 studio=createStudio({
  editValue:(index,key,trigger)=>valueEditor?.openMix(index,key,trigger),rememberPatch:p=>soundShortcuts.used(p),presets:()=>presets,bank:()=>({id:currentSoundFont.id,name:currentSoundFont.name}),audio:()=>audio,inputTime:()=>eventAudioTime(),synth:()=>ready?synth:null,
- recordingState:locked=>{for(const id of ['midi-record-adjustment','midi-adjustment-reset'])$(id).disabled=locked},onWorkspace:arrangeWorkspace,exportBank:()=>loadSoundFont(currentSoundFont),ensureAudio,post:message=>workletNode?.port.postMessage(message),clearLive,stopDemos:stopDemo,effects:effectSettings,master:()=>+$('volume').value,velocity:()=>+$('velocity').value,
+ performanceChanged:()=>renderLayers(),recordingState:locked=>{for(const id of ['midi-record-adjustment','midi-adjustment-reset'])$(id).disabled=locked},onWorkspace:arrangeWorkspace,exportBank:()=>loadSoundFont(currentSoundFont),ensureAudio,post:message=>workletNode?.port.postMessage(message),clearLive,stopDemos:stopDemo,effects:effectSettings,master:()=>+$('volume').value,velocity:()=>+$('velocity').value,
  displayTrack:(track,index)=>{selected=track.patch;partIndex=index;partName=track.name;Object.assign(shape,track.shape);renderSelection();renderList({revealSelected:true});renderKeyboard()},
  audition:(note,velocity)=>{if(!ready)return;const owner='editor-preview';voices.press(owner,studio.inputTrack,note,velocity);setTimeout(()=>voices.release(owner),180)},
  level:()=>{if(!analyser)return 0;analyser.getFloatTimeDomainData(samples);return Math.sqrt(samples.reduce((s,x)=>s+x*x,0)/samples.length)},
  restoreEffects:(settings,master)=>{if(settings&&typeof settings==='object'){const fields={reverbMix:['reverb',0,100],reverbType:['reverb-type',0,5],reverbDecay:['reverb-decay',0,127],reverbDamping:['reverb-damping',0,7],reverbPredelay:['reverb-predelay',0,127],delayMix:['delay',0,100],delayTime:['delay-time',70,115],delayFeedback:['delay-feedback',0,75],delayDamping:['delay-damping',0,7]};for(const [key,[id,min,max]] of Object.entries(fields))if(Number.isFinite(settings[key]))$(id).value=clamp(settings[key],min,max);reverbEnabled=!!settings.reverbEnabled;delayEnabled=!!settings.delayEnabled;$('delay-mode').value=settings.delayStereo?'stereo':'mono';applyEffects()}if(Number.isFinite(master)){$('volume').value=clamp(master,0,100);$('volume').oninput()}}
 });
-composer=createComposer({presets:()=>presets,ensureAudio,post:m=>workletNode?.port.postMessage(m),exportBank:()=>loadSoundFont(currentSoundFont),open:()=>studio.setView('compose'),stopScenes:()=>studio.stop(false),stopDemos:stopDemo,clearLive,recording:()=>studio.recording,sceneProject:()=>studio.serialise(),setMaster:value=>{if(gain)gain.gain.value=value},restoreMaster:()=>{if(gain)gain.gain.value=+$('volume').value/100}});
+renderLayers();
+composer=createComposer({presets:()=>presets,ensureAudio,post:m=>workletNode?.port.postMessage(m),exportBank:()=>loadSoundFont(currentSoundFont),open:()=>studio.setView('compose'),openPerformance:()=>studio.setView('perform'),stopScenes:()=>studio.stop(false),stopDemos:stopDemo,clearLive,recording:()=>studio.recording,sceneProject:()=>studio.serialise(),setMaster:value=>{if(gain)gain.gain.value=value},restoreMaster:()=>{if(gain)gain.gain.value=+$('volume').value/100}});
 valueEditor=createValueEditor(document,{track:i=>studio.project.tracks[i],mix:studio.xrMix,persist:studio.persist,locked:id=>id==='shape-octave'&&studio.playing});
 // VR is another controller and display for this same performance, never a second clock.
 let vrStorage;try{vrStorage=localStorage}catch{}
@@ -488,5 +518,7 @@ vr=createWebXR({
 },{document,navigator,storage:vrStorage,XRWebGLLayer:window.XRWebGLLayer});
 if(window.innerWidth<600){keyCount=25;$('key-count').value='25'}
 $('bank-credit').textContent=currentSoundFont.credit+' · SpessaSynth playback engine';renderList();renderSelection();renderKeyboard();drawPads();renderEffects();setCompactLayout(compactLayout);initialiseLCDSize();paint();
+// Open every visit with a blank composition; saved projects are opened deliberately.
+studio.setView('compose');
 // Read-only diagnostics for local verification of the embedded bank and output.
-window.soundroom={get sequencer(){return studio?.diagnostics()},get soundFont(){return currentSoundFont.id},get soundFontName(){return currentSoundFont.name},get ready(){return ready},get presetCount(){return presets.length},get selected(){return {...selected}},get voices(){return synth?.voiceCount||0},get activeNotes(){return [...voices.notes.keys()]},get shape(){return {...shape}},get effects(){return effectSettings()},get actualPatch(){return synth?.midiChannels[0].patch},get level(){if(!analyser)return 0;analyser.getFloatTimeDomainData(samples);return Math.sqrt(samples.reduce((s,x)=>s+x*x,0)/samples.length)}};
+window.soundroom={get composition(){return composer?.summary()},get sequencer(){return studio?.diagnostics()},get soundFont(){return currentSoundFont.id},get soundFontName(){return currentSoundFont.name},get ready(){return ready},get presetCount(){return presets.length},get selected(){return {...selected}},get voices(){return synth?.voiceCount||0},get activeNotes(){return [...voices.notes.keys()]},get shape(){return {...shape}},get effects(){return effectSettings()},get actualPatch(){return synth?.midiChannels[0].patch},get level(){if(!analyser)return 0;analyser.getFloatTimeDomainData(samples);return Math.sqrt(samples.reduce((s,x)=>s+x*x,0)/samples.length)}};

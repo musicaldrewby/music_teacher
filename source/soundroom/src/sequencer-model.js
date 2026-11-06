@@ -15,7 +15,7 @@ export const uid=()=>Date.now().toString(36)+'-'+(++serial).toString(36);
 export const patchKey=p=>[p.isGMGSDrum?1:0,p.bankMSB,p.bankLSB,p.program].join(':');
 export function createTimelineProject(presets){
  const programs=[0,32,48,4,24,89,80,0];
- return {format:'soundroom-project',version:1,name:'Untitled song',tempo:100,bars:4,meter:[4,4],loop:true,countIn:1,metronome:'record',clickVolume:65,clickTone:'click',clickAccent:true,grid:'1/16',snap:true,recordGrid:'1/16',recordMode:'overdub',quantizeGrid:'1/16',strength:100,quantizeLength:false,swing:0,selectedTrack:0,armedTrack:0,punch:{enabled:false,from:1,to:4},sections:[],arrangement:[],tracks:programs.map((program,i)=>({name:i===7?'Drums':'Track '+(i+1),patch:clone(presets.find(p=>i===7?p.isGMGSDrum:p.program===program&&!p.isDrum&&p.bankMSB===0)||presets[0]),volume:100,pan:64,reverb:80,delay:64,mute:false,solo:false,monitor:true,shape:{octave:0,tune:0,attack:64,release:64,brightness:64},notes:[],controllers:[]}))};
+ return {format:'soundroom-project',version:1,name:'Untitled song',keyboardMode:'single',tempo:100,bars:4,meter:[4,4],loop:true,countIn:1,metronome:'record',clickVolume:65,clickTone:'click',clickAccent:true,grid:'1/16',snap:true,recordGrid:'1/16',recordMode:'overdub',quantizeGrid:'1/16',strength:100,quantizeLength:false,swing:0,selectedTrack:0,armedTrack:0,punch:{enabled:false,from:1,to:4},sections:[],arrangement:[],tracks:programs.map((program,i)=>({name:i===7?'Drums':'Track '+(i+1),patch:clone(presets.find(p=>i===7?p.isGMGSDrum:p.program===program&&!p.isDrum&&p.bankMSB===0)||presets[0]),volume:100,pan:64,reverb:80,delay:64,mute:false,solo:false,monitor:true,zone:{enabled:i===0,low:0,high:127,velocityLow:1,velocityHigh:127},shape:{octave:0,tune:0,attack:64,release:64,brightness:64},notes:[],controllers:[]}))};
 }
 // Canonical saved data has one shared performance and eight independent patterns.
 // The editor/recorder facade points directly at the selected scene; replacing an
@@ -110,6 +110,17 @@ export class Recorder {
  controller(event,beat){if(!this.active||beat<-RECORD_START_GRACE_SECONDS*this.project.tempo/60||!this.project.loop&&beat>=songBeats(this.project))return;const w=this.window(beat);if(this.project.punch.enabled&&(beat<w.start-RECORD_START_GRACE_SECONDS*this.project.tempo/60||beat>=w.end))return;const total=songBeats(this.project),controller={id:uid(),beat:Math.max(this.project.punch.enabled?w.start:0,beat)%total,...event};this.project.tracks[this.track].controllers.push(controller);this.onChange({track:this.track,controller,firstCycle:Math.max(0,Math.floor(beat/total))+1})}
  stop(beat){for(const owner of [...this.held.keys()])this.noteOff(owner,beat);this.active=false}
 }
+// Each layer records into its own part; the existing audio clock and Recorder
+// remain the only authority for note timing. Targets are frozen for the take.
+export class KeyboardRecorder {
+ constructor(project,onChange){this.project=project;this.onChange=onChange;this.recorders=new Map();this.track=0;}
+ start(track){this.track=track;const targets=this.project.keyboardMode==='layers'?this.project.tracks.flatMap((t,i)=>t.zone?.enabled?[i]:[]):[track];this.recorders=new Map(targets.map(i=>{const r=new Recorder(this.project,this.onChange);r.start(i);return [i,r]}));}
+ destination(owner){const match=String(owner).match(/^layer:([0-7]):/);return match?Number(match[1]):this.track;}
+ noteOn(owner,note,velocity,beat){this.recorders.get(this.destination(owner))?.noteOn(owner,note,velocity,beat);}
+ noteOff(owner,beat){for(const r of this.recorders.values())r.noteOff(owner,beat);}
+ controller(event,beat){const {targetTrack,...message}=event;for(const [i,r] of this.recorders)if(targetTrack===undefined||targetTrack===i)r.controller(message,beat);}
+ stop(beat){for(const r of this.recorders.values())r.stop(beat);}
+}
 export function trackAudible(p,i){const t=p.tracks[i];return !t.mute&&(!p.tracks.some(x=>x.solo)||t.solo)}
 // A captured event becomes playback on the next pass. A short note snapped
 // ahead of the playhead must not sound twice during the pass that recorded it.
@@ -166,6 +177,7 @@ export function validateTimeline(raw,presets){
  for(const k of ['loop','snap','quantizeLength'])p[k]=!!raw[k];
  for(const k of ['grid','quantizeGrid'])if(GRID_OPTIONS.some(g=>g[0]===raw[k]))p[k]=raw[k];
  p.recordGrid=raw.recordGrid==='off'||GRID_OPTIONS.some(g=>g[0]===raw.recordGrid)?raw.recordGrid:p.recordGrid;
+ p.keyboardMode=raw.keyboardMode==='layers'?'layers':'single';
  p.recordMode=raw.recordMode==='replace'?'replace':'overdub';p.countIn=[0,1,2].includes(raw.countIn)?raw.countIn:1;p.metronome=['off','on','record'].includes(raw.metronome)?raw.metronome:'record';
  p.clickTone=['click','wood','rim','beep'].includes(raw.clickTone)?raw.clickTone:'click';p.clickAccent=raw.clickAccent!==false;
  for(const [k,a,b] of [['clickVolume',0,100],['strength',0,100],['swing',0,100]])p[k]=num(raw[k]??p[k],a,b,k);
@@ -180,12 +192,13 @@ export function validateTimeline(raw,presets){
   const patch=presets.find(x=>t.patch&&patchKey(x)===patchKey(t.patch));if(!patch)throw new Error('A saved patch is missing. Load the project’s SoundFont first.');out.patch=clone(patch);
   for(const k of ['volume','pan','reverb','delay'])out[k]=num(t[k],0,127,k);for(const k of ['mute','solo','monitor'])out[k]=!!t[k];
   for(const [k,a,b] of [['octave',-2,2],['tune',-100,100],['attack',0,127],['release',0,127],['brightness',0,127]])out.shape[k]=num(t.shape?.[k]??out.shape[k],a,b,k);
+  if(t.zone!==undefined){const z=t.zone;if(!z||typeof z.enabled!=='boolean')throw new Error('Invalid keyboard zone.');out.zone={enabled:z.enabled,low:integer(z.low,0,127,'zone low note'),high:integer(z.high,0,127,'zone high note'),velocityLow:integer(z.velocityLow,1,127,'zone low velocity'),velocityHigh:integer(z.velocityHigh,1,127,'zone high velocity')};if(out.zone.low>out.zone.high||out.zone.velocityLow>out.zone.velocityHigh)throw new Error('Keyboard zone ranges must be ascending.');}
   out.notes=t.notes.map(n=>{const start=num(n.start,0,total-.000001,'note start'),duration=num(n.duration,.001,total+.00001,'note duration'),pitch=num(n.pitch,0,127,'pitch'),velocity=num(n.velocity,1,127,'velocity');if(!Number.isInteger(pitch)||!Number.isInteger(velocity))throw new Error('Invalid MIDI note.');const original=n.original?{start:num(n.original.start,0,total,'original start'),duration:num(n.original.duration,.001,total,'original duration')}:{start,duration};return {id:uid(),start,duration,pitch,velocity,original}});
   out.controllers=t.controllers.map(c=>{if(!['cc','bend','pressure'].includes(c.type)||c.type==='cc'&&![1,11,64].includes(c.controller))throw new Error('Unsupported controller event.');return {id:uid(),beat:num(c.beat,0,total,'controller timing'),type:c.type,...(c.type==='cc'?{controller:c.controller}:{}),value:num(c.value,0,c.type==='bend'?16383:127,'controller value')}});return out;
  });return p;
 }
 
-function sharedSettings(target,source){for(const key of ['name','tempo','meter','loop','countIn','metronome','clickVolume','clickTone','clickAccent','grid','snap','recordGrid','recordMode','quantizeGrid','strength','quantizeLength','swing','selectedTrack','armedTrack'])target[key]=clone(source[key])}
+function sharedSettings(target,source){for(const key of ['name','keyboardMode','tempo','meter','loop','countIn','metronome','clickVolume','clickTone','clickAccent','grid','snap','recordGrid','recordMode','quantizeGrid','strength','quantizeLength','swing','selectedTrack','armedTrack'])target[key]=clone(source[key])}
 function sceneFromTimeline(t,name=t.name){return {name:String(name).slice(0,48),tempo:t.tempo,bars:t.bars,punch:clone(t.punch),tracks:t.tracks.map(x=>({notes:clone(x.notes),controllers:clone(x.controllers)}))}}
 function assignPerformance(p,t){p.tracks=t.tracks.map(x=>{const out=clone(x);delete out.notes;delete out.controllers;return out});bindProject(p)}
 export function validateProject(raw,presets){

@@ -1,0 +1,154 @@
+/* Comfortable is the default. Short viewports scroll; controls never scale down. */
+:root{--studio-line:#465664;--studio-soft:#aebfcb;--studio-surface:#1b2630}
+#workstation-header{padding:12px 22px 10px;background:linear-gradient(120deg,#303b48,#202a36);border-color:#526272}
+.studio-brand{display:flex;align-items:center;gap:12px;margin:0 0 12px;color:#f1f5f8}
+.studio-monogram{display:grid;place-items:center;width:37px;height:37px;border:1px solid #a2bc73;border-radius:9px;background:#243224;color:#d4e6a9;font:700 14px ui-monospace,monospace;letter-spacing:1px}
+.studio-brand>div{display:flex;align-items:baseline;gap:12px}.studio-brand strong{font:650 21px/1.2 system-ui;letter-spacing:-.6px}.studio-brand>div>span{color:#b7c6d2;font:12px system-ui}.studio-brand p{margin:0 0 0 auto;font:12px system-ui;color:#b7c6d2}
+#workstation-header .workspace-tabs{max-width:580px;min-width:380px;gap:5px}
+#workstation-header .workspace-tabs button{font:650 13px/1.2 system-ui;letter-spacing:.5px;min-height:44px}
+#workstation-header .workspace-actions{gap:7px}
+#workstation-header .workspace-actions button,#workstation-header .theme-choice{font:500 12px/1.25 system-ui;min-height:42px}
+#workstation-header .project-bar{margin-top:10px}
+#workstation-header .project-identity{font-size:14px}
+#workstation-header .project-actions>button,#workstation-header .project-menu>summary{font-size:13px;min-height:40px}
+#workspace-content{padding:22px 24px 16px;scroll-padding:20px;background:radial-gradient(ellipse at top left,#283440 0,transparent 65%),#17212b}
+body[data-workspace] #workstation-main{max-width:none}
+#workstation-footer{max-width:1660px;margin:0 auto;font-size:11px;opacity:1;color:#acbbc7;padding:18px 0 3px}
+#workstation-footer button{font-size:12px;min-height:36px}
+button:disabled{cursor:not-allowed}
+/* The continuous song workspace starts with an invitation instead of empty editors. */
+#compose-panel{max-width:1420px;padding:3px 0 20px;font-size:14px}
+.compose-heading{margin-bottom:20px;align-items:center}
+.compose-heading h2{font:600 clamp(26px,2.5vw,36px)/1.15 system-ui;letter-spacing:-.8px;margin:7px 0 9px}
+.compose-heading .eyebrow{font:650 11px/1.3 system-ui;letter-spacing:2px;color:#bbd498}
+.compose-heading p{font-size:14px;margin:0;color:#b7c6d2}
+#compose-panel label{font-size:13px;color:#c7d4dd;gap:7px}
+#compose-panel input:not([type=range]),#compose-panel select{min-height:43px;font-size:15px;padding:10px 12px}
+#compose-panel button{font:550 13px/1.3 system-ui;min-height:43px;padding:10px 16px;border-radius:6px}
+#compose-panel button.primary{background:linear-gradient(#d9e6b6,#b9cf91);color:#172414;border-color:#c7dca1;box-shadow:0 2px 4px #0003}
+#compose-panel button.primary:hover:not(:disabled){background:#dfedc0}
+.comp-toolbar{gap:10px;padding-bottom:18px;align-items:center;border-color:var(--studio-line)}
+.comp-examples{position:relative;margin:0 0 0 auto;align-self:center}
+.comp-examples>summary{color:#bdcbd6;font:500 13px/1.3 system-ui;min-height:43px;padding:12px 8px}
+.comp-examples>div{position:absolute;right:0;top:48px;padding:10px;width:250px;display:grid;gap:8px;border:1px solid #6b7e8e;border-radius:8px;background:#273441;box-shadow:0 12px 30px #0008;z-index:12}
+.comp-title-row{grid-template-columns:minmax(240px,1fr) 150px auto;gap:22px;margin:20px 0}
+.comp-title-row #comp-name{font-size:18px}
+#comp-summary{font:13px/1.4 system-ui;color:#bacbd6;padding-bottom:11px;white-space:nowrap}
+.comp-transport{padding:16px;gap:14px;border-color:#4c6271;background:#202f3b;border-radius:10px}
+.comp-transport output{font:13px/1.4 ui-monospace,monospace}
+.comp-editbar{gap:10px;margin:18px 0 12px}
+.comp-editbar span{font-size:12px;color:#b5c6b0}
+#comp-timeline-scroll{border-color:#4d6372;border-radius:10px;max-height:480px}
+.comp-track{height:71px}.comp-track>button{width:220px;padding:10px 14px!important;gap:13px}.comp-track canvas{height:70px}.comp-track small{font-size:12px;margin-top:5px}.comp-track b{font-size:14px}
+.comp-editors{gap:20px;margin:22px 0}.comp-editors>section{padding:22px}.comp-fields{gap:16px;margin-bottom:18px}.comp-editors details summary{font-size:14px;padding-bottom:14px}.comp-editors #comp-notes{font-size:13px;height:180px}.comp-tempo-row{font-size:13px;padding:8px}
+#compose-panel .comp-save-panel{margin:22px 0 0;padding:0 22px;background:#1e2b36;border-color:#455b6b}
+.comp-save-panel>summary{padding:18px 0;font:600 14px/1.4 system-ui;color:#d4e4c4}.comp-save-panel[open]{padding-bottom:18px!important}.comp-save-panel h3{margin-top:5px!important}
+#comp-status{position:static;font:13px/1.5 system-ui;background:#1b2b26;border-color:#405a48;color:#c9dec0;padding:12px 16px;margin:16px 0 0}
+#compose-panel[data-empty=true] .comp-transport,#compose-panel[data-empty=true] .comp-editbar,#compose-panel[data-empty=true] .comp-editors,#compose-panel[data-empty=true] #comp-markers{display:none}
+#compose-panel[data-empty=true] #comp-timeline-scroll{max-height:none;background:linear-gradient(135deg,#263642,#1b2933);border:1px dashed #607788;overflow:hidden}
+.comp-empty{text-align:center;padding:34px 24px 26px;display:flex;align-items:center;flex-direction:column}
+.empty-track-art{width:136px;height:65px;position:relative;display:flex;flex-direction:column;justify-content:center;gap:6px;margin-bottom:20px;opacity:.95}
+.empty-track-art i{display:block;height:12px;border:1px solid #6b8277;border-radius:3px;background:linear-gradient(90deg,#c6dda5 0 19%,#324a43 19% 100%)}
+.empty-track-art i:nth-child(2){width:85%;background:linear-gradient(90deg,#96ccda 0 22%,#2a4049 22% 100%)}
+.empty-track-art i:nth-child(3){width:68%;background:linear-gradient(90deg,#c4addc 0 28%,#3a354a 28% 100%)}
+.empty-track-art span{position:absolute;right:-7px;bottom:0;width:31px;height:31px;border-radius:50%;display:grid;place-items:center;border:1px solid #bad297;background:#344b3b;font:22px system-ui;color:#e0efc9}
+.comp-empty .eyebrow{font:650 10px system-ui;letter-spacing:2.3px;color:#b6cc98}
+#compose-panel .comp-empty h3{font:550 clamp(24px,2.2vw,30px)/1.2 system-ui;letter-spacing:-.6px;color:#e9f0e4;margin:10px 0 12px}
+.comp-empty p{font:14px/1.65 system-ui;color:#b8c9d5;margin:0 0 22px}
+.empty-actions{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
+#compose-panel .empty-actions button{min-width:152px;min-height:46px}
+#compose-panel .empty-play-link{font:13px/1.5 system-ui;color:#bfd2e2;background:none;border:0;box-shadow:none;margin-top:17px;padding:8px}
+#compose-panel .empty-play-link:hover{color:#eff7fd;text-decoration:underline}
+/* Play: generous keys, readable names, and a real button row on each track. */
+html:not([data-layout=compact]) body[data-workspace=perform] #play-station{max-width:1660px;margin:auto;grid-template-columns:minmax(0,1fr) 340px;gap:20px}
+html:not([data-layout=compact]) body[data-workspace=perform] #soundroom-instrument{padding:14px 16px 0}
+html:not([data-layout=compact]) #soundroom-instrument .panel-legend{display:flex;font-size:10px;margin-bottom:12px}
+html:not([data-layout=compact]) #soundroom-instrument .startbar{padding:8px 11px;margin-bottom:12px}
+html:not([data-layout=compact]) #soundroom-instrument .startbar strong{font-size:14px}
+html:not([data-layout=compact]) #soundroom-instrument .startbar button{font-size:13px;min-height:42px}
+html:not([data-layout=compact]) .instrument #patch-screen{height:378px!important;padding:12px 14px}
+html:not([data-layout=compact]) .instrument #patch-screen[data-home=true]{height:274px!important}
+html:not([data-layout=compact]) #patch-screen .lcd-page-nav{margin:6px 0 10px!important}
+html:not([data-layout=compact]) #patch-screen .lcd-page-nav button,html:not([data-layout=compact]) #patch-screen .lcd-categories button,html:not([data-layout=compact]) #patch-screen .lcd-menu-actions button,html:not([data-layout=compact]) #patch-screen .lcd-subnav button{font-size:13px!important;min-height:42px!important}
+html:not([data-layout=compact]) #patch-screen h1{font-size:38px;margin:9px 0}
+html:not([data-layout=compact]) #patch-screen .eyebrow,html:not([data-layout=compact]) #patch-screen .tag{font-size:12px}
+html:not([data-layout=compact]) #soundroom-instrument .audition{padding:10px 0;gap:8px}
+html:not([data-layout=compact]) #soundroom-instrument .audition button{font-size:12px;min-height:40px;padding:9px 12px}
+html:not([data-layout=compact]) #play-keyboard{padding:14px 16px}
+html:not([data-layout=compact]) #play-keyboard .keytoolbar{gap:10px;min-height:45px;padding-bottom:10px}
+html:not([data-layout=compact]) #play-keyboard .keytoolbar h2{font-size:12px;display:block}
+html:not([data-layout=compact]) #play-keyboard .keytoolbar button,html:not([data-layout=compact]) #play-keyboard .keytoolbar select{min-height:40px;font-size:13px}
+html:not([data-layout=compact]) body:not(.performance-view) #play-keyboard .keyboard{height:164px}
+html:not([data-layout=compact]) body:not(.performance-view) #play-keyboard .key.white{height:159px}
+html:not([data-layout=compact]) body:not(.performance-view) #play-keyboard .key.white.playing{height:156px}
+html:not([data-layout=compact]) body:not(.performance-view) #play-keyboard .key.black{height:105px}
+html:not([data-layout=compact]) #play-keyboard .settings{gap:18px;padding-top:12px;margin-top:8px}
+html:not([data-layout=compact]) #play-keyboard .settings .rangehead{font-size:12px;margin-bottom:6px}
+html:not([data-layout=compact]) #play-keyboard .settings .value-button{min-height:32px}
+html:not([data-layout=compact]) #play-keyboard .sustain button{font-size:12px;min-height:42px}
+html:not([data-layout=compact]) body[data-workspace=perform] #layer-panel{max-height:none;align-self:stretch;padding:20px;overflow:visible}
+.layer-panel p,.layer-panel label{font-size:14px}.layer-heading{font-size:12px}.layer-heading button{font-size:13px;min-height:42px}.layer-panel h2{font-size:23px}.layer-panel .layer-help{font-size:12px}
+html:not([data-layout=compact]) body[data-workspace=perform] #play-track-strip{gap:10px;grid-template-rows:repeat(4,minmax(96px,auto));align-self:start}
+html:not([data-layout=compact]) #play-track-strip .play-part{padding:9px;min-height:96px}
+html:not([data-layout=compact]) #play-track-strip .play-part-select{min-height:41px;padding:0;font-size:13px}
+html:not([data-layout=compact]) #play-track-strip .play-part-select b{font-size:12px;max-width:100%;padding:0}
+html:not([data-layout=compact]) #play-track-strip .play-part-select span{font-size:13px;line-height:1.4;margin-top:5px;white-space:normal;overflow-wrap:anywhere}
+html:not([data-layout=compact]) #play-track-strip .play-part-controls{position:static;gap:6px;margin-top:8px;opacity:1;justify-content:flex-end}
+html:not([data-layout=compact]) #play-track-strip .play-part-controls button{min-height:32px;min-width:43px;font-size:12px}
+html:not([data-layout=compact]) body[data-workspace=perform] #scene-panel{padding:14px;gap:14px;display:block}
+html:not([data-layout=compact]) body[data-workspace=perform] #scene-panel .scene-heading{display:flex;justify-content:space-between;margin-bottom:12px}
+html:not([data-layout=compact]) body[data-workspace=perform] #scene-panel .scene-heading h2{display:block;font-size:15px}
+html:not([data-layout=compact]) #scene-buttons{gap:9px}
+html:not([data-layout=compact]) #scene-buttons .scene-button{min-height:70px;padding:10px}
+html:not([data-layout=compact]) #scene-buttons .scene-button b,html:not([data-layout=compact]) #scene-buttons .scene-button span{font-size:13px}
+html:not([data-layout=compact]) #scene-buttons .scene-button small{font-size:11px;margin-top:7px}
+/* Editing and mixing retain practical minimum widths, then scroll or wrap. */
+html:not([data-layout=compact]) .section-heading h2{font-size:22px}
+html:not([data-layout=compact]) .panel-hint{font-size:13px;line-height:1.6}
+html:not([data-layout=compact]) #sequence-panel{padding:18px;gap:14px}
+html:not([data-layout=compact]) #sequence-panel button,html:not([data-layout=compact]) #sequence-panel select{font-size:13px;min-height:40px}
+html:not([data-layout=compact]) #sequence-panel #roll-toolbar{gap:14px;margin:12px 0}
+html:not([data-layout=compact]) #sequence-panel #roll-scroll{min-height:300px}
+html:not([data-layout=compact]) .track-select span,html:not([data-layout=compact]) .mix-name{font-size:14px}
+html:not([data-layout=compact]) .track-select small,html:not([data-layout=compact]) .mix-patch{font-size:12px}
+html:not([data-layout=compact]) #mixer-strips{grid-template-columns:repeat(4,minmax(170px,1fr));gap:16px}
+html:not([data-layout=compact]) .mixer-strip{padding:16px 14px}
+html:not([data-layout=compact]) .mix-control>span{font-size:13px}
+html:not([data-layout=compact]) .mix-switches button{font-size:13px;min-height:38px}
+html:not([data-layout=compact]) #transport-dock{padding:10px 22px!important}
+html:not([data-layout=compact]) #transport-dock .transport-buttons button{font-size:13px;min-height:46px;min-width:90px}
+html:not([data-layout=compact]) #transport-dock .song-settings button{font-size:12px;min-height:42px}
+html:not([data-layout=compact]) #transport-dock .transport-readout span,html:not([data-layout=compact]) #transport-dock .transport-readout small{font-size:11px}
+html:not([data-layout=compact]) #transport-dock #studio-status,html:not([data-layout=compact]) #transport-dock .transport-targets,html:not([data-layout=compact]) #transport-dock #record-summary{font-size:12px}
+@media(min-width:1700px){html:not([data-layout=compact]) #mixer-strips{grid-template-columns:repeat(8,minmax(160px,1fr))}#workspace-content{padding:28px 32px 20px}}
+@media(max-width:1200px){#workstation-header .studio-nav{grid-template-columns:1fr!important}#workstation-header .workspace-actions{justify-content:flex-end}#workstation-header .workspace-tabs{max-width:none;flex:1}html:not([data-layout=compact]) body[data-workspace=perform] #play-station{grid-template-columns:minmax(0,1fr) 300px;gap:16px}#workspace-content{padding:18px}.comp-transport output{width:100%;margin:0}}
+@media(max-width:900px){.studio-brand p{display:none}.studio-brand>div{flex-wrap:wrap;gap:4px 10px}#workstation-header .workspace-tabs{min-width:0}.comp-title-row{grid-template-columns:1fr 130px}.comp-title-row #comp-summary{grid-column:1/-1;padding-bottom:0}.comp-editors{grid-template-columns:1fr}.comp-examples{margin-left:0}html:not([data-layout=compact]) body[data-workspace=perform] #play-station{display:flex;flex-direction:column}html:not([data-layout=compact]) #play-station>*{width:100%}html:not([data-layout=compact]) body[data-workspace=perform] #play-track-strip{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-template-rows:auto}html:not([data-layout=compact]) #scene-buttons{grid-template-columns:repeat(4,minmax(0,1fr))}html:not([data-layout=compact]) #mixer-strips{grid-template-columns:repeat(2,minmax(165px,1fr))}}
+@media(max-width:600px){#workstation-header{padding:10px 12px}.studio-brand{margin-bottom:10px}.studio-brand strong{font-size:19px}.studio-brand>div>span{font-size:11px}#workstation-header .workspace-actions{justify-content:flex-start;flex-wrap:wrap}#workstation-header .workspace-tabs button{font-size:11px;padding:8px 6px}#workspace-content{padding:16px 12px}.compose-heading{gap:10px}.compose-heading h2{font-size:26px}.compose-heading .eyebrow{font-size:10px}.compose-heading p{font-size:13px}#compose-panel #comp-help-toggle{padding:8px 10px}.comp-title-row{gap:14px}.comp-empty{padding:26px 14px}.comp-empty p br{display:none}.comp-examples>div{left:0;right:auto}.comp-toolbar{gap:8px}.comp-editors>section{padding:16px}.comp-track>button{width:190px}html:not([data-layout=compact]) body[data-workspace=perform] #play-track-strip{grid-template-columns:repeat(2,minmax(0,1fr))}html:not([data-layout=compact]) #play-keyboard .keytoolbar{flex-wrap:wrap}html:not([data-layout=compact]) .instrument #patch-screen[data-home=true]{height:290px!important}html:not([data-layout=compact]) #play-keyboard .settings{gap:10px}html:not([data-layout=compact]) #transport-dock{padding:9px 12px!important}}
+@media(max-height:700px){.studio-brand{margin-bottom:8px}.studio-monogram{width:30px;height:30px}.comp-empty{padding-top:24px;padding-bottom:22px}.empty-track-art{margin-bottom:14px}.comp-empty p{margin-bottom:18px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+#comp-help:not([open]){display:none}
+#comp-help[open]{margin:0 0 20px}
+/* A shared side column keeps the layer controls close to the instrument tracks. */
+#play-side{display:contents}
+@media(min-width:901px){
+ html:not([data-layout=compact]) body[data-workspace=perform] #play-side{display:flex;flex-direction:column;grid-column:2;grid-row:1 / 3;gap:16px;min-width:0;align-self:start}
+ html:not([data-layout=compact]) body[data-workspace=perform] #layer-panel{flex:none;align-self:auto;padding:16px}
+ html:not([data-layout=compact]) body[data-workspace=perform] #play-track-strip{display:grid;width:100%;grid-template-rows:auto;gap:9px}
+}
+body.performance-view #play-side,body[data-workspace=sequence] #play-side{display:none!important}
+body:not([data-workspace=compose]) .studio-brand{display:none}
+html:not([data-layout=compact]) body[data-workspace=perform] #workspace-content{padding-top:16px}
+html:not([data-layout=compact]) body[data-workspace=perform] #soundroom-instrument{padding:10px 14px 0}
+html:not([data-layout=compact]) #soundroom-instrument .panel-legend{margin-bottom:8px}
+html:not([data-layout=compact]) .instrument #patch-screen[data-home=true]{height:250px!important}
+html:not([data-layout=compact]) #soundroom-instrument .audition{padding:7px 0}
+html:not([data-layout=compact]) #play-keyboard .keytoolbar{padding-bottom:8px}
+html:not([data-layout=compact]) #transport-dock #studio-status{margin:4px 0 0}
+@media(max-width:900px){#play-side{display:contents}}
+/* The home LCD presents the selected sound; its categories return when browsing. */
+html:not([data-layout=compact]) .instrument #patch-screen[data-home=true]{height:210px!important}
+html:not([data-layout=compact]) #patch-screen[data-home=true] .lcd-menu{display:none}
+html:not([data-layout=compact]) #patch-screen[data-home=true] h1{font-size:34px;margin:6px 0}
+html:not([data-layout=compact]) #patch-screen[data-home=true] .instrument-top{padding-top:0!important}
+html:not([data-layout=compact]) #transport-dock #studio-status{padding:0;border:0;line-height:18px}
+@media(max-height:800px){#compose-panel[data-empty=true] .empty-track-art{display:none}#compose-panel[data-empty=true] .comp-empty{padding-top:25px;padding-bottom:24px}}

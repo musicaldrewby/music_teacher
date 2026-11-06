@@ -6,7 +6,7 @@ const { build } = require('esbuild');
 await mkdir('dist/assets', { recursive: true });
 await build({ entryPoints: ['src/app.js'], bundle: true, minify: true, format: 'iife', outfile: 'dist/assets/app.js', logLevel: 'info', nodePaths: process.env.NODE_PATH?.split(delimiter).filter(Boolean) || [] });
 await copyFile('src/index.html', 'dist/index.html');
-for (const name of ['hardware.css', 'performance.css', 'studio.css', 'workstation.css', 'lcd-browser.css', 'ui.css', 'workspace-layout.css', 'play-layout.css', 'score.css']) await copyFile('src/' + name, 'dist/assets/' + name);
+for (const name of ['hardware.css', 'performance.css', 'studio.css', 'workstation.css', 'lcd-browser.css', 'ui.css', 'workspace-layout.css', 'play-layout.css', 'score.css', 'upgrade.css', 'comfortable.css']) await copyFile('src/' + name, 'dist/assets/' + name);
 
 const processor=await readFile('dist/assets/spessasynth-processor-4.3.14.js','utf8');
 const extension=await build({entryPoints:['src/sequencer-worklet.js'],bundle:true,minify:true,format:'iife',write:false,logLevel:'silent'});
