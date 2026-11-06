@@ -205,7 +205,7 @@ export class WorldControls {
     if (e.code === 'Space') this.jumpPress();
     // Extra keyboard-only alternatives; mouse remains the primary building input.
     if (!e.ctrlKey && !e.metaKey) {
-      const actions = {KeyR:'rotate',KeyV:'flight',KeyP:'place',KeyF:'use',KeyT:'torch'};
+      const actions = {KeyR:'rotate',KeyV:'flight',KeyP:'place',KeyF:'use',KeyT:'torch',KeyN:'view'};
       if (actions[e.code]) { e.preventDefault(); this.api.action(actions[e.code]); }
     }
   }

@@ -1,5 +1,6 @@
 import * as THREE from './vendor/three.module.min.js';
 import {TOOLS} from './equipment.js';
+import {characterPalette} from './character-style.js';
 export class HeldEquipment {
  constructor(scene,camera){
   this.camera=camera;scene.add(camera);
@@ -39,6 +40,10 @@ export class HeldEquipment {
   this.torch=new THREE.Group();this.foreground.add(this.torch);this.torch.position.set(-.36,-.36,-.62);this.torch.rotation.z=.12;
   part(this.torch,.055,.34,.055,0,0,0,'#9b683d');this.flame=part(this.torch,.09,.14,.09,0,.21,0,'#ffb34e');part(this.flame,.045,.11,.045,0,-.01,.045,'#fff0bb');
   this.light=new THREE.PointLight('#ffd19a',0,11,1.3);this.light.position.set(-.17,-.12,-.24);this.light.castShadow=true;this.light.shadow.mapSize.set(256,256);this.light.shadow.bias=-.001;this.light.shadow.normalBias=.025;this.light.shadow.camera.near=.06;this.light.shadow.camera.far=11;camera.add(this.light);
+ }
+ setStyle(value){
+  const p=characterPalette(value),colors=[p.shirt,p.skin.color,p.skin.shade];
+  this.models.hand.children.forEach((m,i)=>{m.material.color.set(colors[i]);m.userData.baseColor=m.material.color.clone();});
  }
  render(renderer){
   if(!this.root.visible&&!this.torch.visible)return;

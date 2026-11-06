@@ -19,6 +19,9 @@ import {crateContents,sleeveFor,sleeveBytes} from './record-sleeve.js';
 import {caveMaterial} from './cave-material.js';
 import {GroundDrops,DROP_LIMIT} from './ground-drops.js';
 import {HeldEquipment} from './held-equipment.js';
+import {characterSettings} from './character-style.js';
+import {CharacterAvatar} from './character-avatar.js';
+import {PlayerCamera} from './player-camera.js';
 import {discoverySites,discoveryKey,FIRST_CASE_VERSION} from './discovery-sites.js';
 import * as THREE from './vendor/three.module.min.js';
 import {BLOCKS,FURNITURE,uid} from './data.js';
@@ -44,6 +47,7 @@ export class World{
   for(const m of [this.material,this.glassMaterial,this.leafMaterial,this.floraMaterial,this.waterMaterial,this.terrainDepth,this.terrainDistance,this.leafDepthMaterial,this.leafDistanceMaterial])blendMaterial(m,this.detailBlend);
   this.atmosphere=new Atmosphere('Resonant Valley');this.skyScene=new SkyScene(this);this.horizon=new Horizon(this);this.traces=new WeatherTraces(this);this.detailRevision=0;this.feedback=new WorldFeedback(this.scene);
   this.drops=new GroundDrops(this);this.breakOverlay=new BreakOverlay(this.scene);this.hands=new HeldEquipment(this.scene,this.camera);this.heldState={};this.lastEntityLight=-1;
+  this.playerState={eyeHeight:1.66,visible:false};this.playerCamera=new PlayerCamera(this);this.avatar=new CharacterAvatar(this);this.setCharacter({});this.renderCamera=this.camera;
   addEventListener('resize',()=>{this.camera.aspect=innerWidth/innerHeight;this.camera.updateProjectionMatrix();this.renderer.setSize(innerWidth,innerHeight);});
  }
  get seed(){return this.stream?.generator.seed||'';}
@@ -131,7 +135,9 @@ export class World{
  async prepareEntry(equipment){
   this.setHeldEquipment({...equipment,visible:true});
   this.hands?.update(0,{...this.heldState,world:this,sky:1});
-  await prepareView(this,this.onLoading);
+  // Prepare the avatar's texture and shaders behind the loading screen, too.
+  this.preparingCharacter=true;this.avatar.root.visible=true;
+  try{await prepareView(this,this.onLoading);}finally{this.preparingCharacter=false;this.avatar.root.visible=false;}
  }
  ensureStandingSpace(){const p=this.camera.position;if(!this.collides(p.x,p.y-1.66,p.z))return;for(let y=Math.max(MIN_Y+1,Math.floor(p.y-1.66));y<=MAX_Y+1;y++)if(!this.collides(p.x,y,p.z)){p.y=y+1.66;return;}}
  setViewDistance(value){this.viewDistance=Math.max(2,Math.min(5,Number(value)||3));if(this.stream)this.stream.update(this.camera.position.x,this.camera.position.z,this.viewDistance);}
@@ -198,7 +204,9 @@ export class World{
  toggleLight(e){e.lit=e.lit===false;this.releaseEntityMesh(e.id);if(this.isReady(e.x,e.z))this.buildEntity(e);this.refreshLightSources();}
  lightAt(x,y,z){return this.stream?.lightAt(x,y,z)||[0,0];}
  setHeldEquipment(state){this.heldState=state;}
- swingTool(){this.hands?.swing();}
+ setCharacter(value){const next=characterSettings(value),changed=!this.character||next.skin!==this.character.skin||next.tone!==this.character.tone;this.character=next;if(changed){this.hands?.setStyle(next);this.avatar?.setStyle(next);}this.playerCamera?.setMode(next.view);}
+ updatePlayerView(dt=0){return this.renderCamera=this.playerCamera?.update(dt)||this.camera;}
+ swingTool(){this.hands?.swing();this.avatar?.swing();}
  showBreakDamage(target,progress){if(!target){this.breakOverlay?.clear();return;}this.breakOverlay?.show(target,progress,target.hit.entity?this.entityMeshes.get(target.hit.entity.id):null);}
  entityModel(e){
   const group=new THREE.Group(),wood='#a67950',dark='#503c31',ivory='#e8e5d9',metal='#3b454e';
@@ -272,8 +280,22 @@ export class World{
   return false;
  }
  pick(){
-  this.camera.updateWorldMatrix(true,false);this.ray.setFromCamera({x:0,y:0},this.camera);
-  const {origin,direction}=this.ray.ray,reach=7.5;
+  const camera=this.updatePlayerView(),eye=this.camera.position,hit=this.pickFrom(camera,7.5+camera.position.distanceTo(eye));
+  if(!hit||camera===this.camera)return hit;
+  // A view behind the player must never extend reach or allow using objects
+  // through a wall. Aim at the visible reticle, then check from the player's eye.
+  const direction=hit.point.clone().sub(eye),distance=direction.length();direction.normalize();
+  let blocked=distance>7.5||!!traceBlocks(eye,direction,Math.max(0,distance-.04),(x,y,z)=>this.get(x,y,z));
+  if(!blocked){
+   this.ray.set(eye,direction);this.ray.far=Math.max(0,distance-.04);const nearby=[];
+   for(const group of this.entityMeshes.values())if(group.position.distanceToSquared(eye)<(distance+3)**2){group.updateWorldMatrix(true,true);nearby.push(group);}
+   blocked=!!this.ray.intersectObjects(nearby,true)[0];
+  }
+  if(blocked){this.outline.visible=false;return null;}hit.distance=distance;return hit;
+ }
+ pickFrom(camera,reach){
+  camera.updateWorldMatrix(true,false);this.ray.setFromCamera({x:0,y:0},camera);
+  const {origin,direction}=this.ray.ray;
   const block=traceBlocks(origin,direction,reach,(x,y,z)=>this.get(x,y,z));
   this.ray.far=block?.distance??reach;
   const nearby=[];
@@ -294,12 +316,13 @@ export class World{
  nearestEntity(){let best=null,dist=4;for(const e of [...this.entities,...(this.discoveryEntities?.values()||[])]){const d=this.camera.position.distanceTo(new THREE.Vector3(e.x+.5,e.y+.7,e.z+.5));if(d<dist){dist=d;best=e;}}return best;}
  setTime(t){this.atmosphere?.setMode(t);this.time=this.atmosphere?.mode||t;}
  skipToMorning(){return this.atmosphere.morning();}
- resetView(){const p=this.generator.spawn;this.camera.position.set(p.x,p.y,p.z);this.camera.rotation.set(-.055,p.yaw,0,'YXZ');this.stream.update(p.x,p.z,this.viewDistance);}
+ resetView(){const p=this.generator.spawn;this.camera.position.set(p.x,p.y,p.z);this.camera.rotation.set(-.055,p.yaw,0,'YXZ');this.stream.update(p.x,p.z,this.viewDistance);this.playerCamera?.reset();this.avatar?.reset();}
  render(t,active){
   const p=this.camera.position;this.stream?.update(p.x,p.z,this.viewDistance);this.stream?.tick(t*1000);
 
   this.waterMaterial.uniforms.time.value=t;
   const dt=this.lastAtmosphereFrame===null||this.lastAtmosphereFrame===undefined?0:Math.min(1,Math.max(0,t-this.lastAtmosphereFrame));this.lastAtmosphereFrame=t;
+  this.updatePlayerView(dt);
   const sample=this.atmosphere.step(dt,this.generator.column(p.x,p.z),active&&!document.hidden);this.skyState=sample;this.skyScene?.update(t,sample);this.feedback?.update(Math.min(dt,.05),this.entityMeshes);
   this.traces?.update(t,sample);
   if(this.horizon)this.horizon.update(sample,this.skyScene.root.visible,dt);
@@ -309,8 +332,10 @@ export class World{
   if(t-this.lastEntityLight>.16){this.lastEntityLight=t;for(const [id,g] of this.entityMeshes){const e=this.entities.find(e=>e.id===id)||this.discoveryEntities?.get(id);if(e&&g.userData.light)g.userData.light.value.set(...this.lightAt(e.x+.5,e.y+.8,e.z+.5));}}
   for(const g of this.entityMeshes.values())g.traverse(o=>{if(o.userData.flame)o.scale.y=1+Math.sin(t*3.8+g.position.x)*.045;});
   this.hands?.update(t,{...this.heldState,sky:sky*(.25+sample.daylight*.75),world:this});
-  this.renderer.render(this.scene,this.camera);
-  this.hands?.render(this.renderer);
+  this.avatar?.update(t,Math.min(dt,.05),this.playerState,this.preparingCharacter||this.playerCamera?.third);
+  if(this.preparingCharacter)this.avatar.root.visible=true;
+  this.renderer.render(this.scene,this.renderCamera);
+  if(!this.playerCamera?.third)this.hands?.render(this.renderer);
  }
  serialize(){return {drops:this.drops?.serialize()||[],atmosphere:this.atmosphere?.serialize(),exploration:this.exploration?.serialize(),generator:this.generator.config(),tracks:this.railway?.serialize()||[],edits:[...this.edits],entities:this.entities.map(e=>({...e}))};}
 }

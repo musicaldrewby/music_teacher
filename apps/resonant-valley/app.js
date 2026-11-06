@@ -22,6 +22,7 @@ import {firstCaseHint} from './discovery-sites.js';
 import {DiscoveryUI} from './discovery-ui.js';
 import {World} from './world.js';
 import {WorldControls} from './controls.js';
+import {CharacterUI} from './character-ui.js';
 import {movementIntent,shoreJumpSpeed,SWIM_RISE,verticalSpeed} from './movement.js';
 import {MIN_Y,MAX_Y,WORLD_LIMIT,WATER,GENERATOR_VERSION} from './terrain.js';
 import {AudioEngine} from './audio.js';
@@ -42,13 +43,14 @@ const findVolume=()=>document.hidden||worldBusy?0:(audio?.volume??0)*(world?.atm
 const finds=new FindReveal({cue:kind=>findCues.play(audio?.ctx,kind,findVolume()),itemIcon,itemName:id=>ITEMS[id].name,
  audition:piece=>auditionSound(piece).catch(error=>toast(error.message))});
 const breaking=new BreakSession();let lastMiningSwing=-Infinity,lastMiningFrame=null;
+let characterUI;
 let controls,velocityY=0,grounded=false,flying=false,target=null,lastPick=0,toastTimer=null,worldChanged=false,eyeHeight=1.66,mouseState='released',worldBusy=false;
 let panelFromFree=false,hotbarSize='standard',idleSave=null,initializing=true;
 const download=(blob,name)=>{const a=document.createElement('a'),url=URL.createObjectURL(blob);a.href=url;a.download=name.replace(/[\\/:*?"<>|]/g,'-');document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),10000);};
 function toast(message){$('toast').textContent=message;$('toast').classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('toast').classList.remove('show'),3500);if(panel)$('studio-status').textContent=message;}
 function save(loud=false){if(initializing||worldBusy||!world?.stream||!studio)return false;try{const data=serialize();localStorage.setItem(SAVE_KEY,JSON.stringify(data));$('save-status').textContent='Saved on this device';worldChanged=false;if(loud)toast('World and music saved on this device.');return true;}catch(err){$('save-status').textContent='Download a backup';toast('Browser storage is unavailable or full. Download your world from the menu.');return false;}}
 function scheduleSave(){if(initializing)return;worldChanged=true;$('save-status').textContent='Saving…';clearTimeout(saveTimer);if(idleSave!==null)window.cancelIdleCallback?.(idleSave);idleSave=null;saveTimer=setTimeout(()=>{const flush=()=>{idleSave=null;if(worldChanged)save();};if(window.requestIdleCallback)idleSave=window.requestIdleCallback(flush,{timeout:1600});else flush();},900);}
-function serialize(){return {format:'resonant-valley-world',version:10,opening,equipmentVersion:2,packedSigns,packedCrates,carryTorch,bareHand,favorites:[...favorites],collection:profile,world:world.serialize(),mode,hotbar,otherBar,selected,inventory,records,song:studio.song,player:{x:world.camera.position.x,y:world.camera.position.y-eyeHeight+1.66,z:world.camera.position.z,yaw:world.camera.rotation.y,pitch:world.camera.rotation.x},settings:{hotbarSize,volume:audio.volume,time:world.time,sensitivity,mouseMode:controls?.dragMode?'drag':'mouse',viewDistance:world.viewDistance}};}
+function serialize(){return {format:'resonant-valley-world',version:10,opening,equipmentVersion:2,packedSigns,packedCrates,carryTorch,bareHand,favorites:[...favorites],collection:profile,world:world.serialize(),mode,hotbar,otherBar,selected,inventory,records,song:studio.song,player:{x:world.camera.position.x,y:world.camera.position.y-eyeHeight+1.66,z:world.camera.position.z,yaw:world.camera.rotation.y,pitch:world.camera.rotation.x},settings:{character:world.character,hotbarSize,volume:audio.volume,time:world.time,sensitivity,mouseMode:controls?.dragMode?'drag':'mouse',viewDistance:world.viewDistance}};}
 function validateState(data){if(!data||data.format!=='resonant-valley-world'||![1,2,3,4,5,6,7,8,9,10].includes(data.version)||!Array.isArray(data.world?.edits)||!Array.isArray(data.world?.entities))throw Error('Choose a Resonant Valley world file.');if(data.world.edits.length>180000||data.world.entities.length>300)throw Error('This world is too large for this version.');if(data.world.generator&&data.world.generator.version!==GENERATOR_VERSION)throw Error('This world needs a newer terrain generator.');const song=normalizeSong(data.song);const recs=(Array.isArray(data.records)?data.records:[]).slice(0,60).map((r,i)=>{
  const id=typeof r.id==='string'&&r.id.length?r.id.slice(0,80):uid();
  const colorIndex=Number.isInteger(r.colorIndex)?Math.abs(r.colorIndex)%COLORS.length:i%COLORS.length;
@@ -79,6 +81,7 @@ async function applyState(data,{keepCollection=false}={}){
  world.setRecordLibrary(records);setHotbarSize(s.settings?.hotbarSize);studio.load(s.song);studio.fillEmptyTrack(sound(profile.owned[0]));audio.setVolume(clamp(s.settings?.volume??.65,0,1));sensitivity=clamp(s.settings?.sensitivity??1,.3,2);
  if(!s.world.atmosphere){const phase={day:.32,sunset:.76,night:.92}[s.settings?.time]??.32;world.atmosphere.day=phase;world.setTime('cycle');}$('master-volume').value=audio.volume;$('sensitivity').value=sensitivity;$('daylight').value=world.time;
  velocityY=0;eyeHeight=1.66;flying=false;grounded=false;buildingUndo=[];
+ world.setCharacter(s.settings?.character);characterUI?.render();
  if(controls)controls.setDragMode(s.settings?.mouseMode==='drag');$('mouse-controls').value=s.settings?.mouseMode==='drag'?'drag':'mouse';
  updateMode();renderHotbar();refreshWorldInfo();world.setDiscoveryClaims(profile.claimed);
 }
@@ -153,6 +156,7 @@ function refreshMousePrompt(){
  document.body.classList.toggle('pointer-locked',!!controls?.locked);document.body.classList.toggle('roaming',roaming);
  document.body.classList.toggle('touch-play',touch);$('touch-controls').hidden=!(touch&&roaming);
  $('bare-hand').textContent=touch?'Fist':'Fist · 0';
+ $('view-toggle').hidden=!roaming;
  $('touch-lower').hidden=!flying;
  $('crosshair').classList.toggle('hidden',!!panel||!!show);
  $('lock-look').textContent=controls?.locked?'Esc · Cursor':controls?.dragMode?'Enable mouse look':'Resume mouse look';
@@ -169,6 +173,7 @@ function openPanel(id,extra){
  panel=id;controls?.release();$(id).classList.remove('hidden');$('modal-backdrop').classList.remove('hidden');
  world.outline.visible=false;$('target-label').textContent='';$('interact-hint').classList.add('hidden');
  if(id==='opening-panel')gigUI.open(extra);
+ if(id==='character-panel')characterUI?.render();
  if(id==='exchange-panel'){audio.stop();stopRecordUI();showExchange(extra);}
  fieldUI?.opened(id);if(id==='studio-panel'){recordRequest++;pendingRecord=null;if(activeRecord){audio.stop();stopRecordUI();}audio.setDistanceGain(1);studio.show(extra);}if(id==='inventory-panel')renderInventory();if(id==='records-panel')recordUI.open(extra);if(id==='collection-panel')discoveryUI.render();
  if(id==='studio-panel'&&profile.owned.length)audio.init().catch(e=>toast(e.message));
@@ -566,7 +571,7 @@ function bind(){
    if(ride?.cart&&['jump','flight','use'].includes(action)){interact();return;}
    if(action==='backpack'){if(panel==='inventory-panel')closePanel();else openPanel('inventory-panel');}
    if(action==='map'){if(panel==='map-panel')closePanel();else openPanel('map-panel');}if(action==='studio')openPanel('studio-panel');if(action==='undo')undoBuild();
-   if(action==='torch')toggleCarriedTorch();if(action==='hand')toggleHand();if(action==='place')place();if(action==='use')interact();
+   if(action==='view')toggleCharacterView();if(action==='torch')toggleCarriedTorch();if(action==='hand')toggleHand();if(action==='place')place();if(action==='use')interact();
    if(action==='rotate'){rotation=(rotation+1)%4;renderHotbar();}
    if(action==='flight'){if(mode==='creative'){flying=!flying;velocityY=0;$('touch-lower').hidden=!flying;toast(flying?(controls.coarse?'Flight on · Jump rises · Down descends':'Flight on · Space rises · Shift descends'):'Flight off');}else toast('Flight is available in Free build.');}
    if(action==='jump')jump();
@@ -574,6 +579,9 @@ function bind(){
   }
  });
  controls.setDragMode($('mouse-controls').value==='drag');
+ characterUI=new CharacterUI({get:()=>world.character,change:value=>{cancelMining();world.setCharacter(value);scheduleSave();}});
+ $('character-open').onclick=$('welcome-character').onclick=()=>openPanel('character-panel');
+ $('character-done').onclick=()=>closePanel();$('view-toggle').onclick=toggleCharacterView;
  $('new-world-open').onclick=$('welcome-new').onclick=$('new-world-toolbar').onclick=openWorldCreation;
  $('random-seed').onclick=()=>{$('world-seed').value=randomSeed();};
  $('create-world').onclick=async()=>{
@@ -600,6 +608,7 @@ function bind(){
  for(const action of ['jump','lower','use','place','rotate'])controls.bindTouchAction($('touch-'+action),action);
  addEventListener('beforeunload',()=>save());document.addEventListener('visibilitychange',()=>{if(document.hidden){findCues.stop();finds.clear();save();controls.clear();studio.releaseAll();if(world.skyState)fieldAudio.update(world.skyState,world.atmosphere,{active:false});}});
 }
+function toggleCharacterView(){cancelMining();world.setCharacter({...world.character,view:world.character.view==='third'?'first':'third'});characterUI?.render();scheduleSave();toast(world.character.view==='third'?'Third-person view · N switches back':'First-person view · N switches back');}
 function look(dx,dy){world.camera.rotation.y-=dx*.0024*sensitivity;world.camera.rotation.x=clamp(world.camera.rotation.x-dy*.0024*sensitivity,-1.48,1.48);}
 function jump(){
  if(flying)return;
@@ -653,7 +662,9 @@ async function init(){
  $('loading').classList.add('hidden');$('welcome').classList.remove('hidden');
  let previous=performance.now();
  function frame(now){
-  const dt=Math.min((now-previous)/1000,.05);previous=now;controls.update(now);move(dt);updateMining();
+  const dt=Math.min((now-previous)/1000,.05);previous=now;controls.update(now);move(dt);
+  world.playerState={eyeHeight,grounded,flying,visible:started&&!worldBusy,riding:ride?.cart,ridingHeading:ride?.heading,swimming:!flying&&world.isWater(world.camera.position.x,world.camera.position.y-eyeHeight+.6,world.camera.position.z)};
+  updateMining();
   if(controls.canMove()&&!document.hidden)world.drops.step(dt,world.camera.position,eyeHeight,mode==='gather'?collectDrop:null);
   const progress=world.stream.stats();$('terrain-status').textContent=progress.queued?'Loading terrain…':'';
   if(now-lastPick>120){

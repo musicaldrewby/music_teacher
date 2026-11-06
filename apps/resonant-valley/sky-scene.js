@@ -21,7 +21,7 @@ export class SkyScene {
  seed(seed){this.paint.seed(seed);this.noise=new Noise(seed+' sky');const positions=[];for(let i=0;i<900;i++){const a=this.noise.random(i,1)*Math.PI*2,y=this.noise.random(i,2)*2-1,r=Math.sqrt(1-y*y);positions.push(Math.cos(a)*r*145,y*145,Math.sin(a)*r*145);}this.starGeo.setAttribute('position',new THREE.Float32BufferAttribute(positions,3));this.roofs.clear();}
  roof(x,z){const key=Math.floor(x)+','+Math.floor(z);if(!this.roofs.has(key))this.roofs.set(key,roofHeight(this.world,x,z));return this.roofs.get(key);}
  update(t,s){
-  const w=this.world,p=w.camera.position,sky=w.lightAt(p.x,p.y,p.z)[0],underwater=w.isWater(p.x,p.y,p.z),visible=sky>.1&&!underwater;
+  const w=this.world,view=w.renderCamera||w.camera,p=view.position,sky=w.lightAt(p.x,p.y,p.z)[0],underwater=w.isWater(p.x,p.y,p.z),visible=sky>.1&&!underwater;
   this.root.position.copy(p);this.root.visible=visible;
   const angle=(s.phase-.22)*Math.PI*2,direction=new THREE.Vector3(Math.cos(angle),Math.sin(angle),-.32).normalize();
   this.paint.update(w.atmosphere.age,s,direction,p,rainFront(w.atmosphere));
@@ -30,8 +30,8 @@ export class SkyScene {
   if(underwater)w.scene.background.set('#167ba5');
   const mist=s.mist*.68+s.rain*.17+s.snow*.25;
   w.scene.fog.near=underwater?1:lerp(Math.max(16,(w.viewDistance-1.3)*16),7,mist);w.scene.fog.far=underwater?18:lerp(w.horizon?145:w.viewDistance*16-2,25,mist);
-  this.sun.visible=direction.y>-.025;this.sun.position.copy(direction).multiplyScalar(140);this.sun.quaternion.copy(w.camera.quaternion);this.sun.material.uniforms.opacity.value=1-s.cloud*.88;
-  const moonAngle=angle-s.moonIndex/8*Math.PI*2;this.moon.position.set(Math.cos(moonAngle),Math.sin(moonAngle),-.25).normalize().multiplyScalar(135);this.moon.visible=this.moon.position.y>-2&&s.moon>.01;this.moon.quaternion.copy(w.camera.quaternion);this.moon.material.uniforms.phase.value=s.moonIndex/8*Math.PI*2;this.moon.material.uniforms.opacity.value=(.2+s.night*.8)*(1-s.cloud*.94);
+  this.sun.visible=direction.y>-.025;this.sun.position.copy(direction).multiplyScalar(140);this.sun.quaternion.copy(view.quaternion);this.sun.material.uniforms.opacity.value=1-s.cloud*.88;
+  const moonAngle=angle-s.moonIndex/8*Math.PI*2;this.moon.position.set(Math.cos(moonAngle),Math.sin(moonAngle),-.25).normalize().multiplyScalar(135);this.moon.visible=this.moon.position.y>-2&&s.moon>.01;this.moon.quaternion.copy(view.quaternion);this.moon.material.uniforms.phase.value=s.moonIndex/8*Math.PI*2;this.moon.material.uniforms.opacity.value=(.2+s.night*.8)*(1-s.cloud*.94);
   this.stars.rotation.z=-(s.day-1+s.phase)*Math.PI*2;this.stars.material.opacity=s.night*(1-s.cloud)*.95;
   this.meteor.material.opacity=s.meteor;this.meteor.position.set(((w.atmosphere.age%300)-296)*13,0,0);
   this.aurora.material.uniforms.time.value=t;this.aurora.material.uniforms.opacity.value=s.aurora;this.aurora.visible=s.aurora>.01;
@@ -42,7 +42,7 @@ export class SkyScene {
   for(const material of [w.material,w.floraMaterial,w.leafMaterial])material.color.setScalar(1-s.wet*.13);
   if(w.windUniform)w.windUniform.value=t*(.35+s.wind);
   if(t-this.roofAge>.8){this.roofs.clear();this.roofAge=t;}
-  this.sheltered=this.roof(p.x,p.z)>p.y+.2;
+  this.sheltered=this.roof(w.camera.position.x,w.camera.position.z)>w.camera.position.y+.2;
   this.rain.visible=s.rain>.025&&!underwater;this.snow.visible=s.snow>.025&&!underwater;this.splashes.visible=this.rain.visible;
   const drop=(i,speed,radius)=>{const x=p.x+(this.noise.random(i,3)-.5)*radius+Math.sin(t*.2+i)*s.wind,z=p.z+(this.noise.random(i,4)-.5)*radius;const y=p.y+11-((t*speed+this.noise.random(i,5)*18)%18);return [x,y,z,this.roof(x,z)];};
   if(this.rain.visible){const count=Math.floor(280*s.rain);this.rainGeo.setDrawRange(0,count*2);for(let i=0;i<count;i++){const [x,y,z,roof]=drop(i,17,27),hidden=y<=roof;this.rainData.set([x,hidden?-1000:y,z,x+s.wind*.08,hidden?-1000:Math.max(roof,y-.65),z],i*6);}this.rainGeo.attributes.position.needsUpdate=true;}
