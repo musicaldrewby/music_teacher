@@ -1,6 +1,6 @@
 import {SoundFontVoice,FONT_INSTRUMENTS} from './soundfont.js?v=43';
 import {BoomwhackerVoice,BOOM_SAMPLES} from './boomwhacker-voice.js?v=42';
-import {MusicAudio} from './audio.js?v=43';
+import {MusicAudio} from './audio.js?v=44';
 import {WallSynth} from './synth.js?v=43';
 import {BassVoice,bassEvent} from './bass.js?v=43';
 import {SteelpanVoice} from './steelpan-voice.js?v=22';

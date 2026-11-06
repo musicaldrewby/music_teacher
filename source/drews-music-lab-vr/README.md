@@ -236,3 +236,28 @@ natural decay before note-off, check velocity/repeated notes/future-note
 cancellation, exercise all 24 synth presets and bass, and render a mixed WAV
 through the actual AudioWorklet and export scheduler. These checks do not
 replace a listening/playability check on a Quest headset.
+
+
+### Live input response (version 44)
+
+Playable room meshes and on-screen percussion now strike on pointerdown, matching
+held synth keys. Pointerup does not strike again; right-drag, sliders and room
+menus retain their existing behavior. Ready mouse, keyboard and VR-trigger notes
+reach the audio engine synchronously. Loading/suspended audio still waits for
+readiness and discards gestures released before it finishes. Controller raycasts
+refresh the current world transform before picking; frame-status text updates run
+after mallet contact processing.
+
+The live AudioContext requests the minimum supported buffer (`latencyHint: 0`),
+without forcing a different hardware sample rate. The master compressor's fixed
+6 ms look-ahead is replaced with a zero-delay soft peak guard, transparent below
+0.7 and bounded at full scale. SoundFont envelopes, filters and effects remain
+in the instrument path. Performance check also shows the browser's base/output
+latency estimate when available. Hardware/wireless output delay is not measured
+by the app and cannot be eliminated by input scheduling.
+
+`tests/latency.mjs` executes the production mouse/button/VR trigger handlers,
+checks cancellation and duplicate prevention, and measures sample-zero impulse
+response and peak protection in the master at 44.1/48 kHz. The existing real
+AudioWorklet suite also asserts prompt onset for every mapped SoundFont instrument.
+Physical mouse-to-speaker and Quest headset latency still require a device check.

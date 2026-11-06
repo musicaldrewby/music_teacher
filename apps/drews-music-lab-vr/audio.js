@@ -4,8 +4,15 @@ import {ResonantVoice} from './resonant-voice.js?v=30';
 import {SteelpanVoice} from './steelpan-voice.js?v=22';
 export class MusicAudio {
  constructor(){this.ctx=null;this.level=.65;this.voices=[];}
- init(context){if(this.ctx)return;this.ctx=context;const c=this.ctx;this.master=c.createGain();this.master.gain.value=this.level*.55;const limiter=c.createDynamicsCompressor();limiter.threshold.value=-12;limiter.knee.value=18;limiter.ratio.value=8;limiter.attack.value=.003;limiter.release.value=.15;this.master.connect(limiter);limiter.connect(c.destination);this.noise=c.createBuffer(1,c.sampleRate,c.sampleRate);let d=this.noise.getChannelData(0);for(let i=0;i<d.length;i++)d[i]=Math.random()*2-1;this.reverb=c.createConvolver();let b=c.createBuffer(2,c.sampleRate*1.8,c.sampleRate);for(let ch=0;ch<2;ch++){let a=b.getChannelData(ch);for(let i=0;i<a.length;i++)a[i]=(Math.random()*2-1)*Math.pow(1-i/a.length,3);}this.reverb.buffer=b;let wet=c.createGain();wet.gain.value=.13;this.reverb.connect(wet);wet.connect(this.master);}
- async start(){if(!this.ctx)this.init(new AudioContext());if(this.ctx.state!=='running')await this.ctx.resume();}
+ init(context){if(this.ctx)return;this.ctx=context;const c=this.ctx;this.master=c.createGain();this.master.gain.value=this.level*.55;
+  // Protect loud chords without the compressor's fixed look-ahead delay.
+  // Normal playing levels pass unchanged; only peaks above .7 bend softly.
+  this.limiter=c.createWaveShaper();const curve=new Float32Array(4097);
+  for(let i=0;i<curve.length;i++){const x=2*i/(curve.length-1)-1,a=Math.abs(x);curve[i]=a<=.7?x:Math.sign(x)*(.7+.3*Math.tanh((a-.7)/.3));}
+  this.limiter.curve=curve;this.limiter.oversample='none';this.master.connect(this.limiter);this.limiter.connect(c.destination);
+  this.noise=c.createBuffer(1,c.sampleRate,c.sampleRate);let d=this.noise.getChannelData(0);for(let i=0;i<d.length;i++)d[i]=Math.random()*2-1;this.reverb=c.createConvolver();let b=c.createBuffer(2,c.sampleRate*1.8,c.sampleRate);for(let ch=0;ch<2;ch++){let a=b.getChannelData(ch);for(let i=0;i<a.length;i++)a[i]=(Math.random()*2-1)*Math.pow(1-i/a.length,3);}this.reverb.buffer=b;let wet=c.createGain();wet.gain.value=.13;this.reverb.connect(wet);wet.connect(this.master);}
+ async start(){if(!this.ctx)this.init(new AudioContext({latencyHint:0}));if(this.ctx.state!=='running')await this.ctx.resume();}
+ latency(){const c=this.ctx;if(!c)return null;const base=Number.isFinite(c.baseLatency)?c.baseLatency:null,output=Number.isFinite(c.outputLatency)?c.outputLatency:null;return{base,output,total:base===null&&output===null?null:(base??0)+(output??0)};}
  galleryOutput(){if(!this.galleryBus){this.galleryBus=this.ctx.createGain();this.galleryAnalyser=this.ctx.createAnalyser();this.galleryAnalyser.fftSize=1024;this.galleryAnalyser.smoothingTimeConstant=.75;this.galleryBus.connect(this.galleryAnalyser);this.galleryAnalyser.connect(this.master);}return this.galleryBus;}
  async prepareSoundfont(){this.soundfont??=await preloadSoundfont();await this.soundfont.prepare(this.ctx);this.fontVoice??=new SoundFontVoice(this.ctx,this.master,this.reverb,this.soundfont);return this.soundfont;}
  async prepareBoomwhackers(){this.boomwhackers??=new BoomwhackerVoice(this.ctx,this.master,this.reverb);return this.boomwhackers.load();}

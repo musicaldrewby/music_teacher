@@ -37,6 +37,7 @@ const levels={};
 for(const type of Object.keys(FONT_INSTRUMENTS)){
  const ctx=context(14),audio=await makeAudio(ctx);audio.play(type,60,.35,0);audio.play(type,60,1,7);await bank.flush(ctx);
  const result=await ctx.startRendering(),soft=stats(result,0,1),hard=stats(result,7,8);
+ const onset=result.getChannelData(0).findIndex(x=>Math.abs(x)>1e-5);assert.ok(onset>=0&&onset/result.sampleRate<.012,`${type}: prompt onset through the real worklet and master (${onset/result.sampleRate}s)`);
  assert.ok(hard.peak>.003,`${type} must be audible (${hard.peak})`);assert.ok(hard.rms>soft.rms*1.2,`${type} dynamics`);levels[type]=+hard.peak.toFixed(3);
  if(['metallophone','glockenspiel','piano'].includes(type)){
   const early=stats(result,7.05,7.45).rms,late=stats(result,9,9.4).rms;
