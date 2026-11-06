@@ -7,7 +7,8 @@ class ValleySampler extends AudioWorkletProcessor {
   else if(data.type==='note')this.rack.note(data);
   else if(data.type==='release')this.rack.release(data.id,data.frame);
   else if(data.type==='stop')this.rack?.stop();
+  else if(data.type==='metering')this.rack?.setMetering(data.enabled,data.epoch);
  }catch(error){this.port.postMessage({type:'error',message:error.message});}};}
- process(inputs,outputs){if(this.rack)this.rack.render(outputs[0][0],outputs[0][1],currentFrame);return true;}
+ process(inputs,outputs){if(this.rack){this.rack.render(outputs[0][0],outputs[0][1],currentFrame);const levels=this.rack.meterSnapshot(currentFrame+outputs[0][0].length);if(levels)this.port.postMessage(levels);}return true;}
 }
 registerProcessor('valley-sampler',ValleySampler);

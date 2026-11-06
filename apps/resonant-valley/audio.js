@@ -7,7 +7,7 @@ export function loadSoundFont(){
  return bankPromise;
 }
 export class AudioEngine {
- constructor(){this.ctx=null;this.volume=.65;this.playing=false;this.source='studio';this.loop=true;this.metronome=false;this.serial=0;this.ready=false;}
+ constructor(){this.ctx=null;this.volume=.65;this.playing=false;this.source='studio';this.loop=true;this.metronome=false;this.serial=0;this.ready=false;this.metering=false;this.meterEpoch=0;this.meterFrames=[];this.silentLevels=new Float32Array(16);}
  async unlockWorld(){
   if(!this.ctx)this.ctx=new (window.AudioContext||window.webkitAudioContext)({latencyHint:'interactive'});
   if(this.ctx.state==='suspended')await this.ctx.resume();
@@ -25,25 +25,38 @@ export class AudioEngine {
   if(!this.ctx.audioWorklet){
    const [bytes,{SoundFontRack}]=await Promise.all([loadSoundFont(),import('./soundfont-rack.js')]);
    const rack=new SoundFontRack(bytes,this.ctx.sampleRate),node=this.ctx.createScriptProcessor(2048,0,2);
-   node.port={postMessage:data=>{if(data.type==='configure')rack.configure(data.tracks);else if(data.type==='sync')rack.sync(data.tracks);else if(data.type==='note')rack.note(data);else if(data.type==='release')rack.release(data.id,data.frame);else if(data.type==='stop')rack.stop();},close:()=>{node.onaudioprocess=null;rack.stop();}};
-   node.onaudioprocess=e=>rack.render(e.outputBuffer.getChannelData(0),e.outputBuffer.getChannelData(1),Math.round(e.playbackTime*this.ctx.sampleRate));
-   this.node=node;node.connect(this.output);this.ready=true;this.onStatus?.('GeneralUser GS · Compatibility audio');return;
+   node.port={postMessage:data=>{if(data.type==='configure')rack.configure(data.tracks);else if(data.type==='sync')rack.sync(data.tracks);else if(data.type==='note')rack.note(data);else if(data.type==='release')rack.release(data.id,data.frame);else if(data.type==='stop')rack.stop();else if(data.type==='metering')rack.setMetering(data.enabled,data.epoch);},close:()=>{node.onaudioprocess=null;rack.stop();}};
+   node.onaudioprocess=e=>{const frame=Math.round(e.playbackTime*this.ctx.sampleRate);rack.render(e.outputBuffer.getChannelData(0),e.outputBuffer.getChannelData(1),frame);const levels=rack.meterSnapshot(frame+e.outputBuffer.length);if(levels)this.receiveLevels(levels);};
+   this.node=node;node.connect(this.output);this.ready=true;this.setMetering(this.metering);this.onStatus?.('GeneralUser GS · Compatibility audio');return;
   }
   const [bytes]=await Promise.all([loadSoundFont(),this.ctx.audioWorklet.addModule(new URL('./soundfont-worklet.js',import.meta.url))]);
   this.node=new AudioWorkletNode(this.ctx,'valley-sampler',{numberOfInputs:0,numberOfOutputs:1,outputChannelCount:[2]});
   this.node.connect(this.output);
-  await new Promise((resolve,reject)=>{const timer=setTimeout(()=>reject(Error('Sound library timed out. Please try again.')),45000);this.node.port.onmessage=({data})=>{if(data.type==='ready'){clearTimeout(timer);resolve();}else if(data.type==='error'){clearTimeout(timer);reject(Error(data.message));this.onStatus?.('Audio: '+data.message);}};const copy=bytes.slice(0);this.node.port.postMessage({type:'init',bytes:copy},[copy]);});
-  this.ready=true;this.onStatus?.('GeneralUser GS · Ready');
+  await new Promise((resolve,reject)=>{const timer=setTimeout(()=>reject(Error('Sound library timed out. Please try again.')),45000);this.node.port.onmessage=({data})=>{if(data.type==='ready'){clearTimeout(timer);resolve();}else if(data.type==='levels')this.receiveLevels(data);else if(data.type==='error'){clearTimeout(timer);reject(Error(data.message));this.onStatus?.('Audio: '+data.message);}};const copy=bytes.slice(0);this.node.port.postMessage({type:'init',bytes:copy},[copy]);});
+  this.ready=true;this.setMetering(this.metering);this.onStatus?.('GeneralUser GS · Ready');
  }
  send(data){if(this.ready)this.node.port.postMessage(data);}
  setVolume(v){this.volume=clamp(v,0,1);if(this.graph)this.graph.master.gain.setTargetAtTime(this.volume*1.1,this.ctx.currentTime,.03);}
  setRoom(v){if(this.graph)this.graph.wet.gain.setTargetAtTime(v,this.ctx.currentTime,.08);}
  setEcho(v,bpm=96){if(this.graph){this.graph.echoWet.gain.setTargetAtTime(clamp(v,0,.5),this.ctx.currentTime,.03);this.graph.delay.delayTime.setTargetAtTime(echoSeconds(bpm),this.ctx.currentTime,.03);}}
  setDistanceGain(v){if(this.output)this.output.gain.setTargetAtTime(v,this.ctx.currentTime,.1);}
- audition(instrument,pitch,duration=2,velocity=.7,volume=.7,pads=null){
+ setMetering(enabled){this.metering=!!enabled;this.meterEpoch++;this.meterFrames.length=0;this.send({type:'metering',enabled:this.metering,epoch:this.meterEpoch});}
+ receiveLevels(data){if(!this.metering||data.epoch!==this.meterEpoch)return;this.meterFrames.push(data);if(this.meterFrames.length>16)this.meterFrames.shift();}
+ visualTime(now=performance.now()){
+  const ctx=this.ctx;if(!ctx)return 0;const out=ctx.getOutputTimestamp?.();
+  const time=out?.performanceTime>0?out.contextTime+(now-out.performanceTime)/1000:ctx.currentTime-(ctx.outputLatency??ctx.baseLatency??0);
+  return Math.max(0,Math.min(ctx.currentTime,time));
+ }
+ trackLevels(at=this.visualTime()){
+  if(!this.metering||!this.ctx||this.ctx.state!=='running')return this.silentLevels;
+  const frame=at*this.ctx.sampleRate;let latest=null;
+  for(const sample of this.meterFrames){if(sample.frame>frame)break;latest=sample;}
+  return latest&&frame-latest.frame<this.ctx.sampleRate*.25?latest.levels:this.silentLevels;
+ }
+ audition(instrument,pitch,duration=2,velocity=.7,volume=.7,pads=null,meterTrack=null){
   if(!this.ready)return null;const id='live-'+this.serial++;
   const frame=Math.round((this.ctx.currentTime+.005)*this.ctx.sampleRate);
-  this.send({type:'note',id,track:'audition',instrument,pads,pitch,velocity,volume,frame,duration});
+  this.send({type:'note',id,track:'audition',instrument,pads,pitch,velocity,volume,frame,duration,meterTrack});
   const release=()=>this.send({type:'release',id,frame:Math.max(frame+1,Math.round(this.ctx.currentTime*this.ctx.sampleRate))});
   return {release,cancel:release};
  }
@@ -61,7 +74,7 @@ export class AudioEngine {
   }
  }
  position(at=this.ctx?.currentTime){if(!this.playing||!this.ctx)return 0;const raw=(at-this.startTime)/this.sec+this.startStep;return raw<0?raw:raw%(this.song.bars*16);}
- stop(notify=true){clearInterval(this.timer);clearTimeout(this.endTimer);this.playing=false;this.send({type:'stop'});if(notify)this.onStop?.();}
+ stop(notify=true){clearInterval(this.timer);clearTimeout(this.endTimer);this.playing=false;this.send({type:'stop'});this.setMetering(this.metering);if(notify)this.onStop?.();}
  async exportWav(song){
   const bytes=await loadSoundFont(),rate=44100,worker=new Worker(new URL('./audio-render-worker.js',import.meta.url),{type:'module'});
   const result=await new Promise((resolve,reject)=>{const timer=setTimeout(()=>{worker.terminate();reject(Error('Audio export timed out.'));},120000);worker.onmessage=({data})=>{clearTimeout(timer);worker.terminate();data.error?reject(Error(data.error)):resolve(data);};worker.onerror=e=>{clearTimeout(timer);worker.terminate();reject(Error(e.message));};const copy=bytes.slice(0);worker.postMessage({bytes:copy,song,rate},[copy]);});
