@@ -46,7 +46,7 @@ body.touch-play {
 #touch-use svg { color:#ffd693; }
 #touch-gather svg { color:#d9c3ed; }
 .touch-play.roaming #world-toolbar { display:flex; padding-top:max(10px,env(safe-area-inset-top)); }
-.touch-play.roaming :is(#world-status,#discovery-hint,#controls-hint,#new-world-toolbar),.touch-play #world-toolbar kbd { display:none; }
+.touch-play.roaming :is(#world-status,#discovery-hint,#controls-hint),.touch-play #world-toolbar kbd { display:none; }
 .touch-play.roaming #field-compass { top:calc(max(10px,env(safe-area-inset-top)) + 48px); left:var(--touch-left); font-size:12px; padding:3px 7px; }
 .touch-play.roaming .world-footer { bottom:max(8px,env(safe-area-inset-bottom)); }
 .touch-play.roaming #bare-hand,.touch-play.roaming #carry-torch {

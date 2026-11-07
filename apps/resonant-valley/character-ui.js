@@ -24,6 +24,6 @@ export class CharacterUI{
   paintCharacterPortrait($('character-preview'),state,{back:this.back});$('character-name').textContent=skin.name;$('character-description').textContent=skin.note;
   $('character-turn').textContent=this.back?'Show front':'Show back';$('character-view').value=state.view;
   $('character-summary').textContent=skin.name+' · '+(state.view==='third'?'Third person':'First person');
-  $('view-toggle').textContent=state.view==='third'?'View: 3rd':'View: 1st';$('view-toggle').setAttribute('aria-label','Switch to '+(state.view==='third'?'first':'third')+' person');$('view-toggle').setAttribute('aria-pressed',String(state.view==='third'));
+  $('view-toggle').innerHTML=(state.view==='third'?'Third person':'First person')+' <kbd>N</kbd>';$('view-toggle').setAttribute('aria-label','Switch to '+(state.view==='third'?'first':'third')+' person');$('view-toggle').setAttribute('aria-pressed',String(state.view==='third'));
  }
 }

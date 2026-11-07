@@ -1,0 +1,95 @@
+/* A small set of everyday actions, with the rest grouped in the world menu. */
+#world-toolbar { gap:12px; }
+#world-toolbar .world-actions { gap:6px; }
+#world-toolbar .hud-button { min-height:40px; padding:7px 11px; font-size:15px; white-space:nowrap; }
+#world-toolbar .hud-button kbd { margin-left:7px; }
+#world-toolbar #studio-open { color:#ffe1a0; }
+#world-toolbar #menu-open { border-color:#9dbbd7 #40556f #40556f #9dbbd7; }
+#world-toolbar .hud-button span { margin-right:4px; }
+#world-toolbar button:focus-visible,#menu-panel :is(button,select,input,summary):focus-visible {
+ outline:3px solid #ffda8c; outline-offset:3px;
+}
+#menu-panel { width:min(560px,94vw); padding:23px; scrollbar-gutter:stable; scroll-padding:14px; }
+#menu-panel .panel-heading { margin-bottom:16px; }
+#menu-panel h2 { font-size:25px; }
+#menu-panel .eyebrow { color:#b6cde1; font-size:11px; letter-spacing:1.5px; }
+#menu-panel button { min-height:42px; font-size:16px; }
+#menu-panel #resume { display:flex; align-items:center; justify-content:space-between; padding:12px 15px; font-size:19px; }
+#menu-panel #character-open { margin:12px 0 0; padding:11px 13px; background:#2c4059; border-color:#7595b7 #24354d #24354d #7595b7; }
+#menu-panel #character-summary { color:#d0dded; font-size:14px; line-height:1.3; }
+#menu-panel .menu-shortcuts { margin:10px 0 18px; gap:8px; }
+#menu-panel .menu-shortcuts button { background:#22344b; }
+.menu-groups { display:grid; gap:8px; }
+.menu-group { border:2px solid #526e8d; background:#1c2e45; }
+.menu-group summary { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:12px 14px; list-style:none; cursor:pointer; }
+.menu-group summary::-webkit-details-marker { display:none; }
+.menu-group summary:hover { background:#314761; }
+.menu-group summary strong,.menu-group summary small { display:block; }
+.menu-group summary strong { font-size:18px; color:#e4effb; font-weight:400; }
+.menu-group summary small { margin-top:3px; color:#b1c7dd; font-size:14px; line-height:1.2; }
+.menu-chevron { color:#ffd391; font-size:25px; line-height:1; }
+.menu-group[open] summary { border-bottom:1px solid #526e8d; background:#2a4059; }
+.menu-group[open] .menu-chevron { transform:rotate(45deg); }
+.menu-group-body { padding:8px 14px 14px; }
+#menu-panel .settings-row { margin:12px 0; min-height:40px; gap:12px; font-size:16px; }
+#menu-panel .settings-row label { flex:1; }
+#menu-panel .settings-row select { font-size:15px; width:190px; max-width:52%; min-height:40px; padding:6px 8px; }
+.setting-slider { display:flex; align-items:center; gap:8px; width:190px; max-width:52%; }
+#menu-panel .setting-slider input { flex:1; min-width:0; width:100%; height:32px; accent-color:#9bcef0; }
+.setting-slider output { min-width:42px; color:#ffda9e; text-align:right; font-size:15px; }
+#menu-panel .menu-help { color:#bdcfe2; font-size:14px; line-height:1.4; margin:7px 0 12px; }
+#menu-panel .seed-card { margin-top:9px; padding:10px; }
+#menu-panel .seed-card output { font-size:17px; }
+#menu-panel .world-management { border-top:1px solid #526e8d; padding-top:14px; margin-top:15px; }
+#menu-panel .menu-extras { display:flex; gap:8px; margin:16px 0 0; }
+#menu-panel .menu-extras button { flex:1; background:transparent; color:#bfd5e9; border:1px solid #526781; font-size:14px; }
+#menu-panel #offline-note:empty { display:none; }
+#menu-panel #offline-note { display:block; margin-top:9px; }
+body:has(#menu-panel:not(.hidden)) :is(.world-footer,#player-actions) { visibility:hidden; }
+
+/* Escape reveals a tidy group rather than overlapping floating buttons. */
+body:not(.touch-play) #player-actions { position:absolute; right:20px; bottom:136px; display:flex; flex-direction:column; align-items:stretch; gap:8px; }
+body:not(.touch-play) #player-actions button { position:static; min-height:40px; padding:8px 12px; font-size:14px; text-align:left; }
+#view-toggle kbd { margin-left:8px; color:#f3cf94; }
+.pointer-locked:not(.touch-play) #player-actions { display:none; }
+#world-shortcuts { display:none; position:absolute; top:18px; right:20px; gap:15px; padding:7px 10px; color:#e4eef8; background:#172840c9; border:1px solid #526886; font-size:13px; }
+.pointer-locked:not(.touch-play) #world-shortcuts { display:flex; }
+#world-shortcuts kbd { margin-right:5px; color:#ffda9e; }
+.touch-play #view-toggle kbd { display:none; }
+.touch-play #view-toggle { max-width:114px; }
+.touch-play #world-toolbar .hud-button,.touch-play #menu-panel button,.touch-play #menu-panel select { min-height:44px; }
+
+@media (max-width:1050px) {
+ #world-toolbar .brand>div { display:none; }
+ #world-toolbar .hud-button kbd { display:none; }
+}
+@media (max-width:740px) {
+ #world-toolbar { align-items:center; }
+ #world-toolbar .brand { display:none; }
+ #world-toolbar .world-actions { flex:1; justify-content:center; gap:5px; }
+ #world-toolbar .hud-button { padding:6px 8px; font-size:14px; }
+ #menu-panel { padding:18px; }
+}
+@media (max-width:480px) {
+ #world-toolbar .hud-button { min-height:38px; padding:5px 7px; font-size:12px; }
+ #world-toolbar .hud-button span { display:none; }
+ #menu-panel { padding:15px; }
+ #menu-panel .settings-row { font-size:15px; gap:8px; }
+ #menu-panel .settings-row select { font-size:14px; }
+ .menu-group summary { padding:11px; }
+ .menu-group-body { padding:6px 10px 12px; }
+ #menu-panel button { font-size:15px; }
+ #world-shortcuts { top:58px; right:10px; font-size:12px; }
+ .touch-play.roaming #field-compass { top:calc(max(5px,env(safe-area-inset-top)) + 52px); }
+}
+@media (pointer:coarse) { #world-toolbar .hud-button,#menu-panel button,#menu-panel select { min-height:44px; } }
+@media (max-height:760px) {
+ #menu-panel { padding:16px; }
+ #menu-panel .panel-heading { margin-bottom:12px; }
+ #menu-panel #resume { padding:9px 12px; }
+ #menu-panel #character-open { margin-top:9px; padding:8px 12px; }
+ #menu-panel .menu-shortcuts { margin:8px 0 12px; }
+ #menu-panel .menu-extras { margin-top:10px; }
+ .menu-groups { gap:6px; }
+ .menu-group summary { padding:9px 12px; }
+}

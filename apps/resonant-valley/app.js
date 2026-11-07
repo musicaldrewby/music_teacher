@@ -79,7 +79,7 @@ async function applyState(data,{keepCollection=false}={}){
  packedSigns=(Array.isArray(s.packedSigns)?s.packedSigns:[]).filter(p=>p&&typeof p.id==='string').slice(-300).map(e=>({id:e.id.slice(0,80),...signData(e)}));
  packedCrates=(Array.isArray(s.packedCrates)?s.packedCrates:[]).filter(p=>p&&typeof p.id==='string').slice(0,Math.min(300,inventory.crate||0)).map(cratePack);
  world.setRecordLibrary(records);setHotbarSize(s.settings?.hotbarSize);studio.load(s.song);studio.fillEmptyTrack(sound(profile.owned[0]));audio.setVolume(clamp(s.settings?.volume??.65,0,1));sensitivity=clamp(s.settings?.sensitivity??1,.3,2);
- if(!s.world.atmosphere){const phase={day:.32,sunset:.76,night:.92}[s.settings?.time]??.32;world.atmosphere.day=phase;world.setTime('cycle');}$('master-volume').value=audio.volume;$('sensitivity').value=sensitivity;$('daylight').value=world.time;
+ if(!s.world.atmosphere){const phase={day:.32,sunset:.76,night:.92}[s.settings?.time]??.32;world.atmosphere.day=phase;world.setTime('cycle');}$('master-volume').value=audio.volume;$('sensitivity').value=sensitivity;updateSettingReadouts();$('daylight').value=world.time;
  velocityY=0;eyeHeight=1.66;flying=false;grounded=false;buildingUndo=[];
  world.setCharacter(s.settings?.character);characterUI?.render();
  if(controls)controls.setDragMode(s.settings?.mouseMode==='drag');$('mouse-controls').value=s.settings?.mouseMode==='drag'?'drag':'mouse';
@@ -142,6 +142,10 @@ function renderHotbar(){
  $('bare-hand').classList.toggle('active',item==='hand');$('bare-hand').setAttribute('aria-pressed',String(item==='hand'));
 }
 
+function updateSettingReadouts(){
+ $('volume-value').value=Math.round(audio.volume*100)+'%';
+ $('sensitivity-value').value=sensitivity.toFixed(1)+'×';
+}
 function refreshMousePrompt(){
  const mouseOnly=controls&&!controls.coarse&&!controls.dragMode;
  const show=started&&!panel&&!worldBusy&&(controls?.suspended||mouseOnly&&!controls.locked);
@@ -156,7 +160,7 @@ function refreshMousePrompt(){
  document.body.classList.toggle('pointer-locked',!!controls?.locked);document.body.classList.toggle('roaming',roaming);
  document.body.classList.toggle('touch-play',touch);$('touch-controls').hidden=!(touch&&roaming);
  $('bare-hand').textContent=touch?'Fist':'Fist · 0';
- $('view-toggle').hidden=!roaming;
+ $('view-toggle').hidden=!(started&&!panel&&!worldBusy);
  $('touch-lower').hidden=!flying;
  $('crosshair').classList.toggle('hidden',!!panel||!!show);
  $('lock-look').textContent=controls?.locked?'Esc · Cursor':controls?.dragMode?'Enable mouse look':'Resume mouse look';
@@ -550,7 +554,7 @@ function bind(){
   if(event.shiftKey&&(focus===first||focus===$('discovery-title'))){event.preventDefault();last?.focus();}
   else if(!event.shiftKey&&focus===last){event.preventDefault();first?.focus();}
  });
- $('world-mode').onchange=e=>{switchMode(e.target.value);scheduleSave();};$('master-volume').oninput=e=>{audio.setVolume(+e.target.value);scheduleSave();};$('sensitivity').oninput=e=>{sensitivity=+e.target.value;scheduleSave();};
+ $('world-mode').onchange=e=>{switchMode(e.target.value);scheduleSave();};$('master-volume').oninput=e=>{audio.setVolume(+e.target.value);updateSettingReadouts();scheduleSave();};$('sensitivity').oninput=e=>{sensitivity=+e.target.value;updateSettingReadouts();scheduleSave();};
  $('save-world').onclick=()=>save(true);$('return-home').onclick=()=>returnHome();$('export-world').onclick=()=>{download(new Blob([JSON.stringify(serialize())],{type:'application/json'}),'Resonant-Valley.world.json');toast('World backup downloaded.');};$('import-world').onclick=()=>$('world-file').click();
  $('world-file').onchange=async e=>{const f=e.target.files[0];if(!f)return;try{if(f.size>20e6)throw Error('Choose a world file under 20 MB.');const data=validateState(JSON.parse(await f.text()));if(!confirm('Open this world in place of your current world? Download your current world first if you want to keep it.'))return;await changeWorld(()=>applyState(data),{backup:true,message:'World opened.'});}catch(err){toast(err.message||'Could not open this world.');}finally{e.target.value='';}};
  $('record-stop').onclick=()=>{audio.stop();stopRecordUI();};$('record-loop').onchange=e=>{if(audio.source==='record'&&!stationPlayback&&!gigRun)audio.loop=e.target.checked;};$('records-create').onclick=()=>openPanel('studio-panel');
@@ -582,7 +586,7 @@ function bind(){
  characterUI=new CharacterUI({get:()=>world.character,change:value=>{cancelMining();world.setCharacter(value);scheduleSave();}});
  $('character-open').onclick=$('welcome-character').onclick=()=>openPanel('character-panel');
  $('character-done').onclick=()=>closePanel();$('view-toggle').onclick=toggleCharacterView;
- $('new-world-open').onclick=$('welcome-new').onclick=$('new-world-toolbar').onclick=openWorldCreation;
+ $('new-world-open').onclick=$('welcome-new').onclick=openWorldCreation;
  $('random-seed').onclick=()=>{$('world-seed').value=randomSeed();};
  $('create-world').onclick=async()=>{
   const seed=$('world-seed').value.trim()||randomSeed(),fresh=document.querySelector('[name="world-start"]:checked').value==='fresh';
@@ -594,7 +598,6 @@ function bind(){
  $('previous-world').onclick=async()=>{
   try{const raw=localStorage.getItem(PREVIOUS_KEY);if(!raw)return;const previous=validateState(JSON.parse(raw));await changeWorld(()=>applyState(previous,{keepCollection:true}),{backup:true,message:'Previous world restored.'});}catch(error){toast('Could not open the previous world: '+error.message);}
  };
- $('new-collection').onclick=openWorldCreation;
  $('view-distance').onchange=e=>{world.setViewDistance(e.target.value);scheduleSave();};
  $('carry-torch').onclick=toggleCarriedTorch;$('bare-hand').onclick=toggleHand;
  $('capture-mouse').onclick=()=>controls.requestLook();

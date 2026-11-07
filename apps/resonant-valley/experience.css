@@ -2,7 +2,6 @@
 .world-header{position:fixed;inset:0 0 auto;z-index:14;padding:14px 22px;min-height:72px;background:linear-gradient(#132446ed,#19335b88,transparent)}
 .world-actions{flex-wrap:wrap;justify-content:flex-end}
 .world-actions .hud-button{padding:10px 12px}
-#new-world-toolbar{border-top-color:#b9a2ff;border-left-color:#b9a2ff;background:#5d438f}
 .panel{top:calc(50% + 38px);max-height:calc(100dvh - 110px)}
 .studio{top:82px}
 #toast{z-index:30}

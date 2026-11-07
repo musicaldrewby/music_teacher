@@ -36,17 +36,23 @@ export class CharacterAvatar{
   this.accent.color.set(p.accent);this.headphones.visible=p.style==='headphones';this.cap.visible=p.style==='cap';
  }
  swing(){this.lastSwing=performance.now()/1000;}
- reset(){this.last.set(Infinity,Infinity,Infinity);this.walk=0;}
+ reset(){this.last.set(Infinity,Infinity,Infinity);this.phase=0;this.walk=0;}
  update(t,dt,state={},visible=false){
   const w=this.world,p=w.camera.position,ride=state.riding,crouch=!ride&&(state.eyeHeight??1.66)<1.54;
   this.root.visible=visible&&state.visible!==false;
-  const distance=Math.hypot(p.x-this.last.x,p.z-this.last.z),moving=Number.isFinite(distance)&&distance<1&&dt>0?Math.min(1,distance/dt/3):0;
-  this.last.copy(p);this.walk+=(moving-this.walk)*Math.min(1,dt*14);if(moving>.01)this.phase+=distance*9;
-  const stride=Math.sin(this.phase)*.62*this.walk,feet=p.y-(ride?1.30:state.eyeHeight??1.66);
+  const distance=Math.hypot(p.x-this.last.x,p.z-this.last.z);
+  // A full walking cycle spans about three blocks. Travel still controls the
+  // stride, with a cadence cap for sudden moves and a quiet pose in flight.
+  const stepping=!ride&&!state.flying&&(state.grounded!==false||state.swimming);
+  const speed=stepping&&Number.isFinite(distance)&&distance<1&&dt>0?distance/dt:0;
+  const moving=Math.min(1,speed/3.5);
+  this.last.copy(p);this.walk+=(moving-this.walk)*(1-Math.exp(-Math.max(0,dt)*10));
+  if(speed>.03)this.phase+=Math.min(distance*2,dt*11.4)*(state.swimming?.65:1);
+  const stride=Math.sin(this.phase)*.52*this.walk,feet=p.y-(ride?1.30:state.eyeHeight??1.66);
   this.root.position.set(p.x,feet,p.z);this.root.rotation.y=ride&&Number.isFinite(state.ridingHeading)?state.ridingHeading:w.camera.rotation.y;this.root.scale.y=crouch?.84:1;
   this.head.rotation.x=Math.max(-.65,Math.min(.65,w.camera.rotation.x));const headTurn=w.camera.rotation.y-this.root.rotation.y;this.head.rotation.y=Math.max(-.9,Math.min(.9,Math.atan2(Math.sin(headTurn),Math.cos(headTurn))));
   this.leftLeg.rotation.x=ride?1.25:stride;this.rightLeg.rotation.x=ride?1.25:-stride;
-  this.leftArm.rotation.set(-stride*.8,0,.045);this.rightArm.rotation.set(stride*.8,0,-.045);
+  this.leftArm.rotation.set(-stride*.65,0,.045);this.rightArm.rotation.set(stride*.65,0,-.045);
   if(ride){this.root.position.y-=.32;this.leftArm.rotation.x=this.rightArm.rotation.x=.45;}
   else if(state.swimming){this.leftArm.rotation.x=1.15+stride*.5;this.rightArm.rotation.x=1.15-stride*.5;}
   else if(state.flying){this.leftArm.rotation.z=.26;this.rightArm.rotation.z=-.26;}
