@@ -111,7 +111,8 @@ html:not([data-layout=compact]) #scene-buttons .scene-button small{font-size:11p
 html:not([data-layout=compact]) .section-heading h2{font-size:22px}
 html:not([data-layout=compact]) .panel-hint{font-size:13px;line-height:1.6}
 html:not([data-layout=compact]) #sequence-panel{padding:18px;gap:14px}
-html:not([data-layout=compact]) #sequence-panel button,html:not([data-layout=compact]) #sequence-panel select{font-size:13px;min-height:40px}
+/* Piano-roll notes follow the 24px pitch grid, not toolbar button sizing. */
+html:not([data-layout=compact]) #sequence-panel button:not(.roll-note),html:not([data-layout=compact]) #sequence-panel select{font-size:13px;min-height:40px}
 html:not([data-layout=compact]) #sequence-panel #roll-toolbar{gap:14px;margin:12px 0}
 html:not([data-layout=compact]) #sequence-panel #roll-scroll{min-height:300px}
 html:not([data-layout=compact]) .track-select span,html:not([data-layout=compact]) .mix-name{font-size:14px}
