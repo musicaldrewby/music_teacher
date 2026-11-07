@@ -66,6 +66,11 @@ html:not([data-layout=compact]) #soundroom-instrument .panel-legend{display:flex
 html:not([data-layout=compact]) #soundroom-instrument .startbar{padding:8px 11px;margin-bottom:12px}
 html:not([data-layout=compact]) #soundroom-instrument .startbar strong{font-size:14px}
 html:not([data-layout=compact]) #soundroom-instrument .startbar button{font-size:13px;min-height:42px}
+/* Keep the sound panel and keyboard stationary through audio startup. */
+#soundroom-instrument .startbar.ready{display:flex}
+#soundroom-instrument .startbar strong{display:block}
+#soundroom-instrument .startbar #enable{min-width:142px;flex-shrink:0}
+#soundroom-instrument .startbar.ready #enable{display:block;visibility:hidden}
 html:not([data-layout=compact]) .instrument #patch-screen{height:378px!important;padding:12px 14px}
 html:not([data-layout=compact]) .instrument #patch-screen[data-home=true]{height:274px!important}
 html:not([data-layout=compact]) #patch-screen .lcd-page-nav{margin:6px 0 10px!important}
