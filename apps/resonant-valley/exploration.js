@@ -1,8 +1,9 @@
+import {expeditionSites,EXPEDITION_NAMES} from './expedition-sites.js';
 import {SKYLINE_NAMES,skylineSites} from './skyline.js';
 import {BLOCKS} from './data.js';
 import {MIN_Y,MAX_Y,PAD,WATER,voxelIndex} from './terrain.js';
 import {nearbyLandmarks,LANDMARK_NAMES} from './landmarks.js';
-const placeNames={...LANDMARK_NAMES,...SKYLINE_NAMES};
+const placeNames={...LANDMARK_NAMES,...SKYLINE_NAMES,...EXPEDITION_NAMES};
 export const MAP_COLORS={ocean:'#326f9f',river:'#479bc2',beach:'#d6b36e',meadow:'#77aa68',forest:'#39745c',taiga:'#3e776f',alpine:'#cfdae8',desert:'#d1a462',wetland:'#607e8f'};
 const key=(x,z)=>`${Math.floor(x/16)},${Math.floor(z/16)}`;
 const validPoint=p=>p&&Number.isFinite(p.x)&&Number.isFinite(p.z)&&Math.abs(p.x)<=131071&&Math.abs(p.z)<=131071;
@@ -14,14 +15,14 @@ export class Exploration {
   this.visited=new Set((Array.isArray(raw.visited)?raw.visited:[]).filter(k=>typeof k==='string'&&/^-?\d{1,5},-?\d{1,5}$/.test(k)).slice(-12000));
   this.surveys=new Map();this.sampled=new WeakSet();for(const pair of (Array.isArray(raw.surveys)?raw.surveys:[]).slice(-768)){if(!Array.isArray(pair)||!this.visited.has(pair[0])||typeof pair[1]!=='string'||pair[1].length!==88)continue;try{const rawTile=atob(pair[1]);if(rawTile.length===64)this.surveys.set(pair[0],Uint8Array.from(rawTile,c=>c.charCodeAt(0)&127));}catch{}}
   this.markers=(Array.isArray(raw.markers)?raw.markers:[]).filter(validPoint).slice(0,60).map((p,i)=>({id:typeof p.id==='string'&&/^pin-[a-z0-9]+$/.test(p.id)?p.id:'pin-'+i,x:Math.round(p.x),z:Math.round(p.z),name:String(p.name||'My place').slice(0,36)}));
-  this.found=(Array.isArray(raw.found)?raw.found:[]).filter(p=>validPoint(p)&&typeof p.id==='string'&&Object.hasOwn(placeNames,p.type)).slice(-500).map(p=>({...p,name:placeNames[p.type]}));this.tracked=typeof raw.tracked==='string'?raw.tracked.slice(0,80):'home';this.keepsakes=new Set((Array.isArray(raw.keepsakes)?raw.keepsakes:[]).filter(k=>typeof k==='string'&&k.startsWith('landmark:1:')).slice(0,2000));
+  this.found=(Array.isArray(raw.found)?raw.found:[]).filter(p=>validPoint(p)&&typeof p.id==='string'&&Object.hasOwn(placeNames,p.type)).slice(-500).map(p=>({...p,name:placeNames[p.type]}));this.tracked=typeof raw.tracked==='string'?raw.tracked.slice(0,80):'home';this.keepsakes=new Set((Array.isArray(raw.keepsakes)?raw.keepsakes:[]).filter(k=>typeof k==='string'&&(k.startsWith('landmark:1:')||k.startsWith('expedition:1:'))).slice(0,2000));
  }
  visit(world){
   const p=world.camera.position,cx=Math.floor(p.x/16),cz=Math.floor(p.z/16);let changed=false;
   for(let dx=-1;dx<=1;dx++)for(let dz=-1;dz<=1;dz++){const k=`${cx+dx},${cz+dz}`;if(!world.isReady((cx+dx)*16+8,(cz+dz)*16+8))continue;if(!this.visited.has(k)){this.visited.add(k);changed=true;}const chunk=world.stream?.loaded.get(k);if(chunk?.ready&&!this.sampled.has(chunk)){this.sampled.add(chunk);const tile=surveyChunk(chunk),old=this.surveys.get(k);if(!old||tile.some((v,i)=>v!==old[i])){this.surveys.set(k,tile);changed=true;}}}
   while(this.surveys.size>768)this.surveys.delete(this.surveys.keys().next().value);
   while(this.visited.size>12000)this.visited.delete(this.visited.values().next().value);
-  const places=[...nearbyLandmarks(world.generator,p.x,p.z,22),...skylineSites(world.generator,p.x,p.z,22)];
+  const places=[...nearbyLandmarks(world.generator,p.x,p.z,22),...skylineSites(world.generator,p.x,p.z,22),...expeditionSites(world.generator,p.x,p.z,22)];
   const newly=[];for(const s of places)if(Math.hypot(p.x-s.x,p.z-s.z)<=22&&Math.abs(p.y-s.y)<22&&!this.found.some(f=>f.id===s.id)){this.found.push(s);newly.push(s);changed=true;}this.found=this.found.slice(-500);
   return {changed,newly};
  }

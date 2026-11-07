@@ -1,6 +1,6 @@
 [
   {
-    "title": "Mallet & Measure \u2014 Free Classroom Edition",
+    "title": "Mallet & Measure — Free Classroom Edition",
     "slug": "mallet-measure-free",
     "url": "https://musicaldrewby.github.io/music_teacher/apps/mallet-measure-free/",
     "original_url": "https://mallet-measure-free.musicaldrewby.chatgpt.site",
@@ -8,7 +8,7 @@
     "backend": null
   },
   {
-    "title": "Mr. Drew\u2019s Autoharp",
+    "title": "Mr. Drew’s Autoharp",
     "slug": "mr-drews-autoharp",
     "url": "https://musicaldrewby.github.io/music_teacher/apps/mr-drews-autoharp/",
     "original_url": "https://mr-drews-autoharp.musicaldrewby.chatgpt.site",
@@ -24,7 +24,7 @@
     "backend": null
   },
   {
-    "title": "Orbit \u2014 Polyrhythm Studio",
+    "title": "Orbit — Polyrhythm Studio",
     "slug": "orbit-polyrhythm-studio",
     "url": "https://musicaldrewby.github.io/music_teacher/apps/orbit-polyrhythm-studio/",
     "original_url": "https://orbit-polyrhythm-studio.musicaldrewby.chatgpt.site",
@@ -64,7 +64,7 @@
     "backend": null
   },
   {
-    "title": "Boomwhacker Play-Along \u2014 Teacher Edition",
+    "title": "Boomwhacker Play-Along — Teacher Edition",
     "slug": "drews-boomwhacker-creator",
     "url": "https://musicaldrewby.github.io/music_teacher/apps/drews-boomwhacker-creator/",
     "original_url": "https://drews-boomwhacker-creator.musicaldrewby.chatgpt.site",
@@ -96,7 +96,7 @@
     "backend": null
   },
   {
-    "title": "Mr. Drew\u2019s Name That Tune!",
+    "title": "Mr. Drew’s Name That Tune!",
     "slug": "mr-drews-name-that-tune",
     "url": "https://musicaldrewby.github.io/music_teacher/apps/mr-drews-name-that-tune/",
     "original_url": "https://mr-drews-name-that-tune.musicaldrewby.chatgpt.site",
@@ -128,7 +128,7 @@
     "backend": null
   },
   {
-    "title": "Mr. Drew\u2019s Music Lab \u00b7 VR",
+    "title": "Mr. Drew’s Music Lab · VR",
     "slug": "drews-music-lab-vr",
     "url": "https://musicaldrewby.github.io/music_teacher/apps/drews-music-lab-vr/",
     "original_url": "https://drews-music-lab-vr.musicaldrewby.chatgpt.site",
@@ -164,7 +164,7 @@
     "slug": "resonant-valley",
     "url": "https://musicaldrewby.github.io/music_teacher/apps/resonant-valley/",
     "original_url": "https://resonant-valley.musicaldrewby.chatgpt.site",
-    "source_commit": "f5746a72478ef60f31d27278f4392f3c72e96242",
+    "source_commit": "0e23177feecda9bd28c166138e75bf3b0df3edd5",
     "backend": null
   }
 ]

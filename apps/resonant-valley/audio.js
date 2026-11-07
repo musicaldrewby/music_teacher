@@ -1,3 +1,4 @@
+import {phraseRange} from './studio-takes.js';
 import {clamp} from './data.js';
 import {effectsGraph as graph,echoSeconds} from './audio-effects.js';
 
@@ -60,21 +61,21 @@ export class AudioEngine {
   const release=()=>this.send({type:'release',id,frame:Math.max(frame+1,Math.round(this.ctx.currentTime*this.ctx.sampleRate))});
   return {release,cancel:release};
  }
- start(song,{source='studio',countIn=false,loop=true,onEnd=null,initialGain=1,prepareSong=s=>s}={}){
-  if(!this.ready)return;this.stop(false);this.originalSong=song;this.prepareSong=prepareSong;this.song=prepareSong(song);this.source=source;this.loop=loop;this.onEnd=onEnd;this.playing=true;this.step=countIn?-16:0;this.startStep=this.step;this.sec=60/song.bpm/4;this.startTime=this.ctx.currentTime+.08;this.nextTime=this.startTime;this.setRoom(this.song.reverb);this.setEcho(this.song.delay,song.bpm);if(this.output){this.output.gain.cancelScheduledValues(this.ctx.currentTime);this.output.gain.setValueAtTime(initialGain,this.ctx.currentTime);}this.send({type:'configure',tracks:this.song.tracks});this.tick();this.timer=setInterval(()=>this.tick(),25);
+ start(song,{source='studio',countIn=false,loop=true,onEnd=null,onBoundary=null,range=null,initialGain=1,prepareSong=s=>s}={}){
+  if(!this.ready)return;this.stop(false);this.originalSong=song;this.prepareSong=prepareSong;this.song=prepareSong(song);this.source=source;this.loop=loop;this.onEnd=onEnd;this.onBoundary=onBoundary;this.range=phraseRange(song,range);this.playing=true;this.step=countIn?-16:0;this.startStep=this.step;this.sec=60/song.bpm/4;this.startTime=this.ctx.currentTime+.08;this.nextTime=this.startTime;this.setRoom(this.song.reverb);this.setEcho(this.song.delay,song.bpm);if(this.output){this.output.gain.cancelScheduledValues(this.ctx.currentTime);this.output.gain.setValueAtTime(initialGain,this.ctx.currentTime);}this.send({type:'configure',tracks:this.song.tracks});this.tick();this.timer=setInterval(()=>this.tick(),25);
  }
  tick(){
-  if(!this.playing)return;this.song=this.prepareSong(this.originalSong);const len=this.song.bars*16;this.setRoom(this.song.reverb);this.setEcho(this.song.delay,this.song.bpm);this.send({type:'sync',tracks:this.song.tracks.map(t=>({...t,notes:[]}))});
+  if(!this.playing)return;this.song=this.prepareSong(this.originalSong);const from=this.range?.start??0,end=this.range?.end??this.song.bars*16,len=end-from;this.setRoom(this.song.reverb);this.setEcho(this.song.delay,this.song.bpm);this.send({type:'sync',tracks:this.song.tracks.map(t=>({...t,notes:[]}))});
   if(this.nextTime<this.ctx.currentTime-.2){const missed=Math.floor((this.ctx.currentTime-this.nextTime)/this.sec);this.nextTime+=missed*this.sec;this.step+=missed;if(this.loop&&this.step>=len)this.step%=len;}
   while(this.nextTime<this.ctx.currentTime+.15){
-   if(this.step>=len){if(!this.loop){clearInterval(this.timer);this.endTimer=setTimeout(()=>{this.stop();this.onEnd?.();},Math.max(0,(this.nextTime-this.ctx.currentTime+(this.song.delay>0?9:3))*1000));return;}this.step=0;}
-   if(this.step>=0)this.song.tracks.forEach((t,i)=>{for(const n of t.notes)if(n.s>=this.step&&n.s<this.step+1)this.send({type:'note',track:i,pitch:n.p,velocity:n.v,frame:Math.round((this.nextTime+(n.s-this.step)*this.sec)*this.ctx.sampleRate),duration:Math.min(n.d,len-n.s)*this.sec});});
+   if(this.step>=len){if(!this.loop){clearInterval(this.timer);if(this.onBoundary)this.boundaryTimer=setTimeout(()=>this.onBoundary?.(),Math.max(0,(this.nextTime-this.ctx.currentTime)*1000));this.endTimer=setTimeout(()=>{this.stop();this.onEnd?.();},Math.max(0,(this.nextTime-this.ctx.currentTime+(this.song.delay>0?9:3))*1000));return;}this.step=0;}
+   if(this.step>=0)this.song.tracks.forEach((t,i)=>{for(const n of t.notes)if(n.s>=from+this.step&&n.s<from+this.step+1)this.send({type:'note',track:i,pitch:n.p,velocity:n.v,frame:Math.round((this.nextTime+(n.s-from-this.step)*this.sec)*this.ctx.sampleRate),duration:Math.min(n.d,end-n.s)*this.sec});});
    if((this.metronome&&this.source==='studio'||this.step<0)&&((this.step%4+4)%4===0)){const osc=this.ctx.createOscillator(),g=this.ctx.createGain();osc.frequency.value=this.step%16===0?1400:1050;g.gain.setValueAtTime(.035,this.nextTime);g.gain.exponentialRampToValueAtTime(.00001,this.nextTime+.03);osc.connect(g);g.connect(this.graph.input);osc.start(this.nextTime);osc.stop(this.nextTime+.04);setTimeout(()=>g.disconnect(),500);}
    this.nextTime+=this.sec;this.step++;
   }
  }
- position(at=this.ctx?.currentTime){if(!this.playing||!this.ctx)return 0;const raw=(at-this.startTime)/this.sec+this.startStep;return raw<0?raw:raw%(this.song.bars*16);}
- stop(notify=true){clearInterval(this.timer);clearTimeout(this.endTimer);this.playing=false;this.send({type:'stop'});this.setMetering(this.metering);if(notify)this.onStop?.();}
+ position(at=this.ctx?.currentTime){if(!this.playing||!this.ctx)return 0;const raw=(at-this.startTime)/this.sec+this.startStep;const from=this.range?.start??0,len=(this.range?.end??this.song.bars*16)-from;return raw<0?raw:from+(this.loop===false?Math.min(raw,len):raw%len);}
+ stop(notify=true){clearInterval(this.timer);clearTimeout(this.endTimer);clearTimeout(this.boundaryTimer);this.playing=false;this.send({type:'stop'});this.setMetering(this.metering);if(notify)this.onStop?.();}
  async exportWav(song){
   const bytes=await loadSoundFont(),rate=44100,worker=new Worker(new URL('./audio-render-worker.js',import.meta.url),{type:'module'});
   const result=await new Promise((resolve,reject)=>{const timer=setTimeout(()=>{worker.terminate();reject(Error('Audio export timed out.'));},120000);worker.onmessage=({data})=>{clearTimeout(timer);worker.terminate();data.error?reject(Error(data.error)):resolve(data);};worker.onerror=e=>{clearTimeout(timer);worker.terminate();reject(Error(e.message));};const copy=bytes.slice(0);worker.postMessage({bytes:copy,song,rate},[copy]);});

@@ -6,9 +6,9 @@ export function createWaterMaterial() {
     uniforms: {
       time: {value: 0}, shade: {value: 1},
       fogColor: {value: new THREE.Color('#b6dce6')}, fogNear: {value: 28}, fogFar: {value: 46},
-      shallowTint: {value: new THREE.Color('#48bdb4')},
-      channelTint: {value: new THREE.Color('#286eaa')},
-      deepTint: {value: new THREE.Color('#204d84')}
+      shallowTint: {value: new THREE.Color('#54d5ba')},
+      channelTint: {value: new THREE.Color('#237fae')},
+      deepTint: {value: new THREE.Color('#194d87')}
     },
     vertexShader: `
       attribute vec2 blockLight;
@@ -39,16 +39,29 @@ export function createWaterMaterial() {
         vec3 tint = mix(mix(shallowTint, channelTint, channel), deepTint, deep);
         vec3 sight = normalize(cameraPosition - worldPoint);
         float grazing = pow(1.0 - abs(sight.y), 3.0);
-        float swell = sin(worldPoint.x * 1.7 + worldPoint.z * 2.5 + time * 0.58);
-        float crest = sin(worldPoint.x * 2.1 + worldPoint.z * 3.7 + swell * 0.6 + time * 0.72);
-        float glint = smoothstep(0.90, 0.995, crest) * (0.65 + 0.35 * swell);
-        tint = mix(tint, fogColor, 0.025 + 0.13 * grazing);
-        tint += vec3(0.027, 0.047, 0.055) * glint;
-        float alpha = mix(0.33, 0.79, channel) + 0.10 * deep + 0.07 * grazing;
+        // World-anchored eighth-block pixels drift in two crossing currents.
+        // No displacement or reflection render pass: swimming and shore ledges
+        // use the exact same water surface as before.
+        vec2 pixel = floor(worldPoint.xz * 8.0) / 8.0;
+        float swell = sin(dot(pixel, vec2(1.3, 2.1)) + time * 0.7);
+        float ripple = sin(dot(pixel, vec2(4.5, -2.2)) - time * 1.25 + swell * 1.2);
+        float crossRipple = sin(dot(pixel, vec2(2.0, 5.1)) + time * 0.92);
+        float lines = smoothstep(0.72, 0.94, ripple);
+        float sparkle = smoothstep(0.88, 0.99, ripple) * smoothstep(0.68, 0.98, crossRipple);
+        float caustic = smoothstep(0.35, 0.65, abs(ripple * crossRipple)) * (1.0 - deep);
+        tint = mix(tint, fogColor, 0.055 + 0.23 * grazing);
+        tint += vec3(0.04, 0.12, 0.12) * lines + vec3(0.19, 0.26, 0.24) * sparkle;
+        tint += vec3(0.025, 0.065, 0.043) * caustic;
+        // Broken foam ribbons appear over shallow shoreline shelves.
+        float foam = (1.0 - smoothstep(0.65, 1.7, bedDepth))
+                   * smoothstep(0.38, 0.82, sin(dot(pixel, vec2(3.2, 1.7)) - time * 0.85 + swell));
+        tint = mix(tint, vec3(0.55, 0.86, 0.78), foam * 0.48);
+        float alpha = mix(0.35, 0.77, channel) + 0.10 * deep + 0.08 * grazing + foam * 0.12;
         if (surfaceUp < 0.5) {
-          float cascade = sin(worldPoint.y * 5.1 + time * 4.7 + sin(dot(worldPoint.xz, vec2(3.0, 2.1))));
-          tint = mix(tint, shallowTint, 0.38) + vec3(0.08, 0.15, 0.15) * smoothstep(0.30, 0.95, cascade);
-          alpha = 0.67;
+          vec2 flow = floor(vec2(worldPoint.x + worldPoint.z, worldPoint.y) * 8.0) / 8.0;
+          float cascade = sin(flow.y * 6.3 + time * 5.4 + sin(flow.x * 3.0));
+          tint = mix(tint, shallowTint, 0.46) + vec3(0.15, 0.23, 0.22) * smoothstep(0.30, 0.95, cascade);
+          alpha = 0.68;
         }
         float skyLight = clamp(caveLight.x, 0.0, 1.0);
         vec3 lit = tint * shade * (0.002 + skyLight * skyLight)

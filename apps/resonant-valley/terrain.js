@@ -1,3 +1,5 @@
+import {populateExpeditions,expeditionSites} from './expedition-sites.js';
+import {finishSteps} from './work-steps.js';
 import {venuePlaces} from './venue-places.js';
 import {plantSkyline,skylineSites} from './skyline.js';
 import {populateLandmarks} from './landmarks.js';
@@ -21,10 +23,12 @@ const coverDensity={forest:.78,taiga:.7,meadow:.13,wetland:.2,alpine:.07,desert:
 export const BIOMES={ocean:'Ocean',beach:'Beach',river:'River',meadow:'Meadow',forest:'Woodland',taiga:'Pine forest',alpine:'Snowy highlands',desert:'Desert',wetland:'Wetland'};
 
 export class TerrainGenerator {
-  constructor({seed='Resonant Valley',version=GENERATOR_VERSION,legacy=false,landmarksVersion=1,landmarkExclusions=[],skylineExclusions=[],skylineVersion=1,shorelineVersion=SHORELINE_VERSION,firstCaseVersion=FIRST_CASE_VERSION,caseLayoutVersion=CASE_LAYOUT_VERSION}={}) {
+  constructor({seed='Resonant Valley',version=GENERATOR_VERSION,legacy=false,expeditionsVersion=0,expeditionExclusions=[],landmarksVersion=1,landmarkExclusions=[],skylineExclusions=[],skylineVersion=1,shorelineVersion=SHORELINE_VERSION,firstCaseVersion=FIRST_CASE_VERSION,caseLayoutVersion=CASE_LAYOUT_VERSION}={}) {
     if(version!==GENERATOR_VERSION)throw Error('This world uses a newer terrain generator.');
     if(shorelineVersion!==0&&shorelineVersion!==SHORELINE_VERSION)throw Error('This world uses a newer shoreline generator.');
     this.shorelineVersion=shorelineVersion;
+    if(![0,1].includes(expeditionsVersion))throw Error('This world uses newer expedition sites.');
+    this.expeditionsVersion=expeditionsVersion;this.expeditionExclusions=Array.isArray(expeditionExclusions)?expeditionExclusions.filter(p=>Array.isArray(p)&&p.length===2&&p.every(Number.isInteger)).slice(0,180000):[];this.expeditionProtected=new Set(this.expeditionExclusions.map(p=>p.join(',')));
     if(![0,1].includes(skylineVersion))throw Error('This world uses a newer skyline generator.');
     this.skylineVersion=skylineVersion;this.skylineExclusions=Array.isArray(skylineExclusions)?skylineExclusions.filter(p=>Array.isArray(p)&&p.length===2&&p.every(Number.isInteger)).slice(0,180000):[];
     this.skylineProtected=new Set(this.skylineExclusions.map(p=>p.join(',')));
@@ -38,7 +42,7 @@ export class TerrainGenerator {
     this.home=this.legacy?{x:0,z:0,h:3}:this.findHome();
     this.spawn=this.legacy?{x:18.2,y:5.66,z:13.8,yaw:.49}:{x:this.home.x+8.2,y:this.home.h+2.66,z:this.home.z+12.8,yaw:.49};
   }
-  config(){return {seed:this.seed,version:this.version,legacy:this.legacy,landmarksVersion:this.landmarksVersion,landmarkExclusions:this.landmarkExclusions,skylineVersion:this.skylineVersion,skylineExclusions:this.skylineExclusions,shorelineVersion:this.shorelineVersion,firstCaseVersion:this.firstCaseVersion,caseLayoutVersion:this.caseLayoutVersion};}
+  config(){return {seed:this.seed,version:this.version,legacy:this.legacy,expeditionsVersion:this.expeditionsVersion,expeditionExclusions:this.expeditionExclusions,landmarksVersion:this.landmarksVersion,landmarkExclusions:this.landmarkExclusions,skylineVersion:this.skylineVersion,skylineExclusions:this.skylineExclusions,shorelineVersion:this.shorelineVersion,firstCaseVersion:this.firstCaseVersion,caseLayoutVersion:this.caseLayoutVersion};}
   rawColumn(x,z) {
     const n=this.noise;
     const wx=x+n.value2(x/290,z/290,7)*34,wz=z+n.value2(x/290,z/290,11)*34;
@@ -91,7 +95,7 @@ export class TerrainGenerator {
       if(d<30)c={...c,h:Math.round(mix(this.home.h,c.h,smooth(15,30,d))),biome:d<17?'meadow':c.biome};
     }
     if(this.shorelineVersion&&!c.preserved)c.bankSurface=naturalBankSurface(this.noise,c,x,z,SEA_LEVEL);
-    if(this.cache.size>6000)this.cache.clear();this.cache.set(k,c);return c;
+    if(this.cache.size>=12000)this.cache.delete(this.cache.keys().next().value);this.cache.set(k,c);return c;
   }
   material(c,depth,x,z) {
     if(depth>3)return 3;
@@ -121,6 +125,7 @@ export class TerrainGenerator {
   }
   naturalFeature(gx,gz,towers){
     const n=this.noise,x=gx*6+Math.floor(n.random(gx,gz,501)*5),z=gz*6+Math.floor(n.random(gx,gz,503)*5);
+    if(this.expeditionsVersion&&expeditionSites(this,x,z,11).some(s=>Math.max(Math.abs(s.x-x),Math.abs(s.z-z))<11))return null;
     if(towers.some(t=>Math.max(Math.abs(t.x-x),Math.abs(t.z-z))<7))return null;
     if(this.legacy?Math.max(Math.abs(x),Math.abs(z))<52:Math.max(Math.abs(x-this.home.x),Math.abs(z-this.home.z))<18)return null;
     const c=this.column(x,z),chance=n.random(gx,gz,509),density=coverDensity[c.biome]||0;
@@ -133,7 +138,8 @@ export class TerrainGenerator {
     const autumn=!pine&&n.random(x,z,527)>.72;
     return {kind:'tree',x,y,z,pine,height,leaf:pine?22:autumn?12:5,trunk:autumn?15:4};
   }
-  generateChunk(cx,cz) {
+  generateChunk(cx,cz) {return finishSteps(this.generateChunkSteps(cx,cz));}
+  *generateChunkSteps(cx,cz) {
     const x0=cx*CHUNK_SIZE-PAD,z0=cz*CHUNK_SIZE-PAD,cells=new Uint8Array(STRIDE*STRIDE*HEIGHT),decor=[];
     const get=(x,y,z)=>x<x0||x>=x0+STRIDE||z<z0||z>=z0+STRIDE||y<MIN_Y||y>MAX_Y?0:cells[voxelIndex(x-x0,y,z-z0)];
     const put=(x,y,z,id,onlyAir=false)=>{
@@ -142,6 +148,7 @@ export class TerrainGenerator {
     };
     for(let lx=0;lx<STRIDE;lx++)for(let lz=0;lz<STRIDE;lz++){
       const x=x0+lx,z=z0+lz,c=this.column(x,z);
+      yield;
       for(let y=MIN_Y;y<=Math.max(c.h,SEA_LEVEL);y++){
         let id=0;
         if(y<=c.h){id=this.material(c,c.h-y,x,z);if(this.cave(x,y,z,c))id=c.h<SEA_LEVEL||y<MIN_Y+8?WATER:0;}
@@ -154,6 +161,7 @@ export class TerrainGenerator {
     // boulders crossing its boundary do not depend on which chunk arrived first.
     const towers=skylineSites(this,x0+9,z0+9,24).filter(s=>s.type==='lookout');
     for(let gx=Math.floor((x0-4)/6);gx<=Math.floor((x0+STRIDE+4)/6);gx++)for(let gz=Math.floor((z0-4)/6);gz<=Math.floor((z0+STRIDE+4)/6);gz++){
+      yield;
       const feature=this.naturalFeature(gx,gz,towers);if(!feature)continue;
       const {x,y,z,height,pine,leaf,trunk}=feature;
       if(feature.kind==='cactus'){for(let dy=0;dy<height;dy++)put(x,y+dy,z,28);}
@@ -172,7 +180,7 @@ export class TerrainGenerator {
     if(this.legacy){
       // Preserve the complete old area, including its exact tree/cabin blocks.
       for(let lx=0;lx<STRIDE;lx++)for(let lz=0;lz<STRIDE;lz++){
-        const x=x0+lx,z=z0+lz;if(!this.inLegacy(x,z))continue;
+        const x=x0+lx,z=z0+lz;if(!this.inLegacy(x,z))continue;yield;
         for(let y=MIN_Y;y<=MAX_Y;y++){
           let id=y< -3?3:this.old.get(x,y,z);
           if(!id&&y<=SEA_LEVEL)id=WATER;put(x,y,z,id);
@@ -189,10 +197,14 @@ export class TerrainGenerator {
       if(base!==1||get(x,c.h+1,z)||this.noise.random(x,z,601)>.22)continue;
       decor.push({x:x+.2+this.noise.random(x,z,607)*.6,y:c.h+1,z:z+.2+this.noise.random(x,z,613)*.6,flower:this.noise.random(x,z,617)>.5,color:Math.floor(this.noise.random(x,z,619)*4)});
     }
+    yield;
     populateLandmarks(this,cx,cz,put,decor);
+    yield;
     plantSkyline(this,cx,cz,put);
-    for(const site of discoverySites(this,cx,cz))if(site.buried)put(site.x,site.y,site.z,29);
-    return {cx,cz,cells,decor};
+    yield;populateExpeditions(this,cx,cz,put);
+    yield;const discoveries=discoverySites(this,cx,cz);
+    for(const site of discoveries)if(site.buried)put(site.x,site.y,site.z,29);
+    return {cx,cz,cells,decor,discoveries};
   }
   cabin(put) {
     const {x:ox,z:oz,h}=this.home;

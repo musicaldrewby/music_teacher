@@ -92,7 +92,9 @@ export function claimCache(current,generator,site){
   return {profile:p,rewards,credits:p.credits-current.credits};
  }
 
- const reward=cacheReward(generator,site);grant(reward);p.credits+=8+hash(key+'credits')%13;
+ const reward=cacheReward(generator,site);
+ if(site.destination){const pool=SOUNDS.filter(s=>s.kind==='instrument'&&s.rarity==='rare'&&!p.owned.includes(s.id));if(pool.length)grant({...pool[hash(key+'destination')%pool.length],kind:'sound'});else{p.credits+=40;rewards.push({kind:'credits',name:'40 collection credits',rarity:'rare'});}}
+ grant(reward);p.credits+=8+hash(key+'credits')%13;
  if(p.dry>=4&&!added){const pool=SOUNDS.filter(s=>!p.owned.includes(s.id)&&rank[s.rarity]<=rank[reward.rarity]);if(pool.length)grant({...pool[hash(key+'new')%pool.length],kind:'sound',bonus:true});}
  if(p.rareDry>=12&&!rare){const pool=SOUNDS.filter(s=>s.rarity==='rare'&&!p.owned.includes(s.id));if(pool.length)grant({...pool[hash(key+'rare')%pool.length],kind:'sound',bonus:true});}
  p.dry=added?0:Math.min(4,p.dry+1);p.rareDry=rare?0:Math.min(12,p.rareDry+1);

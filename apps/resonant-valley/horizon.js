@@ -1,3 +1,4 @@
+import {sampleHorizonTile,horizonFeatures} from './horizon-samples.js';
 import * as THREE from './vendor/three.module.min.js';
 import {BLOCKS} from './data.js';
 import {skylineSites,skylineBoxes} from './skyline.js';
@@ -25,9 +26,10 @@ export class Horizon {
    const underlay=new THREE.Mesh(this.ground,backing);underlay.frustumCulled=false;underlay.renderOrder=-1;this.root.add(underlay);
   }
   const m=new THREE.Mesh(this.ground,this.landMat);m.frustumCulled=false;this.root.add(m);
-  this.features=new Map();this.dirty=new Set();this.tiles=new Map();this.pending=[];this.pendingParts=[];this.center='';this.revision=-1;
+  this.features=new Map();this.dirty=new Set();this.tiles=new Map();this.pending=[];this.pendingParts=[];this.center='';this.revision=-1;this.jobs=new Map();this.results=[];this.epoch=0;this.nextJob=0;this.planSerial=0;
  }
  reset(){
+  this.worker?.terminate();this.worker=null;this.workerTried=false;this.sentConfig=false;this.jobs.clear();this.results.length=0;this.localSample=null;this.nextPlan=null;this.epoch++;
   this.woods?.clear();this.woodEdits.clear();this.dirty.clear();this.tiles.clear();this.center='';this.pending=[];this.pendingParts=[];this.revision=-1;this.ground.setDrawRange(0,0);
   for(const {parts} of this.features.values())for(const m of parts.values()){this.root.remove(m);m.geometry.dispose();}
   this.features.clear();
@@ -67,9 +69,9 @@ export class Horizon {
   }
   const geo=b.geometry();markChunk(geo,cx,cz);return geo;
  }
- feature(s){
+ feature(s,boxes=skylineBoxes(this.w.generator,s)){
   const byChunk=new Map();
-  for(const b of skylineBoxes(this.w.generator,s)){
+  for(const b of boxes){
    for(let cx=Math.floor(b.x/16);cx<=Math.floor((b.x+b.w-1)/16);cx++)for(let cz=Math.floor(b.z/16);cz<=Math.floor((b.z+b.d-1)/16);cz++){
     const key=cx+','+cz,x=Math.max(b.x,cx*16),z=Math.max(b.z,cz*16),w=Math.min(b.x+b.w,cx*16+16)-x,d=Math.min(b.z+b.d,cz*16+16)-z;
     if(!byChunk.has(key))byChunk.set(key,[]);
@@ -78,15 +80,38 @@ export class Horizon {
   }
   return {site:s,parts:new Map(),byChunk};
  }
- plan(cx,cz){
-  const w=this.w,targets=skylineSites(w.generator,cx*16+8,cz*16+8,160),ids=new Set(targets.map(s=>s.id));
+ applyFeatures(targets,cx,cz){
+  const ids=new Set(targets.map(s=>s.site.id));
   for(const [id,{parts}] of this.features)if(!ids.has(id)){for(const m of parts.values()){this.root.remove(m);m.geometry.dispose();}this.features.delete(id);}
-  for(const s of targets)if(!this.features.has(s.id))this.features.set(s.id,this.feature(s));
+  for(const {site,boxes} of targets)if(!this.features.has(site.id))this.features.set(site.id,this.feature(site,boxes));
   this.pendingParts=[];
   for(const f of this.features.values())for(const k of f.byChunk.keys())if(!f.parts.has(k)){
    const [x,z]=k.split(',').map(Number);this.pendingParts.push({f,k,d:(x-cx)**2+(z-cz)**2});
   }
-  this.pendingParts.sort((a,b)=>b.d-a.d);
+  this.pendingParts.sort((a,b)=>b.d-a.d);this.featuresDirty=true;
+ }
+ ensureWorker(){
+  if(this.workerTried)return;this.workerTried=true;
+  try{
+   this.worker=new Worker(new URL('./horizon-worker.js',import.meta.url),{type:'module'});
+   this.worker.onmessage=({data})=>this.results.push(data);
+   this.worker.onerror=e=>{e.preventDefault?.();this.fallback();};
+  }catch{this.worker=null;}
+ }
+ fallback(){
+  this.worker?.terminate();this.worker=null;this.sentConfig=false;this.nextPlan=null;this.results.length=0;
+  for(const job of this.jobs.values())if(job.tile&&this.tiles.get(job.tile.key)===job.tile){job.tile.sampling=false;this.pending.push(job.tile);}
+  this.jobs.clear();const {cx,cz}=this.w.stream.center;this.applyFeatures(horizonFeatures(this.w.generator,cx,cz),cx,cz);
+ }
+ post(job){
+  const id=++this.nextJob;this.jobs.set(id,job);
+  try{this.worker.postMessage({...job,tile:undefined,id,epoch:this.epoch,config:this.sentConfig?undefined:this.w.generator.config()});this.sentConfig=true;}
+  catch{this.fallback();}
+ }
+ plan(cx,cz){
+  this.ensureWorker();this.planSerial++;
+  if(this.worker)this.nextPlan={kind:'plan',cx,cz,serial:this.planSerial};
+  else this.applyFeatures(horizonFeatures(this.w.generator,cx,cz),cx,cz);
   const next=new Map(),free=new Set(Array.from({length:TILES},(_,i)=>i)),missing=[];
   for(let x=cx-RANGE;x<=cx+RANGE;x++)for(let z=cz-RANGE;z<=cz+RANGE;z++){
    const key=x+','+z,tile=this.tiles.get(key);
@@ -94,12 +119,37 @@ export class Horizon {
   }
   const slots=free.values();for(const tile of missing){tile.slot=slots.next().value;next.set(tile.key,tile);}
   for(const [k,t] of this.tiles)if(!next.has(k)){this.woods?.remove(t);this.woodEdits.delete(k);}
-  this.tiles=next;this.pending=[...next.values()].filter(v=>!v.ready).sort((a,b)=>((b.x-cx)**2+(b.z-cz)**2)-((a.x-cx)**2+(a.z-cz)**2));
+  this.tiles=next;this.pending=[...next.values()].filter(v=>!v.ready&&!v.sampling).sort((a,b)=>((b.x-cx)**2+(b.z-cz)**2)-((a.x-cx)**2+(a.z-cz)**2));
  }
- fill(tile){
-  this.surface.fill(tile,this.w.generator,!!this.w.atlas);
-  this.woods?.fill(tile);tile.ready=true;
+ fill(tile,samples){
+  this.surface.fill(tile,this.w.generator,!!this.w.atlas,samples?.columns);
+  tile.treeSamples=samples?.trees;this.woods?.fill(tile,tile.treeSamples);tile.ready=true;
  }
+ sample(deadline){
+  let changed=false;
+  if(this.results.length){
+   const result=this.results.shift(),job=this.jobs.get(result.id);this.jobs.delete(result.id);
+   if(job&&result.epoch===this.epoch){
+    if(result.error){if(job.tile&&this.tiles.get(job.tile.key)===job.tile){job.tile.sampling=false;this.pending.push(job.tile);}this.fallback();}
+    else if(job.kind==='plan'){if(job.serial===this.planSerial)this.applyFeatures(result.data,job.cx,job.cz);}
+    else if(this.tiles.get(job.tile.key)===job.tile){this.fill(job.tile,result.data);changed=true;}
+   }
+  }
+  if(this.worker){
+   if(this.nextPlan&&![...this.jobs.values()].some(j=>j.kind==='plan')){const plan=this.nextPlan;this.nextPlan=null;this.post(plan);}
+   while(this.worker&&this.jobs.size<3&&this.pending.length){const tile=this.pending.pop();tile.sampling=true;this.post({kind:'tile',x:tile.x,z:tile.z,tile});}
+  }else{
+   if(!this.localSample&&this.pending.length){const tile=this.pending.pop();tile.sampling=true;this.localSample={tile,steps:sampleHorizonTile(this.w.generator,tile.x,tile.z)};}
+   if(this.localSample){
+    const {tile,steps}=this.localSample;let part;
+    do{part=steps.next();}while(!part.done&&performance.now()<deadline);
+    if(part.done){if(this.tiles.get(tile.key)===tile){this.fill(tile,part.value);changed=true;}this.localSample=null;}
+   }
+  }
+  return changed;
+ }
+ get pendingWork(){return this.jobs.size+this.results.length+(this.localSample?1:0)+(this.nextPlan?1:0);}
+
  update(s,visible,dt=1/60){
   const w=this.w,c=w.stream.center,cx=c.cx,cz=c.cz,key=cx+','+cz;
   const returning=!this.root.visible;this.root.visible=visible;
@@ -113,16 +163,10 @@ export class Horizon {
    const {f,k}=this.pendingParts.pop(),m=new THREE.Mesh(this.partGeometry(k,f.byChunk.get(k)),this.siteMat);
    this.root.add(m);f.parts.set(k,m);changed=true;if(performance.now()>=deadline)break;
   }
-  if(this.pending.length){
-   // Give the collision stream the rest of the frame, even in dense forests.
-   for(let i=0;i<12&&this.pending.length&&performance.now()<deadline;i++){
-    const tile=this.pending.pop();this.fill(tile);changed=true;
-    if(performance.now()>=deadline)break;
-   }
-  }
+  if(this.sample(deadline)||this.featuresDirty){changed=true;this.featuresDirty=false;}
   for(const k of this.woodEdits){
    if(performance.now()>=deadline)break;
-   const t=this.tiles.get(k);if(t?.ready)this.woods?.fill(t);
+   const t=this.tiles.get(k);if(t?.ready)this.woods?.fill(t,t.treeSamples);
    this.woodEdits.delete(k);if(performance.now()>=deadline)break;
   }
   this.woods?.flush();

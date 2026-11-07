@@ -1,3 +1,5 @@
+import {discoveryTrail,TrailChimes} from './discovery-trail.js';
+import {WorldSaveStore} from './world-save.js';
 import {OpeningNightUI,openingState,audibleScore} from './opening-night.js';
 import {upgradeVenues} from './venue-places.js';
 import {recordSharingEnabled} from './record-sharing.js';
@@ -32,6 +34,7 @@ const $=id=>document.getElementById(id);
 const escape=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const savePrefix='resonant-valley:'+new URL('.',import.meta.url).pathname;
 const SAVE_KEY=savePrefix+'world-v1',PREVIOUS_KEY=savePrefix+'previous-world';
+const worldSaves=new WorldSaveStore();let saveRevision=0;
 let opening=openingState(),gigUI,gigRun=null,exchangeFrame=null,exchangeSelected=null;
 let ride,stationVisit=null,stationPlayback=false,packedSigns=[];
 let world,audio,studio,started=false,panel=null,mode='gather',selected=0,tab='Craft',rotation=0,hotbar=freshBar('gather'),otherBar=freshBar('creative');
@@ -39,6 +42,7 @@ let inventory={hand:1},records=[],buildingUndo=[],saveTimer=null,savedState=null
 let profile=newCollection(),discoveryUI,carryTorch=false,bareHand=false,lastToolHint=-Infinity;
 let fieldUI,recordUI,packedCrates=[],recordRequest=0,pendingRecord=null,favorites=new Set();const fieldAudio=new WorldAudio();
 const findCues=new FindCues();
+const trailChimes=new TrailChimes(ctx=>findCues.buffer(ctx,'plucks'));let clueMode='both';
 const findVolume=()=>document.hidden||worldBusy?0:(audio?.volume??0)*(world?.atmosphere.effectsVolume??0)*(audio?.playing ? .65 : 1);
 const finds=new FindReveal({cue:kind=>findCues.play(audio?.ctx,kind,findVolume()),itemIcon,itemName:id=>ITEMS[id].name,
  audition:piece=>auditionSound(piece).catch(error=>toast(error.message))});
@@ -48,9 +52,14 @@ let controls,velocityY=0,grounded=false,flying=false,target=null,lastPick=0,toas
 let panelFromFree=false,hotbarSize='standard',idleSave=null,initializing=true;
 const download=(blob,name)=>{const a=document.createElement('a'),url=URL.createObjectURL(blob);a.href=url;a.download=name.replace(/[\\/:*?"<>|]/g,'-');document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),10000);};
 function toast(message){$('toast').textContent=message;$('toast').classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('toast').classList.remove('show'),3500);if(panel)$('studio-status').textContent=message;}
-function save(loud=false){if(initializing||worldBusy||!world?.stream||!studio)return false;try{const data=serialize();localStorage.setItem(SAVE_KEY,JSON.stringify(data));$('save-status').textContent='Saved on this device';worldChanged=false;if(loud)toast('World and music saved on this device.');return true;}catch(err){$('save-status').textContent='Download a backup';toast('Browser storage is unavailable or full. Download your world from the menu.');return false;}}
-function scheduleSave(){if(initializing)return;worldChanged=true;$('save-status').textContent='Saving…';clearTimeout(saveTimer);if(idleSave!==null)window.cancelIdleCallback?.(idleSave);idleSave=null;saveTimer=setTimeout(()=>{const flush=()=>{idleSave=null;if(worldChanged)save();};if(window.requestIdleCallback)idleSave=window.requestIdleCallback(flush,{timeout:1600});else flush();},900);}
-function serialize(){return {format:'resonant-valley-world',version:10,opening,equipmentVersion:2,packedSigns,packedCrates,carryTorch,bareHand,favorites:[...favorites],collection:profile,world:world.serialize(),mode,hotbar,otherBar,selected,inventory,records,song:studio.song,player:{x:world.camera.position.x,y:world.camera.position.y-eyeHeight+1.66,z:world.camera.position.z,yaw:world.camera.rotation.y,pitch:world.camera.rotation.x},settings:{character:world.character,hotbarSize,volume:audio.volume,time:world.time,sensitivity,mouseMode:controls?.dragMode?'drag':'mouse',viewDistance:world.viewDistance}};}
+async function save(loud=false){
+ if(initializing||worldBusy||!world?.stream||!studio)return false;
+ const revision=saveRevision;
+ try{const data=serialize();await worldSaves.write(SAVE_KEY,data);if(revision===saveRevision){$('save-status').textContent='Saved on this device';worldChanged=false;}if(loud)toast('World and music saved on this device.');return true;}
+ catch(err){$('save-status').textContent='Download a backup';toast('Browser storage is unavailable or full. Download your world from the menu.');return false;}
+}
+function scheduleSave(){if(initializing)return;saveRevision++;worldChanged=true;$('save-status').textContent='Saving…';clearTimeout(saveTimer);if(idleSave!==null)window.cancelIdleCallback?.(idleSave);idleSave=null;saveTimer=setTimeout(()=>{const flush=()=>{idleSave=null;if(worldChanged)save();};if(window.requestIdleCallback)idleSave=window.requestIdleCallback(flush,{timeout:1600});else flush();},900);}
+function serialize(){return {format:'resonant-valley-world',version:10,opening,equipmentVersion:2,packedSigns,packedCrates,carryTorch,bareHand,favorites:[...favorites],collection:profile,world:world.serialize(),mode,hotbar,otherBar,selected,inventory,records,song:studio.song,pendingTake:studio.take,player:{x:world.camera.position.x,y:world.camera.position.y-eyeHeight+1.66,z:world.camera.position.z,yaw:world.camera.rotation.y,pitch:world.camera.rotation.x},settings:{clueMode,character:world.character,hotbarSize,volume:audio.volume,time:world.time,sensitivity,mouseMode:controls?.dragMode?'drag':'mouse',viewDistance:world.viewDistance}};}
 function validateState(data){if(!data||data.format!=='resonant-valley-world'||![1,2,3,4,5,6,7,8,9,10].includes(data.version)||!Array.isArray(data.world?.edits)||!Array.isArray(data.world?.entities))throw Error('Choose a Resonant Valley world file.');if(data.world.edits.length>180000||data.world.entities.length>300)throw Error('This world is too large for this version.');if(data.world.generator&&data.world.generator.version!==GENERATOR_VERSION)throw Error('This world needs a newer terrain generator.');const song=normalizeSong(data.song);const recs=(Array.isArray(data.records)?data.records:[]).slice(0,60).map((r,i)=>{
  const id=typeof r.id==='string'&&r.id.length?r.id.slice(0,80):uid();
  const colorIndex=Number.isInteger(r.colorIndex)?Math.abs(r.colorIndex)%COLORS.length:i%COLORS.length;
@@ -78,9 +87,10 @@ async function applyState(data,{keepCollection=false}={}){
  records=s.records;
  packedSigns=(Array.isArray(s.packedSigns)?s.packedSigns:[]).filter(p=>p&&typeof p.id==='string').slice(-300).map(e=>({id:e.id.slice(0,80),...signData(e)}));
  packedCrates=(Array.isArray(s.packedCrates)?s.packedCrates:[]).filter(p=>p&&typeof p.id==='string').slice(0,Math.min(300,inventory.crate||0)).map(cratePack);
- world.setRecordLibrary(records);setHotbarSize(s.settings?.hotbarSize);studio.load(s.song);studio.fillEmptyTrack(sound(profile.owned[0]));audio.setVolume(clamp(s.settings?.volume??.65,0,1));sensitivity=clamp(s.settings?.sensitivity??1,.3,2);
+ world.setRecordLibrary(records);setHotbarSize(s.settings?.hotbarSize);studio.load(s.song,s.pendingTake);studio.fillEmptyTrack(sound(profile.owned[0]));audio.setVolume(clamp(s.settings?.volume??.65,0,1));sensitivity=clamp(s.settings?.sensitivity??1,.3,2);
  if(!s.world.atmosphere){const phase={day:.32,sunset:.76,night:.92}[s.settings?.time]??.32;world.atmosphere.day=phase;world.setTime('cycle');}$('master-volume').value=audio.volume;$('sensitivity').value=sensitivity;updateSettingReadouts();$('daylight').value=world.time;
  velocityY=0;eyeHeight=1.66;flying=false;grounded=false;buildingUndo=[];
+ clueMode=['both','visual','off'].includes(s.settings?.clueMode)?s.settings.clueMode:'both';$('treasure-clues').value=clueMode;
  world.setCharacter(s.settings?.character);characterUI?.render();
  if(controls)controls.setDragMode(s.settings?.mouseMode==='drag');$('mouse-controls').value=s.settings?.mouseMode==='drag'?'drag':'mouse';
  updateMode();renderHotbar();refreshWorldInfo();world.setDiscoveryClaims(profile.claimed);
@@ -89,14 +99,14 @@ function refreshWorldInfo(){
  $('current-seed').textContent=world.seed;
  $('generator-label').textContent=world.generator.legacy?'Original valley preserved · New terrain beyond':'Seeded landscape';
  $('view-distance').value=world.viewDistance;
- try{$('previous-world').disabled=!localStorage.getItem(PREVIOUS_KEY);}catch{$('previous-world').disabled=true;}
+ worldSaves.read(PREVIOUS_KEY).then(value=>{$('previous-world').disabled=!value;}).catch(()=>{$('previous-world').disabled=true;});
 }
 function randomSeed(){const a=new Uint32Array(2);crypto.getRandomValues(a);return Array.from(a,n=>n.toString(36)).join('-');}
 function openWorldCreation(){document.querySelector('[name="world-start"][value="fresh"]').checked=true;$('world-seed').value=randomSeed();$('world-create-status').textContent='';openPanel('new-world-panel');}
 async function changeWorld(action,{backup=false,message='Your world is ready.'}={}){
- if(worldBusy)return;const before=serialize();
- if(backup){try{localStorage.setItem(PREVIOUS_KEY,JSON.stringify(before));}catch{toast('Could not keep a backup. Download your world before creating another one.');return;}}
- worldBusy=true;refreshMousePrompt();finds.clear();findCues.stop();ride?.reset();stationVisit=null;controls?.release();clearTimeout(saveTimer);audio.stop();stopRecordUI();studio.releaseAll();
+ if(worldBusy)return;const before=serialize();worldBusy=true;saveRevision++;
+ if(backup){try{await worldSaves.write(PREVIOUS_KEY,before);}catch{worldBusy=false;toast('Could not keep a backup. Download your world before creating another one.');return;}}
+ refreshMousePrompt();finds.clear();findCues.stop();trailChimes.stop();ride?.reset();stationVisit=null;controls?.release();clearTimeout(saveTimer);audio.stop();stopRecordUI();studio.releaseAll();
  $('loading-message').textContent='Growing your valley…';$('loading').classList.remove('hidden');
  let success=false;
  try{await action();velocityY=0;eyeHeight=1.66;flying=false;grounded=false;buildingUndo=[];target=null;refreshWorldInfo();await prepareArrival();success=true;}
@@ -435,9 +445,10 @@ function tryDiscovery(){
  if(control&&!control.disabled)control.focus({preventScroll:true});
 }
 function updateDiscoveryHint(){
- const hint=$('discovery-hint');if(panel||!started){hint.classList.add('hidden');return;}
- const p=world.camera.position,sites=[...(world.discoveryEntities?.values()||[])];const nearest=sites.sort((a,b)=>Math.hypot(a.x-p.x,a.z-p.z)-Math.hypot(b.x-p.x,b.z-p.z))[0];
- hint.textContent=nearest?.starter?firstCaseHint(world.generator):nearest&&Math.hypot(nearest.x-p.x,nearest.z-p.z)<7?'An instrument case is nearby.':'';hint.classList.toggle('hidden',!hint.textContent);
+ const hint=$('discovery-hint'),active=started&&!panel&&!worldBusy&&!document.hidden;
+ const clue=active&&clueMode!=='off'?discoveryTrail(world):null;
+ hint.textContent=clue?.text||'';hint.classList.toggle('hidden',!clue);
+ trailChimes.update(audio?.ctx,clue,active&&clueMode==='both'&&!audio?.playing?findVolume():0,performance.now()/1000);
 }
 function saveRecord(song,quiet=false){
  if(records.length>=60){toast('Your shelf is full. Download your compositions before adding more.');return;}
@@ -496,12 +507,12 @@ function advanceShow(run){
  }
  const next=run.set[run.index++];playRecord(next,run.player,false,run);if(panel==='opening-panel')gigUI.refresh();
 }
-function collectListeningCopies(){
+async function collectListeningCopies(){
  const done=new Set();for(const edition of inbox()){
   if(records.some(r=>r.edition===edition.id)){done.add(edition.id);continue;}if(records.length>=60)break;
   try{const record=listeningCopy(edition);records.push(record);done.add(edition.id);}catch{done.add(edition.id);}
  }
- if(done.size){world.setRecordLibrary(records);if(save())clearFiled(done);renderRecords();}
+ if(done.size){world.setRecordLibrary(records);if(await save())clearFiled(done);renderRecords();}
 }
 function closeExchange(){exchangeFrame?.remove();exchangeFrame=null;exchangeSelected=null;}
 function showExchange(record){
@@ -543,7 +554,7 @@ function bind(){
   crateChanged:crate=>{world.refreshEntity(crate);scheduleSave();}
  });
 
- fieldUI=new FieldUI({world:()=>world,open:openPanel,save:scheduleSave,toast,keepsake:site=>{const gifts=world.exploration.keepsakes;if(mode!=='gather'||gifts.has(site.id)||gifts.size>=2000)return '';gifts.add(site.id);const [id,n]=({mesa:[25,4],lookout:[6,4],grove:[26,2],garden:['planter',1],workshop:[16,4],tree:[15,2],arch:[19,3],cascade:[11,3]})[site.type];gatherItem(id,n,site.name);renderHotbar();return true;}});$('bag-search').oninput=renderInventory;$('bag-sort').onchange=$('bag-favorites').onchange=renderInventory;$('bag-sounds').onclick=()=>openPanel('collection-panel');
+ fieldUI=new FieldUI({world:()=>world,open:openPanel,save:scheduleSave,toast,keepsake:site=>{const gifts=world.exploration.keepsakes;if(mode!=='gather'||gifts.has(site.id)||gifts.size>=2000)return '';gifts.add(site.id);const [id,n]=({studio:[7,6],vault:[13,6],observatory:[11,6],mesa:[25,4],lookout:[6,4],grove:[26,2],garden:['planter',1],workshop:[16,4],tree:[15,2],arch:[19,3],cascade:[11,3]})[site.type];gatherItem(id,n,site.name);renderHotbar();return true;}});$('bag-search').oninput=renderInventory;$('bag-sort').onchange=$('bag-favorites').onchange=renderInventory;$('bag-sounds').onclick=()=>openPanel('collection-panel');
  document.querySelectorAll('[data-mode]').forEach(b=>b.onclick=()=>{switchMode(b.dataset.mode);});$('enter-world').onclick=startWorld;$('welcome-help').onclick=()=>openPanel('help-panel');
  $('studio-open').onclick=()=>openPanel('studio-panel');$('collection-studio').onclick=()=>openPanel('studio-panel');$('discovery-studio').onclick=tryDiscovery;$('find-next').onclick=()=>finds.next();$('first-find-explore').onclick=()=>closePanel('play');$('collection-open').onclick=()=>openPanel('collection-panel');$('bag-open').onclick=()=>openPanel('inventory-panel');$('menu-open').onclick=()=>openPanel('menu-panel');document.querySelectorAll('[data-close]').forEach(b=>b.onclick=closePanel);$('modal-backdrop').onclick=closePanel;$('help-open').onclick=()=>openPanel('help-panel');
  document.querySelectorAll('[data-tab]').forEach(b=>b.onclick=()=>{tab=b.dataset.tab;renderInventory();});
@@ -555,6 +566,7 @@ function bind(){
   else if(!event.shiftKey&&focus===last){event.preventDefault();first?.focus();}
  });
  $('world-mode').onchange=e=>{switchMode(e.target.value);scheduleSave();};$('master-volume').oninput=e=>{audio.setVolume(+e.target.value);updateSettingReadouts();scheduleSave();};$('sensitivity').oninput=e=>{sensitivity=+e.target.value;updateSettingReadouts();scheduleSave();};
+ $('treasure-clues').onchange=e=>{clueMode=e.target.value;trailChimes.stop();scheduleSave();};
  $('save-world').onclick=()=>save(true);$('return-home').onclick=()=>returnHome();$('export-world').onclick=()=>{download(new Blob([JSON.stringify(serialize())],{type:'application/json'}),'Resonant-Valley.world.json');toast('World backup downloaded.');};$('import-world').onclick=()=>$('world-file').click();
  $('world-file').onchange=async e=>{const f=e.target.files[0];if(!f)return;try{if(f.size>20e6)throw Error('Choose a world file under 20 MB.');const data=validateState(JSON.parse(await f.text()));if(!confirm('Open this world in place of your current world? Download your current world first if you want to keep it.'))return;await changeWorld(()=>applyState(data),{backup:true,message:'World opened.'});}catch(err){toast(err.message||'Could not open this world.');}finally{e.target.value='';}};
  $('record-stop').onclick=()=>{audio.stop();stopRecordUI();};$('record-loop').onchange=e=>{if(audio.source==='record'&&!stationPlayback&&!gigRun)audio.loop=e.target.checked;};$('records-create').onclick=()=>openPanel('studio-panel');
@@ -596,7 +608,7 @@ function bind(){
   },{backup:true,message:fresh?'Your collection is empty. Look for the brass case near your cabin.':'New landscape ready. Your music and collection came with you.'});
  };
  $('previous-world').onclick=async()=>{
-  try{const raw=localStorage.getItem(PREVIOUS_KEY);if(!raw)return;const previous=validateState(JSON.parse(raw));await changeWorld(()=>applyState(previous,{keepCollection:true}),{backup:true,message:'Previous world restored.'});}catch(error){toast('Could not open the previous world: '+error.message);}
+  try{const raw=await worldSaves.read(PREVIOUS_KEY);if(!raw)return;const previous=validateState(raw);await changeWorld(()=>applyState(previous,{keepCollection:true}),{backup:true,message:'Previous world restored.'});}catch(error){toast('Could not open the previous world: '+error.message);}
  };
  $('view-distance').onchange=e=>{world.setViewDistance(e.target.value);scheduleSave();};
  $('carry-torch').onclick=toggleCarriedTorch;$('bare-hand').onclick=toggleHand;
@@ -609,7 +621,7 @@ function bind(){
  $('lock-look').onclick=()=>{if(controls.locked){controls.suspend();refreshMousePrompt();}else{controls.setDragMode(false);$('mouse-controls').value='mouse';controls.requestLook();}};
  controls.bindStick($('touch-stick'));controls.bindMiningButton($('touch-gather'));
  for(const action of ['jump','lower','use','place','rotate'])controls.bindTouchAction($('touch-'+action),action);
- addEventListener('beforeunload',()=>save());document.addEventListener('visibilitychange',()=>{if(document.hidden){findCues.stop();finds.clear();save();controls.clear();studio.releaseAll();if(world.skyState)fieldAudio.update(world.skyState,world.atmosphere,{active:false});}});
+ addEventListener('beforeunload',()=>save());document.addEventListener('visibilitychange',()=>{if(document.hidden){findCues.stop();trailChimes.stop();finds.clear();save();controls.clear();studio.releaseAll();if(world.skyState)fieldAudio.update(world.skyState,world.atmosphere,{active:false});}});
 }
 function toggleCharacterView(){cancelMining();world.setCharacter({...world.character,view:world.character.view==='third'?'first':'third'});characterUI?.render();scheduleSave();toast(world.character.view==='third'?'Third-person view · N switches back':'First-person view · N switches back');}
 function look(dx,dy){world.camera.rotation.y-=dx*.0024*sensitivity;world.camera.rotation.x=clamp(world.camera.rotation.x-dy*.0024*sensitivity,-1.48,1.48);}
@@ -649,7 +661,7 @@ function move(dt){
  if(p.y<MIN_Y-1)returnHome();
 }
 async function init(){
- try{const raw=localStorage.getItem(SAVE_KEY);if(raw)savedState=JSON.parse(raw);}catch{}
+ try{savedState=await worldSaves.read(SAVE_KEY);}catch(error){$('loading-message').textContent='Could not read your saved world. Close other valley tabs and reload; your save has not been changed.';console.warn(error);return;}
  try{world=new World($('world'));}catch(err){$('loading').innerHTML='<div class="small-logo">RV</div><p>This world needs WebGL graphics.</p><p>Try a desktop browser with hardware acceleration enabled.</p>'+(recordSharingEnabled?'<p><a href="./exchange.html">Open the Record Exchange</a></p>':'');console.error(err);return;}
  world.onLoading=message=>{$('loading-message').textContent=message;};
  audio=new AudioEngine();studio=new Studio(audio,emptySong(),{change:()=>scheduleSave(),toast,download,saveRecord,openRecords:record=>{openPanel('records-panel',record?{selected:record.id}:{});if(record)recordUI.editSleeve();},stopRecordUI,playbackChanged:()=>{},canInstrument:id=>hasSound(profile,id),firstSound:()=>sound(profile.owned[0]),firstFindClue:()=>profile.starter?'Find an unopened case or mine a violet inlay with a stone pickaxe.':firstCaseHint(world?.generator),trackLimit:()=>capacity(profile),mixerOwned:()=>profile.mixer,reverbOwned:()=>profile.reverb,delayOwned:()=>profile.delay,prepareSong:s=>playableSong(s,profile),openCollection:()=>openPanel('collection-panel')});

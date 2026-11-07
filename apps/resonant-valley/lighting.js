@@ -1,3 +1,4 @@
+import {finishSteps} from './work-steps.js';
 import {isLeaf} from './visuals.js';
 import {CHUNK_SIZE,MIN_Y,MAX_Y,HEIGHT,PAD,STRIDE,WATER,voxelIndex,chunkKey} from './terrain.js';
 export const LIGHT_MAX=15;
@@ -5,22 +6,25 @@ export const lightPassable=id=>id===0||id===8||id===WATER||isLeaf(id);
 const loss=id=>id===WATER||isLeaf(id)?2:1;
 // Skylight and warm block light travel through connected, transparent voxels.
 // Neighbor edges let the same field converge across streamed chunk boundaries.
-export function solveLight(chunk,edges=null,sources=[]){
+export function solveLight(chunk,edges=null,sources=[]){return finishSteps(solveLightSteps(chunk,edges,sources));}
+export function* solveLightSteps(chunk,edges=null,sources=[]){
  const {cells,cx,cz}=chunk,sky=new Uint8Array(cells.length),glow=new Uint8Array(cells.length);
  for(let x=0;x<STRIDE;x++)for(let z=0;z<STRIDE;z++){
+  if(z===0)yield;
   let level=LIGHT_MAX;
   for(let y=MAX_Y;y>=MIN_Y;y--){const i=voxelIndex(x,y,z),id=cells[i];if(!lightPassable(id)){level=0;continue;}if(id!==0&&id!==8)level=Math.max(0,level-loss(id));sky[i]=level;}
  }
  if(edges)for(let i=0;i<cells.length;i++)if(lightPassable(cells[i])){sky[i]=Math.max(sky[i],edges.sky[i]);glow[i]=edges.glow[i];}
  for(const s of sources){const x=Math.floor(s.x)-cx*CHUNK_SIZE+PAD,z=Math.floor(s.z)-cz*CHUNK_SIZE+PAD,y=Math.floor(s.y);if(x<0||x>=STRIDE||z<0||z>=STRIDE||y<MIN_Y||y>MAX_Y)continue;const i=voxelIndex(x,y,z);if(lightPassable(cells[i]))glow[i]=Math.max(glow[i],s.level||14);}
- const flood=field=>{
+ const flood=function*(field){
   const buckets=Array.from({length:16},()=>[]);for(let i=0;i<field.length;i++)if(field[i]>1)buckets[field[i]].push(i);
   const visit=(j,level)=>{if(!lightPassable(cells[j]))return;const v=level-loss(cells[j]);if(v>field[j]){field[j]=v;if(v>1)buckets[v].push(j);}};
-  for(let level=15;level>1;level--)for(const i of buckets[level]){if(field[i]!==level)continue;const y=i%HEIGHT,column=(i-y)/HEIGHT,z=column%STRIDE,x=(column-z)/STRIDE;
+  let visited=0;
+  for(let level=15;level>1;level--)for(const i of buckets[level]){if(++visited%1024===0)yield;if(field[i]!==level)continue;const y=i%HEIGHT,column=(i-y)/HEIGHT,z=column%STRIDE,x=(column-z)/STRIDE;
    if(y>0)visit(i-1,level);if(y<HEIGHT-1)visit(i+1,level);if(x>0)visit(i-STRIDE*HEIGHT,level);if(x<STRIDE-1)visit(i+STRIDE*HEIGHT,level);if(z>0)visit(i-HEIGHT,level);if(z<STRIDE-1)visit(i+HEIGHT,level);
   }
  };
- flood(sky);flood(glow);chunk.sky=sky;chunk.glow=glow;return chunk;
+ yield;yield* flood(sky);yield* flood(glow);chunk.sky=sky;chunk.glow=glow;return chunk;
 }
 export function lightEdges(loaded,cx,cz){
  const sky=new Uint8Array(STRIDE*STRIDE*HEIGHT),glow=new Uint8Array(sky.length);

@@ -46,11 +46,14 @@ export class DistantWoods{
   }
   this.mesh.count=this.parts.length;
  }
- fill(tile){
+ fill(tile,samples=null){
   this.remove(tile);tile.woods=[];
-  const g=this.world.generator,left=tile.x*16,top=tile.z*16,towers=skylineSites(g,left+8,top+8,24).filter(s=>s.type==='lookout');
-  for(let gx=Math.floor(left/6);gx<=Math.floor((left+15)/6);gx++)for(let gz=Math.floor(top/6);gz<=Math.floor((top+15)/6);gz++){
-   const f=g.naturalFeature(gx,gz,towers);
+  const g=this.world.generator,left=tile.x*16,top=tile.z*16;
+  if(!samples){
+   samples=[];const towers=skylineSites(g,left+8,top+8,24).filter(s=>s.type==='lookout');
+   for(let gx=Math.floor(left/6);gx<=Math.floor((left+15)/6);gx++)for(let gz=Math.floor(top/6);gz<=Math.floor((top+15)/6);gz++)samples.push(g.naturalFeature(gx,gz,towers));
+  }
+  for(const f of samples){
    if(!f||f.kind==='boulder'||f.x<left||f.x>=left+16||f.z<top||f.z>=top+16||changedTree(this.world.stream,f))continue;
    const x=f.x+.5,z=f.z+.5,h=f.height;
    if(f.kind==='cactus'){this.box(tile,x,f.y,z,1,h,1,28);continue;}

@@ -1,6 +1,7 @@
+import {finishSteps} from './work-steps.js';
 import {faceUVs} from './atlas-layout.js';
 import {isLeaf} from './visuals.js';
-import {solveLight} from './lighting.js';
+import {solveLightSteps} from './lighting.js';
 import {CHUNK_SIZE,MIN_Y,MAX_Y,HEIGHT,SEA_LEVEL,WATER,PAD,voxelIndex} from './terrain.js';
 import {hash3} from './noise.js';
 
@@ -118,14 +119,16 @@ function plantMesh(group,plant,read,light,x,z) {
   }
 }
 
-export function meshChunk(chunk) {
-  if(!chunk.sky)solveLight(chunk);
+export function meshChunk(chunk) {return finishSteps(meshChunkSteps(chunk));}
+export function* meshChunkSteps(chunk) {
+  if(!chunk.sky)yield* solveLightSteps(chunk);
   const groups=[blank(),blank(),blank(),blank(),blank()],{cells,cx,cz}=chunk;
   const corners=new Float32Array(4),depths=measureWater(cells);
   groups[2].waterDepth=[];
   const lighting=(lx,y,lz)=>{if(y>MAX_Y)return [1,0];if(y<MIN_Y)return [0,0];const i=voxelIndex(lx,y,lz);return [(chunk.sky[i]||0)/15,(chunk.glow[i]||0)/15];};
   const read=(lx,y,lz)=>y<MIN_Y||y>MAX_Y?0:cells[voxelIndex(lx,y,lz)];
   for(let lx=PAD;lx<CHUNK_SIZE+PAD;lx++)for(let lz=PAD;lz<CHUNK_SIZE+PAD;lz++)for(let y=MIN_Y;y<=MAX_Y;y++){
+    if(y===MIN_Y)yield;
     const id=read(lx,y,lz);if(!id)continue;
     const x=cx*CHUNK_SIZE+lx-PAD,z=cz*CHUNK_SIZE+lz-PAD,isWater=id===WATER,transparent=id===8,leaf=isLeaf(id);
     const g=groups[isWater?2:transparent?1:leaf?4:0];
@@ -152,6 +155,7 @@ export function meshChunk(chunk) {
       }
     }
   }
+  yield;
   for(const p of chunk.decor||[]){
     const lx=Math.floor(p.x)-cx*CHUNK_SIZE+PAD,lz=Math.floor(p.z)-cz*CHUNK_SIZE+PAD;
     plantMesh(groups[3],p,read,lighting(lx,p.y,lz),lx,lz);

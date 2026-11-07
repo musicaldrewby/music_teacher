@@ -1,13 +1,13 @@
-import {solveLight,lightEdges,needsNeighborLight,LIGHT_NEIGHBORS,sampleLight} from './lighting.js';
+import {solveLightSteps,lightEdges,needsNeighborLight,LIGHT_NEIGHBORS,sampleLight} from './lighting.js';
 import {TerrainGenerator,applyChunkEdits,CHUNK_SIZE,MIN_Y,MAX_Y,WORLD_LIMIT,PAD,STRIDE,voxelIndex,chunkKey,chunkAt,blockKey} from './terrain.js';
-import {meshChunk} from './chunk-mesh.js';
+import {meshChunkSteps} from './chunk-mesh.js';
 import {nextFrame} from './frame-work.js';
 
 // Only the moving neighborhood is resident. The edit journal survives eviction.
 export class TerrainStream {
   constructor(config,{worker=null,onLoad=()=>{},onUnload=()=>{},onError=()=>{}}={}){
     this.generator=new TerrainGenerator(config);this.worker=worker;this.onLoad=onLoad;this.onUnload=onUnload;this.onError=onError;
-    this.lightSources=[];this.loaded=new Map();this.edits=new Map();this.editChunks=new Map();this.revisions=new Map();this.dirty=new Set();
+    this.lightSources=[];this.loaded=new Map();this.edits=new Map();this.editChunks=new Map();this.revisions=new Map();this.geometryRevisions=new Map();this.dirty=new Set();
     this.pending=new Map();this.pendingKeys=new Set();this.queue=[];this.center=null;this.radius=3;this.epoch=1;this.nextId=1;this.closed=false;
     this.completed=[];this.nextLocalJob=0;this.travel=null;this.leadX=0;this.leadZ=0;
     if(worker){worker.onmessage=e=>{if(!this.closed)this.completed.push(e.data);};worker.onerror=e=>{e.preventDefault?.();this.fallback('Background terrain generation is unavailable.');};}
@@ -25,7 +25,7 @@ export class TerrainStream {
     if(this.center?.cx===cx&&this.center?.cz===cz&&this.radius===radius&&leadX===this.leadX&&leadZ===this.leadZ)return;
     this.leadX=leadX;this.leadZ=leadZ;
     this.center={cx,cz};this.radius=radius;
-    for(const [k,c] of this.loaded)if(!this.near(c.cx,c.cz,1)){this.onUnload(k);this.loaded.delete(k);this.dirty.delete(k);if(!this.editChunks.has(k))this.revisions.delete(k);}
+    for(const [k,c] of this.loaded)if(!this.near(c.cx,c.cz,1)){this.onUnload(k);this.loaded.delete(k);this.dirty.delete(k);if(!this.editChunks.has(k)){this.revisions.delete(k);this.geometryRevisions.delete(k);}}
     this.refreshQueue();
   }
   refreshQueue(){
@@ -59,7 +59,7 @@ export class TerrainStream {
     const cx=Math.floor(x/CHUNK_SIZE),cz=Math.floor(z/CHUNK_SIZE);
     for(let a=cx-1;a<=cx+1;a++)for(let b=cz-1;b<=cz+1;b++){
       const lx=x-a*CHUNK_SIZE+PAD,lz=z-b*CHUNK_SIZE+PAD;if(lx<0||lx>=STRIDE||lz<0||lz>=STRIDE)continue;
-      const key=chunkKey(a,b);this.revisions.set(key,(this.revisions.get(key)||0)+1);
+      const key=chunkKey(a,b);this.revisions.set(key,(this.revisions.get(key)||0)+1);this.geometryRevisions.set(key,(this.geometryRevisions.get(key)||0)+1);
       const c=this.loaded.get(key);if(c){c.cells[voxelIndex(lx,y,lz)]=id;this.dirty.add(key);}
     }
     return true;
@@ -77,12 +77,18 @@ export class TerrainStream {
   }
   makeJob(){
     let task,kind='generate';
-    for(const k of this.dirty){if(this.pendingKeys.has(k))continue;this.dirty.delete(k);const c=this.loaded.get(k);if(!c)continue;task={cx:c.cx,cz:c.cz,k};kind='remesh';break;}
+    // A nearby edit or stale collision chunk gets repaired immediately. New
+    // ground then alternates with lighting refreshes instead of waiting behind
+    // the entire lighting queue.
+    while(this.queue.length&&(this.loaded.has(this.queue[0].k)||this.pendingKeys.has(this.queue[0].k)||!this.near(this.queue[0].cx,this.queue[0].cz,1)))this.queue.shift();
+    const urgent=[...this.dirty].find(k=>!this.pendingKeys.has(k)&&this.loaded.get(k)?.ready===false);
+    if(!urgent&&this.queue.length&&(this.queue[0].tier<2||this.lastKind!=='generate'))task=this.queue.shift();
+    if(!task)for(const k of urgent?[urgent]:this.dirty){if(this.pendingKeys.has(k))continue;this.dirty.delete(k);const c=this.loaded.get(k);if(!c)continue;task={cx:c.cx,cz:c.cz,k};kind='remesh';break;}
     if(!task){while(this.queue.length){const q=this.queue.shift();if(!this.loaded.has(q.k)&&!this.pendingKeys.has(q.k)&&this.near(q.cx,q.cz,1)){task=q;break;}}}
-    if(!task)return null;
+    if(!task)return null;this.lastKind=kind;
     const job={id:this.nextId++,epoch:this.epoch,revision:this.revisions.get(task.k)||0,kind,cx:task.cx,cz:task.cz,config:this.generator.config(),edits:this.editsFor(task.cx,task.cz),lightEdges:lightEdges(this.loaded,task.cx,task.cz),lightSources:this.lightSources};
-    if(kind==='remesh'){const c=this.loaded.get(task.k);job.chunk={cx:c.cx,cz:c.cz,cells:c.cells.slice(),decor:c.decor};}
-    this.pending.set(job.id,{...task,revision:job.revision});this.pendingKeys.add(task.k);return job;
+    if(kind==='remesh'){const c=this.loaded.get(task.k);job.chunk={cx:c.cx,cz:c.cz,cells:c.cells.slice(),decor:c.decor,discoveries:c.discoveries};}
+    this.pending.set(job.id,{...task,revision:job.revision,geometryRevision:this.geometryRevisions.get(task.k)||0});this.pendingKeys.add(task.k);return job;
   }
   tick(frameTime){
     if(this.closed)return;
@@ -93,15 +99,23 @@ export class TerrainStream {
       if(job.chunk)transfers.push(job.chunk.cells.buffer);
       this.worker.postMessage(this.sentConfig?{...job,config:undefined}:job,transfers);this.sentConfig=true;
     }catch{this.fallback('Terrain worker could not start; using local generation.');break;}}}
-    else if(this.pending.size===0){
-      if(Number.isFinite(frameTime)&&frameTime<this.nextLocalJob)return;
-      const job=this.makeJob();if(!job)return;
-      const start=performance.now();
-      try{const chunk=job.chunk||this.generator.generateChunk(job.cx,job.cz);applyChunkEdits(chunk,job.edits);solveLight(chunk,job.lightEdges,job.lightSources);this.receive({id:job.id,epoch:job.epoch,revision:job.revision,chunk,meshes:meshChunk(chunk)});}
-      catch(error){this.receive({id:job.id,epoch:job.epoch,error:String(error)});}
-      if(Number.isFinite(frameTime))this.nextLocalJob=frameTime+Math.max(35,(performance.now()-start)*2);
+    else{
+      if(!this.localJob){const job=this.makeJob();if(!job)return;this.localJob={job,steps:this.localSteps(job)};}
+      const {job,steps}=this.localJob,deadline=performance.now()+3;
+      try{
+        let part;do{part=steps.next();}while(!part.done&&performance.now()<deadline);
+        if(part.done){this.localJob=null;this.receive(part.value);}
+      }catch(error){this.localJob=null;this.receive({id:job.id,epoch:job.epoch,error:String(error)});}
     }
   }
+  *localSteps(job){
+    const chunk=job.chunk||(yield* this.generator.generateChunkSteps(job.cx,job.cz));
+    applyChunkEdits(chunk,job.edits);yield;
+    yield* solveLightSteps(chunk,job.lightEdges,job.lightSources);
+    const meshes=yield* meshChunkSteps(chunk);
+    return {id:job.id,epoch:job.epoch,revision:job.revision,chunk,meshes};
+  }
+
   receive(result){
     if(this.closed||result.epoch!==this.epoch)return;
     const pending=this.pending.get(result.id);if(!pending)return;this.pending.delete(result.id);this.pendingKeys.delete(pending.k);
@@ -114,7 +128,7 @@ export class TerrainStream {
       this.dirty.add(pending.k);
     }
     else{
-      const previous=this.loaded.get(pending.k);chunk.ready=true;this.loaded.set(pending.k,chunk);this.onLoad(pending.k,chunk,result.meshes);
+      const previous=this.loaded.get(pending.k),lightingOnly=!!previous?.ready&&previous.geometryRevision===pending.geometryRevision;chunk.ready=true;chunk.geometryRevision=pending.geometryRevision;this.loaded.set(pending.k,chunk);this.onLoad(pending.k,chunk,result.meshes,lightingOnly);
       let missedLight=false;
       for(const [dx,dz] of LIGHT_NEIGHBORS){
         const neighbor=this.loaded.get(chunkKey(chunk.cx+dx,chunk.cz+dz));
@@ -139,5 +153,5 @@ export class TerrainStream {
     }
   }
   stats(){return {loaded:this.loaded.size,queued:this.queue.length+this.pending.size,edited:this.edits.size,worker:!!this.worker};}
-  dispose(){this.closed=true;this.worker?.terminate();for(const k of this.loaded.keys())this.onUnload(k);this.loaded.clear();this.pending.clear();this.completed.length=0;this.queue=[];this.edits.clear();this.editChunks.clear();this.revisions.clear();this.dirty.clear();}
+  dispose(){this.closed=true;this.localJob=null;this.worker?.terminate();for(const k of this.loaded.keys())this.onUnload(k);this.loaded.clear();this.pending.clear();this.completed.length=0;this.queue=[];this.edits.clear();this.editChunks.clear();this.revisions.clear();this.geometryRevisions.clear();this.dirty.clear();}
 }

@@ -21,7 +21,7 @@ export async function prepareView(world,report=()=>{},yieldFrame=nextFrame){
  while(true){
   await yieldFrame();check();world.render(performance.now()/1000,false);
   const h=world.horizon,pending=stream.queue.length+stream.pending.size+stream.completed.length+stream.dirty.size;
-  const scenery=h?.root.visible&&(h.pending.length+h.pendingParts.length+h.woodEdits.size);
+  const scenery=h?.root.visible&&(h.pending.length+h.pendingParts.length+h.woodEdits.size+(h.pendingWork||0));
   if(!pending&&!scenery)break;
   report(pending?'Preparing nearby terrain… '+stream.loaded.size+' chunks ready':'Preparing the horizon… '+[...h.tiles.values()].filter(t=>t.ready).length+' / '+h.tiles.size);
  }

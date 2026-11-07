@@ -41,7 +41,7 @@ function regional(g,cx,cz){
  if(Math.hypot(x-g.home.x,z-g.home.z)>138&&n.random(cx,cz,1463)>.18){
   const type=['mesa','lookout','grove'][Math.floor(n.random(cx,cz,1471)*3)];found=site(g,type,x,z,k);
  }
- if(cache.size>512)cache.clear();cache.set(k,found);return found;
+ if(cache.size>=512)cache.delete(cache.keys().next().value);cache.set(k,found);return found;
 }
 export function skylineSites(g,x,z,r){
  if(!g.skylineVersion)return [];

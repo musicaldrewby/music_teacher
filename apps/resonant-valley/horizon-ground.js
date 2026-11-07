@@ -61,13 +61,13 @@ export class HorizonGround{
   g.setIndex(new THREE.BufferAttribute(new Uint32Array(this.pattern.length),1).setUsage(THREE.DynamicDrawUsage));g.setDrawRange(0,0);
   this.heights=new Float32Array(STRIDE*STRIDE);this.tops=new Uint8Array(STRIDE*STRIDE);this.beds=new Int16Array(STRIDE*STRIDE);
  }
- fill(tile,terrain,textured){
+ fill(tile,terrain,textured,samples=null){
   const {heights,tops,beds}=this,g=this.geometry,a=g.attributes,left=tile.x*16,back=tile.z*16;
   const slot=blendSlot(tile.x,tile.z),first=tile.slot*groundTileVertices;let vertex=first;
   for(let z=-1;z<=N;z++)for(let x=-1;x<=N;x++){
-   const wx=left+x*STEP+1,wz=back+z*STEP+1,c=terrain.column(wx,wz),i=(z+1)*STRIDE+x+1;
+   const wx=left+x*STEP+1,wz=back+z*STEP+1,i=(z+1)*STRIDE+x+1,c=samples?.[i]||terrain.column(wx,wz);
    heights[i]=Math.max(WATER_TOP,c.h+1);beds[i]=c.h;
-   tops[i]=c.h<SEA_LEVEL?0:terrain.material(c,0,wx,wz);
+   tops[i]=c.h<SEA_LEVEL?0:(c.id??terrain.material(c,0,wx,wz));
   }
   const face=(x,y,z,ux,uy,uz,vx,vy,vz,nx,ny,nz,style,ink,shade)=>{
    for(let k=0;k<4;k++){

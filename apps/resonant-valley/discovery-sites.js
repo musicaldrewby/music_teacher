@@ -1,3 +1,4 @@
+import {expeditionSites,expeditionCase} from './expedition-sites.js';
 import {skylineGround} from './skyline.js';
 // Versioned placement is independent of load order and player inventory.
 export const DISCOVERY_VERSION=1;
@@ -44,7 +45,7 @@ function candidateAt(generator,cx,cz){
    }
   }
  }
- if(cache.size>=4096)cache.clear();
+ if(cache.size>=4096)cache.delete(cache.keys().next().value);
  cache.set(key,spot);return spot;
 }
 function anyNear(generator,spot,radius,qualifies){
@@ -69,6 +70,7 @@ function kept(generator,spot,kind,gap){
 export function discoverySites(generator,cx,cz){
  const out=[],first=firstCasePosition(generator);
  if(Math.floor(first.x/16)===cx&&Math.floor(first.z/16)===cz)out.push({id:'starter',type:'cache',...first,y:generator.column(first.x,first.z).h+1,starter:true,buried:false});
+ for(const place of expeditionSites(generator,cx*16+8,cz*16+8,24)){const site=expeditionCase(place);if(Math.floor(site.x/16)===cx&&Math.floor(site.z/16)===cz)out.push(site);}
  const spot=candidateAt(generator,cx,cz);
  if(!spot)return out;
  const {x,z,h}=spot,spaced=generator.caseLayoutVersion>=2;

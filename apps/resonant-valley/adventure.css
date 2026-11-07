@@ -1,0 +1,18 @@
+/* Compact field clues stay readable with either mouse or touch controls. */
+#hud #discovery-hint:not(.hidden){display:block;top:94px;left:14px;max-width:min(320px,calc(100vw - 28px));padding:7px 10px;font-size:13px;line-height:1.35;border:2px solid #9b92cb;border-left:4px solid #dbbbff;box-shadow:3px 3px #132039a6;color:#f4e9ff;background:#202b46e8;pointer-events:none}
+body.touch-play #hud #discovery-hint:not(.hidden){top:128px;max-width:min(260px,calc(100vw - 28px));font-size:12px}
+
+.record-workflow,.record-options,.phrase-controls,.take-buttons{display:flex;align-items:center;flex-wrap:wrap;gap:8px 14px}
+.record-workflow{flex-shrink:0;justify-content:space-between;padding:8px 18px;background:#172c46;border-bottom:2px solid #416083}
+#record-guide{color:#a5e1d7;font-size:13px;letter-spacing:.5px}
+.record-options{color:#cad9ef;font-size:13px;gap:14px}.record-options label{display:flex;gap:5px;align-items:center}
+#take-review:not(.hidden){display:flex;flex-shrink:0;align-items:center;justify-content:space-between;gap:10px;padding:12px 18px;background:#30445b;border-bottom:3px solid #f5cc7b;box-shadow:inset 4px 0 #f5cc7b}
+#take-review strong{font-size:19px;color:#ffdd94;display:block}#take-message{font-size:13px;color:#e1eaf6}
+.take-buttons{gap:8px}.take-buttons button{font-size:14px;min-height:36px;padding:7px 12px}.take-buttons button[aria-pressed=true]{background:#b9e9dc;color:#142a3c;border-color:#eefbe4}
+.studio #take-keep{background:#b3dd9a;color:#203b34;border-color:#e2f4cc #668765 #59755b #e2f4cc}
+.phrase-controls{flex-shrink:0;gap:7px 12px;padding:7px 13px;background:#213c58;border-bottom:2px solid #577b99;color:#c6d9ed;font-size:13px}
+.phrase-label{font-size:11px;color:#8ce4d1;letter-spacing:1.4px}.phrase-controls label{display:flex;align-items:center;gap:6px}.phrase-controls select{min-width:46px;height:29px;padding:3px 7px}.phrase-controls button{padding:5px 9px;font-size:13px;min-height:29px}
+.studio #repeat-phrase{margin-left:auto;color:#c2f4e2;border-bottom-color:#6ea395}
+@media(max-width:850px){#take-review:not(.hidden){align-items:flex-start;flex-direction:column;padding:9px 12px}.record-workflow{padding:7px 12px}.phrase-controls{gap:5px 9px;padding:6px 8px}.studio #repeat-phrase{margin-left:0}}
+@media(pointer:coarse){.phrase-controls :is(button,select),.take-buttons button{min-height:40px}.record-options label{min-height:32px}}
+@media(max-height:650px){.record-workflow{padding-block:3px}.phrase-controls{padding-block:3px}#take-review:not(.hidden){padding-block:5px}#take-message{display:none}}

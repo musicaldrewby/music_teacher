@@ -74,16 +74,23 @@ export class World{
   for(const e of this.entities)if(chunkAt(e.x,e.z)===k)this.releaseEntityMesh(e.id);
   for(const [id,e] of this.discoveryEntities||[])if(chunkAt(e.x,e.z)===k){this.releaseEntityMesh(id);this.discoveryEntities.delete(id);}
  }
- installChunk(k,chunk,groups){
+ installChunk(k,chunk,groups,lightingOnly=false){
+  const existing=this.chunks.get(k);
+  if(lightingOnly&&existing&&groups.filter(g=>g.p.length).length===existing.length&&existing.every(m=>groups[m.userData.groupIndex]?.l.length===m.geometry.attributes.blockLight.array.length)){
+   // Torch propagation only changes two floats per vertex. Retain positions,
+   // normals, UVs and GPU objects instead of disposing and uploading the world.
+   for(const mesh of existing){const attr=mesh.geometry.attributes.blockLight;attr.array=groups[mesh.userData.groupIndex].l;attr.needsUpdate=true;}
+   this.refreshTrackMesh(k);return;
+  }
   if(!this.chunks.has(k)){this.detailRevision=(this.detailRevision||0)+1;this.detailBlend?.add(k,chunk.cx,chunk.cz);}
   for(const mesh of this.chunks.get(k)||[]){this.scene.remove(mesh);mesh.geometry.dispose();}
   const materials=[this.material,this.glassMaterial,this.waterMaterial,this.floraMaterial,this.leafMaterial],meshes=[];
   groups.forEach((g,i)=>{
    if(!g.p.length)return;const geo=new THREE.BufferGeometry();
-   for(const [name,values,size] of [['position',g.p,3],['normal',g.n,3],['color',g.c,3],['uv',g.u,2],['blockLight',g.l,2]])geo.setAttribute(name,new THREE.BufferAttribute(values,size));
+   for(const [name,values,size] of [['position',g.p,3],['normal',g.n,3],['color',g.c,3],['uv',g.u,2],['blockLight',g.l,2]])geo.setAttribute(name,new THREE.BufferAttribute(values,size).setUsage(name==='blockLight'?THREE.DynamicDrawUsage:THREE.StaticDrawUsage));
    if(i===2)geo.setAttribute('waterDepth',new THREE.BufferAttribute(g.waterDepth,1));
    if(this.detailBlend)markChunk(geo,chunk.cx,chunk.cz);
-   geo.computeBoundingSphere();const mesh=new THREE.Mesh(geo,materials[i]);mesh.castShadow=i===0||i===4;if(i===0&&this.terrainDepth){mesh.customDepthMaterial=this.terrainDepth;mesh.customDistanceMaterial=this.terrainDistance;}if(i===4){mesh.customDepthMaterial=this.leafDepthMaterial;mesh.customDistanceMaterial=this.leafDistanceMaterial;}mesh.receiveShadow=i!==2;mesh.userData.chunk=true;mesh.userData.water=i===2;mesh.userData.decoration=i===3;this.scene.add(mesh);meshes.push(mesh);
+   geo.computeBoundingSphere();const mesh=new THREE.Mesh(geo,materials[i]);mesh.castShadow=i===0||i===4;if(i===0&&this.terrainDepth){mesh.customDepthMaterial=this.terrainDepth;mesh.customDistanceMaterial=this.terrainDistance;}if(i===4){mesh.customDepthMaterial=this.leafDepthMaterial;mesh.customDistanceMaterial=this.leafDistanceMaterial;}mesh.receiveShadow=i!==2;mesh.userData.groupIndex=i;mesh.userData.chunk=true;mesh.userData.water=i===2;mesh.userData.decoration=i===3;this.scene.add(mesh);meshes.push(mesh);
   });this.chunks.set(k,meshes);
   for(const e of this.entities)if(chunkAt(e.x,e.z)===k&&!this.entityMeshes.has(e.id))this.buildEntity(e);
   this.installDiscoveries(chunk.cx,chunk.cz);this.refreshTrackMesh(k);
@@ -91,7 +98,7 @@ export class World{
  setDiscoveryClaims(claimed){this.discoveryClaims=new Set(claimed||[]);for(const c of this.stream?.loaded.values()||[])if(c.ready)this.installDiscoveries(c.cx,c.cz);}
  installDiscoveries(cx,cz){
   this.discoveryEntities??=new Map();
-  for(const site of discoverySites(this.generator,cx,cz)){
+  for(const site of this.stream.loaded.get(cx+','+cz)?.discoveries||discoverySites(this.generator,cx,cz)){
    const id=discoveryKey(this.generator,site),claimed=this.discoveryClaims?.has(id);
    if(claimed){this.releaseEntityMesh(id);this.discoveryEntities.delete(id);if(site.buried&&this.get(site.x,site.y,site.z)===29)this.set(site.x,site.y,site.z,0);continue;}
    if(!site.buried&&!this.discoveryEntities.has(id)){const e={...site,siteId:site.id,id,discovery:true};this.discoveryEntities.set(id,e);this.buildEntity(e);}
@@ -105,6 +112,7 @@ export class World{
   if(data&&(data.edits.length>180000||data.entities.length>300))throw Error('This world is too large.');
   const config={...(data?.generator||{seed:'Original valley',legacy:true,version:GENERATOR_VERSION})};
   config.firstCaseVersion??=1;
+  if(config.expeditionsVersion===undefined){config.expeditionsVersion=1;config.expeditionExclusions=protectExisting(data);}
   if(config.skylineVersion===undefined){config.skylineVersion=1;config.skylineExclusions=protectExisting(data); }
   if(config.landmarksVersion===undefined){config.landmarksVersion=1;config.landmarkExclusions=protectExisting(data);}
   if(data?.tracks&&(!Array.isArray(data.tracks)||data.tracks.length>TRACK_LIMIT))throw Error('This railway is too large.');

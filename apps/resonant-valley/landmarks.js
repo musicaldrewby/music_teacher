@@ -1,5 +1,11 @@
 export const LANDMARK_NAMES={arch:'Stone arch',workshop:'Old workshop',tree:'Great copper tree',garden:'Wildflower hollow',cascade:'Spring cascade'};
+const cacheByWorld=new WeakMap();
 export function landmarkAt(generator,gx,gz){
+ let cache=cacheByWorld.get(generator);if(!cache){cache=new Map();cacheByWorld.set(generator,cache);}
+ const key=gx+','+gz;if(cache.has(key))return cache.get(key);
+ const value=makeLandmark(generator,gx,gz);if(cache.size>=1024)cache.delete(cache.keys().next().value);cache.set(key,value);return value;
+}
+function makeLandmark(generator,gx,gz){
  if(!generator.landmarksVersion)return null;
  const n=generator.noise;if(n.random(gx,gz,1001)>.78)return null;
  const x=gx*128+24+Math.floor(n.random(gx,gz,1003)*80),z=gz*128+24+Math.floor(n.random(gx,gz,1009)*80),c=generator.column(x,z);
