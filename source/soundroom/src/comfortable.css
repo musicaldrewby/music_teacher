@@ -142,6 +142,10 @@ html:not([data-layout=compact]) #transport-dock #studio-status,html:not([data-la
 }
 body.performance-view #play-side,body[data-workspace=sequence] #play-side{display:none!important}
 body:not([data-workspace=compose]) .studio-brand{display:none}
+/* All workspaces share one header height and one fixed navigation row. */
+body[data-workspace=compose] #workstation-header .project-bar{display:flex!important;visibility:hidden}
+#workstation-header .studio-brand{position:absolute;left:22px;right:22px;bottom:10px;height:44px;margin:0;pointer-events:none}
+@media(max-width:600px){#workstation-header .studio-brand{left:12px;right:12px}}
 html:not([data-layout=compact]) body[data-workspace=perform] #workspace-content{padding-top:16px}
 html:not([data-layout=compact]) body[data-workspace=perform] #soundroom-instrument{padding:10px 14px 0}
 html:not([data-layout=compact]) #soundroom-instrument .panel-legend{margin-bottom:8px}
