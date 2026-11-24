@@ -32,6 +32,30 @@ window.ARCADE_REGIONS = [
   }
 ];
 window.ARCADE_APPS = [
+{
+  "id": "grand-musical-parade",
+  "title": "The Grand Musical Parade",
+  "shortTitle": "Grand Musical Parade",
+  "art": "animal-parade",
+  "region": "games",
+  "description": "Explore Carnival of the Animals with 2–5 teams. Spin the wheel, listen to the orchestra, uncover animal puzzles, answer Saint-Saëns trivia, and collect passport stamps. Finish with a listening round of up to twelve mystery tracks at your own pace.",
+  "tags": [
+    "carnival of the animals",
+    "saint-saens",
+    "saint saens",
+    "orchestra",
+    "listening",
+    "animals",
+    "teams",
+    "board game",
+    "puzzle",
+    "spinner",
+    "passport",
+    "finale"
+  ],
+  "url": "https://grand-musical-parade.musicaldrewby.chatgpt.site/",
+  "thumbnail": "assets/grand-musical-parade-screen.jpg"
+},
   {
   "id": "mallet-measure-free",
   "title": "Mallet & Measure — Free Classroom Edition",
@@ -408,3 +432,4 @@ window.ARCADE_APPS = [
     "thumbnail": "assets/from-tips-to-tours-screen.webp"
   }
 ];
+

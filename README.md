@@ -2,10 +2,11 @@
 
 [Open the arcade](https://musicaldrewby.github.io/music_teacher/) · [Simple app directory](https://musicaldrewby.github.io/music_teacher/directory.html)
 
-Created by Drew Wichman. This repository contains the arcade and 21 apps, including the October 25 collection and Resonant Valley, including their HTML, JavaScript, styles, images, instrument samples, soundfonts, music, and bundled libraries.
+Created by Drew Wichman. This repository contains an arcade linking to 22 apps, with 21 bundled app copies, including the October 25 collection and Resonant Valley, including their HTML, JavaScript, styles, images, instrument samples, soundfonts, music, and bundled libraries.
 
 | App | Website | Folder under `apps/` |
 | --- | --- | --- |
+| The Grand Musical Parade | [Open public game](https://grand-musical-parade.musicaldrewby.chatgpt.site/) | Hosted on Sites |
 | Mallet & Measure — Free Classroom Edition | [Open app](https://mallet-measure-free.musicaldrewby.chatgpt.site) | `mallet-measure-free` |
 | Mr. Drew’s Autoharp | [Open app](https://mr-drews-autoharp.musicaldrewby.chatgpt.site) | `mr-drews-autoharp` |
 | Poison Rhythm | [Open app](https://poison-rhythm.musicaldrewby.chatgpt.site) | `poison-rhythm` |
@@ -51,3 +52,8 @@ Fonts and browser libraries formerly loaded from CDNs are bundled locally. Their
 `migration/assets.json` records the source URL and SHA-256 hashes for every app file, plus the reviewed path/link adjustments. `migration/import_assets.py` imports that exact snapshot and refuses content drift. The one-time import workflow runs only on `migration/complete-arcade-2026-10-25`; it does not continuously synchronize or overwrite future changes on `main`.
 
 The previous homepage is preserved in branch `backup/arcade-before-app-migration-2026-10-25`.
+
+
+## Grand Musical Parade cabinet
+
+The front row and Games category feature a dedicated forest-green and brass cabinet with paper-theatre animal artwork. Its live HTML marquee and game-board screen link directly to the public game. The catalog, search, favorites, detail dialog and simple directory share that destination. The artwork is generated for this project; the screen reuses the game’s existing illustrated board. The game itself remains hosted on its public Site.

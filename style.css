@@ -233,3 +233,15 @@
 .skin-resonant-valley .machine-actions button{color:#ffecaf;border-color:#ceaa69;background:linear-gradient(#38374f,#181828)}
 .floor-resonant-valley{--floor-left:3%;--floor-width:94%;--floor-bottom:1.7%}
 .detail-mirror{font-size:13px;font-weight:800;color:#245965;text-underline-offset:3px;padding:8px 0}
+
+/* Grand Musical Parade: its own paper-theatre animal cabinet. */
+.skin-grand-musical-parade{--cabinet-image:url('assets/cabinet-grand-musical-parade.webp');--sheet-size:100%;--sheet-pos:50%;--title-left:18%;--title-width:64%;--title-top:3.9%;--title-height:6.1%;--screen-left:21.7%;--screen-width:56.6%;--screen-top:21.8%;--screen-height:17%}
+.skin-grand-musical-parade .machine-title{font-family:Georgia,'Times New Roman',serif;font-weight:700;text-transform:none;color:#29452e;text-shadow:0 1px #fff6db;padding:0 .6cqw;letter-spacing:0}
+.skin-grand-musical-parade .machine-title.two-lines{font-size:6.1cqw;line-height:1.02}
+.skin-grand-musical-parade .machine-screen{background:#163725;box-shadow:0 0 10px #cdb96722;border-radius:5%}
+.skin-grand-musical-parade .machine-screen .custom-cover{height:100%;aspect-ratio:auto;top:0;transform:none;background:#163725}
+.skin-grand-musical-parade .machine-screen .custom-cover img{object-fit:cover;object-position:center}
+.skin-grand-musical-parade .machine-actions{left:23%;right:23%;bottom:8.9%;justify-content:space-between}
+.skin-grand-musical-parade .machine-actions button{color:#ffefbc;border-color:#d5af64;background:linear-gradient(#395838,#1b3524)}
+.floor-grand-musical-parade{--floor-left:4%;--floor-width:92%;--floor-bottom:1.2%}
+
